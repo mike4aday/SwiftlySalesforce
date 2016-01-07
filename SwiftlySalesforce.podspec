@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "SwiftlySalesforce"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "An easy-to-use framework for building native iOS apps with Swift and the Salesforce Platform"
 
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/mike4aday/SwiftlySalesforce"
   s.license          = 'MIT'
   s.author           = { "Michael Epstein" => "@mike4aday" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/SwiftlySalesforce.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/mike4aday/SwiftlySalesforce.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/mike4aday'
 
   s.platform     = :ios, '9.1'
