@@ -43,59 +43,59 @@ AuthenticationManager.sharedInstance.configureWithConsumerKey(consumerKey, callb
 ### Query Salesforce
 ```swift
 guard let credentials = AuthenticationManager.sharedInstance.credentials else {
-AuthenticationManager.sharedInstance.authenticate()
-return
+	AuthenticationManager.sharedInstance.authenticate()
+	return
 } 
 let soql = "SELECT Id,Subject,Status FROM Task ORDER BY CreatedDate DESC LIMIT 100"
 Alamofire.request(SalesforceAPI.Query(soql: soql).endpoint(credentials: credentials))
-.validate()
-.salesforceResponse {
-(response) -> Void in
-switch response.result {
-case .Failure(let error):
-if error.isAuthenticationRequiredError() {
-// Access token probably expired
-AuthenticationManager.sharedInstance.authenticate()
-}
-else {
-// Alert the user
-}
-case .Success(let value):
-if let dict = value as? [String: AnyObject], let records = dict["records"] as? [[String: AnyObject]] {
-let tasks = [Task]()
-for record in records {
-tasks.append(Task(dictionary: record))
-}
-self.tasks = tasks // Update the model
-}
-}
-}
+	.validate()
+	.salesforceResponse {
+		(response) -> Void in
+		switch response.result {
+		case .Failure(let error):
+			if error.isAuthenticationRequiredError() {
+				// Access token probably expired
+				AuthenticationManager.sharedInstance.authenticate()
+			}
+			else {
+				// Alert the user
+			}
+		case .Success(let value):
+			if let dict = value as? [String: AnyObject], let records = dict["records"] as? [[String: AnyObject]] {
+				let tasks = [Task]()
+				for record in records {
+					tasks.append(Task(dictionary: record))
+				}
+				self.tasks = tasks // Update the model
+			}
+		}
+	}
 ```
 
 ### Update a Salesforce Record
 ```swift
 guard let credentials = AuthenticationManager.sharedInstance.credentials else {
-AuthenticationManager.sharedInstance.authenticate()
-return
+	AuthenticationManager.sharedInstance.authenticate()
+	return
 }
 let recordUpdate: [String: AnyObject] = ["Status" : selectedStatus ] // Update the status field
 Alamofire.request(SalesforceAPI.UpdateRecord(type: "Task", id: task.id, fields: recordUpdate).endpoint(credentials: credentials))
 .validate()
 .salesforceResponse {
-[unowned self]
-(response) -> Void in
-switch response.result {
-case .Success:
-task.status = selectedStatus // Update the model
-case .Failure(let error):
-if error.isAuthenticationRequiredError() {
-// Access token probably expired
-AuthenticationManager.sharedInstance.authenticate()
-}
-else {
-// Alert the user
-}
-}
+	[unowned self]
+	(response) -> Void in
+	switch response.result {
+	case .Success:
+		task.status = selectedStatus // Update the model
+	case .Failure(let error):
+		if error.isAuthenticationRequiredError() {
+			// Access token probably expired
+			AuthenticationManager.sharedInstance.authenticate()
+		}
+		else {
+			// Alert the user
+		}
+	}
 }
 ```
 
@@ -137,25 +137,25 @@ If you have a question, suggestion, or find a bug, please contact me:
 * Twitter [@mike4aday]
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
 
-[Alamofire]: <https://github.com/alamofire/alamofire>
-[OAuth2]: <https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com>
-[REST API]: <https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/>
-[Swift 2]: <https://developer.apple.com/swift/>
-[Podfile]: <https://guides.cocoapods.org/syntax/podfile.html>
-[CocoaPods]: <https://cocoapods.org/>
-[sfdc-ios Chatter]: <http://sfdc.co/sfdc-ios>
-[@mike4aday]: <https://twitter.com/mike4aday>
-[Connected App]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm>
-[Partner Community]: <https://p.force.com>
-[Apex REST]: <https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST>
-[OAuth2 user-agent flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_user_agent_flow.htm&language=en>
-[OAuth2 username-password flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_username_password_flow.htm&language=en>
-[OAuth2 refresh token flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_refresh_token_flow.htm&language=en_US>
-[Example]: <https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce>
-[Mobile SDK for iOS]: <https://github.com/forcedotcom/SalesforceMobileSDK-iOS>
-
-[SalesforceAPI]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/SalesforceAPI.swift>
-[Credentials]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Credentials.swift>
-[Extensions]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Extensions.swift>
-[AuthenticationManager]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/AuthenticationManager.swift>
-[MasterViewController.swift]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/MasterViewController.swift>
+   [Alamofire]: <https://github.com/alamofire/alamofire>
+   [OAuth2]: <https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com>
+   [REST API]: <https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/>
+   [Swift 2]: <https://developer.apple.com/swift/>
+   [Podfile]: <https://guides.cocoapods.org/syntax/podfile.html>
+   [CocoaPods]: <https://cocoapods.org/>
+   [sfdc-ios Chatter]: <http://sfdc.co/sfdc-ios>
+   [@mike4aday]: <https://twitter.com/mike4aday>
+   [Connected App]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm>
+   [Partner Community]: <https://p.force.com>
+   [Apex REST]: <https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST>
+   [OAuth2 user-agent flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_user_agent_flow.htm&language=en>
+   [OAuth2 username-password flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_username_password_flow.htm&language=en>
+   [OAuth2 refresh token flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_refresh_token_flow.htm&language=en_US>
+   [Example]: <https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce>
+   [Mobile SDK for iOS]: <https://github.com/forcedotcom/SalesforceMobileSDK-iOS>
+   
+   [SalesforceAPI]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/SalesforceAPI.swift>
+   [Credentials]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Credentials.swift>
+   [Extensions]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Extensions.swift>
+   [AuthenticationManager]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/AuthenticationManager.swift>
+   [MasterViewController.swift]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/MasterViewController.swift>
