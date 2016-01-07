@@ -1,32 +1,20 @@
-#
-# Be sure to run `pod lib lint SwiftlySalesforce.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = "SwiftlySalesforce"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of SwiftlySalesforce."
+  s.version          = "1.0.0"
+  s.summary          = "An easy-to-use framework for building native iOS apps with Swift and the Salesforce Platform"
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
+
   s.description      = <<-DESC
+				An easy-to-use framework, written in Swift 2, for building iOS apps that integrate with the Salesforce Platform. Simplifies Salesforce REST API calls, and OAuth2 authentication.
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/SwiftlySalesforce"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/mike4aday/SwiftlySalesforce"
   s.license          = 'MIT'
   s.author           = { "Michael Epstein" => "@mike4aday" }
   s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/SwiftlySalesforce.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/mike4aday'
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '9.1'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
@@ -34,7 +22,6 @@ Pod::Spec.new do |s|
     'SwiftlySalesforce' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'Alamofire', '~> 3.0'
+  s.dependency 'Locksmith', '~> 2.0'
 end
