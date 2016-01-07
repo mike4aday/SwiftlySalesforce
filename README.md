@@ -48,28 +48,28 @@ guard let credentials = AuthenticationManager.sharedInstance.credentials else {
 } 
 let soql = "SELECT Id,Subject,Status FROM Task ORDER BY CreatedDate DESC LIMIT 100"
 Alamofire.request(SalesforceAPI.Query(soql: soql).endpoint(credentials: credentials))
-	.validate()
-	.salesforceResponse {
-		(response) -> Void in
-		switch response.result {
-		case .Failure(let error):
-			if error.isAuthenticationRequiredError() {
-				// Access token probably expired
-				AuthenticationManager.sharedInstance.authenticate()
+.validate()
+.salesforceResponse {
+	(response) -> Void in
+	switch response.result {
+	case .Failure(let error):
+		if error.isAuthenticationRequiredError() {
+			// Access token probably expired
+			AuthenticationManager.sharedInstance.authenticate()
+		}
+		else {
+			// Alert the user
+		}
+	case .Success(let value):
+		if let dict = value as? [String: AnyObject], let records = dict["records"] as? [[String: AnyObject]] {
+			let tasks = [Task]()
+			for record in records {
+				tasks.append(Task(dictionary: record))
 			}
-			else {
-				// Alert the user
-			}
-		case .Success(let value):
-			if let dict = value as? [String: AnyObject], let records = dict["records"] as? [[String: AnyObject]] {
-				let tasks = [Task]()
-				for record in records {
-					tasks.append(Task(dictionary: record))
-				}
-				self.tasks = tasks // Update the model
-			}
+			self.tasks = tasks // Update the model
 		}
 	}
+}
 ```
 
 ### Update a Salesforce Record
