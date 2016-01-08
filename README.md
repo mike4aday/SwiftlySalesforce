@@ -10,7 +10,7 @@ _Swiftly Salesforce_ is an easy-to-use framework for building native iOS apps wi
 - Check out the code in the included [example] app
 - If you have a question, suggestion, or find a bug, [contact me](#contact)
 
-## Background
+## Why 'Swiftly Salesforce'?
 
 The goal of _Swiftly Salesforce_ is to lower the barrier to developing custom iOS apps that integrate with the Salesforce Platform. It simplifies the Salesforce authorization process, and asynchronous interaction with the back-end Salesforce [REST API].
 
