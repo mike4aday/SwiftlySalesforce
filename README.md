@@ -124,6 +124,7 @@ If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you
 * [Salesforce Partner Community](https://partners.salesforce.com): "Innovate, grow, connect" with Salesforce ISVs. Join the [Salesforce + iOS Mobile][sfdc-ios Chatter] Chatter group
 * [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: 'official' SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
 * [A Salesforce Swift App](http://www.mobileandemerging.technology/a-salesforce-mobile-app-with-swift/): blog post on using Swift with the Salesforce Mobile SDK. By [Jonathan Jenkins](http://www.mobileandemerging.technology/author/jonathan-jenkins/)
+* [Salesforce OAuth2 Made Easy For Native iOS Apps](https://developer.salesforce.com/blogs/developer-relations/2015/03/salesforce-oauth-made-easy-native-ios-apps.html): blog post by [Quinton Wall](http://twitter.com/quintonwall)
 * [When to Use the Salesforce1 Platform vs. Creating Custom Apps](https://help.salesforce.com/HTViewSolution?id=000192840&language=en_US)
 * [Alamofire]: Swift version of AFNetworking, "...One of the most popular third-party libraries on iOS and OS X." Tutorial [here](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial).
 * [Functional Swift](https://www.objc.io/books/functional-swift/): great book for learning Swift 2, by the team at [objc.io](http://objc.io). See their [other books](https://www.objc.io/books/) on Advanced Swift, and Core Data.
