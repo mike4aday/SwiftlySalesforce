@@ -2,7 +2,8 @@
 _Swiftly Salesforce_ is an easy-to-use framework for building native iOS apps with Swift and the Salesforce Platform.
 
 ## Quick Overview
-- All-Swift, 'lightweight' alternative to the Salesforce [Mobile SDK for iOS]
+- Written in Swift 2
+- 'Lightweight' alternative to the Salesforce [Mobile SDK for iOS]
 - Simplifies the Salesforce [OAuth2] authorization process (aka the OAuth2 "dance")
 - Works with [Alamofire] for easy and secure interaction with the Salesforce [REST API]
 - Installs with [CocoaPods]: add `pod 'SwiftlySalesforce'` to your [Podfile]
@@ -17,7 +18,7 @@ Though I plan to improve and evolve _Swiftly Salesforce_, I want to keep it as s
 
 _Swiftly Salesforce_ is a very 'lightweight' alternative to the [Salesforce Mobile SDK][Mobile SDK for iOS], which is much more comprehensive, but it comes with greater complexity, a steeper learning curve, and a larger code base to support backward compatibility and hybrid app development. For me, at least, that can sometimes slow the development of apps that don't require such a comprehensive SDK. 
 
-In addition, I wanted to work with Swift 2, and liked the syntax and ease-of-use of [Alamofire], one of the most popular iOS frameworks. I tried to avoid depending too much on any other framework, but Alamofire is widely-adopted, and well-maintained, and fits very nicely with _Swiftly Salesforce's_ core functionality.
+In addition, I wanted to work with Swift 2, and liked the syntax and ease-of-use of [Alamofire], one of the most popular iOS frameworks. I tried to avoid depending too much on any other framework, but Alamofire is widely-adopted, well-maintained, and fits very nicely with _Swiftly Salesforce's_ core functionality.
 
 ## Getting Started
 If you haven't already:
