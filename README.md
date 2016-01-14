@@ -33,7 +33,7 @@ pod 'SwiftlySalesforce'
 
 ## Using Swiftly Salesforce
 
-### Register Your Callback URL Scheme with iOS
+### Tell iOS How to Handle Your Callback URL
 Salesforce will redirect the user's browser to the callback URL upon successful authorization, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the URL, and will pass it to your app's delegate.
 
 ```xml
@@ -51,8 +51,8 @@ Salesforce will redirect the user's browser to the callback URL upon successful 
 </array>
 ```
 
-### Tell Your iOS App About Your Salesforce Connected App
-Add the following to your app's delegate class, preferably in the method `application(_:didFinishLaunchingWithOptions:)`:
+### Tell Swiftly Salesforce About Your Connected App
+Add the following to your app's delegate class, preferably in the method `application(_:didFinishLaunchingWithOptions:)`. The consumer key and callback URL should be copied _exactly_ as they appear in your Salesforce [Connected App][Connected App]'s settings.
 ```swift
 /// Salesforce Connected App settings
 let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkik_rz_GVRYmFpDR6yDaUrEfpC0vKqisPMY1klyH78G9Ockl2p7IJuqRk07nQ"
