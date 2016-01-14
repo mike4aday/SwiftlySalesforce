@@ -75,6 +75,25 @@ func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
 }
 ```
 
+### 4. Add an ATS Exception for Salefsorce
+As of this writing, you need to add an [ATS exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security) to your app's .plist file to allow it to connect to salesforce.com.
+```xml
+<!-- ADD TO YOUR APP'S .PLIST FILE -->
+<key>NSAppTransportSecurity</key>
+<dict>
+	<key>NSExceptionDomains</key>
+	<dict>
+		<key>salesforce.com</key>
+		<dict>
+			<key>NSExceptionRequiresForwardSecrecy</key>
+			<false/>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+```
+
 ## Using Swiftly Salesforce
 
 ### Query Salesforce
