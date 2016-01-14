@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 1.0.3 (Jan. 14, 2016)
+Updated README
+
 ## Version 1.0.2 (Jan. 11, 2016)
 Updated README
 
