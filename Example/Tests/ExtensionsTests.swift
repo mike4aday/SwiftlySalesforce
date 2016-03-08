@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Alamofire
 
 class ExtensionsTests: XCTestCase {
 
@@ -73,5 +74,96 @@ class ExtensionsTests: XCTestCase {
 		}
 		
 		XCTAssertEqual(comps1, comps2)
+	}
+	
+	func testSentenceCapitalizedString() {
+		let s = "hello world"
+		XCTAssertEqual("Hello world", s.sentenceCapitalizedString)
+	}
+	
+	func testNSURLInit() {
+		XCTAssertNil(NSURL(URLString: nil))
+		XCTAssertNotNil(NSURL(URLString: "https://www.salesforce.com"))
+	}
+	
+	func testIsAuthenticationRequiredError() {
+		
+		let err1 = NSError(domain: "My Domain", code: 401, userInfo: [:])
+		XCTAssertFalse(err1.isAuthenticationRequiredError())
+		
+		let err2 = NSError(domain: NSURLErrorDomain, code: NSURLErrorUserAuthenticationRequired, userInfo: [:])
+		XCTAssertTrue(err2.isAuthenticationRequiredError())
+	}
+	
+	func testValidateSalesforceResponseForRestApiRequest() {
+		
+		// Given
+		let URLString = "https://na1.salesforce.com/services/data/v26.0/sobjects/"
+		let expectation = expectationWithDescription("request should return 401 status code")
+		
+		var error: NSError?
+		
+		// When
+		Alamofire.request(.GET, URLString)
+			.validateSalesforceResponse()
+			.response { _, _, _, responseError in
+				error = responseError
+				expectation.fulfill()
+		}
+		
+		waitForExpectationsWithTimeout(5.0, handler: nil)
+		
+		// Then
+		guard let err = error where err.isAuthenticationRequiredError() else {
+			XCTFail()
+			return
+		}
+	}
+	
+	func testValidateSalesforceResponseForIdRequest() {
+		
+		// Given
+		let URLString = "https://login.salesforce.com/id/00Dx0000000BV7z/005x00000012Q9P"
+		let expectation = expectationWithDescription("request should return 403 status code")
+		
+		var error: NSError?
+		
+		// When
+		Alamofire.request(.GET, URLString)
+			.validateSalesforceResponse()
+			.response { _, _, _, responseError in
+				error = responseError
+				expectation.fulfill()
+		}
+		
+		waitForExpectationsWithTimeout(5.0, handler: nil)
+		
+		// Then
+		guard let err = error where err.isAuthenticationRequiredError() else {
+			XCTFail()
+			return
+		}
+	}
+	
+	func testValidateSalesforceResponseForSuccessfulRequest() {
+		
+		// Given
+		let URLString = "https://www.salesforce.com/"
+		let expectation = expectationWithDescription("request should return 200 status code")
+		
+		var error: NSError?
+		
+		// When
+		Alamofire.request(.GET, URLString)
+			.validateSalesforceResponse()
+			.response { _, _, _, responseError in
+				error = responseError
+				expectation.fulfill()
+		}
+		
+		waitForExpectationsWithTimeout(5.0, handler: nil)
+		
+		// Then
+		XCTAssertNil(error)
 	}
 }

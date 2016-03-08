@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "SwiftlySalesforce"
-  s.version          = "1.0.3"
-  s.summary          = "An easy-to-use framework for building native iOS apps with Swift and the Salesforce Platform"
+  s.version          = "2.0.0"
+  s.summary          = "An easy-to-use framework for rapid development of native iOS apps with Swift and the Salesforce Platform"
 
 
   s.description      = <<-DESC
@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
     'SwiftlySalesforce' => ['Pod/Assets/*.png']
   }
 
+  s.dependency 'PromiseKit', '~> 3.0'
   s.dependency 'Alamofire', '~> 3.0'
   s.dependency 'Locksmith', '~> 2.0'
 end

@@ -7,18 +7,24 @@
 //
 
 import Foundation
-import Locksmith
+
 
 public struct Credentials: Equatable {
 
+	
 	public let accessToken: String
 	public let refreshToken: String?
 	public let instanceURL: NSURL
 	public let identityURL: NSURL
 	
-	public var userID: String {
-		return identityURL.absoluteString.componentsSeparatedByString("/").last ?? "" // Should never be ""
+	public var userID: String? {
+		return identityURL.absoluteString.componentsSeparatedByString("/").last 
 	}
+	
+	
+	//
+	// MARK: - Initializers
+	//
 	
 	public init(accessToken: String, instanceURL: NSURL, identityURL: NSURL, refreshToken: String?) {
 		self.accessToken = accessToken
@@ -28,91 +34,70 @@ public struct Credentials: Equatable {
 	}
 	
 	public init?(dictionary: [String: AnyObject]) {
-		if	let accessToken = dictionary["access_token"] as? String,
-			let instanceURL = dictionary["instance_url"] as? NSURL,
-			let identityURL = dictionary["id"] as? NSURL {
-				
-			self.init(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: dictionary["refresh_token"] as? String)
-		}
-		else {
-			return nil
-		}
-	}
-	
-	/// Initializer
-	/// - Parameter callbackURL: URL with appended access token, instance URL, identity URL and optional refresh token
-	public init?(callbackURL: NSURL) {
 		
-		if let modifiedURL = NSURL(string: callbackURL.absoluteString.stringByReplacingOccurrencesOfString("#", withString: "?")),
-			let queryItems = NSURLComponents(string: modifiedURL.absoluteString)?.queryItems {
+		if	let accessToken = dictionary[Constant.access_token.rawValue] as? String,
+			let instanceURL = dictionary[Constant.instance_url.rawValue] as? NSURL,
+			let identityURL = dictionary[Constant.id.rawValue] as? NSURL {
 				
-				var dict = [String: AnyObject]()
-				for queryItem in queryItems {
-					let key = queryItem.name.lowercaseString
-					if let value = queryItem.value {
-						switch key {
-						case "access_token", "refresh_token":
-							dict[key] = value
-						case "instance_url", "id":
-							if let url = NSURL(string: value) {
-								dict[key] = url
-							}
-						default:
-							continue
-						}
-					}
-				}
-				self.init(dictionary: dict)
+			self.init(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: dictionary[Constant.refresh_token.rawValue] as? String)
 		}
 		else {
 			return nil
 		}
 	}
 	
-	/// Initializer
-	/// - Parameter json: JSON returned by Salesforce's OAuth2 "refresh token" flow
-	/// - Parameter refreshToken: The current refresh token.
-	public init?(json: AnyObject, refreshToken: String?) {
-		if let jsonDict = json as? [String: String] {
-			var dict = [String: AnyObject]()
-			if let refreshToken = refreshToken {
-				dict["refresh_token"] = refreshToken
-			}
-			for item in jsonDict {
-				let (key, value) = (item.0.lowercaseString, item.1)
-				switch key {
-				case "access_token":
-					dict[key] = value
-				case "instance_url", "id":
-					if let url = NSURL(string: value) {
-						dict[key] = url
-					}
-				default:
-					continue
-				}
-			}
-			self.init(dictionary: dict)
-		}
-		else {
+	/// Initialize credentials from a Salesforce-produced redirect URL, to which
+	/// URL-encoded token information has been appended in the fragment
+	/// - Parameter URLEncodedString: fragment or query string as returned by Salesforce during OAuth2 user-agent or refresh token flow
+	/// - Parameter refreshToken: optional value for refresh token; since the refresh token flow doesn't return the refresh token itself, including it as an argument will preserve it for the next refresh request
+	public init?(URLEncodedString: String, refreshToken: String? = nil) {
+		
+		// Create 'fake' URL with argument as query string
+		guard let url = NSURL(string: "http://example.com?\(URLEncodedString)") else {
 			return nil
 		}
+		
+		guard let
+			accessToken = url.valueForQueryItem(Constant.access_token.rawValue),
+			instanceURL = NSURL(URLString: url.valueForQueryItem(Constant.instance_url.rawValue)),
+			identityURL = NSURL(URLString: url.valueForQueryItem(Constant.id.rawValue)) else {
+				
+				return nil
+		}
+		
+		let refreshToken = refreshToken ?? url.valueForQueryItem(Constant.refresh_token.rawValue)
+		self.init(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: refreshToken)
 	}
+	
+	
+	// MARK: - Public methods
 	
 	/// Converts credentials struct to dictionary
 	/// - Returns: Dictionary representation of credentials struct
 	public func toDictionary() -> [String: AnyObject] {
 		var dict = [
-			"access_token" : accessToken,
-			"instance_url" : instanceURL,
-			"id" : identityURL
+			Constant.access_token.rawValue : accessToken,
+			Constant.instance_url.rawValue : instanceURL,
+			Constant.id.rawValue : identityURL
 		]
 		if let refreshToken = self.refreshToken {
-			dict["refresh_token"] = refreshToken
+			dict[Constant.refresh_token.rawValue] = refreshToken
 		}
 		return dict
 	}
 }
 
+
+// MARK: - Constants
+extension Credentials {
+	
+	internal enum Constant: String {
+		case access_token, instance_url, id, refresh_token
+	}
+}
+
+
+// MARK: - Equality operator
 public func ==(lhs: Credentials, rhs: Credentials) -> Bool {
 	return lhs.accessToken == rhs.accessToken &&
 		lhs.refreshToken == rhs.refreshToken &&

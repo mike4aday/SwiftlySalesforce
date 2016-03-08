@@ -14,21 +14,18 @@ import Alamofire
 // MARK: - Extension
 extension Request {
 	
-	public func salesforceResponse(completionHandler: Response<AnyObject, NSError> -> Void) -> Self {
-		return response(responseSerializer: Request.salesforceResponseSerializer(), completionHandler: completionHandler)
-	}
-	
-	public static func salesforceResponseSerializer() -> ResponseSerializer<AnyObject, NSError> {
-		
-		return ResponseSerializer {
-			
-			request, response, data, error in
-			
-			guard response?.statusCode < 400 else {
-				return .Failure(NSError.errorForSalesforceResponse(request: request, response: response, data: data, error: error))
+	public func validateSalesforceResponse() -> Self {
+		return validate {
+			(request, response) -> Request.ValidationResult in
+			switch response.statusCode {
+			case 401:
+				return .Failure(NSError(domain: NSURLErrorDomain, code: NSURLError.UserAuthenticationRequired.rawValue, userInfo: nil))
+			case 403:
+				return .Failure(NSError(domain: NSURLErrorDomain, code: NSURLError.NoPermissionsToReadFile.rawValue, userInfo: nil))
+			default:
+				return .Success
 			}
-			return JSONResponseSerializer().serializeResponse(request, response, data, error)
-		}
+		}.validate()
 	}
 }
 
@@ -36,43 +33,13 @@ extension Request {
 // MARK: - Extension
 extension NSError {
 	
-	/// Crates an NSError object from a Salesforce API error response
-	/// - Returns: NSError object
-	static func errorForSalesforceResponse(request request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) -> NSError {
-		
-		// Default result
-		var result: (domain: String, code: Int, userInfo: [NSObject: AnyObject]) = (NSURLErrorDomain, NSURLError.Unknown.rawValue, [:])
-		if let failingURL = request?.URL {
-			result.userInfo[NSURLErrorFailingURLErrorKey] = failingURL
-		}
-		
-		// Parse JSON for message and string code from Salesforce
-		let serialization = Request.JSONResponseSerializer().serializeResponse(request, response, data, nil) // Ignoring any parsing error for now
-		switch serialization {
-		case .Success(let json):
-			if let msg = json[0]?["message"] as? String {
-				var reason = msg
-				if let salesforceErrorCode = json[0]?["errorCode"] as? String {
-					reason += " (\(salesforceErrorCode))"
-				}
-				result.userInfo[NSLocalizedFailureReasonErrorKey] = reason
-			}
-		case .Failure(let serializationError):
-			debugPrint(serializationError)
-		}
-		
-		let map: [Int: NSURLError] = [400: .BadURL, 401: .UserAuthenticationRequired, 403: .NoPermissionsToReadFile, 404: .FileDoesNotExist, 405: .BadURL, 415: .BadURL]
-		if let statusCode = response?.statusCode, let errorCode = map[statusCode] {
-			result.code = errorCode.rawValue
-		}
-		
-		return NSError(domain: result.domain, code: result.code, userInfo: result.userInfo)
-	}
-	
 	/// Indicates whether or not the NSError instance represents an authentication error
-	/// - Returns: true if the error indicates that Salesforce authentication is required
+	/// - Returns: true if the error indicates that Salesforce re/authentication is required
 	public func isAuthenticationRequiredError() -> Bool {
-		return self.code == NSURLError.UserAuthenticationRequired.rawValue
+		
+		// When authentication is required, the Identity resource returns status code 403; other resources return 401
+		return (self.code == NSURLError.UserAuthenticationRequired.rawValue || self.code == NSURLError.NoPermissionsToReadFile.rawValue)
+			&& self.domain == NSURLErrorDomain
 	}
 }
 
@@ -89,6 +56,7 @@ extension NSURLComponents {
 		}
 	}
 }
+
 
 // MARK: - Extension
 // Adapted from http://codingventures.com/articles/Dating-Swift/
@@ -110,3 +78,39 @@ extension NSDateFormatter {
 		return formatter
 	}()
 }
+
+
+// MARK: - Extension
+extension String {
+	
+	public var sentenceCapitalizedString: String {
+		get {
+			var s = String(self)
+			s.replaceRange(s.startIndex...s.startIndex, with: String(s[s.startIndex]).capitalizedString)
+			return s
+		}
+	}
+}
+
+
+// MARK: - Extension
+extension NSURL {
+	
+	/// Allows optional argument when creating a NSURL
+	public convenience init?(URLString: String?) {
+		guard let s = URLString else {
+			return nil
+		}
+		self.init(string: s)
+	}
+	
+	/// Adapted from http://stackoverflow.com/questions/3997976/parse-nsurl-query-property
+	/// - Parameter name: name of URL-encoded name/value pair in query string
+	/// - Returns: First value (if more than one present in query string) as optional String
+	public func valueForQueryItem(name: String) -> String? {
+		let urlComponents = NSURLComponents(URL: self, resolvingAgainstBaseURL: false)
+		let queryItems = urlComponents?.queryItems
+		return queryItems?.filter({$0.name == name}).first?.value
+	}
+}
+
