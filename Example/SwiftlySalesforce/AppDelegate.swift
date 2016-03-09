@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
 	
 	var window: UIWindow?
 	
-	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Configure the Salesforce authentication manager with Connected App settings
 		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL)
@@ -32,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
 	}
 	
 	func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-		handleRedirctURL(url)
+		handleRedirectURL(url)
 		return true
 	}
 }

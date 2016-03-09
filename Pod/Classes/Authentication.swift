@@ -79,7 +79,7 @@ extension LoginViewPresentable {
 		}
 	}
 	
-	public func handleRedirctURL(redirectURL: NSURL) {
+	public func handleRedirectURL(redirectURL: NSURL) {
 		let result: AuthenticationResult
 		do {
 			result = try resultFromRedirectURL(redirectURL)
