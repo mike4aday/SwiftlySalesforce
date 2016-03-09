@@ -2,7 +2,7 @@
 _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
 * Written entirely in [Swift](https://developer.apple.com/swift/), Apple's "modern programming language that is safe, fast and interactive."
 * Enables elegant, painless coding for complex, asynchronous [Salesforce API][REST API] interactions
-* Manages the Salesforce [OAuth2] authorization process (a.k.a. the "OAuth dance") automatically
+* Manages the Salesforce [OAuth2] authorization process (a.k.a. the "OAuth dance") automatically and transparently
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS]
 * Easy to install and update
 
