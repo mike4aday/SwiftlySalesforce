@@ -3,7 +3,6 @@ _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobi
 - Written entirely in [Swift](https://developer.apple.com/swift/), Apple's "modern programming language that is safe, fast and interactive."
 - Enables elegant, painless code for complex, asynchronous [Salesforce API][REST API] interactions, and [OAuth2] authorization
 - Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS]
-- [Open source](http://github.com/mike4aday/SwiftlySalesforce)
 - Easy to install and update
 
 ## How do I set up Swiftly Salesforce?
