@@ -195,7 +195,7 @@ func application(application: UIApplication, openURL url: NSURL, sourceApplicati
 }
 ```
 
-### Configure your App Delegate for _Swiftly Salesforce_ 
+### Configure your App Delegate for Swiftly Salesforce
 Update your app delegate class so that it:
 * Configures _Swiftly Salesforce_ with your Connected App's consumer key and callback URL
 * Implements `LoginViewPresentable` - you don't have to implement any methods, though, thanks to the magic of Swift 2's [protocol extensions](http://www.codingexplorer.com/protocol-extensions-in-swift-2/)
