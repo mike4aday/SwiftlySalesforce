@@ -226,7 +226,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
 ```
 
 ### Add an ATS Exception for Salefsorce
-As of this writing, you need to add an [application transport security (ATS) exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security)  to your app's .plist file to allow it to connect to salesforce.com, as follows:
+As of this writing, you need to add an [application transport security (ATS) exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security)  to your iOS application's .plist file to allow it to connect to salesforce.com, as follows:
 ```xml
 <!-- ADD TO YOUR APP'S .PLIST FILE -->
 <key>NSAppTransportSecurity</key>
@@ -243,7 +243,6 @@ As of this writing, you need to add an [application transport security (ATS) exc
 	</dict>
 </dict>
 ```
-
 
    [Alamofire]: <https://github.com/alamofire/alamofire>
    [PromiseKit]: <https://github.com/mxcl/PromiseKit>
