@@ -11,7 +11,6 @@
 
 import UIKit
 import SwiftlySalesforce
-import SafariServices
 
 
 @UIApplicationMain
