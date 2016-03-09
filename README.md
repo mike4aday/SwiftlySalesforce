@@ -1,41 +1,179 @@
 # Swiftly Salesforce
-_Swiftly Salesforce_ is an easy-to-use framework for building native iOS apps with Swift and the Salesforce Platform.
+_Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
+- Written entirely in [Swift](https://developer.apple.com/swift/), Apple's "modern programming language that is safe, fast and interactive."
+- Enables elegant, painless code for complex, asynchronous [Salesforce API][REST API] interactions, and [OAuth2] authorization
+- Simpler and lighter than the Salesforce [Mobile SDK for iOS]
+- [Open source](http://github.com/mike4aday/SwiftlySalesforce)
+- Easy to install and update
 
-## Quick Overview
-- Written in Swift 2
-- 'Lightweight' alternative to the Salesforce [Mobile SDK for iOS]
-- Simplifies the Salesforce [OAuth2] authorization process (aka the OAuth2 "dance")
-- Works with [Alamofire] for easy and secure interaction with the Salesforce [REST API]
-- Installs with [CocoaPods]: add `pod 'SwiftlySalesforce'` to your [Podfile]
-- Check out the code in the included [example] app
-- If you have a question, suggestion, or find a bug, [contact me](#contact)
+## How do I set up Swiftly Salesforce?
+You can be up and running in under 5 minutes by following these steps (and if you're already familiar with the relevant procedure; if not, see the [appendix](#appendix)):
 
-## Why 'Swiftly Salesforce'?
+1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition
+1. Set up a Salesforce [Connected App] that will be the server to your iOS mobile app
+1. Register your Connected App's callback URL scheme with iOS ([see appendix](#appendix))
+1. Add _Swiftly Salesforce_ to your Xcode project; append `pod 'SwiftlySalesforce'` to your [CocoaPods](https://cocoapods.org/) Podfile, or just copy these [7 Swift files](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Pod/Classes), and add the [dependent frameworks](#dependent-frameworks)
+1. Configure your app delegate for _Swiftly Salesforce_ ([see appendix](#appendix))
+1. Add an ATS exception for salesforce.com ([see appendix](#appendix)) 
 
-The goal of _Swiftly Salesforce_ is to lower the barrier to developing custom iOS apps that integrate with the Salesforce Platform. It simplifies the Salesforce authorization process, and asynchronous interaction with the back-end Salesforce [REST API].
+## How do I use Swiftly Salesforce?
+_Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce); it retrieves a user's task records from Salesforce, and enables the user to change the task's status.
 
-Though I plan to improve and evolve _Swiftly Salesforce_, I want to keep it as simple and lean as possible, and I want to enable you to work with other modern, [complementary frameworks](#complementary-frameworks) that are also narrowly-focused, and which are better at their core functionality than _Swiftly Salesforce_ would be. That said, if it makes sense to expand the capability of _Swiftly Salesforce_, [let me know](#contact) and I'll gladly consider it.
+_Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
 
-_Swiftly Salesforce_ is a very 'lightweight' alternative to the [Salesforce Mobile SDK][Mobile SDK for iOS], which is much more comprehensive, but it comes with greater complexity, a steeper learning curve, and a larger code base to support backward compatibility and hybrid app development. For me, at least, that can sometimes slow the development of apps that don't require such a comprehensive SDK. 
-
-In addition, I wanted to work with Swift 2, and liked the syntax and ease-of-use of [Alamofire], one of the most popular iOS frameworks. I tried to avoid depending too much on any other framework, but Alamofire is widely-adopted, well-maintained, and fits very nicely with _Swiftly Salesforce's_ core functionality.
-
-## Getting Started
-If you haven't already:
-
-1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition environment ('org')
-2. Create a [Connected App] that will be the server to your iOS mobile app
-
-The easiest way to incorporate _Swiftly Salesforce_ into your Xcode project is with [CocoaPods]; add the  line below to your [Podfile]. 
+### Example: Retrieve a Salesforce Record
+The following will retrieve all the fields for the specified account record:
+```swift
+SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF").request()
 ```
-pod 'SwiftlySalesforce' 
+To specify which fields should be retrieved:
+```swift
+let fields = ["AccountNumber", "BillingCity", "MyCustomField__c"]
+SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF", fields: fields).request()
 ```
 
-## Configure Your iOS App
+### Example: Update a Salesforce Record
+```swift
+SalesforceAPI.UpdateRecord(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"]).request()
+.then {
+	(_) -> () in
+	// Update the local model
+}.always {
+	// Update the UI
+}
+```
+### Example: Querying
+```swift
+let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
+SalesforceAPI.Query(soql: soql).request()
+```
+See the next example for handling the query results
 
-### 1. Tell iOS How to Handle Your Callback URL
-Salesforce will redirect the user's browser to the callback URL upon successful authorization, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the URL, and will pass it to your app's delegate.
+### Example: Chaining Asynchronous Requests
+Let's say we want to retrieve a random zip/postal code from a [custom Apex REST](https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST) resource, and then use that zip code in a query:
+```swift
+// Chained asynch requests 
+// (Enclosing in "firstly" block is optional; just keeps things nicely laid out)
+firstly {
+	// Make GET request of custom Apex REST resource
+	SalesforceAPI.ApexRest(method: "GET", path: "/MyApexResourceThatEmitsRandomZip").request()
+}.then {
+	// Query accounts with that postal code
+	(postalCode) -> Promise<AnyObject> in
+	let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
+	return SalesforceAPI.Query(soql: soql).request()
+}.then {
+	// Parse JSON response
+	(result) -> () in
+	guard let records = result["records"] as? [[String: AnyObject]] else {
+		throw NSError(domain: "TaskForce", code: -101, userInfo: nil)
+	}
+	for record in records {
+	    if let id = record["Id"] as? String, name = record["Name"] as? String {
+	        print("Account ID = \(id); name = \(name)")
+        }
+    }
+}
+```
+You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next operation. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, when the first completes, when any fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
 
+### Example: Handling Errors
+The following code is from the example file, [TaskStore.swift](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
+```swift
+firstly {
+	SalesforceAPI.Identity.request()
+}.then {
+	// Get user ID
+	(identityInfo) -> String in
+	guard let userID = identityInfo["user_id"] as? String else {
+		throw NSError(domain: "TaskForce", code: -100, userInfo: nil)
+	}
+	return userID
+}.then {
+	// Query tasks owned by user
+	(userID) -> Promise<AnyObject> in
+	let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
+	return SalesforceAPI.Query(soql: soql).request()
+}.then {
+	// Parse JSON response into Task instances
+	(result) -> () in
+	guard let records = result["records"] as? [[String: AnyObject]] else {
+		throw NSError(domain: "TaskForce", code: -101, userInfo: nil)
+	}
+	let tasks = records.map { Task(dictionary: $0) }
+	self.cache = tasks
+	fulfill(tasks)
+}.error {
+	// Any errors in the chain, e.g. loss of Internet connectivity, will be caught here
+	(error) -> Void in
+	reject(error)
+}
+```
+You could also recover from an error, and continue with the chain, using a 'recover' block. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
+```swift
+CLLocationManager.promise().recover { err in
+    guard !err.fatal else { throw err }
+    return CLLocationChicago
+}.then { location in
+    // the user’s location, or Chicago if an error occurred
+}.error { err in
+    // the error was fatal
+}
+```
+### Example: Log Out
+If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. _Swiftly Salesforce_ will revoke and remove any stored credentials, and automatically display a Safari View Controller with the Salesforce login page, ready for another user to log in.
+```swift
+// Call this when "Log Out" button is tapped, for example
+if let app = UIApplication.sharedApplication().delegate as? LoginViewPresentable {
+	app.logOut().then {
+		() -> () in
+		// User's authorization now revoked - clear local data cache
+		return
+	}
+}
+```
+## Dependent Frameworks
+The great Swift frameworks leveraged by _Swiftly Salesforce_:
+* [PromiseKit](http://promisekit.org) (Version 3): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
+* [Alamofire] (Version 3): "Elegant HTTP Networking in Swift"
+* [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
+
+## Main Components of Swiftly Salesforce
+* [SalesforceAPI]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important, or commonly-used Salesforce [REST API] endpoints are represented as enum values, and I'll add more endpoints over time. You can also easily create [Alamofire] requests for your [custom Apex REST][Apex REST] endpoints, for example, by following the pattern established in this file.
+
+* [Credentials]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
+
+* [Extensions]: Swift extensions used by other components of _Swiftly Salesforce_. The extensions that you'll likely use in your own code are `NSDateFormatter.SalesforceDateTime`, and `NSDateFormatter.SalesforceDate`, for converting Salesforce date/time and date fields to and from strings for JSON serialization, and `Alamofire.Request.salesforceResponse( )` to handle the Salesforce REST API's JSON response.
+
+* [OAuth2Manager]: Singleton that coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the OAuth2Manager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then the OAuth2Manager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted form into which the user would enter his/her username and password. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their passwords are never handled by the client application.
+
+## Resources
+If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful.
+* [Salesforce REST API Developer's Guide][REST API]
+* [Salesforce App Cloud](http://www.salesforce.com/platform): aka the Salesforce Platform
+* [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
+* [Salesforce Partner Community](https://partners.salesforce.com): "Innovate, grow, connect" with Salesforce ISVs. Join the [Salesforce + iOS Mobile][sfdc-ios Chatter] Chatter group
+* [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: 'official' SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
+* [A Salesforce Swift App](http://www.mobileandemerging.technology/a-salesforce-mobile-app-with-swift/): blog post on using Swift with the Salesforce Mobile SDK. By [Jonathan Jenkins](http://www.mobileandemerging.technology/author/jonathan-jenkins/)
+* [Salesforce OAuth2 Made Easy For Native iOS Apps](https://developer.salesforce.com/blogs/developer-relations/2015/03/salesforce-oauth-made-easy-native-ios-apps.html): blog post by [Quinton Wall](http://twitter.com/quintonwall)
+* [When to Use the Salesforce1 Platform vs. Creating Custom Apps](https://help.salesforce.com/HTViewSolution?id=000192840&language=en_US)
+* [Alamofire]: Swift version of AFNetworking, "...One of the most popular third-party libraries on iOS and OS X." Tutorial [here](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial).
+* [Functional Swift](https://www.objc.io/books/functional-swift/): great book for learning Swift 2, by the team at [objc.io](http://objc.io). See their [other books](https://www.objc.io/books/) on Advanced Swift, and Core Data.
+* [iOS Apps with REST APIs](https://grokswift.com/bookshort/?utm_expid=86885646-0.pSwvTyVzSoG5VWML8NMtRw.1&utm_referrer=https%3A%2F%2Fgrokswift.com%2F): great book for getting started with Swift, REST APIs, JSON, and Alamofire. "Only the nitty gritty that you need to get real work done now: interfacing with your web services and displaying the results in your UI." By Christina Moulton of [GrokSwift](https://twitter.com/GrokSwift) 
+
+## About Me
+I'm a senior technical '[evangelist](https://en.wikipedia.org/wiki/Technology_evangelist)' at Salesforce, and I work with [ISV](https://en.wikipedia.org/wiki/Independent_software_vendor) partners who are building applications on the Salesforce Platform. 
+
+## Contact
+Questions, suggestions, bug reports and code contributions welcome:
+* Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues)
+* Twitter [@mike4aday]
+* Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
+
+## Appendix
+
+### Register Your Connected App's Callback URL Scheme with iOS
+Upon successful OAuth2 authorization, Salesforce will redirect the Safari View Controller back to the callback URL that you specified in your Connected App settings, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the URL, and will pass it to your app's delegate.
 ```xml
 <!-- ADD TO YOUR APP'S .PLIST FILE -->
 <key>CFBundleURLTypes</key>
@@ -45,38 +183,50 @@ Salesforce will redirect the user's browser to the callback URL upon successful 
     <string>SalesforceOAuth2CallbackURLScheme</string>
     <key>CFBundleURLSchemes</key>
     <array>
-      <string><!-- YOUR CALLBACK URL'S SCHEME HERE --></string>
+      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL) --></string>
     </array>
   </dict>
 </array>
 ```
-
-### 2. Tell Swiftly Salesforce About Your Connected App
-Add the following to your app's delegate class, preferably in the method `application(_:didFinishLaunchingWithOptions:)`. The consumer key and callback URL should be copied _exactly_ as they appear in your Salesforce [Connected App][Connected App]'s settings.
+Then, you just need to add a single line in your app delegate class so that _Swiftly Salesforce_ will handle the callback URL and the appended credentials.
 ```swift
-/// Salesforce Connected App settings
-let consumerKey = "YOUR CONNECTED APP'S CONSUMER KEY"
-let callbackURL = NSURL(string: "YOUR CALLBACK URL")! //TODO: register it with iOS...
-AuthenticationManager.sharedInstance.configureWithConsumerKey(consumerKey, callbackURL: callbackURL)
-```
-
-### 3. Handle the Callback URL
-Now that you've registered your callback URL with iOS, you need to handle that URL in your app. Add the following to your app delegate's method `application(_:handleOpenURL:)`
-```Swift
-func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-  if url.absoluteString.hasPrefix(callbackURL.absoluteString) {
-    // This is the callback URL, with credentials appended by Salesforce upon successful authentication
-    if let credentials = Credentials(callbackURL: url) {
-      AuthenticationManager.sharedInstance.loginCompletedWithCredentials(credentials)
-      return true
-    }
-  }
-  return false
+func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+	handleRedirectURL(url)
+	return true
 }
 ```
 
-### 4. Add an ATS Exception for Salefsorce
-As of this writing, you need to add an [ATS exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security) to your app's .plist file to allow it to connect to salesforce.com.
+### Configure your App Delegate for _Swiftly Salesforce_ 
+Update your app delegate class so that it:
+* Configures _Swiftly Salesforce_ with your Connected App's consumer key and callback URL
+* Implements `LoginViewPresentable` - you don't have to implement any methods, though, thanks to the magic of Swift 2's [protocol extensions](http://www.codingexplorer.com/protocol-extensions-in-swift-2/)
+* Calls `handleRedirectURL(NSURL:)` when asked by iOS to open the callback URL
+See below:
+```swift
+import UIKit
+import SwiftlySalesforce
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
+	
+	var window: UIWindow?
+	
+	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		// Configure the Salesforce authentication manager with Connected App settings
+		OAuth2Manager.sharedInstance.configureWithConsumerKey("<YOUR CONNECTED APP'S CONSUMER KEY>", redirectURL: NSURL(string: "<YOUR CONNECTED APP'S CALLBACK URL")!)
+		OAuth2Manager.sharedInstance.authenticationDelegate = self
+		return true
+	}
+	
+	func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+		handleRedirectURL(url)
+		return true
+	}
+}
+```
+
+### Add an ATS Exception for Salefsorce
+As of this writing, you need to add an [application transport security (ATS) exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security)  to your app's .plist file to allow it to connect to salesforce.com, as follows:
 ```xml
 <!-- ADD TO YOUR APP'S .PLIST FILE -->
 <key>NSAppTransportSecurity</key>
@@ -94,112 +244,12 @@ As of this writing, you need to add an [ATS exception](https://www.hackingwithsw
 </dict>
 ```
 
-## Using Swiftly Salesforce
-
-### Query Salesforce
-```swift
-guard let credentials = AuthenticationManager.sharedInstance.credentials else {
-	AuthenticationManager.sharedInstance.authenticate()
-	return
-} 
-let soql = "SELECT Id,Subject,Status FROM Task ORDER BY CreatedDate DESC LIMIT 100"
-Alamofire.request(SalesforceAPI.Query(soql: soql).endpoint(credentials: credentials))
-.validate()
-.salesforceResponse {
-	(response) -> Void in
-	switch response.result {
-	case .Failure(let error):
-		if error.isAuthenticationRequiredError() {
-			// Access token probably expired
-			AuthenticationManager.sharedInstance.authenticate()
-		}
-		else {
-			// Alert the user
-		}
-	case .Success(let value):
-		if let dict = value as? [String: AnyObject], let records = dict["records"] as? [[String: AnyObject]] {
-			let tasks = [Task]()
-			for record in records {
-				tasks.append(Task(dictionary: record))
-			}
-			self.tasks = tasks // Update the model
-		}
-	}
-}
-```
-
-### Update a Salesforce Record
-```swift
-guard let credentials = AuthenticationManager.sharedInstance.credentials else {
-	AuthenticationManager.sharedInstance.authenticate()
-	return
-}
-let recordUpdate: [String: AnyObject] = ["Status" : selectedStatus ] // Update the status field
-Alamofire.request(SalesforceAPI.UpdateRecord(type: "Task", id: task.id, fields: recordUpdate).endpoint(credentials: credentials))
-.validate()
-.salesforceResponse {
-	[unowned self]
-	(response) -> Void in
-	switch response.result {
-	case .Success:
-		task.status = selectedStatus // Update the model
-	case .Failure(let error):
-		if error.isAuthenticationRequiredError() {
-			// Access token probably expired
-			AuthenticationManager.sharedInstance.authenticate()
-		}
-		else {
-			// Alert the user
-		}
-	}
-}
-```
-
-## Main Components
-* [SalesforceAPI]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important, or commonly-used Salesforce [REST API] endpoints are represented as enum values, and I'll add more endpoints over time. You can also easily create [Alamofire] requests for your [custom Apex REST][Apex REST] endpoints, for example, by following the pattern established in this file.
-
-* [Credentials]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
-
-* [Extensions]: Swift extensions used by other components of _Swiftly Salesforce_. The extensions that you'll likely use in your own code are `NSDateFormatter.SalesforceDateTime`, and `NSDateFormatter.SalesforceDate`, for converting Salesforce date/time and date fields to and from strings for JSON serialization, and `Alamofire.Request.salesforceResponse( )` to handle the Salesforce REST API's JSON response.
-
-* [AuthenticationManager]: Singleton that coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the AuthenticationManager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then the AuthenticationManager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted form into which the user would enter his/her username and password. See [MasterViewController.swift] for an example of the authentication process; it uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their passwords are never handled by the client application.
-
-## Complementary Frameworks
-Some great Swift frameworks that are complementary to _Swiftly Salesforce_, and which may be useful for your applications:
-* [Alamofire]: "Elegant HTTP Networking in Swift"
-* [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON): "The better way to deal with JSON data in Swift"
-* [Realm](http://realm.io): "A replacement for SQLite & Core Data"
-* [PromiseKit](http://promisekit.org): "...Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
-
-## Resources
-If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful.
-* [Salesforce REST API Developer's Guide][REST API]
-* [Salesforce App Cloud](http://www.salesforce.com/platform): aka the Salesforce Platform
-* [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
-* [Salesforce Partner Community](https://partners.salesforce.com): "Innovate, grow, connect" with Salesforce ISVs. Join the [Salesforce + iOS Mobile][sfdc-ios Chatter] Chatter group
-* [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: 'official' SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
-* [A Salesforce Swift App](http://www.mobileandemerging.technology/a-salesforce-mobile-app-with-swift/): blog post on using Swift with the Salesforce Mobile SDK. By [Jonathan Jenkins](http://www.mobileandemerging.technology/author/jonathan-jenkins/)
-* [Salesforce OAuth2 Made Easy For Native iOS Apps](https://developer.salesforce.com/blogs/developer-relations/2015/03/salesforce-oauth-made-easy-native-ios-apps.html): blog post by [Quinton Wall](http://twitter.com/quintonwall)
-* [When to Use the Salesforce1 Platform vs. Creating Custom Apps](https://help.salesforce.com/HTViewSolution?id=000192840&language=en_US)
-* [Alamofire]: Swift version of AFNetworking, "...One of the most popular third-party libraries on iOS and OS X." Tutorial [here](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial).
-* [Functional Swift](https://www.objc.io/books/functional-swift/): great book for learning Swift 2, by the team at [objc.io](http://objc.io). See their [other books](https://www.objc.io/books/) on Advanced Swift, and Core Data.
-* [iOS Apps with REST APIs](https://grokswift.com/bookshort/?utm_expid=86885646-0.pSwvTyVzSoG5VWML8NMtRw.1&utm_referrer=https%3A%2F%2Fgrokswift.com%2F): great book for getting started with Swift, REST APIs, JSON, and Alamofire. "Only the nitty gritty that you need to get real work done now: interfacing with your web services and displaying the results in your UI." By Christina Moulton of [GrokSwift](https://twitter.com/GrokSwift) 
-
-## About
-I'm a senior technical '[evangelist](https://en.wikipedia.org/wiki/Technology_evangelist)' at Salesforce, and I work with [ISV](https://en.wikipedia.org/wiki/Independent_software_vendor) partners who are developing applications on the Salesforce Platform. It's been my favorite platform for about 9 years, well before I became a Salesforce employee, and I've worked with iOS for about 3 years. 
-
-## Contact
-If you have a question, suggestion, or find a bug, please contact me:
-* Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues)
-* Twitter [@mike4aday]
-* Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
 
    [Alamofire]: <https://github.com/alamofire/alamofire>
+   [PromiseKit]: <https://github.com/mxcl/PromiseKit>
    [OAuth2]: <https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com>
    [REST API]: <https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/>
    [Swift 2]: <https://developer.apple.com/swift/>
-   [Podfile]: <https://guides.cocoapods.org/syntax/podfile.html>
-   [CocoaPods]: <https://cocoapods.org/>
    [sfdc-ios Chatter]: <http://sfdc.co/sfdc-ios>
    [@mike4aday]: <https://twitter.com/mike4aday>
    [Connected App]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm>
@@ -214,5 +264,5 @@ If you have a question, suggestion, or find a bug, please contact me:
    [SalesforceAPI]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/SalesforceAPI.swift>
    [Credentials]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Credentials.swift>
    [Extensions]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Extensions.swift>
-   [AuthenticationManager]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/AuthenticationManager.swift>
-   [MasterViewController.swift]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/MasterViewController.swift>
+   [OAuth2Manager]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/OAuth2Manager.swift>
+
