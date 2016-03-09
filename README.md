@@ -83,7 +83,7 @@ The following code is from the example file, [TaskStore.swift](https://github.co
 firstly {
 	SalesforceAPI.Identity.request()
 }.then {
-	// Get user ID
+	// Extract user ID from JSON result
 	(identityInfo) -> String in
 	guard let userID = identityInfo["user_id"] as? String else {
 		throw NSError(domain: "TaskForce", code: -100, userInfo: nil)
