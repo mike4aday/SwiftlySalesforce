@@ -17,7 +17,7 @@ You can be up and running in under 5 minutes by following these steps (and if yo
 1. Add an ATS exception for salesforce.com ([see appendix](#appendix)) 
 
 ## How do I use Swiftly Salesforce?
-_Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce); it retrieves a user's task records from Salesforce, and enables the user to change the task's status.
+_Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce); it retrieves a user's task records from Salesforce, and enables the user to update the status of a task.
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
 
@@ -214,7 +214,8 @@ func application(application: UIApplication, openURL url: NSURL, sourceApplicati
 Update your app delegate class so that it:
 * Configures _Swiftly Salesforce_ with your Connected App's consumer key and callback URL
 * Implements `LoginViewPresentable` - you don't have to implement any methods, though, thanks to the magic of Swift 2's [protocol extensions](http://www.codingexplorer.com/protocol-extensions-in-swift-2/)
-* Calls `handleRedirectURL(NSURL:)` when asked by iOS to open the callback URL
+* Calls `handleRedirectURL(NSURL:)` when asked by iOS to open the callback URL.
+
 See below:
 ```swift
 import UIKit
