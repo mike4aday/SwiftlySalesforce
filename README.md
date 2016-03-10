@@ -225,7 +225,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
 	let redirectURL = NSURL(string: "<<YOUR CONNECTED APP'S CALLBACK URL>>")!
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		// Configure the Salesforce authentication manager with Connected App settings
 		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL)
 		OAuth2Manager.sharedInstance.authenticationDelegate = self
 		return true
