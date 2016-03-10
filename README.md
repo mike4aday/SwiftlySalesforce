@@ -31,7 +31,17 @@ To specify which fields should be retrieved:
 let fields = ["AccountNumber", "BillingCity", "MyCustomField__c"]
 SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF", fields: fields).request()
 ```
-
+Note that `request()` is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:
+```swift
+let promise: Promise<AnyObject> = SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF").request()
+```
+And we can chain closures that will be called when the promise is fulfilled:
+```swift
+promise.then {
+	(json) -> () in
+	// Parse the JSON and do stuff
+}
+```
 ### Example: Update a Salesforce Record
 ```swift
 SalesforceAPI.UpdateRecord(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"]).request()
