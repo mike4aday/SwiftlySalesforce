@@ -71,7 +71,7 @@ firstly {
 }.then {
 	// Query accounts with that zip code
 	(result) -> Promise<AnyObject> in
-	guard let postalCode = result["zip"] as? String else {
+	guard let zip = result["zip"] as? String else {
 		throw NSError(domain: "TaskForce", code: -100, userInfo: nil)
 	}
 	let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
