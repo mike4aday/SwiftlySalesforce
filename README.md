@@ -68,9 +68,10 @@ firstly {
 	// Make GET request of custom Apex REST resource
 	SalesforceAPI.ApexRest(method: "GET", path: "/MyApexResourceThatEmitsRandomZip").request()
 }.then {
-	// Query accounts with that postal code
-	(postalCode) -> Promise<AnyObject> in
-	let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
+	// Query accounts with that zip code
+	(result) -> Promise<AnyObject> in
+	let postalCode = result["zip"]
+	let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
 	return SalesforceAPI.Query(soql: soql).request()
 }.then {
 	// Parse JSON response
