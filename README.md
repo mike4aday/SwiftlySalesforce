@@ -35,7 +35,7 @@ Note that `request()` is an asynchronous function, whose return value is a "prom
 ```swift
 let promise: Promise<AnyObject> = SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF").request()
 ```
-And we can chain closures that will be called when the promise is fulfilled:
+And we can add a closure that will be called later, when the promise is fulfilled:
 ```swift
 promise.then {
 	(json) -> () in
@@ -119,7 +119,7 @@ firstly {
 	reject(error)
 }
 ```
-You could also recover from an error, and continue with the chain, using a 'recover' block. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
+You could also recover from an error, and continue with the chain, using a `recover` closure. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
 ```swift
 CLLocationManager.promise().recover { err in
     guard !err.fatal else { throw err }
