@@ -221,10 +221,12 @@ import SwiftlySalesforce
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
 	
 	var window: UIWindow?
+	let consumerKey = "<<YOUR CONNECTED APP'S CONSUMER KEY>>"
+	let redirectURL = NSURL(string: "<<YOUR CONNECTED APP'S CALLBACK URL>>")!
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Configure the Salesforce authentication manager with Connected App settings
-		OAuth2Manager.sharedInstance.configureWithConsumerKey("<YOUR CONNECTED APP'S CONSUMER KEY>", redirectURL: NSURL(string: "<YOUR CONNECTED APP'S CALLBACK URL")!)
+		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL)
 		OAuth2Manager.sharedInstance.authenticationDelegate = self
 		return true
 	}
