@@ -52,7 +52,7 @@ SalesforceAPI.UpdateRecord(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Sta
 	// Update the UI
 }
 ```
-The `always` closure will be called regardless of success or failure.
+The `always` closure will be called regardless of success or failure elsewhere in the promise chain.
 ### Example: Querying
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
@@ -98,8 +98,8 @@ firstly {
 	SalesforceAPI.Identity.request()
 }.then {
 	// Extract user ID from JSON result
-	(identityInfo) -> String in
-	guard let userID = identityInfo["user_id"] as? String else {
+	(result) -> String in
+	guard let userID = result["user_id"] as? String else {
 		throw NSError(domain: "TaskForce", code: -100, userInfo: nil)
 	}
 	return userID
@@ -118,7 +118,7 @@ firstly {
 	self.cache = tasks
 	fulfill(tasks)
 }.error {
-	// Any errors in the chain, e.g. loss of Internet connectivity, will be caught here
+	// Any errors in the chain would be caught here
 	(error) -> Void in
 	reject(error)
 }
