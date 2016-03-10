@@ -52,6 +52,7 @@ SalesforceAPI.UpdateRecord(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Sta
 	// Update the UI
 }
 ```
+The `always` closure will be called regardless of success or failure.
 ### Example: Querying
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
@@ -70,7 +71,9 @@ firstly {
 }.then {
 	// Query accounts with that zip code
 	(result) -> Promise<AnyObject> in
-	let postalCode = result["zip"]
+	guard let postalCode = result["zip"] as? String else {
+		throw NSError(domain: "TaskForce", code: -100, userInfo: nil)
+	}
 	let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
 	return SalesforceAPI.Query(soql: soql).request()
 }.then {
