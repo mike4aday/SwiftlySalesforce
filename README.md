@@ -7,7 +7,7 @@ _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobi
 * Easy to install and update
 
 ## How do I set up Swiftly Salesforce?
-You can be up and running in under 5 minutes by following these steps (and if you're already familiar with the relevant procedure; if not, see the [appendix](#appendix)):
+You can be up and running in under 5 minutes by following these steps (if you're already familiar with the relevant procedure; if not, see the [appendix](#appendix)):
 
 1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition
 1. Set up a Salesforce [Connected App] that will be the server to your iOS mobile app
@@ -16,7 +16,7 @@ You can be up and running in under 5 minutes by following these steps (and if yo
 1. Configure your app delegate for _Swiftly Salesforce_ ([see appendix](#appendix))
 1. Add an ATS exception for salesforce.com ([see appendix](#appendix)) 
 
-Minimum Requirements
+Minimum requirements:
 * iOS 9.1
 * Swift 2
 * Xcode 7
