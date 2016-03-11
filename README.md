@@ -16,6 +16,11 @@ You can be up and running in under 5 minutes by following these steps (and if yo
 1. Configure your app delegate for _Swiftly Salesforce_ ([see appendix](#appendix))
 1. Add an ATS exception for salesforce.com ([see appendix](#appendix)) 
 
+Minimum Requirements
+* iOS 9.1
+* Swift 2
+* Xcode 7
+
 ## How do I use Swiftly Salesforce?
 _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce); it retrieves a user's task records from Salesforce, and enables the user to update the status of a task.
 
