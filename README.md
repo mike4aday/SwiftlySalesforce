@@ -14,7 +14,9 @@ You can be up and running in under 5 minutes by following these steps (if you're
 1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition
 1. Set up a Salesforce [Connected App] that will be the server to your iOS mobile app
 1. Register your Connected App's callback URL scheme with iOS ([see appendix](#appendix))
-1. Add _Swiftly Salesforce_ to your Xcode project; append `pod 'SwiftlySalesforce'` to your [CocoaPods](https://cocoapods.org/) Podfile, or just copy these [7 Swift files](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Pod/Classes), and add the [dependent frameworks](#dependent-frameworks)
+1. Add _Swiftly Salesforce_ to your Xcode project: 
+ * Add `pod 'SwiftlySalesforce'` to your project's [CocoaPods](https://cocoapods.org/) Podfile  ([see appendix](#appendix))
+ * Or just copy these [7 Swift files](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Pod/Classes), and add the [dependent frameworks](#dependent-frameworks)
 1. Configure your app delegate for _Swiftly Salesforce_ ([see appendix](#appendix))
 1. Add an ATS exception for salesforce.com ([see appendix](#appendix)) 
 
@@ -192,6 +194,17 @@ Questions, suggestions, bug reports and code contributions welcome:
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
 
 ## Appendix
+
+### Add Swiftly Salesforce to Your CocoaPods Podfile
+Adding _Swiftly Salesforce_ to a simple Podfile:
+```
+platform :ios, '9.1'
+use_frameworks!
+
+pod 'SwiftlySalesforce'
+# Another pod here
+```
+See [Podfile](https://guides.cocoapods.org/syntax/podfile.html) for more details
 
 ### Register Your Connected App's Callback URL Scheme with iOS
 Upon successful OAuth2 authorization, Salesforce will redirect the Safari View Controller back to the callback URL that you specified in your Connected App settings, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the URL, and will pass it to your app's delegate.
