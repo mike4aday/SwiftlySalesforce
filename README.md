@@ -15,7 +15,7 @@ You can be up and running in under 5 minutes by following these steps (if you're
 1. Set up a Salesforce [Connected App] that will be the server to your iOS mobile app
 1. Register your Connected App's callback URL scheme with iOS ([see appendix](#appendix))
 1. Add _Swiftly Salesforce_ to your Xcode project: 
- * Add `pod 'SwiftlySalesforce'` to your project's [CocoaPods](https://cocoapods.org/) Podfile  ([see appendix](#appendix))
+ * Add `pod 'SwiftlySalesforce'` to your project's [Podfile](https://guides.cocoapods.org/syntax/podfile.html)  ([see appendix](#appendix))
  * Or just copy these [7 Swift files](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Pod/Classes), and add the [dependent frameworks](#dependent-frameworks)
 1. Configure your app delegate for _Swiftly Salesforce_ ([see appendix](#appendix))
 1. Add an ATS exception for salesforce.com ([see appendix](#appendix)) 
