@@ -1,4 +1,4 @@
-![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.png)
+![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg)
 
 # Swiftly Salesforce
 _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
