@@ -19,7 +19,9 @@
     </section>
 
     <section class="main-content">
-      <h1>
+      <p><img src="http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg" alt="Salesforce powered"></p>
+
+<h1>
 <a id="swiftly-salesforce" class="anchor" href="#swiftly-salesforce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Swiftly Salesforce</h1>
 
 <p><em>Swiftly Salesforce</em> is a framework for the rapid development of native iOS mobile apps that interact with the <a href="http://www.salesforce.com/platform/overview/">Salesforce Platform</a>.</p>
@@ -43,7 +45,13 @@
 <a href="https://developer.salesforce.com/signup">Get</a> a free Salesforce Developer Edition</li>
 <li>Set up a Salesforce <a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm">Connected App</a> that will be the server to your iOS mobile app</li>
 <li>Register your Connected App's callback URL scheme with iOS (<a href="#appendix">see appendix</a>)</li>
-<li>Add <em>Swiftly Salesforce</em> to your Xcode project; append <code>pod 'SwiftlySalesforce'</code> to your <a href="https://cocoapods.org/">CocoaPods</a> Podfile, or just copy these <a href="https://github.com/mike4aday/SwiftlySalesforce/tree/master/Pod/Classes">7 Swift files</a>, and add the <a href="#dependent-frameworks">dependent frameworks</a>
+<li>Add <em>Swiftly Salesforce</em> to your Xcode project: 
+
+<ul>
+<li>Add <code>pod 'SwiftlySalesforce'</code> to your project's <a href="https://guides.cocoapods.org/syntax/podfile.html">Podfile</a>  (<a href="#appendix">see appendix</a>)</li>
+<li>Or just copy these <a href="https://github.com/mike4aday/SwiftlySalesforce/tree/master/Pod/Classes">7 Swift files</a>, and add the <a href="#dependent-frameworks">dependent frameworks</a>
+</li>
+</ul>
 </li>
 <li>Configure your app delegate for <em>Swiftly Salesforce</em> (<a href="#appendix">see appendix</a>)</li>
 <li>Add an ATS exception for salesforce.com (<a href="#appendix">see appendix</a>) </li>
@@ -274,6 +282,20 @@ firstly {
 
 <h2>
 <a id="appendix" class="anchor" href="#appendix" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix</h2>
+
+<h3>
+<a id="add-swiftly-salesforce-to-your-cocoapods-podfile" class="anchor" href="#add-swiftly-salesforce-to-your-cocoapods-podfile" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add Swiftly Salesforce to Your CocoaPods Podfile</h3>
+
+<p>Adding <em>Swiftly Salesforce</em> to a simple Podfile:</p>
+
+<pre><code>platform :ios, '9.1'
+use_frameworks!
+
+pod 'SwiftlySalesforce'
+# Another pod here
+</code></pre>
+
+<p>See <a href="https://guides.cocoapods.org/syntax/podfile.html">Podfile</a> for more details</p>
 
 <h3>
 <a id="register-your-connected-apps-callback-url-scheme-with-ios" class="anchor" href="#register-your-connected-apps-callback-url-scheme-with-ios" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Register Your Connected App's Callback URL Scheme with iOS</h3>
