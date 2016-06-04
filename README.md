@@ -263,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
 
 #### Communities and OAuth2
 If the mobile app's users are members of a Salesforce Community, then they should authorize with the Community URL, rather than the default ```login.salesforce.com``` URL. For example, if the hostname portion of the Community authorization URL is ```acme.force.com```, then configure the ```OAuth2Manager``` class with an additional parameter that specifies the hostname:
-```
+```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL, hostname: "acme.force.com")
 		OAuth2Manager.sharedInstance.authenticationDelegate = self
