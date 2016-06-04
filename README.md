@@ -265,11 +265,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
 If the mobile app's users are members of a Salesforce Community, then they should authorize with the Community URL, rather than the default ```login.salesforce.com``` URL. For example, if the hostname portion of the Community authorization URL is ```acme.force.com```, then configure the ```OAuth2Manager``` class with an additional parameter that specifies the hostname:
 ```
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL)
+		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL, hostname: "acme.force.com")
 		OAuth2Manager.sharedInstance.authenticationDelegate = self
 		return true
 }
 ```
+For more information, see [Configure Authentication Flows with OAuth](https://developer.salesforce.com/docs/atlas.en-us.salesforce_communities_implementation.meta/salesforce_communities_implementation/networks_auth_configure_oauth.htm)
 
 ### Add an ATS Exception for Salefsorce
 As of this writing, you need to add an [application transport security (ATS) exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security)  to your iOS application's .plist file to allow it to connect to salesforce.com, as follows:
