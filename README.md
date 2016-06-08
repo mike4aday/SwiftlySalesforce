@@ -183,7 +183,7 @@ If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you
 * [Alamofire]: Swift version of AFNetworking, "...One of the most popular third-party libraries on iOS and OS X." Tutorial [here](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial).
 * [Functional Swift](https://www.objc.io/books/functional-swift/): great book for learning Swift 2, by the team at [objc.io](http://objc.io). See their [other books](https://www.objc.io/books/) on Advanced Swift, and Core Data.
 * [iOS Apps with REST APIs](https://grokswift.com/bookshort/?utm_expid=86885646-0.pSwvTyVzSoG5VWML8NMtRw.1&utm_referrer=https%3A%2F%2Fgrokswift.com%2F): great book for getting started with Swift, REST APIs, JSON, and Alamofire. "Only the nitty gritty that you need to get real work done now: interfacing with your web services and displaying the results in your UI." By Christina Moulton of [GrokSwift](https://twitter.com/GrokSwift) 
-* [Salesforce Mobile SDK Quick Start](http://www.centare.com/salesforce-mobile-sdk-quickstart/): blog post by [@welbes](https://twitter.com/welbes)
+* [Salesforce Mobile SDK Quick Start](http://www.centare.com/salesforce-mobile-sdk-quickstart/): blog post by [William Welbes](https://twitter.com/welbes)
 
 ## About Me
 I'm a senior technical '[evangelist](https://en.wikipedia.org/wiki/Technology_evangelist)' at Salesforce, and I work with [ISV](https://en.wikipedia.org/wiki/Independent_software_vendor) partners who are building applications on the Salesforce Platform. 
