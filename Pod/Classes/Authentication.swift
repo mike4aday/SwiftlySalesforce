@@ -28,9 +28,9 @@ public protocol LoginViewPresentable: class, AuthenticationDelegate {
 }
 
 
-/// App delegates should implement this protocol to enable SwiftlySalesforce's
-/// default login behavior
 internal final class LoginViewController: SFSafariViewController {
+	
+	// Hold reference to the view controller that's temporarily replaced by the login view controller
 	var replacedRootViewController: UIViewController?
 }
 
