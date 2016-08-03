@@ -40,7 +40,7 @@ extension SalesforceAPI {
 	
 	public typealias Route = (method: Alamofire.Method, URI: String, parameters: [String: AnyObject]?, headers: [String: String]?)
 	
-	static public let DefaultVersion: Float = 36.0
+	static public let DefaultVersion: Float = 37.0
 
 	var route: Route {
 		
