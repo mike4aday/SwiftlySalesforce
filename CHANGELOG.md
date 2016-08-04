@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 2.0.1 (Aug. 4, 2016)
+- Updated README
+- Updated PromiseKit dependency to version 3.2.1+
+- Updated SalesforceAPI.DefaultVersion to 37.0
+- Replaced deprecated selector string syntax with Swift #selector
+- Fixed issue #1 (irrelevant comments)
+
 ## Version 2.0.0 (Mar. 5, 2016)
 - Incorporated PromiseKit for asynchronous interaction with Salesforce REST API and OAuth2 endpoints
 - Updated SalesforceAPI.DefaultVersion to 36.0
