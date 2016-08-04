@@ -34,7 +34,7 @@ public class DetailViewController: UITableViewController {
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-		refreshControl?.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+		refreshControl?.addTarget(self, action: #selector(DetailViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
 		loadData()
 	}
 	

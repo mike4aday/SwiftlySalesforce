@@ -21,7 +21,7 @@ class MasterViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		refreshControl?.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+		refreshControl?.addTarget(self, action: #selector(MasterViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
 		loadData(refresh: true)
 	}
 	
