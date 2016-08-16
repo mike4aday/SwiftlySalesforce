@@ -20,7 +20,7 @@
 		B2695F171D6336EF00493443 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2695F0F1D6336EF00493443 /* Info.plist */; };
 		B2695F181D6336EF00493443 /* OAuth2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2695F101D6336EF00493443 /* OAuth2Manager.swift */; };
 		B2695F191D6336EF00493443 /* SalesforceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2695F111D6336EF00493443 /* SalesforceAPI.swift */; };
-		B2695F1A1D6336EF00493443 /* SwiftlySalesforce.h in Headers */ = {isa = PBXBuildFile; fileRef = B2695F121D6336EF00493443 /* SwiftlySalesforce.h */; };
+		B2695F1A1D6336EF00493443 /* SwiftlySalesforce.h in Headers */ = {isa = PBXBuildFile; fileRef = B2695F121D6336EF00493443 /* SwiftlySalesforce.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B274ECAF1D6314C800612689 /* SwiftlySalesforce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B274ECA41D6314C800612689 /* SwiftlySalesforce.framework */; };
 /* End PBXBuildFile section */
 
@@ -368,7 +368,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftlySalesforce/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Pod/Classes/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -388,7 +388,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftlySalesforce/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Pod/Classes/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -403,6 +403,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = SwiftlySalesforceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.salesforce.SwiftlySalesforceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,6 +415,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = SwiftlySalesforceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.salesforce.SwiftlySalesforceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
