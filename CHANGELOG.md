@@ -6,8 +6,6 @@
 ## Version 2.0.2 (Coming soon)
 - Add Carthage support
 
------
-
 ## Version 2.0.1 (Aug. 4, 2016)
 - Updated README
 - Updated PromiseKit dependency to version 3.2.1+
