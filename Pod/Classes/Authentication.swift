@@ -13,13 +13,13 @@ import PromiseKit
 
 
 public enum AuthenticationResult {
-	case Success(credentials: Credentials)
-	case Failure(error: ErrorType)
+	case success(credentials: Credentials)
+	case failure(error: Error)
 }
 
 
 public protocol AuthenticationDelegate: class {
-	func authenticateWithURL(URL: NSURL) throws
+	func authenticateWithURL(_ URL: URL) throws
 }
 
 
@@ -39,7 +39,7 @@ internal final class LoginViewController: SFSafariViewController {
 extension AuthenticationDelegate {
 	
 	/// Parses the callback URL for URL-encoded name/value pairs that indicate success or failure.
-	public func resultFromRedirectURL(redirectURL: NSURL) throws -> AuthenticationResult {
+	public func resultFromRedirectURL(_ redirectURL: URL) throws -> AuthenticationResult {
 		
 		// TODO: docs are wrong... Error information may be in URL fragment *or* in query string...
 		guard let encodedResult = redirectURL.fragment ?? redirectURL.query else {
@@ -47,10 +47,10 @@ extension AuthenticationDelegate {
 		}
 		
 		if let creds = Credentials(URLEncodedString: encodedResult) {
-			return .Success(credentials: creds)
+			return .success(credentials: creds)
 		}
-		else if let error = Error.errorFromURLEncodedString(encodedResult) {
-			return .Failure(error: error)
+		else if let error = SFError.errorFromURLEncodedString(encodedResult) {
+			return .failure(error: error)
 		}
 		else {
 			// Can't make sense of the callback URL
@@ -64,7 +64,7 @@ extension AuthenticationDelegate {
 extension LoginViewPresentable {
 	
 	/// Implement AuthenticationDelegate.authenticateWithURL(URL: NSURL)
-	public func authenticateWithURL(URL: NSURL) throws {
+	public func authenticateWithURL(_ URL: Foundation.URL) throws {
 		try startLoginWithURL(URL)
 	}
 	
@@ -79,19 +79,19 @@ extension LoginViewPresentable {
 		}
 	}
 	
-	public func handleRedirectURL(redirectURL: NSURL) {
+	public func handleRedirectURL(_ redirectURL: URL) {
 		let result: AuthenticationResult
 		do {
 			result = try resultFromRedirectURL(redirectURL)
 		}
 		catch {
-			result = .Failure(error: error)
+			result = .failure(error: error)
 		}
 		defer {
 			OAuth2Manager.sharedInstance.authenticationCompletedWithResult(result)
 			if let window = self.window,
-				currentRootViewController = window.rootViewController as? LoginViewController,
-				replacedViewController = currentRootViewController.replacedRootViewController {
+				let currentRootViewController = window.rootViewController as? LoginViewController,
+				let replacedViewController = currentRootViewController.replacedRootViewController {
 				
 				window.rootViewController = replacedViewController
 			}
@@ -99,18 +99,18 @@ extension LoginViewPresentable {
 	}
 	
 	/// Override to customize login behavior
-	public func startLoginWithURL(loginURL: NSURL) throws {
+	public func startLoginWithURL(_ loginURL: URL) throws {
 		
 		guard !loggingIn else {
-			throw Error.InvalidState(message: "Already logging in!")
+			throw SFError.invalidState(message: "Already logging in!")
 		}
 		
 		guard let window = self.window else {
-			throw Error.InvalidState(message: "No valid window!")
+			throw SFError.invalidState(message: "No valid window!")
 		}
 			
 		// Replace current root view controller with Safari view controller for login
-		let loginVC = LoginViewController(URL: loginURL)
+		let loginVC = LoginViewController(url: loginURL)
 		loginVC.replacedRootViewController = window.rootViewController
 		window.rootViewController = loginVC
 	}
@@ -129,15 +129,15 @@ extension LoginViewPresentable {
 				OAuth2Manager.sharedInstance.revoke()
 			}.then {
 				() -> () in
-				if let loginURL = OAuth2Manager.sharedInstance.authorizationURL, window = self.window {
+				if let loginURL = OAuth2Manager.sharedInstance.authorizationURL, let window = self.window {
 				
 					// Replace current root view controller with Safari view controller for login
-					let loginVC = LoginViewController(URL: loginURL)
+					let loginVC = LoginViewController(url: loginURL)
 					loginVC.replacedRootViewController = window.rootViewController
 					window.rootViewController = loginVC
 				}
 				fulfill()
-			}.error {
+			}.catch {
 				(error) -> () in
 				reject(error)
 			}

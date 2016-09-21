@@ -1,0 +1,9 @@
+github "Alamofire/Alamofire" ~> 4.0
+github "mxcl/PromiseKit" ~> 4.0
+github "matthewpalmer/Locksmith"
+
+
+
+
+
+

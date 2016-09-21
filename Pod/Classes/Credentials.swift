@@ -14,11 +14,11 @@ public struct Credentials: Equatable {
 	
 	public let accessToken: String
 	public let refreshToken: String?
-	public let instanceURL: NSURL
-	public let identityURL: NSURL
+	public let instanceURL: URL
+	public let identityURL: URL
 	
 	public var userID: String? {
-		return identityURL.absoluteString.componentsSeparatedByString("/").last 
+		return identityURL.absoluteString.components(separatedBy: "/").last 
 	}
 	
 	
@@ -26,7 +26,7 @@ public struct Credentials: Equatable {
 	// MARK: - Initializers
 	//
 	
-	public init(accessToken: String, instanceURL: NSURL, identityURL: NSURL, refreshToken: String?) {
+	public init(accessToken: String, instanceURL: URL, identityURL: URL, refreshToken: String?) {
 		self.accessToken = accessToken
 		self.instanceURL = instanceURL
 		self.identityURL = identityURL
@@ -36,8 +36,8 @@ public struct Credentials: Equatable {
 	public init?(dictionary: [String: AnyObject]) {
 		
 		if	let accessToken = dictionary[Constant.access_token.rawValue] as? String,
-			let instanceURL = dictionary[Constant.instance_url.rawValue] as? NSURL,
-			let identityURL = dictionary[Constant.id.rawValue] as? NSURL {
+			let instanceURL = dictionary[Constant.instance_url.rawValue] as? URL,
+			let identityURL = dictionary[Constant.id.rawValue] as? URL {
 				
 			self.init(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: dictionary[Constant.refresh_token.rawValue] as? String)
 		}
@@ -53,14 +53,14 @@ public struct Credentials: Equatable {
 	public init?(URLEncodedString: String, refreshToken: String? = nil) {
 		
 		// Create 'fake' URL with argument as query string
-		guard let url = NSURL(string: "http://example.com?\(URLEncodedString)") else {
+		guard let url = URL(string: "http://example.com?\(URLEncodedString)") else {
 			return nil
 		}
 		
 		guard let
 			accessToken = url.valueForQueryItem(Constant.access_token.rawValue),
-			instanceURL = NSURL(URLString: url.valueForQueryItem(Constant.instance_url.rawValue)),
-			identityURL = NSURL(URLString: url.valueForQueryItem(Constant.id.rawValue)) else {
+			let instanceURL = URL(URLString: url.valueForQueryItem(Constant.instance_url.rawValue)),
+			let identityURL = URL(URLString: url.valueForQueryItem(Constant.id.rawValue)) else {
 				
 				return nil
 		}
@@ -79,11 +79,11 @@ public struct Credentials: Equatable {
 			Constant.access_token.rawValue : accessToken,
 			Constant.instance_url.rawValue : instanceURL,
 			Constant.id.rawValue : identityURL
-		]
+		] as [String : Any]
 		if let refreshToken = self.refreshToken {
 			dict[Constant.refresh_token.rawValue] = refreshToken
 		}
-		return dict
+		return dict as [String : AnyObject]
 	}
 }
 
