@@ -1,5 +1,5 @@
-github "Alamofire/Alamofire" ~> 3.0
-github "mxcl/PromiseKit" ~> 3.4
+github "Alamofire/Alamofire" ~> 4.0
+github "mxcl/PromiseKit" ~> 4.0
 github "matthewpalmer/Locksmith"
 
 

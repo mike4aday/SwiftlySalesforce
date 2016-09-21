@@ -12,18 +12,18 @@ import Alamofire
 
 
 // MARK: - Extension
-extension Request {
+extension DataRequest {
 	
 	public func validateSalesforceResponse() -> Self {
-		return validate {
-			(request, response) -> Request.ValidationResult in
+		return  validate {
+			(request, response, data) -> Request.ValidationResult in
 			switch response.statusCode {
 			case 401:
-				return .Failure(NSError(domain: NSURLErrorDomain, code: NSURLError.UserAuthenticationRequired.rawValue, userInfo: nil))
+				return .failure(NSError(domain: NSURLErrorDomain, code: URLError.userAuthenticationRequired.rawValue, userInfo: nil))
 			case 403:
-				return .Failure(NSError(domain: NSURLErrorDomain, code: NSURLError.NoPermissionsToReadFile.rawValue, userInfo: nil))
+				return .failure(NSError(domain: NSURLErrorDomain, code: URLError.noPermissionsToReadFile.rawValue, userInfo: nil))
 			default:
-				return .Success
+				return .success
 			}
 		}.validate()
 	}
@@ -38,21 +38,21 @@ extension NSError {
 	public func isAuthenticationRequiredError() -> Bool {
 		
 		// When authentication is required, the Identity resource returns status code 403; other resources return 401
-		return (self.code == NSURLError.UserAuthenticationRequired.rawValue || self.code == NSURLError.NoPermissionsToReadFile.rawValue)
+		return (self.code == URLError.userAuthenticationRequired.rawValue || self.code == URLError.noPermissionsToReadFile.rawValue)
 			&& self.domain == NSURLErrorDomain
 	}
 }
 
 
 // MARK: - Extension
-extension NSURLComponents {
-	public func addQueryItems(queryItems: [String:String]) {
+extension URLComponents {
+	public mutating func addQueryItems(_ queryItems: [String:String]) {
 		guard queryItems.count > 0 else { return }
 		if self.queryItems == nil {
-			self.queryItems = [NSURLQueryItem]()
+			self.queryItems = [URLQueryItem]()
 		}
 		for name in queryItems.keys {
-			self.queryItems?.append(NSURLQueryItem(name: name, value: queryItems[name]))
+			self.queryItems?.append(URLQueryItem(name: name, value: queryItems[name]))
 		}
 	}
 }
@@ -60,20 +60,20 @@ extension NSURLComponents {
 
 // MARK: - Extension
 // Adapted from http://codingventures.com/articles/Dating-Swift/
-extension NSDateFormatter {
+extension DateFormatter {
 	
-	@nonobjc public static let SalesforceDateTime: NSDateFormatter = {
-		let formatter = NSDateFormatter()
-		formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-		formatter.timeZone = NSTimeZone()
+	@nonobjc public static let SalesforceDateTime: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.locale = Locale(identifier: "en_US_POSIX")
+		formatter.timeZone = TimeZone(identifier: "UTC")
 		formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
 		return formatter
 	}()
 	
-	@nonobjc public static let SalesforceDate: NSDateFormatter = {
-		let formatter = NSDateFormatter()
-		formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-		formatter.timeZone = NSTimeZone()
+	@nonobjc public static let SalesforceDate: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.locale = Locale(identifier: "en_US_POSIX")
+		formatter.timeZone = TimeZone(identifier: "UTC")
 		formatter.dateFormat = "yyyy-MM-dd"
 		return formatter
 	}()
@@ -84,20 +84,17 @@ extension NSDateFormatter {
 extension String {
 	
 	public var sentenceCapitalizedString: String {
-		get {
-			var s = String(self)
-			s.replaceRange(s.startIndex...s.startIndex, with: String(s[s.startIndex]).capitalizedString)
-			return s
-		}
-	}
+        let first = String(characters.prefix(1)).capitalized
+        let other = String(characters.dropFirst())
+        return first + other	}
 }
 
 
 // MARK: - Extension
-extension NSURL {
+extension URL {
 	
 	/// Allows optional argument when creating a NSURL
-	public convenience init?(URLString: String?) {
+	public init?(URLString: String?) {
 		guard let s = URLString else {
 			return nil
 		}
@@ -107,8 +104,8 @@ extension NSURL {
 	/// Adapted from http://stackoverflow.com/questions/3997976/parse-nsurl-query-property
 	/// - Parameter name: name of URL-encoded name/value pair in query string
 	/// - Returns: First value (if more than one present in query string) as optional String
-	public func valueForQueryItem(name: String) -> String? {
-		let urlComponents = NSURLComponents(URL: self, resolvingAgainstBaseURL: false)
+	public func valueForQueryItem(_ name: String) -> String? {
+		let urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: false)
 		let queryItems = urlComponents?.queryItems
 		return queryItems?.filter({$0.name == name}).first?.value
 	}

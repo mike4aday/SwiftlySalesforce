@@ -9,47 +9,47 @@
 import Foundation
 
 
-public enum Error: ErrorType {
+public enum SFError: Error {
 	
 	
-	case InvalidState(message: String)
-	case InvalidArgument(message: String)
-	case AuthenticationFailure(message: String)
-	case ResponseError(code: String, description: String)
+	case invalidState(message: String)
+	case invalidArgument(message: String)
+	case authenticationFailure(message: String)
+	case responseError(code: String, description: String)
 	
 	
-	public static func errorFromURLEncodedString(URLEncodedString: String) -> Error? {
+	public static func errorFromURLEncodedString(_ URLEncodedString: String) -> Error? {
 		
 		// Create 'fake' URL with argument as query string
-		guard let url = NSURL(string: "http://example.com?\(URLEncodedString)") else {
+		guard let url = URL(string: "http://example.com?\(URLEncodedString)") else {
 			return nil
 		}
 		
 		guard let
 			code = url.valueForQueryItem("error"),
-			desc = url.valueForQueryItem("error_description") else {
+			let desc = url.valueForQueryItem("error_description") else {
 				
 			return nil
 		}
 		
-		return Error.ResponseError(code: code, description: desc)
+		return SFError.responseError(code: code, description: desc)
 	}
 }
 
 
 // MARK: - Extension
-extension Error: CustomStringConvertible {
+extension SFError: CustomStringConvertible {
 
 	public var description: String {
 		switch self {
-		case let .InvalidState(message):
+		case let .invalidState(message):
 			return message
-		case let .InvalidArgument(message):
+		case let .invalidArgument(message):
 			return message
-		case let .AuthenticationFailure(message):
+		case let .authenticationFailure(message):
 			return message
-		case let .ResponseError(code, description):
-			return "\(code.stringByReplacingOccurrencesOfString("_", withString: " ").sentenceCapitalizedString): \(description.stringByReplacingOccurrencesOfString("+", withString: " "))"
+		case let .responseError(code, description):
+			return "\(code.replacingOccurrences(of: "_", with: " ").sentenceCapitalizedString): \(description.replacingOccurrences(of: "+", with: " "))"
 		}
 	}
 }
