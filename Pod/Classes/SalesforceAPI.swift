@@ -185,11 +185,11 @@ extension SalesforceAPI {
 		case .Identity:
 			URL = credentials.identityURL
 		case .NextQueryResult, .Custom:
-			URL = credentials.instanceURL.URLByAppendingPathComponent(route.URI)
+			URL = credentials.instanceURL.URLByAppendingPathComponent(route.URI)!
 		case .ApexRest:
-			URL = credentials.instanceURL.URLByAppendingPathComponent("/services/apexrest\(route.URI)")
+			URL = credentials.instanceURL.URLByAppendingPathComponent("/services/apexrest\(route.URI)")!
 		default:
-			URL = credentials.instanceURL.URLByAppendingPathComponent("/services/data/v\(version)\(route.URI)")
+			URL = credentials.instanceURL.URLByAppendingPathComponent("/services/data/v\(version)\(route.URI)")!
 		}
 		
 		let req = NSMutableURLRequest(URL: URL)
