@@ -1,10 +1,12 @@
 # Change Log
 
-## Version 3.0 (Coming soon)
+## Version 3.0.0 (Coming soon)
 - Upgrade for Swift 3
-
-## Version 2.0.2 (Coming soon)
 - Add Carthage support
+
+## Version 2.1.0 (Oct. 1, 2016)
+- Updated code for Swift 2.3
+- Updated Podfile for Xcode 8
 
 ## Version 2.0.1 (Aug. 4, 2016)
 - Updated README
