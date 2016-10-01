@@ -22,8 +22,8 @@ You can be up and running in under 5 minutes by following these steps (if you're
 
 Minimum requirements:
 * iOS 9.1
-* Swift 2
-* Xcode 7
+* Swift 2.3
+* Xcode 8
 
 ## How do I use Swiftly Salesforce?
 _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce); it retrieves a user's task records from Salesforce, and enables the user to update the status of a task.
@@ -33,7 +33,7 @@ _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OA
 ### Example: Retrieve a Salesforce Record
 The following will retrieve all the fields for the specified account record:
 ```swift
-SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF").request()
+SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF", fields: nil).request()
 ```
 To specify which fields should be retrieved:
 ```swift
