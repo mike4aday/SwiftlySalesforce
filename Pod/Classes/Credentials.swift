@@ -18,7 +18,7 @@ public struct Credentials: Equatable {
 	public let identityURL: NSURL
 	
 	public var userID: String? {
-		return identityURL.absoluteString.componentsSeparatedByString("/").last 
+		return identityURL.absoluteString?.componentsSeparatedByString("/").last
 	}
 	
 	
