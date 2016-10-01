@@ -24,5 +24,5 @@ Pod::Spec.new do |s|
 
   s.dependency 'PromiseKit', '~> 3.5'
   s.dependency 'Alamofire', '~> 3.0'
-  s.dependency 'Locksmith', :git => 'https://github.com/matthewpalmer/Locksmith.git', :branch => 'swift-2.3'
+  s.dependency 'Locksmith', '~> 2.0'
 end
