@@ -22,14 +22,18 @@ public protocol AuthenticationDelegate: class {
 	func authenticateWithURL(URL: NSURL) throws
 }
 
-
 public protocol LoginViewPresentable: class, AuthenticationDelegate {
 	var window: UIWindow? { get }
+	func createLoginViewController(URL loginURL:NSURL) -> UIViewController
 }
 
+public protocol LoginViewControllerable: class {
+	var replacedRootViewController: UIViewController? {
+		get set
+	}
+}
 
-internal final class LoginViewController: SFSafariViewController {
-	
+internal final class LoginViewController: SFSafariViewController, LoginViewControllerable {
 	// Hold reference to the view controller that's temporarily replaced by the login view controller
 	var replacedRootViewController: UIViewController?
 }
@@ -70,7 +74,7 @@ extension LoginViewPresentable {
 	
 	public var loggingIn: Bool {
 		get {
-			if let _ = window?.rootViewController as? LoginViewController {
+			if let _ = window?.rootViewController as? LoginViewControllerable {
 				return true
 			}
 			else {
@@ -90,7 +94,7 @@ extension LoginViewPresentable {
 		defer {
 			OAuth2Manager.sharedInstance.authenticationCompletedWithResult(result)
 			if let window = self.window,
-				currentRootViewController = window.rootViewController as? LoginViewController,
+				currentRootViewController = window.rootViewController as? LoginViewControllerable,
 				replacedViewController = currentRootViewController.replacedRootViewController {
 				
 				window.rootViewController = replacedViewController
@@ -110,8 +114,10 @@ extension LoginViewPresentable {
 		}
 			
 		// Replace current root view controller with Safari view controller for login
-		let loginVC = LoginViewController(URL: loginURL)
-		loginVC.replacedRootViewController = window.rootViewController
+		let loginVC = createLoginViewController(URL: loginURL)
+		if let loginVC = loginVC as? LoginViewControllerable {
+			loginVC.replacedRootViewController = window.rootViewController
+		}
 		window.rootViewController = loginVC
 	}
 	
@@ -132,8 +138,10 @@ extension LoginViewPresentable {
 				if let loginURL = OAuth2Manager.sharedInstance.authorizationURL, window = self.window {
 				
 					// Replace current root view controller with Safari view controller for login
-					let loginVC = LoginViewController(URL: loginURL)
-					loginVC.replacedRootViewController = window.rootViewController
+					let loginVC = self.createLoginViewController(URL: loginURL)
+					if let loginVC = loginVC as? LoginViewControllerable {
+						loginVC.replacedRootViewController = window.rootViewController
+					}
 					window.rootViewController = loginVC
 				}
 				fulfill()
@@ -142,5 +150,9 @@ extension LoginViewPresentable {
 				reject(error)
 			}
 		}
+	}
+    
+	public func createLoginViewController(URL loginURL:NSURL) -> UIViewController {
+		return LoginViewController(URL: loginURL)
 	}
 }
