@@ -9,7 +9,7 @@ _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobi
 * Easy to install and update
 
 ## How do I set up Swiftly Salesforce?
-You can be up and running in under 5 minutes by following these steps (if you're already familiar with the relevant procedure; if not, see the [appendix](#appendix)):
+You can be up and running in under 5 minutes by following these steps. If you're not already familiar with the relevant procedure, see the [appendix](#appendix)):
 
 1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition
 1. Set up a Salesforce [Connected App] (it will be the ‘back-end’ for your iOS mobile app)
@@ -30,7 +30,7 @@ _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKi
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
 
-### Example: Set Up Your AppDelegate to Talk to Salesforce
+### Example: Configure Your App to Talk to Salesforce
 ```swift
 import UIKit
 import SwiftlySalesforce
@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 ```
 Note the following in the above example:
 
-1. Your AppDelegate should implement ```LoginDelegate```
+1. Your app delegate should implement ```LoginDelegate```
 1. Replace the values for ```consumerKey``` and ```redirectURL``` with the values defined in your [Connected App]
 1. Call ```configureSalesforce()``` and ```handleRedirectURL()``` as shown
 
@@ -260,31 +260,31 @@ func application(application: UIApplication, openURL url: NSURL, sourceApplicati
 ### Configure your App Delegate for Swiftly Salesforce
 Update your app delegate class so that it:
 * Configures _Swiftly Salesforce_ with your Connected App's consumer key and callback URL
-* Implements `LoginViewPresentable` - you don't have to implement any methods, though, thanks to the magic of Swift 2's [protocol extensions](http://www.codingexplorer.com/protocol-extensions-in-swift-2/)
-* Calls `handleRedirectURL(NSURL:)` when asked by iOS to open the callback URL.
+* Implements `LoginDelegate` - you don't have to implement any methods, though, thanks to the magic of Swift's [protocol extensions](http://www.codingexplorer.com/protocol-extensions-in-swift-2/)
+* Calls `handleRedirectURL(URL:)` when asked by iOS to open the callback URL.
 
-See below:
 ```swift
 import UIKit
 import SwiftlySalesforce
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
+
+    var window: UIWindow?
 	
-	var window: UIWindow?
-	let consumerKey = "<<YOUR CONNECTED APP'S CONSUMER KEY>>"
-	let redirectURL = NSURL(string: "<<YOUR CONNECTED APP'S CALLBACK URL>>")!
+    /// Salesforce Connected App properties (replace with your own…)
+    let consumerKey = “< YOUR CONNECTED APP’S CONSUMER KEY HERE >“
+    let redirectURL = URL(string: “< YOUR CONNECTED APP’S REDIRECT URL HERE >“)!
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
+        return true
+    }
 	
-	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL)
-		OAuth2Manager.sharedInstance.authenticationDelegate = self
-		return true
-	}
-	
-	func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-		handleRedirectURL(url)
-		return true
-	}
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        handleRedirectURL(redirectURL: url as URL)
+        return true
+    }
 }
 ```
 
