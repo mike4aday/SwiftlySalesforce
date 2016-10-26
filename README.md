@@ -251,10 +251,10 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 ```
 Then, you just need to add a single line in your app delegate class so that _Swiftly Salesforce_ will handle the callback URL and the appended credentials.
 ```swift
-func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-	handleRedirectURL(url)
-	return true
-}
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        handleRedirectURL(redirectURL: url as URL)
+        return true
+    }
 ```
 
 ### Configure your App Delegate for Swiftly Salesforce
