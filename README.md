@@ -12,7 +12,7 @@ _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobi
 You can be up and running in under 5 minutes by following these steps (if you're already familiar with the relevant procedure; if not, see the [appendix](#appendix)):
 
 1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition
-1. Set up a Salesforce [Connected App] that will be the server to your iOS mobile app
+1. Set up a Salesforce [Connected App] (it will be the ‘back-end’ for your iOS mobile app)
 1. Register your Connected App's callback URL scheme with iOS ([see appendix](#appendix))
 1. Add _Swiftly Salesforce_ to your Xcode project: 
  * Add `pod 'SwiftlySalesforce'` to your project's [Podfile](https://guides.cocoapods.org/syntax/podfile.html)  ([see appendix](#appendix))
@@ -26,34 +26,34 @@ Minimum requirements:
 * Xcode 8
 
 ## How do I use Swiftly Salesforce?
-_Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce); it retrieves a user's task records from Salesforce, and enables the user to update the status of a task.
+_Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
 
 ### Example: Retrieve a Salesforce Record
 The following will retrieve all the fields for the specified account record:
 ```swift
-SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF", fields: nil).request()
+salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
 To specify which fields should be retrieved:
 ```swift
 let fields = ["AccountNumber", "BillingCity", "MyCustomField__c"]
-SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF", fields: fields).request()
+salesforce.retrieve(type: "Account", id: "0013000001FjCcF", fields: fields)
 ```
-Note that `request()` is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:
+Note that `retrieve()` is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:
 ```swift
-let promise: Promise<AnyObject> = SalesforceAPI.ReadRecord(type: "Account", id: "0013000001FjCcF").request()
+let promise = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
 And we can add a closure that will be called later, when the promise is fulfilled:
 ```swift
 promise.then {
 	(json) -> () in
-	// Parse the JSON and do stuff
+	// Parse the JSON and do interesting stuff
 }
 ```
 ### Example: Update a Salesforce Record
 ```swift
-SalesforceAPI.UpdateRecord(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"]).request()
+salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"])
 .then {
 	(_) -> () in
 	// Update the local model
@@ -65,7 +65,7 @@ The `always` closure will be called regardless of success or failure elsewhere i
 ### Example: Querying
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
-SalesforceAPI.Query(soql: soql).request()
+salesforce.query(soql: soql)
 ```
 See the next example for handling the query results
 
@@ -73,25 +73,22 @@ See the next example for handling the query results
 Let's say we want to retrieve a random zip/postal code from a [custom Apex REST](https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST) resource, and then use that zip code in a query:
 ```swift
 // Chained asynch requests 
-// (Enclosing in "firstly" block is optional; just keeps things nicely laid out)
-firstly {
+first {
 	// Make GET request of custom Apex REST resource
-	SalesforceAPI.ApexRest(method: "GET", path: "/MyApexResourceThatEmitsRandomZip").request()
+       // (Enclosing this in a ‘first’ block is optional and can keep things neat.)
+	salesforce.apexRest(path: "/MyApexResourceThatEmitsRandomZip")
 }.then {
 	// Query accounts with that zip code
-	(result) -> Promise<AnyObject> in
+	result in
 	guard let zip = result["zip"] as? String else {
-		throw NSError(domain: "TaskForce", code: -100, userInfo: nil)
+               throw TaskForceError.generic(100, “Can’t get random zip code from our custom REST endpoint!”)
 	}
 	let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
-	return SalesforceAPI.Query(soql: soql).request()
+	return salesforce.query(soql: soql)
 }.then {
 	// Parse JSON response
-	(result) -> () in
-	guard let records = result["records"] as? [[String: AnyObject]] else {
-		throw NSError(domain: "TaskForce", code: -101, userInfo: nil)
-	}
-	for record in records {
+	queryResult in
+	for record in queryResult.records {
 	    if let id = record["Id"] as? String, name = record["Name"] as? String {
 	        print("Account ID = \(id); name = \(name)")
         }
@@ -103,34 +100,27 @@ You could repeat this chaining multiple times, feeding the result of one asynchr
 ### Example: Handling Errors
 The following code is from the example file, [TaskStore.swift](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
 ```swift
-firstly {
-	SalesforceAPI.Identity.request()
-}.then {
-	// Extract user ID from JSON result
-	(result) -> String in
-	guard let userID = result["user_id"] as? String else {
-		throw NSError(domain: "TaskForce", code: -100, userInfo: nil)
-	}
-	return userID
-}.then {
-	// Query tasks owned by user
-	(userID) -> Promise<AnyObject> in
-	let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
-	return SalesforceAPI.Query(soql: soql).request()
-}.then {
-	// Parse JSON response into Task instances
-	(result) -> () in
-	guard let records = result["records"] as? [[String: AnyObject]] else {
-		throw NSError(domain: "TaskForce", code: -101, userInfo: nil)
-	}
-	let tasks = records.map { Task(dictionary: $0) }
-	self.cache = tasks
-	fulfill(tasks)
-}.error {
-	// Any errors in the chain would be caught here
-	(error) -> Void in
-	reject(error)
-}
+first {
+					// Get ID of current user
+					salesforce.identity()
+				}.then {
+					// Get tasks owned by user
+					userInfo in
+					guard let userID = userInfo.userID else {
+						throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
+					}
+					let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
+					return salesforce.query(soql: soql)
+				}.then {
+					// Parse JSON into Task instances and cache in memory
+					(result: QueryResult) -> () in
+					let tasks = result.records.map { Task(dictionary: $0) }
+					self.cache = tasks
+					fulfill(tasks)
+				}.catch {
+					error in
+					reject(error)
+				}
 ```
 You could also recover from an error, and continue with the chain, using a `recover` closure. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
 ```swift
@@ -147,13 +137,17 @@ CLLocationManager.promise().recover { err in
 If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. _Swiftly Salesforce_ will revoke and remove any stored credentials, and automatically display a Safari View Controller with the Salesforce login page, ready for another user to log in.
 ```swift
 // Call this when "Log Out" button is tapped, for example
-if let app = UIApplication.sharedApplication().delegate as? LoginViewPresentable {
-	app.logOut().then {
-		() -> () in
-		// User's authorization now revoked - clear local data cache
-		return
-	}
-}
+if let app = UIApplication.shared.delegate as? LoginDelegate {
+			app.logout().then {
+				() -> () in
+				TaskStore.shared.clear()
+				self.tableView.reloadData()
+				return
+			}.catch {
+				error in
+				debugPrint(error)
+			}
+		}
 ```
 ## Dependent Frameworks
 The great Swift frameworks leveraged by _Swiftly Salesforce_:
