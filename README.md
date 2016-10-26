@@ -30,13 +30,13 @@ _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKi
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
 
-### Example: Set Up Your AppDelegate
+### Example: Set Up Your AppDelegate to Talk to Salesforce
 ```swift
 import UIKit
 import SwiftlySalesforce
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, _LoginDelegate_ {
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 
     var window: UIWindow?
 	
@@ -55,6 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, _LoginDelegate_ {
     }
 }
 ```
+Note the following in the above example:
+1. Your AppDelegate should implement ```LoginDelegate```
+2. Replace the values for ```consumerKey``` and ```redirectURL``` with the values defined in your [Connected App]
+3. Call ```configureSalesforce()``` and ```handleRedirectURL()``` as shown
 
 ### Example: Retrieve a Salesforce Record
 The following will retrieve all the fields for the specified account record:
