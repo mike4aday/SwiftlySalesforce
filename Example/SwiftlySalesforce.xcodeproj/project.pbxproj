@@ -9,19 +9,25 @@
 /* Begin PBXBuildFile section */
 		4CF514DF9ECA024676C1D877 /* Pods_SwiftlySalesforce_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2B0F9745755F5A69D654A8 /* Pods_SwiftlySalesforce_Tests.framework */; };
 		534DFA7C78453D8B7E582C26 /* Pods_SwiftlySalesforce_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D41C68BF76D2015A912F59 /* Pods_SwiftlySalesforce_Example.framework */; };
-		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		EA22BEDE1C8A05D000EFCBB2 /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA197C81C3EC27500103957 /* ExtensionsTests.swift */; };
-		EA22BEE01C8A1EB200EFCBB2 /* ErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22BEDF1C8A1EB200EFCBB2 /* ErrorTests.swift */; };
-		EA22BEE41C8A22D500EFCBB2 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22BEE31C8A22D500EFCBB2 /* AuthenticationTests.swift */; };
-		EA22BEE61C8A503400EFCBB2 /* OAuth2ManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22BEE51C8A503400EFCBB2 /* OAuth2ManagerTests.swift */; };
-		EA22BEE71C8C6B8000EFCBB2 /* SalesforceAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA197C91C3EC27500103957 /* SalesforceAPITests.swift */; };
-		EA9160271C400C78007E030A /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9160241C400C78007E030A /* MasterViewController.swift */; };
-		EA9160281C400C78007E030A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9160251C400C78007E030A /* DetailViewController.swift */; };
-		EACB6EA91C88A943008055F9 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6EA71C88A123008055F9 /* TaskStore.swift */; };
-		EACB6EAC1C895BBD008055F9 /* CredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA197C71C3EC27500103957 /* CredentialsTests.swift */; };
+		EABD72401DC0455C00790BCB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723A1DC0455C00790BCB /* MasterViewController.swift */; };
+		EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723B1DC0455C00790BCB /* TaskForceError.swift */; };
+		EABD72421DC0455C00790BCB /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723C1DC0455C00790BCB /* TaskStore.swift */; };
+		EABD72431DC0455C00790BCB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723D1DC0455C00790BCB /* Task.swift */; };
+		EABD72441DC0455C00790BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723E1DC0455C00790BCB /* AppDelegate.swift */; };
+		EABD72451DC0455C00790BCB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723F1DC0455C00790BCB /* DetailViewController.swift */; };
+		EABD72551DC05A8800790BCB /* SalesforceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD724B1DC05A8800790BCB /* SalesforceTests.swift */; };
+		EABD72561DC05A8800790BCB /* MockOAuth2Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD724C1DC05A8800790BCB /* MockOAuth2Data.swift */; };
+		EABD72571DC05A8800790BCB /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD724D1DC05A8800790BCB /* RouterTests.swift */; };
+		EABD72581DC05A8800790BCB /* OAuth2.plist in Resources */ = {isa = PBXBuildFile; fileRef = EABD724E1DC05A8800790BCB /* OAuth2.plist */; };
+		EABD72591DC05A8800790BCB /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD724F1DC05A8800790BCB /* ModelTests.swift */; };
+		EABD725A1DC05A8800790BCB /* MockJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD72501DC05A8800790BCB /* MockJSONData.swift */; };
+		EABD725B1DC05A8800790BCB /* QueryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = EABD72511DC05A8800790BCB /* QueryResponse.json */; };
+		EABD725C1DC05A8800790BCB /* IdentityResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = EABD72521DC05A8800790BCB /* IdentityResponse.json */; };
+		EABD725D1DC05A8800790BCB /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD72531DC05A8800790BCB /* ExtensionTests.swift */; };
+		EABD725E1DC05A8800790BCB /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD72541DC05A8800790BCB /* AuthManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +46,6 @@
 		24705FBC892656066700574C /* Pods-SwiftlySalesforce_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Example/Pods-SwiftlySalesforce_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* SwiftlySalesforce_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftlySalesforce_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -51,16 +56,23 @@
 		CE2B0F9745755F5A69D654A8 /* Pods_SwiftlySalesforce_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34715B1ED2A8E40E849172A /* SwiftlySalesforce.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftlySalesforce.podspec; path = ../SwiftlySalesforce.podspec; sourceTree = "<group>"; };
 		EA18C7A91C4404F800DAED6A /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		EA22BEDF1C8A1EB200EFCBB2 /* ErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTests.swift; sourceTree = "<group>"; };
-		EA22BEE31C8A22D500EFCBB2 /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
-		EA22BEE51C8A503400EFCBB2 /* OAuth2ManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2ManagerTests.swift; sourceTree = "<group>"; };
-		EA8017BB1DA0554000F07B44 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
-		EA9160241C400C78007E030A /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		EA9160251C400C78007E030A /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		EAA197C71C3EC27500103957 /* CredentialsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsTests.swift; sourceTree = "<group>"; };
-		EAA197C81C3EC27500103957 /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
-		EAA197C91C3EC27500103957 /* SalesforceAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesforceAPITests.swift; sourceTree = "<group>"; };
-		EACB6EA71C88A123008055F9 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
+		EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
+		EABD723A1DC0455C00790BCB /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		EABD723B1DC0455C00790BCB /* TaskForceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskForceError.swift; sourceTree = "<group>"; };
+		EABD723C1DC0455C00790BCB /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
+		EABD723D1DC0455C00790BCB /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		EABD723E1DC0455C00790BCB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EABD723F1DC0455C00790BCB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		EABD724B1DC05A8800790BCB /* SalesforceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesforceTests.swift; sourceTree = "<group>"; };
+		EABD724C1DC05A8800790BCB /* MockOAuth2Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockOAuth2Data.swift; sourceTree = "<group>"; };
+		EABD724D1DC05A8800790BCB /* RouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
+		EABD724E1DC05A8800790BCB /* OAuth2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OAuth2.plist; sourceTree = "<group>"; };
+		EABD724F1DC05A8800790BCB /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		EABD72501DC05A8800790BCB /* MockJSONData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONData.swift; sourceTree = "<group>"; };
+		EABD72511DC05A8800790BCB /* QueryResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = QueryResponse.json; sourceTree = "<group>"; };
+		EABD72521DC05A8800790BCB /* IdentityResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdentityResponse.json; sourceTree = "<group>"; };
+		EABD72531DC05A8800790BCB /* ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTests.swift; sourceTree = "<group>"; };
+		EABD72541DC05A8800790BCB /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		F7891B295CCEE606466284B0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F8FEE5B2427F471C6FAA4ACD /* Pods-SwiftlySalesforce_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Tests/Pods-SwiftlySalesforce_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,7 +100,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				EA8017BB1DA0554000F07B44 /* SwiftlySalesforce_Example.entitlements */,
+				EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for SwiftlySalesforce */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -110,11 +122,13 @@
 		607FACD21AFB9204008FA782 /* Example for SwiftlySalesforce */ = {
 			isa = PBXGroup;
 			children = (
-				EA9160241C400C78007E030A /* MasterViewController.swift */,
-				EA9160251C400C78007E030A /* DetailViewController.swift */,
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				EABD723A1DC0455C00790BCB /* MasterViewController.swift */,
+				EABD723B1DC0455C00790BCB /* TaskForceError.swift */,
+				EABD723C1DC0455C00790BCB /* TaskStore.swift */,
+				EABD723D1DC0455C00790BCB /* Task.swift */,
+				EABD723E1DC0455C00790BCB /* AppDelegate.swift */,
+				EABD723F1DC0455C00790BCB /* DetailViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				EACB6EA71C88A123008055F9 /* TaskStore.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -134,12 +148,13 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				EA22BEE31C8A22D500EFCBB2 /* AuthenticationTests.swift */,
-				EAA197C71C3EC27500103957 /* CredentialsTests.swift */,
-				EA22BEDF1C8A1EB200EFCBB2 /* ErrorTests.swift */,
-				EAA197C81C3EC27500103957 /* ExtensionsTests.swift */,
-				EA22BEE51C8A503400EFCBB2 /* OAuth2ManagerTests.swift */,
-				EAA197C91C3EC27500103957 /* SalesforceAPITests.swift */,
+				EABD724B1DC05A8800790BCB /* SalesforceTests.swift */,
+				EABD724C1DC05A8800790BCB /* MockOAuth2Data.swift */,
+				EABD724D1DC05A8800790BCB /* RouterTests.swift */,
+				EABD724F1DC05A8800790BCB /* ModelTests.swift */,
+				EABD72501DC05A8800790BCB /* MockJSONData.swift */,
+				EABD72531DC05A8800790BCB /* ExtensionTests.swift */,
+				EABD72541DC05A8800790BCB /* AuthManagerTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -148,6 +163,9 @@
 		607FACE91AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EABD72511DC05A8800790BCB /* QueryResponse.json */,
+				EABD72521DC05A8800790BCB /* IdentityResponse.json */,
+				EABD724E1DC05A8800790BCB /* OAuth2.plist */,
 				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -289,6 +307,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EABD72581DC05A8800790BCB /* OAuth2.plist in Resources */,
+				EABD725C1DC05A8800790BCB /* IdentityResponse.json in Resources */,
+				EABD725B1DC05A8800790BCB /* QueryResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9C12BED75CB4FE9418A6BAC8 /* [CP] Check Pods Manifest.lock */ = {
@@ -382,7 +403,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -392,10 +413,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EACB6EA91C88A943008055F9 /* TaskStore.swift in Sources */,
-				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				EA9160271C400C78007E030A /* MasterViewController.swift in Sources */,
-				EA9160281C400C78007E030A /* DetailViewController.swift in Sources */,
+				EABD72431DC0455C00790BCB /* Task.swift in Sources */,
+				EABD72401DC0455C00790BCB /* MasterViewController.swift in Sources */,
+				EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */,
+				EABD72451DC0455C00790BCB /* DetailViewController.swift in Sources */,
+				EABD72441DC0455C00790BCB /* AppDelegate.swift in Sources */,
+				EABD72421DC0455C00790BCB /* TaskStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,12 +426,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA22BEE61C8A503400EFCBB2 /* OAuth2ManagerTests.swift in Sources */,
-				EACB6EAC1C895BBD008055F9 /* CredentialsTests.swift in Sources */,
-				EA22BEDE1C8A05D000EFCBB2 /* ExtensionsTests.swift in Sources */,
-				EA22BEE71C8C6B8000EFCBB2 /* SalesforceAPITests.swift in Sources */,
-				EA22BEE01C8A1EB200EFCBB2 /* ErrorTests.swift in Sources */,
-				EA22BEE41C8A22D500EFCBB2 /* AuthenticationTests.swift in Sources */,
+				EABD72561DC05A8800790BCB /* MockOAuth2Data.swift in Sources */,
+				EABD725E1DC05A8800790BCB /* AuthManagerTests.swift in Sources */,
+				EABD725A1DC05A8800790BCB /* MockJSONData.swift in Sources */,
+				EABD72571DC05A8800790BCB /* RouterTests.swift in Sources */,
+				EABD725D1DC05A8800790BCB /* ExtensionTests.swift in Sources */,
+				EABD72551DC05A8800790BCB /* SalesforceTests.swift in Sources */,
+				EABD72591DC05A8800790BCB /* ModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,11 +503,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -517,9 +542,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -529,15 +555,17 @@
 			baseConfigurationReference = 24705FBC892656066700574C /* Pods-SwiftlySalesforce_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SwiftlySalesforce_Example.entitlements;
 				DEVELOPMENT_TEAM = 2R46AVEA2Z;
 				INFOPLIST_FILE = SwiftlySalesforce/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -546,15 +574,16 @@
 			baseConfigurationReference = 111732379560F313E6BB7A77 /* Pods-SwiftlySalesforce_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SwiftlySalesforce_Example.entitlements;
 				DEVELOPMENT_TEAM = 2R46AVEA2Z;
 				INFOPLIST_FILE = SwiftlySalesforce/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -562,7 +591,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90E884D3C81D57C00681BD33 /* Pods-SwiftlySalesforce_Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -575,7 +606,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftlySalesforce_Example.app/SwiftlySalesforce_Example";
 			};
 			name = Debug;
@@ -584,7 +616,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8FEE5B2427F471C6FAA4ACD /* Pods-SwiftlySalesforce_Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -593,7 +627,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftlySalesforce_Example.app/SwiftlySalesforce_Example";
 			};
 			name = Release;

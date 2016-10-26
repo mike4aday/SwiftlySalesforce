@@ -2,72 +2,73 @@
 //  MasterViewController.swift
 //  Example for SwiftlySalesforce
 //
-//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2016. All rights reserved.
+//  Created by Michael Epstein on 10/21/16.
+//  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 import SwiftlySalesforce
-import SafariServices
-import PromiseKit
 
-class MasterViewController: UITableViewController {
-
+final class MasterViewController: UITableViewController {
 	
 	@IBOutlet weak var statusLabel: UILabel!
 	@IBOutlet weak var logoutButton: UIBarButtonItem!
 	
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		refreshControl?.addTarget(self, action: #selector(MasterViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+		refreshControl?.addTarget(self, action: #selector(MasterViewController.handleRefresh), for: UIControlEvents.valueChanged)
 		loadData(refresh: true)
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		loadData(refresh: false)
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if let destinationVC = segue.destinationViewController as? DetailViewController,
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let destinationVC = segue.destination as? DetailViewController,
 			let cell = sender as? UITableViewCell,
-			let indexPath = tableView.indexPathForCell(cell),
-			let task = TaskStore.sharedInstance.cache?[indexPath.row] {
-				destinationVC.task = task
-				destinationVC.title = task.subject ?? ""
+			let indexPath = tableView.indexPath(for: cell),
+			let task = TaskStore.shared.cache?[indexPath.row] {
+			destinationVC.task = task
+			destinationVC.title = task.subject ?? ""
 		}
 	}
 	
 	@IBAction func logoutButtonPressed(sender: AnyObject) {
-		if let app = UIApplication.sharedApplication().delegate as? LoginViewPresentable {
-			app.logOut().then {
+		if let app = UIApplication.shared.delegate as? LoginDelegate {
+			app.logout().then {
 				() -> () in
-				TaskStore.sharedInstance.clear()
+				TaskStore.shared.clear()
 				self.tableView.reloadData()
 				return
+			}.catch {
+				error in
+				debugPrint(error)
 			}
 		}
 	}
 	
 	/// Asynchronously load current user's tasks
-	func loadData(refresh refresh: Bool = false) {
+	func loadData(refresh: Bool = false) {
 		
 		statusLabel.text = "Loading tasks"
+		self.refreshControl?.isEnabled = false
 		
-		firstly {
-			TaskStore.sharedInstance.getTasks(refresh: refresh)
+		// "first" is an optional way to make chained calls look better...
+		first {
+			TaskStore.shared.getTasks(refresh: refresh)
 		}.always {
 			() -> () in
 			self.refreshControl?.endRefreshing()
-			self.statusLabel.text = "You have \(TaskStore.sharedInstance.cache?.count ?? 0) tasks. Pull to refresh."
+			self.refreshControl?.isEnabled = true
+			self.statusLabel.text = "You have \(TaskStore.shared.cache?.count ?? 0) tasks. Pull to refresh."
 			self.tableView.reloadData()
-			self.logoutButton.enabled = OAuth2Manager.sharedInstance.credentials != nil
-		}.error {
+			self.logoutButton.isEnabled = salesforce.authManager.authData != nil
+		}.catch {
 			// Handle any errors
 			(error) -> () in
-			self.alertWithTitle("Error!", error: error)
+			self.alert(title: "Error!", error: error)
 		}
 	}
 	
@@ -81,13 +82,13 @@ class MasterViewController: UITableViewController {
 // MARK: - Extension
 extension MasterViewController {
 	
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return TaskStore.sharedInstance.cache?.count ?? 0
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return TaskStore.shared.cache?.count ?? 0
 	}
 	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("DataCell")!
-		if let task = TaskStore.sharedInstance.cache?[indexPath.row], let subject = task.subject, let status = task.status  {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell")!
+		if let task = TaskStore.shared.cache?[indexPath.row], let subject = task.subject, let status = task.status  {
 			cell.textLabel?.text = "\(subject) (Status: \(status))"
 			cell.detailTextLabel?.text = task.whatName
 		}
@@ -97,15 +98,15 @@ extension MasterViewController {
 
 // MARK: - Extension
 extension UIViewController {
-
-	func alertWithTitle(title: String, message: String) {
-		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-		alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
-		self.presentViewController(alert, animated: true, completion: nil)
+	
+	func alert(title: String, message: String) {
+		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+		alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
 	}
 	
-	func alertWithTitle(title: String, error: ErrorType) {
-		return alertWithTitle(title, message: "\(error)")
+	func alert(title: String, error: Error) {
+		return alert(title: title, message: "\(error)")
 	}
-
+	
 }
