@@ -6,8 +6,6 @@
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
-import Foundation
-import PromiseKit
 import SwiftlySalesforce
 
 public final class TaskStore {
@@ -25,7 +23,7 @@ public final class TaskStore {
 				fulfill(tasks)
 			}
 			else {
-				firstly {
+				first {
 					// Get ID of current user
 					//TODO: if user already authorized, then we could just get this from salesforce.authData
 					salesforce.identity()

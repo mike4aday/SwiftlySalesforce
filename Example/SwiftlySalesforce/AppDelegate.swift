@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftlySalesforce
-import PromiseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {

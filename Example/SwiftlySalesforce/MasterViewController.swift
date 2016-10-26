@@ -8,14 +8,11 @@
 
 import UIKit
 import SwiftlySalesforce
-import PromiseKit
 
 final class MasterViewController: UITableViewController {
 	
-	
 	@IBOutlet weak var statusLabel: UILabel!
 	@IBOutlet weak var logoutButton: UIBarButtonItem!
-	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -58,7 +55,8 @@ final class MasterViewController: UITableViewController {
 		statusLabel.text = "Loading tasks"
 		self.refreshControl?.isEnabled = false
 		
-		firstly {
+		// "first" is an optional way to make chained calls look better...
+		first {
 			TaskStore.shared.getTasks(refresh: refresh)
 		}.always {
 			() -> () in
