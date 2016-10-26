@@ -252,9 +252,9 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 Then, you just need to add a single line in your app delegate class so that _Swiftly Salesforce_ will handle the callback URL and the appended credentials.
 ```swift
 func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(redirectURL: url as URL)
-        return true
-    }
+    handleRedirectURL(redirectURL: url as URL)
+    return true
+}
 ```
 
 ### Configure your App Delegate for Swiftly Salesforce
@@ -287,17 +287,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
     }
 }
 ```
-
-#### Communities and OAuth2
-If the mobile app's users are members of a Salesforce Community, then they should authorize with the Community URL, rather than the default ```login.salesforce.com```. For example, if the hostname portion of the Community authorization URL is ```acme.force.com```, then configure the ```OAuth2Manager``` class with an additional parameter that specifies the hostname:
-```swift
-func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		OAuth2Manager.sharedInstance.configureWithConsumerKey(consumerKey, redirectURL: redirectURL, hostname: "acme.force.com")
-		OAuth2Manager.sharedInstance.authenticationDelegate = self
-		return true
-}
-```
-For more information, see [Configure Authentication Flows with OAuth](https://developer.salesforce.com/docs/atlas.en-us.salesforce_communities_implementation.meta/salesforce_communities_implementation/networks_auth_configure_oauth.htm).
 
 ### Add an ATS Exception for Salefsorce
 As of this writing, you need to add an [application transport security (ATS) exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security)  to your iOS application's .plist file to allow it to connect to salesforce.com, as follows:
