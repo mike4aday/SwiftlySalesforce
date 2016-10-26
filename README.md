@@ -97,7 +97,7 @@ first {
     }
 }
 ```
-You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next operation. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, when the first completes, when any fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
+You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next operation. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, or when just the first completes, or when any one operation fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
 
 ### Example: Handling Errors
 The following code is adapted from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
@@ -157,7 +157,7 @@ The great Swift frameworks leveraged by _Swiftly Salesforce_:
 * [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Main Components of Swiftly Salesforce
-* [Salesforce.swift]: 
+* [Salesforce.swift]: This is likely the only file you’ll refer to. It’s your Swift interface to the Salesforce Platform, with methods to query, retrieve, update and delete records, and to access [custom Apex REST][Apex REST] endpoints.
 
 * [Router.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important and commonly-used Salesforce [REST API] endpoints are represented as enum values, including one for [custom Apex REST][Apex REST] endpoints.
 
