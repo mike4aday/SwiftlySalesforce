@@ -100,13 +100,13 @@ first {
 You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next operation. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, when the first completes, when any fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
 
 ### Example: Handling Errors
-The following code is from the example file, [TaskStore.swift](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
+The following code is from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
 ```swift
 first {
     // Get ID of current user
     salesforce.identity()
     }.then {
-        // Get tasks owned by user
+        // Query tasks owned by user
         userInfo in
         guard let userID = userInfo.userID else {
             throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
