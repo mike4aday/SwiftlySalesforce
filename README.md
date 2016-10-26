@@ -194,12 +194,12 @@ if let app = UIApplication.shared.delegate as? LoginDelegate {
 
 ## Dependent Frameworks
 The great Swift frameworks leveraged by _Swiftly Salesforce_:
-* [PromiseKit](http://promisekit.org) (Version 4): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
-* [Alamofire] (Version 4): "Elegant HTTP Networking in Swift"
+* [PromiseKit](http://promisekit.org): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
+* [Alamofire](https://github.com/Alamofire/Alamofire): "Elegant HTTP Networking in Swift"
 * [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Resources
-If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful.
+If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful:
 * [Salesforce REST API Developer's Guide][REST API]
 * [Salesforce App Cloud](http://www.salesforce.com/platform): aka the Salesforce Platform
 * [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
