@@ -157,13 +157,15 @@ The great Swift frameworks leveraged by _Swiftly Salesforce_:
 * [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Main Components of Swiftly Salesforce
-* [Router.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important, or commonly-used Salesforce [REST API] endpoints are represented as enum values, and I'll add more endpoints over time. You can also easily create [Alamofire] requests for your [custom Apex REST][Apex REST] endpoints, for example, by following the pattern established in this file.
+* [Salesforce.swift]: 
+
+* [Router.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important and commonly-used Salesforce [REST API] endpoints are represented as enum values, including one for [custom Apex REST][Apex REST] endpoints.
 
 * [AuthData.swift]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
 
-* [Extensions.swift]: Swift extensions used by other components of _Swiftly Salesforce_. The extensions that you'll likely use in your own code are `DateFormatter.salesforceDateTime`, and `DateFormatter.salesforceDate`, for converting Salesforce date/time and date fields to and from strings for JSON serialization.
+* [Extensions.swift]: Swift extensions used by other components of _Swiftly Salesforce_. The extensions that you'll likely use in your own code are `DateFormatter.salesforceDateTime`, and `DateFormatter.salesforceDate`, for converting Salesforce date/time and date values to and from strings for JSON serialization.
 
-* [AuthManager.swift]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the AuthManager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then AuthManager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their credentials are never handled by the client application.
+* [AuthManager.swift]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the AuthManager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then AuthManager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their credentials	 are never handled by the client application.
 
 ## Resources
 If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful.
@@ -171,12 +173,10 @@ If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you
 * [Salesforce App Cloud](http://www.salesforce.com/platform): aka the Salesforce Platform
 * [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
 * [Salesforce Partner Community](https://partners.salesforce.com): "Innovate, grow, connect" with Salesforce ISVs. Join the [Salesforce + iOS Mobile][sfdc-ios Chatter] Chatter group
-* [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: 'official' SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
+* [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: Salesforce-supported SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
 * [A Salesforce Swift App](http://www.mobileandemerging.technology/a-salesforce-mobile-app-with-swift/): blog post on using Swift with the Salesforce Mobile SDK. By [Jonathan Jenkins](http://www.mobileandemerging.technology/author/jonathan-jenkins/)
-* [Salesforce OAuth2 Made Easy For Native iOS Apps](https://developer.salesforce.com/blogs/developer-relations/2015/03/salesforce-oauth-made-easy-native-ios-apps.html): blog post by [Quinton Wall](http://twitter.com/quintonwall)
 * [When to Use the Salesforce1 Platform vs. Creating Custom Apps](https://help.salesforce.com/HTViewSolution?id=000192840&language=en_US)
 * [Alamofire]: Swift version of AFNetworking, "...One of the most popular third-party libraries on iOS and OS X." Tutorial [here](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial).
-* [Functional Swift](https://www.objc.io/books/functional-swift/): great book for learning Swift 2, by the team at [objc.io](http://objc.io). See their [other books](https://www.objc.io/books/) on Advanced Swift, and Core Data.
 * [iOS Apps with REST APIs](https://grokswift.com/bookshort/?utm_expid=86885646-0.pSwvTyVzSoG5VWML8NMtRw.1&utm_referrer=https%3A%2F%2Fgrokswift.com%2F): great book for getting started with Swift, REST APIs, JSON, and Alamofire. "Only the nitty gritty that you need to get real work done now: interfacing with your web services and displaying the results in your UI." By Christina Moulton of [GrokSwift](https://twitter.com/GrokSwift) 
 * [Salesforce Mobile SDK Quick Start](http://www.centare.com/salesforce-mobile-sdk-quickstart/): blog post by [William Welbes](https://twitter.com/welbes)
 
