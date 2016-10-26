@@ -47,8 +47,10 @@ let promise = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 And we can add a closure that will be called later, when the promise is fulfilled:
 ```swift
 promise.then {
-	(json) -> () in
-	// Parse the JSON and do interesting stuff
+	queryResult in
+	for record in queryResult.records {
+		// Parse the JSON dictionary of the record’s fields & values, and do interesting stuff…
+	}
 }
 ```
 ### Example: Update a Salesforce Record
