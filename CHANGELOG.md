@@ -1,8 +1,9 @@
 # Change Log
 
-## Version 3.0.0 (Coming soon)
+## Version 3.0.0 (Oct. 25, 2016)
+(This is a ‘breaking’ change that is not compatible with prior versions)
 - Upgrade for Swift 3
-- Add Carthage support
+- Lots of enhancements to make building native iOS apps on Salesforce even simpler - see the [README](../README.md)
 
 ## Version 2.2.0 (Oct. 24, 2016)
 - Support for custom login view controllers - [thanks to @humoronaka](https://github.com/mike4aday/SwiftlySalesforce/pull/10). (Note: this feature will not be carried over into version 3.0.0, which is nearly complete as of Oct. 24, 2016, but will be incorporated into a subsequent release.)
