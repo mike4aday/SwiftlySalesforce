@@ -27,11 +27,6 @@ extension Router: URLRequestConvertible {
 	
 	public func asURLRequest() throws -> URLRequest {
 		
-		var headers: HTTPHeaders = ["Accept": "application/json"]
-		var path: String
-		var params: [String: Any]?
-		var urlRequest: URLRequest
-		
 		switch self {
 		
 		case let .identity(authData, version):
