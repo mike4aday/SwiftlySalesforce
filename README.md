@@ -100,7 +100,7 @@ first {
 You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next operation. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, when the first completes, when any fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
 
 ### Example: Handling Errors
-The following code is from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
+The following code is adapted from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
 ```swift
 first {
     // Get ID of current user
@@ -111,10 +111,10 @@ first {
         guard let userID = userInfo.userID else {
             throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
         }
-        let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
+        let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDE 	R BY CreatedDate DESC"
         return salesforce.query(soql: soql)
     }.then {
-        // Parse JSON into Task instances and cache in memory
+        // Parse JSON into Task instances
         (result: QueryResult) -> () in
         let tasks = result.records.map { Task(dictionary: $0) }
         fulfill(tasks)
@@ -152,18 +152,18 @@ if let app = UIApplication.shared.delegate as? LoginDelegate {
 ```
 ## Dependent Frameworks
 The great Swift frameworks leveraged by _Swiftly Salesforce_:
-* [PromiseKit](http://promisekit.org) (Version 3): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
-* [Alamofire] (Version 3): "Elegant HTTP Networking in Swift"
+* [PromiseKit](http://promisekit.org) (Version 4): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
+* [Alamofire] (Version 4): "Elegant HTTP Networking in Swift"
 * [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Main Components of Swiftly Salesforce
-* [SalesforceAPI]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important, or commonly-used Salesforce [REST API] endpoints are represented as enum values, and I'll add more endpoints over time. You can also easily create [Alamofire] requests for your [custom Apex REST][Apex REST] endpoints, for example, by following the pattern established in this file.
+* [Router]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important, or commonly-used Salesforce [REST API] endpoints are represented as enum values, and I'll add more endpoints over time. You can also easily create [Alamofire] requests for your [custom Apex REST][Apex REST] endpoints, for example, by following the pattern established in this file.
 
-* [Credentials]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
+* [AuthData]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
 
-* [Extensions]: Swift extensions used by other components of _Swiftly Salesforce_. The extensions that you'll likely use in your own code are `NSDateFormatter.SalesforceDateTime`, and `NSDateFormatter.SalesforceDate`, for converting Salesforce date/time and date fields to and from strings for JSON serialization.
+* [Extensions]: Swift extensions used by other components of _Swiftly Salesforce_. The extensions that you'll likely use in your own code are `DateFormatter.salesforceDateTime`, and `DateFormatter.salesforceDate`, for converting Salesforce date/time and date fields to and from strings for JSON serialization.
 
-* [OAuth2Manager]: Singleton that coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the OAuth2Manager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then the OAuth2Manager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted form into which the user would enter his/her username and password. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their passwords are never handled by the client application.
+* [AuthManager]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the OAuth2Manager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then the OAuth2Manager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted form into which the user would enter his/her username and password. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their passwords are never handled by the client application.
 
 ## Resources
 If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful.
