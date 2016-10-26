@@ -19,7 +19,7 @@ extension SalesforceError: CustomDebugStringConvertible {
 	
 	public var debugDescription: String {
 		switch self {
-		case let .userAuthenticationRequired:
+		case .userAuthenticationRequired:
 			return "User authentication required"
 		case let .invalidity(message):
 			return "Invalid: \(message)"
