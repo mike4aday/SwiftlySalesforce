@@ -32,3 +32,5 @@ Carthage
 #
 # Pods/
 OAuth2.plist
+Podfile.lock
+Example/Pods
