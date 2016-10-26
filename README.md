@@ -49,7 +49,7 @@ And we can add a closure that will be called later, when the promise is fulfille
 promise.then {
 	queryResult in
 	for record in queryResult.records {
-		// Parse the JSON dictionary of the record’s fields & values, and do interesting stuff…
+		// Parse JSON dictionary of record fields & values, and do interesting stuff…
 	}
 }
 ```
@@ -76,25 +76,25 @@ Let's say we want to retrieve a random zip/postal code from a [custom Apex REST]
 ```swift
 // Chained asynch requests 
 first {
-	// Make GET request of custom Apex REST resource
-       // (Enclosing this in a ‘first’ block is optional and can keep things neat.)
-	salesforce.apexRest(path: "/MyApexResourceThatEmitsRandomZip")
+  // Make GET request of custom Apex REST resource
+  // (Enclosing this in a ‘first’ block is optional and can keep things neat.)
+  salesforce.apexRest(path: "/MyApexResourceThatEmitsRandomZip")
 }.then {
-	// Query accounts with that zip code
-	result in
-	guard let zip = result["zip"] as? String else {
-               throw TaskForceError.generic(100, “Can’t get random zip code from our custom REST endpoint!”)
-	}
-	let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
-	return salesforce.query(soql: soql)
+  // Query accounts in that zip code
+  result in
+  guard let zip = result["zip"] as? String else {
+    throw TaskForceError.generic(100, “Can’t get random zip code from our custom REST endpoint!”)
+  }
+  let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
+  return salesforce.query(soql: soql)
 }.then {
-	// Parse JSON response
-	queryResult in
-	for record in queryResult.records {
-	    if let id = record["Id"] as? String, name = record["Name"] as? String {
-	        print("Account ID = \(id); name = \(name)")
-        }
+  // Parse JSON response
+  queryResult in
+  for record in queryResult.records {
+    if let id = record["Id"] as? String, name = record["Name"] as? String {
+      print("Account ID = \(id); name = \(name)")
     }
+  }
 }
 ```
 You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next operation. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, when the first completes, when any fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
