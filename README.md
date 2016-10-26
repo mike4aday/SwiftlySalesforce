@@ -303,8 +303,8 @@ As of this writing, you need to add an [application transport security (ATS) exc
    [Example]: <https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce>
    [Mobile SDK for iOS]: <https://github.com/forcedotcom/SalesforceMobileSDK-iOS>
    
-   [SalesforceAPI]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/SalesforceAPI.swift>
-   [Credentials]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Credentials.swift>
-   [Extensions]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Extensions.swift>
-   [OAuth2Manager]: <https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/OAuth2Manager.swift>
+   [Router]: <Pod/Classes/SalesforceAPI.swift>
+   [Auth Data]: <Pod/Classes/Credentials.swift>
+   [Extensions]: <Pod/Classes/Extensions.swift>
+   [AuthManager]: <Classes/OAuth2Manager.swift>
 
