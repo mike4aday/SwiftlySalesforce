@@ -56,9 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 }
 ```
 Note the following in the above example:
+
 1. Your AppDelegate should implement ```LoginDelegate```
-2. Replace the values for ```consumerKey``` and ```redirectURL``` with the values defined in your [Connected App]
-3. Call ```configureSalesforce()``` and ```handleRedirectURL()``` as shown
+1. Replace the values for ```consumerKey``` and ```redirectURL``` with the values defined in your [Connected App]
+1. Call ```configureSalesforce()``` and ```handleRedirectURL()``` as shown
 
 ### Example: Retrieve a Salesforce Record
 The following will retrieve all the fields for the specified account record:
