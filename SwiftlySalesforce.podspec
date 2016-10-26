@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
-    'SwiftlySalesforce' => ['Pod/Assets/*.png']
+  #  'SwiftlySalesforce' => ['Pod/Assets/*.png']
   }
 
   s.dependency 'PromiseKit', '~> 3.5'
