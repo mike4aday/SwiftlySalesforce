@@ -2,16 +2,15 @@
 //  DetailViewController.swift
 //  Example for SwiftlySalesforce
 //
-//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2016. All rights reserved.
+//  Created by Michael Epstein on 10/21/16.
+//  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import SwiftlySalesforce
-import Alamofire
 
-public class DetailViewController: UITableViewController {
-
+final class DetailViewController: UITableViewController {
 	
 	@IBOutlet weak var saveButton: UIBarButtonItem!
 	@IBOutlet weak var infoLabel: UILabel!
@@ -25,7 +24,7 @@ public class DetailViewController: UITableViewController {
 	public var selectedStatus: String? {
 		didSet {
 			if let currentStatus = task?.status, let saveButton = self.saveButton, let infoLabel = self.infoLabel {
-				saveButton.enabled = currentStatus == selectedStatus ? false : true
+				saveButton.isEnabled = currentStatus == selectedStatus ? false : true
 				infoLabel.text = currentStatus == selectedStatus ? "Select task status" : "Don't forget to press 'Save'!"
 			}
 		}
@@ -34,7 +33,7 @@ public class DetailViewController: UITableViewController {
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-		refreshControl?.addTarget(self, action: #selector(DetailViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+		refreshControl?.addTarget(self, action: #selector(DetailViewController.handleRefresh), for: UIControlEvents.valueChanged)
 		loadData()
 	}
 	
@@ -43,43 +42,44 @@ public class DetailViewController: UITableViewController {
 		
 		infoLabel.text = "Loading task statuses..."
 		
-		SalesforceAPI.Query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder").request()
+		salesforce.query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder")
 		.then {
 			(result) -> () in
-			if let records = result["records"] as? [[String: AnyObject]] {
-				self.statuses = records.map { $0["MasterLabel"] as? String ?? "N/A" }
-			}
+			self.statuses = result.records.map { $0["MasterLabel"] as? String ?? "N/A" }
 		}.always {
 			self.infoLabel.text = "Select task status"
 			self.tableView.reloadData()
 			self.refreshControl?.endRefreshing()
-		}.error {
+		}.catch {
 			(error) -> () in
-			self.alertWithTitle("Error!", error: error)
+			self.alert(title: "Error!", error: error)
 		}
 	}
-
+	
 	// Asynchronously save updated Task record
 	func save() {
 		
-		guard let task = self.task, let id = task.id, let selectedStatus = self.selectedStatus where selectedStatus != task.status else {
+		guard let task = self.task, let id = task.id, let selectedStatus = self.selectedStatus, selectedStatus != task.status else {
 			return
 		}
 		
 		infoLabel.text = "Saving changes..."
-	
-		let recordUpdate: [String: AnyObject] = ["Status" : selectedStatus]
-		SalesforceAPI.UpdateRecord(type: "Task", id: id, fields: recordUpdate).request()
+		
+		let recordUpdate: [String: Any] = ["Status" : selectedStatus]
+		salesforce.update(type: "Task", id: id, fields: recordUpdate)
 		.then {
 			(_) -> () in
-			self.alertWithTitle("Success!", message: "Updated task status to \(selectedStatus)")
+			self.alert(title: "Success!", message: "Updated task status to \(selectedStatus)")
 		}.then {
 			(_) -> () in
 			self.task?.status = selectedStatus
-			self.saveButton.enabled = false
+			self.saveButton.isEnabled = false
 		}.always {
 			self.infoLabel.text = "Select task status"
 			self.refreshControl?.endRefreshing()
+		}.catch {
+			error in
+			self.alert(title: "Error!", error: error)
 		}
 	}
 	
@@ -96,23 +96,21 @@ public class DetailViewController: UITableViewController {
 // MARK: - Extension
 extension DetailViewController {
 	
-	public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return self.statuses?.count ?? 0
 	}
 	
-	public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("DataCell")!
+	public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell")!
 		if let status = statuses?[indexPath.row]  {
 			cell.textLabel?.text = status
-			cell.accessoryType = (status == selectedStatus) ? .Checkmark : .None
+			cell.accessoryType = (status == selectedStatus) ? .checkmark : .none
 		}
 		return cell
 	}
 	
-	public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		selectedStatus = statuses?[indexPath.row]
 		tableView.reloadData()
 	}
 }
-
-
