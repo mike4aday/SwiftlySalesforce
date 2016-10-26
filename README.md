@@ -103,26 +103,25 @@ You could repeat this chaining multiple times, feeding the result of one asynchr
 The following code is from the example file, [TaskStore.swift](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
 ```swift
 first {
-					// Get ID of current user
-					salesforce.identity()
-				}.then {
-					// Get tasks owned by user
-					userInfo in
-					guard let userID = userInfo.userID else {
-						throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
-					}
-					let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
-					return salesforce.query(soql: soql)
-				}.then {
-					// Parse JSON into Task instances and cache in memory
-					(result: QueryResult) -> () in
-					let tasks = result.records.map { Task(dictionary: $0) }
-					self.cache = tasks
-					fulfill(tasks)
-				}.catch {
-					error in
-					reject(error)
-				}
+    // Get ID of current user
+    salesforce.identity()
+    }.then {
+        // Get tasks owned by user
+        userInfo in
+        guard let userID = userInfo.userID else {
+            throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
+        }
+        let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
+        return salesforce.query(soql: soql)
+    }.then {
+        // Parse JSON into Task instances and cache in memory
+        (result: QueryResult) -> () in
+        let tasks = result.records.map { Task(dictionary: $0) }
+        fulfill(tasks)
+    }.catch {
+        error in
+        reject(error)
+}
 ```
 You could also recover from an error, and continue with the chain, using a `recover` closure. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
 ```swift
