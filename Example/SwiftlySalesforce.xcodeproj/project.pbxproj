@@ -56,7 +56,7 @@
 		CE2B0F9745755F5A69D654A8 /* Pods_SwiftlySalesforce_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34715B1ED2A8E40E849172A /* SwiftlySalesforce.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftlySalesforce.podspec; path = ../SwiftlySalesforce.podspec; sourceTree = "<group>"; };
 		EA18C7A91C4404F800DAED6A /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		EA8017BB1DA0554000F07B44 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
+		EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
 		EABD723A1DC0455C00790BCB /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		EABD723B1DC0455C00790BCB /* TaskForceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskForceError.swift; sourceTree = "<group>"; };
 		EABD723C1DC0455C00790BCB /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				EA8017BB1DA0554000F07B44 /* SwiftlySalesforce_Example.entitlements */,
+				EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for SwiftlySalesforce */,
 				607FACE81AFB9204008FA782 /* Tests */,
