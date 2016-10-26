@@ -30,6 +30,32 @@ _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKi
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
 
+### Example: Set Up Your AppDelegate
+```swift
+import UIKit
+import SwiftlySalesforce
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
+
+    var window: UIWindow?
+	
+    /// Salesforce Connected App properties
+    let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkik_rz_GVRYmFpDR6yDaUrEfpC0vKqisPMY1klyH78G9Ockl2p7IJuqRk07nQ"
+    let redirectURL = URL(string: "taskforce://authorized")!
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
+        return true
+    }
+	
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        handleRedirectURL(redirectURL: url as URL)
+        return true
+    }
+}
+```
+
 ### Example: Retrieve a Salesforce Record
 The following will retrieve all the fields for the specified account record:
 ```swift
@@ -194,11 +220,11 @@ Questions, suggestions, bug reports and code contributions welcome:
 ### Add Swiftly Salesforce to Your CocoaPods Podfile
 Adding _Swiftly Salesforce_ to a simple Podfile:
 ```
-platform :ios, '9.1'
-use_frameworks!
-
-pod 'SwiftlySalesforce'
-# Another pod here
+target 'MyApp' do
+  use_frameworks!
+  pod ‘SwiftlySalesforce’
+  # Another pod here
+end
 ```
 See [Podfile](https://guides.cocoapods.org/syntax/podfile.html) for more details
 
