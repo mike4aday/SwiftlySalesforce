@@ -9,7 +9,7 @@ _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobi
 * Easy to install and update
 
 ## How do I set up Swiftly Salesforce?
-You can be up and running in under 5 minutes by following these steps. If you're not already familiar with the relevant procedure, see the [appendix](#appendix)):
+You can be up and running in under 5 minutes by following these steps:
 
 1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition
 1. Set up a Salesforce [Connected App] (it will be the ‘back-end’ for your iOS mobile app)
@@ -26,7 +26,7 @@ Minimum requirements:
 * Xcode 8
 
 ## How do I use Swiftly Salesforce?
-_Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.
+Behind the scenes, _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
 
@@ -62,7 +62,7 @@ Note the following in the above example:
 1. Call `configureSalesforce()` and `handleRedirectURL()` as shown
 
 ### Example: Retrieve a Salesforce Record
-The following will retrieve all the fields for the specified account record:
+The following will retrieve all the fields for an account record:
 ```swift
 salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
@@ -100,7 +100,7 @@ The `always` closure will be called regardless of success or failure elsewhere i
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
 salesforce.query(soql: soql)
 ```
-See the next example for handling the query results
+See the next example for handling the query results.
 
 ### Example: Chaining Asynchronous Requests
 Let's say we want to retrieve a random zip/postal code from a [custom Apex REST](https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST) resource, and then use that zip code in a query:
@@ -119,7 +119,6 @@ first {
     let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
     return salesforce.query(soql: soql)
 }.then {
-    // Parse JSON response
     queryResult in
     for record in queryResult.records {
         if let id = record["Id"] as? String, name = record["Name"] as? String {
@@ -181,14 +180,9 @@ if let app = UIApplication.shared.delegate as? LoginDelegate {
     }
 }
 ```
-## Dependent Frameworks
-The great Swift frameworks leveraged by _Swiftly Salesforce_:
-* [PromiseKit](http://promisekit.org) (Version 4): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
-* [Alamofire] (Version 4): "Elegant HTTP Networking in Swift"
-* [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Main Components of Swiftly Salesforce
-* [Salesforce.swift]: This is likely the only file you’ll refer to. It’s your Swift interface to the Salesforce Platform, with methods to query, retrieve, update and delete records, and to access [custom Apex REST][Apex REST] endpoints.
+* [Salesforce.swift]: This is your Swift interface to the Salesforce Platform, and likely the only file you’ll refer to. It has methods to query, retrieve, update and delete records, and to access [custom Apex REST][Apex REST] endpoints.
 
 * [Router.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important and commonly-used Salesforce [REST API] endpoints are represented as enum values, including one for [custom Apex REST][Apex REST] endpoints.
 
@@ -197,6 +191,12 @@ The great Swift frameworks leveraged by _Swiftly Salesforce_:
 * [Extensions.swift]: Swift extensions used by other components of _Swiftly Salesforce_. The extensions that you'll likely use in your own code are `DateFormatter.salesforceDateTime`, and `DateFormatter.salesforceDate`, for converting Salesforce date/time and date values to and from strings for JSON serialization.
 
 * [AuthManager.swift]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the AuthManager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then AuthManager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their credentials	 are never handled by the client application.
+
+## Dependent Frameworks
+The great Swift frameworks leveraged by _Swiftly Salesforce_:
+* [PromiseKit](http://promisekit.org) (Version 4): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
+* [Alamofire] (Version 4): "Elegant HTTP Networking in Swift"
+* [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Resources
 If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful.
