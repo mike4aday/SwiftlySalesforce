@@ -57,9 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 ```
 Note the following in the above example:
 
-1. Your app delegate should implement ```LoginDelegate```
-1. Replace the values for ```consumerKey``` and ```redirectURL``` with the values defined in your [Connected App]
-1. Call ```configureSalesforce()``` and ```handleRedirectURL()``` as shown
+1. Your app delegate should implement `LoginDelegate`
+1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]
+1. Call `configureSalesforce()` and `handleRedirectURL()` as shown
 
 ### Example: Retrieve a Salesforce Record
 The following will retrieve all the fields for the specified account record:
@@ -136,22 +136,22 @@ The following code is adapted from the example file, [TaskStore.swift](Example/S
 first {
     // Get ID of current user
     salesforce.identity()
-    }.then {
-        // Query tasks owned by user
-        userInfo in
-        guard let userID = userInfo.userID else {
-            throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
-        }
-        let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDE 	R BY CreatedDate DESC"
-        return salesforce.query(soql: soql)
-    }.then {
-        // Parse JSON into Task instances
-        (result: QueryResult) -> () in
-        let tasks = result.records.map { Task(dictionary: $0) }
-        fulfill(tasks)
-    }.catch {
-        error in
-        reject(error)
+}.then {
+    // Query tasks owned by user
+    userInfo in
+    guard let userID = userInfo.userID else {
+        throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
+    }
+    let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDE 	R BY CreatedDate DESC"
+    return salesforce.query(soql: soql)
+}.then {
+    // Parse JSON into Task instances
+    (result: QueryResult) -> () in
+    let tasks = result.records.map { Task(dictionary: $0) }
+    fulfill(tasks)
+}.catch {
+    error in
+    reject(error)
 }
 ```
 You could also recover from an error, and continue with the chain, using a `recover` closure. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
@@ -161,7 +161,7 @@ CLLocationManager.promise().recover { err in
     return CLLocationChicago
 }.then { location in
     // the user’s location, or Chicago if an error occurred
-}.error { err in
+}.catch { err in
     // the error was fatal
 }
 ```
@@ -170,16 +170,16 @@ If you want to log out the current Salesforce user, and then clear any locally-c
 ```swift
 // Call this when "Log Out" button is tapped, for example
 if let app = UIApplication.shared.delegate as? LoginDelegate {
-			app.logout().then {
-				() -> () in
-				TaskStore.shared.clear()
-				self.tableView.reloadData()
-				return
-			}.catch {
-				error in
-				debugPrint(error)
-			}
-		}
+    app.logout().then {
+        () -> () in
+        TaskStore.shared.clear()
+        self.tableView.reloadData()
+        return
+    }.catch {
+        error in
+        debugPrint(error)
+    }
+}
 ```
 ## Dependent Frameworks
 The great Swift frameworks leveraged by _Swiftly Salesforce_:
@@ -261,7 +261,7 @@ func application(application: UIApplication, openURL url: NSURL, sourceApplicati
 Update your app delegate class so that it:
 * Configures _Swiftly Salesforce_ with your Connected App's consumer key and callback URL
 * Implements `LoginDelegate` - you don't have to implement any methods, though, thanks to the magic of Swift's [protocol extensions](http://www.codingexplorer.com/protocol-extensions-in-swift-2/)
-* Calls `handleRedirectURL(URL:)` when asked by iOS to open the callback URL.
+* Calls `handleRedirectURL(redirectURL:)` when asked by iOS to open the callback URL.
 
 ```swift
 import UIKit
