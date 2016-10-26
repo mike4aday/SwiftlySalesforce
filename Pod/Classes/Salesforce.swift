@@ -9,7 +9,7 @@
 import PromiseKit
 import Alamofire
 
-public let salesforce: Salesforce = Salesforce.shared
+public let salesforce = Salesforce.shared
 
 open class Salesforce {
 	
@@ -23,6 +23,8 @@ open class Salesforce {
 		// Can't instantiate
 	}
 	
+	/// Asynchronously requests information about the current user
+	/// See https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0
 	open func identity() -> Promise<UserInfo> {
 		let builder = {
 			authData in
@@ -35,6 +37,8 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
+	/// Asynchronously retrieves information about org limits
+	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
 	open func limits() -> Promise<[Limit]> {
 		let builder = {
 			authData in
@@ -54,6 +58,10 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
+	/// Asynchronsouly executes a SOQL query
+	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
+	/// - Parameter soql: SOQL query
+	/// - Returns: Promise of a QueryResult
 	open func query(soql: String) -> Promise<QueryResult> {
 		let builder = {
 			authData in
@@ -78,6 +86,11 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
+	/// Asynchronously retrieves a single record 
+	/// - Parameter type: The type of the record, e.g. "Account", "Contact" or "MyCustomObject__c"
+	/// - Parameter id: ID of the record to retrieve
+	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
+	/// - Returns: Promise of a dictionary keyed by field names
 	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<[String: Any]> {
 		let builder = {
 			authData in
