@@ -307,5 +307,5 @@ As of this writing, you need to add an [application transport security (ATS) exc
    [Router.swift]: <Pod/Classes/Router.swift>
    [AuthData.swift]: <Pod/Classes/AuthData.swift>
    [Extensions.swift]: <Pod/Classes/Extensions.swift>
-   [AuthManager.swift]: <Classes/AuthManager.swift>
+   [AuthManager.swift]: <Pod/Classes/AuthManager.swift>
 
