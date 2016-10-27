@@ -31,6 +31,5 @@ Carthage
 # `pod install` in .travis.yml
 #
 # Pods/
-OAuth2.plist
 Podfile.lock
 Example/Pods
