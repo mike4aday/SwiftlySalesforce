@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 3.0.1 (Oct. 27, 2016)
+- Added file "OAuth2.plist" which is used for testing the framework. If you run the tests, edit the file and insert your own values for the Salesforce access token, refresh token, etc. 
+
 ## Version 3.0.0 (Oct. 25, 2016)
 (This is a ‘breaking’ change that is not compatible with prior versions)
 - Upgrade for Swift 3
