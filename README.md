@@ -288,7 +288,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 ```
 
 ### Add an ATS Exception for Salefsorce
-As of this writing, you need to add an [application transport security (ATS) exception](https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security)  to your iOS application's .plist file to allow it to connect to salesforce.com, as follows:
+As of this writing, you need to add an [application transport security (ATS) exception](https://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/) to your iOS application's .plist file to allow it to connect to salesforce.com, as follows:
 ```xml
 <!-- ADD TO YOUR APP'S .PLIST FILE -->
 <key>NSAppTransportSecurity</key>
