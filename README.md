@@ -4,7 +4,7 @@
 _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
 * Written entirely in [Swift](https://developer.apple.com/swift/), Apple's "modern programming language that is safe, fast and interactive."
 * Enables elegant, painless coding for complex, asynchronous [Salesforce API][REST API] interactions
-* Manages the Salesforce [OAuth2] authorization process (a.k.a. the "OAuth dance") automatically and transparently
+* Manages the Salesforce [OAuth2] authorization process (the "OAuth dance") automatically and transparently
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS]
 * Easy to install and update
 
@@ -28,7 +28,7 @@ Minimum requirements:
 ## How do I use Swiftly Salesforce?
 Behind the scenes, _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.
 
-_Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (a.k.a. the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login page.
+_Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login form.
 
 ### Example: Configure Your App to Talk to Salesforce
 ```swift
@@ -271,9 +271,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 
     var window: UIWindow?
 	
-    /// Salesforce Connected App properties (replace with your own…)
-    let consumerKey = “< YOUR CONNECTED APP’S CONSUMER KEY HERE >“
-    let redirectURL = URL(string: “< YOUR CONNECTED APP’S REDIRECT URL HERE >“)!
+    /// Salesforce Connected App properties (replace with your own...)
+    let consumerKey = "< YOUR CONNECTED APP’S CONSUMER KEY HERE >"
+    let redirectURL = URL(string: "< YOUR CONNECTED APP’S REDIRECT URL HERE >")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
