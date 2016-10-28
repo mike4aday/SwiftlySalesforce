@@ -12,7 +12,7 @@ _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobi
 You can be up and running in under 5 minutes by following these steps:
 
 1. [Get](https://developer.salesforce.com/signup) a free Salesforce Developer Edition
-1. Set up a Salesforce [Connected App](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_defining_remote_access_applications.htm) (it will be the ‘back-end’ for your iOS mobile app)
+1. Set up a Salesforce [Connected App]
 1. Register your Connected App's callback URL scheme with iOS ([see appendix](#appendix))
 1. Add _Swiftly Salesforce_ to your Xcode project: 
  * Add `pod 'SwiftlySalesforce'` to your project's [Podfile](https://guides.cocoapods.org/syntax/podfile.html)  ([see appendix](#appendix))
