@@ -171,7 +171,7 @@ If you want to log out the current Salesforce user, and then clear any locally-c
 if let app = UIApplication.shared.delegate as? LoginDelegate {
     app.logout().then {
         () -> () in
-	// Clear any cached data and reset the UI
+        // Clear any cached data and reset the UI
         return
     }.catch {
         error in
