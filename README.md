@@ -167,12 +167,11 @@ CLLocationManager.promise().recover { err in
 ### Example: Log Out
 If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. _Swiftly Salesforce_ will revoke and remove any stored credentials, and automatically display a Safari View Controller with the Salesforce login page, ready for another user to log in.
 ```swift
-// Call this when "Log Out" button is tapped, for example
+// Call this when your app's "Log Out" button is tapped, for example
 if let app = UIApplication.shared.delegate as? LoginDelegate {
     app.logout().then {
         () -> () in
-        TaskStore.shared.clear()
-        self.tableView.reloadData()
+	// Clear any cached data and reset the UI
         return
     }.catch {
         error in
