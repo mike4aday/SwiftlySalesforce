@@ -121,8 +121,8 @@ first {
 }.then {
     queryResult in
     for record in queryResult.records {
-        if let id = record["Id"] as? String, name = record["Name"] as? String {
-          print("Account ID = \(id); name = \(name)")
+        if let name = record["Name"] as? String {
+          print("Account name = \(name)")
         }
     }
 }
