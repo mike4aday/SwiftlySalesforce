@@ -229,7 +229,7 @@ Adding _Swiftly Salesforce_ to a simple Podfile:
 ```
 target 'MyApp' do
   use_frameworks!
-  pod ‘SwiftlySalesforce’
+  pod 'SwiftlySalesforce'
   # Another pod here
 end
 ```
