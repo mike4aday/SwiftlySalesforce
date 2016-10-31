@@ -29,9 +29,11 @@ Minimum requirements:
 Documentation is [here](http://cocoadocs.org/docsets/SwiftlySalesforce). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
 
 ## Examples
-Behind the scenes, _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.
+Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login form.
+
+Behind the scenes, _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. 
 
 ### Example: Configure Your App to Talk to Salesforce
 ```swift
