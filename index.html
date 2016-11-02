@@ -11,7 +11,7 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">Swiftlysalesforce</h1>
+      <h1 class="project-name">Swiftly Salesforce</h1>
       <h2 class="project-tagline">An easy-to-use framework for building native iOS apps with Swift and the Salesforce Platform</h2>
       <a href="https://github.com/mike4aday/SwiftlySalesforce" class="btn">View on GitHub</a>
       <a href="https://github.com/mike4aday/SwiftlySalesforce/zipball/master" class="btn">Download .zip</a>
@@ -77,42 +77,42 @@
 
 <p>The following will retrieve all the fields for the specified account record:</p>
 
-<div class="highlight highlight-source-swift"><pre>SalesforceAPI<span class="pl-k">.</span>ReadRecord(type: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, id: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>request()</pre></div>
+<div class="highlight highlight-source-swift"><pre>SalesforceAPI.<span class="pl-c1">ReadRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>).<span class="pl-c1">request</span>()</pre></div>
 
 <p>To specify which fields should be retrieved:</p>
 
 <div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> fields <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">"</span>AccountNumber<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>BillingCity<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>MyCustomField__c<span class="pl-pds">"</span></span>]
-SalesforceAPI<span class="pl-k">.</span>ReadRecord(type: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, id: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>, fields: fields)<span class="pl-k">.</span>request()</pre></div>
+SalesforceAPI.<span class="pl-c1">ReadRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>, <span class="pl-c1">fields</span>: fields).<span class="pl-c1">request</span>()</pre></div>
 
 <p>Note that <code>request()</code> is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:</p>
 
-<div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> promise: Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">=</span> SalesforceAPI<span class="pl-k">.</span>ReadRecord(type: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, id: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>request()</pre></div>
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> promise<span class="pl-k">:</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">=</span> SalesforceAPI.<span class="pl-c1">ReadRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>).<span class="pl-c1">request</span>()</pre></div>
 
 <p>And we can add a closure that will be called later, when the promise is fulfilled:</p>
 
-<div class="highlight highlight-source-swift"><pre>promise<span class="pl-k">.</span>then {
+<div class="highlight highlight-source-swift"><pre>promise.<span class="pl-smi">then</span> {
     (json) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
     <span class="pl-c">// Parse the JSON and do stuff</span>
-}</pre></div>
+<span class="pl-c"></span>}</pre></div>
 
 <h3>
 <a id="example-update-a-salesforce-record" class="anchor" href="#example-update-a-salesforce-record" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Update a Salesforce Record</h3>
 
-<div class="highlight highlight-source-swift"><pre>SalesforceAPI<span class="pl-k">.</span>UpdateRecord(type: <span class="pl-s"><span class="pl-pds">"</span>Task<span class="pl-pds">"</span></span>, id: <span class="pl-s"><span class="pl-pds">"</span>00T1500001h3V5NEAU<span class="pl-pds">"</span></span>, fields: [<span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Completed<span class="pl-pds">"</span></span>])<span class="pl-k">.</span>request()
-<span class="pl-k">.</span>then {
-    (_) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
+<div class="highlight highlight-source-swift"><pre>SalesforceAPI.<span class="pl-c1">UpdateRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Task<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>00T1500001h3V5NEAU<span class="pl-pds">"</span></span>, <span class="pl-c1">fields</span>: [<span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Completed<span class="pl-pds">"</span></span>]).<span class="pl-c1">request</span>()
+.<span class="pl-smi">then</span> {
+    (<span class="pl-c1">_</span>) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
     <span class="pl-c">// Update the local model</span>
-}<span class="pl-k">.</span>always {
+<span class="pl-c"></span>}.<span class="pl-smi">always</span> {
     <span class="pl-c">// Update the UI</span>
-}</pre></div>
+<span class="pl-c"></span>}</pre></div>
 
 <p>The <code>always</code> closure will be called regardless of success or failure elsewhere in the promise chain.</p>
 
 <h3>
 <a id="example-querying" class="anchor" href="#example-querying" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Querying</h3>
 
-<div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Name FROM Account WHERE BillingPostalCode = '<span class="pl-pse">\(</span><span class="pl-s1">postalCode</span><span class="pl-pse">)</span>'<span class="pl-pds">"</span></span>
-SalesforceAPI<span class="pl-k">.</span>Query(soql: soql)<span class="pl-k">.</span>request()</pre></div>
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Name FROM Account WHERE BillingPostalCode = '<span class="pl-pse">\(</span><span class="pl-s1">postalCode)</span>'<span class="pl-pds">"</span></span>
+SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: soql).<span class="pl-c1">request</span>()</pre></div>
 
 <p>See the next example for handling the query results</p>
 
@@ -123,26 +123,26 @@ SalesforceAPI<span class="pl-k">.</span>Query(soql: soql)<span class="pl-k">.</s
 
 <div class="highlight highlight-source-swift"><pre><span class="pl-c">// Chained asynch requests </span>
 <span class="pl-c">// (Enclosing in "firstly" block is optional; just keeps things nicely laid out)</span>
-firstly {
+<span class="pl-c"></span>firstly {
     <span class="pl-c">// Make GET request of custom Apex REST resource</span>
-    SalesforceAPI<span class="pl-k">.</span>ApexRest(method: <span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, path: <span class="pl-s"><span class="pl-pds">"</span>/MyApexResourceThatEmitsRandomZip<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>request()
-}<span class="pl-k">.</span>then {
+<span class="pl-c"></span>    SalesforceAPI.<span class="pl-c1">ApexRest</span>(<span class="pl-c1">method</span>: <span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, <span class="pl-c1">path</span>: <span class="pl-s"><span class="pl-pds">"</span>/MyApexResourceThatEmitsRandomZip<span class="pl-pds">"</span></span>).<span class="pl-c1">request</span>()
+}.<span class="pl-smi">then</span> {
     <span class="pl-c">// Query accounts with that zip code</span>
-    (result) <span class="pl-k">-&gt;</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">in</span>
-    <span class="pl-k">guard</span> <span class="pl-k">let</span> <span class="pl-c1">zip</span> <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>zip<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> NSError(domain: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, code: <span class="pl-c1">-100</span>, userInfo: <span class="pl-c1">nil</span>)
+<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">in</span>
+    <span class="pl-k">guard</span> <span class="pl-k">let</span> zip <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>zip<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> <span class="pl-k">else</span> {
+        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-100</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
     }
-    <span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Name FROM Account WHERE BillingPostalCode = '<span class="pl-pse">\(</span><span class="pl-s1"><span class="pl-c1">zip</span></span><span class="pl-pse">)</span>'<span class="pl-pds">"</span></span>
-    <span class="pl-k">return</span> SalesforceAPI<span class="pl-k">.</span>Query(soql: soql)<span class="pl-k">.</span>request()
-}<span class="pl-k">.</span>then {
+    <span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Name FROM Account WHERE BillingPostalCode = '<span class="pl-pse">\(</span><span class="pl-s1">zip)</span>'<span class="pl-pds">"</span></span>
+    <span class="pl-k">return</span> SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: soql).<span class="pl-c1">request</span>()
+}.<span class="pl-smi">then</span> {
     <span class="pl-c">// Parse JSON response</span>
-    (result) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
-    <span class="pl-k">guard</span> <span class="pl-k">let</span> records <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>records<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> [[<span class="pl-c1">String</span>: <span class="pl-c1">AnyObject</span>]] <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> NSError(domain: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, code: <span class="pl-c1">-101</span>, userInfo: <span class="pl-c1">nil</span>)
+<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
+    <span class="pl-k">guard</span> <span class="pl-k">let</span> records <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>records<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> [[<span class="pl-c1">String</span><span class="pl-k">:</span> <span class="pl-c1">AnyObject</span>]] <span class="pl-k">else</span> {
+        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-101</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
     }
     <span class="pl-k">for</span> record <span class="pl-k">in</span> records {
         <span class="pl-k">if</span> <span class="pl-k">let</span> id <span class="pl-k">=</span> record[<span class="pl-s"><span class="pl-pds">"</span>Id<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span>, name <span class="pl-k">=</span> record[<span class="pl-s"><span class="pl-pds">"</span>Name<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> {
-            <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>Account ID = <span class="pl-pse">\(</span><span class="pl-s1">id</span><span class="pl-pse">)</span>; name = <span class="pl-pse">\(</span><span class="pl-s1">name</span><span class="pl-pse">)</span><span class="pl-pds">"</span></span>)
+            <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>Account ID = <span class="pl-pse">\(</span><span class="pl-s1">id)</span>; name = <span class="pl-pse">\(</span><span class="pl-s1">name)</span><span class="pl-pds">"</span></span>)
         }
     }
 }</pre></div>
@@ -155,44 +155,44 @@ firstly {
 <p>The following code is from the example file, <a href="https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/TaskStore.swift">TaskStore.swift</a> and shows how to handle errors:</p>
 
 <div class="highlight highlight-source-swift"><pre>firstly {
-    SalesforceAPI<span class="pl-k">.</span>Identity<span class="pl-k">.</span>request()
-}<span class="pl-k">.</span>then {
+    SalesforceAPI.<span class="pl-smi">Identity</span>.<span class="pl-c1">request</span>()
+}.<span class="pl-smi">then</span> {
     <span class="pl-c">// Extract user ID from JSON result</span>
-    (result) <span class="pl-k">-&gt;</span> <span class="pl-c1">String</span> <span class="pl-k">in</span>
+<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> <span class="pl-c1">String</span> <span class="pl-k">in</span>
     <span class="pl-k">guard</span> <span class="pl-k">let</span> userID <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>user_id<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> NSError(domain: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, code: <span class="pl-c1">-100</span>, userInfo: <span class="pl-c1">nil</span>)
+        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-100</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
     }
     <span class="pl-k">return</span> userID
-}<span class="pl-k">.</span>then {
+}.<span class="pl-smi">then</span> {
     <span class="pl-c">// Query tasks owned by user</span>
-    (userID) <span class="pl-k">-&gt;</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">in</span>
-    <span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '<span class="pl-pse">\(</span><span class="pl-s1">userID</span><span class="pl-pse">)</span>' ORDER BY CreatedDate DESC<span class="pl-pds">"</span></span>
-    <span class="pl-k">return</span> SalesforceAPI<span class="pl-k">.</span>Query(soql: soql)<span class="pl-k">.</span>request()
-}<span class="pl-k">.</span>then {
+<span class="pl-c"></span>    (userID) <span class="pl-k">-&gt;</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">in</span>
+    <span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '<span class="pl-pse">\(</span><span class="pl-s1">userID)</span>' ORDER BY CreatedDate DESC<span class="pl-pds">"</span></span>
+    <span class="pl-k">return</span> SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: soql).<span class="pl-c1">request</span>()
+}.<span class="pl-smi">then</span> {
     <span class="pl-c">// Parse JSON response into Task instances</span>
-    (result) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
-    <span class="pl-k">guard</span> <span class="pl-k">let</span> records <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>records<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> [[<span class="pl-c1">String</span>: <span class="pl-c1">AnyObject</span>]] <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> NSError(domain: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, code: <span class="pl-c1">-101</span>, userInfo: <span class="pl-c1">nil</span>)
+<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
+    <span class="pl-k">guard</span> <span class="pl-k">let</span> records <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>records<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> [[<span class="pl-c1">String</span><span class="pl-k">:</span> <span class="pl-c1">AnyObject</span>]] <span class="pl-k">else</span> {
+        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-101</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
     }
-    <span class="pl-k">let</span> tasks <span class="pl-k">=</span> records<span class="pl-k">.</span><span class="pl-c1">map</span> { Task(dictionary: $<span class="pl-c1">0</span>) }
-    <span class="pl-k">self</span><span class="pl-k">.</span>cache <span class="pl-k">=</span> tasks
-    fulfill(tasks)
-}<span class="pl-k">.</span>error {
+    <span class="pl-k">let</span> tasks <span class="pl-k">=</span> records.<span class="pl-c1">map</span> { <span class="pl-c1">Task</span>(<span class="pl-c1">dictionary</span>: <span class="pl-smi">$0</span>) }
+    <span class="pl-v">self</span>.<span class="pl-smi">cache</span> <span class="pl-k">=</span> tasks
+    <span class="pl-c1">fulfill</span>(tasks)
+}.<span class="pl-c1">error</span> {
     <span class="pl-c">// Any errors in the chain would be caught here</span>
-    (error) <span class="pl-k">-&gt;</span> <span class="pl-c1">Void</span> <span class="pl-k">in</span>
-    reject(error)
+<span class="pl-c"></span>    (error) <span class="pl-k">-&gt;</span> <span class="pl-c1">Void</span> <span class="pl-k">in</span>
+    <span class="pl-c1">reject</span>(error)
 }</pre></div>
 
 <p>You could also recover from an error, and continue with the chain, using a <code>recover</code> closure. The following snippet is from PromiseKit's <a href="http://promisekit.org/recovering-from-errors">documentation</a>:</p>
 
-<div class="highlight highlight-source-swift"><pre>CLLocationManager<span class="pl-k">.</span>promise()<span class="pl-k">.</span>recover { err <span class="pl-k">in</span>
-    <span class="pl-k">guard</span> <span class="pl-k">!</span>err<span class="pl-k">.</span>fatal <span class="pl-k">else</span> { <span class="pl-k">throw</span> err }
+<div class="highlight highlight-source-swift"><pre>CLLocationManager.<span class="pl-c1">promise</span>().<span class="pl-smi">recover</span> { err <span class="pl-k">in</span>
+    <span class="pl-k">guard</span> <span class="pl-k">!</span>err.<span class="pl-smi">fatal</span> <span class="pl-k">else</span> { <span class="pl-k">throw</span> err }
     <span class="pl-k">return</span> CLLocationChicago
-}<span class="pl-k">.</span>then { location <span class="pl-k">in</span>
+}.<span class="pl-smi">then</span> { location <span class="pl-k">in</span>
     <span class="pl-c">// the user’s location, or Chicago if an error occurred</span>
-}<span class="pl-k">.</span>error { err <span class="pl-k">in</span>
+<span class="pl-c"></span>}.<span class="pl-c1">error</span> { err <span class="pl-k">in</span>
     <span class="pl-c">// the error was fatal</span>
-}</pre></div>
+<span class="pl-c"></span>}</pre></div>
 
 <h3>
 <a id="example-log-out" class="anchor" href="#example-log-out" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Log Out</h3>
@@ -200,11 +200,11 @@ firstly {
 <p>If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. <em>Swiftly Salesforce</em> will revoke and remove any stored credentials, and automatically display a Safari View Controller with the Salesforce login page, ready for another user to log in.</p>
 
 <div class="highlight highlight-source-swift"><pre><span class="pl-c">// Call this when "Log Out" button is tapped, for example</span>
-<span class="pl-k">if</span> <span class="pl-k">let</span> app <span class="pl-k">=</span> UIApplication<span class="pl-k">.</span>sharedApplication()<span class="pl-k">.</span>delegate <span class="pl-k">as?</span> LoginViewPresentable {
-    app<span class="pl-k">.</span>logOut()<span class="pl-k">.</span>then {
+<span class="pl-c"></span><span class="pl-k">if</span> <span class="pl-k">let</span> app <span class="pl-k">=</span> UIApplication.<span class="pl-c1">sharedApplication</span>().<span class="pl-smi">delegate</span> <span class="pl-k">as?</span> LoginViewPresentable {
+    app.<span class="pl-c1">logOut</span>().<span class="pl-smi">then</span> {
         () <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
         <span class="pl-c">// User's authorization now revoked - clear local data cache</span>
-        <span class="pl-k">return</span>
+<span class="pl-c"></span>        <span class="pl-k">return</span>
     }
 }</pre></div>
 
@@ -317,8 +317,8 @@ pod 'SwiftlySalesforce'
 
 <p>Then, you just need to add a single line in your app delegate class so that <em>Swiftly Salesforce</em> will handle the callback URL and the appended credentials.</p>
 
-<div class="highlight highlight-source-swift"><pre><span class="pl-k">func</span> <span class="pl-en">application</span>(application: UIApplication, <span class="pl-en">openURL</span> <span class="pl-smi">url</span>: NSURL, sourceApplication: <span class="pl-c1">String</span>?, annotation: <span class="pl-c1">AnyObject</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
-    handleRedirectURL(url)
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en"><span class="pl-smi">application</span></span>: UIApplication, <span class="pl-en">openURL</span> <span class="pl-smi">url</span>: NSURL, <span class="pl-en"><span class="pl-smi">sourceApplication</span></span>: <span class="pl-c1">String</span><span class="pl-k">?</span>, <span class="pl-en"><span class="pl-smi">annotation</span></span>: <span class="pl-c1">AnyObject</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+    <span class="pl-c1">handleRedirectURL</span>(url)
     <span class="pl-k">return</span> <span class="pl-c1">true</span>
 }</pre></div>
 
@@ -336,24 +336,24 @@ pod 'SwiftlySalesforce'
 
 <p>See below:</p>
 
-<div class="highlight highlight-source-swift"><pre><span class="pl-k">import</span> <span class="pl-c1">UIKit</span>
-<span class="pl-k">import</span> <span class="pl-c1">SwiftlySalesforce</span>
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">import</span> <span class="pl-en">UIKit</span>
+<span class="pl-k">import</span> <span class="pl-en">SwiftlySalesforce</span>
 
 <span class="pl-k">@UIApplicationMain</span>
-<span class="pl-k">class</span> AppDelegate: UIResponder, UIApplicationDelegate, LoginViewPresentable {
+<span class="pl-k">class</span> <span class="pl-en">AppDelegate</span>: <span class="pl-e">UIResponder, UIApplicationDelegate, LoginViewPresentable </span>{
 
-    <span class="pl-k">var</span> window: UIWindow?
+    <span class="pl-k">var</span> window<span class="pl-k">:</span> UIWindow<span class="pl-k">?</span>
     <span class="pl-k">let</span> consumerKey <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;&lt;YOUR CONNECTED APP'S CONSUMER KEY&gt;&gt;<span class="pl-pds">"</span></span>
-    <span class="pl-k">let</span> redirectURL <span class="pl-k">=</span> NSURL(string: <span class="pl-s"><span class="pl-pds">"</span>&lt;&lt;YOUR CONNECTED APP'S CALLBACK URL&gt;&gt;<span class="pl-pds">"</span></span>)<span class="pl-k">!</span>
+    <span class="pl-k">let</span> redirectURL <span class="pl-k">=</span> <span class="pl-c1">NSURL</span>(<span class="pl-c1">string</span>: <span class="pl-s"><span class="pl-pds">"</span>&lt;&lt;YOUR CONNECTED APP'S CALLBACK URL&gt;&gt;<span class="pl-pds">"</span></span>)<span class="pl-k">!</span>
 
-    <span class="pl-k">func</span> <span class="pl-en">application</span>(application: UIApplication, <span class="pl-en">didFinishLaunchingWithOptions</span> <span class="pl-smi">launchOptions</span>: [NSObject: <span class="pl-c1">AnyObject</span>]?) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
-        OAuth2Manager<span class="pl-k">.</span>sharedInstance<span class="pl-k">.</span>configureWithConsumerKey(consumerKey, redirectURL: redirectURL)
-        OAuth2Manager<span class="pl-k">.</span>sharedInstance<span class="pl-k">.</span>authenticationDelegate <span class="pl-k">=</span> <span class="pl-k">self</span>
+    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en"><span class="pl-smi">application</span></span>: UIApplication, <span class="pl-en">didFinishLaunchingWithOptions</span> <span class="pl-smi">launchOptions</span>: [NSObject: <span class="pl-c1">AnyObject</span>]<span class="pl-k">?</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+        OAuth2Manager.<span class="pl-smi">sharedInstance</span>.<span class="pl-c1">configureWithConsumerKey</span>(consumerKey, <span class="pl-c1">redirectURL</span>: redirectURL)
+        OAuth2Manager.<span class="pl-smi">sharedInstance</span>.<span class="pl-smi">authenticationDelegate</span> <span class="pl-k">=</span> <span class="pl-v">self</span>
         <span class="pl-k">return</span> <span class="pl-c1">true</span>
     }
 
-    <span class="pl-k">func</span> <span class="pl-en">application</span>(application: UIApplication, <span class="pl-en">openURL</span> <span class="pl-smi">url</span>: NSURL, sourceApplication: <span class="pl-c1">String</span>?, annotation: <span class="pl-c1">AnyObject</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
-        handleRedirectURL(url)
+    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en"><span class="pl-smi">application</span></span>: UIApplication, <span class="pl-en">openURL</span> <span class="pl-smi">url</span>: NSURL, <span class="pl-en"><span class="pl-smi">sourceApplication</span></span>: <span class="pl-c1">String</span><span class="pl-k">?</span>, <span class="pl-en"><span class="pl-smi">annotation</span></span>: <span class="pl-c1">AnyObject</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+        <span class="pl-c1">handleRedirectURL</span>(url)
         <span class="pl-k">return</span> <span class="pl-c1">true</span>
     }
 }</pre></div>
@@ -379,7 +379,7 @@ pod 'SwiftlySalesforce'
 &lt;/<span class="pl-ent">dict</span>&gt;</pre></div>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/mike4aday/SwiftlySalesforce">Swiftlysalesforce</a> is maintained by <a href="https://github.com/mike4aday">mike4aday</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/mike4aday/SwiftlySalesforce">Swiftly Salesforce</a> is maintained by <a href="https://github.com/mike4aday">mike4aday</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
