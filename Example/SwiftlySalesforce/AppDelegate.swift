@@ -12,16 +12,16 @@ import SwiftlySalesforce
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 
-    var window: UIWindow?
+	var window: UIWindow?
 	
 	/// Salesforce Connected App properties
-	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkik_rz_GVRYmFpDR6yDaUrEfpC0vKqisPMY1klyH78G9Ockl2p7IJuqRk07nQ"
+	let consumerKey = "3MVG91ftikjGaM__SSivaqQgkik_rz_GSRYmFpDR6yDaUrEfpC0vKqisPMY1ilyH78G9Ocpl2p7IJuqRk07nQ"
 	let redirectURL = URL(string: "taskforce://authorized")!
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
-        return true
-    }
+		return true
+	}
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 		handleRedirectURL(redirectURL: url as URL)
