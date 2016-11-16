@@ -45,9 +45,5 @@ extension MockOAuth2Data {
 	var redirectURL: URL? {
 		return URL(string: data?["RedirectURL"] as? String)
 	}
-	
-	var loginURL: URL? {
-		return URL(string: data?["LoginURL"] as? String)
-	}
 }
 
