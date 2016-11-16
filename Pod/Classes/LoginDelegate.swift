@@ -12,14 +12,23 @@ import Alamofire
 
 public typealias LoginResult = Alamofire.Result<AuthData>
 
-fileprivate final class LoginViewController: SFSafariViewController {
+public protocol LoginViewControllerable: class {
+	var replacedRootViewController: UIViewController? {
+		get set
+	}
+}
+
+fileprivate final class LoginViewController: SFSafariViewController, LoginViewControllerable {
 	// Hold reference to the view controller that's temporarily replaced by the login view controller
 	var replacedRootViewController: UIViewController?
 }
 
+
+
 public protocol LoginDelegate {
 	var window: UIWindow? { get }
 	func login(url: URL) throws
+	func createLoginViewController(url loginURL:URL) -> UIViewController
 }
 
 // MARK: - Extension
@@ -27,7 +36,7 @@ extension LoginDelegate {
 	
 	public var loggingIn: Bool {
 		get {
-			if let _ = window?.rootViewController as? LoginViewController {
+			if let _ = window?.rootViewController as? LoginViewControllerable {
 				return true
 			}
 			else {
@@ -47,8 +56,12 @@ extension LoginDelegate {
 		}
 		
 		// Replace current root view controller with Safari view controller for login
-		let loginVC = LoginViewController(url: url)
-		loginVC.replacedRootViewController = window.rootViewController
+		let loginVC = createLoginViewController(url: url)
+		guard let loginViewControllerable = loginVC as? LoginViewControllerable else {
+			throw SalesforceError.invalidity(message: "No valid LoginViewController!")
+		}
+		
+		loginViewControllerable.replacedRootViewController = window.rootViewController
 		window.rootViewController = loginVC
 	}
 	
@@ -66,7 +79,7 @@ extension LoginDelegate {
 		}
 		
 		salesforce.authManager.loginCompleted(result: result)
-		if let window = self.window, let currentRootVC = window.rootViewController as? LoginViewController, let replacedRootVC = currentRootVC.replacedRootViewController {
+		if let window = self.window, let currentRootVC = window.rootViewController as? LoginViewControllerable, let replacedRootVC = currentRootVC.replacedRootViewController {
 			window.rootViewController = replacedRootVC
 		}
 	}
@@ -84,8 +97,11 @@ extension LoginDelegate {
 				() -> () in
 				if let loginURL = try? salesforce.authManager.loginURL(), let window = self.window {
 					// Replace current root view controller with Safari view controller for login
-					let loginVC = LoginViewController(url: loginURL)
-					loginVC.replacedRootViewController = window.rootViewController
+					let loginVC = self.createLoginViewController(url: loginURL)
+					
+					if let loginViewControllerable = loginVC as? LoginViewControllerable {
+						loginViewControllerable.replacedRootViewController = window.rootViewController
+					}
 					window.rootViewController = loginVC
 				}
 				fulfill()
@@ -95,4 +111,9 @@ extension LoginDelegate {
 			}
 		}
 	}
+    
+	func createLoginViewController(url loginURL:URL) -> UIViewController {
+		return LoginViewController(url: loginURL)
+	}
+    
 }
