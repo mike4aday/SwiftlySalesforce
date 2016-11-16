@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
     }
 	
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(url: url as URL)
+        handleRedirectURL(url: url)
         return true
     }
 }
