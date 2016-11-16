@@ -14,7 +14,5 @@
 	<string>xxxxxxxx</string>
 	<key>RedirectURL</key>
 	<string>xxxxxxxx</string>
-	<key>LoginURL</key>
-	<string>https://login.salesforce.com</string>
 </dict>
 </plist>
