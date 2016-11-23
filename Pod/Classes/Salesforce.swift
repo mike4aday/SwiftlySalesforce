@@ -103,7 +103,11 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
-	open func insert(type: String, id: String, fields: [String: Any]) -> Promise<String> {
+	/// Asynchronously inserts a new record
+	/// - Parameter type: The type of the record to be inserted, e.g. "Account", "Contact" or "MyCustomObject__c"
+	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
+	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
+	open func insert(type: String, fields: [String: Any]) -> Promise<String> {
 		let builder = {
 			(authData: AuthData) throws -> URLRequest in
 			return try Router.insert(type: type, fields: fields, authData: authData, version: self.version).asURLRequest()
@@ -116,6 +120,11 @@ open class Salesforce {
 			return id
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
+	}
+	
+	@available(*, deprecated: 3.1.1, message: "Parameter 'id' is not needed. Call insert(type: String, fields: [String: Any]) instead.")
+	open func insert(type: String, id: String, fields: [String: Any]) -> Promise<String> {
+		return insert(type: type, fields: fields)
 	}
 	
 	/// Asynchronously updates a record
