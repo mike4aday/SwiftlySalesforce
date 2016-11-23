@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 3.1.1 (Nov. 23, 2016)
+Fixed issue #15; removed unneeded `id` parameter in `Salesforce.insert( )` method
+
 ## Version 3.1.0 (Nov. 16, 2016)
 - Updated `LoginDelegate` to accommodate custom login view controllers and flows. Note: the default [OAuth2 user-agent flow](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_user_agent_oauth_flow.htm) with the Salesforce-hosted webform is the recommended way to authenticate users; your app shouldn't handle their credentials. Adapted from [@hmuronaka's pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/14).
 - Deprecated `LoginDelegate` extension method `handleRedirectURL(redirectURL: URL)` in favor of `handleRedirectURL(url: URL)`.
