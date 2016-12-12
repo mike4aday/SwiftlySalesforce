@@ -48,10 +48,7 @@ open class Salesforce {
 			(response: [String: [String: Int]]) throws -> [Limit] in
 			var limits = [Limit]()
 			for (name, value) in response {
-				guard let remaining = value["Remaining"], let maximum = value["Max"] else {
-					throw SalesforceError.jsonDeserializationFailure(elementName: name, json: value)
-				}
-				limits.append(Limit(name: name, maximum: maximum, remaining: remaining))
+				try limits.append(Limit(name: name, json: value))
 			}
 			return limits
 		}
