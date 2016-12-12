@@ -115,7 +115,7 @@ public struct UserInfo {
 	}
 	
 	/// Initializer
-	init(json: [String: Any]) throws {
+	init(json: [String: Any]) {
 		self.dictionary = json
 	}
 }

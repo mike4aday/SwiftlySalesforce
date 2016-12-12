@@ -32,7 +32,7 @@ open class Salesforce {
 		}
 		let deserializer = {
 			(response: [String: Any]) throws -> UserInfo in
-			return try UserInfo(json: response)
+			return UserInfo(json: response)
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
