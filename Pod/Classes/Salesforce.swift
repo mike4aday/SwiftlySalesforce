@@ -161,6 +161,22 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
+	/// Asynchronously retrieves metadata information about a Salesforce object and its fields
+	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
+	/// - Parameter type: Type (i.e. object name)
+	/// - Returns: Promise<ObjectDescription>
+	open func describe(type: String) -> Promise<ObjectDescription> {
+		let builder = {
+			(authData: AuthData) throws -> URLRequest in
+			return try Router.describe(type: type, authData: authData, version: self.version).asURLRequest()
+		}
+		let deserializer = {
+			(response: [String: Any]) throws -> ObjectDescription in
+			return try ObjectDescription(json: response)
+		}
+		return request(requestBuilder: builder, jsonDeserializer: deserializer)
+	}
+	
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.
 	/// See https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST
 	/// The endpoint's response should be JSON-formatted.
