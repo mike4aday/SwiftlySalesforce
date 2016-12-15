@@ -172,7 +172,7 @@ open class Salesforce {
 		}
 		let deserializer = {
 			(response: [String: Any]) throws -> ObjectDescription in
-			return try ObjectDescription(json: response)
+			return ObjectDescription(json: response)
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
