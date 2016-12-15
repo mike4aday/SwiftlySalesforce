@@ -86,6 +86,59 @@ class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 				XCTFail("\(error)")
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
-
 	}
+	
+	func testThatItRetrieves() {
+		
+		// Given
+		let type = "Account"
+		let soql = "SELECT Id FROM \(type) ORDER BY Id LIMIT 1"
+		
+		// When
+		let exp = expectation(description: "Retrieve \(type) record")
+		salesforce.query(soql: soql)
+			.then {
+				(queryResult) -> Promise<[String: Any]> in
+				guard queryResult.records.count == 1, let id = queryResult.records[0]["Id"] as? String else {
+					throw SalesforceError.invalidity(message: "No records")
+				}
+				return salesforce.retrieve(type: type, id: id)
+			}.then {
+				record -> () in
+				guard let attributes = record["attributes"] as? [String: Any], let recordType = attributes["type"] as? String else {
+					throw SalesforceError.invalidity(message: "No records")
+				}
+				XCTAssertEqual(type, recordType)
+				exp.fulfill()
+			}.catch {
+				error in
+				XCTFail("\(error)")
+			}
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+	
+	func testThatItDescribes() {
+		
+		// Given
+		let type = "Account"
+		
+		// When
+		let exp = expectation(description: "Describe Account")
+		salesforce.describe(type: type)
+			.then {
+				// Then
+				desc -> () in
+				debugPrint(desc)
+				XCTAssertEqual(desc.name, "Account")
+				XCTAssertTrue(desc.fields.count > 0)
+				XCTAssertNotNil(desc.fields["Type"])
+				XCTAssertEqual(desc.fields["Type"]?.type, "picklist")
+				exp.fulfill()
+			}.catch {
+				error in
+				XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+
 }

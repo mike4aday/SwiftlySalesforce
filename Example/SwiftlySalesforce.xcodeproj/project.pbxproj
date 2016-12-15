@@ -12,6 +12,8 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		EA5114F51DFE26280019029F /* DescribeAccountResult.json in Resources */ = {isa = PBXBuildFile; fileRef = EA5114EF1DFDF1AD0019029F /* DescribeAccountResult.json */; };
+		EA5114F61DFE262B0019029F /* DescribeTaskResult.json in Resources */ = {isa = PBXBuildFile; fileRef = EA5114F31DFE0CE30019029F /* DescribeTaskResult.json */; };
 		EABD72401DC0455C00790BCB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723A1DC0455C00790BCB /* MasterViewController.swift */; };
 		EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723B1DC0455C00790BCB /* TaskForceError.swift */; };
 		EABD72421DC0455C00790BCB /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723C1DC0455C00790BCB /* TaskStore.swift */; };
@@ -24,8 +26,8 @@
 		EABD72581DC05A8800790BCB /* OAuth2.plist in Resources */ = {isa = PBXBuildFile; fileRef = EABD724E1DC05A8800790BCB /* OAuth2.plist */; };
 		EABD72591DC05A8800790BCB /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD724F1DC05A8800790BCB /* ModelTests.swift */; };
 		EABD725A1DC05A8800790BCB /* MockJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD72501DC05A8800790BCB /* MockJSONData.swift */; };
-		EABD725B1DC05A8800790BCB /* QueryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = EABD72511DC05A8800790BCB /* QueryResponse.json */; };
-		EABD725C1DC05A8800790BCB /* IdentityResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = EABD72521DC05A8800790BCB /* IdentityResponse.json */; };
+		EABD725B1DC05A8800790BCB /* QueryResult.json in Resources */ = {isa = PBXBuildFile; fileRef = EABD72511DC05A8800790BCB /* QueryResult.json */; };
+		EABD725C1DC05A8800790BCB /* IdentityResult.json in Resources */ = {isa = PBXBuildFile; fileRef = EABD72521DC05A8800790BCB /* IdentityResult.json */; };
 		EABD725D1DC05A8800790BCB /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD72531DC05A8800790BCB /* ExtensionTests.swift */; };
 		EABD725E1DC05A8800790BCB /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD72541DC05A8800790BCB /* AuthManagerTests.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		CE2B0F9745755F5A69D654A8 /* Pods_SwiftlySalesforce_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34715B1ED2A8E40E849172A /* SwiftlySalesforce.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftlySalesforce.podspec; path = ../SwiftlySalesforce.podspec; sourceTree = "<group>"; };
 		EA18C7A91C4404F800DAED6A /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
+		EA5114EF1DFDF1AD0019029F /* DescribeAccountResult.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DescribeAccountResult.json; sourceTree = "<group>"; };
+		EA5114F31DFE0CE30019029F /* DescribeTaskResult.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DescribeTaskResult.json; sourceTree = "<group>"; };
 		EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
 		EABD723A1DC0455C00790BCB /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		EABD723B1DC0455C00790BCB /* TaskForceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskForceError.swift; sourceTree = "<group>"; };
@@ -69,8 +73,8 @@
 		EABD724E1DC05A8800790BCB /* OAuth2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OAuth2.plist; sourceTree = "<group>"; };
 		EABD724F1DC05A8800790BCB /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		EABD72501DC05A8800790BCB /* MockJSONData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONData.swift; sourceTree = "<group>"; };
-		EABD72511DC05A8800790BCB /* QueryResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = QueryResponse.json; sourceTree = "<group>"; };
-		EABD72521DC05A8800790BCB /* IdentityResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdentityResponse.json; sourceTree = "<group>"; };
+		EABD72511DC05A8800790BCB /* QueryResult.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = QueryResult.json; sourceTree = "<group>"; };
+		EABD72521DC05A8800790BCB /* IdentityResult.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdentityResult.json; sourceTree = "<group>"; };
 		EABD72531DC05A8800790BCB /* ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTests.swift; sourceTree = "<group>"; };
 		EABD72541DC05A8800790BCB /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		F7891B295CCEE606466284B0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -163,8 +167,10 @@
 		607FACE91AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EABD72511DC05A8800790BCB /* QueryResponse.json */,
-				EABD72521DC05A8800790BCB /* IdentityResponse.json */,
+				EA5114EF1DFDF1AD0019029F /* DescribeAccountResult.json */,
+				EA5114F31DFE0CE30019029F /* DescribeTaskResult.json */,
+				EABD72511DC05A8800790BCB /* QueryResult.json */,
+				EABD72521DC05A8800790BCB /* IdentityResult.json */,
 				EABD724E1DC05A8800790BCB /* OAuth2.plist */,
 				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
@@ -307,9 +313,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA5114F61DFE262B0019029F /* DescribeTaskResult.json in Resources */,
 				EABD72581DC05A8800790BCB /* OAuth2.plist in Resources */,
-				EABD725C1DC05A8800790BCB /* IdentityResponse.json in Resources */,
-				EABD725B1DC05A8800790BCB /* QueryResponse.json in Resources */,
+				EABD725C1DC05A8800790BCB /* IdentityResult.json in Resources */,
+				EABD725B1DC05A8800790BCB /* QueryResult.json in Resources */,
+				EA5114F51DFE26280019029F /* DescribeAccountResult.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

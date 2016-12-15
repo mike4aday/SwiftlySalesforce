@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 	var window: UIWindow?
 	
 	/// Salesforce Connected App properties
-	let consumerKey = "<YOUR SALESFORCE CONNECTED APP'S CONSUMER KEY>"
-	let redirectURL = URL(string: "<YOUR SALESFORCE CONNECTED APP'S REDIRECT URL>")! 
+	let consumerKey = "<YOUR SALESFORCE CONNECTED APP'S CONSUMER KEY>" // Replace with your own
+	let redirectURL = URL(string: "scheme://redirect")! // Replace with your own
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)

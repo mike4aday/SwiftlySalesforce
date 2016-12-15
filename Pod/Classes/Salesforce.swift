@@ -32,7 +32,7 @@ open class Salesforce {
 		}
 		let deserializer = {
 			(response: [String: Any]) throws -> UserInfo in
-			return try UserInfo(json: response)
+			return UserInfo(json: response)
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
@@ -48,10 +48,7 @@ open class Salesforce {
 			(response: [String: [String: Int]]) throws -> [Limit] in
 			var limits = [Limit]()
 			for (name, value) in response {
-				guard let remaining = value["Remaining"], let maximum = value["Max"] else {
-					throw SalesforceError.jsonDeserializationFailure(elementName: name, json: value)
-				}
-				limits.append(Limit(name: name, maximum: maximum, remaining: remaining))
+				try limits.append(Limit(name: name, json: value))
 			}
 			return limits
 		}
@@ -74,6 +71,10 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
+	/// Queries next batch of records returned by a SOQL query whose result is broken into multiple batches (i.e. paginated).
+	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm
+	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
+	/// - Returns: Promise of a QueryResult
 	open func queryNext(path: String) -> Promise<QueryResult> {
 		let builder = {
 			authData in
@@ -128,6 +129,10 @@ open class Salesforce {
 	}
 	
 	/// Asynchronously updates a record
+	/// - Parameter type: Type of record to be updated (for example, "Account" or "Lead")
+	/// - Parameter id: Unique ID of record to be updated
+	/// - Parameter fields: Dictionary of field name and field value pairs.
+	/// - Returns: Promise<Void>
 	open func update(type: String, id: String, fields: [String: Any]) -> Promise<Void> {
 		let builder = {
 			(authData: AuthData) throws -> URLRequest in
@@ -141,6 +146,9 @@ open class Salesforce {
 	}
 	
 	/// Asynchronously deletes a record
+	/// - Parameter type: Type of record to be deleted (for example, "Account" or "Lead")
+	/// - Parameter id: Unique ID of record to be deleted
+	/// - Returns: Promise<Void>
 	open func delete(type: String, id: String) -> Promise<Void> {
 		let builder = {
 			(authData: AuthData) throws -> URLRequest in
@@ -153,14 +161,30 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
+	/// Asynchronously retrieves metadata information about a Salesforce object and its fields
+	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
+	/// - Parameter type: Type (i.e. object name)
+	/// - Returns: Promise<ObjectDescription>
+	open func describe(type: String) -> Promise<ObjectDescription> {
+		let builder = {
+			(authData: AuthData) throws -> URLRequest in
+			return try Router.describe(type: type, authData: authData, version: self.version).asURLRequest()
+		}
+		let deserializer = {
+			(response: [String: Any]) throws -> ObjectDescription in
+			return try ObjectDescription(json: response)
+		}
+		return request(requestBuilder: builder, jsonDeserializer: deserializer)
+	}
+	
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.
 	/// See https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST
-	/// The current implementation expects that the endpoint's output will be JSON-formatted.
+	/// The endpoint's response should be JSON-formatted.
 	/// - Parameter method: HTTP method
 	/// - Parameter path: String that gets appended to instance URL; should begin with "/"
 	/// - Parameter parameters: Dictionary of parameter name/value pairs
 	/// - Parameter headers: Dictionary of HTTP header values
-	/// - Returns: Promise of Any type
+	/// - Returns: Promise of Any type; result should be JSON-formatted.
 	open func apexRest(method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Any> {
 		let builder = {
 			authData in
@@ -173,6 +197,12 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
+	/// Use this method to call a Salesforce REST API endpoint that's not covered by the other methods.
+	/// - Parameter method: HTTP method
+	/// - Parameter path: Absolute path to endpoint, but excluding instance URL; should begin with "/"
+	/// - Parameter parameters: Dictionary of parameter name/value pairs
+	/// - Parameter headers: Dictionary of HTTP header values
+	/// - Returns: Promise of Any type; result should be JSON-formatted.
 	open func custom(method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Any> {
 		let builder = {
 			authData in

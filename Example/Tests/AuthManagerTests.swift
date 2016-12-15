@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Alamofire
 @testable import SwiftlySalesforce
 
 class AuthManagerTests: XCTestCase, MockOAuth2Data, LoginDelegate {
@@ -15,21 +16,52 @@ class AuthManagerTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 	
 	func testThatItRefreshes() {
 		
-		// Given
-		guard let refreshToken = refreshToken, let consumerKey = consumerKey, let redirectURL = redirectURL else {
+		// GIVEN
+		guard let refreshToken = refreshToken, let accessToken = accessToken, let consumerKey = consumerKey, let redirectURL = redirectURL else {
 			XCTFail()
 			return
 		}
 		let oldAccessToken = accessToken
+		debugPrint("Old access token: \(oldAccessToken)")
 		let authMgr = AuthManager(configuration: AuthManager.Configuration(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self))
 		
-		// When
+		// WHEN
+		// Revoke the access token
 		let exp = expectation(description: "Refresh token")
-		authMgr.refresh(refreshToken: refreshToken)
-		.then {
-			// Then
+		let revoke: () -> Promise<Void> = {
+			return Promise {
+				fulfill, reject in
+				Alamofire.request("https://login.salesforce.com/services/oauth2/revoke", method: .get, parameters: ["token": oldAccessToken])
+				.validate {
+					(request, response, data) -> Request.ValidationResult in
+					switch response.statusCode {
+					case 200..<300:
+						return .success
+					case 400:
+						// Ignore - could be that acces token is already invalid
+						return .success
+					default:
+						return .failure(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.statusCode)))
+					}
+				}
+				.responseString { response in
+					switch response.result {
+					case .success:
+						fulfill()
+					case .failure(let error):
+						reject(error)
+					}
+				}
+			}
+		}
+		
+		// THEN
+		revoke().then {
+			authMgr.refresh(refreshToken: refreshToken)
+		}.then {
 			authData -> () in
-			debugPrint(authData)
+			debugPrint("New access token: \(authData.accessToken)")
+			XCTAssertNotNil(authData.accessToken)
 			XCTAssertNotEqual(oldAccessToken, authData.accessToken)
 			exp.fulfill()
 		}.catch {
