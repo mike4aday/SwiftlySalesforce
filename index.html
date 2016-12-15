@@ -29,7 +29,7 @@
 <ul>
 <li>Written entirely in <a href="https://developer.apple.com/swift/">Swift</a>, Apple's "modern programming language that is safe, fast and interactive."</li>
 <li>Enables elegant, painless coding for complex, asynchronous <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/">Salesforce API</a> interactions</li>
-<li>Manages the Salesforce <a href="https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com">OAuth2</a> authorization process (a.k.a. the "OAuth dance") automatically and transparently</li>
+<li>Manages the Salesforce <a href="https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com">OAuth2</a> authorization process (the "OAuth dance") automatically and transparently</li>
 <li>Simpler and lighter alternative to the Salesforce <a href="https://github.com/forcedotcom/SalesforceMobileSDK-iOS">Mobile SDK for iOS</a>
 </li>
 <li>Easy to install and update</li>
@@ -38,18 +38,19 @@
 <h2>
 <a id="how-do-i-set-up-swiftly-salesforce" class="anchor" href="#how-do-i-set-up-swiftly-salesforce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How do I set up Swiftly Salesforce?</h2>
 
-<p>You can be up and running in under 5 minutes by following these steps (if you're already familiar with the relevant procedure; if not, see the <a href="#appendix">appendix</a>):</p>
+<p>You can be up and running in a few minutes by following these steps:</p>
 
 <ol>
 <li>
 <a href="https://developer.salesforce.com/signup">Get</a> a free Salesforce Developer Edition</li>
-<li>Set up a Salesforce <a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm">Connected App</a> that will be the server to your iOS mobile app</li>
+<li>Set up a Salesforce <a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm">Connected App</a>
+</li>
 <li>Register your Connected App's callback URL scheme with iOS (<a href="#appendix">see appendix</a>)</li>
 <li>Add <em>Swiftly Salesforce</em> to your Xcode project: 
 
 <ul>
 <li>Add <code>pod 'SwiftlySalesforce'</code> to your project's <a href="https://guides.cocoapods.org/syntax/podfile.html">Podfile</a>  (<a href="#appendix">see appendix</a>)</li>
-<li>Or just copy these <a href="https://github.com/mike4aday/SwiftlySalesforce/tree/master/Pod/Classes">7 Swift files</a>, and add the <a href="#dependent-frameworks">dependent frameworks</a>
+<li>Or just copy these <a href="./Pod/Classes">Swift source files</a> into your project, and add the <a href="#dependent-frameworks">dependent frameworks</a>
 </li>
 </ul>
 </li>
@@ -60,45 +61,90 @@
 <p>Minimum requirements:</p>
 
 <ul>
-<li>iOS 9.1</li>
-<li>Swift 2</li>
-<li>Xcode 7</li>
+<li>iOS 10.0</li>
+<li>Swift 3</li>
+<li>Xcode 8</li>
 </ul>
 
 <h2>
-<a id="how-do-i-use-swiftly-salesforce" class="anchor" href="#how-do-i-use-swiftly-salesforce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How do I use Swiftly Salesforce?</h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
 
-<p><em>Swiftly Salesforce</em> leverages <a href="https://github.com/alamofire/alamofire">Alamofire</a> and <a href="https://github.com/mxcl/PromiseKit">PromiseKit</a>, two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. Below are some examples to illustrate how to use <em>Swiftly Salesforce</em>, and how you can chain complex asynchronous calls. You can also find a complete example app <a href="https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce">here</a>; it retrieves a user's task records from Salesforce, and enables the user to update the status of a task.</p>
+<p>Documentation is <a href="http://cocoadocs.org/docsets/SwiftlySalesforce">here</a>. See especially the public methods of the <code>Salesforce</code> class - those are likely all you'll need to call from your code.</p>
 
-<p><em>Swiftly Salesforce</em> will automatically manage the entire Salesforce <a href="https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com">OAuth2</a> process (a.k.a. the "OAuth dance"). If <em>Swiftly Salesforce</em> has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then <em>Swiftly Salesforce</em> will attempt to refresh the access token, without bothering the user to re-enter the username and password. If <em>Swiftly Salesforce</em> doesn't have a valid access token, or is unable to refresh it, then <em>Swiftly Salesforce</em> will direct the user to the Salesforce-hosted login page.</p>
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>Below are some examples to illustrate how to use <em>Swiftly Salesforce</em>, and how you can chain complex asynchronous calls. You can also find a complete example app <a href="Example/SwiftlySalesforce">here</a>; it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.</p>
+
+<p><em>Swiftly Salesforce</em> will automatically manage the entire Salesforce <a href="https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com">OAuth2</a> process (the "OAuth dance"). If <em>Swiftly Salesforce</em> has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then <em>Swiftly Salesforce</em> will attempt to refresh the access token, without bothering the user to re-enter the username and password. If <em>Swiftly Salesforce</em> doesn't have a valid access token, or is unable to refresh it, then <em>Swiftly Salesforce</em> will direct the user to the Salesforce-hosted login form.</p>
+
+<p>Behind the scenes, <em>Swiftly Salesforce</em> leverages <a href="https://github.com/alamofire/alamofire">Alamofire</a> and <a href="https://github.com/mxcl/PromiseKit">PromiseKit</a>, two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. </p>
+
+<h3>
+<a id="example-configure-your-app-to-talk-to-salesforce" class="anchor" href="#example-configure-your-app-to-talk-to-salesforce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Configure Your App to Talk to Salesforce</h3>
+
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">import</span> <span class="pl-en">UIKit</span>
+<span class="pl-k">import</span> <span class="pl-en">SwiftlySalesforce</span>
+
+<span class="pl-k">@UIApplicationMain</span>
+<span class="pl-k">class</span> <span class="pl-en">AppDelegate</span>: <span class="pl-e">UIResponder, UIApplicationDelegate, LoginDelegate </span>{
+
+    <span class="pl-k">var</span> window<span class="pl-k">:</span> UIWindow<span class="pl-k">?</span>
+
+    <span class="pl-c">/// Salesforce Connected App properties (replace with your own…)</span>
+<span class="pl-c"></span>    <span class="pl-k">let</span> consumerKey <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>3MVG91ftiraGaMd_SSxxaqQgk21_rz_GVRxxFpDR6yDaxxEfpC0vKresPMY1kopH98G9Ockl2p7IJuqRk23nQ<span class="pl-pds">"</span></span>
+    <span class="pl-k">let</span> redirectURL <span class="pl-k">=</span> <span class="pl-c1">URL</span>(<span class="pl-c1">string</span>: <span class="pl-s"><span class="pl-pds">"</span>taskforce://authorized<span class="pl-pds">"</span></span>)<span class="pl-k">!</span>
+
+    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en">_</span> <span class="pl-smi">application</span>: UIApplication, <span class="pl-en">didFinishLaunchingWithOptions</span> <span class="pl-smi">launchOptions</span>: [UIApplicationLaunchOptionsKey: <span class="pl-c1">Any</span>]<span class="pl-k">?</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+        <span class="pl-c1">configureSalesforce</span>(<span class="pl-c1">consumerKey</span>: consumerKey, <span class="pl-c1">redirectURL</span>: redirectURL)
+        <span class="pl-k">return</span> <span class="pl-c1">true</span>
+    }
+
+    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en">_</span> <span class="pl-smi">app</span>: UIApplication, <span class="pl-en">open</span> <span class="pl-smi">url</span>: URL, <span class="pl-en"><span class="pl-smi">options</span></span>: [UIApplicationOpenURLOptionsKey : <span class="pl-c1">Any</span>] <span class="pl-k">=</span> [<span class="pl-k">:</span>]) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+        <span class="pl-c1">handleRedirectURL</span>(<span class="pl-c1">url</span>: url)
+        <span class="pl-k">return</span> <span class="pl-c1">true</span>
+    }
+}</pre></div>
+
+<p>Note the following in the above example:</p>
+
+<ol>
+<li>Your app delegate should implement <code>LoginDelegate</code>
+</li>
+<li>Replace the values for <code>consumerKey</code> and <code>redirectURL</code> with the values defined in your <a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm">Connected App</a>
+</li>
+<li>Call <code>configureSalesforce()</code> and <code>handleRedirectURL()</code> as shown</li>
+</ol>
 
 <h3>
 <a id="example-retrieve-a-salesforce-record" class="anchor" href="#example-retrieve-a-salesforce-record" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Retrieve a Salesforce Record</h3>
 
-<p>The following will retrieve all the fields for the specified account record:</p>
+<p>The following will retrieve all the fields for an account record:</p>
 
-<div class="highlight highlight-source-swift"><pre>SalesforceAPI.<span class="pl-c1">ReadRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>).<span class="pl-c1">request</span>()</pre></div>
+<div class="highlight highlight-source-swift"><pre>salesforce.<span class="pl-c1">retrieve</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>)</pre></div>
 
 <p>To specify which fields should be retrieved:</p>
 
 <div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> fields <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">"</span>AccountNumber<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>BillingCity<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>MyCustomField__c<span class="pl-pds">"</span></span>]
-SalesforceAPI.<span class="pl-c1">ReadRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>, <span class="pl-c1">fields</span>: fields).<span class="pl-c1">request</span>()</pre></div>
+salesforce.<span class="pl-c1">retrieve</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>, <span class="pl-c1">fields</span>: fields)</pre></div>
 
-<p>Note that <code>request()</code> is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:</p>
+<p>Note that <code>retrieve()</code> is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:</p>
 
-<div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> promise<span class="pl-k">:</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">=</span> SalesforceAPI.<span class="pl-c1">ReadRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>).<span class="pl-c1">request</span>()</pre></div>
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> promise <span class="pl-k">=</span> salesforce.<span class="pl-c1">retrieve</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Account<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>0013000001FjCcF<span class="pl-pds">"</span></span>)</pre></div>
 
 <p>And we can add a closure that will be called later, when the promise is fulfilled:</p>
 
 <div class="highlight highlight-source-swift"><pre>promise.<span class="pl-smi">then</span> {
-    (json) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
-    <span class="pl-c">// Parse the JSON and do stuff</span>
-<span class="pl-c"></span>}</pre></div>
+    queryResult <span class="pl-k">in</span>
+    <span class="pl-k">for</span> record <span class="pl-k">in</span> queryResult.<span class="pl-smi">records</span> {
+        <span class="pl-c">// Parse JSON dictionary of record fields &amp; values, and do interesting stuff…</span>
+<span class="pl-c"></span>    }
+}</pre></div>
 
 <h3>
 <a id="example-update-a-salesforce-record" class="anchor" href="#example-update-a-salesforce-record" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Update a Salesforce Record</h3>
 
-<div class="highlight highlight-source-swift"><pre>SalesforceAPI.<span class="pl-c1">UpdateRecord</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Task<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>00T1500001h3V5NEAU<span class="pl-pds">"</span></span>, <span class="pl-c1">fields</span>: [<span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Completed<span class="pl-pds">"</span></span>]).<span class="pl-c1">request</span>()
+<div class="highlight highlight-source-swift"><pre>salesforce.<span class="pl-c1">update</span>(<span class="pl-c1">type</span>: <span class="pl-s"><span class="pl-pds">"</span>Task<span class="pl-pds">"</span></span>, <span class="pl-c1">id</span>: <span class="pl-s"><span class="pl-pds">"</span>00T1500001h3V5NEAU<span class="pl-pds">"</span></span>, <span class="pl-c1">fields</span>: [<span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Completed<span class="pl-pds">"</span></span>])
 .<span class="pl-smi">then</span> {
     (<span class="pl-c1">_</span>) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
     <span class="pl-c">// Update the local model</span>
@@ -112,9 +158,9 @@ SalesforceAPI.<span class="pl-c1">ReadRecord</span>(<span class="pl-c1">type</sp
 <a id="example-querying" class="anchor" href="#example-querying" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Querying</h3>
 
 <div class="highlight highlight-source-swift"><pre><span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Name FROM Account WHERE BillingPostalCode = '<span class="pl-pse">\(</span><span class="pl-s1">postalCode)</span>'<span class="pl-pds">"</span></span>
-SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: soql).<span class="pl-c1">request</span>()</pre></div>
+salesforce.<span class="pl-c1">query</span>(<span class="pl-c1">soql</span>: soql)</pre></div>
 
-<p>See the next example for handling the query results</p>
+<p>See the next example for handling the query results.</p>
 
 <h3>
 <a id="example-chaining-asynchronous-requests" class="anchor" href="#example-chaining-asynchronous-requests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Chaining Asynchronous Requests</h3>
@@ -122,66 +168,54 @@ SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: 
 <p>Let's say we want to retrieve a random zip/postal code from a <a href="https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST">custom Apex REST</a> resource, and then use that zip code in a query:</p>
 
 <div class="highlight highlight-source-swift"><pre><span class="pl-c">// Chained asynch requests </span>
-<span class="pl-c">// (Enclosing in "firstly" block is optional; just keeps things nicely laid out)</span>
-<span class="pl-c"></span>firstly {
+<span class="pl-c"></span>first {
     <span class="pl-c">// Make GET request of custom Apex REST resource</span>
-<span class="pl-c"></span>    SalesforceAPI.<span class="pl-c1">ApexRest</span>(<span class="pl-c1">method</span>: <span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, <span class="pl-c1">path</span>: <span class="pl-s"><span class="pl-pds">"</span>/MyApexResourceThatEmitsRandomZip<span class="pl-pds">"</span></span>).<span class="pl-c1">request</span>()
+<span class="pl-c"></span>    <span class="pl-c">// (Enclosing this in a ‘first’ block is optional and can keep things neat.)</span>
+<span class="pl-c"></span>    salesforce.<span class="pl-c1">apexRest</span>(<span class="pl-c1">path</span>: <span class="pl-s"><span class="pl-pds">"</span>/MyApexResourceThatEmitsRandomZip<span class="pl-pds">"</span></span>)
 }.<span class="pl-smi">then</span> {
-    <span class="pl-c">// Query accounts with that zip code</span>
-<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">in</span>
+    <span class="pl-c">// Query accounts in that zip code</span>
+<span class="pl-c"></span>    result <span class="pl-k">in</span>
     <span class="pl-k">guard</span> <span class="pl-k">let</span> zip <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>zip<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-100</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
+        <span class="pl-k">throw</span> TaskForceError.<span class="pl-c1">generic</span>(<span class="pl-c1">100</span>, “Can’t <span class="pl-k">get</span> random zip code from our custom REST endpoint<span class="pl-k">!</span>”)
     }
     <span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Name FROM Account WHERE BillingPostalCode = '<span class="pl-pse">\(</span><span class="pl-s1">zip)</span>'<span class="pl-pds">"</span></span>
-    <span class="pl-k">return</span> SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: soql).<span class="pl-c1">request</span>()
+    <span class="pl-k">return</span> salesforce.<span class="pl-c1">query</span>(<span class="pl-c1">soql</span>: soql)
 }.<span class="pl-smi">then</span> {
-    <span class="pl-c">// Parse JSON response</span>
-<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
-    <span class="pl-k">guard</span> <span class="pl-k">let</span> records <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>records<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> [[<span class="pl-c1">String</span><span class="pl-k">:</span> <span class="pl-c1">AnyObject</span>]] <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-101</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
-    }
-    <span class="pl-k">for</span> record <span class="pl-k">in</span> records {
-        <span class="pl-k">if</span> <span class="pl-k">let</span> id <span class="pl-k">=</span> record[<span class="pl-s"><span class="pl-pds">"</span>Id<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span>, name <span class="pl-k">=</span> record[<span class="pl-s"><span class="pl-pds">"</span>Name<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> {
-            <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>Account ID = <span class="pl-pse">\(</span><span class="pl-s1">id)</span>; name = <span class="pl-pse">\(</span><span class="pl-s1">name)</span><span class="pl-pds">"</span></span>)
+    queryResult <span class="pl-k">in</span>
+    <span class="pl-k">for</span> record <span class="pl-k">in</span> queryResult.<span class="pl-smi">records</span> {
+        <span class="pl-k">if</span> <span class="pl-k">let</span> name <span class="pl-k">=</span> record[<span class="pl-s"><span class="pl-pds">"</span>Name<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> {
+          <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>Account name = <span class="pl-pse">\(</span><span class="pl-s1">name)</span><span class="pl-pds">"</span></span>)
         }
     }
 }</pre></div>
 
-<p>You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next operation. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, when the first completes, when any fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See <a href="http://promisekit.org">PromiseKit documentation</a> for more examples.</p>
+<p>You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, or when just the first completes, or when any one operation fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See <a href="http://promisekit.org">PromiseKit documentation</a> for more examples.</p>
 
 <h3>
 <a id="example-handling-errors" class="anchor" href="#example-handling-errors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Handling Errors</h3>
 
-<p>The following code is from the example file, <a href="https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/TaskStore.swift">TaskStore.swift</a> and shows how to handle errors:</p>
+<p>The following code is adapted from the example file, <a href="Example/SwiftlySalesforce/TaskStore.swift">TaskStore.swift</a> and shows how to handle errors:</p>
 
-<div class="highlight highlight-source-swift"><pre>firstly {
-    SalesforceAPI.<span class="pl-smi">Identity</span>.<span class="pl-c1">request</span>()
-}.<span class="pl-smi">then</span> {
-    <span class="pl-c">// Extract user ID from JSON result</span>
-<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> <span class="pl-c1">String</span> <span class="pl-k">in</span>
-    <span class="pl-k">guard</span> <span class="pl-k">let</span> userID <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>user_id<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> <span class="pl-c1">String</span> <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-100</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
-    }
-    <span class="pl-k">return</span> userID
+<div class="highlight highlight-source-swift"><pre>first {
+    <span class="pl-c">// Get ID of current user</span>
+<span class="pl-c"></span>    salesforce.<span class="pl-c1">identity</span>()
 }.<span class="pl-smi">then</span> {
     <span class="pl-c">// Query tasks owned by user</span>
-<span class="pl-c"></span>    (userID) <span class="pl-k">-&gt;</span> Promise<span class="pl-k">&lt;</span><span class="pl-c1">AnyObject</span><span class="pl-k">&gt;</span> <span class="pl-k">in</span>
-    <span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '<span class="pl-pse">\(</span><span class="pl-s1">userID)</span>' ORDER BY CreatedDate DESC<span class="pl-pds">"</span></span>
-    <span class="pl-k">return</span> SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: soql).<span class="pl-c1">request</span>()
-}.<span class="pl-smi">then</span> {
-    <span class="pl-c">// Parse JSON response into Task instances</span>
-<span class="pl-c"></span>    (result) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
-    <span class="pl-k">guard</span> <span class="pl-k">let</span> records <span class="pl-k">=</span> result[<span class="pl-s"><span class="pl-pds">"</span>records<span class="pl-pds">"</span></span>] <span class="pl-k">as?</span> [[<span class="pl-c1">String</span><span class="pl-k">:</span> <span class="pl-c1">AnyObject</span>]] <span class="pl-k">else</span> {
-        <span class="pl-k">throw</span> <span class="pl-c1">NSError</span>(<span class="pl-c1">domain</span>: <span class="pl-s"><span class="pl-pds">"</span>TaskForce<span class="pl-pds">"</span></span>, <span class="pl-c1">code</span>: <span class="pl-c1">-101</span>, <span class="pl-c1">userInfo</span>: <span class="pl-c1">nil</span>)
+<span class="pl-c"></span>    userInfo <span class="pl-k">in</span>
+    <span class="pl-k">guard</span> <span class="pl-k">let</span> userID <span class="pl-k">=</span> userInfo.<span class="pl-smi">userID</span> <span class="pl-k">else</span> {
+        <span class="pl-k">throw</span> TaskForceError.<span class="pl-c1">generic</span>(<span class="pl-c1">code</span>: <span class="pl-c1">100</span>, <span class="pl-c1">message</span>: <span class="pl-s"><span class="pl-pds">"</span>Can't determine user ID<span class="pl-pds">"</span></span>)
     }
-    <span class="pl-k">let</span> tasks <span class="pl-k">=</span> records.<span class="pl-c1">map</span> { <span class="pl-c1">Task</span>(<span class="pl-c1">dictionary</span>: <span class="pl-smi">$0</span>) }
-    <span class="pl-v">self</span>.<span class="pl-smi">cache</span> <span class="pl-k">=</span> tasks
-    <span class="pl-c1">fulfill</span>(tasks)
-}.<span class="pl-c1">error</span> {
-    <span class="pl-c">// Any errors in the chain would be caught here</span>
-<span class="pl-c"></span>    (error) <span class="pl-k">-&gt;</span> <span class="pl-c1">Void</span> <span class="pl-k">in</span>
-    <span class="pl-c1">reject</span>(error)
-}</pre></div>
+    <span class="pl-k">let</span> soql <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '<span class="pl-pse">\(</span><span class="pl-s1">userID)</span>' ORDE   R BY CreatedDate DESC<span class="pl-pds">"</span></span>
+    <span class="pl-k">return</span> salesforce.<span class="pl-c1">query</span>(<span class="pl-c1">soql</span>: soql)
+}.<span class="pl-smi">then</span> {
+    <span class="pl-c">// Parse JSON into Task instances</span>
+<span class="pl-c"></span>    (<span class="pl-c1">result</span>: QueryResult) <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
+    <span class="pl-k">let</span> tasks <span class="pl-k">=</span> result.<span class="pl-smi">records</span>.<span class="pl-c1">map</span> { <span class="pl-c1">Task</span>(<span class="pl-c1">dictionary</span>: <span class="pl-smi">$0</span>) }
+    <span class="pl-c">// Do something interesting with the tasks…</span>
+<span class="pl-c"></span>}.<span class="pl-smi">catch</span> {
+    error <span class="pl-k">in</span>
+    <span class="pl-c">// Handle the error…</span>
+<span class="pl-c"></span>}</pre></div>
 
 <p>You could also recover from an error, and continue with the chain, using a <code>recover</code> closure. The following snippet is from PromiseKit's <a href="http://promisekit.org/recovering-from-errors">documentation</a>:</p>
 
@@ -190,7 +224,7 @@ SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: 
     <span class="pl-k">return</span> CLLocationChicago
 }.<span class="pl-smi">then</span> { location <span class="pl-k">in</span>
     <span class="pl-c">// the user’s location, or Chicago if an error occurred</span>
-<span class="pl-c"></span>}.<span class="pl-c1">error</span> { err <span class="pl-k">in</span>
+<span class="pl-c"></span>}.<span class="pl-smi">catch</span> { err <span class="pl-k">in</span>
     <span class="pl-c">// the error was fatal</span>
 <span class="pl-c"></span>}</pre></div>
 
@@ -199,14 +233,28 @@ SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: 
 
 <p>If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. <em>Swiftly Salesforce</em> will revoke and remove any stored credentials, and automatically display a Safari View Controller with the Salesforce login page, ready for another user to log in.</p>
 
-<div class="highlight highlight-source-swift"><pre><span class="pl-c">// Call this when "Log Out" button is tapped, for example</span>
-<span class="pl-c"></span><span class="pl-k">if</span> <span class="pl-k">let</span> app <span class="pl-k">=</span> UIApplication.<span class="pl-c1">sharedApplication</span>().<span class="pl-smi">delegate</span> <span class="pl-k">as?</span> LoginViewPresentable {
-    app.<span class="pl-c1">logOut</span>().<span class="pl-smi">then</span> {
+<div class="highlight highlight-source-swift"><pre><span class="pl-c">// Call this when your app's "Log Out" button is tapped, for example</span>
+<span class="pl-c"></span><span class="pl-k">if</span> <span class="pl-k">let</span> app <span class="pl-k">=</span> UIApplication.<span class="pl-smi">shared</span>.<span class="pl-smi">delegate</span> <span class="pl-k">as?</span> LoginDelegate {
+    app.<span class="pl-c1">logout</span>().<span class="pl-smi">then</span> {
         () <span class="pl-k">-&gt;</span> () <span class="pl-k">in</span>
-        <span class="pl-c">// User's authorization now revoked - clear local data cache</span>
+        <span class="pl-c">// Clear any cached data and reset the UI</span>
 <span class="pl-c"></span>        <span class="pl-k">return</span>
+    }.<span class="pl-smi">catch</span> {
+        error <span class="pl-k">in</span>
+        <span class="pl-c1">debugPrint</span>(error)
     }
 }</pre></div>
+
+<h2>
+<a id="main-components-of-swiftly-salesforce" class="anchor" href="#main-components-of-swiftly-salesforce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Main Components of Swiftly Salesforce</h2>
+
+<ul>
+<li><p><a href="Pod/Classes/Salesforce.swift">Salesforce.swift</a>: This is your Swift interface to the Salesforce Platform, and likely the only file you’ll refer to. It has methods to query, retrieve, update and delete records, and to access <a href="https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST">custom Apex REST</a> endpoints.</p></li>
+<li><p><a href="Pod/Classes/Router.swift">Router.swift</a>: Acts as a '<a href="https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire">router</a>' for <a href="https://github.com/alamofire/alamofire">Alamofire</a> requests. The more important and commonly-used Salesforce <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/">REST API</a> endpoints are represented as enum values, including one for <a href="https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST">custom Apex REST</a> endpoints.</p></li>
+<li><p><a href="Pod/Classes/AuthData.swift">AuthData.swift</a>: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.</p></li>
+<li><p><a href="Pod/Classes/Extensions.swift">Extensions.swift</a>: Swift extensions used by other components of <em>Swiftly Salesforce</em>. The extensions that you'll likely use in your own code are <code>DateFormatter.salesforceDateTime</code>, and <code>DateFormatter.salesforceDate</code>, for converting Salesforce date/time and date values to and from strings for JSON serialization.</p></li>
+<li><p><a href="Pod/Classes/AuthManager.swift">AuthManager.swift</a>: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the AuthManager will attempt to <a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_refresh_token_flow.htm&amp;language=en_US">refresh</a> it. If the refresh process fails, then AuthManager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a <a href="https://developer.apple.com/videos/play/wwdc2015-504/">Safari View Controller</a> (new in iOS 9) to authenticate the user via the OAuth2 '<a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_user_agent_flow.htm&amp;language=en">user-agent</a>' flow. Though 'user-agent' flow is more complex than the OAuth2 '<a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_username_password_flow.htm&amp;language=en">username-password</a>' flow, it is the preferred method of authenticating users to Salesforce, since their credentials    are never handled by the client application.</p></li>
+</ul>
 
 <h2>
 <a id="dependent-frameworks" class="anchor" href="#dependent-frameworks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependent Frameworks</h2>
@@ -215,27 +263,17 @@ SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: 
 
 <ul>
 <li>
-<a href="http://promisekit.org">PromiseKit</a> (Version 3): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."</li>
+<a href="http://promisekit.org">PromiseKit</a>: "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."</li>
 <li>
-<a href="Version%203">Alamofire</a>: "Elegant HTTP Networking in Swift"</li>
+<a href="https://github.com/Alamofire/Alamofire">Alamofire</a>: "Elegant HTTP Networking in Swift"</li>
 <li>
 <a href="https://github.com/matthewpalmer/Locksmith">Locksmith</a>: "A powerful, protocol-oriented library for working with the keychain in Swift."</li>
 </ul>
 
 <h2>
-<a id="main-components-of-swiftly-salesforce" class="anchor" href="#main-components-of-swiftly-salesforce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Main Components of Swiftly Salesforce</h2>
-
-<ul>
-<li><p><a href="https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/SalesforceAPI.swift">SalesforceAPI</a>: Acts as a '<a href="https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire">router</a>' for <a href="https://github.com/alamofire/alamofire">Alamofire</a> requests. The more important, or commonly-used Salesforce <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/">REST API</a> endpoints are represented as enum values, and I'll add more endpoints over time. You can also easily create <a href="https://github.com/alamofire/alamofire">Alamofire</a> requests for your <a href="https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST">custom Apex REST</a> endpoints, for example, by following the pattern established in this file.</p></li>
-<li><p><a href="https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Credentials.swift">Credentials</a>: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.</p></li>
-<li><p><a href="https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Extensions.swift">Extensions</a>: Swift extensions used by other components of <em>Swiftly Salesforce</em>. The extensions that you'll likely use in your own code are <code>NSDateFormatter.SalesforceDateTime</code>, and <code>NSDateFormatter.SalesforceDate</code>, for converting Salesforce date/time and date fields to and from strings for JSON serialization.</p></li>
-<li><p><a href="https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/OAuth2Manager.swift">OAuth2Manager</a>: Singleton that coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the OAuth2Manager will attempt to <a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_refresh_token_flow.htm&amp;language=en_US">refresh</a> it. If the refresh process fails, then the OAuth2Manager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted form into which the user would enter his/her username and password. The default implementation uses a <a href="https://developer.apple.com/videos/play/wwdc2015-504/">Safari View Controller</a> (new in iOS 9) to authenticate the user via the OAuth2 '<a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_user_agent_flow.htm&amp;language=en">user-agent</a>' flow. Though 'user-agent' flow is more complex than the OAuth2 '<a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_username_password_flow.htm&amp;language=en">username-password</a>' flow, it is the preferred method of authenticating users to Salesforce, since their passwords are never handled by the client application.</p></li>
-</ul>
-
-<h2>
 <a id="resources" class="anchor" href="#resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources</h2>
 
-<p>If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful.</p>
+<p>If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful:</p>
 
 <ul>
 <li><a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/">Salesforce REST API Developer's Guide</a></li>
@@ -246,20 +284,18 @@ SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: 
 <li>
 <a href="https://partners.salesforce.com">Salesforce Partner Community</a>: "Innovate, grow, connect" with Salesforce ISVs. Join the <a href="http://sfdc.co/sfdc-ios">Salesforce + iOS Mobile</a> Chatter group</li>
 <li>
-<a href="https://github.com/forcedotcom/SalesforceMobileSDK-iOS">Salesforce Mobile SDK for iOS</a>: 'official' SDK for developing mobile apps. Written in Objective-C. Available for <a href="https://github.com/forcedotcom/SalesforceMobileSDK-Android">Android</a>, too</li>
+<a href="https://github.com/forcedotcom/SalesforceMobileSDK-iOS">Salesforce Mobile SDK for iOS</a>: Salesforce-supported SDK for developing mobile apps. Written in Objective-C. Available for <a href="https://github.com/forcedotcom/SalesforceMobileSDK-Android">Android</a>, too</li>
 <li>
 <a href="http://www.mobileandemerging.technology/a-salesforce-mobile-app-with-swift/">A Salesforce Swift App</a>: blog post on using Swift with the Salesforce Mobile SDK. By <a href="http://www.mobileandemerging.technology/author/jonathan-jenkins/">Jonathan Jenkins</a>
-</li>
-<li>
-<a href="https://developer.salesforce.com/blogs/developer-relations/2015/03/salesforce-oauth-made-easy-native-ios-apps.html">Salesforce OAuth2 Made Easy For Native iOS Apps</a>: blog post by <a href="http://twitter.com/quintonwall">Quinton Wall</a>
 </li>
 <li><a href="https://help.salesforce.com/HTViewSolution?id=000192840&amp;language=en_US">When to Use the Salesforce1 Platform vs. Creating Custom Apps</a></li>
 <li>
 <a href="https://github.com/alamofire/alamofire">Alamofire</a>: Swift version of AFNetworking, "...One of the most popular third-party libraries on iOS and OS X." Tutorial <a href="http://www.raywenderlich.com/85080/beginning-alamofire-tutorial">here</a>.</li>
 <li>
-<a href="https://www.objc.io/books/functional-swift/">Functional Swift</a>: great book for learning Swift 2, by the team at <a href="http://objc.io">objc.io</a>. See their <a href="https://www.objc.io/books/">other books</a> on Advanced Swift, and Core Data.</li>
-<li>
 <a href="https://grokswift.com/bookshort/?utm_expid=86885646-0.pSwvTyVzSoG5VWML8NMtRw.1&amp;utm_referrer=https%3A%2F%2Fgrokswift.com%2F">iOS Apps with REST APIs</a>: great book for getting started with Swift, REST APIs, JSON, and Alamofire. "Only the nitty gritty that you need to get real work done now: interfacing with your web services and displaying the results in your UI." By Christina Moulton of <a href="https://twitter.com/GrokSwift">GrokSwift</a> </li>
+<li>
+<a href="http://www.centare.com/salesforce-mobile-sdk-quickstart/">Salesforce Mobile SDK Quick Start</a>: blog post by <a href="https://twitter.com/welbes">William Welbes</a>
+</li>
 </ul>
 
 <h2>
@@ -288,11 +324,11 @@ SalesforceAPI.<span class="pl-c1">Query</span>(<span class="pl-c1">soql</span>: 
 
 <p>Adding <em>Swiftly Salesforce</em> to a simple Podfile:</p>
 
-<pre><code>platform :ios, '9.1'
-use_frameworks!
-
-pod 'SwiftlySalesforce'
-# Another pod here
+<pre><code>target 'MyApp' do
+  use_frameworks!
+  pod 'SwiftlySalesforce'
+  # Another pod here
+end
 </code></pre>
 
 <p>See <a href="https://guides.cocoapods.org/syntax/podfile.html">Podfile</a> for more details</p>
@@ -317,8 +353,8 @@ pod 'SwiftlySalesforce'
 
 <p>Then, you just need to add a single line in your app delegate class so that <em>Swiftly Salesforce</em> will handle the callback URL and the appended credentials.</p>
 
-<div class="highlight highlight-source-swift"><pre><span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en"><span class="pl-smi">application</span></span>: UIApplication, <span class="pl-en">openURL</span> <span class="pl-smi">url</span>: NSURL, <span class="pl-en"><span class="pl-smi">sourceApplication</span></span>: <span class="pl-c1">String</span><span class="pl-k">?</span>, <span class="pl-en"><span class="pl-smi">annotation</span></span>: <span class="pl-c1">AnyObject</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
-    <span class="pl-c1">handleRedirectURL</span>(url)
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en">_</span> <span class="pl-smi">app</span>: UIApplication, <span class="pl-en">open</span> <span class="pl-smi">url</span>: URL, <span class="pl-en"><span class="pl-smi">options</span></span>: [UIApplicationOpenURLOptionsKey : <span class="pl-c1">Any</span>] <span class="pl-k">=</span> [<span class="pl-k">:</span>]) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+    <span class="pl-c1">handleRedirectURL</span>(<span class="pl-c1">redirectURL</span>: url <span class="pl-k">as</span> URL)
     <span class="pl-k">return</span> <span class="pl-c1">true</span>
 }</pre></div>
 
@@ -329,31 +365,30 @@ pod 'SwiftlySalesforce'
 
 <ul>
 <li>Configures <em>Swiftly Salesforce</em> with your Connected App's consumer key and callback URL</li>
-<li>Implements <code>LoginViewPresentable</code> - you don't have to implement any methods, though, thanks to the magic of Swift 2's <a href="http://www.codingexplorer.com/protocol-extensions-in-swift-2/">protocol extensions</a>
+<li>Implements <code>LoginDelegate</code> - you don't have to implement any methods, though, thanks to the magic of Swift's <a href="http://www.codingexplorer.com/protocol-extensions-in-swift-2/">protocol extensions</a>
 </li>
-<li>Calls <code>handleRedirectURL(NSURL:)</code> when asked by iOS to open the callback URL.</li>
+<li>Calls <code>handleRedirectURL(redirectURL:)</code> when asked by iOS to open the callback URL.</li>
 </ul>
-
-<p>See below:</p>
 
 <div class="highlight highlight-source-swift"><pre><span class="pl-k">import</span> <span class="pl-en">UIKit</span>
 <span class="pl-k">import</span> <span class="pl-en">SwiftlySalesforce</span>
 
 <span class="pl-k">@UIApplicationMain</span>
-<span class="pl-k">class</span> <span class="pl-en">AppDelegate</span>: <span class="pl-e">UIResponder, UIApplicationDelegate, LoginViewPresentable </span>{
+<span class="pl-k">class</span> <span class="pl-en">AppDelegate</span>: <span class="pl-e">UIResponder, UIApplicationDelegate, LoginDelegate </span>{
 
     <span class="pl-k">var</span> window<span class="pl-k">:</span> UIWindow<span class="pl-k">?</span>
-    <span class="pl-k">let</span> consumerKey <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;&lt;YOUR CONNECTED APP'S CONSUMER KEY&gt;&gt;<span class="pl-pds">"</span></span>
-    <span class="pl-k">let</span> redirectURL <span class="pl-k">=</span> <span class="pl-c1">NSURL</span>(<span class="pl-c1">string</span>: <span class="pl-s"><span class="pl-pds">"</span>&lt;&lt;YOUR CONNECTED APP'S CALLBACK URL&gt;&gt;<span class="pl-pds">"</span></span>)<span class="pl-k">!</span>
 
-    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en"><span class="pl-smi">application</span></span>: UIApplication, <span class="pl-en">didFinishLaunchingWithOptions</span> <span class="pl-smi">launchOptions</span>: [NSObject: <span class="pl-c1">AnyObject</span>]<span class="pl-k">?</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
-        OAuth2Manager.<span class="pl-smi">sharedInstance</span>.<span class="pl-c1">configureWithConsumerKey</span>(consumerKey, <span class="pl-c1">redirectURL</span>: redirectURL)
-        OAuth2Manager.<span class="pl-smi">sharedInstance</span>.<span class="pl-smi">authenticationDelegate</span> <span class="pl-k">=</span> <span class="pl-v">self</span>
+    <span class="pl-c">/// Salesforce Connected App properties (replace with your own...)</span>
+<span class="pl-c"></span>    <span class="pl-k">let</span> consumerKey <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&lt; YOUR CONNECTED APP’S CONSUMER KEY HERE &gt;<span class="pl-pds">"</span></span>
+    <span class="pl-k">let</span> redirectURL <span class="pl-k">=</span> <span class="pl-c1">URL</span>(<span class="pl-c1">string</span>: <span class="pl-s"><span class="pl-pds">"</span>&lt; YOUR CONNECTED APP’S REDIRECT URL HERE &gt;<span class="pl-pds">"</span></span>)<span class="pl-k">!</span>
+
+    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en">_</span> <span class="pl-smi">application</span>: UIApplication, <span class="pl-en">didFinishLaunchingWithOptions</span> <span class="pl-smi">launchOptions</span>: [UIApplicationLaunchOptionsKey: <span class="pl-c1">Any</span>]<span class="pl-k">?</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+        <span class="pl-c1">configureSalesforce</span>(<span class="pl-c1">consumerKey</span>: consumerKey, <span class="pl-c1">redirectURL</span>: redirectURL)
         <span class="pl-k">return</span> <span class="pl-c1">true</span>
     }
 
-    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en"><span class="pl-smi">application</span></span>: UIApplication, <span class="pl-en">openURL</span> <span class="pl-smi">url</span>: NSURL, <span class="pl-en"><span class="pl-smi">sourceApplication</span></span>: <span class="pl-c1">String</span><span class="pl-k">?</span>, <span class="pl-en"><span class="pl-smi">annotation</span></span>: <span class="pl-c1">AnyObject</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
-        <span class="pl-c1">handleRedirectURL</span>(url)
+    <span class="pl-k">func</span> <span class="pl-en">application</span>(<span class="pl-en">_</span> <span class="pl-smi">app</span>: UIApplication, <span class="pl-en">open</span> <span class="pl-smi">url</span>: URL, <span class="pl-en"><span class="pl-smi">options</span></span>: [UIApplicationOpenURLOptionsKey : <span class="pl-c1">Any</span>] <span class="pl-k">=</span> [<span class="pl-k">:</span>]) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {
+        <span class="pl-c1">handleRedirectURL</span>(<span class="pl-c1">redirectURL</span>: url <span class="pl-k">as</span> URL)
         <span class="pl-k">return</span> <span class="pl-c1">true</span>
     }
 }</pre></div>
@@ -361,7 +396,7 @@ pod 'SwiftlySalesforce'
 <h3>
 <a id="add-an-ats-exception-for-salefsorce" class="anchor" href="#add-an-ats-exception-for-salefsorce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add an ATS Exception for Salefsorce</h3>
 
-<p>As of this writing, you need to add an <a href="https://www.hackingwithswift.com/example-code/system/how-to-handle-the-https-requirements-in-ios-9-with-app-transport-security">application transport security (ATS) exception</a>  to your iOS application's .plist file to allow it to connect to salesforce.com, as follows:</p>
+<p>As of this writing, you need to add an <a href="https://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/">application transport security (ATS) exception</a> to your iOS application's .plist file to allow it to connect to salesforce.com, as follows:</p>
 
 <div class="highlight highlight-text-xml"><pre><span class="pl-c">&lt;!-- ADD TO YOUR APP'S .PLIST FILE --&gt;</span>
 &lt;<span class="pl-ent">key</span>&gt;NSAppTransportSecurity&lt;/<span class="pl-ent">key</span>&gt;
