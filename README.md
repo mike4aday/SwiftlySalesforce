@@ -1,4 +1,4 @@
-[![Version 3.2.0](https://img.shields.io/badge/Version-3.2.0-orange.svg?style=flat)](https://github.com/mike4aday/SwiftlySalesforce)
+[![Version 3.2.0](https://img.shields.io/badge/Version-3.2.0-orange.svg?style=flat)](https://github.com/mike4aday/SwiftlySalesforce/blob/master/CHANGELOG.md)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 [![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 
@@ -173,6 +173,21 @@ CLLocationManager.promise().recover { err in
     // the error was fatal
 }
 ```
+### Example: Retrieve Object Metadata
+If, for example, you want to determine whether the user has permission to update or delete a record so you can disable editing in your UI, or if you want to retrieve all the options in a picklist, rather than hardcoding them in your mobile app, then call `salesforce.describe()` to retrieve an object's [metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm):
+```swift
+first {
+    salesforce.describe("Account")
+}.then {
+    (accountMetadata) -> () in 
+    saveButton.enabled = accountMetadata.isUpdateable
+    let industryOptions = accountMetadata.fields["Industry"]?.picklistValues
+}.catch {
+    error in 
+    debugPrint(error)
+}
+```
+
 ### Example: Log Out
 If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. _Swiftly Salesforce_ will revoke and remove any stored credentials, and automatically display a Safari View Controller with the Salesforce login page, ready for another user to log in.
 ```swift
