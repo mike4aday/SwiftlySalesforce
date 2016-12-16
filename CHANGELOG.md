@@ -1,7 +1,7 @@
 # Change Log
 
 ## Version 3.2.0 (Dec. 14, 2016)
-- Added Salesforce.describe( ) method, and corresponding model structs (ObjectDescription, FieldDescription, PiclistValue) for retrieving [object metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm). (Closes [issue #13](https://github.com/mike4aday/SwiftlySalesforce/issues/13).)
+- Added Salesforce.describe( ) method, and corresponding [model](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Model.swift) structs (ObjectDescription, FieldDescription, PicklistValue) for retrieving [object metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm). (Closes [issue #13](https://github.com/mike4aday/SwiftlySalesforce/issues/13).)
 - Additional tests and test coverage
 
 ## Version 3.1.1 (Nov. 23, 2016)
