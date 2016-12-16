@@ -1,3 +1,7 @@
+![Version 3.2.0](https://img.shields.io/badge/Version-3.2.0-orange.svg?style=flat)
+[![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
+[![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
+
 ![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg)
 
 # Swiftly Salesforce
