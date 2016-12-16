@@ -1,4 +1,4 @@
-![Version 3.2.0](https://img.shields.io/badge/Version-3.2.0-orange.svg?style=flat)
+[![Version 3.2.0](https://img.shields.io/badge/Version-3.2.0-orange.svg?style=flat)](https://github.com/mike4aday/SwiftlySalesforce)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 [![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 
