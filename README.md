@@ -1,4 +1,4 @@
-<img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="80%"/>
+<img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="72%"/>
 
 _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
 * Written entirely in [Swift](https://developer.apple.com/swift/), Apple's "modern programming language that is safe, fast and interactive."
@@ -20,7 +20,7 @@ You can be up and running in a few minutes by following these steps:
 1. Add an ATS exception for salesforce.com ([see appendix](#appendix)) 
 
 Minimum requirements:
-* iOS 10.0
+* iOS 10
 * Swift 3
 * Xcode 8
 
@@ -28,7 +28,7 @@ Minimum requirements:
 Documentation is [here](http://cocoadocs.org/docsets/SwiftlySalesforce). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
 
 ## Examples
-Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and enables the user to update the status of a task.
+Below are some examples to illustrate how to use _Swiftly Salesforce_, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and lets the user update the status of a task.
 
 _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If _Swiftly Salesforce_ has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then _Swiftly Salesforce_ will attempt to refresh the access token, without bothering the user to re-enter the username and password. If _Swiftly Salesforce_ doesn't have a valid access token, or is unable to refresh it, then _Swiftly Salesforce_ will direct the user to the Salesforce-hosted login form.
 
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
     var window: UIWindow?
 	
     /// Salesforce Connected App properties (replace with your own…)
-    let consumerKey = "3MVG91ftiraGaMd_SSxxaqQgk21_rz_GVRxxFpDR6yDaxxEfpC0vKresPMY1kopH98G9Ockl2p7IJuqRk23nQ"
+    let consumerKey = "3MVG9..."
     let redirectURL = URL(string: "taskforce://authorized")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
