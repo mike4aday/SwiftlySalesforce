@@ -1,8 +1,10 @@
+<!--
 [![Version 3.2.0](https://img.shields.io/badge/Version-3.2.0-orange.svg?style=flat)](https://github.com/mike4aday/SwiftlySalesforce/blob/master/CHANGELOG.md)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 [![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 
-<!--![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg)-->
+![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg)
+-->
 
 ![Swiftly Salesforce](http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png)
 
@@ -306,7 +308,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
     }
 	
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(url: url as URL)
+        handleRedirectURL(url: url)
         return true
     }
 }
