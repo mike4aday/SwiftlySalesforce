@@ -9,8 +9,6 @@
 import PromiseKit
 import Alamofire
 
-public let salesforce = Salesforce.shared
-
 open class Salesforce {
 	
 	open static let shared = Salesforce()

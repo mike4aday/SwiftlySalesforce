@@ -14,3 +14,6 @@ public typealias Promise = PromiseKit.Promise
 public func first<T>(execute body: () throws -> Promise<T>) -> Promise<T> {
 	return PromiseKit.firstly(execute: body)
 }
+
+/// Singleton instance of Salesforce class
+public let salesforce = Salesforce.shared
