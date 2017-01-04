@@ -1,11 +1,3 @@
-<!--
-[![Version 3.2.0](https://img.shields.io/badge/Version-3.2.0-orange.svg?style=flat)](https://github.com/mike4aday/SwiftlySalesforce/blob/master/CHANGELOG.md)
-[![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
-[![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
-
-![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg)
--->
-
 <img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="80%"/>
 
 _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
@@ -287,7 +279,7 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 Update your app delegate class so that it:
 * Configures _Swiftly Salesforce_ with your Connected App's consumer key and callback URL
 * Implements `LoginDelegate` - you don't have to implement any methods, though, thanks to the magic of Swift's [protocol extensions](http://www.codingexplorer.com/protocol-extensions-in-swift-2/)
-* Calls `handleRedirectURL(redirectURL:)` when asked by iOS to open the callback URL.
+* Calls `handleRedirectURL(url:)` when asked by iOS to open the callback URL.
 
 ```swift
 import UIKit
