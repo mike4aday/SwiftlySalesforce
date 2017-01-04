@@ -2,9 +2,10 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 [![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoapods.org/pods/SwiftlySalesforce)
 
-![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg)
+<!--![Salesforce powered](http://mike4aday.github.io/SwiftlySalesforce/images/SFDCPowered.jpg)-->
 
-# Swiftly Salesforce
+![Swiftly Salesforce](http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png)
+
 _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
 * Written entirely in [Swift](https://developer.apple.com/swift/), Apple's "modern programming language that is safe, fast and interactive."
 * Enables elegant, painless coding for complex, asynchronous [Salesforce API][REST API] interactions
@@ -305,7 +306,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
     }
 	
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(redirectURL: url as URL)
+        handleRedirectURL(url: url as URL)
         return true
     }
 }
