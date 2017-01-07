@@ -34,7 +34,7 @@ _Swiftly Salesforce_ will automatically manage the entire Salesforce [OAuth2][OA
 
 Behind the scenes, _Swiftly Salesforce_ leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations. 
 
-### Example: Configure Your App to Talk to Salesforce
+### Example: Configure Your App to Communicate with Salesforce
 ```swift
 import UIKit
 import SwiftlySalesforce
@@ -88,6 +88,25 @@ promise.then {
 	}
 }
 ```
+
+### Example: Retrieve multiple records in parallel
+```swift
+first {
+	// (Enclosing this in a ‘first’ block is optional, and can keep things neat.)
+	salesforce.retrieve(type: "Account", ids: ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"], fields: ["Name", "BillingPostalCode"])
+}.then {
+	records -> () in
+	for record in records {
+		if let name = record["Name"] as? String {
+			debugPrint(name)
+		}
+	}
+}.catch {
+	error in
+	// Handle error...
+}
+```
+
 ### Example: Update a Salesforce Record
 ```swift
 salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"])
@@ -99,6 +118,7 @@ salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Co
 }
 ```
 The `always` closure will be called regardless of success or failure elsewhere in the promise chain.
+
 ### Example: Querying
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
@@ -106,13 +126,26 @@ salesforce.query(soql: soql)
 ```
 See the next example for handling the query results.
 
+### Example: Execute Multiple Queries in Parallel
+You can execute several queries at once and wait for all to complete:
+```swift
+first {
+	salesforce.query(soql: ["SELECT Id, Name FROM Account", "SELECT Id, CreatedDate FROM Contact", "Select Id, Owner.Name FROM Lead"])
+}.then {
+	results: [QueryResult] -> () in
+	// Results are in the same order as the queries
+}.catch {
+	error in
+	// Handle the error
+}
+```
+
 ### Example: Chaining Asynchronous Requests
 Let's say we want to retrieve a random zip/postal code from a [custom Apex REST](https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST) resource, and then use that zip code in a query:
 ```swift
 // Chained asynch requests 
 first {
     // Make GET request of custom Apex REST resource
-    // (Enclosing this in a ‘first’ block is optional and can keep things neat.)
     salesforce.apexRest(path: "/MyApexResourceThatEmitsRandomZip")
 }.then {
     // Query accounts in that zip code
