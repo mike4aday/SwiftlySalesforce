@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 3.3.0 (Jan. 6, 2017)
+- Added overloaded `Salesforce.retrieve` method to retrieve multiple records in parallel
+- Added overloaded `Salesforce.query` method to execute multiple SOQL queries in parallel
+- Added overloaded `Salesforce.describe` method to retrieve metadata about multiple Salesforce objects in parallel
+- Additional documentation, tests and test coverage
+
 ## Version 3.2.0 (Dec. 14, 2016)
 - Added Salesforce.describe( ) method, and corresponding [model](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Pod/Classes/Model.swift) structs (ObjectDescription, FieldDescription, PicklistValue) for retrieving [object metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm). (Closes [issue #13](https://github.com/mike4aday/SwiftlySalesforce/issues/13).)
 - Additional tests and test coverage

@@ -130,6 +130,8 @@ public struct UserInfo: JSONBacking {
 	}
 }
 
+/// Salesforce object metadata
+/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
 public struct ObjectDescription: JSONBacking {
 	
 	public let json: [String : Any]
@@ -220,6 +222,8 @@ public struct ObjectDescription: JSONBacking {
 	}
 }
 
+/// Salesforce field metadata 
+/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
 public struct FieldDescription: JSONBacking {
 	
 	public let json: [String: Any]
