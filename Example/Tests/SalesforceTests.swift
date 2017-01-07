@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PromiseKit
 @testable import SwiftlySalesforce
 
 class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
@@ -78,6 +79,7 @@ class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 				queryResult -> () in
 				debugPrint(queryResult)
 				XCTAssertEqual(queryResult.records.count, 0)
+				XCTAssertEqual(queryResult.totalSize, 0)
 				XCTAssertTrue(queryResult.isDone)
 				XCTAssertNil(queryResult.nextRecordsPath)
 				exp.fulfill()
@@ -86,6 +88,29 @@ class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 				XCTFail("\(error)")
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItRunsMultipleQueries() {
+		
+		// Given
+		let soqls = ["SELECT Id FROM Account WHERE CreatedDate > NEXT_YEAR", "SELECT Id FROM Contact", "SELECT Id FROM Lead"]
+		
+		// When
+		let exp = expectation(description: "Query")
+		salesforce.query(soql: soqls)
+			.then {
+				// Then
+				result -> () in
+				debugPrint(result)
+				XCTAssertEqual(result.count, 3)
+				XCTAssertTrue(result[0].isDone)
+				XCTAssertEqual(result[0].totalSize, 0)
+				exp.fulfill()
+			}.catch {
+				error in
+				XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
 	}
 	
 	func testThatItRetrieves() {
@@ -117,6 +142,83 @@ class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 		waitForExpectations(timeout: 10.0, handler: nil)
 	}
 	
+	func testThatItRetrievesMultipleRecords() {
+		
+		// Given
+		let type = "Account"
+		let recordsToInsert = [
+			["Name": "Account 1"],
+			["Name": "Account 2"],
+			["Name": "Account 3"],
+			["Name": "Account 4"]
+		]
+		
+		// When
+		let exp = expectation(description: "Retrieve multiple records")
+		let promises = recordsToInsert.map { salesforce.insert(type: type, fields: $0) }
+		when(fulfilled: promises).then {
+			results in
+			return salesforce.retrieve(type: type, ids: results, fields: ["Id,Name,ShippingStreet"])
+		}.then {
+			// Then
+			result -> () in
+			debugPrint(result)
+			XCTAssertEqual(result.count, recordsToInsert.count)
+			exp.fulfill()
+		}.catch {
+			error in
+			XCTFail("\(error)")
+		}
+		
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+	
+	func testThatItFailsToRetrieve() {
+		
+		// Given
+		let type = "Account"
+		let id = "001xxxxxxxxxxxxxxx"
+		
+		// When
+		let exp = expectation(description: "Retrieve nonexistent \(type) record")
+		
+		first {
+			salesforce.retrieve(type: type, id: id)
+		}.then {
+			result -> () in
+			XCTFail()
+		}.catch {
+			error in
+			debugPrint(error)
+			exp.fulfill()
+		}
+	
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+	
+	func testThatItInserts() {
+		
+		// Given
+		let type = "Account"
+		let fields = [ "Name" : "Megacorp, Inc.", "BillingPostalCode": "12345"]
+		
+		// When
+		let exp = expectation(description: "Insert \(type) record")
+		first {
+			salesforce.insert(type: type, fields: fields)
+		}.then {
+			// Then
+			result -> () in
+			debugPrint(result)
+			XCTAssertTrue(result.hasPrefix("001"))
+			exp.fulfill()
+		}.catch {
+			error in
+			XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+	
 	func testThatItDescribes() {
 		
 		// Given
@@ -140,5 +242,65 @@ class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 		}
 		waitForExpectations(timeout: 10.0, handler: nil)
 	}
-
+	
+	func testThatItFailsToDescribe() {
+		// Given
+		let type = "A Nonexistent Object"
+		
+		// When
+		let exp = expectation(description: "Describe nonexistent object")
+		salesforce.describe(type: type)
+			.then {
+				// Then
+				desc -> () in
+				XCTFail()
+			}.catch {
+				error in
+				debugPrint(error)
+				exp.fulfill()
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
+		
+	}
+	
+	func testThatItDescribesMultipleObjects() {
+		
+		// Given
+		let types = ["Event", "Account", "Contact", "Lead", "Task"]
+		
+		// When 
+		let exp = expectation(description: "Describe multiple objects")
+		first {
+			salesforce.describe(types: types)
+		}.then {
+			result -> () in
+			XCTAssertEqual(result.count, types.count)
+			XCTAssertEqual(result.map { $0.name }, types)
+			exp.fulfill()
+		}.catch {
+			error in
+			XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+	
+	func testThatItFailsToDescribesMultipleObjects() {
+		
+		// Given
+		let types = ["Event", "XXXXXXXXX", "Contact", "Lead", "Task"]
+		
+		// When
+		let exp = expectation(description: "Describe multiple objects")
+		first {
+			salesforce.describe(types: types)
+			}.then {
+				result -> () in
+				XCTFail()
+			}.catch {
+				error in
+				debugPrint(error)
+				exp.fulfill()
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
 }
