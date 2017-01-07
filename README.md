@@ -1,4 +1,4 @@
-<img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="72%"/>
+<img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="76%"/>
 
 _Swiftly Salesforce_ is a framework for the rapid development of native iOS mobile apps that interact with the [Salesforce Platform](http://www.salesforce.com/platform/overview/).
 * Written entirely in [Swift](https://developer.apple.com/swift/) 3.
@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
 }
 ```
 Note the following in the above example:
+
 1. Your app delegate should implement `LoginDelegate`
 1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]
 1. Call `configureSalesforce()` and `handleRedirectURL()` as shown
@@ -92,7 +93,8 @@ You can retrieve multiple records in parallel, and wait for them all before proc
 ```swift
 first {
 	// (Enclosing this in a ‘first’ block is optional, and can keep things neat.)
-	salesforce.retrieve(type: "Account", ids: ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"], fields: ["Name", "BillingPostalCode"])
+	let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
+	salesforce.retrieve(type: "Account", ids: ids, fields: ["Name", "BillingPostalCode"])
 }.then {
 	records -> () in
 	for record in records {
@@ -130,10 +132,11 @@ salesforce.query(soql: soql).then {
 }
 ```
 
-You can also execute multiple queries at once and wait for all to complete:
+You can also execute multiple queries at once and wait for them all to complete before proceeding:
 ```swift
 first {
-	salesforce.query(soql: ["SELECT Id, Name FROM Account", "SELECT Id, CreatedDate FROM Contact", "Select Id, Owner.Name FROM Lead"])
+	let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
+	salesforce.query(soql: queries)
 }.then {
 	queryResults -> () in
 	// Results are in the same order as the queries
@@ -181,7 +184,7 @@ first {
     guard let userID = userInfo.userID else {
         throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
     }
-    let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDE 	R BY CreatedDate DESC"
+    let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
     return salesforce.query(soql: soql)
 }.then {
     // Parse JSON into Task instances
@@ -266,7 +269,7 @@ The great Swift frameworks leveraged by _Swiftly Salesforce_:
 * [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Resources
-If you're new to Swift, the Salesforce Platform, or the Salesforce REST API, you might find the following resources useful:
+If you're new to the Salesforce Platform or the Salesforce REST API, you might find the following resources useful:
 * [Salesforce REST API Developer's Guide][REST API]
 * [Salesforce App Cloud](http://www.salesforce.com/platform): aka the Salesforce Platform
 * [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
