@@ -53,7 +53,7 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
-	/// Asynchronsouly executes a SOQL query
+	/// Asynchronsouly executes a SOQL query.
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: SOQL query
 	/// - Returns: Promise of a QueryResult
@@ -67,6 +67,15 @@ open class Salesforce {
 			return try QueryResult(json: response)
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
+	}
+	
+	/// Asynchronsouly executes multiple SOQL queries.
+	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
+	/// - Parameter soql: Array of SOQL queries
+	/// - Returns: Promise of an array of QueryResults, in the same order as the "soql" parameter
+	open func query(soql: [String]) -> Promise<[QueryResult]> {
+		let promises = soql.map { query(soql: $0) }
+		return when(fulfilled: promises)
 	}
 	
 	/// Queries next batch of records returned by a SOQL query whose result is broken into multiple batches (i.e. paginated).
@@ -100,6 +109,16 @@ open class Salesforce {
 			return response
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
+	}
+	
+	/// Asynchronously retrieves multiple records of the same type, by ID
+	/// - Parameter type: The type of the records to retrieve, e.g. "Account", "Contact" or "MyCustomObject__c"
+	/// - Parameter ids: IDs of the records to retrieve. All records must be of the same type.
+	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
+	/// - Returns: Promise of an array of dictionaries, keyed by field names, and in the same order as the "ids" parameter
+	open func retrieve(type: String, ids: [String], fields: [String]? = nil) -> Promise<[[String: Any]]> {
+		let promises = ids.map { retrieve(type: type, id: $0, fields: fields) }
+		return when(fulfilled: promises)
 	}
 	
 	/// Asynchronously inserts a new record
@@ -159,9 +178,9 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
-	/// Asynchronously retrieves metadata information about a Salesforce object and its fields
+	/// Asynchronously retrieves metadata information about a Salesforce object and its fields.
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
-	/// - Parameter type: Type (i.e. object name)
+	/// - Parameter type: Object name
 	/// - Returns: Promise<ObjectDescription>
 	open func describe(type: String) -> Promise<ObjectDescription> {
 		let builder = {
@@ -173,6 +192,15 @@ open class Salesforce {
 			return ObjectDescription(json: response)
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
+	}
+	
+	/// Asynchronously retrieves metadata information for multiple Salesforce objects.
+	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
+	/// - Parameter types: Array of object names
+	/// - Returns: Promise<[ObjectDescription]>, a promise of an array of ObjectDescriptions, in the same order as the "types" parameter.
+	open func describe(types: [String]) -> Promise<[ObjectDescription]> {
+		let promises = types.map { describe(type: $0) }
+		return when(fulfilled: promises)
 	}
 	
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.
