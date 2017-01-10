@@ -13,9 +13,9 @@ You can be up and running in a few minutes by following these steps:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
-1. Add Swiftly Salesforce to your Xcode project; if you use [CocoaPods](http://www.cocoapods.org), add `pod SwiftlySalesforce` to your [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
-1. Configure your app delegate ([see appendix](#appendix))
-1. Register your Connected App's callback URL scheme with iOS ([see appendix](#appendix))
+1. Add Swiftly Salesforce to your Xcode project (if you use [CocoaPods](http://www.cocoapods.org), add `pod 'SwiftlySalesforce'` to your [Podfile](https://guides.cocoapods.org/syntax/podfile.html))
+1. Configure your app delegate ([example](#example-configure-your-app-delegate))
+1. Register your Connected App's callback URL scheme with iOS ([example](#example-register-your-connected-apps-callback-url-scheme-with-ios))
 
 ## Minimum requirements:
 * iOS 10
@@ -218,6 +218,63 @@ if let app = UIApplication.shared.delegate as? LoginDelegate {
 }
 ```
 
+### Example: Add Swiftly Salesforce to Your CocoaPods [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
+```
+target 'MyApp' do
+  use_frameworks!
+  pod 'SwiftlySalesforce'
+  # Another pod here
+end
+```
+
+### Example: Configure Your App Delegate
+```swift
+import UIKit
+import SwiftlySalesforce
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
+
+    var window: UIWindow?
+
+    /// Salesforce Connected App properties (replace with your own…)
+    let consumerKey = "<YOUR CONNECTED APP’S CONSUMER KEY HERE>"
+    let redirectURL = URL(string: "<YOUR CONNECTED APP’S REDIRECT URL HERE>")!
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
+        return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        handleRedirectURL(url: url)
+        return true
+    }
+}
+```
+Note the following in the above example:
+
+1. Your app delegate should implement `LoginDelegate`
+1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]
+1. Call `configureSalesforce()` and `handleRedirectURL()` as shown
+
+### Example: Register Your Connected App's Callback URL Scheme with iOS
+Upon successful OAuth2 authorization, Salesforce will redirect the Safari View Controller back to the callback URL that you specified in your Connected App settings, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the callback URL, and will pass it to your app's delegate.
+```xml
+<!-- ADD TO YOUR APP'S .PLIST FILE -->
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLName</key>
+    <string>SalesforceOAuth2CallbackURLScheme</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL) --></string>
+    </array>
+  </dict>
+</array>
+```
+
 ## Main Components of Swiftly Salesforce
 * [Salesforce.swift]: This is your Swift interface to the Salesforce Platform, and likely the only file you’ll refer to. It has methods to query, retrieve, update and delete records, and to access [custom Apex REST][Apex REST] endpoints.
 
@@ -250,64 +307,6 @@ Questions, suggestions, bug reports and code contributions welcome:
 * Twitter [@mike4aday]
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
 
-## Appendix
-
-### Add Swiftly Salesforce to Your CocoaPods [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
-```
-target 'MyApp' do
-  use_frameworks!
-  pod 'SwiftlySalesforce'
-  # Another pod here
-end
-```
-
-### Configure Your App Delegate
-```swift
-import UIKit
-import SwiftlySalesforce
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
-
-    var window: UIWindow?
-
-    /// Salesforce Connected App properties (replace with your own…)
-    let consumerKey = "<YOUR CONNECTED APP’S CONSUMER KEY HERE>"
-    let redirectURL = URL(string: "<YOUR CONNECTED APP’S REDIRECT URL HERE>")!
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
-        return true
-    }
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(url: url)
-        return true
-    }
-}
-```
-Note the following in the above example:
-
-1. Your app delegate should implement `LoginDelegate`
-1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]
-1. Call `configureSalesforce()` and `handleRedirectURL()` as shown
-
-### Register Your Connected App's Callback URL Scheme with iOS
-Upon successful OAuth2 authorization, Salesforce will redirect the Safari View Controller back to the callback URL that you specified in your Connected App settings, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the callback URL, and will pass it to your app's delegate.
-```xml
-<!-- ADD TO YOUR APP'S .PLIST FILE -->
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLName</key>
-    <string>SalesforceOAuth2CallbackURLScheme</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL) --></string>
-    </array>
-  </dict>
-</array>
-```
    [Alamofire]: <https://github.com/alamofire/alamofire>
    [PromiseKit]: <https://github.com/mxcl/PromiseKit>
    [OAuth2]: <https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com>
