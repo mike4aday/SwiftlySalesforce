@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 3.3.1 (Jan 10, 2017)
+Updated README
+
 ## Version 3.3.0 (Jan. 6, 2017)
 - Added overloaded `Salesforce.retrieve` method to retrieve multiple records in parallel
 - Added overloaded `Salesforce.query` method to execute multiple SOQL queries in parallel
