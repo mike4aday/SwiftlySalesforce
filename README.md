@@ -17,7 +17,7 @@ You can be up and running in a few minutes by following these steps:
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 1. Register your Connected App's callback URL scheme with iOS ([example](#example-register-your-connected-apps-callback-url-scheme-with-ios))
 
-## Minimum requirements:
+## Minimum requirements
 * iOS 10
 * Swift 3
 * Xcode 8
