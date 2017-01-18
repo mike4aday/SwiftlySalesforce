@@ -2,7 +2,7 @@ title: Swiftly Salesforce
 description: An easy-to-use framework for building native iOS apps with Swift and the Salesforce Platform
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-minimal
+theme: jekyll-theme-tactile
 
 gems:
   - jekyll-mentions
