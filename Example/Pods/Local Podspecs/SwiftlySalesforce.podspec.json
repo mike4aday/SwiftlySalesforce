@@ -1,7 +1,7 @@
 {
   "name": "SwiftlySalesforce",
-  "version": "3.3.1",
-  "summary": "An easy-to-use framework for rapid development of native iOS apps with Swift and the Salesforce Platform",
+  "version": "3.3.2",
+  "summary": "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform",
   "description": "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform. Simplifies Salesforce REST API calls, and OAuth2 authentication.",
   "homepage": "https://github.com/mike4aday/SwiftlySalesforce",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/mike4aday/SwiftlySalesforce.git",
-    "tag": "3.3.1"
+    "tag": "3.3.2"
   },
   "social_media_url": "https://twitter.com/mike4aday",
   "platforms": {
