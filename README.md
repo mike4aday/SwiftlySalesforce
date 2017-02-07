@@ -235,21 +235,21 @@ import UIKit
 import SwiftlySalesforce
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
 
     var window: UIWindow?
 
-    /// Salesforce Connected App properties (replace with your own…)
-    let consumerKey = "<YOUR CONNECTED APP’S CONSUMER KEY HERE>"
+    /// Salesforce Connected App properties (replace with your own…) /* 2 */
+    let consumerKey = "<YOUR CONNECTED APP’S CONSUMER KEY HERE>" 
     let redirectURL = URL(string: "<YOUR CONNECTED APP’S REDIRECT URL HERE>")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
+        configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL) /* 3 */
         return true
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(url: url)
+        handleRedirectURL(url: url) /* 3 */
         return true
     }
 }
