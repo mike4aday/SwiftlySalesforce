@@ -1,0 +1,35 @@
+PODS:
+  - Alamofire (4.3.0)
+  - Locksmith (3.0.0)
+  - PromiseKit (4.1.7):
+    - PromiseKit/Foundation (= 4.1.7)
+    - PromiseKit/QuartzCore (= 4.1.7)
+    - PromiseKit/UIKit (= 4.1.7)
+  - PromiseKit/CorePromise (4.1.7)
+  - PromiseKit/Foundation (4.1.7):
+    - PromiseKit/CorePromise
+  - PromiseKit/QuartzCore (4.1.7):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (4.1.7):
+    - PromiseKit/CorePromise
+  - SwiftlySalesforce (3.3.2):
+    - Alamofire (~> 4.0)
+    - Locksmith (~> 3.0)
+    - PromiseKit (~> 4.0)
+
+DEPENDENCIES:
+  - SwiftlySalesforce (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftlySalesforce:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
+  PromiseKit: 779f2e41faf62d854e7593026ddbcb0bb5c5002d
+  SwiftlySalesforce: ec07b3b6e4042527a873a666e93c0c5d62a9a6d4
+
+PODFILE CHECKSUM: 6a5cfa5f32ca1645b6ace30e1a5e00bece280cc9
+
+COCOAPODS: 1.2.0
