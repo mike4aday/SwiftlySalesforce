@@ -1,0 +1,3 @@
+"mxcl/PromiseKit" ~> 4.0
+"Alamofire/Alamofire" ~> 4.0
+"matthewpalmer/Locksmith" ~> 3.0

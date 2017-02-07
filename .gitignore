@@ -31,5 +31,3 @@ Carthage
 # `pod install` in .travis.yml
 #
 # Pods/
-Podfile.lock
-Example/Pods
