@@ -8,16 +8,18 @@ Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platf
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS]
 * Easy to install and update
 
-## How do I set up Swiftly Salesforce?
+## Quick Start
 You can be up and running in a few minutes by following these steps:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
-1. Add Swiftly Salesforce to your Xcode project (if you use [CocoaPods](http://www.cocoapods.org), add `pod 'SwiftlySalesforce'` to your [Podfile](https://guides.cocoapods.org/syntax/podfile.html))
+1. Add Swiftly Salesforce to your Xcode project
+    - [CocoaPods](http://www.cocoapods.org): add `pod 'SwiftlySalesforce'` to your [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
+    - [Carthage](https://github.com/Carthage/Carthage): add `github "mike4aday/SwiftlySalesforce"` to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile)
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 1. Register your Connected App's callback URL scheme with iOS ([example](#example-register-your-connected-apps-callback-url-scheme-with-ios))
 
-## Minimum requirements
+## Minimum Requirements
 * iOS 10
 * Swift 3
 * Xcode 8
