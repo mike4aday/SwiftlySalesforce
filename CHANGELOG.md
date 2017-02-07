@@ -1,6 +1,9 @@
 # Change Log
 
-## Version 3.3.1 (Jan 10, 2017)
+## Version 3.3.2 (Feb. 7, 2017)
+Support Carthage dependency manager
+
+## Version 3.3.1 (Jan. 10, 2017)
 Updated README
 
 ## Version 3.3.0 (Jan. 6, 2017)
