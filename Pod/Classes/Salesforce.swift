@@ -240,6 +240,17 @@ open class Salesforce {
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
+    
+    /// Use this method to register your device to receive push notifications from the Salesforce Universal Push Notification service
+    /// - Parameter devicetoken: the device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
+    /// - Returns: Promise of Any Type; result will either be success, or failure message
+    open func registerForSalesforceNotifications(devicetoken: String) -> Promise<Any> {
+        let headers = ["Content-Type" : "application/json"]
+        let params = ["ConnectionToken" : devicetoken, "ServiceType" : "Apple" ]
+        return custom(method: .post, path: "/services/data/v\(version)/sobjects/MobilePushServiceDevice", parameters: params, headers: headers)
+    }
+    
+
 	
 	fileprivate func request<T,U>(requestBuilder: @escaping (AuthData) throws -> URLRequest, jsonDeserializer: @escaping (U) throws -> T) -> Promise<T> {
 		
