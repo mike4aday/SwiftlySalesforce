@@ -248,7 +248,7 @@ open class Salesforce {
         let headers = ["Content-Type" : "application/json"]
         let params = ["ConnectionToken" : devicetoken, "ServiceType" : "Apple" ]
         return custom(method: .post, path: "/services/data/v\(version)/sobjects/MobilePushServiceDevice", parameters: params, headers: headers)
-    }
+    } 
     
 
 	
