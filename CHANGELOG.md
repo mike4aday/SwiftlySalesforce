@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 3.3.3 (Feb. 26, 2017)
+Support for registering with Salesforce notification services.
+(Thanks to [@quintonwall](https://github.com/quintonwall) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/24).)
+
 ## Version 3.3.2 (Feb. 7, 2017)
 Support Carthage dependency manager
 
