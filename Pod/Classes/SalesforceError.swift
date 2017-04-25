@@ -27,8 +27,10 @@ extension SalesforceError: CustomDebugStringConvertible {
 			return "Unsupported URL: \(url.absoluteString)"
 		case let .responseFailure(code, message, fields):
 			return "Salesforce response failure. Code: \(code). Message: \(message). Fields: \(fields ?? [])"
-		default:
-			return "\(self)"
+		case let .jsonDeserializationFailure(elementName, json):
+			return "JSON serialization failure. Elmement name: \(elementName ?? "None"). JSON: \(json)"
+		case .serverFailure:
+			return "Server failure"
 		}
 	}
 }
