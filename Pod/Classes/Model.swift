@@ -10,6 +10,13 @@ public protocol JSONBacking {
 	var json: [String: Any] { get }
 }
 
+extension JSONBacking {
+	
+	public func value(for key: String) -> Any? {
+		return json[key]
+	}
+}
+
 /// Holds the result of a SOQL query
 /// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm
 public struct QueryResult {
@@ -196,8 +203,14 @@ public struct ObjectDescription: JSONBacking {
 	}
 	
 	/// The first 3 characters of this object's record IDs
+	// TODO: "keyPrefix" could be null, so this property should be optional
+	// and will be modified accordingly in the next major release.
+	// Updated in v. 3.4.1: if keyPrefix is null, return empty string.
 	public var keyPrefix: String {
-		return json["keyPrefix"] as! String
+		guard let keyPrefix = json["keyPrefix"] as? String else {
+			return ""
+		}
+		return keyPrefix
 	}
 	
 	public var label: String {
