@@ -12,7 +12,7 @@ import Alamofire
 open class Salesforce {
 	
 	open static let shared = Salesforce()
-	open static let defaultVersion = "38.0" // Winter '17
+	open static let defaultVersion = "39.0" // Spring '17
 	
 	open let authManager = AuthManager()
 	open var version = Salesforce.defaultVersion
