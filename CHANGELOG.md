@@ -1,12 +1,12 @@
 # Change Log
 
 ## Version 3.5.0 (Apr. 26, 2017)
-- Updated the default Salesforce API version to 39.0 (Spring '17)
-- Added method `Salesforce.describeAll()` to retrieve metadata about all objects defined in the org ([issue #28](https://github.com/mike4aday/SwiftlySalesforce/issues/28).)
+- Updated the default Salesforce API version to 39.0 (Spring '17).
+- Added method `Salesforce.describeAll()` to retrieve metadata about all objects defined in the org ([issue #28](https://github.com/mike4aday/SwiftlySalesforce/issues/28)).
 - Bug fix; `ObjectDescription.keyPrefix` now returns an empty string if the retrieved object metadata value is null. (In the next major release `keyPrefix` will become an optional string.) ([issue #36](https://github.com/mike4aday/SwiftlySalesforce/issues/36))
 - `ObjectDescription.fields` now returns an empty dictionary if the retrieved metadata has no field-level information, as is the case with `Salesforce.describeAll()`. (In the next major release, `fields` will become an optional dictionary.)
-- Bug fix; `Salesforce.limits()` broke with the Salesforce Spring '17 release, which changed the JSON payload returned by the REST API's `limits` resource. ([Issue #37](https://github.com/mike4aday/SwiftlySalesforce/issues/37))
-- `Model.UserInfo` and `Model.QueryResult` now have public initializers ([issue #34](https://github.com/mike4aday/SwiftlySalesforce/issues/34).)
+- Bug fix; `Salesforce.limits()` broke with the Salesforce Spring '17 release, which changed the JSON payload returned by the REST API's `limits` resource ([issue #37](https://github.com/mike4aday/SwiftlySalesforce/issues/37)).
+- `Model.UserInfo` and `Model.QueryResult` now have public initializers ([issue #34](https://github.com/mike4aday/SwiftlySalesforce/issues/34)).
 
 ## Version 3.4.0 (Feb. 26, 2017)
 Support for registering with Salesforce notification services.
