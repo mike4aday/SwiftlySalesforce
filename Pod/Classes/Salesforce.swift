@@ -43,7 +43,7 @@ open class Salesforce {
 			return try Router.limits(authData: authData, version: self.version).asURLRequest()
 		}
 		let deserializer = {
-			(response: [String: [String: Int]]) throws -> [Limit] in
+			(response: [String: [String: Any]]) throws -> [Limit] in
 			var limits = [Limit]()
 			for (name, value) in response {
 				try limits.append(Limit(name: name, json: value))
@@ -178,7 +178,7 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
-	/// Asynchronously retrieves metadata information about a Salesforce object and its fields.
+	/// Asynchronously retrieves metadata about a Salesforce object and its fields.
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
 	/// - Parameter type: Object name
 	/// - Returns: Promise<ObjectDescription>
@@ -194,13 +194,34 @@ open class Salesforce {
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
-	/// Asynchronously retrieves metadata information for multiple Salesforce objects.
+	/// Asynchronously retrieves metadata for multiple Salesforce objects.
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
 	/// - Parameter types: Array of object names
 	/// - Returns: Promise<[ObjectDescription]>, a promise of an array of ObjectDescriptions, in the same order as the "types" parameter.
 	open func describe(types: [String]) -> Promise<[ObjectDescription]> {
 		let promises = types.map { describe(type: $0) }
 		return when(fulfilled: promises)
+	}
+	
+	/// Asynchronously retrieves object-level metadata about all objects defined in the org.
+	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
+	/// - Returns: Promise<[ObjectDescription]>
+	open func describeAll() -> Promise<[ObjectDescription]> {
+		let builder = {
+			(authData: AuthData) throws -> URLRequest in
+			return try Router.describeGlobal(authData: authData, version: self.version).asURLRequest()
+		}
+		let deserializer = {
+			(response: [String: Any]) throws -> [ObjectDescription] in
+			guard let jsonArray = response["sobjects"] as? [[String: Any]] else {
+				throw SalesforceError.jsonDeserializationFailure(elementName: "sobjects", json: response)
+			}
+			return jsonArray.map {
+				(json) -> ObjectDescription in
+				return ObjectDescription(json: json)
+			}
+		}
+		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
 	
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.
@@ -245,12 +266,10 @@ open class Salesforce {
     /// - Parameter devicetoken: the device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
     /// - Returns: Promise of Any Type; result will either be success, or failure message
     open func registerForSalesforceNotifications(devicetoken: String) -> Promise<Any> {
-        let headers = ["Content-Type" : "application/json"]
-        let params = ["ConnectionToken" : devicetoken, "ServiceType" : "Apple" ]
-        return custom(method: .post, path: "/services/data/v\(version)/sobjects/MobilePushServiceDevice", parameters: params, headers: headers)
-    } 
-    
-
+		let headers = ["Content-Type" : "application/json"]
+		let params = ["ConnectionToken" : devicetoken, "ServiceType" : "Apple" ]
+		return custom(method: .post, path: "/services/data/v\(version)/sobjects/MobilePushServiceDevice", parameters: params, headers: headers)
+    }
 	
 	fileprivate func request<T,U>(requestBuilder: @escaping (AuthData) throws -> URLRequest, jsonDeserializer: @escaping (U) throws -> T) -> Promise<T> {
 		
