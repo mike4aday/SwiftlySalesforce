@@ -132,7 +132,7 @@ public struct UserInfo: JSONBacking {
 	}
 	
 	/// Initializer
-	init(json: [String: Any]) {
+	public init(json: [String: Any]) {
 		self.json = json
 	}
 }
