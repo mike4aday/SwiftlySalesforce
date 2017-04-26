@@ -205,21 +205,25 @@ open class Salesforce {
 	
 	/// Asynchronously retrieves object-level metadata about all objects defined in the org.
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
-	/// - Returns: Promise<[ObjectDescription]>
-	open func describeAll() -> Promise<[ObjectDescription]> {
+	/// - Returns: Promise of a dictionary of ObjectDescriptions, keyed by object name
+	open func describeAll() -> Promise<[String: ObjectDescription]> {
 		let builder = {
 			(authData: AuthData) throws -> URLRequest in
 			return try Router.describeGlobal(authData: authData, version: self.version).asURLRequest()
 		}
 		let deserializer = {
-			(response: [String: Any]) throws -> [ObjectDescription] in
+			(response: [String: Any]) throws -> [String: ObjectDescription] in
 			guard let jsonArray = response["sobjects"] as? [[String: Any]] else {
 				throw SalesforceError.jsonDeserializationFailure(elementName: "sobjects", json: response)
 			}
-			return jsonArray.map {
-				(json) -> ObjectDescription in
-				return ObjectDescription(json: json)
+			var dict = [String: ObjectDescription]()
+			for json in jsonArray {
+				guard let name = json["name"] as? String else {
+					throw SalesforceError.jsonDeserializationFailure(elementName: "name", json: json)
+				}
+				dict[name] = ObjectDescription(json: json)
 			}
+			return dict
 		}
 		return request(requestBuilder: builder, jsonDeserializer: deserializer)
 	}
