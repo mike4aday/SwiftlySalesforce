@@ -26,7 +26,7 @@ public struct QueryResult {
 	public let records: [[String: Any]]
 	public let nextRecordsPath: String?
 	
-	init(json: [String: Any]) throws {
+	public init(json: [String: Any]) throws {
 		guard
 			let totalSize = json["totalSize"] as? Int,
 			let isDone = json["done"] as? Bool,
