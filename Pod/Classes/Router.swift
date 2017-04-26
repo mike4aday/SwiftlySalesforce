@@ -20,6 +20,7 @@ public enum Router {
 	case update(type: String, id: String, fields: [String: Any], authData: AuthData, version: String)
 	case delete(type: String, id: String, authData: AuthData, version: String)
 	case describe(type: String, authData: AuthData, version: String)
+	case describeGlobal(authData: AuthData, version: String)
 	case apexREST(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?, authData: AuthData)
 	case custom(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?, authData: AuthData)
 }
@@ -60,6 +61,9 @@ extension Router: URLRequestConvertible {
 			
 		case let .describe(type, authData, version):
 			return try build(authData: authData, path: "/services/data/v\(version)/sobjects/\(type)/describe")
+			
+		case let .describeGlobal(authData, version):
+			return try build(authData: authData, path: "/services/data/v\(version)/sobjects/")
 			
 		case let .apexREST(method, path, parameters, headers, authData):
 			return try build(authData: authData, method: method, path: "/services/apexrest\(path)", params: parameters, headers: headers)

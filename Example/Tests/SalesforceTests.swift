@@ -230,7 +230,7 @@ class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 			.then {
 				// Then
 				desc -> () in
-				debugPrint(desc)
+				//debugPrint(desc)
 				XCTAssertEqual(desc.name, "Account")
 				XCTAssertTrue(desc.fields.count > 0)
 				XCTAssertNotNil(desc.fields["Type"])
@@ -239,6 +239,29 @@ class SalesforceTests: XCTestCase, MockOAuth2Data, LoginDelegate {
 			}.catch {
 				error in
 				XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+	
+	func testThatItDescribesAll() {
+		
+		// Given
+		
+		// When
+		let exp = expectation(description: "Describe All (Describe Global)")
+		salesforce.describeAll()
+		.then {
+			(results: [String: ObjectDescription]) -> () in
+			guard let acct = results["Account"], acct.name == "Account", acct.keyPrefix == "001",
+			let contact = results["Contact"], contact.name == "Contact"
+			else {
+				XCTFail()
+				return
+			}
+			exp.fulfill()
+		}.catch {
+			error in
+			XCTFail("Failed to describe all. Error: \(error)")
 		}
 		waitForExpectations(timeout: 10.0, handler: nil)
 	}

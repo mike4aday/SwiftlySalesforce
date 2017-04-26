@@ -10,6 +10,13 @@ public protocol JSONBacking {
 	var json: [String: Any] { get }
 }
 
+extension JSONBacking {
+	
+	public func value(for key: String) -> Any? {
+		return json[key]
+	}
+}
+
 /// Holds the result of a SOQL query
 /// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm
 public struct QueryResult {
@@ -19,7 +26,7 @@ public struct QueryResult {
 	public let records: [[String: Any]]
 	public let nextRecordsPath: String?
 	
-	init(json: [String: Any]) throws {
+	public init(json: [String: Any]) throws {
 		guard
 			let totalSize = json["totalSize"] as? Int,
 			let isDone = json["done"] as? Bool,
@@ -44,8 +51,8 @@ public struct Limit {
 	public let maximum: Int
 	public let remaining: Int
 	
-	public init(name: String, json: [String: Int]) throws {
-		guard let remaining = json["Remaining"], let maximum = json["Max"] else {
+	public init(name: String, json: [String: Any]) throws {
+		guard let remaining = json["Remaining"] as? Int, let maximum = json["Max"] as? Int else {
 			throw SalesforceError.jsonDeserializationFailure(elementName: name, json: json)
 		}
 		self.name = name
@@ -125,7 +132,7 @@ public struct UserInfo: JSONBacking {
 	}
 	
 	/// Initializer
-	init(json: [String: Any]) {
+	public init(json: [String: Any]) {
 		self.json = json
 	}
 }
@@ -136,8 +143,14 @@ public struct ObjectDescription: JSONBacking {
 	
 	public let json: [String : Any]
 	
+	/// Field-level metadata
+	// TODO: "fields" could be missing in JSON, so this property should be optional
+	// and will be modified accordingly in the next major release.
+	// Updated in v.3.4.1: if "fields" is missing, return empty dictionary.
 	public var fields: [String: FieldDescription] {
-		let jsons = json["fields"] as! [[String: Any]]
+		guard let jsons = json["fields"] as? [[String: Any]] else {
+			return [:]
+		}
 		let fields = jsons.asDictionary {
 			(json) -> [String: FieldDescription] in
 			let field = FieldDescription(json: json)
@@ -196,8 +209,20 @@ public struct ObjectDescription: JSONBacking {
 	}
 	
 	/// The first 3 characters of this object's record IDs
+	// TODO: "keyPrefix" could be null, so this property should be optional
+	// and will be modified accordingly in the next major release.
+	// Updated in v.3.4.1: if keyPrefix is null, return empty string.
 	public var keyPrefix: String {
-		return json["keyPrefix"] as! String
+		guard let keyPrefix = json["keyPrefix"] as? String else {
+			return ""
+		}
+		return keyPrefix
+	}
+	
+	/// The first 3 characters of the ID for all records of this type.
+	/// Synonym for keyPrefix
+	public var idPrefix: String? {
+		return json["keyPrefix"] as? String
 	}
 	
 	public var label: String {
