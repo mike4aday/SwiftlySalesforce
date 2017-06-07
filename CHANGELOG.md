@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 3.5.1 (Jun. 7, 2017)
+Fixes [issue #29] (https://github.com/mike4aday/SwiftlySalesforce/issues/29).
+
 ## Version 3.5.0 (Apr. 26, 2017)
 - Updated the default Salesforce API version to 39.0 (Spring '17).
 - Added method `Salesforce.describeAll()` to retrieve metadata about all objects defined in the org ([issue #28](https://github.com/mike4aday/SwiftlySalesforce/issues/28)).
