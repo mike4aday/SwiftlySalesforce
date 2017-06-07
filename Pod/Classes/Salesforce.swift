@@ -315,9 +315,17 @@ open class Salesforce {
 				.validate {
 					(request, response, data) -> Request.ValidationResult in
 					switch response.statusCode {
-					case 401, 403:
+					case 401:
 						return .failure(SalesforceError.userAuthenticationRequired)
-					case 400, 404, 405, 415:
+					case 403:
+						// The identity resource will return 403 for bad OAuth token (i.e. authentication required)
+						if let str = data, let body = String(data: str, encoding: String.Encoding.utf8), "Bad_OAuth_Token".lowercased() == body.lowercased() {
+							return .failure(SalesforceError.userAuthenticationRequired)
+						}
+						else {
+							fallthrough
+						}
+					case 400, 403, 404, 405, 415:
 						// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/errorcodes.htm
 						if let data = data,
 							let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]],
