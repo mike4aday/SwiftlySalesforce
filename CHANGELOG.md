@@ -1,6 +1,6 @@
 # Change Log
 
-## Version 3.5.2 (Jun. 17, 2017)
+## Version 3.6.0 (Jun. 17, 2017)
 Updated the default Salesforce API version to 40.0 (Summer '17)
 
 ## Version 3.5.1 (Jun. 7, 2017)
