@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-  s.version          = "3.5.2"
+  s.version          = "3.6.0"
   s.summary          = "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform"
 
 
