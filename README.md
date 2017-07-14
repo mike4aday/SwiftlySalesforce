@@ -52,8 +52,9 @@ And you can add a closure that will be called later, when the promise is fulfill
 ```swift
 promise.then {
     queryResult in
-    for record in queryResult.records {		
-        // Parse JSON dictionary of record fields & values, and do interesting stuff…
+    for (record: Record) in queryResult.records {		
+        debugPrint(record.id)
+	// Do other interesting stuff with the record
     }
 }
 ```
@@ -67,7 +68,7 @@ first {
 }.then {
     records -> () in
     for record in records {
-        if let name = record["Name"] as? String {
+        if let name = record.name as? String {
             debugPrint(name)
 	}
     }
@@ -140,6 +141,32 @@ first {
 }
 ```
 You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, or when just the first completes, or when any one operation fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
+
+### Example: Retrieve a User's Photo
+```		
+import PromiseKit
+// ...
+/// "first" block is an optional way to make chained calls easier to read...
+first {
+    salesforce.identity()
+}.then {
+    (identity) -> Promise<UIImage> in
+    if let photoURL = identity.photoURL {
+        return salesforce.fetchImage(url: photoURL)
+    }
+    else {
+        return Promise(value: defaultImage)
+    }
+}.then {
+    image in
+    self.photoView.image = image
+}.always {
+    self.refreshControl?.endRefreshing()
+}.catch {
+    (error) -> () in
+    // Handle any errors
+}
+```
 
 ### Example: Handling Errors
 The following code is adapted from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
