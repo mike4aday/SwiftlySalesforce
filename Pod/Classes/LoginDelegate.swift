@@ -10,9 +10,8 @@ import SafariServices
 import PromiseKit
 import Alamofire
 
-public typealias LoginResult = Alamofire.Result<AuthData>
 
-public protocol LoginDelegate {
+public protocol LoginDelegate: class {
 	func login(url: URL) throws
 }
 
@@ -49,11 +48,11 @@ extension LoginDelegate {
 	public func login(url: URL) throws {
 		
 		guard !loggingIn else {
-			throw SalesforceError.invalidity(message: "Already logging in!")
+			throw ApplicationError.invalidState(message: "Already logging in!")
 		}
 		
 		guard let window = UIApplication.shared.keyWindow else {
-			throw SalesforceError.invalidity(message: "No valid window!")
+			throw ApplicationError.invalidState(message: "No key window!")
 		}
 		
 		// Replace current root view controller with Safari view controller for login
@@ -65,44 +64,30 @@ extension LoginDelegate {
 	/// Handles the redirect URL returned by Salesforce after OAuth2 authentication and authorization.
 	/// Restores the root view controller that was replaced by the Salesforce-hosted login web form
 	/// - Parameter url: URL returned by Salesforce after OAuth2 authentication & authorization
-	public func handleRedirectURL(url: URL) {
+	/// - Parameter connectedApp: Connected App involved in the current OAuth2 authentication
+	public func handleRedirectURL(_ url: URL, for connectedApp: ConnectedApp) {
 		
-		var result:LoginResult
-		
-		// Note: docs are wrong - error information may be in URL fragment *or* in query string...
-		if let urlEncodedString = url.fragment ?? url.query, let authData = AuthData(urlEncodedString: urlEncodedString) {
-			result = .success(authData)
-		}
-		else {
-			// Can't make sense of the redirect URL
-			result = .failure(SalesforceError.unsupportedURL(url: url))
-		}
-		salesforce.authManager.loginCompleted(result: result)
+		connectedApp.loginCompleted(redirectURL: url)
 		
 		// Restore the original root view controller
 		if let window = UIApplication.shared.keyWindow, let currentRootVC = window.rootViewController as? LoginViewController, let replacedRootVC = currentRootVC.replacedRootViewController {
 			window.rootViewController = replacedRootVC
 		}
-
-	}
-	
-	@available(*, deprecated: 3.1.0, message: "Parameter 'redirectURL' renamed to 'url.' Call handleRedirectURL(url: URL) instead.")
-	public func handleRedirectURL(redirectURL: URL) {
-		return handleRedirectURL(url: redirectURL)
 	}
 	
 	/// Call this to initiate logout process.
 	/// Revokes OAuth2 refresh and/or access token, then replaces
 	/// the current root view controller with a Safari view controller for login
+	/// - Parameter connectedApp: Connected App from which the current user will log out
 	/// - Returns: Promise<Void>; chain to this for custom post-logout actions
-	public func logout() -> Promise<Void> {
+	public func logout(from connectedApp: ConnectedApp) -> Promise<Void> {
 		return Promise<Void> {
 			fulfill, reject in
 			firstly {
-				salesforce.authManager.revoke()
+				connectedApp.revoke()
 			}.then {
 				() -> () in
-				if let loginURL = try? salesforce.authManager.loginURL(), let window = UIApplication.shared.keyWindow {
+				if let loginURL = try? connectedApp.loginURL(), let window = UIApplication.shared.keyWindow {
 					// Replace current root view controller with Safari view controller for login
 					let loginVC = SafariLoginViewController(url: loginURL)
 					loginVC.replacedRootViewController = window.rootViewController

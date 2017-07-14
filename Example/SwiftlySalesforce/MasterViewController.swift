@@ -2,15 +2,16 @@
 //  MasterViewController.swift
 //  Example for SwiftlySalesforce
 //
-//  Created by Michael Epstein on 10/21/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
-//
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2017. All rights reserved.
 
 import UIKit
 import SwiftlySalesforce
 
 final class MasterViewController: UITableViewController {
 	
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var photoView: UIImageView!
 	@IBOutlet weak var statusLabel: UILabel!
 	@IBOutlet weak var logoutButton: UIBarButtonItem!
 	
@@ -37,9 +38,11 @@ final class MasterViewController: UITableViewController {
 	
 	@IBAction func logoutButtonPressed(sender: AnyObject) {
 		if let app = UIApplication.shared.delegate as? LoginDelegate {
-			app.logout().then {
+			app.logout(from: salesforce.connectedApp).then {
 				() -> () in
 				TaskStore.shared.clear()
+				self.photoView.image = nil
+				self.nameLabel.text = nil
 				self.tableView.reloadData()
 				return
 			}.catch {
@@ -52,19 +55,31 @@ final class MasterViewController: UITableViewController {
 	/// Asynchronously load current user's tasks
 	func loadData(refresh: Bool = false) {
 		
-		statusLabel.text = "Loading tasks"
+		statusLabel.text = "Loading tasks..."
 		self.refreshControl?.isEnabled = false
 		
-		// "first" is an optional way to make chained calls look better...
+		/// "first" is an optional way to make chained calls look better...
 		first {
-			TaskStore.shared.getTasks(refresh: refresh)
+			// Note we're running 2 tasks in parallel here...
+			fulfill(TaskStore.shared.getTasks(refresh: refresh), salesforce.identity())
+		}.then {
+			(_, identity) -> Promise<UIImage> in
+			self.nameLabel.text = identity.displayName
+			if let photoURL = identity.photoURL {
+				return salesforce.fetchImage(url: photoURL)
+			}
+			else {
+				throw TaskForceError.generic(code: -231, message: "No image URL!")
+			}
+		}.then {
+			image in
+			self.photoView.image = image
 		}.always {
-			() -> () in
 			self.refreshControl?.endRefreshing()
 			self.refreshControl?.isEnabled = true
-			self.statusLabel.text = "You have \(TaskStore.shared.cache?.count ?? 0) tasks. Pull to refresh."
 			self.tableView.reloadData()
-			self.logoutButton.isEnabled = salesforce.authManager.authData != nil
+			self.statusLabel.text = "You have \(TaskStore.shared.cache?.count ?? 0) tasks. Pull to refresh."
+			self.logoutButton.isEnabled = salesforce.connectedApp.accessToken != nil
 		}.catch {
 			// Handle any errors
 			(error) -> () in

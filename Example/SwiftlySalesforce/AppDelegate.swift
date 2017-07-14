@@ -8,28 +8,31 @@
 
 import UIKit
 import SwiftlySalesforce
-import UserNotifications 
+import UserNotifications
+
+var salesforce: Salesforce!
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, LoginDelegate {
 
+	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkik_rz_GVRYmFpDR6yDaUrEfpC0vKqisPMY1klyH78G9Ockl2p7IJuqRk07nQ"
+	let redirectURL = URL(string: "taskforce://authorized")!
+	
 	var window: UIWindow?
 	
-	/// Salesforce Connected App properties
-	let consumerKey = "<YOUR SALESFORCE CONNECTED APP'S CONSUMER KEY>" // Replace with your own
-	let redirectURL = URL(string: "scheme://redirect")! // Replace with your own
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL)
-        
+		
+		salesforce = Salesforce(connectedApp: ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self))
+		
         //uncomment if you want to receive push notifications, including those 
         //from salesforce's universal notification service
         //registerForRemoteNotification()
+		
 		return true
 	}
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-		handleRedirectURL(url: url)
+		handleRedirectURL(url, for: salesforce.connectedApp) 
 		return true
 	}
     
@@ -39,10 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        salesforce.registerForSalesforceNotifications(devicetoken: deviceTokenString)
+        salesforce.registerForNotifications(deviceToken: deviceTokenString)
             .then {
                 (result) -> () in
-                print("successfully registered for salesforce notifications")
+                print("Successfully registered for salesforce notifications")
             }.catch {
                 error in
                 print(error)

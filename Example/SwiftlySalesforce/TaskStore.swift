@@ -30,10 +30,7 @@ public final class TaskStore {
 				}.then {
 					// Get tasks owned by user
 					userInfo in
-					guard let userID = userInfo.userID else {
-						throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
-					}
-					let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
+					let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userInfo.userID)' ORDER BY CreatedDate DESC"
 					return salesforce.query(soql: soql)
 				}.then {
 					// Parse JSON into Task instances and cache in memory

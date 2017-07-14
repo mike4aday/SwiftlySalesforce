@@ -1,0 +1,12 @@
+{
+	"city" : "Paris",
+	"country" : "France",
+	"countryCode" : "FR",
+	"geocodeAccuracy" : "Street",
+	"latitude" : 47.84627258324638,
+	"longitude" : 3.3549643597681116,
+	"postalCode" : "75251",
+	"state" : null,
+	"stateCode" : null,
+	"street" : "21 Place Jussieu"
+}

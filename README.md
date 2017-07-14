@@ -121,7 +121,7 @@ Let's say we want to retrieve a random zip/postal code from a [custom Apex REST]
 // Chained asynch requests
 first {
     // Make GET request of custom Apex REST resource
-    salesforce.apexRest(path: "/MyApexResourceThatEmitsRandomZip")
+    salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
 }.then {
     // Query accounts in that zip code
     result in
@@ -234,6 +234,9 @@ end
 import UIKit
 import SwiftlySalesforce
 
+// Global variable
+var salesforce: Salesforce!
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
 
@@ -244,12 +247,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
     let redirectURL = URL(string: "<YOUR CONNECTED APP’S REDIRECT URL HERE>")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        configureSalesforce(consumerKey: consumerKey, redirectURL: redirectURL) /* 3 */
+		salesforce = Salesforce(connectedApp: ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)) /* 3 */
         return true
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(url: url) /* 3 */
+        handleRedirectURL(url: url) /* 4 */
         return true
     }
 }
@@ -258,7 +261,8 @@ Note the following in the above example:
 
 1. Your app delegate should implement `LoginDelegate`
 1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]
-1. Call `configureSalesforce()` and `handleRedirectURL()` as shown
+1. Create a `Salesforce` instance with your Connected App's values
+1. Call `handleRedirectURL()` as shown
 
 ### Example: Register Your Connected App's Callback URL Scheme with iOS
 Upon successful OAuth2 authorization, Salesforce will redirect the Safari View Controller back to the callback URL that you specified in your Connected App settings, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the callback URL, and will pass it to your app's delegate.
@@ -268,10 +272,10 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 <array>
   <dict>
     <key>CFBundleURLName</key>
-    <string>SalesforceOAuth2CallbackURLScheme</string>
+    <string>SalesforceOAuth2</string>
     <key>CFBundleURLSchemes</key>
     <array>
-      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL) --></string>
+      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL! Must be custom scheme, not https) --></string>
     </array>
   </dict>
 </array>
@@ -280,13 +284,13 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 ## Main Components of Swiftly Salesforce
 * [Salesforce.swift]: This is your Swift interface to the Salesforce Platform, and likely the only file you’ll refer to. It has methods to query, retrieve, update and delete records, and to access [custom Apex REST][Apex REST] endpoints.
 
-* [Router.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important and commonly-used Salesforce [REST API] endpoints are represented as enum values, including one for [custom Apex REST][Apex REST] endpoints.
+* [Resource.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important and commonly-used Salesforce [REST API] endpoints are represented as enum values, including one for [custom Apex REST][Apex REST] endpoints.
 
-* [AuthData.swift]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
+* [OAuth2Result.swift]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
 
 * [Extensions.swift]: Swift extensions used by other components of Swiftly Salesforce. The extensions that you'll likely use in your own code are `DateFormatter.salesforceDateTime`, and `DateFormatter.salesforceDate`, for converting Salesforce date/time and date values to and from strings for JSON serialization.
 
-* [AuthManager.swift]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the AuthManager will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then AuthManager will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their credentials	 are never handled by the client application.
+* [ConnectedApp.swift]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the ConnectedApp instance will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then ConnectedApp will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their credentials are never handled by the client application.
 
 ## Dependent Frameworks
 The great Swift frameworks leveraged by Swiftly Salesforce:
@@ -326,7 +330,7 @@ Questions, suggestions, bug reports and code contributions welcome:
    [Mobile SDK for iOS]: <https://github.com/forcedotcom/SalesforceMobileSDK-iOS>
 
    [Salesforce.swift]: <Pod/Classes/Salesforce.swift>
-   [Router.swift]: <Pod/Classes/Router.swift>
-   [AuthData.swift]: <Pod/Classes/AuthData.swift>
+   [Resource.swift]: <Pod/Classes/Resource.swift>
+   [OAuth2Result.swift]: <Pod/Classes/OAuth2Result.swift>
    [Extensions.swift]: <Pod/Classes/Extensions.swift>
-   [AuthManager.swift]: <Pod/Classes/AuthManager.swift>
+   [ConnectedApp.swift]: <Pod/Classes/ConnectedApp.swift>
