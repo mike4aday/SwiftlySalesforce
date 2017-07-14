@@ -51,29 +51,29 @@ let promise = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 And you can add a closure that will be called later, when the promise is fulfilled:
 ```swift
 promise.then {
-	queryResult in
-	for record in queryResult.records {
-		// Parse JSON dictionary of record fields & values, and do interesting stuff…
-	}
+    queryResult in
+    for record in queryResult.records {		
+        // Parse JSON dictionary of record fields & values, and do interesting stuff…
+    }
 }
 ```
 
 You can retrieve multiple records in parallel, and wait for them all before proceeding:
 ```swift
 first {
-	// (Enclosing this in a ‘first’ block is optional, and can keep things neat.)
-	let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
-	salesforce.retrieve(type: "Account", ids: ids, fields: ["Name", "BillingPostalCode"])
+    // (Enclosing this in a ‘first’ block is optional, and can keep things neat.)
+    let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
+    salesforce.retrieve(type: "Account", ids: ids, fields: ["Name", "BillingPostalCode"])
 }.then {
-	records -> () in
-	for record in records {
-		if let name = record["Name"] as? String {
-			debugPrint(name)
-		}
+    records -> () in
+    for record in records {
+        if let name = record["Name"] as? String {
+            debugPrint(name)
 	}
+    }
 }.catch {
-	error in
-	// Handle error...
+    error in
+    // Handle error...
 }
 ```
 
@@ -81,10 +81,10 @@ first {
 ```swift
 salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"])
 .then {
-	(_) -> () in
-	// Update the local model
+    (_) -> () in
+    // Update the local model
 }.always {
-	// Update the UI
+    // Update the UI
 }
 ```
 The `always` closure will be called regardless of success or failure elsewhere in the promise chain.
@@ -104,14 +104,14 @@ salesforce.query(soql: soql).then {
 You can also execute multiple queries at once and wait for them all to complete before proceeding:
 ```swift
 first {
-	let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
-	salesforce.query(soql: queries)
+    let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
+    salesforce.query(soql: queries)
 }.then {
-	queryResults -> () in
-	// Results are in the same order as the queries
+    queryResults -> () in
+    // Results are in the same order as the queries
 }.catch {
-	error in
-	// Handle the error
+    error in
+    // Handle the error
 }
 ```
 
