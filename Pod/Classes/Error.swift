@@ -13,12 +13,12 @@ public enum SalesforceError: Error {
 	case unsupportedURL(url: URL)
 }
 
-enum SerializationError: Error {
+public enum SerializationError: Error {
 	case missing(String)
 	case invalid(Any, message: String?)
 }
 
-enum ApplicationError: Error {
+public enum ApplicationError: Error {
 	case invalidState(message: String)
 	case invalidArgument(message: String)
 }
