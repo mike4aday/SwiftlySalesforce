@@ -1,9 +1,5 @@
-#if os(Linux)
 import Foundation
 import Dispatch
-#else
-import Foundation.NSProgress
-#endif
 
 private func _when<T>(_ promises: [Promise<T>]) -> Promise<Void> {
     let root = Promise<Void>.pending()
@@ -13,20 +9,14 @@ private func _when<T>(_ promises: [Promise<T>]) -> Promise<Void> {
         return root.promise
     }
 
-#if !PMKDisableProgress
-#if os(Linux)
-    let progress = NSProgress(totalUnitCount: Int64(promises.count))
-    progress.cancellable = false
-    progress.pausable = false
+#if PMKDisableProgress || os(Linux)
+    var progress: (completedUnitCount: Int, totalUnitCount: Int) = (0, 0)
 #else
     let progress = Progress(totalUnitCount: Int64(promises.count))
     progress.isCancellable = false
     progress.isPausable = false
-#endif //Linux
-#else
-    var progress: (completedUnitCount: Int, totalUnitCount: Int) = (0, 0)
 #endif
-    
+
     let barrier = DispatchQueue(label: "org.promisekit.barrier.when", attributes: .concurrent)
 
     for promise in promises {
@@ -63,9 +53,9 @@ private func _when<T>(_ promises: [Promise<T>]) -> Promise<Void> {
          //…
      }.catch { error in
          switch error {
-         case NSURLError.NoConnection:
+         case URLError.notConnectedToInternet:
              //…
-         case CLError.NotAuthorized:
+         case CLError.denied:
              //…
          }
      }

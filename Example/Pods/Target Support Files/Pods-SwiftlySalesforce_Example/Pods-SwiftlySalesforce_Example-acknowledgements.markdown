@@ -73,7 +73,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## SwiftlySalesforce
 
-Copyright (c) 2016 Michael Epstein <@mike4aday>
+Copyright (c) 2016-2017 Michael Epstein <@mike4aday>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

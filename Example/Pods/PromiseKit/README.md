@@ -2,7 +2,7 @@
 
 ![badge-pod] ![badge-languages] ![badge-pms] ![badge-platforms] ![badge-mit]
 
-[简体中文](README.zh_CN.md)
+[繁體中文](README.zh_Hant.md) [简体中文](README.zh_CN.md)
 
 ---
 
@@ -15,7 +15,7 @@ UIApplication.shared.isNetworkActivityIndicatorVisible = true
 firstly {
     when(URLSession.dataTask(with: url).asImage(), CLLocationManager.promise())
 }.then { image, location -> Void in
-    self.imageView.image = image;
+    self.imageView.image = image
     self.label.text = "\(location)"
 }.always {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -25,7 +25,7 @@ firstly {
 ```
 
 PromiseKit is a thoughtful and complete implementation of promises for any
-platform with a `swiftc`, it has *excellent* Objective-C bridging and
+platform with a `swiftc` (indeed, this includes *Linux*), it has *excellent* Objective-C bridging and
 *delightful* specializations for iOS, macOS, tvOS and watchOS.
 
 # Quick Start
@@ -212,8 +212,7 @@ For [AFNetworking] we recommend [csotiriou/AFNetworking].
 
 # Need to convert your codebase to Promises?
 
-[Hire me](mailto:mxcl@me.com), I have years of experience with Promises in iOS codebases and 10 years of professional experience developing mobile apps.
-
+From experience it really improves the robustness of your app, feel free to ask us how to go about it.
 
 # Support
 
