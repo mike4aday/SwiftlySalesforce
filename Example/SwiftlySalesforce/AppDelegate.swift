@@ -15,8 +15,8 @@ var salesforce: Salesforce!
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, LoginDelegate {
 
-	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkik_rz_GVRYmFpDR6yDaUrEfpC0vKqisPMY1klyH78G9Ockl2p7IJuqRk07nQ"
-	let redirectURL = URL(string: "taskforce://authorized")!
+	let consumerKey = "<*** Your Connected App's Consumer Key ***>"
+	let redirectURL = URL(string: "<*** Your Connected App's redirect URL ***>")!
 	
 	var window: UIWindow?
 	
