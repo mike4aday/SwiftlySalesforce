@@ -16,18 +16,35 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 	var salesforce: Salesforce!
 	
 	override func setUp() {
+		
 		super.setUp()
+		
 		config = readPropertyList(fileName: "OAuth2")
 		let consumerKey = config["ConsumerKey"] as! String
 		let redirectURL = URL(string: config["RedirectURL"] as! String)!
-		let accessToken = config["AccessToken"] as! String
-		let refreshToken = config["RefreshToken"] as! String
-		let identityURL = URL(string: config["IdentityURL"] as! String)!
-		let instanceURL = URL(string: config["InstanceURL"] as! String)!
-		let connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self, storeKey: nil)
-		let oauth2Result = OAuth2Result(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: refreshToken)
-		connectedApp.authData = oauth2Result
+		let key = OAuth2ResultStore.Key(userID: "TEST_USER_ID", orgID: "TEST_ORG_ID", consumerKey: consumerKey)
+		let connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self, storeKey: key)
+
+		if let authData = OAuth2ResultStore.retrieve(key: key) {
+			connectedApp.authData = authData
+		}
+		else {
+			let accessToken = config["AccessToken"] as! String
+			let refreshToken = config["RefreshToken"] as! String
+			let identityURL = URL(string: config["IdentityURL"] as! String)!
+			let instanceURL = URL(string: config["InstanceURL"] as! String)!
+			connectedApp.authData = OAuth2Result(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: refreshToken)
+		}
 		salesforce = Salesforce(connectedApp: connectedApp)
+	}
+	
+	override func tearDown() {
+		
+		super.tearDown()
+		// Uncomment lines below to force refresh with each request
+		//let consumerKey = config["ConsumerKey"] as! String
+		//let key = OAuth2ResultStore.Key(userID: "TEST_USER_ID", orgID: "TEST_ORG_ID", consumerKey: consumerKey)
+		//try! OAuth2ResultStore.clear(key: key)
 	}
 	
 	func testThatItGetsIdentity() {
@@ -35,7 +52,6 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		salesforce.identity()
 			.then {
 				identity -> () in
-				debugPrint(identity)
 				XCTAssertEqual(identity.userID, self.salesforce.connectedApp.authData!.userID)
 				exp.fulfill()
 			}.catch {
