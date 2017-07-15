@@ -7,7 +7,7 @@ Highlights of changes and improvements:
 - `Salesforce` now instantiated with new `ConnectedApp` class
 - Supports switching among multiple users and securely storing their access & refresh tokens
 - `Salesforce.apexREST` method renamed `Salesforce.apex`. 
-- New `Salesforce.getImage` methods to download relatively-small images, such as user thumbnails or Contact photos ([issue #33](https://github.com/mike4aday/SwiftlySalesforce/issues/33) and ([issue #35](https://github.com/mike4aday/SwiftlySalesforce/issues/35)))
+- New `Salesforce.getImage` methods to download relatively-small images, such as user thumbnails or Contact photos ([issue #33](https://github.com/mike4aday/SwiftlySalesforce/issues/33) and [issue #35](https://github.com/mike4aday/SwiftlySalesforce/issues/35))
 - New `Address` struct to hold standard, compound address fields, including longitude and latitude ([issue #38](https://github.com/mike4aday/SwiftlySalesforce/issues/38) and ([issue #39](https://github.com/mike4aday/SwiftlySalesforce/issues/39)))
 
 ## Version 3.6.0 (Jun. 17, 2017)
