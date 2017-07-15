@@ -170,7 +170,7 @@ first {
 }.then {
     queryResult in
     for record in queryResult.records {
-        if let name = record["Name"] as? String {
+        if let name = record.name {
           print("Account name = \(name)")
         }
     }
