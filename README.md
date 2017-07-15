@@ -68,7 +68,7 @@ Note the following in the above example:
 1. Your app delegate should implement `LoginDelegate`.
 1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]. Note that your redirect URL should use a custom scheme, not http or https, e.g. `myapp://go`.
 1. Create a `Salesforce` instance with your Connected App's values. In the above example, `salesforce` is an implicitly-unwrapped, optional, global variable; you could also inject a `Salesforce` instance into your root view controller, for example, instead of using a global variable.
-1. Call `handleRedirectURL()` as shown. The method will be called at the conclusion of the OAuth2 user-agent flow, when Salesforce redirects the user back to your app.
+1. Add a call to `handleRedirectURL()` as shown. iOS will invoke it at the conclusion of the OAuth2 user-agent flow, when Salesforce redirects the user back to your app.
 
 ### Example: Retrieve Salesforce Records
 The following will retrieve all the fields for an account record:
