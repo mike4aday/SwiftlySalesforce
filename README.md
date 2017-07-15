@@ -157,13 +157,13 @@ Let's say we want to retrieve a random zip/postal code from a [custom Apex REST]
 ```swift
 // Chained asynch requests
 first {
-    // Make GET request of custom Apex REST resource
+    // Make GET request of custom Apex REST resource that returns a zip code as a string
     salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
 }.then {
     // Query accounts in that zip code
-    result in
-    guard let zip = result["zip"] as? String else {
-        throw TaskForceError.generic(100, “Can’t get random zip code from our custom REST endpoint!”)
+    (result: Data) -> Promise<QueryResult> in
+    guard let zip = String(data: result, encoding: .utf8) else {
+        throw TaskForceError.generic(100, “Can’t get random zip code from our custom Apex REST endpoint!”)
     }
     let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
     return salesforce.query(soql: soql)
