@@ -52,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
     let redirectURL = URL(string: "<YOUR CONNECTED APP’S REDIRECT URL HERE>")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        salesforce = Salesforce(connectedApp: ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)) /* 3 */
+        let connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)
+        salesforce = Salesforce(connectedApp: connectedApp) /* 3 */
         return true
     }
 
