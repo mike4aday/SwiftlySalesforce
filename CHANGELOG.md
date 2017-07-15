@@ -3,13 +3,12 @@
 ## Version 4.0.0 (July 14, 2017)
 This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
 Highlights of changes and improvements:
-- Removed the `salesforce` singleton
+- Removed the `salesforce` singleton (you could still instantiate your own global `salesforce` variable, if you like; see (example)[https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/AppDelegate.swift])
 - `Salesforce` now instantiated with new `ConnectedApp` class
 - Supports switching among multiple users and securely storing their access & refresh tokens
 - `Salesforce.apexREST` method renamed `Salesforce.apex`. 
-- New `Salesforce.getImage` methods to download relatively-small images such as user thumbnails or contact photos ([issue #33](https://github.com/mike4aday/SwiftlySalesforce/issues/33) and ([issue #35](https://github.com/mike4aday/SwiftlySalesforce/issues/35)))
+- New `Salesforce.getImage` methods to download relatively-small images, such as user thumbnails or Contact photos ([issue #33](https://github.com/mike4aday/SwiftlySalesforce/issues/33) and ([issue #35](https://github.com/mike4aday/SwiftlySalesforce/issues/35)))
 - New `Address` struct to hold standard, compound address fields, including longitude and latitude ([issue #38](https://github.com/mike4aday/SwiftlySalesforce/issues/38) and ([issue #39](https://github.com/mike4aday/SwiftlySalesforce/issues/39)))
-
 
 ## Version 3.6.0 (Jun. 17, 2017)
 Updated the default Salesforce API version to 40.0 (Summer '17)
