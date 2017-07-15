@@ -130,7 +130,7 @@ The `always` closure will be called regardless of success or failure elsewhere i
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
 salesforce.query(soql: soql).then {
-  queryResult -> () in
+  (queryResult: QueryResult) -> () in
   // Handle the QueryResult
 }.catch {
   error in
@@ -144,7 +144,7 @@ first {
     let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
     salesforce.query(soql: queries)
 }.then {
-    queryResults -> () in
+    (queryResults: [QueryResult]) -> () in
     // Results are in the same order as the queries
 }.catch {
     error in
