@@ -4,7 +4,7 @@
 This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
 Highlights of changes and improvements:
 - Removed the `salesforce` singleton (you could still instantiate your own global `salesforce` variable, if you like; see [example](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/AppDelegate.swift))
-- `Salesforce` now instantiated with new `ConnectedApp` class. See [README](./README.md/configure-your-app-delegate).
+- `Salesforce` now instantiated with new `ConnectedApp` class. See [README](./README.md/example-configure-your-app-delegate).
 - Supports switching among multiple users and securely storing their access & refresh tokens
 - `Salesforce.apexREST` method renamed `Salesforce.apex`. 
 - New `Salesforce.getImage` methods to download relatively-small images, such as user thumbnails or Contact photos ([issue #33](https://github.com/mike4aday/SwiftlySalesforce/issues/33) and [issue #35](https://github.com/mike4aday/SwiftlySalesforce/issues/35))
