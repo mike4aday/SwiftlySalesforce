@@ -3,16 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>AccessToken</key>
-	<string>00Di0000000bcK3%21AQIAQNN2o3jAHIW__2w2DjGns_P9r5txvY1_7kfQcKjiln5o36WQabLAYg_geQWj7tuqzt1gsn03C8o82tJBE7mr7a4caSqn__</string>
+	<string>****</string>
 	<key>RefreshToken</key>
-	<string>5Aep861z80Xevi74eXM9q084Tn26bOV83QEKcadjxjV78yQRdnGF8PLKMyyaoLSwBX5RnVpdfA9747frVImV9s4</string>
+	<string>****</string>
 	<key>InstanceURL</key>
-	<string>https://na88.salesforce.com</string>
+	<string>****</string>
 	<key>IdentityURL</key>
-	<string>https://login.salesforce.com/id/00Di0000000bcK3EAI/005i00000016PdaAAE</string>
+	<string>****</string>
 	<key>ConsumerKey</key>
-	<string>3MVG9i1HRpGLXp.qcq7pGZOc4_wlLng60_SRlbJlB2g3TNBCoUl58pGAwHHDBhI71sOqtIo8kz7GmkjmO7SwR</string>
+	<string>****</string>
 	<key>RedirectURL</key>
-	<string>inventoryboss://authenticated</string>
+	<string>****</string>
 </dict>
 </plist>
