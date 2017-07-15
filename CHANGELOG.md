@@ -6,7 +6,7 @@ Highlights of changes and improvements:
 - Removed the `salesforce` singleton (you could still instantiate your own global `salesforce` variable, if you like; see [example](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/AppDelegate.swift)).
 - `Salesforce` now instantiated with new `ConnectedApp` class. See [README](./README.md#example-configure-your-app-delegate).
 - Supports switching among multiple users and securely storing their access & refresh tokens.
-- `Salesforce.apexREST` method renamed `Salesforce.apex`. 
+- `Salesforce.apexREST` method renamed `Salesforce.apex`, and now returns `Promise<Data>` (instead of `Promise<Any>`). 
 - New `Salesforce.getImage` methods to download relatively-small images, such as user thumbnails or Contact photos ([issue #33](https://github.com/mike4aday/SwiftlySalesforce/issues/33) and [issue #35](https://github.com/mike4aday/SwiftlySalesforce/issues/35)).
 - New `Address` struct to hold standard, compound address fields, including longitude and latitude ([issue #38](https://github.com/mike4aday/SwiftlySalesforce/issues/38) and ([issue #39](https://github.com/mike4aday/SwiftlySalesforce/issues/39))).
 
