@@ -3,7 +3,7 @@
 ## Version 4.0.0 (July 14, 2017)
 This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
 Highlights of changes and improvements:
-- Removed the `salesforce` singleton (you could still instantiate your own global `salesforce` variable, if you like; see (example)[https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/AppDelegate.swift])
+- Removed the `salesforce` singleton (you could still instantiate your own global `salesforce` variable, if you like; see [example](https://github.com/mike4aday/SwiftlySalesforce/blob/master/Example/SwiftlySalesforce/AppDelegate.swift))
 - `Salesforce` now instantiated with new `ConnectedApp` class
 - Supports switching among multiple users and securely storing their access & refresh tokens
 - `Salesforce.apexREST` method renamed `Salesforce.apex`. 
