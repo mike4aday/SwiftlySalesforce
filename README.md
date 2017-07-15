@@ -34,6 +34,41 @@ Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAut
 
 Behind the scenes, Swiftly Salesforce leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations.
 
+### Example: Configure Your App Delegate
+```swift
+import UIKit
+import SwiftlySalesforce
+
+// Global variable
+var salesforce: Salesforce!
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
+
+    var window: UIWindow?
+
+    /// Salesforce Connected App properties (replace with your own…) /* 2 */
+    let consumerKey = "<YOUR CONNECTED APP’S CONSUMER KEY HERE>" 
+    let redirectURL = URL(string: "<YOUR CONNECTED APP’S REDIRECT URL HERE>")!
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+		salesforce = Salesforce(connectedApp: ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)) /* 3 */
+        return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        handleRedirectURL(url: url) /* 4 */
+        return true
+    }
+}
+```
+Note the following in the above example:
+
+1. Your app delegate should implement `LoginDelegate`
+1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]. Note that your redirect URL should use a custom scheme, not http or https, e.g. `myapp://go`
+1. Create a `Salesforce` instance with your Connected App's values
+1. Call `handleRedirectURL()` as shown
+
 ### Example: Retrieve Salesforce Records
 The following will retrieve all the fields for an account record:
 ```swift
@@ -255,41 +290,6 @@ target 'MyApp' do
   # Another pod here
 end
 ```
-
-### Example: Configure Your App Delegate
-```swift
-import UIKit
-import SwiftlySalesforce
-
-// Global variable
-var salesforce: Salesforce!
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
-
-    var window: UIWindow?
-
-    /// Salesforce Connected App properties (replace with your own…) /* 2 */
-    let consumerKey = "<YOUR CONNECTED APP’S CONSUMER KEY HERE>" 
-    let redirectURL = URL(string: "<YOUR CONNECTED APP’S REDIRECT URL HERE>")!
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		salesforce = Salesforce(connectedApp: ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)) /* 3 */
-        return true
-    }
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        handleRedirectURL(url: url) /* 4 */
-        return true
-    }
-}
-```
-Note the following in the above example:
-
-1. Your app delegate should implement `LoginDelegate`
-1. Replace the values for `consumerKey` and `redirectURL` with the values defined in your [Connected App]
-1. Create a `Salesforce` instance with your Connected App's values
-1. Call `handleRedirectURL()` as shown
 
 ### Example: Register Your Connected App's Callback URL Scheme with iOS
 Upon successful OAuth2 authorization, Salesforce will redirect the Safari View Controller back to the callback URL that you specified in your Connected App settings, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the callback URL, and will pass it to your app's delegate.
