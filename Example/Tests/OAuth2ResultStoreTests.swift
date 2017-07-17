@@ -3,7 +3,7 @@
 //  SwiftlySalesforce
 //
 //  Created by Michael Epstein on 7/13/17.
-//  Copyright © 2017 CocoaPods. All rights reserved.
+//  Copyright (c) 2017 CocoaPods. All rights reserved.
 //
 
 import XCTest
