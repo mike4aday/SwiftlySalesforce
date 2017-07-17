@@ -835,28 +835,28 @@
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/Pod/Classes/Salesforce.swift",
-      "line": 13,
+      "line": 15,
       "symbol": "Salesforce",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/Pod/Classes/Salesforce.swift",
-      "line": 21,
+      "line": 23,
       "symbol": "Salesforce.connectedApp",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/Pod/Classes/Salesforce.swift",
-      "line": 22,
+      "line": 24,
       "symbol": "Salesforce.version",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/Pod/Classes/Salesforce.swift",
-      "line": 24,
+      "line": 26,
       "symbol": "Salesforce.init(connectedApp:version:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
