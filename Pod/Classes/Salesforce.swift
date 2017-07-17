@@ -6,6 +6,8 @@
 //  Copyright (c) 2017. All rights reserved.
 //
 
+/// Salesforce API
+
 import Foundation
 import Alamofire
 import PromiseKit

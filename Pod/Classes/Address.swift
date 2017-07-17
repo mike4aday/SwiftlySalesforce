@@ -6,7 +6,7 @@
 //  Copyright (c) 2017. All rights reserved.
 //
 
-/// Holds standard objects' compound address field data
+/// Holds standard objects' compound address field data. 
 /// See https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_address.htm
 
 public struct Address {

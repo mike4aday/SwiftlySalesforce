@@ -24,8 +24,8 @@ You can be up and running in a few minutes by following these steps:
 * Swift 3
 * Xcode 8
 
-## Documentation
-Documentation is [here](http://cocoadocs.org/docsets/SwiftlySalesforce). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
+## [Documentation](http://mike4aday.github.io/SwiftlySalesforce/docs)
+Documentation is [here](http://mike4aday.github.io/SwiftlySalesforce/docs). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
 
 ## Examples
 Below are some examples to illustrate how to use Swiftly Salesforce, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and lets the user update the status of a task.

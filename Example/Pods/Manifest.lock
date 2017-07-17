@@ -12,7 +12,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (4.2.2):
     - PromiseKit/CorePromise
-  - SwiftlySalesforce (4.0.0):
+  - SwiftlySalesforce (4.0.1):
     - Alamofire (~> 4.0)
     - Locksmith (~> 3.0)
     - PromiseKit (~> 4.0)
@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
   PromiseKit: 00e8886881f151c7e573d06b437915b0bb2970ec
-  SwiftlySalesforce: f7051d8949cc9e95a16f8a1de8759ca33036bb2c
+  SwiftlySalesforce: 9b33eb78918ed8949a344e9db03e45da3b9eb02e
 
 PODFILE CHECKSUM: 6a5cfa5f32ca1645b6ace30e1a5e00bece280cc9
 
