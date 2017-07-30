@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 4.0.2 (July 30, 2017)
+Fixed misspelling in enum `Address.GeocodeAccuracy` ([issue #44](https://github.com/mike4aday/SwiftlySalesforce/issues/44))
+
 ## Version 4.0.1 (July 17, 2017)
 Documentation updates
 
@@ -11,7 +14,7 @@ Highlights of changes and improvements:
 - Supports switching among multiple users and securely storing their access & refresh tokens.
 - `Salesforce.apexREST` method renamed `Salesforce.apex`, and now returns `Promise<Data>` (instead of `Promise<Any>`). 
 - New `Salesforce.fetchImage` methods to get relatively-small images, such as user thumbnails or Contact photos ([issue #33](https://github.com/mike4aday/SwiftlySalesforce/issues/33) and [issue #35](https://github.com/mike4aday/SwiftlySalesforce/issues/35)).
-- New `Address` struct to hold standard, compound address fields, including longitude and latitude ([issue #38](https://github.com/mike4aday/SwiftlySalesforce/issues/38) and ([issue #39](https://github.com/mike4aday/SwiftlySalesforce/issues/39))).
+- New `Address` struct to hold standard, compound address fields, including longitude and latitude ([issue #38](https://github.com/mike4aday/SwiftlySalesforce/issues/38) and [issue #39](https://github.com/mike4aday/SwiftlySalesforce/issues/39)).
 
 ## Version 3.6.0 (Jun. 17, 2017)
 Updated the default Salesforce API version to 40.0 (Summer '17)

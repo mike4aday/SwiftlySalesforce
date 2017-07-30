@@ -14,7 +14,7 @@ public struct Address {
 	enum GeocodeAccuracy: String {
 		case address = "Address"
 		case nearAddress = "NearAddress"
-		case block = "Blcok"
+		case block = "Block"
 		case street = "Street"
 		case extendedZip = "ExtendedZip"
 		case zip = "Zip"
