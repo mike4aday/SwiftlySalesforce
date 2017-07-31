@@ -235,14 +235,14 @@ first {
 }.then {
     record in
     // Do something useful with the address...
-    // For example, if you enabled [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org 
+    // For example, if you enable [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org 
     // then Salesforce will automatically geocode standard address fields...
     let address = record.address(for: "BillingAddress")
 	let longitude = address.longitude
     let latitude = address.latitude
 }.catch {
-(error) -> () in
-// Handle any errors
+    (error) -> () in
+    // Handle any errors
 }
 ```
 
