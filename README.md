@@ -208,7 +208,7 @@ first {
 import PromiseKit
 // ...
 first {
-    salesforce.retrieve("Contact", "003f40000027GugAAE", "PhotoUrl")
+    salesforce.retrieve("Contact", "003f40000027GugAAE")
 }.then {
     (record) -> Promise<UIImage> in
     guard let photoPath = record["PhotoUrl"] as? String else {
@@ -232,7 +232,7 @@ Addresses for standard objects, e.g. Account and Contact, are stored in a ['comp
 import PromiseKit
 // ...
 first {
-    salesforce.retrieve("Account", "001f40000036J5mAAE", "Name, BillingAddress")
+    salesforce.retrieve("Account", "001f40000036J5mAAE")
 }.then {
     record in
     let address = record.address(for: "BillingAddress")
