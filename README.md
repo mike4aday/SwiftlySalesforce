@@ -227,6 +227,7 @@ first {
 ```
 
 ### Example: Retrieve an Account's Billing Address
+Addresses for standard objects, e.g. Account and Contact, are stored in a ['compound' Address field](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_address.htm), and if you enable the [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org, Salesforce will automatically geocode those addresses, giving you latitude and longitude values you could use for map markers. 
 ```swift
 import PromiseKit
 // ...
@@ -234,12 +235,10 @@ first {
     salesforce.retrieve("Account", "001f40000036J5mAAE", "Name, BillingAddress")
 }.then {
     record in
-    // Do something useful with the address...
-    // For example, if you enable [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org 
-    // then Salesforce will automatically geocode standard address fields...
     let address = record.address(for: "BillingAddress")
-	let longitude = address.longitude
+    let longitude = address.longitude
     let latitude = address.latitude
+    // You could put a marker on a map...
 }.catch {
     (error) -> () in
     // Handle any errors
