@@ -179,7 +179,7 @@ first {
 You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, or when just the first completes, or when any one operation fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
 
 ### Example: Retrieve a User's Photo
-```		
+```swift		
 import PromiseKit
 // ...
 /// "first" block is an optional way to make chained calls easier to read...
@@ -201,6 +201,48 @@ first {
 }.catch {
     (error) -> () in
     // Handle any errors
+}
+```
+### Example: Retrieve a Contact's Photo
+```swift	
+import PromiseKit
+// ...
+first {
+    salesforce.retrieve("Contact", "003f40000027GugAAE", "PhotoUrl")
+}.then {
+    (record) -> Promise<UIImage> in
+    guard let photoPath = record["PhotoUrl"] as? String else {
+        throw MyCustomError("Failed to retrieve contact's photo URL")
+    }
+    return salesforce.fetchImage(path: photoPath)
+}.then {
+    image in
+    self.photoView.image = image
+}.always {
+    self.refreshControl?.endRefreshing()
+}.catch {
+    (error) -> () in
+    // Handle any errors
+}
+```
+
+### Example: Retrieve an Account's Billing Address
+```swift
+import PromiseKit
+// ...
+first {
+    salesforce.retrieve("Account", "001f40000036J5mAAE", "Name, BillingAddress")
+}.then {
+    record in
+    // Do something useful with the address...
+    // For example, if you enabled [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org 
+    // then Salesforce will automatically geocode standard address fields...
+    let address = record.address(for: "BillingAddress")
+	let longitude = address.longitude
+    let latitude = address.latitude
+}.catch {
+(error) -> () in
+// Handle any errors
 }
 ```
 
@@ -228,6 +270,7 @@ first {
     // Handle the error…
 }
 ```
+
 You could also recover from an error, and continue with the chain, using a `recover` closure. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
 ```swift
 CLLocationManager.promise().recover { err in
