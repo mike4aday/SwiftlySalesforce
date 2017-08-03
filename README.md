@@ -235,10 +235,11 @@ first {
     salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
 }.then {
     record in
-    let address = record.address(for: "BillingAddress")
-    let longitude = address.longitude
-    let latitude = address.latitude
-    // You could put a marker on a map...
+    if let address = record.address(for: "BillingAddress") {
+        let longitude = address.longitude
+        let latitude = address.latitude
+        // You could put a marker on a map...
+    }
 }.catch {
     (error) -> () in
     // Handle any errors
