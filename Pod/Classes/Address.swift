@@ -11,7 +11,7 @@
 
 public struct Address {
 	
-	enum GeocodeAccuracy: String {
+	public enum GeocodeAccuracy: String {
 		case address = "Address"
 		case nearAddress = "NearAddress"
 		case block = "Block"
@@ -24,16 +24,16 @@ public struct Address {
 		case unknown = "Unknown"
 	}
 	
-	let city: String?
-	let country: String?
-	let countryCode: String?
-	let geocodeAccuracy: GeocodeAccuracy?
-	let latitude: Double?
-	let longitude: Double?
-	let postalCode: String?
-	let state: String?
-	let stateCode: String?
-	let street: String?
+	public let city: String?
+	public let country: String?
+	public let countryCode: String?
+	public let geocodeAccuracy: GeocodeAccuracy?
+	public let latitude: Double?
+	public let longitude: Double?
+	public let postalCode: String?
+	public let state: String?
+	public let stateCode: String?
+	public let street: String?
 	
 	public init(json: [String: Any]) {
 		city = json["city"] as? String
