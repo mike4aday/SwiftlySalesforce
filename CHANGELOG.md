@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 4.0.3 (Aug. 5, 2017) 
+Changed access level of `Address` members to explicitly `public` (were implicitly `internal`)
+
 ## Version 4.0.2 (July 30, 2017)
 Fixed misspelling in enum `Address.GeocodeAccuracy` ([issue #44](https://github.com/mike4aday/SwiftlySalesforce/issues/44))
 
