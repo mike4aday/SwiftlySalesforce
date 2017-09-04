@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 4.0.4 (Sep. 5, 2017)
+Support Swift 4 
+
 ## Version 4.0.3 (Aug. 5, 2017) 
 Changed access level of `Address` members to explicitly `public` (were implicitly `internal`)
 

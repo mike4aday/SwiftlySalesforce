@@ -1,8 +1,15 @@
 
 <img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="76%"/>
 
+![Swift](https://img.shields.io/badge/%20in-swift%204-orange.svg)
+![Swift](https://img.shields.io/badge/%20in-swift%203-orange.svg)
+[![Version](https://img.shields.io/cocoapods/v/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce)
+[![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce
+
 Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platform/overview/) with Swiftly Salesforce:
-* Written entirely in [Swift](https://developer.apple.com/swift/) 3.
+* Written entirely in [Swift](https://developer.apple.com/swift/).
 * Uses [promises](https://en.wikipedia.org/wiki/Futures_and_promises) to simplify complex, asynchronous [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/) interactions 
 * Manages the Salesforce [OAuth2] process (the "OAuth dance") automatically and transparently
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS]
