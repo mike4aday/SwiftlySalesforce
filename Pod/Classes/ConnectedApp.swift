@@ -210,7 +210,7 @@ open class ConnectedApp {
 						switch response.result {
 						case .success:
 							self.authData = nil
-							fulfill()
+							fulfill(())
 						case .failure:
 							// Salesforce doesn't provide an error code or description for GET revoke calls, so we create an error here
 							reject(SalesforceError.resourceException(code: "TOKEN_REVOCATION_ERROR", message: "Error revoking token", fields: nil))

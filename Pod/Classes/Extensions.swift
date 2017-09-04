@@ -35,7 +35,7 @@ public extension DataRequest {
 				if let error = rsp.error {
 					reject(error)
 				} else if let a = rsp.request, let b = rsp.response, let c = rsp.data {
-					fulfill(a, b, c)
+					fulfill((a, b, c))
 				} else {
 					reject(SerializationError.invalid(rsp, message: "Invalid response"))
 				}

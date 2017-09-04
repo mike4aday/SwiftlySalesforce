@@ -93,7 +93,7 @@ extension LoginDelegate {
 					loginVC.replacedRootViewController = window.rootViewController
 					window.rootViewController = loginVC
 				}
-				fulfill()
+				fulfill(())
 			}.catch {
 				error -> () in
 				reject(error)
