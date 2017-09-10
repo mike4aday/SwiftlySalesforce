@@ -1,3 +1,2 @@
-github "Alamofire/Alamofire" "4.3.0"
-github "matthewpalmer/Locksmith" "3.0.0"
-github "mxcl/PromiseKit" "4.1.7"
+github "Alamofire/Alamofire" "4.5.1"
+github "mxcl/PromiseKit" "4.4.0"
