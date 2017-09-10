@@ -23,6 +23,7 @@
 		EA62C67C1F196E8D00D6CF4E /* MockAddress.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6661F196E6600D6CF4E /* MockAddress.json */; };
 		EA62C67D1F196E9100D6CF4E /* OAuth2ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C6671F196E6600D6CF4E /* OAuth2ResultTests.swift */; };
 		EA62C67E1F196E9500D6CF4E /* MockIdentity.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6681F196E6600D6CF4E /* MockIdentity.json */; };
+		EAB438951F65E26100C9ED97 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB438941F65E26100C9ED97 /* KeychainTests.swift */; };
 		EABD72401DC0455C00790BCB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723A1DC0455C00790BCB /* MasterViewController.swift */; };
 		EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723B1DC0455C00790BCB /* TaskForceError.swift */; };
 		EABD72421DC0455C00790BCB /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723C1DC0455C00790BCB /* TaskStore.swift */; };
@@ -72,6 +73,7 @@
 		EA62C6671F196E6600D6CF4E /* OAuth2ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2ResultTests.swift; sourceTree = "<group>"; };
 		EA62C6681F196E6600D6CF4E /* MockIdentity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockIdentity.json; sourceTree = "<group>"; };
 		EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
+		EAB438941F65E26100C9ED97 /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		EABD723A1DC0455C00790BCB /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		EABD723B1DC0455C00790BCB /* TaskForceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskForceError.swift; sourceTree = "<group>"; };
 		EABD723C1DC0455C00790BCB /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				EA62C65E1F196E6600D6CF4E /* ConnectedAppTests.swift */,
 				EABD72531DC05A8800790BCB /* ExtensionTests.swift */,
 				EA62C6641F196E6600D6CF4E /* IdentityTests.swift */,
+				EAB438941F65E26100C9ED97 /* KeychainTests.swift */,
 				EA62C6631F196E6600D6CF4E /* MockData.swift */,
 				EA62C6671F196E6600D6CF4E /* OAuth2ResultTests.swift */,
 				EA62C65F1F196E6600D6CF4E /* OAuth2ResultStoreTests.swift */,
@@ -465,6 +468,7 @@
 			files = (
 				EA62C67B1F196E8900D6CF4E /* AddressTests.swift in Sources */,
 				EA62C6791F196E8100D6CF4E /* MockData.swift in Sources */,
+				EAB438951F65E26100C9ED97 /* KeychainTests.swift in Sources */,
 				EA62C6761F196E7500D6CF4E /* ObjectDescriptionTests.swift in Sources */,
 				EA62C67A1F196E8500D6CF4E /* IdentityTests.swift in Sources */,
 				EA62C6771F196E7700D6CF4E /* ResourceTests.swift in Sources */,
