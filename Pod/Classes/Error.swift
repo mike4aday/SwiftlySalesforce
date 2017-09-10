@@ -23,6 +23,14 @@ public enum ApplicationError: Error {
 	case invalidArgument(message: String)
 }
 
+enum KeychainError: Error {
+	case readFailure(status: OSStatus)
+	case writeFailure(status: OSStatus)
+	case deleteFailure(status: OSStatus)
+	case itemNotFound(service: String, account: String)
+	case itemHasNoData(service: String, account: String)
+}
+
 extension SalesforceError: CustomDebugStringConvertible {
 	
 	public var debugDescription: String {
