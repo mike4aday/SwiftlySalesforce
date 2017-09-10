@@ -374,7 +374,6 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 The great Swift frameworks leveraged by Swiftly Salesforce:
 * [PromiseKit](http://promisekit.org): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
 * [Alamofire](https://github.com/Alamofire/Alamofire): "Elegant HTTP Networking in Swift"
-* [Locksmith](https://github.com/matthewpalmer/Locksmith): "A powerful, protocol-oriented library for working with the keychain in Swift."
 
 ## Resources
 If you're new to the Salesforce Platform or the Salesforce REST API, you might find the following resources useful:
