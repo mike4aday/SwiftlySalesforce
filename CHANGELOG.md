@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.5 (Sep. 10, 2017)
+- Added Keychain wrapper class
+- Removed Locksmith dependency
+
 ## Version 4.0.4 (Sep. 5, 2017)
 Support Swift 4 
 
