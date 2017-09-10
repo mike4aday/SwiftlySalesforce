@@ -8,7 +8,6 @@
 
 import PromiseKit
 import Alamofire
-import Locksmith
 
 open class ConnectedApp {
 	
