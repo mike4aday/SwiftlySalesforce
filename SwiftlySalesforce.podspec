@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-  s.version          = "4.0.4"
+  s.version          = "4.0.5"
   s.summary          = "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform"
 
 
@@ -25,6 +25,5 @@ s.name             = "SwiftlySalesforce"
 
   s.dependency 'PromiseKit', '~> 4.0'
   s.dependency 'Alamofire', '~> 4.0'
-  s.dependency 'Locksmith', '~> 3.0'
 
 end
