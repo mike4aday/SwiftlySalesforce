@@ -9,7 +9,6 @@
 /// Salesforce API
 
 import Foundation
-import Alamofire
 import PromiseKit
 
 open class Salesforce {
@@ -17,31 +16,30 @@ open class Salesforce {
 	/// Default Salesforce API version
 	static public let defaultVersion = "40.0" // Summer '17
 
-	private let q = DispatchQueue.global()
-	private let bgq = DispatchQueue.global(qos: .background)
+	private let q = DispatchQueue.global(qos: .userInitiated)
 	
 	public var connectedApp: ConnectedApp
 	public var version: String
 	
+	private var requestor: DataRequestor
+	
 	public init(connectedApp: ConnectedApp, version: String = Salesforce.defaultVersion) {
 		self.connectedApp = connectedApp
-		self.version = version 
+		self.version = version
+		self.requestor = DataRequestor(connectedApp: connectedApp)
 	}
 	
 	/// Asynchronously requests information about the current user
 	/// See https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0
 	open func identity() -> Promise<Identity> {
-		return request(.identity(version: version)) {
-			Alamofire.request($0).validate {
-				(request, response, data) -> Request.ValidationResult in
-				switch response.statusCode {
-				case 403:
-					return .failure(SalesforceError.userAuthenticationRequired)
-				default:
-					return .success
-				}
-			}.validateSalesforceResponse().responseJSONDictionary()
-		}.then(on: q) {
+		let handler: DataRequestor.ResponseHandler = {
+			(data, response, error) throws -> Data in
+			guard let resp = response as? HTTPURLResponse, resp.statusCode != 403 else {
+				throw SalesforceError.userAuthenticationRequired
+			}
+			return try DataRequestor.defaultResponseHandler(data, response, error)
+		}
+		return requestor.request(resource: .identity(version: version), responseHandler: handler).asJSON().then(on: q) {
 			(json: [String: Any]) -> Identity in
 			return try Identity(json: json)
 		}
@@ -51,18 +49,12 @@ open class Salesforce {
 	/// - Returns: Promise of an array of Limits
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
 	open func limits() -> Promise<[Limit]> {
-		return request(.limits(version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSON()
-		}.then(on: q) {
-			(result: Any) -> [Limit] in
+		return requestor.request(resource: .limits(version: version)).asJSON().then(on: q) {
+			(result: [String: Any]) -> [Limit] in
 			guard let json = result as? [String: [String: Any]] else {
-				throw SerializationError.invalid(result, message: "Invalid limit response")
+				throw SerializationError.invalid(result, message: "Unable to parse limit information")
 			}
-			var limits = [Limit]()
-			for (name, value) in json {
-				try limits.append(Limit(name: name, json: value))
-			}
-			return limits
+			return json.flatMap { try? Limit(name: $0, json: $1) }
 		}
 	}
 	
@@ -71,9 +63,7 @@ open class Salesforce {
 	/// - Parameter soql: SOQL query
 	/// - Returns: Promise of a QueryResult
 	open func query(soql: String) -> Promise<QueryResult> {
-		return request(.query(soql: soql, version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSONDictionary()
-		}.then(on: bgq) {
+		return requestor.request(resource: .query(soql: soql, version: version)).asJSON().then(on: q) {
 			(json: [String: Any]) -> QueryResult in
 			return try QueryResult(json: json)
 		}
@@ -93,9 +83,7 @@ open class Salesforce {
 	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
 	/// - Returns: Promise of a QueryResult
 	open func queryNext(path: String) -> Promise<QueryResult> {
-		return request(.queryNext(path: path)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSONDictionary()
-		}.then(on: q) {
+		return requestor.request(resource: .queryNext(path: path)).asJSON().then(on: q) {
 			(json: [String: Any]) -> QueryResult in
 			return try QueryResult(json: json)
 		}
@@ -107,9 +95,7 @@ open class Salesforce {
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
 	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<Record> {
-		return request(.retrieve(type: type, id: id, fields: fields, version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSONDictionary()
-		}
+		return requestor.request(resource: .retrieve(type: type, id: id, fields: fields, version: version)).asJSON()
 	}
 	
 	/// Asynchronously retrieves multiple records of the same type, by ID
@@ -127,12 +113,10 @@ open class Salesforce {
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
 	open func insert(type: String, fields: [String: Any]) -> Promise<String> {
-		return request(.insert(type: type, fields: fields, version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSONDictionary()
-		}.then (on: q) {
-			(json) -> String in
+		return requestor.request(resource: .insert(type: type, fields: fields, version: version)).asJSON().then {
+			(json: [String: Any]) -> String in
 			guard let id = json["id"] as? String else {
-				throw SerializationError.invalid(json, message: "Cannot determine ID of inserted record!")
+				throw SerializationError.invalid(json, message: "Unable to determine ID of inserted record")
 			}
 			return id
 		}
@@ -144,9 +128,7 @@ open class Salesforce {
 	/// - Parameter fields: Dictionary of field name and field value pairs.
 	/// - Returns: Promise<Void>
 	open func update(type: String, id: String, fields: [String: Any]) -> Promise<Void> {
-		return request(.update(type: type, id: id, fields: fields, version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().response().asVoid()
-		}
+		return requestor.request(resource: .update(type: type, id: id, fields: fields, version: version)).asVoid()
 	}
 	
 	/// Asynchronously deletes a record
@@ -154,9 +136,7 @@ open class Salesforce {
 	/// - Parameter id: Unique ID of record to be deleted
 	/// - Returns: Promise<Void>
 	open func delete(type: String, id: String) -> Promise<Void> {
-		return request(.delete(type: type, id: id, version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().response().asVoid()
-		}
+		return requestor.request(resource: .delete(type: type, id: id, version: version)).asVoid()
 	}
 	
 	/// Asynchronously retrieves metadata about a Salesforce object and its fields.
@@ -164,9 +144,7 @@ open class Salesforce {
 	/// - Parameter type: Object name
 	/// - Returns: Promise<ObjectDescription>
 	open func describe(type: String) -> Promise<ObjectDescription> {
-		return request(.describe(type: type, version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSONDictionary()
-		}.then(on: q) {
+		return requestor.request(resource: .describe(type: type, version: version)).asJSON().then(on: q) {
 			(json: [String: Any]) -> ObjectDescription in
 			return try ObjectDescription(json: json)
 		}
@@ -184,14 +162,12 @@ open class Salesforce {
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
 	/// - Returns: Promise of a dictionary of ObjectDescriptions, keyed by object name
 	open func describeAll() -> Promise<[String: ObjectDescription]> {
-		return request(.describeGlobal(version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSONDictionary()
-		}.then(on: q) {
+		return requestor.request(resource: .describeGlobal(version: version)).asJSON().then(on: q) {
 			(result: [String: Any]) -> [String: ObjectDescription] in
 			guard let jsonArray = result["sobjects"] as? [[String: Any]] else {
-				throw SerializationError.invalid(result, message: "Cannot parse response")
+				throw SerializationError.invalid(result, message: "Unable to parse describe all result")
 			}
-			var dict = [String: ObjectDescription]()
+			var dict = Dictionary<String, ObjectDescription>()
 			for json in jsonArray {
 				if let name = json["name"] as? String {
 					dict[name] = try ObjectDescription(json: json)
@@ -206,15 +182,7 @@ open class Salesforce {
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	open func fetchImage(path: String) -> Promise<UIImage> {
-		return request(.custom(method: .get, baseURL: nil, path: path, parameters: nil, headers: ["Accept": "image/*"])) {
-			Alamofire.request($0).validateSalesforceResponse().responseData()
-		}.then(on: bgq) {
-			(data: Data) -> UIImage in
-			guard let image = UIImage(data: data) else {
-				throw SerializationError.invalid("Image Data", message: "Unable to create image")
-			}
-			return image
-		}
+		return requestor.request(resource: .custom(method: .get, baseURL: nil, path: path, parameters: nil, headers: ["Accept": "image/*"])).asImage(on: q)
 	}
 	
 	/// Asynchronously retrieves an image at the given path.
@@ -222,24 +190,14 @@ open class Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	open func fetchImage(url: URL) -> Promise<UIImage> {
-		return request(.custom(method: .get, baseURL: url, path: nil, parameters: nil, headers: ["Accept": "image/*"])) {
-			Alamofire.request($0).validateSalesforceResponse().responseData()
-		}.then(on: bgq) {
-			(data: Data) -> UIImage in
-			guard let image = UIImage(data: data) else {
-				throw SerializationError.invalid("Image Data", message: "Unable to create image")
-			}
-			return image
-		}
+		return requestor.request(resource: .custom(method: .get, baseURL: url, path: nil, parameters: nil, headers: ["Accept": "image/*"])).asImage(on: q)
 	}
 	
 	/// Use this method to register your device to receive push notifications from the Salesforce Universal Push Notification service.
 	/// - Parameter devicetoken: the device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
 	/// - Returns: Promise of JSON dictionary containing successful registration information
 	open func registerForNotifications(deviceToken: String) -> Promise<[String: Any]> {
-		return request(.registerForNotifications(deviceToken: deviceToken, version: version)) {
-			Alamofire.request($0).validateSalesforceResponse().responseJSONDictionary()
-		}
+		return requestor.request(resource: .registerForNotifications(deviceToken: deviceToken, version: version)).asJSON()
 	}
 		
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.
@@ -251,9 +209,7 @@ open class Salesforce {
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
 	open func apex(method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		return request(.apex(method: method, path: path, parameters: parameters, headers: headers)) {
-			Alamofire.request($0).validateSalesforceResponse().responseData()
-		}
+		return requestor.request(resource: .apex(method: method, path: path, parameters: parameters, headers: headers))
 	}
 
 	/// Use this method to call a Salesforce REST API endpoint that's not covered by the other methods.
@@ -265,45 +221,6 @@ open class Salesforce {
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
 	open func custom(method: HTTPMethod = .get, baseURL: URL? = nil, path: String? = nil, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		return request(.custom(method: method, baseURL: baseURL, path: path, parameters: parameters, headers: headers)) {
-			Alamofire.request($0).validateSalesforceResponse().responseData()
-		}
-	}
-	
-	private func request<T>(_ resource: Resource, promiser: @escaping (URLRequest) -> Promise<T>) -> Promise<T> {
-		let requestor = {
-			(authData: OAuth2Result) throws -> Promise<T> in
-			let req = try resource.asURLRequest(authData: authData)
-			return promiser(req)
-		}
-		return request(requestor: requestor)
-	}
-	
-	private func request<T>(requestor: @escaping (OAuth2Result) throws -> Promise<T>) -> Promise<T> {
-		return Promise<OAuth2Result> {
-			// Get credentials
-			(fulfill, reject) -> () in
-			if let authData = connectedApp.authData {
-				// Use credentials we already have
-				fulfill(authData)
-			}
-			else {
-				reject(SalesforceError.userAuthenticationRequired)
-			}
-		}.then {
-			// Send request
-			return try requestor($0)
-		}.recover {
-			// Recover from expired session token error - fail on other errors
-			(error: Error) -> Promise<T> in
-			if case SalesforceError.userAuthenticationRequired = error {
-				return self.connectedApp.authorize().then {
-					return try requestor($0)
-				}
-			}
-			else {
-				throw error
-			}
-		}
+		return requestor.request(resource: .custom(method: method, baseURL: baseURL, path: path, parameters: parameters, headers: headers))
 	}
 }
