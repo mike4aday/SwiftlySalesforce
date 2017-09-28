@@ -6,8 +6,6 @@
 //  Copyright (c) 2016. All rights reserved.
 //
 
-import Alamofire
-
 public extension DateFormatter {
 	
 	// Adapted from http://codingventures.com/articles/Dating-Swift/
@@ -23,99 +21,6 @@ public extension DateFormatter {
 		formatter.dateFormat = "yyyy-MM-dd"
 		return formatter
 	}()
-}
-
-public extension DataRequest {
-	
-	/// Adds a handler to be called once the request has finished.
-	/// Borrowed from https://github.com/PromiseKit/Alamofire-/blob/master/Sources/Alamofire+Promise.swift
-	public func response() -> Promise<(URLRequest, HTTPURLResponse, Data)> {
-		return Promise { fulfill, reject in
-			response(queue: nil) { rsp in
-				if let error = rsp.error {
-					reject(error)
-				} else if let a = rsp.request, let b = rsp.response, let c = rsp.data {
-					fulfill((a, b, c))
-				} else {
-					reject(SerializationError.invalid(rsp, message: "Invalid response"))
-				}
-			}
-		}
-	}
-	
-	/// Adds a handler to be called once the request has finished.
-	/// Borrowed from https://github.com/PromiseKit/Alamofire-/blob/master/Sources/Alamofire+Promise.swift
-	public func responseData() -> Promise<Data> {
-		return Promise { fulfill, reject in
-			responseData(queue: nil) { response in
-				switch response.result {
-				case .success(let value):
-					fulfill(value)
-				case .failure(let error):
-					reject(error)
-				}
-			}
-		}
-	}
-	
-	/// Adds a handler to be called once the request has finished.
-	public func responseJSON(options: JSONSerialization.ReadingOptions = .allowFragments) -> Promise<Any> {
-		return Promise { fulfill, reject in
-			responseJSON(queue: nil, options: options, completionHandler: { response in
-				switch response.result {
-				case .success(let value):
-					fulfill(value)
-				case .failure(let error):
-					reject(error)
-				}
-			})
-		}
-	}
-	
-	/// Adds a handler to be called once the request has finished and the resulting JSON is rooted at a dictionary.
-	/// Borrowed from https://github.com/PromiseKit/Alamofire-/blob/master/Sources/Alamofire+Promise.swift
-	public func responseJSONDictionary(options: JSONSerialization.ReadingOptions = .allowFragments) -> Promise<[String: Any]> {
-		return Promise { fulfill, reject in
-			responseJSON(queue: nil, options: options, completionHandler: { response in
-				switch response.result {
-				case .success(let value):
-					if let value = value as? [String: Any] {
-						fulfill(value)
-					} else {
-						reject(SerializationError.invalid(value, message: "Invalid JSON dictionary response"))
-					}
-				case .failure(let error):
-					reject(error)
-				}
-			})
-		}
-	}
-
-	public func validateSalesforceResponse() -> Self {
-		return validate {
-			(request, response, data) -> Request.ValidationResult in
-			switch response.statusCode {
-			case 401:
-				return .failure(SalesforceError.userAuthenticationRequired)
-			case 400..<500:
-				// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/errorcodes.htm
-				if let data = data,
-					let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]],
-					let firstError = json?[0],
-					let errorCode = firstError["errorCode"] as? String,
-					let message = firstError["message"] as? String {
-					return .failure(SalesforceError.resourceException(code: errorCode, message: message, fields: firstError["fields"] as? [String]))
-				}
-				else {
-					return .failure(SalesforceError.resourceException(code: "UNKNOWN_ERROR", message: "Unknown error. HTTP response status code: \(response.statusCode)", fields: nil))
-				}
-			case 500:
-				return .failure(SalesforceError.serverFailure)
-			default:
-				return .success // The next .validate() call will catch other errors not caught above
-			}
-		}.validate()
-	}
 }
 
 /// Extension for JSON dictionaries acting as Salesforce records
@@ -178,6 +83,33 @@ public extension Dictionary where Key == String, Value == Any {
 		}
 		else {
 			return URL(string: self[key] as? String)
+		}
+	}
+}
+
+public extension Promise where T == Data {
+	
+	/// Decode the HTTP response as a JSON dictionary
+	public func asJSON() -> Promise<[String: Any]> {
+		return then {
+			(data) -> [String: Any] in
+			guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments), let dict = json as? [String: Any] else {
+				throw SerializationError.invalid(data, message: nil)
+			}
+			return dict
+		}
+	}
+	
+	/// Convert Data to UIImage. Borrowed from PromiseKit - see:
+	/// https://github.com/PromiseKit/Foundation/blob/06ba5746d8bdfed3dde17679ef20d37922de867f/Sources/URLDataPromise.swift
+	public func asImage(on queue: DispatchQueue = DispatchQueue.global(qos: .userInitiated)) -> Promise<UIImage> {
+		return then(on: queue) {
+			data -> UIImage in
+			guard let img = UIImage(data: data), let cgimg = img.cgImage else {
+				throw SerializationError.invalid(String(describing: data), message: "Unable to serialize image")
+			}
+			// This way of decoding the image limits main thread impact when displaying the image
+			return UIImage(cgImage: cgimg, scale: img.scale, orientation: img.imageOrientation)
 		}
 	}
 }
