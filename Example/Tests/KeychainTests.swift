@@ -21,33 +21,57 @@ class KeychainTests: XCTestCase {
 	
 	func testThatItReadsWritesAndDeletes() {
 		
-		let value = "Value: \(UUID().uuidString)"
-		let value2 = "Value2: \(UUID().uuidString)"
+		// Given
+		let value: [String: Any] = [
+			"accessToken": "\(UUID().uuidString)",
+			"refreshToken": "\(UUID().uuidString)",
+			"instanceURL": URL(string: "https://www.salesforce.com")!
+		]
+		let value2: [String: Any] = [
+			"accessToken": "\(UUID().uuidString)",
+			"refreshToken": "\(UUID().uuidString)",
+			"instanceURL": URL(string: "https://www.mydomain.com/")!
+		]
 		let service = "Service: \(UUID().uuidString)"
 		let account = "Account: \(UUID().uuidString)"
+		let data = NSKeyedArchiver.archivedData(withRootObject: value)
+		let data2 = NSKeyedArchiver.archivedData(withRootObject: value2)
 		
-		guard let data = value.data(using: .utf8, allowLossyConversion: false), let data2 = value2.data(using: .utf8, allowLossyConversion: false) else {
-			XCTFail()
-			return
-		}
 		do {
 			// Write to keychain and read back 'value'
 			try Keychain.write(data: data, service: service, account: account)
-			let retrievedValue = String(data: try Keychain.read(service: service, account: account), encoding: .utf8)
-			XCTAssert(value == retrievedValue)
-			
+			guard let keychainData = try? Keychain.read(service: service, account: account),
+			let keychainDict = NSKeyedUnarchiver.unarchiveObject(with: keychainData) as? [String: Any],
+				keychainDict["accessToken"] as? String == value["accessToken"] as? String,
+				keychainDict["refreshToken"] as? String == value["refreshToken"] as? String,
+				keychainDict["instanceURL"] as? URL == value["instanceURL"] as? URL else {
+					XCTFail()
+					return
+			}
+
 			// Update 'value' with 'value2' and read it back
 			try Keychain.write(data: data2, service: service, account: account)
-			let retrievedValue2 = String(data: try Keychain.read(service: service, account: account), encoding: .utf8)
-			XCTAssert(value2 == retrievedValue2)
+			guard let keychainData2 = try? Keychain.read(service: service, account: account),
+				let keychainDict2 = NSKeyedUnarchiver.unarchiveObject(with: keychainData2) as? [String: Any],
+				keychainDict2["accessToken"] as? String == value2["accessToken"] as? String,
+				keychainDict2["refreshToken"] as? String == value2["refreshToken"] as? String,
+				keychainDict2["instanceURL"] as? URL == value2["instanceURL"] as? URL else {
+					XCTFail()
+					return
+			}
 		}
 		catch {
 			XCTFail(error.localizedDescription)
 		}
 		
 		// Delete from keychain
+		guard let _ = try? Keychain.delete(service: service, account: account) else {
+			XCTFail()
+			return
+		}
+		
+		// Make sure it's gone
 		do {
-			try Keychain.delete(service: service, account: account)
 			let _ = try Keychain.read(service: service, account: account)
 		}
 		catch (error: KeychainError.itemNotFound) {
