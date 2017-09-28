@@ -47,6 +47,11 @@ internal final class OAuth2ResultStore {
 	}
 	
 	static func clear(key: Key) throws {
-		try Keychain.delete(service: key.service, account: key.account)
+		do {
+			try Keychain.delete(service: key.service, account: key.account)
+		}
+		catch(error: KeychainError.itemNotFound) {
+			// Ignore
+		}
 	}
 }
