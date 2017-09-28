@@ -113,13 +113,7 @@ open class Salesforce {
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
 	open func insert(type: String, fields: [String: Any]) -> Promise<String> {
-		return requestor.request(resource: .insert(type: type, fields: fields, version: version)).asJSON().then {
-			(json: [String: Any]) -> String in
-			guard let id = json["id"] as? String else {
-				throw SerializationError.invalid(json, message: "Unable to determine ID of inserted record")
-			}
-			return id
-		}
+		return requestor.request(resource: .insert(type: type, fields: fields, version: version)).asString()
 	}
 	
 	/// Asynchronously updates a record
