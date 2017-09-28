@@ -32,6 +32,8 @@ internal struct DataRequestor {
 			return data
 		case 401:
 			throw SalesforceError.userAuthenticationRequired
+		case 404:
+			throw SalesforceError.resourceNotFound
 		case 400..<500:
 			// Try to form error from Salesforce's response
 			// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/errorcodes.htm
@@ -53,11 +55,11 @@ internal struct DataRequestor {
 	
 	internal func request(resource: Resource, responseHandler: @escaping ResponseHandler = DataRequestor.defaultResponseHandler) -> Promise<Data> {
 		
-		let _request = {
+		let go = {
 			(req: URLRequest) -> Promise<Data> in
 			return Promise {
 				(fulfill, reject) -> () in
-				let task: URLSessionDataTask = URLSession.shared.dataTask(with: req) {
+				let task: URLSessionDataTask = self.session.dataTask(with: req) {
 					(data, resp, err) -> Void in
 					do {
 						fulfill(try responseHandler(data, resp, err))
@@ -79,12 +81,12 @@ internal struct DataRequestor {
 				reject(SalesforceError.userAuthenticationRequired)
 			}
 		}.then {
-			return try _request(resource.asURLRequest(authData: $0))
+			return try go(resource.asURLRequest(authData: $0))
 		}.recover {
 			(error: Error) -> Promise<Data> in
 			if case SalesforceError.userAuthenticationRequired = error {
 				return self.connectedApp.authorize().then {
-					return try _request(resource.asURLRequest(authData: $0))
+					return try go(resource.asURLRequest(authData: $0))
 				}
 			}
 			else {
