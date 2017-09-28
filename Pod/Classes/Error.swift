@@ -8,9 +8,11 @@
 
 public enum SalesforceError: Error {
 	case resourceException(code: String, message: String, fields: [String]?)
+	case resourceNotFound
 	case serverFailure
-	case userAuthenticationRequired
+	case unexpectedResponse(response: URLResponse?)
 	case unsupportedURL(url: URL)
+	case userAuthenticationRequired
 }
 
 public enum SerializationError: Error {
@@ -27,8 +29,7 @@ enum KeychainError: Error {
 	case readFailure(status: OSStatus)
 	case writeFailure(status: OSStatus)
 	case deleteFailure(status: OSStatus)
-	case itemNotFound(service: String, account: String)
-	case itemHasNoData(service: String, account: String)
+	case itemNotFound
 }
 
 extension SalesforceError: CustomDebugStringConvertible {
@@ -37,10 +38,14 @@ extension SalesforceError: CustomDebugStringConvertible {
 		switch self {
 		case .userAuthenticationRequired:
 			return "User authentication required"
+		case let .unexpectedResponse(response):
+			return "Unexpected response: \(String(describing: response))"
 		case let .unsupportedURL(url):
 			return "Unsupported URL: \(url.absoluteString)"
 		case let .resourceException(code, message, fields):
-			return "Salesforce response failure. Code: \(code). Message: \(message). Fields: \(fields ?? [])"
+			return "Resource exception. Code: \(code). Message: \(message). Fields: \(fields ?? [])"
+		case .resourceNotFound:
+			return "Resource not found"
 		case .serverFailure:
 			return "Server failure"
 		}
