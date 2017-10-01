@@ -106,10 +106,21 @@ public extension Promise where T == Data {
 		return then(on: queue) {
 			data -> UIImage in
 			guard let img = UIImage(data: data), let cgimg = img.cgImage else {
-				throw SerializationError.invalid(String(describing: data), message: "Unable to serialize image")
+				throw SerializationError.invalid(String(describing: data), message: "Unable to deserialize image")
 			}
 			// This way of decoding the image limits main thread impact when displaying the image
 			return UIImage(cgImage: cgimg, scale: img.scale, orientation: img.imageOrientation)
+		}
+	}
+	
+	/// Convert Data to String
+	public func asString() -> Promise<String> {
+		return then {
+			data -> String in
+			guard let str = String(bytes: data, encoding: .utf8) else {
+				throw SerializationError.invalid(String(describing: data), message: "Unable to deserialize string")
+			}
+			return str
 		}
 	}
 }

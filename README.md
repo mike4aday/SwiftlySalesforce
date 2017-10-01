@@ -2,7 +2,6 @@
 <img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="76%"/>
 
 ![Swift](https://img.shields.io/badge/%20in-swift%204-orange.svg)
-![Swift](https://img.shields.io/badge/%20in-swift%203-orange.svg)
 [![Version](https://img.shields.io/cocoapods/v/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce)
@@ -28,8 +27,8 @@ You can be up and running in a few minutes by following these steps:
 
 ## Minimum Requirements
 * iOS 10
-* Swift 3
-* Xcode 8
+* Swift 4
+* Xcode 9
 
 ## [Documentation](http://mike4aday.github.io/SwiftlySalesforce/docs)
 Documentation is [here](http://mike4aday.github.io/SwiftlySalesforce/docs). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
@@ -39,7 +38,7 @@ Below are some examples to illustrate how to use Swiftly Salesforce, and how you
 
 Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
 
-Behind the scenes, Swiftly Salesforce leverages [Alamofire][Alamofire] and [PromiseKit][PromiseKit], two very widely-adopted frameworks, for elegant handling of networking requests and asynchronous operations.
+Behind the scenes, Swiftly Salesforce leverages [PromiseKit][PromiseKit], a very widely-adopted framework for elegant handling of asynchronous operations.
 
 ### Example: Configure Your App Delegate
 ```swift
@@ -362,7 +361,7 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 ## Main Components of Swiftly Salesforce
 * [Salesforce.swift]: This is your Swift interface to the Salesforce Platform, and likely the only file you’ll refer to. It has methods to query, retrieve, update and delete records, and to access [custom Apex REST][Apex REST] endpoints.
 
-* [Resource.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for [Alamofire] requests. The more important and commonly-used Salesforce [REST API] endpoints are represented as enum values, including one for [custom Apex REST][Apex REST] endpoints.
+* [Resource.swift]: Acts as a '[router](https://littlebitesofcocoa.com/93-creating-a-router-for-alamofire)' for Salesforce API requests. The more important and commonly-used Salesforce [REST API] endpoints are represented as enum values, including one for [custom Apex REST][Apex REST] endpoints.
 
 * [OAuth2Result.swift]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
 
@@ -370,10 +369,8 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 
 * [ConnectedApp.swift]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the ConnectedApp instance will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then ConnectedApp will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their credentials are never handled by the client application.
 
-## Dependent Frameworks
-The great Swift frameworks leveraged by Swiftly Salesforce:
-* [PromiseKit](http://promisekit.org): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
-* [Alamofire](https://github.com/Alamofire/Alamofire): "Elegant HTTP Networking in Swift"
+## Dependent Framework
+Swiftly Salesforce depends on [PromiseKit](http://promisekit.org): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
 
 ## Resources
 If you're new to the Salesforce Platform or the Salesforce REST API, you might find the following resources useful:
@@ -390,7 +387,6 @@ Questions, suggestions, bug reports and code contributions welcome:
 * Twitter [@mike4aday]
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
 
-   [Alamofire]: <https://github.com/alamofire/alamofire>
    [PromiseKit]: <https://github.com/mxcl/PromiseKit>
    [OAuth2]: <https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com>
    [REST API]: <https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/>

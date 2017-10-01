@@ -1,24 +1,21 @@
 //
 //  DataRequest.swift
-//  Alamofire
+//  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 9/25/17.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2016. All rights reserved.
 //
 
 import Foundation
 
-internal struct DataRequestor {
+internal enum Requestor {
+	case data(connectedApp: ConnectedApp, session: URLSession)
+}
+	
+extension Requestor {
 	
 	internal typealias ResponseHandler = (Data?, URLResponse?, Error?) throws -> Data
 
-	internal private(set) var connectedApp: ConnectedApp
-	internal private(set) var session: URLSession
-	
-	internal init(connectedApp: ConnectedApp, session: URLSession = URLSession.shared) {
-		self.connectedApp = connectedApp
-		self.session = session
-	}
-	
 	internal static let defaultResponseHandler: (Data?, URLResponse?, Error?) throws -> Data = {
 		(data, response, error) throws in
 		if let error = error {
@@ -53,44 +50,49 @@ internal struct DataRequestor {
 		}
 	}
 	
-	internal func request(resource: Resource, responseHandler: @escaping ResponseHandler = DataRequestor.defaultResponseHandler) -> Promise<Data> {
+	internal func request(resource: Resource, responseHandler: @escaping ResponseHandler = Requestor.defaultResponseHandler) -> Promise<Data> {
 		
-		let go = {
-			(req: URLRequest) -> Promise<Data> in
-			return Promise {
+		switch self {
+
+		case let .data(connectedApp, session):
+			
+			let go = {
+				(req: URLRequest) -> Promise<Data> in
+				return Promise {
+					(fulfill, reject) -> () in
+					let task: URLSessionDataTask = session.dataTask(with: req) {
+						(data, resp, err) -> Void in
+						do {
+							fulfill(try responseHandler(data, resp, err))
+						}
+						catch {
+							reject(error)
+						}
+					}
+					task.resume()
+				}
+			}
+			
+			return Promise<OAuth2Result> {
 				(fulfill, reject) -> () in
-				let task: URLSessionDataTask = self.session.dataTask(with: req) {
-					(data, resp, err) -> Void in
-					do {
-						fulfill(try responseHandler(data, resp, err))
-					}
-					catch {
-						reject(error)
+				if let auth = connectedApp.authData {
+					fulfill(auth)
+				}
+				else {
+					reject(SalesforceError.userAuthenticationRequired)
+				}
+			}.then {
+				return try go(resource.asURLRequest(authData: $0))
+			}.recover {
+				(error: Error) -> Promise<Data> in
+				if case SalesforceError.userAuthenticationRequired = error {
+					return connectedApp.authorize().then {
+						return try go(resource.asURLRequest(authData: $0))
 					}
 				}
-				task.resume()
-			}
-		}
-		
-		return Promise<OAuth2Result> {
-			(fulfill, reject) -> () in
-			if let auth = connectedApp.authData {
-				fulfill(auth)
-			}
-			else {
-				reject(SalesforceError.userAuthenticationRequired)
-			}
-		}.then {
-			return try go(resource.asURLRequest(authData: $0))
-		}.recover {
-			(error: Error) -> Promise<Data> in
-			if case SalesforceError.userAuthenticationRequired = error {
-				return self.connectedApp.authorize().then {
-					return try go(resource.asURLRequest(authData: $0))
+				else {
+					throw error
 				}
-			}
-			else {
-				throw error
 			}
 		}
 	}

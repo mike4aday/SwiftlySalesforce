@@ -9,7 +9,7 @@
 import Foundation
 
 /// Utility routines for working with the keychain.
-/// Borrowed from https://forums.developer.apple.com/thread/86961
+/// Adapted from https://forums.developer.apple.com/thread/86961
 enum Keychain {
 	
 	/// Returns the value of a generic password keychain item.
@@ -19,7 +19,6 @@ enum Keychain {
 	///   - account: The account for the item.
 	/// - Returns: The value of the item
 	/// - Throws: Any error returned by the Security framework.
-	
 	static func read(service: String, account: String) throws -> Data {
 		var copyResult: CFTypeRef? = nil
 		let err = SecItemCopyMatching([
@@ -48,7 +47,6 @@ enum Keychain {
 	///   - account: The account for the item.
 	///   - data: The desired data.
 	/// - Throws: Any error returned by the Security framework.
-	
 	static func write(data password: Data, service: String, account: String) throws {
 		var copyResult: CFTypeRef? = nil
 		let err = SecItemCopyMatching([
@@ -104,7 +102,6 @@ enum Keychain {
 	///   - account: The account for the item.
 	///   - password: The desired password.
 	/// - Throws: Any error returned by the Security framework.
-	
 	private static func storeByUpdating(service: String, account: String, password: Data) throws {
 		let err = SecItemUpdate([
 			kSecClass: kSecClassGenericPassword,
@@ -127,7 +124,6 @@ enum Keychain {
 	///   - account: The account for the item.
 	///   - password: The desired password.
 	/// - Throws: Any error returned by the Security framework.
-	
 	private static func storeByAdding(service: String, account: String, password: Data) throws {
 		let err = SecItemAdd([
 			kSecClass: kSecClassGenericPassword,

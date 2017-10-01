@@ -93,6 +93,35 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
+	func testThatItRunsMultipleQueries() {
+		
+		// Given
+		let account = [ "Name": "Bit Player, Inc.", "BillingPostalCode": "02214"]
+		let contact = ["FirstName": "Jason", "LastName": "Johnson"]
+		
+		let exp = expectation(description: "Run multiple queries")
+		first {
+			salesforce.insert(type: "Account", fields: account)
+		}.then {
+			(accountID: String) -> Promise<(String, String)> in
+			return self.salesforce.insert(type: "Contact", fields: contact).then { (accountID, $0) }
+		}.then {
+			(accountID, contactID) -> Promise<[QueryResult]> in
+			let q1 = "SELECT Id FROM Account WHERE Id = '\(accountID)'"
+			let q2 = "SELECT Id FROM Contact WHERE Id = '\(contactID)'"
+			return self.salesforce.query(soql: [q1, q2])
+		}.then {
+			(queryResults: [QueryResult]) -> Void in
+			XCTAssert(queryResults.count == 2)
+			XCTAssert(queryResults[0].totalSize == 1)
+			XCTAssert(queryResults[1].totalSize == 1)
+			exp.fulfill()
+		}.catch {
+			XCTFail($0.localizedDescription)
+		}
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
 	func testThatItRetrieves() {
 		
 		// Note: At least 1 Account record must be in the org
@@ -153,15 +182,48 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		let exp = expectation(description: "Insert \(type) record")
 		first {
 			salesforce.insert(type: type, fields: fields)
-			}.then {
-				// Then
-				id -> () in
-				XCTAssertTrue(id.hasPrefix("001"))
-				XCTAssertTrue(id.characters.count >= 15)
-				exp.fulfill()
-			}.catch {
-				error in
-				XCTFail("\(error)")
+		}.then {
+			// Then
+			id -> () in
+			XCTAssertTrue(id.hasPrefix("001"))
+			XCTAssertTrue(id.characters.count >= 15)
+			exp.fulfill()
+		}.catch {
+			error in
+			XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testItDeletes() {
+		
+		// Note: will insert records into org
+		
+		// Given
+		let type = "Account"
+		let fields = [ "Name" : "Worldwide Stuff, Inc.", "BillingPostalCode": "44554"]
+		
+		// When
+		let exp = expectation(description: "Delete \(type) record")
+		first {
+			// Insert it
+			salesforce.insert(type: type, fields: fields)
+		}.then {
+			// Delete it
+			(id: String) -> Promise<String> in
+			return self.salesforce.delete(type: type, id: id).then { id }
+		}.then {
+			// Try to query it
+			(id: String) -> Promise<QueryResult> in
+			return self.salesforce.query(soql: "SELECT Id FROM \(type) WHERE Id = '\(id)'")
+		}.then {
+			// Then shoudn't be found
+			(queryResult: QueryResult) -> Void in
+			XCTAssert(queryResult.totalSize == 0)
+			exp.fulfill()
+		}.catch {
+			error in
+			XCTFail("\(error)")
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
@@ -247,7 +309,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				exp.fulfill()
 			}.catch {
 				error in
-				XCTFail("\(error)")
+				XCTFail(error.localizedDescription)
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
@@ -268,6 +330,29 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				error in
 				debugPrint(error)
 				exp.fulfill()
+		}
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItFetchesImage() {
+		let exp = expectation(description: "Fetch photo for user")
+		first {
+			salesforce.identity()
+		}.then {
+			// Retrieve photo
+			(identity: Identity) -> Promise<UIImage> in
+			guard let url = identity.photoURL else {
+				throw NSError()
+			}
+			return self.salesforce.fetchImage(url: url)
+		}.then {
+			(image: UIImage) -> Void in
+			XCTAssert(image.size.width > 0)
+			XCTAssert(image.size.height > 0)
+			exp.fulfill()
+		}.catch {
+			(error: Error) in
+			XCTFail(error.localizedDescription)
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}

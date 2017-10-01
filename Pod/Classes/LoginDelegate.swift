@@ -8,8 +8,6 @@
 
 import SafariServices
 import PromiseKit
-import Alamofire
-
 
 public protocol LoginDelegate: class {
 	func login(url: URL) throws

@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.6 (Sep. 28, 2017)
+- Removed Alamofire dependency
+- Increased test coverage
+
 ## Version 4.0.5 (Sep. 10, 2017)
 - Added Keychain wrapper class
 - Removed Locksmith dependency

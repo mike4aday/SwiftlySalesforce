@@ -6,7 +6,7 @@
 //  Copyright (c) 2017. All rights reserved.
 //
 
-/// Salesforce API
+/// A 'wrapper' around the Salesforce REST API
 
 import Foundation
 import PromiseKit
@@ -15,29 +15,33 @@ open class Salesforce {
 
 	/// Default Salesforce API version
 	static public let defaultVersion = "40.0" // Summer '17
-
-	private let q = DispatchQueue.global(qos: .userInitiated)
 	
+	/// Related Salesforce connected app
 	public var connectedApp: ConnectedApp
+	
+	/// API version used for requests
 	public var version: String
 	
-	private var requestor: DataRequestor
+	private let q = DispatchQueue.global(qos: .userInitiated)
 	
+	private var requestor: Requestor
+	
+	/// Initializer
 	public init(connectedApp: ConnectedApp, version: String = Salesforce.defaultVersion) {
 		self.connectedApp = connectedApp
 		self.version = version
-		self.requestor = DataRequestor(connectedApp: connectedApp)
+		self.requestor = Requestor.data(connectedApp: connectedApp, session: URLSession.shared)
 	}
 	
 	/// Asynchronously requests information about the current user
 	/// See https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0
 	open func identity() -> Promise<Identity> {
-		let handler: DataRequestor.ResponseHandler = {
+		let handler: Requestor.ResponseHandler = {
 			(data, response, error) throws -> Data in
 			guard let resp = response as? HTTPURLResponse, resp.statusCode != 403 else {
 				throw SalesforceError.userAuthenticationRequired
 			}
-			return try DataRequestor.defaultResponseHandler(data, response, error)
+			return try Requestor.defaultResponseHandler(data, response, error)
 		}
 		return requestor.request(resource: .identity(version: version), responseHandler: handler).asJSON().then(on: q) {
 			(json: [String: Any]) -> Identity in
@@ -113,7 +117,13 @@ open class Salesforce {
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
 	open func insert(type: String, fields: [String: Any]) -> Promise<String> {
-		return requestor.request(resource: .insert(type: type, fields: fields, version: version)).asString()
+		return requestor.request(resource: .insert(type: type, fields: fields, version: version)).asJSON().then(on: q) {
+			(json) -> String in
+			guard let id = json["id"] as? String else {
+				throw SerializationError.invalid(json, message: "Unable to determine ID of inserted record")
+			}
+			return id
+		}
 	}
 	
 	/// Asynchronously updates a record

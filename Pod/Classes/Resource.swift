@@ -6,11 +6,8 @@
 //  Copyright (c) 2017. All rights reserved.
 //
 
-import Alamofire
-
-public typealias HTTPMethod = Alamofire.HTTPMethod
-
 public enum Resource {
+	
 	case identity(version: String)
 	case limits(version: String)
 	case query(soql: String, version: String)
@@ -24,11 +21,26 @@ public enum Resource {
 	case registerForNotifications(deviceToken: String, version: String)
 	case apex(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?)
 	case custom(method: HTTPMethod, baseURL: URL?, path: String?, parameters: [String: Any]?, headers: [String: String]?)
+	
+	case revoke(token: String, host: String)
+	case refresh(refreshToken: String, consumerKey: String, host: String)
+}
+
+public enum HTTPMethod: String {
+	case options = "OPTIONS"
+	case get     = "GET"
+	case head    = "HEAD"
+	case post    = "POST"
+	case put     = "PUT"
+	case patch   = "PATCH"
+	case delete  = "DELETE"
+	case trace   = "TRACE"
+	case connect = "CONNECT"
 }
 
 extension Resource {
 	
-	var _res: (method: HTTPMethod, path: String?, parameters: [String: Any]?, headers: [String: String]?) {
+	private var parts: (method: HTTPMethod, path: String?, parameters: [String: Any]?, headers: [String: String]?) {
 		
 		switch self {
 			
@@ -74,33 +86,72 @@ extension Resource {
 			
 		case let .custom(method, _, path, parameters, headers):
 			return (method: method, path: path, parameters: parameters, headers: headers)
+			
+		case let .revoke(token, _):
+			return (method: .get, path: "/services/oauth2/revoke", parameters: ["token": token], headers: nil)
+			
+		case let .refresh(refreshToken, consumerKey, _):
+			let parameters = [
+				"format" : "urlencoded",
+				"grant_type": "refresh_token",
+				"client_id": consumerKey,
+				"refresh_token": refreshToken]
+			return (method: .get, path: "/services/oauth2/token", parameters: parameters, headers: nil)
 		}
 	}
 
-	func asURLRequest(authData: OAuth2Result) throws -> URLRequest {
+	internal func asURLRequest(authData: OAuth2Result) throws -> URLRequest {
 		
-		let defaultHeaders = ["Accept": "application/json", "Authorization": "Bearer \(authData.accessToken)"]
+		let parts = self.parts
 		
-		var url: URL = {
-			switch self {
-			case .identity:
-				return authData.identityURL
-			case let .custom(_, baseURL, _, _, _):
-				return baseURL ?? authData.instanceURL
-			default:
-				return authData.instanceURL
+		// URL
+		var url: URL
+		switch self {
+		case .identity:
+			url = authData.identityURL
+		case let .custom(_, baseURL, _, _, _):
+			url = (baseURL ?? authData.instanceURL)
+		case .revoke(_, let host), .refresh(_, _, let host):
+			url = URL(string: "https://\(host)")!
+		default:
+			url = authData.instanceURL
+		}
+		if let path = parts.path {
+			url = url.appendingPathComponent(path)
+		}
+		
+		// URL request
+		var request = URLRequest(url: url)
+		request.httpMethod = parts.method.rawValue
+		request.addValue("application/json", forHTTPHeaderField: "Accept")
+		request.addValue("Bearer \(authData.accessToken)", forHTTPHeaderField: "Authorization")
+		if let headers = parts.headers {
+			for (key, value) in headers {
+				request.addValue(value, forHTTPHeaderField: key)
 			}
-		}()
-		if let p = _res.path {
-			url = url.appendingPathComponent(p)
 		}
 		
-		var req = try URLRequest(url: url, method: _res.method, headers: _res.headers)
-		for header in defaultHeaders {
-			req.addValue(header.value, forHTTPHeaderField: header.key)
+		// Encode parameters
+		if let parameters = parts.parameters {
+			
+			switch parts.method {
+				
+			case .get, .head, .delete:
+				// Encode as query string in URL
+				var comps = URLComponents(url: url, resolvingAgainstBaseURL: false)
+				comps?.queryItems = parameters.map {
+					return URLQueryItem(name: $0.key, value: String(describing: $0.value))
+				}
+				request.url = comps?.url
+				request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+				
+			default:
+				// Encode as JSON in request body
+				request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+				request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+			}
 		}
 		
-		let encode = _res.method == .get ? URLEncoding.default.encode : JSONEncoding.default.encode
-		return try encode(req, _res.parameters)
+		return request
 	}
 }

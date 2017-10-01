@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Alamofire
 @testable import SwiftlySalesforce
 
 class ConnectedAppTests: XCTestCase, MockData, LoginDelegate {

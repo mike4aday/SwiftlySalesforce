@@ -7,7 +7,6 @@
 //
 
 import PromiseKit
-import Alamofire
 
 open class ConnectedApp {
 	
@@ -18,7 +17,6 @@ open class ConnectedApp {
 	weak public var loginDelegate: LoginDelegate?
 	
 	private var storeKey: OAuth2ResultStore.Key?
-	
 	private var pendingAuthorization: (promise: Promise<OAuth2Result>, fulfill: (OAuth2Result) -> (), reject: (Error) -> ())?
 	private var promisedRevocation: Promise<Void>?
 	
@@ -195,26 +193,15 @@ open class ConnectedApp {
 			return promise
 		}
 		else {
-			let promise = Promise<Void> {
-				fulfill, reject in
-				guard let token = (accessTokenOnly ? nil : self.authData?.refreshToken) ?? self.authData?.accessToken else {
-					reject(ApplicationError.invalidState(message: "No token to revoke"))
-					return
+			let promise = first {
+				guard let token = (accessTokenOnly ? self.authData?.accessToken : self.authData?.refreshToken) else {
+					return Promise(error: ApplicationError.invalidState(message: "No token to revoke"))
 				}
-				let urlString = "https://\(self.loginHost)/services/oauth2/revoke"
-				Alamofire.request(urlString, parameters: ["token": token], encoding: URLEncoding.default)
-					.validate()
-					.responseData {
-						response in
-						switch response.result {
-						case .success:
-							self.authData = nil
-							fulfill(())
-						case .failure:
-							// Salesforce doesn't provide an error code or description for GET revoke calls, so we create an error here
-							reject(SalesforceError.resourceException(code: "TOKEN_REVOCATION_ERROR", message: "Error revoking token", fields: nil))
-						}
-				}
+				return Promise(value: token)
+			}.then {
+				(token: String) -> Promise<Void> in
+				let resource = Resource.revoke(token: token, host: self.loginHost)
+				return Requestor.data(connectedApp: self, session: URLSession.shared).request(resource: resource).asVoid()
 			}
 			self.promisedRevocation = promise
 			return promise
@@ -225,33 +212,10 @@ open class ConnectedApp {
 	/// - Parameter refreshToken: The value of the OAuth2 refresh token obtained during authorization
 	/// - Returns: Promise of OAuth2Result
 	private func refresh(refreshToken: String) -> Promise<OAuth2Result> {
-		
-		let urlString = "https://\(loginHost)/services/oauth2/token"
-		let params = [
-			"format" : "urlencoded",
-			"grant_type": "refresh_token",
-			"client_id": consumerKey,
-			"refresh_token": refreshToken]
-		
-		return Promise {
-			fulfill, reject in
-			Alamofire.request(URL(string: urlString)!, method: .post, parameters: params, encoding: URLEncoding.default)
-			.validate(statusCode: 200..<300)
-			.responseString {
-				response in
-				switch response.result {
-				case .success(let urlEncodedString):
-					do {
-						let authData = try OAuth2Result(urlEncodedString: urlEncodedString, refreshToken: refreshToken)
-						fulfill(authData)
-					}
-					catch {
-						reject(error)
-					}
-				case .failure(let error):
-					reject(error)
-				}
-			}
+		let resource = Resource.refresh(refreshToken: refreshToken, consumerKey: consumerKey, host: loginHost)
+		return Requestor.data(connectedApp: self, session: URLSession.shared).request(resource: resource).asString().then {
+			(urlEncodedString) -> OAuth2Result in
+			return try OAuth2Result(urlEncodedString: urlEncodedString, refreshToken: refreshToken)
 		}
 	}
 }
