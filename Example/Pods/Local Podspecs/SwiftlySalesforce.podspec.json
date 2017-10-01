@@ -1,6 +1,6 @@
 {
   "name": "SwiftlySalesforce",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "summary": "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform",
   "description": "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform. Swiftly Salesforce uses 'promises' to simplify Salesforce REST API calls, and OAuth2 authentication.",
   "homepage": "https://github.com/mike4aday/SwiftlySalesforce",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/mike4aday/SwiftlySalesforce.git",
-    "tag": "4.0.5"
+    "tag": "4.0.6"
   },
   "social_media_url": "https://twitter.com/mike4aday",
   "platforms": {
@@ -22,9 +22,6 @@
   },
   "dependencies": {
     "PromiseKit": [
-      "~> 4.0"
-    ],
-    "Alamofire": [
       "~> 4.0"
     ]
   }
