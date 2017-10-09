@@ -8,9 +8,9 @@
 
 /// Salesforce object metadata
 /// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
-public struct ObjectDescription: Decodable {
+public struct ObjectDescription {
 	
-	public let fields: [String: FieldDescription]?
+	public let fields: [String: FieldDescription]
 	public let isCreateable: Bool
 	public let isCustom: Bool
 	public let isCustomSetting: Bool
@@ -33,6 +33,9 @@ public struct ObjectDescription: Decodable {
 	public var pluralLabel: String {
 		return labelPlural
 	}
+}
+
+extension ObjectDescription: Decodable {
 	
 	enum CodingKeys: String, CodingKey {
 		case fields
@@ -51,4 +54,34 @@ public struct ObjectDescription: Decodable {
 		case labelPlural
 		case name
 	}
+	
+	public init(from decoder: Decoder) throws {
+		
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		
+		var fieldsDict = [String: FieldDescription]()
+		if let fieldsArray = try container.decodeIfPresent([FieldDescription].self, forKey: .fields) {
+			for field in fieldsArray {
+				fieldsDict[field.name] = field
+			}
+		}
+		
+		// Set properties
+		self.fields = fieldsDict
+		self.isCreateable = try container.decode(Bool.self, forKey: .isCreateable)
+		self.isCustom = try container.decode(Bool.self, forKey: .isCustom)
+		self.isCustomSetting = try container.decode(Bool.self, forKey: .isCustomSetting)
+		self.isDeletable = try container.decode(Bool.self, forKey: .isDeletable)
+		self.isFeedEnabled = try container.decode(Bool.self, forKey: .isFeedEnabled)
+		self.isQueryable = try container.decode(Bool.self, forKey: .isQueryable)
+		self.isSearchable = try container.decode(Bool.self, forKey: .isSearchable)
+		self.isTriggerable = try container.decode(Bool.self, forKey: .isTriggerable)
+		self.isUndeletable = try container.decode(Bool.self, forKey: .isUndeletable)
+		self.isUpdateable = try container.decode(Bool.self, forKey: .isUpdateable)
+		self.keyPrefix = try container.decodeIfPresent(String.self, forKey: .keyPrefix)
+		self.label = try container.decode(String.self, forKey: .label)
+		self.labelPlural = try container.decode(String.self, forKey: .labelPlural)
+		self.name = try container.decode(String.self, forKey: .name)
+	}
 }
+
