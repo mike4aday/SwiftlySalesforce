@@ -10,9 +10,11 @@ import Foundation
 
 /// Salesforce field metadata
 /// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
+
 public struct FieldDescription {
 	
 	public let defaultValue: Any?
+	public let defaultValueFormula: String?
 	public let inlineHelpText: String?
 	public let isCreateable: Bool
 	public let isCustom: Bool
@@ -21,7 +23,7 @@ public struct FieldDescription {
 	public let isSortable: Bool
 	public let isUpdateable: Bool
 	public let label: String
-	public let length: Int?
+	public let length: UInt?
 	public let name: String
 	public let picklistValues: [PicklistItem]?
 	public let relatedTypes: [String]?
@@ -31,51 +33,60 @@ public struct FieldDescription {
 	public var helpText: String? {
 		return inlineHelpText
 	}
+}
 
-	init(json: [String: Any]) throws {
+extension FieldDescription: Decodable {
+	
+	enum CodingKeys: String, CodingKey {
+		case defaultValue
+		case defaultValueFormula
+		case inlineHelpText
+		case isCreateable = "createable"
+		case isCustom = "custom"
+		case isEncrypted = "encrypted"
+		case isNillable = "nillable"
+		case isSortable = "sortable"
+		case isUpdateable = "updateable"
+		case label
+		case length
+		case name
+		case picklistValues
+		case relatedTypes
+		case relationshipName
+		case type
+	}
+	
+	public init(from decoder: Decoder) throws {
 		
-		guard
-			let isCreateable = json["createable"] as? Bool,
-			let isCustom = json["custom"] as? Bool,
-			let isEncrypted = json["encrypted"] as? Bool,
-			let isNillable = json["nillable"] as? Bool,
-			let isSortable = json["sortable"] as? Bool,
-			let isUpdateable = json["updateable"] as? Bool,
-			let label = json["label"] as? String,
-			let name = json["name"] as? String,
-			let type = json["type"] as? String else {
-				
-				throw SerializationError.invalid(json, message: "Unable to create FieldDescription")
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		
+		// 'defaultValue' can be either String (for Picklist-type fields) or Boolean (for Checkbox-type fields).
+		// All other field types seem to store their default values in 'defaultValueFormula'...
+		if let f = try? container.decodeIfPresent(Bool.self, forKey: .defaultValue) {
+			self.defaultValue = f
+		}
+		else if let s = try? container.decodeIfPresent(String.self, forKey: .defaultValue) {
+			self.defaultValue = s
+		}
+		else {
+			self.defaultValue = nil 
 		}
 		
-		self.defaultValue = {
-			if let val = json["defaultValue"], !(val is NSNull) {
-				return val
-			}
-			else {
-				return nil
-			}
-		}()
-		self.inlineHelpText = json["inlineHelpText"] as? String
-		self.isCreateable = isCreateable
-		self.isCustom = isCustom
-		self.isEncrypted = isEncrypted
-		self.isNillable = isNillable
-		self.isSortable = isSortable
-		self.isUpdateable = isUpdateable
-		self.label = label
-		self.length = json["length"] as? Int
-		self.name = name
-		self.picklistValues = try (json["picklistValues"] as? [[String: Any]])?.map { try PicklistItem(json: $0) }
-		
-		/// If the field is a reference ("lookup") type, then 'relatedTypes' contains
-		/// a list of object types to which the object may refer. Most standard
-		/// lookup fields, and all custom lookup fields, may only refer to
-		/// one type of object. Task.WhoId and Task.WhatId, for example, are
-		/// polymorphic lookup fields and can refer to more than one type of object.
-		self.relatedTypes = json["referenceTo"] as? [String]
-		self.relationshipName = json["relationshipName"] as? String
-		self.type = type
+		self.defaultValueFormula = try container.decodeIfPresent(String.self, forKey: .defaultValueFormula)	// Optional property
+		self.inlineHelpText = try container.decodeIfPresent(String.self, forKey: .inlineHelpText) 			// Optional property
+		self.isCreateable = try container.decode(Bool.self, forKey: .isCreateable)							// Required property
+		self.isCustom = try container.decode(Bool.self, forKey: .isCustom)									// Required property
+		self.isEncrypted = try container.decode(Bool.self, forKey: .isEncrypted)							// Required property
+		self.isNillable = try container.decode(Bool.self, forKey: .isNillable)								// Required property
+		self.isSortable = try container.decode(Bool.self, forKey: .isSortable)								// Required property
+		self.isUpdateable = try container.decode(Bool.self, forKey: .isUpdateable)							// Required property
+		self.label = try container.decode(String.self, forKey: .label)										// Required property
+		self.length = try container.decodeIfPresent(UInt.self, forKey: .length)								// Optional property
+		self.name = try container.decode(String.self, forKey: .name)										// Required property
+		self.picklistValues = try container.decodeIfPresent([PicklistItem].self, forKey: .picklistValues)	// Optional property
+		self.relatedTypes = try container.decodeIfPresent([String].self, forKey: .relatedTypes)				// Optional property
+		self.relationshipName = try container.decodeIfPresent(String.self, forKey: .relationshipName)		// Optional property
+		self.type = try container.decode(String.self, forKey: .type)										// Required property
 	}
 }
 
