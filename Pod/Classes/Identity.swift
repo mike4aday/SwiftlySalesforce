@@ -9,7 +9,6 @@
 /// Holds result of call to identity URL
 /// See: https://help.salesforce.com/HTViewHelpDoc?id=remoteaccess_using_openid.htm
 public struct Identity {
-	
 	public let displayName: String
 	public let language: String?
 	public let lastModifiedDate: Date
@@ -18,40 +17,61 @@ public struct Identity {
 	public let orgID: String
 	public let photoURL: URL?
 	public let profileURL: URL?
-	public let recentRecordsURL: URL?
 	public let thumbnailURL: URL?
-	public let userID: String
-	public let username: String
+	public let userID: String	// ID of the user record
+	public let username: String	// Salesforce username, in email format
 	public let userType: String
+}
+
+extension Identity: Decodable {
 	
-	public init(json: [String: Any]) throws {
+	enum CodingKeys: String, CodingKey {
 		
-		guard
-			let displayName = json["display_name"] as? String,
-			let lastModifiedDate = json.date(for: "last_modified_date"),
-			let orgID = json["organization_id"] as? String,
-			let userID = json["user_id"] as? String,
-			let username = json["username"] as? String,
-			let userType = json["user_type"] as? String else {
-				
-			throw SerializationError.invalid(json, message: "Unable to create Identity")
-		}
+		case displayName = "display_name"
+		case language
+		case lastModifiedDate = "last_modified_date"
+		case locale
+		case mobilePhone = "mobile_phone"
+		case orgID = "organization_id"
+		case userID = "user_id"
+		case username
+		case userType = "user_type"
+		
+		// Nested container keys
+		case photos
+		case urls
+	}
 	
-		let photos = json["photos"] as? [String: String]
-		let urls = json["urls"] as? [String: String]
+	enum PhotoKeys: String, CodingKey {
+		case picture
+		case thumbnail
+	}
 	
-		self.displayName = displayName
-		self.language = json["language"] as? String
-		self.lastModifiedDate = lastModifiedDate
-		self.locale = json["locale"] as? String
-		self.mobilePhone = json["mobile_phone"] as? String
-		self.orgID = orgID
-		self.photoURL = URL(string: photos?["picture"])
-		self.profileURL = URL(string: urls?["profile"])
-		self.recentRecordsURL = URL(string: urls?["recent"])
-		self.thumbnailURL = URL(string: photos?["thumbnail"])
-		self.userID = userID
-		self.username = username
-		self.userType = userType
+	enum URLKeys: String, CodingKey {
+		case profile
+	}
+	
+	public init(from decoder: Decoder) throws {
+		
+		// Top level container
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		
+		// Nested containers
+		let photos = try container.nestedContainer(keyedBy: PhotoKeys.self, forKey: .photos)
+		let urls = try container.nestedContainer(keyedBy: URLKeys.self, forKey: .urls)
+		
+		// Set properties
+		self.displayName = try container.decode(String.self, forKey: .displayName)
+		self.language = try container.decodeIfPresent(String.self, forKey: .language)
+		self.lastModifiedDate = try container.decode(Date.self, forKey: .lastModifiedDate)
+		self.locale = try container.decodeIfPresent(String.self, forKey: .locale)
+		self.mobilePhone = try container.decodeIfPresent(String.self, forKey: .mobilePhone)
+		self.orgID = try container.decode(String.self, forKey: .orgID)
+		self.photoURL = try photos.decodeIfPresent(URL.self, forKey: .picture)
+		self.profileURL = try urls.decodeIfPresent(URL.self, forKey: .profile)
+		self.thumbnailURL = try photos.decodeIfPresent(URL.self, forKey: .thumbnail)
+		self.userID = try container.decode(String.self, forKey: .userID)
+		self.username = try container.decode(String.self, forKey: .username)
+		self.userType = try container.decode(String.self, forKey: .userType)
 	}
 }
