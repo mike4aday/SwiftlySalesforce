@@ -40,7 +40,7 @@ public extension Promise where T == Data {
 		return then {
 			(data) -> [String: Any] in
 			guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments), let dict = json as? [String: Any] else {
-				throw SerializationError.invalid(data, message: nil)
+				throw SalesforceError.deserializationError(message: "Unable to deserialize JSON dictionary from data.")
 			}
 			return dict
 		}
@@ -52,7 +52,7 @@ public extension Promise where T == Data {
 		return then(on: queue) {
 			data -> UIImage in
 			guard let img = UIImage(data: data), let cgimg = img.cgImage else {
-				throw SerializationError.invalid(String(describing: data), message: "Unable to deserialize image")
+				throw SalesforceError.deserializationError(message: "Unable to deserialize image from data.")
 			}
 			// This way of decoding the image limits main thread impact when displaying the image
 			return UIImage(cgImage: cgimg, scale: img.scale, orientation: img.imageOrientation)
@@ -64,7 +64,7 @@ public extension Promise where T == Data {
 		return then {
 			data -> String in
 			guard let str = String(bytes: data, encoding: .utf8) else {
-				throw SerializationError.invalid(String(describing: data), message: "Unable to deserialize string")
+				throw SalesforceError.deserializationError(message: "Unable to deserialize string from data.")
 			}
 			return str
 		}
