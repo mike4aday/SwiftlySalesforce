@@ -6,6 +6,16 @@
 //  Copyright (c) 2016. All rights reserved.
 //
 
+public extension Dictionary {
+	
+	public init(items: [Value], indexedBy: (Value) -> Key) {
+		self.init()
+		for item in items {
+			self[indexedBy(item)] = item
+		}
+	}
+}
+
 public extension DateFormatter {
 	
 	// Adapted from http://codingventures.com/articles/Dating-Swift/
@@ -21,70 +31,6 @@ public extension DateFormatter {
 		formatter.dateFormat = "yyyy-MM-dd"
 		return formatter
 	}()
-}
-
-/// Extension for JSON dictionaries acting as Salesforce records
-public extension Dictionary where Key == String, Value == Any {
-	
-	var attributes: (id: String, type: String, path: String)? {
-		guard let attrs = self["attributes"] as? [String: Any],
-			let type = attrs["type"] as? String,
-			let path = attrs["url"] as? String,
-			let id = path.components(separatedBy: "/").last, id.characters.count == 15 || id.characters.count == 18 else {
-				return nil
-		}
-		return (id, type, path)
-	}
-	
-	var id: String? {
-		return attributes?.id
-	}
-	
-	var type: String? {
-		return attributes?.type
-	}
-	
-	var name: String? {
-		return self["Name"] as? String
-	}
-	
-	var lastModifiedDate: Date? {
-		return self.date(for: "LastModifiedDate")
-	}
-	
-	var createdDate: Date? {
-		return self.date(for: "CreatedDate")
-	}
-	
-	public func date(for key: Key, formatter: DateFormatter = DateFormatter.salesforceDateTimeFormatter) -> Date? {
-		if let dateValue = self[key] as? Date {
-			return dateValue
-		}
-		else if let stringValue = self[key] as? String {
-			return formatter.date(from: stringValue)
-		}
-		else {
-			return nil
-		}
-	}
-	
-	public func address(for key: Key) -> Address? {
-		if let json = self[key] as? [String: Any] {
-			return Address(json: json)
-		}
-		else {
-			return nil
-		}
-	}
-	
-	public func url(for key: Key) -> URL? {
-		if let url = self[key] as? URL {
-			return url
-		}
-		else {
-			return URL(string: self[key] as? String)
-		}
-	}
 }
 
 public extension Promise where T == Data {
