@@ -8,11 +8,8 @@
 
 /// Holds result of successful OAuth2 user-agent flow
 /// See https://help.salesforce.com/articleView?id=remoteaccess_oauth_user_agent_flow.htm&type=0
+
 internal struct OAuth2Result {
-	
-	//
-	// MARK: - Variables
-	//
 	
 	internal let accessToken: String
 	internal let refreshToken: String?
@@ -26,10 +23,6 @@ internal struct OAuth2Result {
 	internal var orgID: String {
 		return identityURL.deletingLastPathComponent().lastPathComponent
 	}
-	
-	//
-	// MARK: - Initializers
-	//
 	
 	/// Initializer
 	/// - Parameter accessToken: Salesforce access token (session ID).
@@ -64,7 +57,6 @@ internal struct OAuth2Result {
 	}
 }
 
-// MARK: - Equality operator
 internal func ==(lhs: OAuth2Result, rhs: OAuth2Result) -> Bool {
 	return lhs.accessToken == rhs.accessToken &&
 		lhs.refreshToken == rhs.refreshToken &&
