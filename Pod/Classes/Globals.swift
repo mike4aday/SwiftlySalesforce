@@ -9,7 +9,6 @@
 import PromiseKit
 
 public typealias Promise = PromiseKit.Promise
-public typealias Record = [String: Any]
 
 /// An "alias" for PromiseKit's "firstly" function
 /// See "firstly" at https://github.com/mxcl/PromiseKit/blob/master/Documentation/GettingStarted.md
