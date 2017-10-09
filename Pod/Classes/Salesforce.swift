@@ -22,15 +22,19 @@ open class Salesforce {
 	/// API version used for requests
 	public var version: String
 	
-	private let q = DispatchQueue.global(qos: .userInitiated)
+	// JSON decoder
+	public var decoder: JSONDecoder
 	
-	private var requestor: Requestor
+	private let q = DispatchQueue.global(qos: .userInitiated)
+	private let requestor: Requestor
 	
 	/// Initializer
 	public init(connectedApp: ConnectedApp, version: String = Salesforce.defaultVersion) {
 		self.connectedApp = connectedApp
 		self.version = version
 		self.requestor = Requestor.data(connectedApp: connectedApp, session: URLSession.shared)
+		self.decoder = JSONDecoder()
+		self.decoder.dateDecodingStrategy = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.salesforceDateTimeFormatter)
 	}
 	
 	/// Asynchronously requests information about the current user
@@ -43,33 +47,37 @@ open class Salesforce {
 			}
 			return try Requestor.defaultResponseHandler(data, response, error)
 		}
-		return requestor.request(resource: .identity(version: version), responseHandler: handler).asJSON().then(on: q) {
-			(json: [String: Any]) -> Identity in
-			return try Identity(json: json)
+		return requestor.request(resource: .identity(version: version), responseHandler: handler).then(on: q) {
+			return try self.decoder.decode(Identity.self, from: $0)
 		}
 	}
 	
 	/// Asynchronously retrieves information about org limits
-	/// - Returns: Promise of an array of Limits
+	/// - Returns: Promise of a dictionary of Limits, keyed by limit name
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
-	open func limits() -> Promise<[Limit]> {
-		return requestor.request(resource: .limits(version: version)).asJSON().then(on: q) {
-			(result: [String: Any]) -> [Limit] in
-			guard let json = result as? [String: [String: Any]] else {
-				throw SerializationError.invalid(result, message: "Unable to parse limit information")
-			}
-			return json.flatMap { try? Limit(name: $0, json: $1) }
+	open func limits() -> Promise<[String:Limit]> {
+		return requestor.request(resource: .limits(version: version)).then(on: q) {
+			return try self.decoder.decode([String:Limit].self, from: $0)
 		}
 	}
 	
 	/// Asynchronsouly executes a SOQL query.
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: SOQL query
-	/// - Returns: Promise of a QueryResult
-	open func query(soql: String) -> Promise<QueryResult> {
-		return requestor.request(resource: .query(soql: soql, version: version)).asJSON().then(on: q) {
-			(json: [String: Any]) -> QueryResult in
-			return try QueryResult(json: json)
+	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as type 'T'
+	open func query<T: Decodable>(soql: String) -> Promise<QueryResult<T>> {
+		return requestor.request(resource: .query(soql: soql, version: version)).then(on: q) {
+			return try self.decoder.decode(QueryResult<T>.self, from: $0)
+		}
+	}
+	
+	/// Asynchronsouly executes a SOQL query (non-generic function version).
+	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
+	/// - Parameter soql: SOQL query
+	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as SObjects
+	open func query(soql: String) -> Promise<QueryResult<SObject>> {
+		return requestor.request(resource: .query(soql: soql, version: version)).then(on: q) {
+			return try self.decoder.decode(QueryResult<SObject>.self, from: $0)
 		}
 	}
 	
@@ -77,42 +85,83 @@ open class Salesforce {
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: Array of SOQL queries
 	/// - Returns: Promise of an array of QueryResults, in the same order as the "soql" parameter
-	open func query(soql: [String]) -> Promise<[QueryResult]> {
-		let promises = soql.map { query(soql: $0) }
+	open func query<T: Decodable>(soql: [String]) -> Promise<[QueryResult<T>]> {
+		let promises = soql.map { query(soql: $0) as Promise<QueryResult<T>> }
 		return when(fulfilled: promises)
 	}
 	
-	/// Queries next batch of records returned by a SOQL query whose result is broken into multiple batches (i.e. paginated).
+	/// Asynchronsouly executes multiple SOQL queries (non-generic function version).
+	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
+	/// - Parameter soql: Array of SOQL queries
+	/// - Returns: Promise of an array of QueryResults, in the same order as the "soql" parameter
+	open func query(soql: [String]) -> Promise<[QueryResult<SObject>]> {
+		let promises = soql.map { query(soql: $0) as Promise<QueryResult<SObject>> }
+		return when(fulfilled: promises)
+	}
+	
+	/// Queries next pages of records returned by a SOQL query whose result is broken into multiple pages.
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm
 	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
 	/// - Returns: Promise of a QueryResult
-	open func queryNext(path: String) -> Promise<QueryResult> {
-		return requestor.request(resource: .queryNext(path: path)).asJSON().then(on: q) {
-			(json: [String: Any]) -> QueryResult in
-			return try QueryResult(json: json)
+	open func queryNext<T: Decodable>(path: String) -> Promise<QueryResult<T>> {
+		return requestor.request(resource: .queryNext(path: path)).then(on: q) {
+			return try self.decoder.decode(QueryResult<T>.self, from: $0)
 		}
 	}
 	
-	/// Asynchronously retrieves a single record
+	/// Queries next page of records returned by a SOQL query whose result is broken into pages (non-generic function version).
+	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm
+	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
+	/// - Returns: Promise of a QueryResult
+	open func queryNext(path: String) -> Promise<QueryResult<SObject>> {
+		return requestor.request(resource: .queryNext(path: path)).then(on: q) {
+			return try self.decoder.decode(QueryResult<SObject>.self, from: $0)
+		}
+	}
+	
+	/// Asynchronously retrieves a single record.
 	/// - Parameter type: The type of the record, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter id: ID of the record to retrieve
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
-	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<Record> {
-		return requestor.request(resource: .retrieve(type: type, id: id, fields: fields, version: version)).asJSON()
+	open func retrieve<T: Decodable>(type: String, id: String, fields: [String]? = nil) -> Promise<T> {
+		return requestor.request(resource: .retrieve(type: type, id: id, fields: fields, version: version)).then(on: q) {
+			return try self.decoder.decode(T.self, from: $0)
+		}
 	}
 	
-	/// Asynchronously retrieves multiple records of the same type, by ID
+	/// Asynchronously retrieves a single record (non-generic function version).
+	/// - Parameter type: The type of the record, e.g. "Account", "Contact" or "MyCustomObject__c"
+	/// - Parameter id: ID of the record to retrieve
+	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
+	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
+	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<SObject> {
+		return requestor.request(resource: .retrieve(type: type, id: id, fields: fields, version: version)).then(on: q) {
+			return try self.decoder.decode(SObject.self, from: $0)
+		}
+	}
+	
+	/// Asynchronously retrieves multiple records of the same type, by ID.
 	/// - Parameter type: The type of the records to retrieve, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter ids: IDs of the records to retrieve. All records must be of the same type.
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of an array of dictionaries, keyed by field names, and in the same order as the "ids" parameter
-	open func retrieve(type: String, ids: [String], fields: [String]? = nil) -> Promise<[Record]> {
-		let promises = ids.map { retrieve(type: type, id: $0, fields: fields) }
+	open func retrieve<T: Decodable>(type: String, ids: [String], fields: [String]? = nil) -> Promise<[T]> {
+		let promises: [Promise<T>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
 		return when(fulfilled: promises)
 	}
 	
-	/// Asynchronously creates a new record
+	/// Asynchronously retrieves multiple records of the same type, by ID (non-generic version).
+	/// - Parameter type: The type of the records to retrieve, e.g. "Account", "Contact" or "MyCustomObject__c"
+	/// - Parameter ids: IDs of the records to retrieve. All records must be of the same type.
+	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
+	/// - Returns: Promise of an array of dictionaries, keyed by field names, and in the same order as the "ids" parameter
+	open func retrieve(type: String, ids: [String], fields: [String]? = nil) -> Promise<[SObject]> {
+		let promises: [Promise<SObject>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
+		return when(fulfilled: promises)
+	}
+	
+	/// Asynchronously creates a new record in Salesforce
 	/// - Parameter type: The type of the record to be inserted, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
@@ -120,7 +169,7 @@ open class Salesforce {
 		return requestor.request(resource: .insert(type: type, fields: fields, version: version)).asJSON().then(on: q) {
 			(json) -> String in
 			guard let id = json["id"] as? String else {
-				throw SerializationError.invalid(json, message: "Unable to determine ID of inserted record")
+				throw SalesforceError.deserializationError(message: "Unable to deserialize ID of inserted record.")
 			}
 			return id
 		}
@@ -147,37 +196,26 @@ open class Salesforce {
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
 	/// - Parameter type: Object name
 	/// - Returns: Promise<ObjectDescription>
-	open func describe(type: String) -> Promise<ObjectDescription> {
-		return requestor.request(resource: .describe(type: type, version: version)).asJSON().then(on: q) {
-			(json: [String: Any]) -> ObjectDescription in
-			return try ObjectDescription(json: json)
+	open func describe(type: String) -> Promise<ObjectMetadata> {
+		return requestor.request(resource: .describe(type: type, version: version)).then(on: q) {
+			return try self.decoder.decode(ObjectMetadata.self, from: $0)
 		}
 	}
 	
 	/// Asynchronously retrieves metadata for multiple Salesforce objects.
 	/// - Parameter types: Array of object names
 	/// - Returns: Promise<[ObjectDescription]>, a promise of an array of ObjectDescriptions, in the same order as the "types" parameter.
-	open func describe(types: [String]) -> Promise<[ObjectDescription]> {
+	open func describe(types: [String]) -> Promise<[ObjectMetadata]> {
 		let promises = types.map { describe(type: $0) }
 		return when(fulfilled: promises)
 	}
 	
 	/// Asynchronously retrieves object-level metadata about all objects defined in the org.
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
-	/// - Returns: Promise of a dictionary of ObjectDescriptions, keyed by object name
-	open func describeAll() -> Promise<[String: ObjectDescription]> {
-		return requestor.request(resource: .describeGlobal(version: version)).asJSON().then(on: q) {
-			(result: [String: Any]) -> [String: ObjectDescription] in
-			guard let jsonArray = result["sobjects"] as? [[String: Any]] else {
-				throw SerializationError.invalid(result, message: "Unable to parse describe all result")
-			}
-			var dict = Dictionary<String, ObjectDescription>()
-			for json in jsonArray {
-				if let name = json["name"] as? String {
-					dict[name] = try ObjectDescription(json: json)
-				}
-			}
-			return dict
+	/// - Returns: Promise of an array of ObjectDescriptions
+	open func describeAll() -> Promise<[ObjectMetadata]> {
+		return requestor.request(resource: .describeGlobal(version: version)).then(on: q) {
+			return try self.decoder.decode([ObjectMetadata].self, from: $0)
 		}
 	}
 	
