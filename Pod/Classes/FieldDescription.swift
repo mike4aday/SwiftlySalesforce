@@ -62,16 +62,16 @@ extension FieldDescription: Decodable {
 		
 		// 'defaultValue' can be either String (for Picklist-type fields) or Boolean (for Checkbox-type fields).
 		// All other field types seem to store their default values in 'defaultValueFormula'...
+		var defaultValue: Any? = nil
 		if let f = try? container.decodeIfPresent(Bool.self, forKey: .defaultValue) {
-			self.defaultValue = f
+			defaultValue = f
 		}
 		else if let s = try? container.decodeIfPresent(String.self, forKey: .defaultValue) {
-			self.defaultValue = s
+			defaultValue = s
 		}
-		else {
-			self.defaultValue = nil 
-		}
-		
+
+		// Set properties
+		self.defaultValue = defaultValue
 		self.defaultValueFormula = try container.decodeIfPresent(String.self, forKey: .defaultValueFormula)	// Optional property
 		self.inlineHelpText = try container.decodeIfPresent(String.self, forKey: .inlineHelpText) 			// Optional property
 		self.isCreateable = try container.decode(Bool.self, forKey: .isCreateable)							// Required property
