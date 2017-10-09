@@ -52,14 +52,11 @@ internal struct OAuth2Result {
 	internal init(urlEncodedString: String, refreshToken: String? = nil) throws {
 		
 		// Create 'fake' URL with argument as query string so we can use URL methods to access the embedded OAuth2 result
-		guard let url = URL(string: "http://example.com?\(urlEncodedString)") else {
-			throw ApplicationError.invalidArgument(message: "Invalid URL-encoded string: \(urlEncodedString)")
-		}
-		
-		guard let accessToken = url.value(forQueryItem: "access_token"),
+		guard let url = URL(string: "http://www.salesforce.com?\(urlEncodedString)"),
+			let accessToken = url.value(forQueryItem: "access_token"),
 			let instanceURL = URL(string: url.value(forQueryItem: "instance_url")),
 			let identityURL = URL(string: url.value(forQueryItem: "id")) else {
-				throw SerializationError.invalid(urlEncodedString, message: "Can't parse URL-encoded string: \(urlEncodedString)")
+			throw ApplicationError.invalidArgument(message: "Invalid URL-encoded string: \(urlEncodedString)")
 		}
 		
 		let refreshToken = refreshToken ?? url.value(forQueryItem: "refresh_token")
