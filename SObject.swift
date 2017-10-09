@@ -1,20 +1,28 @@
 //
 //  SObject.swift
-//  Pods-SwiftlySalesforce_Example
+//  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 10/6/17.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2017. All rights reserved.
 //
 
 import Foundation
 
+/// Represents a generic Salesforce object
 public struct SObject {
 	
+	/// Record ID
 	public var id: String
+	
+	/// Type of object (e.g. Account, Lead, MyCustomObject__c)
 	public var type: String
 	
 	fileprivate var container: KeyedDecodingContainer<SObjectCodingKey>
 	
-	public func field<T: Decodable>(named key: String) throws -> T? {
+	/// Gets the value for a given field.
+	/// - Parameter forField: name of the field whose value is to be retrieved
+	/// - Returns: value retrieved for the given field
+	public func value<T: Decodable>(forField key: String) throws -> T? {
 		return try container.decodeIfPresent(T.self, forKey: SObjectCodingKey(stringValue: key)!)
 	}
 }
@@ -22,7 +30,9 @@ public struct SObject {
 extension SObject: Decodable {
 	
 	struct SObjectCodingKey: CodingKey {
-		
+	
+		static let attributes = SObjectCodingKey(stringValue: "attributes")!
+
 		var stringValue: String
 		var intValue: Int?
 		
@@ -33,8 +43,6 @@ extension SObject: Decodable {
 		init?(intValue: Int) {
 			return nil
 		}
-		
-		static let attributes = SObjectCodingKey(stringValue: "attributes")!
 	}
 	
 	enum AttributeCodingKeys: String, CodingKey {
