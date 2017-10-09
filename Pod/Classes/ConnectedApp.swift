@@ -115,7 +115,7 @@ open class ConnectedApp {
 		else {
 			// Can't make sense of the redirect URL
 			if let pending = self.pendingAuthorization, pending.promise.isPending {
-				pending.reject(SerializationError.invalid(redirectURL, message: "Can't parse redirect URL: \(redirectURL)"))
+				pending.reject(SalesforceError.unsupportedURL(url: redirectURL))
 			}
 		}
 	}
