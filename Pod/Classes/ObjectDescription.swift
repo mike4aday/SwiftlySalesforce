@@ -8,7 +8,7 @@
 
 /// Salesforce object metadata
 /// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
-public struct ObjectDescription {
+public struct ObjectDescription: Decodable {
 	
 	public let fields: [String: FieldDescription]?
 	public let isCreateable: Bool
@@ -34,49 +34,21 @@ public struct ObjectDescription {
 		return labelPlural
 	}
 	
-	public init(json: [String: Any]) throws {
-		
-		guard
-			let isCreateable = json["createable"] as? Bool,
-			let isCustom = json["custom"] as? Bool,
-			let isCustomSetting = json["customSetting"] as? Bool,
-			let isDeletable = json["deletable"] as? Bool,
-			let isFeedEnabled = json["feedEnabled"] as? Bool,
-			let isQueryable = json["queryable"] as? Bool,
-			let isSearchable = json["searchable"] as? Bool,
-			let isTriggerable = json["triggerable"] as? Bool,
-			let isUndeletable = json["undeletable"] as? Bool,
-			let isUpdateable = json["updateable"] as? Bool,
-			let label = json["label"] as? String,
-			let labelPlural = json["labelPlural"] as? String,
-			let name = json["name"] as? String else {
-			
-			throw SerializationError.invalid(json, message: "Unable to create ObjectDesription")
-		}
-		
-		self.fields = {
-			if let fieldJsons = json["fields"] as? [[String: Any]], let fieldDescs = try? fieldJsons.map { try FieldDescription(json: $0) } {
-				var dict = [String: FieldDescription]()
-				for fieldDesc in fieldDescs {
-					dict[fieldDesc.name] = fieldDesc
-				}
-				return dict
-			}
-			return nil
-		}()
-		self.isCreateable = isCreateable
-		self.isCustom = isCustom
-		self.isCustomSetting = isCustomSetting
-		self.isDeletable = isDeletable
-		self.isFeedEnabled = isFeedEnabled
-		self.isQueryable = isQueryable
-		self.isSearchable = isSearchable
-		self.isTriggerable = isTriggerable
-		self.isUndeletable = isUndeletable
-		self.isUpdateable = isUpdateable
-		self.keyPrefix = json["keyPrefix"] as? String
-		self.label = label
-		self.labelPlural = labelPlural
-		self.name = name
+	enum CodingKeys: String, CodingKey {
+		case fields
+		case isCreateable = "createable"
+		case isCustom = "custom"
+		case isCustomSetting = "customSetting"
+		case isDeletable = "deletable"
+		case isFeedEnabled = "feedEnabled"
+		case isQueryable = "queryable"
+		case isSearchable = "searchable"
+		case isTriggerable = "triggerable"
+		case isUndeletable = "undeletable"
+		case isUpdateable = "updateable"
+		case keyPrefix
+		case label
+		case labelPlural
+		case name
 	}
 }
