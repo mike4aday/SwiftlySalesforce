@@ -52,4 +52,3 @@ public struct ObjectMetadata: Decodable {
 		case name
 	}
 }
-
