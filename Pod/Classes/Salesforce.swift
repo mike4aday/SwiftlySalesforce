@@ -16,9 +16,6 @@ open class Salesforce {
 	/// Default Salesforce API version
 	static public let defaultVersion = "40.0" // Summer '17
 	
-	/// Related Salesforce connected app
-	public var connectedApp: ConnectedApp
-	
 	/// API version used for requests
 	public var version: String
 	
@@ -30,7 +27,6 @@ open class Salesforce {
 	
 	/// Initializer
 	public init(connectedApp: ConnectedApp, version: String = Salesforce.defaultVersion) {
-		self.connectedApp = connectedApp
 		self.version = version
 		self.requestor = Requestor.data(connectedApp: connectedApp, session: URLSession.shared)
 		self.decoder = JSONDecoder()
