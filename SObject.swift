@@ -6,8 +6,6 @@
 //  Copyright (c) 2017. All rights reserved.
 //
 
-import Foundation
-
 /// Represents a generic Salesforce object
 public struct SObject {
 	
@@ -29,12 +27,12 @@ public struct SObject {
 
 extension SObject: Decodable {
 	
-	struct SObjectCodingKey: CodingKey {
+	fileprivate struct SObjectCodingKey: CodingKey {
 	
 		static let attributes = SObjectCodingKey(stringValue: "attributes")!
 
 		var stringValue: String
-		var intValue: Int?
+		var intValue: Int? = nil
 		
 		init?(stringValue: String) {
 			self.stringValue = stringValue
@@ -45,7 +43,7 @@ extension SObject: Decodable {
 		}
 	}
 	
-	enum AttributeCodingKeys: String, CodingKey {
+	fileprivate enum AttributeCodingKeys: String, CodingKey {
 		case type, url
 	}
 	
