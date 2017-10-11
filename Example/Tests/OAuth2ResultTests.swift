@@ -23,15 +23,9 @@ class OAuth2ResultTests: XCTestCase {
     
 	func testThatItInits() {
 		
-		// Given
 		let s = url.fragment!
+		let res = try! OAuth2Result(urlEncodedString: s)
 		
-		// When
-		guard let res = try? OAuth2Result(urlEncodedString: s) else {
-			return XCTFail("Unable to initialize OAuth2Result")
-		}
-		
-		// Then
 		XCTAssertEqual(res.accessToken, "00Dx0000000BV7z!AR8AQBM8J_xr9kLqmZIRyQxZgLcM4HVi41aGtW0qW3JCzf5xdTGGGSoVim8FfJkZEqxbjaFbberKGk8v8AnYrvChG4qJbQo8")
 		XCTAssertEqual(res.refreshToken, "5Aep8614iLM.Dq661ePDmPEgaAW9Oh_L3JKkDpB4xReb54_pZfVti1dPEk8aimw4Hr9ne7VXXVSIQ==")
 		XCTAssertEqual(res.identityURL, URL(string: "https://login.salesforce.com/id/00Dx0000000BV7z/005x00000012Q9P")!)
