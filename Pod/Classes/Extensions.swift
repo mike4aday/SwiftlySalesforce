@@ -6,19 +6,6 @@
 //  Copyright (c) 2016. All rights reserved.
 //
 
-public extension Dictionary {
-	
-	/// Creates a dictionary from an array of items.
-	/// - Parameter items: array whose elements will become values in the dictionary
-	/// - Parameter key: function that returns a key for the given item
-	public init(items: [Value], key: (Value) -> Key) {
-		self.init()
-		for item in items {
-			self[key(item)] = item
-		}
-	}
-}
-
 public extension DateFormatter {
 	
 	// Adapted from http://codingventures.com/articles/Dating-Swift/
@@ -34,6 +21,19 @@ public extension DateFormatter {
 		formatter.dateFormat = "yyyy-MM-dd"
 		return formatter
 	}()
+}
+
+public extension Dictionary {
+	
+	/// Creates a dictionary from an array of items.
+	/// - Parameter items: array whose elements will become values in the dictionary
+	/// - Parameter key: function that returns a key for the given item
+	public init(items: [Value], key: (Value) -> Key) {
+		self.init()
+		for item in items {
+			self[key(item)] = item
+		}
+	}
 }
 
 public extension JSONDecoder {
