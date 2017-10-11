@@ -33,6 +33,10 @@ public struct FieldMetadata {
 	public var helpText: String? {
 		return inlineHelpText
 	}
+	
+	public var referenceTo: [String]? {
+		return relatedTypes
+	}
 }
 
 extension FieldMetadata: Decodable {
@@ -51,7 +55,7 @@ extension FieldMetadata: Decodable {
 		case length
 		case name
 		case picklistValues
-		case relatedTypes
+		case relatedTypes = "referenceTo"
 		case relationshipName
 		case type
 	}
