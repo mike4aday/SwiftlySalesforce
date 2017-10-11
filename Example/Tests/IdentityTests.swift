@@ -23,11 +23,7 @@ class IdentityTests: XCTestCase, MockData {
     }
 	
 	func testThatItInits() {
-		
-		guard let data = read(fileName: "MockIdentity") else {
-			return XCTFail()
-		}
-		
+		let data = read(fileName: "MockIdentity")!
 		do {
 			let identity = try decoder.decode(Identity.self, from: data)
 			XCTAssertEqual(identity.displayName, "Martin Van Nostrand")
