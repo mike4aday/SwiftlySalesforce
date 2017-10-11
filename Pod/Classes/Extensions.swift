@@ -20,17 +20,25 @@ public extension DateFormatter {
 	
 	// Adapted from http://codingventures.com/articles/Dating-Swift/
 
-	@nonobjc public static let salesforceDateTimeFormatter: DateFormatter = {
+	public static let salesforceDateTimeFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
 		return formatter
 	}()
 	
-	@nonobjc public static let salesforceDateFormatter: DateFormatter = {
+	public static let salesforceDateFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd"
 		return formatter
 	}()
+}
+
+public extension JSONDecoder {
+	
+	public convenience init(dateFormatter: DateFormatter) {
+		self.init()
+		self.dateDecodingStrategy = .formatted(dateFormatter)
+	}
 }
 
 public extension Promise where T == Data {
