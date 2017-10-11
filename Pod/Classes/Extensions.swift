@@ -3,7 +3,7 @@
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2016. All rights reserved.
+//  Copyright (c) 2017. All rights reserved.
 //
 
 public extension DateFormatter {
@@ -45,18 +45,7 @@ public extension JSONDecoder {
 }
 
 public extension Promise where T == Data {
-	
-	/// Decode the HTTP response as a JSON dictionary
-	public func asJSON() -> Promise<[String: Any]> {
-		return then {
-			(data) -> [String: Any] in
-			guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments), let dict = json as? [String: Any] else {
-				throw SalesforceError.deserializationError(message: "Unable to deserialize JSON dictionary from data.")
-			}
-			return dict
-		}
-	}
-	
+
 	/// Convert Data to UIImage. Borrowed from PromiseKit - see:
 	/// https://github.com/PromiseKit/Foundation/blob/06ba5746d8bdfed3dde17679ef20d37922de867f/Sources/URLDataPromise.swift
 	public func asImage(on queue: DispatchQueue = DispatchQueue.global(qos: .userInitiated)) -> Promise<UIImage> {
