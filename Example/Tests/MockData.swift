@@ -34,4 +34,11 @@ extension MockData {
 		}
 		return dict
 	}
+	
+	func readString(from fileName: String, ofType: String = "txt") -> String? {
+		guard let data = read(fileName: fileName, ofType: ofType) else {
+			return nil
+		}
+		return String(data: data, encoding: .utf8)
+	}
 }
