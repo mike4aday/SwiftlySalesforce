@@ -201,7 +201,7 @@ open class ConnectedApp {
 			}.then {
 				(token: String) -> Promise<Void> in
 				let resource = Resource.revoke(token: token, host: self.loginHost)
-				return Requestor.data(connectedApp: self, session: URLSession.shared).request(resource: resource).asVoid()
+				return Requestor.data.request(resource: resource, connectedApp: self).asVoid()
 			}
 			self.promisedRevocation = promise
 			return promise
@@ -213,7 +213,7 @@ open class ConnectedApp {
 	/// - Returns: Promise of OAuth2Result
 	private func refresh(refreshToken: String) -> Promise<OAuth2Result> {
 		let resource = Resource.refresh(refreshToken: refreshToken, consumerKey: consumerKey, host: loginHost)
-		return Requestor.data(connectedApp: self, session: URLSession.shared).request(resource: resource).asString().then {
+		return Requestor.data.request(resource: resource, connectedApp: self).asString().then {
 			(urlEncodedString) -> OAuth2Result in
 			return try OAuth2Result(urlEncodedString: urlEncodedString, refreshToken: refreshToken)
 		}

@@ -9,7 +9,7 @@
 import Foundation
 
 internal enum Requestor {
-	case data(connectedApp: ConnectedApp, session: URLSession)
+	case data
 }
 	
 extension Requestor {
@@ -50,11 +50,11 @@ extension Requestor {
 		}
 	}
 	
-	internal func request(resource: Resource, responseHandler: @escaping ResponseHandler = Requestor.defaultResponseHandler) -> Promise<Data> {
+	internal func request(resource: Resource, connectedApp: ConnectedApp, session: URLSession = URLSession.shared, responseHandler: @escaping ResponseHandler = Requestor.defaultResponseHandler) -> Promise<Data> {
 		
 		switch self {
 
-		case let .data(connectedApp, session):
+		case .data:
 			
 			let go = {
 				(req: URLRequest) -> Promise<Data> in

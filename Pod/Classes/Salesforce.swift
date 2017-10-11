@@ -16,6 +16,9 @@ open class Salesforce {
 	/// Default Salesforce API version
 	static public let defaultVersion = "40.0" // Summer '17
 	
+	/// Related Connected App
+	public private(set) var connectedApp: ConnectedApp
+	
 	/// API version used for requests
 	public var version: String
 	
@@ -27,10 +30,10 @@ open class Salesforce {
 	
 	/// Initializer
 	public init(connectedApp: ConnectedApp, version: String = Salesforce.defaultVersion) {
+		self.connectedApp = connectedApp
 		self.version = version
-		self.requestor = Requestor.data(connectedApp: connectedApp, session: URLSession.shared)
-		self.decoder = JSONDecoder()
-		self.decoder.dateDecodingStrategy = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.salesforceDateTimeFormatter)
+		self.requestor = Requestor.data
+		self.decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	}
 	
 	/// Asynchronously requests information about the current user
@@ -43,7 +46,8 @@ open class Salesforce {
 			}
 			return try Requestor.defaultResponseHandler(data, response, error)
 		}
-		return requestor.request(resource: .identity(version: version), responseHandler: handler).then(on: q) {
+		let resource = Resource.identity(version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp, responseHandler: handler).then(on: q) {
 			return try self.decoder.decode(Identity.self, from: $0)
 		}
 	}
@@ -52,7 +56,8 @@ open class Salesforce {
 	/// - Returns: Promise of a dictionary of Limits, keyed by limit name
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
 	open func limits() -> Promise<[String:Limit]> {
-		return requestor.request(resource: .limits(version: version)).then(on: q) {
+		let resource = Resource.limits(version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode([String:Limit].self, from: $0)
 		}
 	}
@@ -62,7 +67,8 @@ open class Salesforce {
 	/// - Parameter soql: SOQL query
 	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as type 'T'
 	open func query<T: Decodable>(soql: String) -> Promise<QueryResult<T>> {
-		return requestor.request(resource: .query(soql: soql, version: version)).then(on: q) {
+		let resource = Resource.query(soql: soql, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode(QueryResult<T>.self, from: $0)
 		}
 	}
@@ -72,7 +78,8 @@ open class Salesforce {
 	/// - Parameter soql: SOQL query
 	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as SObjects
 	open func query(soql: String) -> Promise<QueryResult<SObject>> {
-		return requestor.request(resource: .query(soql: soql, version: version)).then(on: q) {
+		let resource = Resource.query(soql: soql, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode(QueryResult<SObject>.self, from: $0)
 		}
 	}
@@ -100,7 +107,8 @@ open class Salesforce {
 	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
 	/// - Returns: Promise of a QueryResult
 	open func queryNext<T: Decodable>(path: String) -> Promise<QueryResult<T>> {
-		return requestor.request(resource: .queryNext(path: path)).then(on: q) {
+		let resource = Resource.queryNext(path: path)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode(QueryResult<T>.self, from: $0)
 		}
 	}
@@ -110,7 +118,8 @@ open class Salesforce {
 	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
 	/// - Returns: Promise of a QueryResult
 	open func queryNext(path: String) -> Promise<QueryResult<SObject>> {
-		return requestor.request(resource: .queryNext(path: path)).then(on: q) {
+		let resource = Resource.queryNext(path: path)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode(QueryResult<SObject>.self, from: $0)
 		}
 	}
@@ -121,7 +130,8 @@ open class Salesforce {
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
 	open func retrieve<T: Decodable>(type: String, id: String, fields: [String]? = nil) -> Promise<T> {
-		return requestor.request(resource: .retrieve(type: type, id: id, fields: fields, version: version)).then(on: q) {
+		let resource = Resource.retrieve(type: type, id: id, fields: fields, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode(T.self, from: $0)
 		}
 	}
@@ -132,7 +142,8 @@ open class Salesforce {
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
 	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<SObject> {
-		return requestor.request(resource: .retrieve(type: type, id: id, fields: fields, version: version)).then(on: q) {
+		let resource = Resource.retrieve(type: type, id: id, fields: fields, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode(SObject.self, from: $0)
 		}
 	}
@@ -162,7 +173,8 @@ open class Salesforce {
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
 	open func insert(type: String, fields: [String: Any]) -> Promise<String> {
-		return requestor.request(resource: .insert(type: type, fields: fields, version: version)).asJSON().then(on: q) {
+		let resource = Resource.insert(type: type, fields: fields, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).asJSON().then(on: q) {
 			(json) -> String in
 			guard let id = json["id"] as? String else {
 				throw SalesforceError.deserializationError(message: "Unable to deserialize ID of inserted record.")
@@ -177,7 +189,8 @@ open class Salesforce {
 	/// - Parameter fields: Dictionary of field name and field value pairs.
 	/// - Returns: Promise<Void>
 	open func update(type: String, id: String, fields: [String: Any]) -> Promise<Void> {
-		return requestor.request(resource: .update(type: type, id: id, fields: fields, version: version)).asVoid()
+		let resource = Resource.update(type: type, id: id, fields: fields, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).asVoid()
 	}
 	
 	/// Asynchronously deletes a record
@@ -185,7 +198,8 @@ open class Salesforce {
 	/// - Parameter id: Unique ID of record to be deleted
 	/// - Returns: Promise<Void>
 	open func delete(type: String, id: String) -> Promise<Void> {
-		return requestor.request(resource: .delete(type: type, id: id, version: version)).asVoid()
+		let resource = Resource.delete(type: type, id: id, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).asVoid()
 	}
 	
 	/// Asynchronously retrieves metadata about a Salesforce object and its fields.
@@ -193,7 +207,8 @@ open class Salesforce {
 	/// - Parameter type: Object name
 	/// - Returns: Promise<ObjectDescription>
 	open func describe(type: String) -> Promise<ObjectMetadata> {
-		return requestor.request(resource: .describe(type: type, version: version)).then(on: q) {
+		let resource = Resource.describe(type: type, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode(ObjectMetadata.self, from: $0)
 		}
 	}
@@ -210,7 +225,8 @@ open class Salesforce {
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
 	/// - Returns: Promise of an array of ObjectDescriptions
 	open func describeAll() -> Promise<[ObjectMetadata]> {
-		return requestor.request(resource: .describeGlobal(version: version)).then(on: q) {
+		let resource = Resource.describeGlobal(version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			return try self.decoder.decode([ObjectMetadata].self, from: $0)
 		}
 	}
@@ -220,7 +236,8 @@ open class Salesforce {
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	open func fetchImage(path: String) -> Promise<UIImage> {
-		return requestor.request(resource: .custom(method: .get, baseURL: nil, path: path, parameters: nil, headers: ["Accept": "image/*"])).asImage(on: q)
+		let resource = Resource.custom(method: .get, baseURL: nil, path: path, parameters: nil, headers: ["Accept": "image/*"])
+		return requestor.request(resource: resource, connectedApp: connectedApp).asImage(on: q)
 	}
 	
 	/// Asynchronously retrieves an image at the given path.
@@ -228,26 +245,28 @@ open class Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	open func fetchImage(url: URL) -> Promise<UIImage> {
-		return requestor.request(resource: .custom(method: .get, baseURL: url, path: nil, parameters: nil, headers: ["Accept": "image/*"])).asImage(on: q)
+		let resource = Resource.custom(method: .get, baseURL: url, path: nil, parameters: nil, headers: ["Accept": "image/*"])
+		return requestor.request(resource: resource, connectedApp: connectedApp).asImage(on: q)
 	}
 	
 	/// Use this method to register your device to receive push notifications from the Salesforce Universal Push Notification service.
 	/// - Parameter devicetoken: the device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
 	/// - Returns: Promise of JSON dictionary containing successful registration information
 	open func registerForNotifications(deviceToken: String) -> Promise<[String: Any]> {
-		return requestor.request(resource: .registerForNotifications(deviceToken: deviceToken, version: version)).asJSON()
+		let resource = Resource.registerForNotifications(deviceToken: deviceToken, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).asJSON()
 	}
 		
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.
 	/// See https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST
-	/// The endpoint's response should be JSON-formatted.
 	/// - Parameter method: HTTP method
 	/// - Parameter path: String that gets appended to instance URL; should begin with "/"
 	/// - Parameter parameters: Dictionary of parameter name/value pairs
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
 	open func apex(method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		return requestor.request(resource: .apex(method: method, path: path, parameters: parameters, headers: headers))
+		let resource = Resource.apex(method: method, path: path, parameters: parameters, headers: headers)
+		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
 
 	/// Use this method to call a Salesforce REST API endpoint that's not covered by the other methods.
@@ -259,6 +278,7 @@ open class Salesforce {
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
 	open func custom(method: HTTPMethod = .get, baseURL: URL? = nil, path: String? = nil, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		return requestor.request(resource: .custom(method: method, baseURL: baseURL, path: path, parameters: parameters, headers: headers))
+		let resource = Resource.custom(method: method, baseURL: baseURL, path: path, parameters: parameters, headers: headers)
+		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
 }
