@@ -11,11 +11,10 @@ import XCTest
 
 class AddressTests: XCTestCase, MockData {
 	
-	var json: [String: Any]!
+	let decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	
 	override func setUp() {
 		super.setUp()
-		json = readJSONDictionary(fileName: "MockAddress")!
 	}
 	
     override func tearDown() {
@@ -24,21 +23,18 @@ class AddressTests: XCTestCase, MockData {
     
 	func testThatItInits() {
 		
-		// Given
+		let data = read(fileName: "MockAddress", ofType: "json")!
+		let address = try! decoder.decode(Address.self, from: data)
 		
-		// When
-		let address = Address(json: json)
-		
-		// Then
-		XCTAssertEqual(address.city, "Paris")
-		XCTAssertEqual(address.country, "France")
-		XCTAssertEqual(address.countryCode, "FR")
-		XCTAssertEqual(address.geocodeAccuracy, Address.GeocodeAccuracy.street)
-		XCTAssertEqual(address.latitude, 47.84627258324638)
-		XCTAssertEqual(address.longitude, 3.3549643597681116)
-		XCTAssertEqual(address.postalCode, "75251")
-		XCTAssertNil(address.state)
+		XCTAssertEqual(address.city, "Burlington")
+		XCTAssertEqual(address.country, "USA")
+		XCTAssertNil(address.countryCode)
+		XCTAssertEqual(address.geocodeAccuracy, Address.GeocodeAccuracy.block)
+		XCTAssertEqual(address.latitude, 36.090709)
+		XCTAssertEqual(address.longitude, -79.437266)
+		XCTAssertEqual(address.postalCode, "27215")
+		XCTAssertEqual(address.state, "NC")
 		XCTAssertNil(address.stateCode)
-		XCTAssertEqual(address.street, "21 Place Jussieu")
+		XCTAssertEqual(address.street, "525 S. Lexington Ave.")
 	}
 }
