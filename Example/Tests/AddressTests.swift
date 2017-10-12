@@ -11,10 +11,11 @@ import XCTest
 
 class AddressTests: XCTestCase, MockData {
 	
-	let decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
+	let decoder = JSONDecoder()
 	
 	override func setUp() {
 		super.setUp()
+		decoder.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateFormatter)
 	}
 	
     override func tearDown() {
