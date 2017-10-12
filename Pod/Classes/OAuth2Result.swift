@@ -49,7 +49,7 @@ internal struct OAuth2Result {
 			let accessToken = url.value(forQueryItem: "access_token"),
 			let instanceURL = URL(string: url.value(forQueryItem: "instance_url")),
 			let identityURL = URL(string: url.value(forQueryItem: "id")) else {
-			throw ApplicationError.invalidArgument(message: "Invalid URL-encoded string: \(urlEncodedString)")
+				throw ResponseError.invalidAuthorizationData
 		}
 		
 		let refreshToken = refreshToken ?? url.value(forQueryItem: "refresh_token")

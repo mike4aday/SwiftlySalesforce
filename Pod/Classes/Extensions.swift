@@ -36,14 +36,6 @@ public extension Dictionary {
 	}
 }
 
-public extension JSONDecoder {
-	
-	public convenience init(dateFormatter: DateFormatter) {
-		self.init()
-		self.dateDecodingStrategy = .formatted(dateFormatter)
-	}
-}
-
 public extension Promise where T == Data {
 
 	/// Convert Data to UIImage. Borrowed from PromiseKit - see:
@@ -52,7 +44,7 @@ public extension Promise where T == Data {
 		return then(on: queue) {
 			data -> UIImage in
 			guard let img = UIImage(data: data), let cgimg = img.cgImage else {
-				throw SalesforceError.deserializationError(message: "Unable to deserialize image from data.")
+				throw ResponseError.invalidImageData
 			}
 			// This way of decoding the image limits main thread impact when displaying the image
 			return UIImage(cgImage: cgimg, scale: img.scale, orientation: img.imageOrientation)
@@ -64,7 +56,7 @@ public extension Promise where T == Data {
 		return then {
 			data -> String in
 			guard let str = String(bytes: data, encoding: .utf8) else {
-				throw SalesforceError.deserializationError(message: "Unable to deserialize string from data.")
+				throw ResponseError.invalidStringData
 			}
 			return str
 		}

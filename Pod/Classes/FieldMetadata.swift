@@ -25,8 +25,8 @@ public struct FieldMetadata {
 	public let label: String
 	public let length: UInt?
 	public let name: String
-	public let picklistValues: [PicklistItemMetadata]?
-	public let relatedTypes: [String]?
+	public let picklistValues: [PicklistItemMetadata]
+	public let relatedTypes: [String]
 	public let relationshipName: String?
 	public let type: String
 	
@@ -87,8 +87,8 @@ extension FieldMetadata: Decodable {
 		self.label = try container.decode(String.self, forKey: .label)										// Required property
 		self.length = try container.decodeIfPresent(UInt.self, forKey: .length)								// Optional property
 		self.name = try container.decode(String.self, forKey: .name)										// Required property
-		self.picklistValues = try container.decodeIfPresent([PicklistItemMetadata].self, forKey: .picklistValues)	// Optional property
-		self.relatedTypes = try container.decodeIfPresent([String].self, forKey: .relatedTypes)				// Optional property
+		self.picklistValues = try container.decode([PicklistItemMetadata].self, forKey: .picklistValues)	// Required property
+		self.relatedTypes = try container.decode([String].self, forKey: .relatedTypes)						// Required property
 		self.relationshipName = try container.decodeIfPresent(String.self, forKey: .relationshipName)		// Optional property
 		self.type = try container.decode(String.self, forKey: .type)										// Required property
 	}

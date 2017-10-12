@@ -95,7 +95,7 @@ open class ConnectedApp {
 			"prompt" : "login consent",
 			"display" : "touch" ]
 		guard let comps = URLComponents(string: "https://\(loginHost)/services/oauth2/authorize", parameters: params), let url = comps.url else {
-			throw ApplicationError.invalidState(message: "Cannot construct OAuth2 login URL!")
+			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: nil)
 		}
 		return url
 	}
@@ -115,7 +115,7 @@ open class ConnectedApp {
 		else {
 			// Can't make sense of the redirect URL
 			if let pending = self.pendingAuthorization, pending.promise.isPending {
-				pending.reject(SalesforceError.unsupportedURL(url: redirectURL))
+				pending.reject(ResponseError.invalidAuthorizationData)
 			}
 		}
 	}

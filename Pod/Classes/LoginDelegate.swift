@@ -46,11 +46,11 @@ extension LoginDelegate {
 	public func login(url: URL) throws {
 		
 		guard !loggingIn else {
-			throw ApplicationError.invalidState(message: "Already logging in!")
+			throw ApplicationError.invalidState(message: "Login already in progress.")
 		}
 		
 		guard let window = UIApplication.shared.keyWindow else {
-			throw ApplicationError.invalidState(message: "No key window!")
+			throw ApplicationError.invalidState(message: "No key window for login view.")
 		}
 		
 		// Replace current root view controller with Safari view controller for login

@@ -30,10 +30,13 @@ open class Salesforce {
 	
 	/// Initializer
 	public init(connectedApp: ConnectedApp, version: String = Salesforce.defaultVersion) {
+		
 		self.connectedApp = connectedApp
 		self.version = version
 		self.requestor = Requestor.data
-		self.decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
+		
+		self.decoder = JSONDecoder()
+		self.decoder.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
 	}
 	
 	/// Asynchronously requests information about the current user
@@ -42,7 +45,7 @@ open class Salesforce {
 		let handler: Requestor.ResponseHandler = {
 			(data, response, error) throws -> Data in
 			guard let resp = response as? HTTPURLResponse, resp.statusCode != 403 else {
-				throw SalesforceError.userAuthenticationRequired
+				throw RequestError.userAuthenticationRequired
 			}
 			return try Requestor.defaultResponseHandler(data, response, error)
 		}
@@ -174,12 +177,13 @@ open class Salesforce {
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
 	open func insert(type: String, fields: [String: Any]) -> Promise<String> {
 		let resource = Resource.insert(type: type, fields: fields, version: version)
-		return requestor.request(resource: resource, connectedApp: connectedApp).asJSON().then(on: q) {
-			(json) -> String in
-			guard let id = json["id"] as? String else {
-				throw SalesforceError.deserializationError(message: "Unable to deserialize ID of inserted record.")
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
+			(data: Data) -> String in
+			struct InsertResult: Decodable {
+				var id: String
 			}
-			return id
+			let result: InsertResult = try self.decoder.decode(InsertResult.self, from: data)
+			return result.id
 		}
 	}
 	
@@ -227,7 +231,12 @@ open class Salesforce {
 	open func describeAll() -> Promise<[ObjectMetadata]> {
 		let resource = Resource.describeGlobal(version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
-			return try self.decoder.decode([ObjectMetadata].self, from: $0)
+			(data: Data) -> [ObjectMetadata] in
+			struct DescribeAllResult: Decodable {
+				var sobjects: [ObjectMetadata]
+			}
+			let result: DescribeAllResult = try self.decoder.decode(DescribeAllResult.self, from: data)
+			return result.sobjects
 		}
 	}
 	
@@ -251,10 +260,17 @@ open class Salesforce {
 	
 	/// Use this method to register your device to receive push notifications from the Salesforce Universal Push Notification service.
 	/// - Parameter devicetoken: the device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
-	/// - Returns: Promise of JSON dictionary containing successful registration information
-	open func registerForNotifications(deviceToken: String) -> Promise<[String: Any]> {
+	/// - Returns: Promise of a String which holds the ID of the newly-inserted MobilePushServiceDevice record
+	open func registerForNotifications(deviceToken: String) -> Promise<String> {
 		let resource = Resource.registerForNotifications(deviceToken: deviceToken, version: version)
-		return requestor.request(resource: resource, connectedApp: connectedApp).asJSON()
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
+			(data: Data) -> String in
+			struct InsertResult: Decodable {
+				var id: String
+			}
+			let result: InsertResult = try self.decoder.decode(InsertResult.self, from: data)
+			return result.id
+		}
 	}
 		
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.

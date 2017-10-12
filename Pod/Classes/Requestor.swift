@@ -21,16 +21,20 @@ extension Requestor {
 		if let error = error {
 			throw error
 		}
-		guard let resp = response, let httpResp = resp as? HTTPURLResponse, let data = data else {
-			throw  SalesforceError.unexpectedResponse(response: response)
+		guard let response = response else {
+			throw ResponseError.unknown(message: "Missing response.")
+		}
+		guard let httpResp = response as? HTTPURLResponse, let data = data else {
+			// Not an HTTP response, or missing data
+			throw ResponseError.unhandledResponse(response: response)
 		}
 		switch httpResp.statusCode {
 		case 200..<300:
 			return data
 		case 401:
-			throw SalesforceError.userAuthenticationRequired
+			throw RequestError.userAuthenticationRequired
 		case 404:
-			throw SalesforceError.resourceNotFound
+			throw RequestError.resourceNotFound
 		case 400..<500:
 			// Try to form error from Salesforce's response
 			// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/errorcodes.htm
@@ -38,15 +42,15 @@ extension Requestor {
 				let firstError = json?[0],
 				let errorCode = firstError["errorCode"] as? String,
 				let message = firstError["message"] as? String {
-				throw SalesforceError.resourceException(code: errorCode, message: message, fields: firstError["fields"] as? [String])
+				throw RequestError.resourceException(code: errorCode, message: message, fields: firstError["fields"] as? [String])
 			}
 			else {
-				throw SalesforceError.unexpectedResponse(response: response)
+				throw ResponseError.unhandledResponse(response: response)
 			}
 		case 500:
-			throw SalesforceError.serverFailure
+			throw RequestError.serverFailure
 		default:
-			throw SalesforceError.unexpectedResponse(response: response)
+			throw ResponseError.unhandledResponse(response: response)
 		}
 	}
 	
@@ -79,13 +83,13 @@ extension Requestor {
 					fulfill(auth)
 				}
 				else {
-					reject(SalesforceError.userAuthenticationRequired)
+					reject(RequestError.userAuthenticationRequired)
 				}
 			}.then {
 				return try go(resource.asURLRequest(authData: $0))
 			}.recover {
 				(error: Error) -> Promise<Data> in
-				if case SalesforceError.userAuthenticationRequired = error {
+				if case RequestError.userAuthenticationRequired = error {
 					return connectedApp.authorize().then {
 						return try go(resource.asURLRequest(authData: $0))
 					}
