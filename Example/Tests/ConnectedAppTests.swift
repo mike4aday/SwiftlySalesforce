@@ -13,34 +13,25 @@ class ConnectedAppTests: XCTestCase, MockData, LoginDelegate {
 	
 	var consumerKey: String!
 	var redirectURL: URL!
-	var accessToken: String!
-	var refreshToken: String!
+	var authData: OAuth2Result!
 	
 	override func setUp() {
+		
 		super.setUp()
+		
 		let config = readPropertyList(fileName: "OAuth2")!
+		let redirectURLWithAuth = URL(string: config["RedirectURLWithAuthData"] as! String)!
+		
 		consumerKey = config["ConsumerKey"] as! String
-		redirectURL = URL(string: config["RedirectURL"] as! String)!
-		accessToken = config["AccessToken"] as! String
-		refreshToken = config["RefreshToken"] as! String
+		redirectURL = URL(string: redirectURLWithAuth.absoluteString.components(separatedBy: "#")[0])!
+		authData = try! OAuth2Result(urlEncodedString: redirectURLWithAuth.fragment!)
 	}
 	
 	func testThatItFormsCorrectLoginURL() {
 		
-		// Given
-		guard let consumerKey = consumerKey, let redirectURL = redirectURL else {
-			XCTFail()
-			return
-		}
 		let app = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)
+		let loginURL = try! app.loginURL()
 		
-		// When
-		guard let loginURL = try? app.loginURL() else {
-			XCTFail()
-			return
-		}
-		
-		// Then
 		XCTAssertNotNil(loginURL)
 		XCTAssertEqual(loginURL.value(forQueryItem: "response_type"), "token")
 		XCTAssertEqual(loginURL.value(forQueryItem: "client_id"), consumerKey)
