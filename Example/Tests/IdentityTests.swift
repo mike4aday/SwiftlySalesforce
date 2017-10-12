@@ -15,7 +15,6 @@ class IdentityTests: XCTestCase, MockData {
 	
     override func setUp() {
 		super.setUp()
-		decoder.dateDecodingStrategy = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.salesforceDateTimeFormatter)
     }
     
     override func tearDown() {
