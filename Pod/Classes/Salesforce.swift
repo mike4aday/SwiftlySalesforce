@@ -35,8 +35,7 @@ open class Salesforce {
 		self.version = version
 		self.requestor = Requestor.data
 		
-		self.decoder = JSONDecoder()
-		self.decoder.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
+		self.decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	}
 	
 	/// Asynchronously requests information about the current user

@@ -36,6 +36,14 @@ public extension Dictionary {
 	}
 }
 
+public extension JSONDecoder {
+	
+	convenience init(dateFormatter: DateFormatter) {
+		self.init()
+		self.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
+	}
+}
+
 public extension Promise where T == Data {
 
 	/// Convert Data to UIImage. Borrowed from PromiseKit - see:
