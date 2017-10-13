@@ -29,7 +29,7 @@ open class ConnectedApp {
 						try OAuth2ResultStore.store(key: key, value: authData)
 					}
 					catch {
-						debugPrint("Unable to save OAuth2 result to secure storage! Error: \(error)")
+						debugPrint("Unable to save OAuth2 result to secure storage! Error: \(String(describing: error))")
 					}
 				}
 				else {
@@ -38,7 +38,7 @@ open class ConnectedApp {
 						try OAuth2ResultStore.clear(key: key)
 					}
 					catch {
-						debugPrint("Unable to clear OAuth2 result from secure storage! Error: \(error)")
+						debugPrint("Unable to clear OAuth2 result from secure storage! Error: \(String(describing: error))")
 					}
 				}
 			}
