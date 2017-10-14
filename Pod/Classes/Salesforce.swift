@@ -67,7 +67,7 @@ open class Salesforce {
 	/// Asynchronsouly executes a SOQL query.
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: SOQL query
-	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as type 'T'
+	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as generic type 'T'
 	open func query<T: Decodable>(soql: String) -> Promise<QueryResult<T>> {
 		let resource = Resource.query(soql: soql, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
