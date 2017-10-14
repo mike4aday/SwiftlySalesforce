@@ -15,9 +15,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 	var salesforce: Salesforce!
 	
 	override func setUp() {
-		
 		super.setUp()
-		
 		let config = readPropertyList(fileName: "OAuth2")!
 		let consumerKey = config["ConsumerKey"] as! String
 		let redirectURLWithAuth = URL(string: config["RedirectURLWithAuthData"] as! String)!
@@ -25,16 +23,13 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 	}
 	
 	override func tearDown() {
-		
 		super.tearDown()
-		// Uncomment lines below to force refresh with each request
-		//let consumerKey = config["ConsumerKey"] as! String
-		//let key = OAuth2ResultStore.Key(userID: "TEST_USER_ID", orgID: "TEST_ORG_ID", consumerKey: consumerKey)
-		//try! OAuth2ResultStore.clear(key: key)
 	}
 	
 	func testThatItGetsIdentity() {
+		
 		let exp = expectation(description: "Identity")
+		
 		salesforce.identity().then {
 			identity -> () in
 			XCTAssertEqual(identity.userID, self.salesforce.connectedApp.authData!.userID)
@@ -44,11 +39,14 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			error in
 			XCTFail(String(describing: error))
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
 	func testThatItGetsLimits() {
+		
 		let exp = expectation(description: "limits")
+		
 		salesforce.limits()
 			.then {
 				limits -> () in
@@ -58,12 +56,15 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				error in
 				XCTFail(String(describing: error))
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
 	func testThatItQueriesNoRecords() {
+		
 		let soql = "SELECT Id FROM Account WHERE CreatedDate > NEXT_WEEK"
 		let exp = expectation(description: "Query")
+		
 		salesforce.query(soql: soql)
 			.then {
 				queryResult -> () in
@@ -76,6 +77,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				error in
 				XCTFail(String(describing: error))
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
@@ -104,6 +106,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		}.catch {
 			XCTFail($0.localizedDescription)
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
@@ -127,6 +130,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			}.catch {
 				XCTFail(String(describing: $0))
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
@@ -185,6 +189,89 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
+	func testThatItPerformsMultipleQueries() {
+		
+		let exp = expectation(description: "Multiple queries")
+		
+		// Insert multiple records
+		let accountFields = ["Name": "Corp1, Inc.", "Website": "http://www.mycorp1.com"]
+		let contactFields = ["FirstName": "Joseph", "LastName": "Jones", "Email": "jj@mycorp1.com", "Phone": "+1 212-555-1212"]
+		fulfill(salesforce.insert(type: "Account", fields: accountFields), salesforce.insert(type: "Contact", fields: contactFields)).then {
+			(accountID: String, contactID: String) -> Promise<Array<QueryResult<SObject>>> in
+			let accountQuery = "SELECT Id, Name, Website FROM Account WHERE Id = '\(accountID)'"
+			let contactQuery = "SELECT FirstName, LastName, Email, LastModifiedDate FROM Contact WHERE Id = '\(contactID)'"
+			return self.salesforce.query(soql: [accountQuery, contactQuery])
+		}.then {
+			(queryResults: [QueryResult<SObject>]) -> () in
+			
+			XCTAssert(queryResults.count == 2)
+			
+			let account = queryResults[0].records[0]
+			XCTAssertEqual(account.type, "Account")
+			guard let name: String = try account.value(named: "Name"), let website: URL = try account.value(named: "Website") else {
+				return XCTFail()
+			}
+			XCTAssertEqual(name, try account.string(named: "Name"))
+			XCTAssertEqual(website, try account.url(named: "Website"))
+			
+			let contact = queryResults[1].records[0]
+			XCTAssertEqual(contact.type, "Contact")
+			guard let firstName: String = try contact.value(named: "FirstName"),
+				let lastName: String = try contact.value(named: "LastName"),
+				let email: String = try contact.value(named: "Email"),
+				let modDate: Date = try contact.value(named: "LastModifiedDate") else {
+				return XCTFail()
+			}
+			XCTAssertEqual(lastName, try contact.string(named: "LastName"))
+			XCTAssertEqual(firstName, try contact.string(named: "FirstName"))
+			XCTAssertEqual(email, try contact.string(named: "Email"))
+			XCTAssertEqual(modDate, try contact.date(named: "LastModifiedDate"))
+			
+			exp.fulfill()
+		}.catch {
+			XCTFail(String(describing: $0))
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItRetrievesAndUpdatesAndDecodes() {
+		
+		struct MyAccount: Decodable {
+			var attributes: RecordAttributes
+			var Name: String
+			var LastModifiedDate: String
+			var Website: URL?
+		}
+		
+		let exp = expectation(description: "Retrieve and decode")
+
+		salesforce.insert(type: "Account", fields: ["Name": "Important Corp., Inc.", "Website": "http://importantcorp.com"]).then {
+			(id: String) -> Promise<MyAccount> in
+			return self.salesforce.retrieve(type: "Account", id: id)
+		}.then {
+			(account: MyAccount) -> String in
+			XCTAssertEqual(account.Name, "Important Corp., Inc.")
+			XCTAssertEqual(account.Website, URL(string: "http://importantcorp.com"))
+			XCTAssertNotNil(account.LastModifiedDate)
+			return account.attributes.id
+		}.then {
+			(id: String) -> Promise<String> in
+			return self.salesforce.update(type: "Account", id: id, fields: ["Name": "My New Corp."]).then { id }
+		}.then {
+			(id: String) -> Promise<MyAccount> in
+			return self.salesforce.retrieve(type: "Account", id: id)
+		}.then {
+			(account: MyAccount) -> () in
+			XCTAssertEqual(account.Name, "My New Corp.")
+			exp.fulfill()
+		}.catch {
+			XCTFail(String(describing: $0))
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
 	func testThatItFailsToRetrieve() {
 		
 		let type = "Account"
@@ -201,6 +288,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				error in
 				exp.fulfill()
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
@@ -224,6 +312,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			error in
 			XCTFail(String(describing: error))
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
@@ -255,6 +344,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			error in
 			XCTFail(String(describing: error))
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
@@ -265,7 +355,6 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		
 		salesforce.describe(type: type)
 			.then {
-				// Then
 				(desc: ObjectMetadata) -> () in
 				let fields = Dictionary(items: desc.fields!) { $0.name }
 				XCTAssertEqual(desc.name, "Account")
@@ -317,16 +406,15 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				debugPrint(error)
 				exp.fulfill()
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
 	func testThatItDescribesMultipleObjects() {
 		
-		// Given
 		let types = ["Event", "Account", "Contact", "Lead", "Task"]
-		
-		// When
 		let exp = expectation(description: "Describe multiple objects")
+		
 		first {
 			salesforce.describe(types: types)
 			}.then {
@@ -338,16 +426,15 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				error in
 				XCTFail(error.localizedDescription)
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
 	func testThatItFailsToDescribesMultipleObjects() {
 		
-		// Given
 		let types = ["Event", "XXXXXXXXX", "Contact", "Lead", "Task"]
-		
-		// When
 		let exp = expectation(description: "Describe multiple objects")
+		
 		first {
 			salesforce.describe(types: types)
 			}.then {
@@ -358,11 +445,14 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				debugPrint(error)
 				exp.fulfill()
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
 	func testThatItFetchesImage() {
+		
 		let exp = expectation(description: "Fetch photo for user")
+		
 		first {
 			salesforce.identity()
 		}.then {
@@ -381,6 +471,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			(error: Error) in
 			XCTFail(error.localizedDescription)
 		}
+		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 }
