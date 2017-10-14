@@ -13,15 +13,11 @@ class ExtensionTests: XCTestCase {
     
 	func testThatItParsesSalesforceDateTime() {
 		
-		// Given
 		let dateString = "2015-09-21T13:31:23.909+0000"
-		
-		// When
 		let date = DateFormatter.salesforceDateTimeFormatter.date(from: dateString)
-		
-		// Then
-		XCTAssertNotNil(date)
 		let comps = Calendar(identifier: .gregorian).dateComponents(in: TimeZone(abbreviation: "GMT")!, from: date!)
+
+		XCTAssertNotNil(date)
 		XCTAssertEqual(comps.year, 2015)
 		XCTAssertEqual(comps.month, 9)
 		XCTAssertEqual(comps.day, 21)
@@ -32,13 +28,9 @@ class ExtensionTests: XCTestCase {
 	
 	func testThatItParsesSalesforceDate() {
 		
-		// Given
 		let dateString = "2015-09-21"
-		
-		// When
 		let date = DateFormatter.salesforceDateFormatter.date(from: dateString)
 		
-		// Then
 		XCTAssertNotNil(date)
 		let comps = Calendar(identifier: .gregorian).dateComponents(in: TimeZone(abbreviation: "GMT")!, from: date!)
 		XCTAssertEqual(comps.year, 2015)
@@ -48,16 +40,23 @@ class ExtensionTests: XCTestCase {
 	
 	func testThatItInitializesURLWithOptionalString() {
 		
-		// Given
 		let s1: String? = nil
 		let s2: String? = "www.salesforce.com"
-		
-		// When
 		let url1 = URL(string: s1)
 		let url2 = URL(string: s2)
 		
-		// Then
 		XCTAssertNil(url1)
 		XCTAssertNotNil(url2)
+	}
+	
+	func testThatItGetsQueryItemsFromURL() {
+		
+		let url = URL(string: "https://www.salesforce.com/test?name1=value1&name2=value2")!
+		let url2 = URL(string: "https://www.salesforce.com/test")!
+
+		XCTAssertEqual(url.value(forQueryItem: "name1"), "value1")
+		XCTAssertEqual(url.value(forQueryItem: "name2"), "value2")
+		XCTAssertNil(url.value(forQueryItem: "SOMETHING"))
+		XCTAssertNil(url2.value(forQueryItem: "SOMETHING"))
 	}
 }
