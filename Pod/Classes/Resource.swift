@@ -7,7 +7,6 @@
 //
 
 public enum Resource {
-	
 	case identity(version: String)
 	case limits(version: String)
 	case query(soql: String, version: String)
@@ -21,24 +20,26 @@ public enum Resource {
 	case registerForNotifications(deviceToken: String, version: String)
 	case apex(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?)
 	case custom(method: HTTPMethod, baseURL: URL?, path: String?, parameters: [String: Any]?, headers: [String: String]?)
-	
 	case revoke(token: String, host: String)
 	case refresh(refreshToken: String, consumerKey: String, host: String)
 }
 
-public enum HTTPMethod: String {
-	case options = "OPTIONS"
-	case get     = "GET"
-	case head    = "HEAD"
-	case post    = "POST"
-	case put     = "PUT"
-	case patch   = "PATCH"
-	case delete  = "DELETE"
-	case trace   = "TRACE"
-	case connect = "CONNECT"
+public extension Resource {
+	
+	public enum HTTPMethod: String {
+		case options = "OPTIONS"
+		case get     = "GET"
+		case head    = "HEAD"
+		case post    = "POST"
+		case put     = "PUT"
+		case patch   = "PATCH"
+		case delete  = "DELETE"
+		case trace   = "TRACE"
+		case connect = "CONNECT"
+	}
 }
 
-extension Resource {
+internal extension Resource {
 	
 	private var parts: (method: HTTPMethod, path: String?, parameters: [String: Any]?, headers: [String: String]?) {
 		
