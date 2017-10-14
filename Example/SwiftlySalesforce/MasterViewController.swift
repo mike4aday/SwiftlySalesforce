@@ -83,6 +83,7 @@ final class MasterViewController: UITableViewController {
 		}.catch {
 			// Handle any errors
 			(error) -> () in
+			debugPrint(String(describing: error))
 			self.alert(title: "Error!", error: error)
 		}
 	}
@@ -105,7 +106,7 @@ extension MasterViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell")!
 		if let task = TaskStore.shared.cache?[indexPath.row], let subject = task.subject, let status = task.status  {
 			cell.textLabel?.text = "\(subject) (Status: \(status))"
-			cell.detailTextLabel?.text = task.whatName
+			cell.detailTextLabel?.text = task.relatedRecord?.name
 		}
 		return cell
 	}
@@ -121,7 +122,7 @@ extension UIViewController {
 	}
 	
 	func alert(title: String, error: Error) {
-		return alert(title: title, message: "\(error)")
+		return alert(title: title, message: error.localizedDescription)
 	}
 	
 }

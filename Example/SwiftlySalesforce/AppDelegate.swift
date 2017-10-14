@@ -18,11 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkilGsk4LZyd6CEZMDwzLsC7va_YcNdbUHOdyGO1TShxLDU5kuN6C4KsJMbyWb"
 	let redirectURL = URL(string: "taskforce://authorized")!
 	
+	var connectedApp: ConnectedApp!
 	var window: UIWindow?
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
-		salesforce = Salesforce(connectedApp: ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self))
+		connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)
+		salesforce = Salesforce(connectedApp: connectedApp)
 		
         //uncomment if you want to receive push notifications, including those 
         //from salesforce's universal notification service
@@ -32,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 	}
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-		handleRedirectURL(url, for: salesforce.connectedApp) 
+		handleRedirectURL(url, for: connectedApp)
 		return true
 	}
     

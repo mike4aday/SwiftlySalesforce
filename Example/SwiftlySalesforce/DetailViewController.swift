@@ -14,7 +14,7 @@ final class DetailViewController: UITableViewController {
 	@IBOutlet weak var saveButton: UIBarButtonItem!
 	@IBOutlet weak var infoLabel: UILabel!
 	
-	public var statuses: [String]?
+	public var statuses: [String] = Array<String>()
 	public var task: Task? {
 		didSet {
 			selectedStatus = task?.status
@@ -43,8 +43,9 @@ final class DetailViewController: UITableViewController {
 		
 		salesforce.query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder")
 		.then {
-			(result) -> () in
-			self.statuses = result.records.map { $0["MasterLabel"] as? String ?? "N/A" }
+			(result: QueryResult<SObject>) -> () in
+			self.statuses = result.records.flatMap { (try! $0.string(named: "MasterLabel"))  }
+			return 
 		}.always {
 			self.infoLabel.text = "Select task status"
 			self.tableView.reloadData()
@@ -58,14 +59,14 @@ final class DetailViewController: UITableViewController {
 	// Asynchronously save updated Task record
 	func save() {
 		
-		guard let task = self.task, let id = task.id, let selectedStatus = self.selectedStatus, selectedStatus != task.status else {
+		guard let task = self.task, let selectedStatus = self.selectedStatus, selectedStatus != task.status else {
 			return
 		}
 		
 		infoLabel.text = "Saving changes..."
 		
 		let recordUpdate: [String: Any] = ["Status" : selectedStatus]
-		salesforce.update(type: "Task", id: id, fields: recordUpdate)
+		salesforce.update(type: "Task", id: task.id, fields: recordUpdate)
 		.then {
 			(_) -> () in
 			self.alert(title: "Success!", message: "Updated task status to \(selectedStatus)")
@@ -96,20 +97,19 @@ final class DetailViewController: UITableViewController {
 extension DetailViewController {
 	
 	public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.statuses?.count ?? 0
+		return self.statuses.count
 	}
 	
 	public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell")!
-		if let status = statuses?[indexPath.row]  {
-			cell.textLabel?.text = status
-			cell.accessoryType = (status == selectedStatus) ? .checkmark : .none
-		}
+		let status = statuses[indexPath.row]
+		cell.textLabel?.text = status
+		cell.accessoryType = (status == selectedStatus) ? .checkmark : .none
 		return cell
 	}
 	
 	public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		selectedStatus = statuses?[indexPath.row]
+		selectedStatus = statuses[indexPath.row]
 		tableView.reloadData()
 	}
 }

@@ -29,13 +29,13 @@ public final class TaskStore {
 					salesforce.identity()
 				}.then {
 					// Get tasks owned by user
-					userInfo in
-					let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userInfo.userID)' ORDER BY CreatedDate DESC"
+					userInfo -> Promise<QueryResult<Task>> in
+					let soql = "SELECT Id,CreatedDate,Subject,Status,IsHighPriority,What.Name FROM Task WHERE OwnerId = '\(userInfo.userID)' ORDER BY CreatedDate DESC"
 					return salesforce.query(soql: soql)
 				}.then {
 					// Parse JSON into Task instances and cache in memory
 					(result: QueryResult) -> () in
-					let tasks = result.records.map { Task(dictionary: $0) }
+					let tasks = result.records
 					self.cache = tasks
 					fulfill(tasks)
 				}.catch {
