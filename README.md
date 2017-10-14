@@ -88,7 +88,7 @@ salesforce.retrieve(type: "Account", id: "0013000001FjCcF", fields: fields)
 ```
 Note that `retrieve` is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:
 ```swift
-let promise = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
+let promise: Promise<SObject> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
 And you can add a closure that will be called later, when the promise is fulfilled:
 ```swift
@@ -96,7 +96,7 @@ promise.then {
     queryResult in
     for (record: Record) in queryResult.records {		
         debugPrint(record.id)
-	// Do other interesting stuff with the record
+	    // Do other interesting stuff with the record
     }
 }
 ```
