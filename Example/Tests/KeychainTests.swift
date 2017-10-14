@@ -2,8 +2,8 @@
 //  KeychainTests.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 9/10/17.
-//  Copyright © 2017 CocoaPods. All rights reserved.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2017. All rights reserved.
 //
 
 import XCTest

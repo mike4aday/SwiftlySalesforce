@@ -22,7 +22,7 @@ class ResourceTests: XCTestCase {
 		
 		let req = try! Resource.identity(version: "41.0").asURLRequest(authData: authData)
 		
-		XCTAssertEqual(req.httpMethod, HTTPMethod.get.rawValue)
+		XCTAssertEqual(req.httpMethod, Resource.HTTPMethod.get.rawValue)
 		XCTAssertEqual(req.url!.absoluteString, identityURL.absoluteString + "?version=41.0")
 		XCTAssertEqual(req.url!.value(forQueryItem: "version"), "41.0")
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
@@ -39,7 +39,7 @@ class ResourceTests: XCTestCase {
 		let req = try! Resource.retrieve(type: type, id: id, fields: fields, version: version).asURLRequest(authData: authData)
 		
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/data/v41.0/sobjects/Account/12345?fields=Id,Name,Custom1__c")
-		XCTAssertEqual(req.httpMethod, HTTPMethod.get.rawValue)
+		XCTAssertEqual(req.httpMethod, Resource.HTTPMethod.get.rawValue)
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
 	}
 }

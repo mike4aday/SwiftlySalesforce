@@ -2,17 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AccessToken</key>
-	<string>****</string>
-	<key>RefreshToken</key>
-	<string>****</string>
-	<key>InstanceURL</key>
-	<string>****</string>
-	<key>IdentityURL</key>
-	<string>****</string>
+	<key>RedirectURLWithAuthData</key>
+	<string>taskforce://authorized#access_token=00Di0000000bcK3%21AQIAQC2JqvUQO4ouB0je5WAfanV7svszMatm5vAb6vnulZ_s3fmwNZs8MJ9b1jFEXPJ76VFvePUmNXL0lUQBG6Z7.ITs.Ck1&amp;refresh_token=5Aep861z80Xevi74eXM9q084Tn26bOV83QEKcadjxjV78yQRdm3M7Si.njHAui3_jGWtZAVEwCISrwY8IXz7E5Q&amp;instance_url=https%3A%2F%2Fna88.salesforce.com&amp;id=https%3A%2F%2Flogin.salesforce.com%2Fid%2F00Di0000000bcK3EAI%2F005i00000016PdaAAE&amp;issued_at=1507962093073&amp;signature=JijeEVUzjZpD3Dwk5X9oHrdtRUjzpmUb20pKPV8bXUE%3D&amp;scope=api+refresh_token&amp;token_type=Bearer</string>
 	<key>ConsumerKey</key>
-	<string>****</string>
-	<key>RedirectURL</key>
-	<string>****</string>
+	<string>3MVG91ftikjGaMd_SSivaqQgkilGsk4LZyd6CEZMDwzLsC7va_YcNdbUHOdyGO1TShxLDU5kuN6C4KsJMbyWb</string>
 </dict>
 </plist>

@@ -2,8 +2,8 @@
 //  ObjectMetadataTests.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 7/8/17.
-//  Copyright (c) 2017 CocoaPods. All rights reserved.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2017. All rights reserved.
 //
 
 import XCTest
@@ -25,7 +25,7 @@ class ObjectMetadataTests: XCTestCase, MockData {
 		
 		let data = read(fileName: "MockAccountMetadata", ofType: "json")!
 		let desc = try! decoder.decode(ObjectMetadata.self, from: data)
-		let fields = Dictionary(items: desc.fields, key: { $0.name })
+		let fields = Dictionary(items: desc.fields!, key: { $0.name })
 		let field = fields["Type"]!
 
 		XCTAssertTrue(desc.isCreateable)
@@ -39,11 +39,12 @@ class ObjectMetadataTests: XCTestCase, MockData {
 		XCTAssertTrue(desc.isUndeletable)
 		XCTAssertTrue(desc.isUpdateable)
 		XCTAssertEqual(desc.keyPrefix, "001")
+		XCTAssertEqual(desc.keyPrefix, desc.idPrefix)
 		XCTAssertEqual(desc.label, "Account")
 		XCTAssertEqual(desc.name, "Account")
 		XCTAssertEqual(desc.pluralLabel, "Accounts")
 		XCTAssertEqual(desc.pluralLabel, desc.labelPlural)
-		XCTAssertTrue(desc.fields.count > 0)
+		XCTAssertTrue(desc.fields!.count > 0)
 		
 		XCTAssertTrue(field.isCreateable)
 		XCTAssertFalse(field.isCustom)
@@ -67,7 +68,7 @@ class ObjectMetadataTests: XCTestCase, MockData {
 		
 		let data = read(fileName: "MockContactMetadata", ofType: "json")!
 		let desc = try! decoder.decode(ObjectMetadata.self, from: data)
-		let fields = Dictionary(items: desc.fields, key: { $0.name })
+		let fields = Dictionary(items: desc.fields!, key: { $0.name })
 		let field = fields["ReportsToId"]!
 		
 		XCTAssertTrue(desc.isCreateable)
@@ -81,11 +82,12 @@ class ObjectMetadataTests: XCTestCase, MockData {
 		XCTAssertTrue(desc.isUndeletable)
 		XCTAssertTrue(desc.isUpdateable)
 		XCTAssertEqual(desc.keyPrefix, "003")
+		XCTAssertEqual(desc.keyPrefix, desc.idPrefix)
 		XCTAssertEqual(desc.label, "Contact")
 		XCTAssertEqual(desc.name, "Contact")
 		XCTAssertEqual(desc.pluralLabel, "Contacts")
 		XCTAssertEqual(desc.pluralLabel, desc.labelPlural)
-		XCTAssertTrue(desc.fields.count > 0)
+		XCTAssertTrue(desc.fields!.count > 0)
 		
 		XCTAssertTrue(field.isCreateable)
 		XCTAssertFalse(field.isCustom)
