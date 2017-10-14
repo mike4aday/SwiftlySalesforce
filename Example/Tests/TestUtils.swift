@@ -18,8 +18,7 @@ class TestUtils: LoginDelegate {
 	
 	func createSalesforce(consumerKey: String, enrichedRedirectURL: URL) -> Salesforce {
 		let redirectURL = URL(string: enrichedRedirectURL.absoluteString.components(separatedBy: "#")[0])!
-		let key = OAuth2ResultStore.Key(userID: "TEST_USER_ID", orgID: "TEST_ORG_ID", consumerKey: consumerKey)
-		let connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self, storeKey: key)
+		let connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self, userID: "TEST USER ID", orgID: "TEST ORG ID")
 		let authData = try! OAuth2Result(urlEncodedString: enrichedRedirectURL.fragment!)
 		connectedApp.authData = authData
 		return Salesforce(connectedApp: connectedApp)
