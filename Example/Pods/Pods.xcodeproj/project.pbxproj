@@ -37,7 +37,7 @@
 		589B1A2CD00C3798C635098C8621557C /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC5DE1F88BE2C78F59F7D62FEA017A4 /* Salesforce.swift */; };
 		6097F9D309C746CBF8E9D835FCF181A1 /* AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDD0F4DEC7B45ED67BDA259AA0495C /* AnyPromise.m */; };
 		6688051181372A9D6828AE777E56B8B4 /* PMKQuartzCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 67E1D36DCB7BF8A7DEB230733B158119 /* PMKQuartzCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		688D7571C7A111744DE78183B5F3732A /* PicklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB649AD8AC79BC0D5EF6D19209C86F29 /* PicklistItem.swift */; };
+		688D7571C7A111744DE78183B5F3732A /* PicklistItemMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB649AD8AC79BC0D5EF6D19209C86F29 /* PicklistItemMetadata.swift */; };
 		6C720348CA5031AE1B3F4C5959D7D36D /* hang.m in Sources */ = {isa = PBXBuildFile; fileRef = 647132F3F2E8752B2E96A1DC7747B992 /* hang.m */; };
 		6F961E7D8AF0CAF489815965A42D1F5E /* NSNotificationCenter+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 638FC877C26AE2698B03F57C63A5C636 /* NSNotificationCenter+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70DECBB3C1EC9235DA0CC7D30E05BBAC /* UIViewController+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1EC75F3F631688BE467D62877D90CD /* UIViewController+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -58,7 +58,7 @@
 		9F015EF33EEA06360107903B41047338 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70E4193D7794E3434AF77D85805675 /* Identity.swift */; };
 		A1E7066450832C0CD8A5318B86FE9371 /* when.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D29D2F64D48281095C8274FEE6DACD0 /* when.swift */; };
 		A27AB05EC18401FCD5AACBB71A4BA06F /* NSURLSession+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 9696FB863D0DE618F5B3684606228A4A /* NSURLSession+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A4D221CA9D8EE8C2D98D5165B0B4DA51 /* ObjectDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC96CBF95C5EBD60A6A94D447DDDDB /* ObjectDescription.swift */; };
+		A4D221CA9D8EE8C2D98D5165B0B4DA51 /* ObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC96CBF95C5EBD60A6A94D447DDDDB /* ObjectMetadata.swift */; };
 		A6AA29B8323298578F85675BC4D9983C /* when.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D38D8F361C611EFCFF57DC13B115F3A /* when.m */; };
 		A8537B42A00F1737004858A284D07760 /* PMKUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 95632F4C8D15D6CF8EE867952FA69262 /* PMKUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA242FD4CA04D41C0842103F77764AD2 /* ConnectedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53E5DF4DBBF38A4B0E34407C65A49E1 /* ConnectedApp.swift */; };
@@ -79,10 +79,12 @@
 		DD55AA65DC66138994A7D73D1C58597C /* NSNotificationCenter+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5F4A276E2678B6049F2F139147EC12 /* NSNotificationCenter+AnyPromise.m */; };
 		E0C73A45EA74F0EF2C3AA061F79C367E /* SwiftlySalesforce-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A7D15E7CD311E5D7C852668EECB32 /* SwiftlySalesforce-dummy.m */; };
 		E59328BF5012DE3781037AEC7E72BBDD /* fwd.h in Headers */ = {isa = PBXBuildFile; fileRef = F6300B2B83011D43128DA44649586D4A /* fwd.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA133DA41F91B7E60055DC2F /* SObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA133DA21F9147AC0055DC2F /* SObject.swift */; };
+		EA133DA81F91C9980055DC2F /* RecordAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA133DA61F91C9910055DC2F /* RecordAttributes.swift */; };
 		EAD48A611F7F5BB300729951 /* Requestor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD48A5F1F7F5BAC00729951 /* Requestor.swift */; };
 		EF9E06ECC1B1D6713A9573F0AD37EC53 /* Promise+AnyPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95739ECC732A6332E68750FE3F7489A4 /* Promise+AnyPromise.swift */; };
 		F15273C19DCACD981AEBB7585439E994 /* PMKFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D009A35EE64D77102391EC364147766 /* PMKFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F3D310205AD655730AFE2FDA6D955A40 /* FieldDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD7936D0B8F894920708C8BE00938F /* FieldDescription.swift */; };
+		F3D310205AD655730AFE2FDA6D955A40 /* FieldMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD7936D0B8F894920708C8BE00938F /* FieldMetadata.swift */; };
 		F45A3D52B2218DF9F5C47F35049ABD07 /* CALayer+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48B3970DAE9346AD3FA54A3A613328 /* CALayer+AnyPromise.m */; };
 		F58CDFACE10E0D7AC0F73D7DB94572EF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111CB544691468816DDF3F8D46424552 /* QuartzCore.framework */; };
 		FA2BB28231346DB79D1CD59CC7F21810 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD841937CDE1B47BE56B0B77A73AD71 /* Foundation.framework */; };
@@ -201,20 +203,20 @@
 		A781E6C7BA06DD8A0A80B0494DA26A4E /* NSTask+AnyPromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSTask+AnyPromise.h"; path = "Extensions/Foundation/Sources/NSTask+AnyPromise.h"; sourceTree = "<group>"; };
 		A9573AF375E3182D12971ABD2EE6DD3A /* Pods-SwiftlySalesforce_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftlySalesforce_Example-umbrella.h"; sourceTree = "<group>"; };
 		A9F82E67A30841B8EA38FFE9317D477D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		AB649AD8AC79BC0D5EF6D19209C86F29 /* PicklistItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PicklistItem.swift; path = Pod/Classes/PicklistItem.swift; sourceTree = "<group>"; };
+		AB649AD8AC79BC0D5EF6D19209C86F29 /* PicklistItemMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PicklistItemMetadata.swift; path = Pod/Classes/PicklistItemMetadata.swift; sourceTree = "<group>"; };
 		B660E1F4E80FD3F4BF33455CD40AA754 /* after.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = after.swift; path = Sources/after.swift; sourceTree = "<group>"; };
 		BBE50D467C49DFDB1B622121D9CA22E9 /* Pods-SwiftlySalesforce_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftlySalesforce_Example-resources.sh"; sourceTree = "<group>"; };
 		BD8EEC210981A388DDF8ECCEF8433904 /* NSObject+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSObject+Promise.swift"; path = "Extensions/Foundation/Sources/NSObject+Promise.swift"; sourceTree = "<group>"; };
 		BFFA858C2DB288BB308A48DC5193E6F1 /* PMKAlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PMKAlertController.swift; path = Extensions/UIKit/Sources/PMKAlertController.swift; sourceTree = "<group>"; };
 		C53E5DF4DBBF38A4B0E34407C65A49E1 /* ConnectedApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConnectedApp.swift; path = Pod/Classes/ConnectedApp.swift; sourceTree = "<group>"; };
 		C54315DA3A1A39E54691EB5C6921A90C /* after.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = after.m; path = Sources/after.m; sourceTree = "<group>"; };
-		C5BD7936D0B8F894920708C8BE00938F /* FieldDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FieldDescription.swift; path = Pod/Classes/FieldDescription.swift; sourceTree = "<group>"; };
+		C5BD7936D0B8F894920708C8BE00938F /* FieldMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FieldMetadata.swift; path = Pod/Classes/FieldMetadata.swift; sourceTree = "<group>"; };
 		C75F5106CF2E74A67689DE4BE2044812 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7BE9AC673FC6CE60606733690AA1E3D /* OAuth2Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OAuth2Result.swift; path = Pod/Classes/OAuth2Result.swift; sourceTree = "<group>"; };
 		CB5F4A276E2678B6049F2F139147EC12 /* NSNotificationCenter+AnyPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSNotificationCenter+AnyPromise.m"; path = "Extensions/Foundation/Sources/NSNotificationCenter+AnyPromise.m"; sourceTree = "<group>"; };
 		D14D4C615A8DF5B3403825EB80A9AB34 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Pod/Classes/Info.plist; sourceTree = "<group>"; };
 		D16856D0DB90DB7933FB3AE120950A45 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Pod/Classes/Extensions.swift; sourceTree = "<group>"; };
-		D3BC96CBF95C5EBD60A6A94D447DDDDB /* ObjectDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObjectDescription.swift; path = Pod/Classes/ObjectDescription.swift; sourceTree = "<group>"; };
+		D3BC96CBF95C5EBD60A6A94D447DDDDB /* ObjectMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObjectMetadata.swift; path = Pod/Classes/ObjectMetadata.swift; sourceTree = "<group>"; };
 		D9B468F428AC55896FEC0D8C3A1181AC /* NSURLSession+AnyPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSURLSession+AnyPromise.m"; path = "Extensions/Foundation/Sources/NSURLSession+AnyPromise.m"; sourceTree = "<group>"; };
 		DB6F691A801D32620ED501B0C3559FA9 /* PromiseKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = PromiseKit.modulemap; sourceTree = "<group>"; };
 		DC70E4193D7794E3434AF77D85805675 /* Identity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Identity.swift; path = Pod/Classes/Identity.swift; sourceTree = "<group>"; };
@@ -224,6 +226,8 @@
 		DF52D452D72EF81C1A4A1B4DBDFC452A /* afterlife.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = afterlife.swift; path = Extensions/Foundation/Sources/afterlife.swift; sourceTree = "<group>"; };
 		E7480BAB29A5573D40EBF6E02381C1E2 /* UIViewController+AnyPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+AnyPromise.m"; path = "Extensions/UIKit/Sources/UIViewController+AnyPromise.m"; sourceTree = "<group>"; };
 		E9A5586A6499C102D0BCC9DC96EF7F49 /* join.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = join.swift; path = Sources/join.swift; sourceTree = "<group>"; };
+		EA133DA21F9147AC0055DC2F /* SObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SObject.swift; path = Pod/Classes/SObject.swift; sourceTree = "<group>"; };
+		EA133DA61F91C9910055DC2F /* RecordAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAttributes.swift; sourceTree = "<group>"; };
 		EAD48A5F1F7F5BAC00729951 /* Requestor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requestor.swift; path = Pod/Classes/Requestor.swift; sourceTree = "<group>"; };
 		EBA0823419954654E89B5C0D270F4FD2 /* SwiftlySalesforce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftlySalesforce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE45835539718AE1F15F89B7FC69541F /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -487,7 +491,7 @@
 				C53E5DF4DBBF38A4B0E34407C65A49E1 /* ConnectedApp.swift */,
 				678DA00EA536615B7E1D90BE881AE3C9 /* Error.swift */,
 				D16856D0DB90DB7933FB3AE120950A45 /* Extensions.swift */,
-				C5BD7936D0B8F894920708C8BE00938F /* FieldDescription.swift */,
+				C5BD7936D0B8F894920708C8BE00938F /* FieldMetadata.swift */,
 				794DD3BBEC0193CAF713BF9772609AF6 /* Globals.swift */,
 				DC70E4193D7794E3434AF77D85805675 /* Identity.swift */,
 				D14D4C615A8DF5B3403825EB80A9AB34 /* Info.plist */,
@@ -496,12 +500,14 @@
 				33193F2D5DCEAF4CE951BEEA9A3D463E /* LoginDelegate.swift */,
 				C7BE9AC673FC6CE60606733690AA1E3D /* OAuth2Result.swift */,
 				3452480F31CF764CD3F914C4E8755F7E /* OAuth2ResultStore.swift */,
-				D3BC96CBF95C5EBD60A6A94D447DDDDB /* ObjectDescription.swift */,
-				AB649AD8AC79BC0D5EF6D19209C86F29 /* PicklistItem.swift */,
+				D3BC96CBF95C5EBD60A6A94D447DDDDB /* ObjectMetadata.swift */,
+				AB649AD8AC79BC0D5EF6D19209C86F29 /* PicklistItemMetadata.swift */,
 				3E5E60F5A508B37491903849680706BB /* QueryResult.swift */,
+				EA133DA61F91C9910055DC2F /* RecordAttributes.swift */,
 				EAD48A5F1F7F5BAC00729951 /* Requestor.swift */,
 				5CACFBF3EBECB3904AE12D26757C0929 /* Resource.swift */,
 				DEC5DE1F88BE2C78F59F7D62FEA017A4 /* Salesforce.swift */,
+				EA133DA21F9147AC0055DC2F /* SObject.swift */,
 				C5406223C2FC830C7EC5A3189078865C /* Support Files */,
 			);
 			name = SwiftlySalesforce;
@@ -705,7 +711,8 @@
 				AA242FD4CA04D41C0842103F77764AD2 /* ConnectedApp.swift in Sources */,
 				C681A47F5FCFCE2BDE7A3D5B6074EB0F /* Error.swift in Sources */,
 				02AF89E8C3356D6DEA7884EB13E62AE2 /* Extensions.swift in Sources */,
-				F3D310205AD655730AFE2FDA6D955A40 /* FieldDescription.swift in Sources */,
+				F3D310205AD655730AFE2FDA6D955A40 /* FieldMetadata.swift in Sources */,
+				EA133DA41F91B7E60055DC2F /* SObject.swift in Sources */,
 				FDD471918BA6D6F098B03632BB581A8F /* Globals.swift in Sources */,
 				9F015EF33EEA06360107903B41047338 /* Identity.swift in Sources */,
 				77E1A9779C50F4B9210C7D7B3CB4F824 /* Info.plist in Sources */,
@@ -715,8 +722,9 @@
 				BF985FA2609BBC3697D46AF0DF0F5501 /* OAuth2Result.swift in Sources */,
 				EAD48A611F7F5BB300729951 /* Requestor.swift in Sources */,
 				10690850BFC1FAABD1BFD72E7065164A /* OAuth2ResultStore.swift in Sources */,
-				A4D221CA9D8EE8C2D98D5165B0B4DA51 /* ObjectDescription.swift in Sources */,
-				688D7571C7A111744DE78183B5F3732A /* PicklistItem.swift in Sources */,
+				EA133DA81F91C9980055DC2F /* RecordAttributes.swift in Sources */,
+				A4D221CA9D8EE8C2D98D5165B0B4DA51 /* ObjectMetadata.swift in Sources */,
+				688D7571C7A111744DE78183B5F3732A /* PicklistItemMetadata.swift in Sources */,
 				BCA5F7C33A276E510780A294DEDB222B /* QueryResult.swift in Sources */,
 				9D37D77B21B3FA8D0F25BBD9AD0FA89F /* Resource.swift in Sources */,
 				589B1A2CD00C3798C635098C8621557C /* Salesforce.swift in Sources */,
