@@ -1,5 +1,13 @@
 # Change Log
 
+## Version 5.0.0 (Oct. 15, 2017)
+This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
+Highlights of changes and improvements:
+- Incorporated Swift 4's new `Decodable` protocol throughout. This simplifies both Swiftly Salesforce's code and the creation of your own models that represent Salesforce objects.
+- New `SObject` type to represent a generic Salesforce objects. If you prefer, you can create your own model objects and use those instead, via the magic of Swift generics and the new `Decodable` protocol. See the [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and example app for samples.
+- Revamped Error types.
+- More and better test coverage.
+
 ## Version 4.0.6 (Sep. 28, 2017)
 - Removed Alamofire dependency
 - Increased test coverage
