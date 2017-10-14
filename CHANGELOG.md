@@ -1,4 +1,4 @@
-# Change Log
+# Change Log 
 
 ## Version 5.0.0 (Oct. 15, 2017)
 This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
