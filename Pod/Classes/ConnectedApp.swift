@@ -16,30 +16,32 @@ open class ConnectedApp {
 	
 	weak public var loginDelegate: LoginDelegate?
 	
-	private var storeKey: OAuth2ResultStore.Key?
+	private static let defaultUserID = "Default User ID"
+	private static let defaultOrgID = "Default Org ID"
+	private static let defaultLoginHost = "login.salesforce.com"
+	
+	private var storeKey: OAuth2ResultStore.Key
 	private var pendingAuthorization: (promise: Promise<OAuth2Result>, fulfill: (OAuth2Result) -> (), reject: (Error) -> ())?
 	private var promisedRevocation: Promise<Void>?
 	
 	internal var authData: OAuth2Result? {
 		didSet {
-			if let key = storeKey {
-				if let authData = authData {
-					do {
-						// Try to securely store the OAuth2 result so user won't have to authenticate on next use
-						try OAuth2ResultStore.store(key: key, value: authData)
-					}
-					catch {
-						debugPrint("Unable to save OAuth2 result to secure storage! Error: \(String(describing: error))")
-					}
+			if let authData = authData {
+				do {
+					// Try to securely store the OAuth2 result so user won't have to authenticate on next use
+					try OAuth2ResultStore.store(key: storeKey, value: authData)
 				}
-				else {
-					do {
-						// authData has been set to nil - delete old data, if any
-						try OAuth2ResultStore.clear(key: key)
-					}
-					catch {
-						debugPrint("Unable to clear OAuth2 result from secure storage! Error: \(String(describing: error))")
-					}
+				catch {
+					debugPrint("Unable to save OAuth2 result to secure storage! Error: \(String(describing: error))")
+				}
+			}
+			else {
+				do {
+					// authData has been set to nil - delete old data, if any
+					try OAuth2ResultStore.clear(key: storeKey)
+				}
+				catch {
+					debugPrint("Unable to clear OAuth2 result from secure storage! Error: \(String(describing: error))")
 				}
 			}
 		}
@@ -64,24 +66,28 @@ open class ConnectedApp {
 	/// Initializer
 	/// - Parameter consumerKey: Connected App's consumer key
 	/// - Parameter redirectURL: Connected App's redirect URL
-	/// - Parameter loginDelegate: will handle user authentication when needed
-	/// - Parameter loginHost: Salesforce authorization server (set to "test.salesforce.com" for sandbox org)
-	/// - Parameter userID: optional; record ID of user; useful for supporting multi-user switching
-	/// - Parameter orgID: optional; record ID of org; useful for supporting mutli-user switching
-	/// - Returns: Promise<[ObjectDescription]>, a promise of an array of ObjectDescriptions, in the same order as the "types" parameter.
-	public convenience init(consumerKey: String, redirectURL: URL, loginDelegate: LoginDelegate, loginHost: String = "login.salesforce.com", userID: String = "Default User ID", orgID: String = "Default Org. ID") {
-		let storeKey = OAuth2ResultStore.Key(userID: userID, orgID: orgID, consumerKey: consumerKey)
-		self.init(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: loginDelegate, loginHost: loginHost, storeKey: storeKey)
+	/// - Parameter loginDelegate: will handle user login when needed
+	/// - Parameter loginHost: Salesforce authorization server (if sandbox org, set to "test.salesforce.com")
+	/// - Parameter userID: record ID of user; useful for supporting multi-user switching
+	/// - Parameter orgID: record ID of org; useful for supporting mutli-user switching
+	public convenience init(consumerKey: String, redirectURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID) {
+		self.init(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: loginDelegate, loginHost: loginHost, userID: userID, orgID: orgID, authData: nil)
 	}
 	
-	internal init(consumerKey: String, redirectURL: URL, loginDelegate: LoginDelegate, loginHost: String = "login.salesforce.com", storeKey: OAuth2ResultStore.Key?) {
+	/// Internal initializer
+	internal init(consumerKey: String, redirectURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, authData: OAuth2Result? = nil) {
+		
 		self.consumerKey = consumerKey
 		self.redirectURL = redirectURL
 		self.loginDelegate = loginDelegate
 		self.loginHost = loginHost
-		self.storeKey = storeKey
-		if let key = self.storeKey {
-			self.authData = OAuth2ResultStore.retrieve(key: key)
+		self.storeKey = OAuth2ResultStore.Key(userID: userID, orgID: orgID, consumerKey: consumerKey)
+		
+		if let auth = authData {
+			self.authData = auth
+		}
+		else {
+			self.authData = OAuth2ResultStore.retrieve(key: storeKey)
 		}
 	}
 	
