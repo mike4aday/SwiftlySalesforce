@@ -25,7 +25,7 @@ extension RecordAttributes: Decodable {
 		let path = try container.decode(String.self, forKey: CodingKeys.path)
 		let type = try container.decode(String.self, forKey: CodingKeys.type)
 		
-		guard let id = path.components(separatedBy: "/").last else {
+		guard let id = path.components(separatedBy: "/").last, id.count == 18 || id.count == 15 else {
 			throw DecodingError.dataCorruptedError(forKey: .path, in: container, debugDescription: "Unable to parse record ID from path.")
 		}
 		
