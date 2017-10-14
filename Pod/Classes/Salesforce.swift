@@ -75,7 +75,7 @@ open class Salesforce {
 		}
 	}
 	
-	/// Asynchronsouly executes a SOQL query (non-generic function version).
+	/// Asynchronsouly executes a SOQL query
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: SOQL query
 	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as SObjects
@@ -91,7 +91,7 @@ open class Salesforce {
 	/// - Parameter soql: Array of SOQL queries
 	/// - Returns: Promise of an array of QueryResults, in the same order as the "soql" parameter
 	open func query<T: Decodable>(soql: [String]) -> Promise<[QueryResult<T>]> {
-		let promises = soql.map { query(soql: $0) as Promise<QueryResult<T>> }
+		let promises: [Promise<QueryResult<T>>] = soql.map { query(soql: $0) }
 		return when(fulfilled: promises)
 	}
 	
@@ -100,7 +100,7 @@ open class Salesforce {
 	/// - Parameter soql: Array of SOQL queries
 	/// - Returns: Promise of an array of QueryResults, in the same order as the "soql" parameter
 	open func query(soql: [String]) -> Promise<[QueryResult<SObject>]> {
-		let promises = soql.map { query(soql: $0) as Promise<QueryResult<SObject>> }
+		let promises: [Promise<QueryResult<SObject>>] = soql.map { query(soql: $0) }
 		return when(fulfilled: promises)
 	}
 	
@@ -115,7 +115,7 @@ open class Salesforce {
 		}
 	}
 	
-	/// Queries next page of records returned by a SOQL query whose result is broken into pages (non-generic function version).
+	/// Queries next page of records returned by a SOQL query whose result is broken into pages.
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm
 	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
 	/// - Returns: Promise of a QueryResult
@@ -279,7 +279,7 @@ open class Salesforce {
 	/// - Parameter parameters: Dictionary of parameter name/value pairs
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
-	open func apex(method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
+	open func apex(method: Resource.HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
 		let resource = Resource.apex(method: method, path: path, parameters: parameters, headers: headers)
 		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
@@ -292,7 +292,7 @@ open class Salesforce {
 	/// - Parameter parameters: Dictionary of parameter name/value pairs
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
-	open func custom(method: HTTPMethod = .get, baseURL: URL? = nil, path: String? = nil, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
+	open func custom(method: Resource.HTTPMethod = .get, baseURL: URL? = nil, path: String? = nil, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
 		let resource = Resource.custom(method: method, baseURL: baseURL, path: path, parameters: parameters, headers: headers)
 		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
