@@ -9,17 +9,23 @@
 /// Represents a generic Salesforce object
 public struct SObject {
 	
+	fileprivate var attributes: RecordAttributes
+	fileprivate var container: KeyedDecodingContainer<SObjectCodingKey>
+
 	/// Record ID
-	public var id: String
+	public var id: String {
+		return attributes.id
+	}
 	
 	/// Type of object (e.g. Account, Lead, MyCustomObject__c)
-	public var type: String
-	
-	fileprivate var container: KeyedDecodingContainer<SObjectCodingKey>
+	public var type: String {
+		return attributes.type
+	}
 	
 	/// Gets the value for a given field.
 	/// - Parameter named: name of the field whose value is to be retrieved
-	/// - Returns: value retrieved for the given field
+	/// - Returns: value retrieved for the given field, or nil if the value is nil or not present.
+	/// - Throws: Decoding error if the value cannot be decoded as type 'T'
 	public func value<T: Decodable>(named: String) throws -> T? {
 		return try container.decodeIfPresent(T.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
@@ -68,20 +74,8 @@ extension SObject: Decodable {
 		}
 	}
 	
-	fileprivate enum AttributeCodingKeys: String, CodingKey {
-		case type, url
-	}
-	
 	public init(from decoder: Decoder) throws {
-		let container = try decoder.container(keyedBy: SObjectCodingKey.self)
-		let attributes = try container.nestedContainer(keyedBy: AttributeCodingKeys.self, forKey: SObjectCodingKey.attributes)
-		let type = try attributes.decode(String.self, forKey: .type)
-		let path = try attributes.decode(String.self, forKey: .url)
-		guard let id = path.components(separatedBy: "/").last, id.characters.count == 15 || id.characters.count == 18 else {
-			throw DecodingError.dataCorruptedError(forKey: AttributeCodingKeys.url, in: attributes, debugDescription: "Unable to parse ID from URL attribute.")
-		}
-		self.id = id
-		self.type = type
-		self.container = container
+		self.container = try decoder.container(keyedBy: SObjectCodingKey.self)
+		self.attributes = try container.decode(RecordAttributes.self, forKey: .attributes)
 	}
 }
