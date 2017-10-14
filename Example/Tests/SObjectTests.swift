@@ -20,19 +20,7 @@ class SObjectTests: XCTestCase, MockData, LoginDelegate {
 		let config = readPropertyList(fileName: "OAuth2")!
 		let consumerKey = config["ConsumerKey"] as! String
 		let redirectURLWithAuth = URL(string: config["RedirectURLWithAuthData"] as! String)!
-		let redirectURL = URL(string: redirectURLWithAuth.absoluteString.components(separatedBy: "#")[0])!
-		let key = OAuth2ResultStore.Key(userID: "TEST_USER_ID", orgID: "TEST_ORG_ID", consumerKey: consumerKey)
-		let connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self, storeKey: key)
-		
-		if let authData = OAuth2ResultStore.retrieve(key: key) {
-			connectedApp.authData = authData
-		}
-		else {
-			let authData = try! OAuth2Result(urlEncodedString: redirectURLWithAuth.fragment!)
-			connectedApp.authData = authData
-			try? OAuth2ResultStore.store(key: key, value: authData)
-		}
-		salesforce = Salesforce(connectedApp: connectedApp)
+		salesforce = TestUtils.shared.createSalesforce(consumerKey: consumerKey, enrichedRedirectURL: redirectURLWithAuth)
     }
     
     override func tearDown() {
