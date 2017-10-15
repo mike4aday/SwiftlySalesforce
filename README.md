@@ -337,7 +337,7 @@ first {
     salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
 }.then {
     (record: SObject) -> () in
-    if let address = record.address(named: "BillingAddress") {
+    if let address = try record.address(named: "BillingAddress") {
         let longitude = address.longitude
         let latitude = address.latitude
         // You could put a marker on a map...
