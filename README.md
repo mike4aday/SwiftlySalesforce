@@ -93,14 +93,14 @@ let promise: Promise<SObject> = salesforce.retrieve(type: "Account", id: "001300
 And you can add a closure that will be called later, when the promise is fulfilled:
 ```swift
 salesforce.retrieve(type: "Account", id: "0013000001FjCcF").then {
-	(queryResult: QueryResult<SObject>) -> () in
-	for record: SObject in queryResult.records {
-		debugPrint(record.id)
-		// Do something with each record
-	}
+    (queryResult: QueryResult<SObject>) -> () in
+    for record: SObject in queryResult.records {
+        debugPrint(record.id)
+        // Do something with each record
+    }
 }.catch {
-	(error: Error) in
-	// Do something with the error
+    (error: Error) in
+    // Do something with the error
 }
 ```
 You can retrieve multiple records in parallel, and wait for them all before proceeding:
