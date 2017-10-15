@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-  s.version          = "4.0.6"
+  s.version          = "5.0.0"
   s.summary          = "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform"
 
 
@@ -15,12 +15,12 @@ s.name             = "SwiftlySalesforce"
   s.source           = { :git => "https://github.com/mike4aday/SwiftlySalesforce.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/mike4aday'
 
-  s.platform     = :ios, '10.0'
+  s.platform     = :ios, '10.3'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
+  s.source_files = 'SwiftlySalesforce/Classes/**/*'
   s.resource_bundles = {
-  #  'SwiftlySalesforce' => ['Pod/Assets/*.png']
+
   }
 
   s.dependency 'PromiseKit', '~> 4.0'
