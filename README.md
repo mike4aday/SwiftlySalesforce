@@ -253,33 +253,32 @@ Let's say we want to retrieve a random zip/postal code from a [custom Apex REST]
 ```swift
 // Chained asynch requests
 first {
-// Make GET request of custom Apex REST resource that returns a zip code as a string
-return salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
+    // Make GET request of custom Apex REST resource that returns a zip code as a string
+    return salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
 }.then {
-// Query accounts in that zip code
-(result: Data) -> Promise<QueryResult<SObject>> in
-guard let zip = String(data: result, encoding: .utf8) else {
-throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
-}
-let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
-return salesforce.query(soql: soql)
+    // Query accounts in that zip code
+    (result: Data) -> Promise<QueryResult<SObject>> in
+    guard let zip = String(data: result, encoding: .utf8) else {
+        throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
+    }
+    let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
+    return salesforce.query(soql: soql)
 }.then {
-queryResult -> () in
-for record in queryResult.records {
-if let name = try record.string(named: "Name") {
-print("Account name = \(name)")
-}
-}
+    queryResult -> () in
+    for record in queryResult.records {
+        if let name = try record.string(named: "Name") {
+            print("Account name = \(name)")
+        }
+    }
 }.catch {
-error in
-// Handle error
+    error in
+    // Handle error
 }
 ```
 You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, or when just the first completes, or when any one operation fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
 
 ### Example: Retrieve a User's Photo
 ```swift		
-import PromiseKit
 // ...
 /// "first" block is an optional way to make chained calls easier to read...
 first {
@@ -305,26 +304,26 @@ first {
 ### Example: Retrieve a Contact's Photo
 ```swift	
 first {
-salesforce.retrieve(type: "Contact", id: "003f40000027GugAAE")
+    salesforce.retrieve(type: "Contact", id: "003f40000027GugAAE")
 }.then {
-(record: SObject) -> Promise<UIImage> in
-if let photoPath = try record.string(named: "PhotoUrl") {
-// Fetch image
-return salesforce.fetchImage(path: photoPath)
-}
-else {
-// Return a pre-defined default image
-return Promise(value: self.defaultImage)
-}
+    (record: SObject) -> Promise<UIImage> in
+    if let photoPath = try record.string(named: "PhotoUrl") {
+        // Fetch image
+        return salesforce.fetchImage(path: photoPath)
+    }
+    else {
+        // Return a pre-defined default image
+        return Promise(value: self.defaultImage)
+    }
 }.then {
-(image: UIImage) -> () in
-// Do something interesting with the image, e.g. display in a view:
-// self.photoView.image = image
+    (image: UIImage) -> () in
+    // Do something interesting with the image, e.g. display in a view:
+    // self.photoView.image = image
 }.always {
-self.refreshControl?.endRefreshing()
+    self.refreshControl?.endRefreshing()
 }.catch {
-(error) -> () in
-// Handle any errors
+    (error) -> () in
+    // Handle any errors
 }
 ```
 
@@ -332,17 +331,17 @@ self.refreshControl?.endRefreshing()
 Addresses for standard objects, e.g. Account and Contact, are stored in a ['compound' Address field](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_address.htm), and, if you enable the [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org, Salesforce will automatically geocode those addresses, giving you latitude and longitude values you could use for map markers. 
 ```swift
 first {
-salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
+    salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
 }.then {
-(record: SObject) -> () in
-if let address = record.address(named: "BillingAddress") {
-let longitude = address.longitude
-let latitude = address.latitude
-// You could put a marker on a map...
-}
+    (record: SObject) -> () in
+    if let address = record.address(named: "BillingAddress") {
+        let longitude = address.longitude
+        let latitude = address.latitude
+        // You could put a marker on a map...
+    }
 }.catch {
-(error) -> () in
-// Handle any errors
+    (error) -> () in
+    // Handle any errors
 }
 ```
 
@@ -350,22 +349,22 @@ let latitude = address.latitude
 The following code is adapted from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
 ```swift
 first {
-// Get ID of current user
-//TODO: if user already authorized, then we could just get user ID from salesforce.authData
-salesforce.identity()
+    // Get ID of current user
+    //TODO: if user already authorized, then we could just get user ID from salesforce.authData
+    salesforce.identity()
 }.then {
-// Get tasks owned by user (we assume all records are returned in a single 'page'...)
-userInfo -> Promise<QueryResult<Task>> in
-let soql = "SELECT Id,CreatedDate,Subject,Status,IsHighPriority,What.Name FROM Task WHERE OwnerId = '\(userInfo.userID)' ORDER BY CreatedDate DESC"
-return salesforce.query(soql: soql)
+    // Get tasks owned by user (we assume all records are returned in a single 'page'...)
+    userInfo -> Promise<QueryResult<Task>> in
+    let soql = "SELECT Id,CreatedDate,Subject,Status,IsHighPriority,What.Name FROM Task WHERE OwnerId = '\(userInfo.userID)' ORDER BY CreatedDate DESC"
+    return salesforce.query(soql: soql)
 }.then {
-// Parse JSON into Task instances
-(result: QueryResult<Task>) -> () in
-let tasks: [Task] = result.records
-// Do something with tasks, e.g. display in table view
+    // Parse JSON into Task instances
+    (result: QueryResult<Task>) -> () in
+    let tasks: [Task] = result.records
+    // Do something with tasks, e.g. display in table view
 }.catch {
-error in
-// Handle error
+    error in
+    // Handle error
 }
 ```
 
@@ -384,31 +383,31 @@ CLLocationManager.promise().recover { err in
 If, for example, you want to determine whether the user has permission to update or delete a record so you can disable editing in your UI, or if you want to retrieve all the options in a picklist, rather than hardcoding them in your mobile app, then call `salesforce.describe(type:)` to retrieve an object's [metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm):
 ```swift
 first {
-salesforce.describe(type: "Account")
+    salesforce.describe(type: "Account")
 }.then {
-(accountMetadata) -> () in
-self.saveButton.isEnabled = accountMetadata.isUpdateable
-if let fields = accountMetadata.fields {
-let fieldDict = Dictionary(items: fields, key: { $0.name })
-let industryOptions = fieldDict["Industry"]?.picklistValues
-// Populate a drop-down menu with the picklist values...
-}
+    (accountMetadata) -> () in
+    self.saveButton.isEnabled = accountMetadata.isUpdateable
+    if let fields = accountMetadata.fields {
+        let fieldDict = Dictionary(items: fields, key: { $0.name })
+        let industryOptions = fieldDict["Industry"]?.picklistValues
+        // Populate a drop-down menu with the picklist values...
+    }
 }.catch {
-error in
-debugPrint(error)
+    error in
+    debugPrint(error)
 }
 ```
 
 You can retrieve metadata for multiple objects in parallel, and wait for all before proceeding:
 ```swift
 first {
-  salesforce.describe(types: ["Account", "Contact", "Task", "CustomObject__c"])
+    salesforce.describe(types: ["Account", "Contact", "Task", "CustomObject__c"])
 }.then {
-  results -> () in
-  // results is an array of ObjectDescriptions, in the same order as requested
+    results -> () in
+    // results is an array of ObjectMetadatas, in the same order as requested
 }.catch {
-  error in
-  // Handle the error
+    error in
+    // Handle the error
 }
 ```
 
