@@ -46,6 +46,10 @@ public struct SObject {
 		return try container.decodeIfPresent(UInt.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
 	
+	public func address(named: String) throws -> Address? {
+		return try container.decode(Address.self, forKey: SObjectCodingKey(stringValue: named)!)
+	}
+	
 	/// Returns a subquery result. For example, the records returned by the query
 	/// "SELECT Id, Name, (SELECT Id, Name FROM Contacts) FROM Account" will each have a field
 	/// labeled "Contacts" that hold the results of the subquery in a struct of type QueryResult<SObject>.
