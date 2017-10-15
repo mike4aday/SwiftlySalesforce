@@ -30,22 +30,27 @@ public struct SObject {
 		return try container.decodeIfPresent(T.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
 	
+	/// Gets the value of a field as a String
 	public func string(named: String) throws -> String? {
 		return try container.decodeIfPresent(String.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
 	
+	/// Gets the value of a field as a Date
 	public func date(named: String) throws -> Date? {
 		return try container.decodeIfPresent(Date.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
 	
+	/// Gets the value of a field as a URL
 	public func url(named: String) throws -> URL? {
 		return try container.decodeIfPresent(URL.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
 	
+	/// Gets the value of a field as an unsigned integer
 	public func uint(named: String) throws -> UInt? {
 		return try container.decodeIfPresent(UInt.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
 	
+	/// Gets the value of a field as an Address
 	public func address(named: String) throws -> Address? {
 		return try container.decodeIfPresent(Address.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
