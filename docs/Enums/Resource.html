@@ -1,173 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Resource Enum Reference</title>
+    <title>Resource Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
-    <script src="../js/lunr.min.js" defer></script>
-    <script src="../js/typeahead.jquery.js" defer></script>
-    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-
     <a name="//apple_ref/swift/Enum/Resource" class="dashAnchor"></a>
-
-    <a title="Resource Enum Reference"></a>
-
-    <header class="header">
-      <p class="header-col header-col--primary">
-        <a class="header-link" href="../index.html">
-          SwiftlySalesforce Docs
-        </a>
-         (26% documented)
-      </p>
-    
-      <p class="header-col--secondary">
-        <form role="search" action="../search.json">
-          <input type="text" placeholder="Search documentation" data-typeahead>
-        </form>
-      </p>
-    
-    
+    <a title="Resource Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SwiftlySalesforce Docs</a> (29% documented)</p>
+      </div>
     </header>
-
-    <p class="breadcrumbs">
-      <a class="breadcrumb" href="../index.html">SwiftlySalesforce Reference</a>
-      <img class="carat" src="../img/carat.png" />
-      Resource Enum Reference
-    </p>
-
     <div class="content-wrapper">
-      <nav class="navigation">
+      <p id="breadcrumbs">
+        <a href="../index.html">SwiftlySalesforce Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Resource Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/ConnectedApp.html">ConnectedApp</a>
+                <a href="../Classes/ConnectedApp.html">ConnectedApp</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/Salesforce.html">Salesforce</a>
+                <a href="../Classes/Salesforce.html">Salesforce</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/ApplicationError.html">ApplicationError</a>
+                <a href="../Enums/ApplicationError.html">ApplicationError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/Resource.html">Resource</a>
+                <a href="../Enums/RequestError.html">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/SalesforceError.html">SalesforceError</a>
+                <a href="../Enums/Resource.html">Resource</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/SerializationError.html">SerializationError</a>
+                <a href="../Enums/Resource/HTTPMethod.html">– HTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ResponseError.html">ResponseError</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/DataRequest.html">DataRequest</a>
+                <a href="../Extensions/DateFormatter.html">DateFormatter</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/DateFormatter.html">DateFormatter</a>
+                <a href="../Extensions/Dictionary.html">Dictionary</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Dictionary.html">Dictionary</a>
+                <a href="../Extensions/JSONDecoder.html">JSONDecoder</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/URL.html">URL</a>
+                <a href="../Extensions/Promise.html">Promise</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/URLComponents.html">URLComponents</a>
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLComponents.html">URLComponents</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Functions.html">Functions</a>
+            <a href="../Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Functions.html#/s:F17SwiftlySalesforce5firsturFT7executeFzT_GC10PromiseKit7Promisex__GS1_x_">first(execute:)</a>
+                <a href="../Functions.html#/s:17SwiftlySalesforce5first10PromiseKit0D0CyxGAFyKc7execute_tlF">first(execute:)</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Functions.html#/s:F17SwiftlySalesforce7fulfillu0_rFTGC10PromiseKit7Promisex_GS1_q___GS1_Txq___">fulfill(_:_:)</a>
+                <a href="../Functions.html#/s:17SwiftlySalesforce7fulfill10PromiseKit0D0Cyx_q_tGAEyxG_AEyq_Gtr0_lF">fulfill(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Functions.html#/s:F17SwiftlySalesforce7fulfillu1_rFTGC10PromiseKit7Promisex_GS1_q__GS1_q0___GS1_Txq_q0___">fulfill(_:_:_:)</a>
+                <a href="../Functions.html#/s:17SwiftlySalesforce7fulfill10PromiseKit0D0Cyx_q_q0_tGAEyxG_AEyq_GAEyq0_Gtr1_lF">fulfill(_:_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Functions.html#/s:F17SwiftlySalesforce7fulfillu2_rFTGC10PromiseKit7Promisex_GS1_q__GS1_q0__GS1_q1___GS1_Txq_q0_q1___">fulfill(_:_:_:_:)</a>
+                <a href="../Functions.html#/s:17SwiftlySalesforce7fulfill10PromiseKit0D0Cyx_q_q0_q1_tGAEyxG_AEyq_GAEyq0_GAEyq1_Gtr2_lF">fulfill(_:_:_:_:)</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/LoginDelegate.html">LoginDelegate</a>
+                <a href="../Protocols/LoginDelegate.html">LoginDelegate</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/LoginViewController.html">LoginViewController</a>
+                <a href="../Protocols/LoginViewController.html">LoginViewController</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/Address.html">Address</a>
+                <a href="../Structs/Address.html">Address</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/FieldDescription.html">FieldDescription</a>
+                <a href="../Structs/Address/GeocodeAccuracy.html">– GeocodeAccuracy</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/Identity.html">Identity</a>
+                <a href="../Structs/FieldMetadata.html">FieldMetadata</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/Limit.html">Limit</a>
+                <a href="../Structs/Identity.html">Identity</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/ObjectDescription.html">ObjectDescription</a>
+                <a href="../Structs/Limit.html">Limit</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PicklistItem.html">PicklistItem</a>
+                <a href="../Structs/ObjectMetadata.html">ObjectMetadata</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/QueryResult.html">QueryResult</a>
+                <a href="../Structs/PicklistItemMetadata.html">PicklistItemMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResult.html">QueryResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecordAttributes.html">RecordAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SObject.html">SObject</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-
-        <section class="section">
-          <div class="section-content">
+        <section>
+          <section class="section">
             <h1>Resource</h1>
             <p>Undocumented</p>
 
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-content">
+          </section>
+          <section class="section task-group-section">
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource8identityFMS0_FT7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO8identityACSS7version_tcACmF"></a>
                     <a name="//apple_ref/swift/Element/identity" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource8identityFMS0_FT7versionSS_S0_">identity</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO8identityACSS7version_tcACmF">identity</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -184,13 +178,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource6limitsFMS0_FT7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO6limitsACSS7version_tcACmF"></a>
                     <a name="//apple_ref/swift/Element/limits" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource6limitsFMS0_FT7versionSS_S0_">limits</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO6limitsACSS7version_tcACmF">limits</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -207,13 +201,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource5queryFMS0_FT4soqlSS7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO5queryACSS4soql_SS7versiontcACmF"></a>
                     <a name="//apple_ref/swift/Element/query" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource5queryFMS0_FT4soqlSS7versionSS_S0_">query</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO5queryACSS4soql_SS7versiontcACmF">query</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -230,13 +224,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource9queryNextFMS0_FT4pathSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO9queryNextACSS4path_tcACmF"></a>
                     <a name="//apple_ref/swift/Element/queryNext" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource9queryNextFMS0_FT4pathSS_S0_">queryNext</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO9queryNextACSS4path_tcACmF">queryNext</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -253,13 +247,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource8retrieveFMS0_FT4typeSS2idSS6fieldsGSqGSaSS__7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO8retrieveACSS4type_SS2idSaySSGSg6fieldsSS7versiontcACmF"></a>
                     <a name="//apple_ref/swift/Element/retrieve" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource8retrieveFMS0_FT4typeSS2idSS6fieldsGSqGSaSS__7versionSS_S0_">retrieve</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO8retrieveACSS4type_SS2idSaySSGSg6fieldsSS7versiontcACmF">retrieve</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -276,13 +270,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource6insertFMS0_FT4typeSS6fieldsGVs10DictionarySSP__7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO6insertACSS4type_s10DictionaryVySSypG6fieldsSS7versiontcACmF"></a>
                     <a name="//apple_ref/swift/Element/insert" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource6insertFMS0_FT4typeSS6fieldsGVs10DictionarySSP__7versionSS_S0_">insert</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO6insertACSS4type_s10DictionaryVySSypG6fieldsSS7versiontcACmF">insert</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -299,13 +293,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource6updateFMS0_FT4typeSS2idSS6fieldsGVs10DictionarySSP__7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO6updateACSS4type_SS2ids10DictionaryVySSypG6fieldsSS7versiontcACmF"></a>
                     <a name="//apple_ref/swift/Element/update" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource6updateFMS0_FT4typeSS2idSS6fieldsGVs10DictionarySSP__7versionSS_S0_">update</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO6updateACSS4type_SS2ids10DictionaryVySSypG6fieldsSS7versiontcACmF">update</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -322,13 +316,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource6deleteFMS0_FT4typeSS2idSS7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO6deleteACSS4type_SS2idSS7versiontcACmF"></a>
                     <a name="//apple_ref/swift/Element/delete" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource6deleteFMS0_FT4typeSS2idSS7versionSS_S0_">delete</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO6deleteACSS4type_SS2idSS7versiontcACmF">delete</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -345,13 +339,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource8describeFMS0_FT4typeSS7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO8describeACSS4type_SS7versiontcACmF"></a>
                     <a name="//apple_ref/swift/Element/describe" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource8describeFMS0_FT4typeSS7versionSS_S0_">describe</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO8describeACSS4type_SS7versiontcACmF">describe</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -368,13 +362,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource14describeGlobalFMS0_FT7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO14describeGlobalACSS7version_tcACmF"></a>
                     <a name="//apple_ref/swift/Element/describeGlobal" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource14describeGlobalFMS0_FT7versionSS_S0_">describeGlobal</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO14describeGlobalACSS7version_tcACmF">describeGlobal</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -391,13 +385,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource24registerForNotificationsFMS0_FT11deviceTokenSS7versionSS_S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO24registerForNotificationsACSS11deviceToken_SS7versiontcACmF"></a>
                     <a name="//apple_ref/swift/Element/registerForNotifications" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource24registerForNotificationsFMS0_FT11deviceTokenSS7versionSS_S0_">registerForNotifications</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO24registerForNotificationsACSS11deviceToken_SS7versiontcACmF">registerForNotifications</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -414,13 +408,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource4apexFMS0_FT6methodO9Alamofire10HTTPMethod4pathSS10parametersGSqGVs10DictionarySSP___7headersGSqGS3_SSSS___S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO4apexA2C10HTTPMethodO6method_SS4paths10DictionaryVySSypGSg10parametersAJyS2SGSg7headerstcACmF"></a>
                     <a name="//apple_ref/swift/Element/apex" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource4apexFMS0_FT6methodO9Alamofire10HTTPMethod4pathSS10parametersGSqGVs10DictionarySSP___7headersGSqGS3_SSSS___S0_">apex</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO4apexA2C10HTTPMethodO6method_SS4paths10DictionaryVySSypGSg10parametersAJyS2SGSg7headerstcACmF">apex</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -437,13 +431,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17SwiftlySalesforce8Resource6customFMS0_FT6methodO9Alamofire10HTTPMethod7baseURLGSqV10Foundation3URL_4pathGSqSS_10parametersGSqGVs10DictionarySSP___7headersGSqGS5_SSSS___S0_"></a>
+                    <a name="/s:17SwiftlySalesforce8ResourceO6customA2C10HTTPMethodO6method_10Foundation3URLVSg04baseH0SSSg4paths10DictionaryVySSypGSg10parametersAPyS2SGSg7headerstcACmF"></a>
                     <a name="//apple_ref/swift/Element/custom" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17SwiftlySalesforce8Resource6customFMS0_FT6methodO9Alamofire10HTTPMethod7baseURLGSqV10Foundation3URL_4pathGSqSS_10parametersGSqGVs10DictionarySSP___7headersGSqGS5_SSSS___S0_">custom</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO6customA2C10HTTPMethodO6method_10Foundation3URLVSg04baseH0SSSg4paths10DictionaryVySSypGSg10parametersAPyS2SGSg7headerstcACmF">custom</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -459,15 +453,84 @@
                 </li>
               </ul>
             </div>
-          </div>
-        </section>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce8ResourceO6revokeACSS5token_SS4hosttcACmF"></a>
+                    <a name="//apple_ref/swift/Element/revoke" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO6revokeACSS5token_SS4hosttcACmF">revoke</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
 
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce8ResourceO7refreshACSS0D5Token_SS11consumerKeySS4hosttcACmF"></a>
+                    <a name="//apple_ref/swift/Element/refresh" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO7refreshACSS0D5Token_SS11consumerKeySS4hosttcACmF">refresh</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce8ResourceO10HTTPMethodO"></a>
+                    <a name="//apple_ref/swift/Enum/HTTPMethod" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce8ResourceO10HTTPMethodO">HTTPMethod</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Enums/Resource/HTTPMethod.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/mike4aday/SwiftlySalesforce" target="_blank" rel="external">Michael Epstein</a>. All rights reserved. (Last updated: 2017-10-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
       </article>
     </div>
-    <section class="footer">
-      <p>&copy; 2017 <a class="link" href="https://github.com/mike4aday/SwiftlySalesforce" target="_blank" rel="external">Michael Epstein</a>. All rights reserved. (Last updated: 2017-07-17)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-    </section>
   </body>
 </div>
 </html>
