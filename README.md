@@ -175,7 +175,7 @@ salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Co
 ```
 The `always` closure will be called regardless of success or failure elsewhere in the promise chain.
 
-### Example: Querying
+### Example: Query Salesforce
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
 salesforce.query(soql: soql).then {
@@ -201,7 +201,7 @@ first {
 }
 ```
 
-### Example: Decoding Query Results as Custom Model Objects (NEW!)
+### Example: Decode Query Results as Custom Model Objects (NEW!)
 You can easily perform complex queries, traversing object relationships, and have all the results decoded automatically into your custom model objects that implement the [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
 ```swift 
 struct Account: Decodable {
