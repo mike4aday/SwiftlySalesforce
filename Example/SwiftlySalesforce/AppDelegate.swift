@@ -15,8 +15,8 @@ var salesforce: Salesforce!
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, LoginDelegate {
 
-	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkilGsk4LZyd6CEZMDwzLsC7va_YcNdbUHOdyGO1TShxLDU5kuN6C4KsJMbyWb"
-	let redirectURL = URL(string: "taskforce://authorized")!
+	let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
+	let redirectURL = URL(string: "<YOUR CONNECTED APP'S REDIRECT URL HERE>")!
 	
 	var connectedApp: ConnectedApp!
 	var window: UIWindow?
@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		connectedApp = ConnectedApp(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: self)
 		salesforce = Salesforce(connectedApp: connectedApp)
 		
-        //uncomment if you want to receive push notifications, including those 
-        //from salesforce's universal notification service
+        //Uncomment if you want to receive push notifications, including those
+        //from Salesforce's universal notification service
         //registerForRemoteNotification()
 		
 		return true
