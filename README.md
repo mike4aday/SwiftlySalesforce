@@ -92,31 +92,72 @@ let promise: Promise<SObject> = salesforce.retrieve(type: "Account", id: "001300
 ```
 And you can add a closure that will be called later, when the promise is fulfilled:
 ```swift
-promise.then {
-    queryResult in
-    for (record: Record) in queryResult.records {		
-        debugPrint(record.id)
-	    // Do other interesting stuff with the record
-    }
+salesforce.retrieve(type: "Account", id: "0013000001FjCcF").then {
+	(queryResult: QueryResult<SObject>) -> () in
+	for record: SObject in queryResult.records {
+		debugPrint(record.id)
+		// Do something with each record
+	}
+}.catch {
+	(error: Error) in
+	// Do something with the error
 }
 ```
-
 You can retrieve multiple records in parallel, and wait for them all before proceeding:
 ```swift
 first {
-    // (Enclosing this in a ‘first’ block is optional, and can keep things neat.)
-    let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
-    salesforce.retrieve(type: "Account", ids: ids, fields: ["Name", "BillingPostalCode"])
+	// (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
+	let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
+	return salesforce.retrieve(type: "Account", ids: ids)
 }.then {
-    records -> () in
-    for record in records {
-        if let name = record.name as? String {
-            debugPrint(name)
+	(records: [SObject]) -> () in
+	for record in records {
+		if let name = try record.string(named: "Name"), let modifiedDate = try record.date(named: "LastModifiedDate") {
+			debugPrint(name)
+			debugPrint(modifiedDate)
+		}
 	}
-    }
 }.catch {
-    error in
-    // Handle error...
+	error in
+	// Handle error...
+}
+```
+Instead of using SObject, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's `Decodable` protocol:
+```swift
+struct MyAccountModel: Decodable {
+
+	var id: String
+	var name: String
+	var createdDate: Date
+	var billingAddress: Address?
+	var website: URL?
+
+	enum CodingKeys: String, CodingKey {
+		case id = "Id"
+		case name = "Name"
+		case createdDate = "CreatedDate"
+		case billingAddress = "BillingAddress"
+		case website = "Website"
+	}
+}
+
+first {
+	// (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
+	let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
+		return salesforce.retrieve(type: "Account", ids: ids)
+}.then {
+	(records: [MyAccountModel]) -> () in
+	for record in records {
+		// Do something more interesting with record data
+		let id = record.id
+		let name = record.name
+		let createdDate = record.createdDate
+		let billingAddress = record.billingAddress
+		let website = record.website
+	}
+}.catch {
+	error in
+	// Handle error...
 }
 ```
 
@@ -147,14 +188,63 @@ salesforce.query(soql: soql).then {
 You can also execute multiple queries at once and wait for them all to complete before proceeding:
 ```swift
 first {
-    let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
-    salesforce.query(soql: queries)
+	let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
+	return salesforce.query(soql: queries)
 }.then {
-    (queryResults: [QueryResult]) -> () in
-    // Results are in the same order as the queries
+	(queryResults: [QueryResult<SObject>]) -> () in
+	// Results are in the same order as the queries
 }.catch {
-    error in
-    // Handle the error
+	error in
+	// Handle the error
+}
+```
+
+You can easily perform complex queries, traversing object relationships, and have all the results decoded automatically into your custom model objects:
+```swift 
+struct Account: Decodable {
+
+	var id: String
+	var name: String
+	var lastModifiedDate: Date
+
+	enum CodingKeys: String, CodingKey {
+		case id = "Id"
+		case name = "Name"
+		case lastModifiedDate = "LastModifiedDate"
+	}
+}
+
+struct Contact: Decodable {
+
+	var id: String
+	var firstName: String
+	var lastName: String
+	var createdDate: Date
+	var account: Account?
+
+	enum CodingKeys: String, CodingKey {
+		case id = "Id"
+		case firstName = "FirstName"
+		case lastName = "LastName"
+		case createdDate = "CreatedDate"
+		case account = "Account"
+	}
+}
+
+let soql = "SELECT Id, FIRSTNAME, LastName, CreatedDate, Account.Id, Account.Name, Account.LastModifiedDate FROM Contact"
+salesforce.query(soql: soql).then {
+	(queryResult: QueryResult<Contact>) -> () in
+	for contact in queryResult.records {
+		// Do something more interesting with each Contact record
+		debugPrint(contact.lastName)
+		if let account = contact.account {
+			// Do something more interesting with each Account record
+			debugPrint(account.name)
+		}
+	}
+}.catch {
+	error in
+	// Handle error
 }
 ```
 
@@ -163,23 +253,26 @@ Let's say we want to retrieve a random zip/postal code from a [custom Apex REST]
 ```swift
 // Chained asynch requests
 first {
-    // Make GET request of custom Apex REST resource that returns a zip code as a string
-    salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
+// Make GET request of custom Apex REST resource that returns a zip code as a string
+return salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
 }.then {
-    // Query accounts in that zip code
-    (result: Data) -> Promise<QueryResult> in
-    guard let zip = String(data: result, encoding: .utf8) else {
-        throw TaskForceError.generic(100, “Can’t get random zip code from our custom Apex REST endpoint!”)
-    }
-    let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
-    return salesforce.query(soql: soql)
+// Query accounts in that zip code
+(result: Data) -> Promise<QueryResult<SObject>> in
+guard let zip = String(data: result, encoding: .utf8) else {
+throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
+}
+let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
+return salesforce.query(soql: soql)
 }.then {
-    queryResult in
-    for record in queryResult.records {
-        if let name = record.name {
-          print("Account name = \(name)")
-        }
-    }
+queryResult -> () in
+for record in queryResult.records {
+if let name = try record.string(named: "Name") {
+print("Account name = \(name)")
+}
+}
+}.catch {
+error in
+// Handle error
 }
 ```
 You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, or when just the first completes, or when any one operation fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
@@ -211,44 +304,45 @@ first {
 ```
 ### Example: Retrieve a Contact's Photo
 ```swift	
-import PromiseKit
-// ...
 first {
-    salesforce.retrieve(type: "Contact", id: "003f40000027GugAAE")
+salesforce.retrieve(type: "Contact", id: "003f40000027GugAAE")
 }.then {
-    (record) -> Promise<UIImage> in
-    guard let photoPath = record["PhotoUrl"] as? String else {
-        throw MyCustomError("Failed to retrieve contact's photo URL")
-    }
-    return salesforce.fetchImage(path: photoPath)
+(record: SObject) -> Promise<UIImage> in
+if let photoPath = try record.string(named: "PhotoUrl") {
+// Fetch image
+return salesforce.fetchImage(path: photoPath)
+}
+else {
+// Return a pre-defined default image
+return Promise(value: self.defaultImage)
+}
 }.then {
-    image in
-    self.photoView.image = image
+(image: UIImage) -> () in
+// Do something interesting with the image, e.g. display in a view:
+// self.photoView.image = image
 }.always {
-    self.refreshControl?.endRefreshing()
+self.refreshControl?.endRefreshing()
 }.catch {
-    (error) -> () in
-    // Handle any errors
+(error) -> () in
+// Handle any errors
 }
 ```
 
 ### Example: Retrieve an Account's Billing Address
-Addresses for standard objects, e.g. Account and Contact, are stored in a ['compound' Address field](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_address.htm), and if you enable the [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org, Salesforce will automatically geocode those addresses, giving you latitude and longitude values you could use for map markers. 
+Addresses for standard objects, e.g. Account and Contact, are stored in a ['compound' Address field](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_address.htm), and, if you enable the [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org, Salesforce will automatically geocode those addresses, giving you latitude and longitude values you could use for map markers. 
 ```swift
-import PromiseKit
-// ...
 first {
-    salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
+salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
 }.then {
-    record in
-    if let address = record.address(for: "BillingAddress") {
-        let longitude = address.longitude
-        let latitude = address.latitude
-        // You could put a marker on a map...
-    }
+(record: SObject) -> () in
+if let address = record.address(named: "BillingAddress") {
+let longitude = address.longitude
+let latitude = address.latitude
+// You could put a marker on a map...
+}
 }.catch {
-    (error) -> () in
-    // Handle any errors
+(error) -> () in
+// Handle any errors
 }
 ```
 
@@ -256,24 +350,22 @@ first {
 The following code is adapted from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
 ```swift
 first {
-    // Get ID of current user
-    salesforce.identity()
+// Get ID of current user
+//TODO: if user already authorized, then we could just get user ID from salesforce.authData
+salesforce.identity()
 }.then {
-    // Query tasks owned by user
-    userInfo in
-    guard let userID = userInfo.userID else {
-        throw TaskForceError.generic(code: 100, message: "Can't determine user ID")
-    }
-    let soql = "SELECT Id,Subject,Status,What.Name FROM Task WHERE OwnerId = '\(userID)' ORDER BY CreatedDate DESC"
-    return salesforce.query(soql: soql)
+// Get tasks owned by user (we assume all records are returned in a single 'page'...)
+userInfo -> Promise<QueryResult<Task>> in
+let soql = "SELECT Id,CreatedDate,Subject,Status,IsHighPriority,What.Name FROM Task WHERE OwnerId = '\(userInfo.userID)' ORDER BY CreatedDate DESC"
+return salesforce.query(soql: soql)
 }.then {
-    // Parse JSON into Task instances
-    (result: QueryResult) -> () in
-    let tasks = result.records.map { Task(dictionary: $0) }
-    // Do something interesting with the tasks…
+// Parse JSON into Task instances
+(result: QueryResult<Task>) -> () in
+let tasks: [Task] = result.records
+// Do something with tasks, e.g. display in table view
 }.catch {
-    error in
-    // Handle the error…
+error in
+// Handle error
 }
 ```
 
@@ -292,14 +384,18 @@ CLLocationManager.promise().recover { err in
 If, for example, you want to determine whether the user has permission to update or delete a record so you can disable editing in your UI, or if you want to retrieve all the options in a picklist, rather than hardcoding them in your mobile app, then call `salesforce.describe(type:)` to retrieve an object's [metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm):
 ```swift
 first {
-    salesforce.describe(type: "Account")
+salesforce.describe(type: "Account")
 }.then {
-    (accountMetadata) -> () in
-    saveButton.enabled = accountMetadata.isUpdateable
-    let industryOptions = accountMetadata.fields["Industry"]?.picklistValues
+(accountMetadata) -> () in
+self.saveButton.isEnabled = accountMetadata.isUpdateable
+if let fields = accountMetadata.fields {
+let fieldDict = Dictionary(items: fields, key: { $0.name })
+let industryOptions = fieldDict["Industry"]?.picklistValues
+// Populate a drop-down menu with the picklist values...
+}
 }.catch {
-    error in
-    debugPrint(error)
+error in
+debugPrint(error)
 }
 ```
 
@@ -365,7 +461,7 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
 
 * [OAuth2Result.swift]: Swift struct that holds tokens, and other data, required for each request made to the Salesforce REST API. These values are stored securely in the iOS keychain.
 
-* [Extensions.swift]: Swift extensions used by other components of Swiftly Salesforce. The extensions that you'll likely use in your own code are `DateFormatter.salesforceDateTime`, and `DateFormatter.salesforceDate`, for converting Salesforce date/time and date values to and from strings for JSON serialization.
+* [Extensions.swift]: Swift extensions used by other components of Swiftly Salesforce. 
 
 * [ConnectedApp.swift]: Coordinates the OAuth2 authorization process, and securely stores and retrieves the resulting access token. The access token must be included in the header of every HTTP request to the Salesforce REST API. If the access token has expired, the ConnectedApp instance will attempt to [refresh][OAuth2 refresh token flow] it. If the refresh process fails, then ConnectedApp will call on its delegate to authenticate the user, that is, to display a Salesforce-hosted web login form. The default implementation uses a [Safari View Controller](https://developer.apple.com/videos/play/wwdc2015-504/) (new in iOS 9) to authenticate the user via the OAuth2 '[user-agent][OAuth2 user-agent flow]' flow. Though 'user-agent' flow is more complex than the OAuth2 '[username-password][OAuth2 username-password flow]' flow, it is the preferred method of authenticating users to Salesforce, since their credentials are never handled by the client application.
 
