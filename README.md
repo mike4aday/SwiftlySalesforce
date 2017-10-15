@@ -106,58 +106,58 @@ salesforce.retrieve(type: "Account", id: "0013000001FjCcF").then {
 You can retrieve multiple records in parallel, and wait for them all before proceeding:
 ```swift
 first {
-	// (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
-	let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
-	return salesforce.retrieve(type: "Account", ids: ids)
+    // (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
+    let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
+    return salesforce.retrieve(type: "Account", ids: ids)
 }.then {
-	(records: [SObject]) -> () in
-	for record in records {
-		if let name = try record.string(named: "Name"), let modifiedDate = try record.date(named: "LastModifiedDate") {
-			debugPrint(name)
-			debugPrint(modifiedDate)
-		}
-	}
+    (records: [SObject]) -> () in
+    for record in records {
+        if let name = try record.string(named: "Name"), let modifiedDate = try record.date(named: "LastModifiedDate") {
+	    debugPrint(name)
+            debugPrint(modifiedDate)
+        }
+    }
 }.catch {
-	error in
-	// Handle error...
+    error in
+    // Handle error...
 }
 ```
 Instead of using SObject, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's `Decodable` protocol:
 ```swift
 struct MyAccountModel: Decodable {
 
-	var id: String
-	var name: String
-	var createdDate: Date
-	var billingAddress: Address?
-	var website: URL?
+    var id: String
+    var name: String
+    var createdDate: Date
+    var billingAddress: Address?
+    var website: URL?
 
-	enum CodingKeys: String, CodingKey {
-		case id = "Id"
-		case name = "Name"
-		case createdDate = "CreatedDate"
-		case billingAddress = "BillingAddress"
-		case website = "Website"
-	}
+    enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case createdDate = "CreatedDate"
+        case billingAddress = "BillingAddress"
+        case website = "Website"
+    }
 }
 
 first {
-	// (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
-	let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
-		return salesforce.retrieve(type: "Account", ids: ids)
+    // (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
+    let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
+    return salesforce.retrieve(type: "Account", ids: ids)
 }.then {
-	(records: [MyAccountModel]) -> () in
-	for record in records {
-		// Do something more interesting with record data
-		let id = record.id
-		let name = record.name
-		let createdDate = record.createdDate
-		let billingAddress = record.billingAddress
-		let website = record.website
-	}
+    (records: [MyAccountModel]) -> () in
+    for record in records {
+        // Do something more interesting with record data
+        let id = record.id
+        let name = record.name
+        let createdDate = record.createdDate
+        let billingAddress = record.billingAddress
+        let website = record.website
+    }
 }.catch {
-	error in
-	// Handle error...
+    error in
+    // Handle error...
 }
 ```
 
@@ -177,25 +177,25 @@ The `always` closure will be called regardless of success or failure elsewhere i
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(postalCode)'"
 salesforce.query(soql: soql).then {
-  (queryResult: QueryResult) -> () in
-  // Handle the QueryResult
+    (queryResult: QueryResult) -> () in
+    // Handle the QueryResult
 }.catch {
-  error in
-  // Handle the error
+    error in
+    // Handle the error
 }
 ```
 
-You can also execute multiple queries at once and wait for them all to complete before proceeding:
+You could also execute multiple queries at once and wait for them all to complete before proceeding:
 ```swift
 first {
-	let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
-	return salesforce.query(soql: queries)
+    let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
+    return salesforce.query(soql: queries)
 }.then {
-	(queryResults: [QueryResult<SObject>]) -> () in
-	// Results are in the same order as the queries
+    (queryResults: [QueryResult<SObject>]) -> () in
+    // Results are in the same order as the queries
 }.catch {
-	error in
-	// Handle the error
+    error in
+    // Handle the error
 }
 ```
 
@@ -203,48 +203,48 @@ You can easily perform complex queries, traversing object relationships, and hav
 ```swift 
 struct Account: Decodable {
 
-	var id: String
-	var name: String
-	var lastModifiedDate: Date
+    var id: String
+    var name: String
+    var lastModifiedDate: Date
 
-	enum CodingKeys: String, CodingKey {
-		case id = "Id"
-		case name = "Name"
-		case lastModifiedDate = "LastModifiedDate"
-	}
+    enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case lastModifiedDate = "LastModifiedDate"
+    }
 }
 
 struct Contact: Decodable {
 
-	var id: String
-	var firstName: String
-	var lastName: String
-	var createdDate: Date
-	var account: Account?
+    var id: String
+    var firstName: String
+    var lastName: String
+    var createdDate: Date
+    var account: Account?
 
-	enum CodingKeys: String, CodingKey {
-		case id = "Id"
-		case firstName = "FirstName"
-		case lastName = "LastName"
-		case createdDate = "CreatedDate"
-		case account = "Account"
-	}
+    enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case firstName = "FirstName"
+        case lastName = "LastName"
+	case createdDate = "CreatedDate"
+	case account = "Account"
+    }
 }
 
 let soql = "SELECT Id, FIRSTNAME, LastName, CreatedDate, Account.Id, Account.Name, Account.LastModifiedDate FROM Contact"
 salesforce.query(soql: soql).then {
-	(queryResult: QueryResult<Contact>) -> () in
-	for contact in queryResult.records {
-		// Do something more interesting with each Contact record
-		debugPrint(contact.lastName)
-		if let account = contact.account {
-			// Do something more interesting with each Account record
-			debugPrint(account.name)
-		}
-	}
+    (queryResult: QueryResult<Contact>) -> () in
+    for contact in queryResult.records {
+        // Do something more interesting with each Contact record
+        debugPrint(contact.lastName)
+        if let account = contact.account {
+            // Do something more interesting with each Account record
+            debugPrint(account.name)
+        }
+    }
 }.catch {
-	error in
-	// Handle error
+    error in
+    // Handle error
 }
 ```
 
