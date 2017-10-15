@@ -234,7 +234,7 @@ struct Contact: Decodable {
     }
 }
 
-let soql = "SELECT Id, FIRSTNAME, LastName, CreatedDate, Account.Id, Account.Name, Account.LastModifiedDate FROM Contact"
+let soql = "SELECT Id, FirstName, LastName, CreatedDate, Account.Id, Account.Name, Account.LastModifiedDate FROM Contact"
 salesforce.query(soql: soql).then {
     (queryResult: QueryResult<Contact>) -> () in
     for contact in queryResult.records {
