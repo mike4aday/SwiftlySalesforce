@@ -16,9 +16,9 @@ open class ConnectedApp {
 	
 	weak public var loginDelegate: LoginDelegate?
 	
-	internal static let defaultUserID = "Default User ID"
-	internal static let defaultOrgID = "Default Org ID"
-	internal static let defaultLoginHost = "login.salesforce.com"
+	public static let defaultUserID = "Default User ID"
+	public static let defaultOrgID = "Default Org ID"
+	public static let defaultLoginHost = "login.salesforce.com"
 	
 	private var storeKey: OAuth2ResultStore.Key
 	private var pendingAuthorization: (promise: Promise<OAuth2Result>, fulfill: (OAuth2Result) -> (), reject: (Error) -> ())?
