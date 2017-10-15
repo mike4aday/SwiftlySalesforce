@@ -122,7 +122,9 @@ first {
     // Handle error...
 }
 ```
-Instead of using SObject, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's `Decodable` protocol:
+
+### Example: Custom Model Objects (NEW!)
+Instead of using `SObject`, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's `Decodable` protocol:
 ```swift
 struct MyAccountModel: Decodable {
 
