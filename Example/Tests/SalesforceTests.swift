@@ -235,7 +235,49 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
-	func testThatItRetrievesAndUpdatesAndDecodes() {
+	func testThatItUpdates() {
+		
+		let exp = expectation(description: "Retrieve and decode")
+		
+		salesforce.insert(type: "Account", fields: ["Name": "Important Corp., Inc.", "Website": "http://importantcorp.com", "Sic": "A123"]).then {
+			(id: String) -> Promise<SObject> in
+			return self.salesforce.retrieve(type: "Account", id: id)
+			}.then {
+				(account: SObject) -> SObject in
+				XCTAssertEqual(try account.string(named: "Name"), "Important Corp., Inc.")
+				XCTAssertEqual(try account.url(named: "Website"), URL(string: "http://importantcorp.com"))
+				XCTAssertNil(try account.address(named: "BillingAddress"))
+				XCTAssertEqual(try account.string(named: "Sic"), "A123")
+				return account
+			}.then {
+				(account: SObject) -> Promise<String> in
+				let fields = [
+					"Name": "My New Corp.",
+					"Website": nil,
+					"BillingStreet": "123 Main St.",
+					"BillingCity": "St. Paul",
+					"Sic": nil
+				]
+				return self.salesforce.update(type: account.type, id: account.id, fields: fields).then { account.id }
+			}.then {
+				(id: String) -> Promise<SObject> in
+				return self.salesforce.retrieve(type: "Account", id: id)
+			}.then {
+				(account: SObject) -> () in
+				XCTAssertEqual(try account.string(named: "Name"), "My New Corp.")
+				XCTAssertNil(try account.url(named: "Website"))
+				XCTAssertEqual(try account.string(named: "BillingStreet"), "123 Main St.")
+				XCTAssertEqual(try account.string(named: "BillingCity"), "St. Paul")
+				XCTAssertNil(try account.string(named: "Sic"))
+				exp.fulfill()
+			}.catch {
+				XCTFail(String(describing: $0))
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItRetrievesAndDecodes() {
 		
 		struct MyAccount: Decodable {
 			var attributes: RecordAttributes
@@ -257,13 +299,40 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			return account.attributes.id
 		}.then {
 			(id: String) -> Promise<String> in
-			return self.salesforce.update(type: "Account", id: id, fields: ["Name": "My New Corp."]).then { id }
+			return self.salesforce.update(type: "Account", id: id, fields: ["Name": "My New Corp.", "Website": nil]).then { id }
 		}.then {
 			(id: String) -> Promise<MyAccount> in
 			return self.salesforce.retrieve(type: "Account", id: id)
 		}.then {
 			(account: MyAccount) -> () in
 			XCTAssertEqual(account.Name, "My New Corp.")
+			XCTAssertNil(account.Website)
+			exp.fulfill()
+		}.catch {
+			XCTFail(String(describing: $0))
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItRetrievesViaCustomResource() {
+		
+		let exp = expectation(description: "Test custom resource for simple retrieval")
+		
+		first {
+			salesforce.insert(type: "Account", fields: ["Name": "My Company", "Website": URL(string: "http://www.mycompany.com")!])
+		}.then {
+			(id: String) -> Promise<Data> in
+			let path = "/services/data/v40.0/sobjects/account/\(id)"
+			return self.salesforce.custom(method: .get, baseURL: nil, path: path, parameters: nil, headers: nil)
+		}.then {
+			(data: Data) -> () in
+			let decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
+			let sobject = try decoder.decode(SObject.self, from: data)
+			//XCTAssertEqual(id, sobject.id)
+			XCTAssertEqual("Account", sobject.type)
+			XCTAssertEqual("My Company", try sobject.string(named: "Name"))
+			XCTAssertEqual("http://www.mycompany.com", try sobject.url(named: "Website")!.absoluteString)
 			exp.fulfill()
 		}.catch {
 			XCTFail(String(describing: $0))
@@ -292,25 +361,62 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
-	func testThatItInserts() {
-		
-		// Note: will insert records into org
-		
-		let type = "Account"
-		let fields = [ "Name" : "Megacorp, Inc.", "BillingPostalCode": "12345"]
-		let exp = expectation(description: "Insert \(type) record")
+	func testThatItInsertsAccount() {
+	
+		let fields: [String: Any?] = [
+			"Name" : "Megacorp, Inc.",
+			"BillingPostalCode": "12345",
+			"Website": URL(string: "http://megacorp.com")!,
+			"BillingStreet": nil
+		]
+		let exp = expectation(description: "Insert Account record")
 		
 		first {
-			salesforce.insert(type: type, fields: fields)
+			salesforce.insert(type: "Account", fields: fields)
 		}.then {
 			// Then
-			id -> () in
+			id -> String in
 			XCTAssertTrue(id.hasPrefix("001"))
 			XCTAssertTrue(id.characters.count >= 15)
+			return id
+		}.then {
+			// Delete record that was just inserted
+			return self.salesforce.delete(type: "Account", id: $0)
+		}.then {
 			exp.fulfill()
 		}.catch {
-			error in
-			XCTFail(String(describing: error))
+			XCTFail(String(describing: $0))
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItInsertsTask() {
+		
+		let fields: [String: Any?] = [
+			"Subject" : "A Superhuman Task",
+			"IsReminderSet": true,
+			"ReminderDateTime": Date(timeIntervalSinceNow: 125000),
+			"ActivityDate": nil
+		]
+		let exp = expectation(description: "Insert Task record")
+		
+		first {
+			salesforce.insert(type: "Task", fields: fields)
+			}.then {
+				// Then
+				id -> String in
+				XCTAssertTrue(id.hasPrefix("00T"))
+				XCTAssertTrue(id.characters.count >= 15)
+				return id
+			}.then {
+				// Delete record that was just inserted
+				return self.salesforce.delete(type: "Task", id: $0)
+			}.then {
+				id in
+				exp.fulfill()
+			}.catch {
+				XCTFail(String(describing: $0))
 		}
 		
 		waitForExpectations(timeout: 5.0, handler: nil)
@@ -318,31 +424,27 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 	
 	func testThatItDeletes() {
 		
-		// Note: will insert records into org
-		
-		let type = "Account"
 		let fields = [ "Name" : "Worldwide Stuff, Inc.", "BillingPostalCode": "44554"]
-		let exp = expectation(description: "Delete \(type) record")
+		let exp = expectation(description: "Delete Account record")
 		
 		first {
 			// Insert it
-			salesforce.insert(type: type, fields: fields)
+			salesforce.insert(type: "Account", fields: fields)
 		}.then {
 			// Delete it
 			(id: String) -> Promise<String> in
-			return self.salesforce.delete(type: type, id: id).then { id }
+			return self.salesforce.delete(type: "Account", id: id).then { id }
 		}.then {
 			// Try to query it
 			(id: String) -> Promise<QueryResult<SObject>> in
-			return self.salesforce.query(soql: "SELECT Id FROM \(type) WHERE Id = '\(id)'")
+			return self.salesforce.query(soql: "SELECT Id FROM Account WHERE Id = '\(id)'")
 		}.then {
 			// Then shoudn't be found
 			(queryResult: QueryResult) -> Void in
 			XCTAssert(queryResult.totalSize == 0)
 			exp.fulfill()
 		}.catch {
-			error in
-			XCTFail(String(describing: error))
+			XCTFail(String(describing: $0))
 		}
 		
 		waitForExpectations(timeout: 5.0, handler: nil)
@@ -353,18 +455,16 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		let type = "Account"
 		let exp = expectation(description: "Describe Account")
 		
-		salesforce.describe(type: type)
-			.then {
-				(desc: ObjectMetadata) -> () in
-				let fields = Dictionary(items: desc.fields!) { $0.name }
-				XCTAssertEqual(desc.name, "Account")
-				XCTAssertTrue(fields.count > 0)
-				XCTAssertNotNil(fields["Type"])
-				XCTAssertEqual(fields["Type"]!.type, "picklist")
-				exp.fulfill()
-			}.catch {
-				error in
-				XCTFail(String(describing: error))
+		salesforce.describe(type: type).then {
+			(desc: ObjectMetadata) -> () in
+			let fields = Dictionary(items: desc.fields!) { $0.name }
+			XCTAssertEqual(desc.name, "Account")
+			XCTAssertTrue(fields.count > 0)
+			XCTAssertNotNil(fields["Type"])
+			XCTAssertEqual(fields["Type"]!.type, "picklist")
+			exp.fulfill()
+		}.catch {
+			XCTFail(String(describing: $0))
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
@@ -385,8 +485,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				}
 				exp.fulfill()
 			}.catch {
-				error in
-				XCTFail(String(describing: error))
+				XCTFail(String(describing: $0))
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
