@@ -1,16 +1,16 @@
 PODS:
-  - PromiseKit (4.4.0):
-    - PromiseKit/Foundation (= 4.4.0)
-    - PromiseKit/QuartzCore (= 4.4.0)
-    - PromiseKit/UIKit (= 4.4.0)
-  - PromiseKit/CorePromise (4.4.0)
-  - PromiseKit/Foundation (4.4.0):
+  - PromiseKit (4.4.3):
+    - PromiseKit/Foundation (= 4.4.3)
+    - PromiseKit/QuartzCore (= 4.4.3)
+    - PromiseKit/UIKit (= 4.4.3)
+  - PromiseKit/CorePromise (4.4.3)
+  - PromiseKit/Foundation (4.4.3):
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (4.4.0):
+  - PromiseKit/QuartzCore (4.4.3):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (4.4.0):
+  - PromiseKit/UIKit (4.4.3):
     - PromiseKit/CorePromise
-  - SwiftlySalesforce (4.0.6):
+  - SwiftlySalesforce (5.0.0):
     - PromiseKit (~> 4.0)
 
 DEPENDENCIES:
@@ -21,9 +21,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  PromiseKit: ecf5fe92275d57ee77c9ede858af47a162e9b97e
-  SwiftlySalesforce: e278c4cc49073dd9c3a529ad0ac6490d8fbd0f05
+  PromiseKit: fbb52a0d154402c57eeb6eccd36dd7724fcf6117
+  SwiftlySalesforce: 8f3cf11e70a645e56d1f16d6338153ae42ba1fc0
 
-PODFILE CHECKSUM: 6a5cfa5f32ca1645b6ace30e1a5e00bece280cc9
+PODFILE CHECKSUM: 0c2230198a85c2ce24d65efaaab92e170e58963e
 
 COCOAPODS: 1.3.1
