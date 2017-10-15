@@ -304,6 +304,7 @@ first {
     // Handle any errors
 }
 ```
+
 ### Example: Retrieve a Contact's Photo
 ```swift	
 first {
@@ -337,10 +338,38 @@ first {
     salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
 }.then {
     (record: SObject) -> () in
-    if let address = try record.address(named: "BillingAddress") {
-        let longitude = address.longitude
-        let latitude = address.latitude
+    if let address = try record.address(named: "BillingAddress"), let lon = address.longitude, let lat = address.latitude {
+	// You could put a marker on a map...
+        print("LAT/LON: \(lat)/\(lon)")
+    }
+}.catch {
+    (error) -> () in
+    // Handle any errors
+}
+```
+
+Or use your own custom `Decodable` model class, instead of the default `SObject`:
+```swift
+struct MyAccountModel: Decodable {
+			
+    var id: String
+    var name: String
+    var billingAddress: Address?
+			
+    enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case billingAddress = "BillingAddress"
+    }
+}
+		
+first {
+    salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
+}.then {
+    (record: MyAccountModel) -> () in
+    if let address = record.billingAddress, let lon = address.longitude, let lat = address.latitude {
         // You could put a marker on a map...
+        print("LAT/LON: \(lat)/\(lon)")
     }
 }.catch {
     (error) -> () in
@@ -382,6 +411,7 @@ CLLocationManager.promise().recover { err in
     // the error was fatal
 }
 ```
+
 ### Example: Retrieve Object Metadata
 If, for example, you want to determine whether the user has permission to update or delete a record so you can disable editing in your UI, or if you want to retrieve all the options in a picklist, rather than hardcoding them in your mobile app, then call `salesforce.describe(type:)` to retrieve an object's [metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm):
 ```swift
@@ -473,7 +503,7 @@ Swiftly Salesforce depends on [PromiseKit](http://promisekit.org): "Not just a p
 ## Resources
 If you're new to the Salesforce Platform or the Salesforce REST API, you might find the following resources useful:
 * [Salesforce REST API Developer's Guide][REST API]
-* [Salesforce App Cloud](http://www.salesforce.com/platform): aka the Salesforce Platform
+* [Salesforce Platform](http://www.salesforce.com/platform)
 * [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
 * [Salesforce Partner Community](https://partners.salesforce.com): "Innovate, grow, connect" with Salesforce ISVs. Join the [Salesforce + iOS Mobile][sfdc-ios Chatter] Chatter group
 * [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: Salesforce-supported SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
