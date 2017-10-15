@@ -47,7 +47,7 @@ public struct SObject {
 	}
 	
 	public func address(named: String) throws -> Address? {
-		return try container.decode(Address.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try container.decodeIfPresent(Address.self, forKey: SObjectCodingKey(stringValue: named)!)
 	}
 	
 	/// Returns a subquery result. For example, the records returned by the query
