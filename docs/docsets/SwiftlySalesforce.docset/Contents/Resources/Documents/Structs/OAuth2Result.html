@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>OAuth2Result Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/OAuth2Result" class="dashAnchor"></a>
+    <a title="OAuth2Result Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SwiftlySalesforce Docs</a> (22% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SwiftlySalesforce Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        OAuth2Result Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/ConnectedApp.html">ConnectedApp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OAuth2ResultStore.html">OAuth2ResultStore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OAuth2ResultStore/Key.html">– Key</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Salesforce.html">Salesforce</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ApplicationError.html">ApplicationError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Keychain.html">Keychain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/KeychainError.html">KeychainError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RequestError.html">RequestError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Requestor.html">Requestor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Resource.html">Resource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Resource/HTTPMethod.html">– HTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ResponseError.html">ResponseError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/DateFormatter.html">DateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Dictionary.html">Dictionary</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONDecoder.html">JSONDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Promise.html">Promise</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLComponents.html">URLComponents</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:17SwiftlySalesforce2eeoiSbAA12OAuth2ResultV_ADtF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:17SwiftlySalesforce5first10PromiseKit0D0CyxGAFyKc7execute_tlF">first(execute:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:17SwiftlySalesforce7fulfill10PromiseKit0D0Cyx_q_tGAEyxG_AEyq_Gtr0_lF">fulfill(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:17SwiftlySalesforce7fulfill10PromiseKit0D0Cyx_q_q0_tGAEyxG_AEyq_GAEyq0_Gtr1_lF">fulfill(_:_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:17SwiftlySalesforce7fulfill10PromiseKit0D0Cyx_q_q0_q1_tGAEyxG_AEyq_GAEyq0_GAEyq1_Gtr2_lF">fulfill(_:_:_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/LoginDelegate.html">LoginDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LoginViewController.html">LoginViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Address.html">Address</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Address/GeocodeAccuracy.html">– GeocodeAccuracy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FieldMetadata.html">FieldMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FieldMetadata/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity.html">Identity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity/PhotoKeys.html">– PhotoKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity/URLKeys.html">– URLKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Limit.html">Limit</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Limit/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OAuth2Result.html">OAuth2Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectMetadata.html">ObjectMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectMetadata/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PicklistItemMetadata.html">PicklistItemMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PicklistItemMetadata/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResult.html">QueryResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResult/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecordAttributes.html">RecordAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecordAttributes/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SObject.html">SObject</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>OAuth2Result</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">OAuth2Result</span></code></pre>
+
+                </div>
+              </div>
+            <p>Holds result of successful OAuth2 user-agent flow
+See <a href="https://help.salesforce.com/articleView?id=remoteaccess_oauth_user_agent_flow.htm&type=0">https://help.salesforce.com/articleView?id=remoteaccess_oauth_user_agent_flow.htm&amp;type=0</a></p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultV11accessTokenSSv"></a>
+                    <a name="//apple_ref/swift/Property/accessToken" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultV11accessTokenSSv">accessToken</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">OAuth2Result</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultV12refreshTokenSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/refreshToken" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultV12refreshTokenSSSgv">refreshToken</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">OAuth2Result</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultV11instanceURL10Foundation0F0Vv"></a>
+                    <a name="//apple_ref/swift/Property/instanceURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultV11instanceURL10Foundation0F0Vv">instanceURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">OAuth2Result</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultV11identityURL10Foundation0F0Vv"></a>
+                    <a name="//apple_ref/swift/Property/identityURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultV11identityURL10Foundation0F0Vv">identityURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">OAuth2Result</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultV6userIDSSv"></a>
+                    <a name="//apple_ref/swift/Property/userID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultV6userIDSSv">userID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">OAuth2Result</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultV5orgIDSSv"></a>
+                    <a name="//apple_ref/swift/Property/orgID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultV5orgIDSSv">orgID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">OAuth2Result</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultVACSS11accessToken_10Foundation3URLV08instanceH0AG08identityH0SSSg07refreshF0tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(accessToken:instanceURL:identityURL:refreshToken:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultVACSS11accessToken_10Foundation3URLV08instanceH0AG08identityH0SSSg07refreshF0tcfc">init(accessToken:instanceURL:identityURL:refreshToken:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="nf">init</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">instanceURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">identityURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">refreshToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessToken</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Salesforce access token (session ID).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>instanceURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Salesforce instance to use for subsequent, authenticated requests.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>identityURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Salesforce identity URL unique to the current user. See: <a href="https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0">https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&amp;type=0</a></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>refreshToken</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional value for refresh token; since the refresh token flow doesn&rsquo;t return the refresh token itself,
+including the refresh token as an argument will preserve it for the next refresh request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12OAuth2ResultVACSS16urlEncodedString_SSSg12refreshTokentKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(urlEncodedString:refreshToken:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12OAuth2ResultVACSS16urlEncodedString_SSSg12refreshTokentKcfc">init(urlEncodedString:refreshToken:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize credentials from a Salesforce-produced redirect URL, to which
+URL-encoded token information has been appended in the fragment</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="nf">init</span><span class="p">(</span><span class="nv">urlEncodedString</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">refreshToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>urlEncodedString</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL fragment or query string as returned by Salesforce during OAuth2 user-agent or refresh token flow</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>refreshToken</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional value for refresh token; since the refresh token flow doesn&rsquo;t return the refresh token itself,
+including the refresh token as an argument will preserve it for the next refresh request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/mike4aday/SwiftlySalesforce" target="_blank" rel="external">Michael Epstein</a>. All rights reserved. (Last updated: 2017-10-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,1755 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 14,
+      "symbol": "Address.GeocodeAccuracy",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 15,
+      "symbol": "Address.GeocodeAccuracy.address",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 16,
+      "symbol": "Address.GeocodeAccuracy.nearAddress",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 17,
+      "symbol": "Address.GeocodeAccuracy.block",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 18,
+      "symbol": "Address.GeocodeAccuracy.street",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 19,
+      "symbol": "Address.GeocodeAccuracy.extendedZip",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 20,
+      "symbol": "Address.GeocodeAccuracy.zip",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 21,
+      "symbol": "Address.GeocodeAccuracy.city",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 22,
+      "symbol": "Address.GeocodeAccuracy.county",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 23,
+      "symbol": "Address.GeocodeAccuracy.state",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 24,
+      "symbol": "Address.GeocodeAccuracy.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 27,
+      "symbol": "Address.city",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 28,
+      "symbol": "Address.country",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 29,
+      "symbol": "Address.countryCode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 30,
+      "symbol": "Address.geocodeAccuracy",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 31,
+      "symbol": "Address.latitude",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 32,
+      "symbol": "Address.longitude",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 33,
+      "symbol": "Address.postalCode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 34,
+      "symbol": "Address.state",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 35,
+      "symbol": "Address.stateCode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Address.swift",
+      "line": 36,
+      "symbol": "Address.street",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 16,
+      "symbol": "ConnectedApp.consumerKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 17,
+      "symbol": "ConnectedApp.redirectURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 18,
+      "symbol": "ConnectedApp.loginHost",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 20,
+      "symbol": "ConnectedApp.loginDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 22,
+      "symbol": "ConnectedApp.defaultUserID",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 23,
+      "symbol": "ConnectedApp.defaultOrgID",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 24,
+      "symbol": "ConnectedApp.defaultLoginHost",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 30,
+      "symbol": "ConnectedApp.authData",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 53,
+      "symbol": "ConnectedApp.accessToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 57,
+      "symbol": "ConnectedApp.instanceURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 61,
+      "symbol": "ConnectedApp.userID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
+      "line": 65,
+      "symbol": "ConnectedApp.orgID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 9,
+      "symbol": "RequestError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 10,
+      "symbol": "RequestError.resourceException",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 11,
+      "symbol": "RequestError.resourceNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 12,
+      "symbol": "RequestError.serverFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 13,
+      "symbol": "RequestError.userAuthenticationRequired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 16,
+      "symbol": "ResponseError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 17,
+      "symbol": "ResponseError.invalidAuthorizationData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 18,
+      "symbol": "ResponseError.invalidImageData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 19,
+      "symbol": "ResponseError.invalidStringData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 20,
+      "symbol": "ResponseError.unhandledResponse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 21,
+      "symbol": "ResponseError.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 24,
+      "symbol": "ApplicationError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 25,
+      "symbol": "ApplicationError.invalidState",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 28,
+      "symbol": "KeychainError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 29,
+      "symbol": "KeychainError.readFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 30,
+      "symbol": "KeychainError.writeFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 31,
+      "symbol": "KeychainError.deleteFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Error.swift",
+      "line": 32,
+      "symbol": "KeychainError.itemNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Extensions.swift",
+      "line": 13,
+      "symbol": "DateFormatter.salesforceDateTimeFormatter",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Extensions.swift",
+      "line": 19,
+      "symbol": "DateFormatter.salesforceDateFormatter",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Extensions.swift",
+      "line": 41,
+      "symbol": "JSONDecoder.init(dateFormatter:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Extensions.swift",
+      "line": 97,
+      "symbol": "URLComponents.init(string:parameters:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 16,
+      "symbol": "FieldMetadata.defaultValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 17,
+      "symbol": "FieldMetadata.defaultValueFormula",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 18,
+      "symbol": "FieldMetadata.inlineHelpText",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 19,
+      "symbol": "FieldMetadata.isCreateable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 20,
+      "symbol": "FieldMetadata.isCustom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 21,
+      "symbol": "FieldMetadata.isEncrypted",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 22,
+      "symbol": "FieldMetadata.isNillable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 23,
+      "symbol": "FieldMetadata.isSortable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 24,
+      "symbol": "FieldMetadata.isUpdateable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 25,
+      "symbol": "FieldMetadata.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 26,
+      "symbol": "FieldMetadata.length",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 27,
+      "symbol": "FieldMetadata.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 28,
+      "symbol": "FieldMetadata.picklistValues",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 29,
+      "symbol": "FieldMetadata.relatedTypes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 30,
+      "symbol": "FieldMetadata.relationshipName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 31,
+      "symbol": "FieldMetadata.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 33,
+      "symbol": "FieldMetadata.helpText",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 37,
+      "symbol": "FieldMetadata.referenceTo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 44,
+      "symbol": "FieldMetadata.CodingKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 45,
+      "symbol": "FieldMetadata.CodingKeys.defaultValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 46,
+      "symbol": "FieldMetadata.CodingKeys.defaultValueFormula",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 47,
+      "symbol": "FieldMetadata.CodingKeys.inlineHelpText",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 48,
+      "symbol": "FieldMetadata.CodingKeys.isCreateable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 49,
+      "symbol": "FieldMetadata.CodingKeys.isCustom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 50,
+      "symbol": "FieldMetadata.CodingKeys.isEncrypted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 51,
+      "symbol": "FieldMetadata.CodingKeys.isNillable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 52,
+      "symbol": "FieldMetadata.CodingKeys.isSortable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 53,
+      "symbol": "FieldMetadata.CodingKeys.isUpdateable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 54,
+      "symbol": "FieldMetadata.CodingKeys.label",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 55,
+      "symbol": "FieldMetadata.CodingKeys.length",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 56,
+      "symbol": "FieldMetadata.CodingKeys.name",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 57,
+      "symbol": "FieldMetadata.CodingKeys.picklistValues",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 58,
+      "symbol": "FieldMetadata.CodingKeys.relatedTypes",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 59,
+      "symbol": "FieldMetadata.CodingKeys.relationshipName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/FieldMetadata.swift",
+      "line": 60,
+      "symbol": "FieldMetadata.CodingKeys.type",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Globals.swift",
+      "line": null,
+      "symbol": "Promise",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Globals.swift",
+      "line": 24,
+      "symbol": "fulfill(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Globals.swift",
+      "line": 27,
+      "symbol": "fulfill(_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 12,
+      "symbol": "Identity.displayName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 13,
+      "symbol": "Identity.language",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 14,
+      "symbol": "Identity.lastModifiedDate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 15,
+      "symbol": "Identity.locale",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 16,
+      "symbol": "Identity.mobilePhone",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 17,
+      "symbol": "Identity.orgID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 18,
+      "symbol": "Identity.photoURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 19,
+      "symbol": "Identity.profileURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 20,
+      "symbol": "Identity.thumbnailURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 21,
+      "symbol": "Identity.userID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 22,
+      "symbol": "Identity.username",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 23,
+      "symbol": "Identity.userType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 28,
+      "symbol": "Identity.CodingKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 30,
+      "symbol": "Identity.CodingKeys.displayName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 31,
+      "symbol": "Identity.CodingKeys.language",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 32,
+      "symbol": "Identity.CodingKeys.lastModifiedDate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 33,
+      "symbol": "Identity.CodingKeys.locale",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 34,
+      "symbol": "Identity.CodingKeys.mobilePhone",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 35,
+      "symbol": "Identity.CodingKeys.orgID",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 36,
+      "symbol": "Identity.CodingKeys.userID",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 37,
+      "symbol": "Identity.CodingKeys.username",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 38,
+      "symbol": "Identity.CodingKeys.userType",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 41,
+      "symbol": "Identity.CodingKeys.photos",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 42,
+      "symbol": "Identity.CodingKeys.urls",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 45,
+      "symbol": "Identity.PhotoKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 46,
+      "symbol": "Identity.PhotoKeys.picture",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 47,
+      "symbol": "Identity.PhotoKeys.thumbnail",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 50,
+      "symbol": "Identity.URLKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Identity.swift",
+      "line": 51,
+      "symbol": "Identity.URLKeys.profile",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Limit.swift",
+      "line": 13,
+      "symbol": "Limit.maximum",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Limit.swift",
+      "line": 14,
+      "symbol": "Limit.remaining",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Limit.swift",
+      "line": 16,
+      "symbol": "Limit.CodingKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Limit.swift",
+      "line": 17,
+      "symbol": "Limit.CodingKeys.maximum",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Limit.swift",
+      "line": 18,
+      "symbol": "Limit.CodingKeys.remaining",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
+      "line": null,
+      "symbol": "LoginDelegate",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
+      "line": 12,
+      "symbol": "LoginDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
+      "line": 13,
+      "symbol": "LoginDelegate.login(url:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
+      "line": 16,
+      "symbol": "LoginViewController",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
+      "line": 17,
+      "symbol": "LoginViewController.replacedRootViewController",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
+      "line": 30,
+      "symbol": "LoginDelegate.loggingIn",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2Result.swift",
+      "line": 14,
+      "symbol": "OAuth2Result.accessToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2Result.swift",
+      "line": 15,
+      "symbol": "OAuth2Result.refreshToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2Result.swift",
+      "line": 16,
+      "symbol": "OAuth2Result.instanceURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2Result.swift",
+      "line": 17,
+      "symbol": "OAuth2Result.identityURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2Result.swift",
+      "line": 19,
+      "symbol": "OAuth2Result.userID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2Result.swift",
+      "line": 23,
+      "symbol": "OAuth2Result.orgID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2Result.swift",
+      "line": 60,
+      "symbol": "==(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 9,
+      "symbol": "OAuth2ResultStore",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 11,
+      "symbol": "OAuth2ResultStore.Key",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 13,
+      "symbol": "OAuth2ResultStore.Key.userID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 14,
+      "symbol": "OAuth2ResultStore.Key.orgID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 15,
+      "symbol": "OAuth2ResultStore.Key.consumerKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 17,
+      "symbol": "OAuth2ResultStore.Key.account",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 20,
+      "symbol": "OAuth2ResultStore.Key.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 25,
+      "symbol": "OAuth2ResultStore.retrieve(key:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 36,
+      "symbol": "OAuth2ResultStore.store(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/OAuth2ResultStore.swift",
+      "line": 49,
+      "symbol": "OAuth2ResultStore.clear(key:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 13,
+      "symbol": "ObjectMetadata.fields",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 14,
+      "symbol": "ObjectMetadata.isCreateable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 15,
+      "symbol": "ObjectMetadata.isCustom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 16,
+      "symbol": "ObjectMetadata.isCustomSetting",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 17,
+      "symbol": "ObjectMetadata.isDeletable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 18,
+      "symbol": "ObjectMetadata.isFeedEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 19,
+      "symbol": "ObjectMetadata.isQueryable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 20,
+      "symbol": "ObjectMetadata.isSearchable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 21,
+      "symbol": "ObjectMetadata.isTriggerable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 22,
+      "symbol": "ObjectMetadata.isUndeletable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 23,
+      "symbol": "ObjectMetadata.isUpdateable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 24,
+      "symbol": "ObjectMetadata.keyPrefix",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 25,
+      "symbol": "ObjectMetadata.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 26,
+      "symbol": "ObjectMetadata.labelPlural",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 27,
+      "symbol": "ObjectMetadata.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 29,
+      "symbol": "ObjectMetadata.idPrefix",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 33,
+      "symbol": "ObjectMetadata.pluralLabel",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 37,
+      "symbol": "ObjectMetadata.CodingKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 38,
+      "symbol": "ObjectMetadata.CodingKeys.fields",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 39,
+      "symbol": "ObjectMetadata.CodingKeys.isCreateable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 40,
+      "symbol": "ObjectMetadata.CodingKeys.isCustom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 41,
+      "symbol": "ObjectMetadata.CodingKeys.isCustomSetting",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 42,
+      "symbol": "ObjectMetadata.CodingKeys.isDeletable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 43,
+      "symbol": "ObjectMetadata.CodingKeys.isFeedEnabled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 44,
+      "symbol": "ObjectMetadata.CodingKeys.isQueryable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 45,
+      "symbol": "ObjectMetadata.CodingKeys.isSearchable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 46,
+      "symbol": "ObjectMetadata.CodingKeys.isTriggerable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 47,
+      "symbol": "ObjectMetadata.CodingKeys.isUndeletable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 48,
+      "symbol": "ObjectMetadata.CodingKeys.isUpdateable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 49,
+      "symbol": "ObjectMetadata.CodingKeys.keyPrefix",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 50,
+      "symbol": "ObjectMetadata.CodingKeys.label",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 51,
+      "symbol": "ObjectMetadata.CodingKeys.labelPlural",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ObjectMetadata.swift",
+      "line": 52,
+      "symbol": "ObjectMetadata.CodingKeys.name",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 12,
+      "symbol": "PicklistItemMetadata.isActive",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 13,
+      "symbol": "PicklistItemMetadata.isDefault",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 14,
+      "symbol": "PicklistItemMetadata.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 15,
+      "symbol": "PicklistItemMetadata.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 17,
+      "symbol": "PicklistItemMetadata.CodingKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 18,
+      "symbol": "PicklistItemMetadata.CodingKeys.isActive",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 19,
+      "symbol": "PicklistItemMetadata.CodingKeys.isDefault",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 20,
+      "symbol": "PicklistItemMetadata.CodingKeys.label",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/PicklistItemMetadata.swift",
+      "line": 21,
+      "symbol": "PicklistItemMetadata.CodingKeys.value",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 14,
+      "symbol": "QueryResult.totalSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 15,
+      "symbol": "QueryResult.isDone",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 16,
+      "symbol": "QueryResult.records",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 17,
+      "symbol": "QueryResult.nextRecordsPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 19,
+      "symbol": "QueryResult.CodingKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 20,
+      "symbol": "QueryResult.CodingKeys.totalSize",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 21,
+      "symbol": "QueryResult.CodingKeys.isDone",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 22,
+      "symbol": "QueryResult.CodingKeys.records",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/QueryResult.swift",
+      "line": 23,
+      "symbol": "QueryResult.CodingKeys.nextRecordsPath",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": null,
+      "symbol": "RecordAttributes",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": 9,
+      "symbol": "RecordAttributes",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": 10,
+      "symbol": "RecordAttributes.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": 11,
+      "symbol": "RecordAttributes.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": 12,
+      "symbol": "RecordAttributes.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": 17,
+      "symbol": "RecordAttributes.CodingKeys",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": 18,
+      "symbol": "RecordAttributes.CodingKeys.path",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
+      "line": 19,
+      "symbol": "RecordAttributes.CodingKeys.type",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Requestor.swift",
+      "line": null,
+      "symbol": "Requestor",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Requestor.swift",
+      "line": 11,
+      "symbol": "Requestor",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Requestor.swift",
+      "line": 12,
+      "symbol": "Requestor.data",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Requestor.swift",
+      "line": 19,
+      "symbol": "Requestor.defaultResponseHandler",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Requestor.swift",
+      "line": 57,
+      "symbol": "Requestor.request(resource:connectedApp:session:responseHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": null,
+      "symbol": "Resource",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": null,
+      "symbol": "Resource",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 9,
+      "symbol": "Resource",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 10,
+      "symbol": "Resource.identity",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 11,
+      "symbol": "Resource.limits",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 12,
+      "symbol": "Resource.query",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 13,
+      "symbol": "Resource.queryNext",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 14,
+      "symbol": "Resource.retrieve",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 15,
+      "symbol": "Resource.insert",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 16,
+      "symbol": "Resource.update",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 17,
+      "symbol": "Resource.delete",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 18,
+      "symbol": "Resource.describe",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 19,
+      "symbol": "Resource.describeGlobal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 20,
+      "symbol": "Resource.registerForNotifications",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 21,
+      "symbol": "Resource.apex",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 22,
+      "symbol": "Resource.custom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 23,
+      "symbol": "Resource.revoke",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 24,
+      "symbol": "Resource.refresh",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 29,
+      "symbol": "Resource.HTTPMethod",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 30,
+      "symbol": "Resource.HTTPMethod.options",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 31,
+      "symbol": "Resource.HTTPMethod.get",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 32,
+      "symbol": "Resource.HTTPMethod.head",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 33,
+      "symbol": "Resource.HTTPMethod.post",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 34,
+      "symbol": "Resource.HTTPMethod.put",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 35,
+      "symbol": "Resource.HTTPMethod.patch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 36,
+      "symbol": "Resource.HTTPMethod.delete",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 37,
+      "symbol": "Resource.HTTPMethod.trace",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 38,
+      "symbol": "Resource.HTTPMethod.connect",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 106,
+      "symbol": "Resource.asURLRequest(authData:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
+      "line": 33,
+      "symbol": "SObject.string(named:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
+      "line": 37,
+      "symbol": "SObject.date(named:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
+      "line": 41,
+      "symbol": "SObject.url(named:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
+      "line": 45,
+      "symbol": "SObject.uint(named:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
+      "line": 49,
+      "symbol": "SObject.address(named:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Salesforce.swift",
+      "line": 14,
+      "symbol": "Salesforce",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Salesforce.swift",
+      "line": 26,
+      "symbol": "Salesforce.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mepstein/Documents/Projects/SwiftlySalesforce"
+}
