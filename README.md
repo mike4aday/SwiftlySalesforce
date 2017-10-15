@@ -201,7 +201,7 @@ first {
 }
 ```
 
-### Example: Querying and Decoding the Results as Custom Model Objects (NEW!)
+### Example: Decoding Query Results as Custom Model Objects (NEW!)
 You can easily perform complex queries, traversing object relationships, and have all the results decoded automatically into your custom model objects that implement the [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
 ```swift 
 struct Account: Decodable {
