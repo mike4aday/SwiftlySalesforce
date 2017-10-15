@@ -8,6 +8,9 @@
 
 import PromiseKit
 
+/// Represents a Salesforce Connected App.
+/// See https://help.salesforce.com/articleView?id=connected_app_overview.htm
+
 open class ConnectedApp {
 	
 	public let consumerKey: String
@@ -16,9 +19,9 @@ open class ConnectedApp {
 	
 	weak public var loginDelegate: LoginDelegate?
 	
-	public static let defaultUserID = "Default User ID"
-	public static let defaultOrgID = "Default Org ID"
-	public static let defaultLoginHost = "login.salesforce.com"
+	static public let defaultUserID = "Default User ID"
+	static public let defaultOrgID = "Default Org ID"
+	static public let defaultLoginHost = "login.salesforce.com"
 	
 	private var storeKey: OAuth2ResultStore.Key
 	private var pendingAuthorization: (promise: Promise<OAuth2Result>, fulfill: (OAuth2Result) -> (), reject: (Error) -> ())?
