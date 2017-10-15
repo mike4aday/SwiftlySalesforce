@@ -1009,41 +1009,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
-      "line": 33,
-      "symbol": "SObject.string(named:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
-      "line": 37,
-      "symbol": "SObject.date(named:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
-      "line": 41,
-      "symbol": "SObject.url(named:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
-      "line": 45,
-      "symbol": "SObject.uint(named:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/SObject.swift",
-      "line": 49,
-      "symbol": "SObject.address(named:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Salesforce.swift",
       "line": 14,
       "symbol": "Salesforce",
