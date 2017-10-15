@@ -12,8 +12,8 @@ public enum Resource {
 	case query(soql: String, version: String)
 	case queryNext(path: String)
 	case retrieve(type: String, id: String, fields: [String]?, version: String)
-	case insert(type: String, fields: [String: Any], version: String)
-	case update(type: String, id: String, fields: [String: Any], version: String)
+	case insert(type: String, fields: [String: Any?], version: String)
+	case update(type: String, id: String, fields: [String: Any?], version: String)
 	case delete(type: String, id: String, version: String)
 	case describe(type: String, version: String)
 	case describeGlobal(version: String)
@@ -65,10 +65,12 @@ internal extension Resource {
 			return (method: .get, path: "/services/data/v\(version)/sobjects/\(type)/\(id)", parameters: params, headers: nil)
 			
 		case let .insert(type, fields, version):
-			return (method: .post, path: "/services/data/v\(version)/sobjects/\(type)/", parameters: fields, headers: ["Content-Type" : "application/json"])
+			let params = fields.mapValues { $0 ?? NSNull() }
+			return (method: .post, path: "/services/data/v\(version)/sobjects/\(type)/", parameters: params, headers: ["Content-Type" : "application/json"])
 			
 		case let .update(type, id, fields, version):
-			return (method: .patch, path: "/services/data/v\(version)/sobjects/\(type)/\(id)", parameters: fields, headers: ["Content-Type" : "application/json"])
+			let params = fields.mapValues { $0 ?? NSNull() }
+			return (method: .patch, path: "/services/data/v\(version)/sobjects/\(type)/\(id)", parameters: params, headers: ["Content-Type" : "application/json"])
 			
 		case let .delete(type, id, version):
 			return (method: .delete, path: "/services/data/v\(version)/sobjects/\(type)/\(id)", parameters: nil, headers: nil)
@@ -148,7 +150,17 @@ internal extension Resource {
 				
 			default:
 				// Encode as JSON in request body
-				request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+				let modifiedParameters = parameters.mapValues {
+					(value: Any) -> Any in
+					if let url = value as? URL {
+						return url.absoluteString
+					}
+					if let date = value as? Date {
+						return DateFormatter.salesforceDateTimeFormatter.string(from: date)
+					}
+					return value
+				}
+				request.httpBody = try JSONSerialization.data(withJSONObject: modifiedParameters, options: [])
 				request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 			}
 		}

@@ -174,7 +174,7 @@ open class Salesforce {
 	/// - Parameter type: The type of the record to be inserted, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
-	open func insert(type: String, fields: [String: Any]) -> Promise<String> {
+	open func insert(type: String, fields: [String: Any?]) -> Promise<String> {
 		let resource = Resource.insert(type: type, fields: fields, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			(data: Data) -> String in
@@ -186,12 +186,12 @@ open class Salesforce {
 		}
 	}
 	
-	/// Asynchronously updates a record
+	/// Asynchronously updates a record in Salesforce
 	/// - Parameter type: Type of record to be updated (for example, "Account" or "Lead")
 	/// - Parameter id: Unique ID of record to be updated
 	/// - Parameter fields: Dictionary of field name and field value pairs.
 	/// - Returns: Promise<Void>
-	open func update(type: String, id: String, fields: [String: Any]) -> Promise<Void> {
+	open func update(type: String, id: String, fields: [String: Any?]) -> Promise<Void> {
 		let resource = Resource.update(type: type, id: id, fields: fields, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).asVoid()
 	}
