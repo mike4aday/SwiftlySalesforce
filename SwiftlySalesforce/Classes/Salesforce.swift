@@ -22,20 +22,14 @@ open class Salesforce {
 	/// API version used for requests
 	public var version: String
 	
-	// JSON decoder
-	public var decoder: JSONDecoder
-	
+	public let decoder: JSONDecoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	private let q = DispatchQueue.global(qos: .userInitiated)
-	private let requestor: Requestor
+	private let requestor: Requestor = Requestor.data
 	
 	/// Initializer
 	public init(connectedApp: ConnectedApp, version: String = Salesforce.defaultVersion) {
-		
 		self.connectedApp = connectedApp
 		self.version = version
-		self.requestor = Requestor.data
-		
-		self.decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	}
 	
 	/// Asynchronously requests information about the current user
