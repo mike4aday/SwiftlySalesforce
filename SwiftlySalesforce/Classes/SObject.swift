@@ -11,6 +11,7 @@ public struct SObject {
 	
 	fileprivate var attributes: RecordAttributes
 	fileprivate var container: KeyedDecodingContainer<SObjectCodingKey>
+	fileprivate var mutableFields = [String: Any?]()
 
 	/// Record ID
 	public var id: String {
@@ -27,32 +28,32 @@ public struct SObject {
 	/// - Returns: value retrieved for the given field, or nil if the value is nil or not present.
 	/// - Throws: Decoding error if the value cannot be decoded as type 'T'
 	public func value<T: Decodable>(named: String) throws -> T? {
-		return try container.decodeIfPresent(T.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try getValue(named: named, asType: T.self)
 	}
 	
 	/// Gets the value of a field as a String
 	public func string(named: String) throws -> String? {
-		return try container.decodeIfPresent(String.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try getValue(named: named, asType: String.self)
 	}
 	
 	/// Gets the value of a field as a Date
 	public func date(named: String) throws -> Date? {
-		return try container.decodeIfPresent(Date.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try getValue(named: named, asType: Date.self)
 	}
 	
 	/// Gets the value of a field as a URL
 	public func url(named: String) throws -> URL? {
-		return try container.decodeIfPresent(URL.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try getValue(named: named, asType: URL.self)
 	}
 	
 	/// Gets the value of a field as an unsigned integer
 	public func uint(named: String) throws -> UInt? {
-		return try container.decodeIfPresent(UInt.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try getValue(named: named, asType: UInt.self)
 	}
 	
 	/// Gets the value of a field as an Address
 	public func address(named: String) throws -> Address? {
-		return try container.decodeIfPresent(Address.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try getValue(named: named, asType: Address.self)
 	}
 	
 	/// Returns a subquery result. For example, the records returned by the query
@@ -61,7 +62,16 @@ public struct SObject {
 	/// - Parameter named: name of the field containing the query result.
 	/// - Returns: QueryResult<SObject> containing the subquery results decoded as SObjects
 	public func subqueryResult(named: String) throws -> QueryResult<SObject>? {
-		return try container.decodeIfPresent(QueryResult.self, forKey: SObjectCodingKey(stringValue: named)!)
+		return try getValue(named: named, asType: QueryResult<SObject>.self)
+	}
+	
+	fileprivate func getValue<T: Decodable>(named: String, asType: T.Type) throws -> T? {
+		if mutableFields.keys.contains(named) {
+			return mutableFields[named] as? T
+		}
+		else {
+			return try container.decodeIfPresent(T.self, forKey: SObjectCodingKey(stringValue: named)!)
+		}
 	}
 }
 
