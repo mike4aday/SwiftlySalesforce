@@ -75,12 +75,10 @@ public struct SObject {
 	}
 }
 
-extension SObject: Decodable {
+extension SObject: Codable {
 	
 	fileprivate struct SObjectCodingKey: CodingKey {
 	
-		static let attributes = SObjectCodingKey(stringValue: "attributes")!
-
 		var stringValue: String
 		var intValue: Int? = nil
 		
@@ -95,6 +93,13 @@ extension SObject: Decodable {
 	
 	public init(from decoder: Decoder) throws {
 		self.container = try decoder.container(keyedBy: SObjectCodingKey.self)
-		self.attributes = try container.decode(RecordAttributes.self, forKey: .attributes)
+		self.attributes = try container.decode(RecordAttributes.self, forKey: SObjectCodingKey(stringValue: "attributes")!)
+	}
+	
+	public func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: SObjectCodingKey.self)
+		for field in mutableFields {
+			try container.encode(mutableFields[field.key], forKey: SObjectCodingKey(stringValue: field.key)!)
+		}
 	}
 }
