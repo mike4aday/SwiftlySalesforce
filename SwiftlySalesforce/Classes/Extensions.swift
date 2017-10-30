@@ -96,12 +96,11 @@ public extension URLComponents {
 	
 	init?(string: String, parameters: [String: Any]?) {
 		self.init(string: string)
-		if let params = parameters {
-			var queryItems = [URLQueryItem]()
-			for param in params {
-				queryItems.append(URLQueryItem(name: param.key, value: "\(param.value)"))
-			}
-			self.queryItems = queryItems
-		}
+		self.queryItems = parameters?.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
+	}
+	
+	init?(url: URL, parameters: [String: Any]?) {
+		self.init(url: url, resolvingAgainstBaseURL: false)
+		self.queryItems = parameters?.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
 	}
 }
