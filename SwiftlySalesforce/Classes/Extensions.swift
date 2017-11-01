@@ -40,7 +40,15 @@ public extension JSONDecoder {
 	
 	convenience init(dateFormatter: DateFormatter) {
 		self.init()
-		self.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
+		self.dateDecodingStrategy = .formatted(dateFormatter)
+	}
+}
+
+public extension JSONEncoder {
+	
+	convenience init(dateFormatter: DateFormatter) {
+		self.init()
+		self.dateEncodingStrategy = .formatted(dateFormatter)
 	}
 }
 
