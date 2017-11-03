@@ -15,8 +15,10 @@ public struct Record {
 	/// Salesforce record ID
 	public var id: String?
 	
+	/// Fields and values that would be encoded for update or insert to Salesforce
+	public fileprivate(set) var mutableFields: [String: Encodable?]
+	
 	fileprivate var container: KeyedDecodingContainer<RecordCodingKey>?
-	fileprivate var mutableFields: [String: Encodable?]
 	
 	/// Subscript by field name; read only
 	subscript<Value: Decodable>(field: String) -> Value? {
@@ -165,6 +167,20 @@ extension Record: Codable {
 				try container.encodeNil(forKey: codingKey)
 			}
 		}
+	}
+}
+
+extension Record: CustomStringConvertible {
+	
+	var description: String {
+		
+		return """
+		Record
+		------
+		Salesforce type: \(type)
+		Record ID: \(id ?? (N/A))
+		Mutable fields: \(mutableFields)
+		"""
 	}
 }
 
