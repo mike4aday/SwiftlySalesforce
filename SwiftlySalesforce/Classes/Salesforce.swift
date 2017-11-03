@@ -14,7 +14,7 @@ import PromiseKit
 open class Salesforce {
 
 	/// Default Salesforce API version
-	static public let defaultVersion = "40.0" // Summer '17
+	static public let defaultVersion = "41.0" // Winter '18
 	
 	/// Related Connected App
 	public private(set) var connectedApp: ConnectedApp
@@ -22,7 +22,8 @@ open class Salesforce {
 	/// API version used for requests
 	public var version: String
 	
-	public let decoder: JSONDecoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
+	private let decoder: JSONDecoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
+	private let encoder: JSONEncoder = JSONEncoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	private let q = DispatchQueue.global(qos: .userInitiated)
 	private let requestor: Requestor = Requestor.data
 	
@@ -31,6 +32,8 @@ open class Salesforce {
 		self.connectedApp = connectedApp
 		self.version = version
 	}
+	
+	// MARK: -
 	
 	/// Asynchronously requests information about the current user
 	/// See https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0
@@ -58,6 +61,8 @@ open class Salesforce {
 		}
 	}
 	
+	// MARK: - Query methods
+	
 	/// Asynchronsouly executes a SOQL query.
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: SOQL query
@@ -72,11 +77,11 @@ open class Salesforce {
 	/// Asynchronsouly executes a SOQL query
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: SOQL query
-	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as SObjects
-	open func query(soql: String) -> Promise<QueryResult<SObject>> {
+	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as Records
+	open func query(soql: String) -> Promise<QueryResult<Record>> {
 		let resource = Resource.query(soql: soql, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
-			return try self.decoder.decode(QueryResult<SObject>.self, from: $0)
+			return try self.decoder.decode(QueryResult<Record>.self, from: $0)
 		}
 	}
 	
@@ -93,8 +98,8 @@ open class Salesforce {
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: Array of SOQL queries
 	/// - Returns: Promise of an array of QueryResults, in the same order as the "soql" parameter
-	open func query(soql: [String]) -> Promise<[QueryResult<SObject>]> {
-		let promises: [Promise<QueryResult<SObject>>] = soql.map { query(soql: $0) }
+	open func query(soql: [String]) -> Promise<[QueryResult<Record>]> {
+		let promises: [Promise<QueryResult<Record>>] = soql.map { query(soql: $0) }
 		return when(fulfilled: promises)
 	}
 	
@@ -113,12 +118,14 @@ open class Salesforce {
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm
 	/// - Parameter path: the 'nextRecordsPath' property of a previously-obtained QueryResult.
 	/// - Returns: Promise of a QueryResult
-	open func queryNext(path: String) -> Promise<QueryResult<SObject>> {
+	open func queryNext(path: String) -> Promise<QueryResult<Record>> {
 		let resource = Resource.queryNext(path: path)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
-			return try self.decoder.decode(QueryResult<SObject>.self, from: $0)
+			return try self.decoder.decode(QueryResult<Record>.self, from: $0)
 		}
 	}
+	
+	//MARK: - Retrieve methods
 	
 	/// Asynchronously retrieves a single record.
 	/// - Parameter type: The type of the record, e.g. "Account", "Contact" or "MyCustomObject__c"
@@ -137,10 +144,10 @@ open class Salesforce {
 	/// - Parameter id: ID of the record to retrieve
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
-	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<SObject> {
+	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<Record> {
 		let resource = Resource.retrieve(type: type, id: id, fields: fields, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
-			return try self.decoder.decode(SObject.self, from: $0)
+			return try self.decoder.decode(Record.self, from: $0)
 		}
 	}
 	
@@ -159,25 +166,71 @@ open class Salesforce {
 	/// - Parameter ids: IDs of the records to retrieve. All records must be of the same type.
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of an array of dictionaries, keyed by field names, and in the same order as the "ids" parameter
-	open func retrieve(type: String, ids: [String], fields: [String]? = nil) -> Promise<[SObject]> {
-		let promises: [Promise<SObject>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
+	open func retrieve(type: String, ids: [String], fields: [String]? = nil) -> Promise<[Record]> {
+		let promises: [Promise<Record>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
 		return when(fulfilled: promises)
+	}
+	
+	// MARK: - Insert methods
+	
+	/// Asynchronously creates a new record in Salesforce
+	/// - Parameter type: The type of the record to be inserted, e.g. "Account", "Contact" or "MyCustomObject__c"
+	/// - Parameter record: an Encodable object that will be inserted as a new record in Salesforce
+	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
+	open func insert<T: Encodable>(type: String, record: T) -> Promise<String> {
+		var data: Data
+		do {
+			data = try encoder.encode(record)
+		}
+		catch {
+			return Promise(error: error)
+		}
+		let resource = Resource.insert(type: type, data: data, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
+			(data: Data) -> String in
+			let result: InsertResult = try self.decoder.decode(InsertResult.self, from: data)
+			return result.id
+		}
+	}
+	
+	open func insert(record: Record) -> Promise<String> {
+		return insert(type: record.type, record: record)
 	}
 	
 	/// Asynchronously creates a new record in Salesforce
 	/// - Parameter type: The type of the record to be inserted, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
-	open func insert(type: String, fields: [String: Any?]) -> Promise<String> {
-		let resource = Resource.insert(type: type, fields: fields, version: version)
-		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
-			(data: Data) -> String in
-			struct InsertResult: Decodable {
-				var id: String
-			}
-			let result: InsertResult = try self.decoder.decode(InsertResult.self, from: data)
-			return result.id
+	open func insert(type: String, fields: [String: Encodable?]) -> Promise<String> {
+		let record = Record(type: type, fields: fields)
+		return insert(type: type, record: record)
+	}
+
+	// MARK: - Update methods
+	
+	/// Asynchronously updates a record in Salesforce
+	/// - Parameter type: Type of record to be updated (for example, "Account" or "Lead")
+	/// - Parameter id: Unique ID of record to be updated
+	/// - Parameter record: record with updates
+	/// - Returns: Promise<Void>
+	open func update<T: Encodable>(type: String, id: String, record: T) -> Promise<Void> {
+		var data: Data
+		do {
+			data = try encoder.encode(record)
 		}
+		catch {
+			return Promise(error: error)
+		}
+		let resource = Resource.update(type: type, id: id, data: data, version: version)
+		return requestor.request(resource: resource, connectedApp: connectedApp).asVoid()
+	}
+	
+	/// Asynchronously updates a record in Salesforce
+	open func update(record: Record) -> Promise<Void> {
+		guard let id = record.id else {
+			return Promise(error: ApplicationError.invalidState(message: "Missing record ID"))
+		}
+		return update(type: record.type, id: id, record: record)
 	}
 	
 	/// Asynchronously updates a record in Salesforce
@@ -185,10 +238,12 @@ open class Salesforce {
 	/// - Parameter id: Unique ID of record to be updated
 	/// - Parameter fields: Dictionary of field name and field value pairs.
 	/// - Returns: Promise<Void>
-	open func update(type: String, id: String, fields: [String: Any?]) -> Promise<Void> {
-		let resource = Resource.update(type: type, id: id, fields: fields, version: version)
-		return requestor.request(resource: resource, connectedApp: connectedApp).asVoid()
+	open func update(type: String, id: String, fields: [String: Encodable?]) -> Promise<Void> {
+		let record = Record(type: type, fields: fields)
+		return update(type: type, id: id, record: record)
 	}
+	
+	// MARK: - Delete methods
 	
 	/// Asynchronously deletes a record
 	/// - Parameter type: Type of record to be deleted (for example, "Account" or "Lead")
@@ -198,6 +253,15 @@ open class Salesforce {
 		let resource = Resource.delete(type: type, id: id, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).asVoid()
 	}
+	
+	open func delete(record: Record) -> Promise<Void> {
+		guard let id = record.id else {
+			return Promise(error: ApplicationError.invalidState(message: "Missing record ID"))
+		}
+		return delete(type: record.type, id: id)
+	}
+	
+	// MARK: - Describe methods
 	
 	/// Asynchronously retrieves metadata about a Salesforce object and its fields.
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
@@ -225,20 +289,19 @@ open class Salesforce {
 		let resource = Resource.describeGlobal(version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
 			(data: Data) -> [ObjectMetadata] in
-			struct DescribeAllResult: Decodable {
-				var sobjects: [ObjectMetadata]
-			}
 			let result: DescribeAllResult = try self.decoder.decode(DescribeAllResult.self, from: data)
 			return result.sobjects
 		}
 	}
+	
+	// MARK: - Image methods
 	
 	/// Asynchronously retrieves an image at the given path.
 	/// Use this method only for small images, e.g. images at Account.PhotoUrl, Contact.PhotoUrl, or Lead.PhotoUrl.
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	open func fetchImage(path: String) -> Promise<UIImage> {
-		let resource = Resource.custom(method: .get, baseURL: nil, path: path, parameters: nil, headers: ["Accept": "image/*"])
+		let resource = Resource.fetchFile(baseURL: nil, path: path, contentType: "image/*")
 		return requestor.request(resource: resource, connectedApp: connectedApp).asImage(on: q)
 	}
 	
@@ -247,9 +310,11 @@ open class Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	open func fetchImage(url: URL) -> Promise<UIImage> {
-		let resource = Resource.custom(method: .get, baseURL: url, path: nil, parameters: nil, headers: ["Accept": "image/*"])
+		let resource = Resource.fetchFile(baseURL: url, path: nil, contentType: "image/*")
 		return requestor.request(resource: resource, connectedApp: connectedApp).asImage(on: q)
 	}
+	
+	// MARK: - Registration for mobile push notification
 	
 	/// Use this method to register your device to receive push notifications from the Salesforce Universal Push Notification service.
 	/// - Parameter devicetoken: the device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
@@ -265,6 +330,8 @@ open class Salesforce {
 			return result.id
 		}
 	}
+	
+	// MARK: -
 		
 	/// Asynchronously calls an Apex method exposed as a REST endpoint.
 	/// See https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST
@@ -274,7 +341,7 @@ open class Salesforce {
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
 	open func apex(method: Resource.HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		let resource = Resource.apex(method: method, path: path, parameters: parameters, headers: headers)
+		let resource = Resource.apex(method: method, path: path, queryParameters: parameters, data: nil, headers: headers)
 		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
 
@@ -287,7 +354,20 @@ open class Salesforce {
 	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Data
 	open func custom(method: Resource.HTTPMethod = .get, baseURL: URL? = nil, path: String? = nil, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		let resource = Resource.custom(method: method, baseURL: baseURL, path: path, parameters: parameters, headers: headers)
+		let resource = Resource.custom(method: method, baseURL: baseURL, path: path, queryParameters: parameters, data: nil, headers: headers)
 		return requestor.request(resource: resource, connectedApp: connectedApp)
+	}
+}
+
+// MARK: - Internal-use models
+
+fileprivate extension Salesforce {
+	
+	fileprivate struct InsertResult: Decodable {
+		var id: String
+	}
+	
+	fileprivate struct DescribeAllResult: Decodable {
+		var sobjects: [ObjectMetadata]
 	}
 }
