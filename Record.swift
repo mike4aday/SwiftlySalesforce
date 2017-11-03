@@ -16,7 +16,7 @@ public struct Record {
 	public var id: String?
 	
 	/// Fields and values that would be encoded for update or insert to Salesforce
-	public fileprivate(set) var mutableFields: [String: Encodable?]
+	public private(set) var mutableFields = [String: Encodable?]()
 	
 	fileprivate var container: KeyedDecodingContainer<RecordCodingKey>?
 	
@@ -88,10 +88,12 @@ public struct Record {
 		mutableFields.updateValue(value, forKey: field)
 	}
 	
-	public init(type: String, id: String? = nil, fields: [String: Encodable?] = [String: Encodable?]()) {
+	public init(type: String, id: String? = nil, fields: [String: Encodable?]? = nil) {
 		self.type = type
 		self.id = id 
-		self.mutableFields = fields 
+		if let fields = fields {
+			self.mutableFields = fields
+		}
 	}
 }
 
@@ -122,7 +124,6 @@ extension Record: Codable {
 		self.type = type
 		self.id = id
 		self.container = topContainer
-		self.mutableFields = [String: Codable?]()
 	}
 	
 	/// Encodes this record.
