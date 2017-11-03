@@ -6,48 +6,21 @@
 //  Copyright (c) 2017. All rights reserved.
 //
 
-/// Represents a generic Salesforce object record
+/// Represents a generic record of a Salesforce object
 public struct Record {
 	
-	fileprivate var attributes: RecordAttributes?
+	/// Salesforce type corresponding to this record
+	public var type: String
+	
+	/// Salesforce record ID
+	public var id: String?
+	
 	fileprivate var container: KeyedDecodingContainer<RecordCodingKey>?
-	fileprivate var mutableFields: [String: Codable?]
-	
-	
-	
-	/// Record ID
-	public var id: String? {
-		return attributes?.id
-	}
-	
-	/// Type of object (e.g. Account, Lead, MyCustomObject__c)
-	public var type: String? {
-		return attributes?.type
-	}
-	
-	/// Path to the record detail page in Salesforce
-	public var path: String? {
-		return attributes?.path
-	}
+	fileprivate var mutableFields: [String: Encodable?]
 	
 	/// Subscript by field name; read only
-	subscript<Value: Codable>(field: String) -> Value? {
+	subscript<Value: Decodable>(field: String) -> Value? {
 		return value(forField: field)
-	}
-	
-	/// Returns the value for the given field
-	public func value<Value: Codable>(forField field: String) -> Value? {
-		if mutableFields.keys.contains(field) {
-			return mutableFields[field] as? Value
-		}
-		else {
-			if let c = container, let key = RecordCodingKey(stringValue: field) {
-				return try? c.decode(Value.self, forKey: key)
-			}
-			else {
-				return nil
-			}
-		}
 	}
 	
 	/// Returns the value for the given field as a String
@@ -85,12 +58,37 @@ public struct Record {
 		return value(forField: field)
 	}
 	
+	public func address(forField field: String) -> Address? {
+		return value(forField: field)
+	}
+	
+	public func subqueryResult(forField field: String) -> QueryResult<Record>? {
+		return value(forField: field)
+	}
+	
+	/// Returns the value for the given field
+	public func value<Value: Decodable>(forField field: String) -> Value? {
+		if mutableFields.keys.contains(field) {
+			return mutableFields[field] as? Value
+		}
+		else {
+			if let c = container, let key = RecordCodingKey(stringValue: field) {
+				return try? c.decode(Value.self, forKey: key)
+			}
+			else {
+				return nil
+			}
+		}
+	}
+	
 	/// Sets the value for the given field
-	public mutating func setValue(_ value: Codable?, forField field: String) {
+	public mutating func setValue(_ value: Encodable?, forField field: String) {
 		mutableFields.updateValue(value, forKey: field)
 	}
 	
-	public init(fields: [String: Codable?] = [String: Codable?]()) {
+	public init(type: String, id: String? = nil, fields: [String: Encodable?] = [String: Encodable?]()) {
+		self.type = type
+		self.id = id 
 		self.mutableFields = fields 
 	}
 }
@@ -98,26 +96,37 @@ public struct Record {
 extension Record: Codable {
 	
 	fileprivate struct RecordCodingKey: CodingKey {
-		
 		var stringValue: String
 		var intValue: Int? = nil
-		
-		init?(stringValue: String) {
-			self.stringValue = stringValue
-		}
-		
-		init?(intValue: Int) {
-			return nil
-		}
+		init?(stringValue: String) { self.stringValue = stringValue }
+		init?(intValue: Int) { return nil }
+	}
+	
+	fileprivate enum AttributeKeys: String, CodingKey {
+		case url, type
 	}
 	
 	public init(from decoder: Decoder) throws {
-		let cont = try decoder.container(keyedBy: RecordCodingKey.self)
-		self.container = cont
-		self.attributes = try cont.decodeIfPresent(RecordAttributes.self, forKey: RecordCodingKey(stringValue: "attributes")!)
+		
+		let topContainer = try decoder.container(keyedBy: RecordCodingKey.self)
+		let attributesKey = RecordCodingKey(stringValue: "attributes")!
+		let attributesContainer = try topContainer.nestedContainer(keyedBy: AttributeKeys.self, forKey: attributesKey)
+		let type = try attributesContainer.decode(String.self, forKey: AttributeKeys.type)
+		let path = try attributesContainer.decode(String.self, forKey: AttributeKeys.url)
+		guard let id = path.components(separatedBy: "/").last, id.count == 18 || id.count == 15 else {
+			throw DecodingError.dataCorruptedError(forKey: .url, in: attributesContainer, debugDescription: "Unable to parse record ID from path.")
+		}
+		
+		self.type = type
+		self.id = id
+		self.container = topContainer
 		self.mutableFields = [String: Codable?]()
 	}
 	
+	/// Encodes this record.
+	/// NOTE! Only the values set by calling `setValue(_:,forField:)` are encoded; values that were decoded from
+	/// Salesforce are not encoded here. That's by design since an `insert` or `update` operation requires only new values,
+	/// and should not include fields that can't be updated, e.g. Id or CreatedDate
 	public func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: RecordCodingKey.self)
 		for field in mutableFields {
