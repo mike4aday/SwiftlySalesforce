@@ -228,7 +228,7 @@ open class Salesforce {
 	/// Asynchronously updates a record in Salesforce
 	open func update(record: Record) -> Promise<Void> {
 		guard let id = record.id else {
-			return Promise(error: ApplicationError.invalidState(message: "Missing record ID"))
+			return Promise(error: ApplicationError.invalidState(message: "Can't update record: missing record ID."))
 		}
 		return update(type: record.type, id: id, record: record)
 	}
