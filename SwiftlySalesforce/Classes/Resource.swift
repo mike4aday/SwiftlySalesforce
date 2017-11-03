@@ -12,14 +12,15 @@ public enum Resource {
 	case query(soql: String, version: String)
 	case queryNext(path: String)
 	case retrieve(type: String, id: String, fields: [String]?, version: String)
-	case insert(type: String, fields: [String: Any?], version: String)
-	case update(type: String, id: String, fields: [String: Any?], version: String)
+	case insert(type: String, data: Data, version: String)
+	case update(type: String, id: String, data: Data, version: String)
 	case delete(type: String, id: String, version: String)
 	case describe(type: String, version: String)
 	case describeGlobal(version: String)
+	case fetchFile(baseURL: URL?, path: String?, contentType: String)
 	case registerForNotifications(deviceToken: String, version: String)
-	case apex(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?)
-	case custom(method: HTTPMethod, baseURL: URL?, path: String?, parameters: [String: Any]?, headers: [String: String]?)
+	case apex(method: HTTPMethod, path: String, queryParameters: [String: Any?]?, data: Data?, headers: [String: String]?)
+	case custom(method: HTTPMethod, baseURL: URL?, path: String?, queryParameters: [String: Any?]?, data: Data?, headers: [String: String]?)
 	case revoke(token: String, host: String)
 	case refresh(refreshToken: String, consumerKey: String, host: String)
 }
@@ -41,130 +42,148 @@ public extension Resource {
 
 internal extension Resource {
 	
-	private var parts: (method: HTTPMethod, path: String?, parameters: [String: Any]?, headers: [String: String]?) {
+	fileprivate enum ContentType: String {
+		case json = "application/json"
+		case urlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
+	}
+	
+	internal func asURLRequest(authData: OAuth2Result) throws -> URLRequest {
 		
 		switch self {
 			
 		case let .identity(version):
-			return (method: .get, path: nil, parameters: ["version": version], headers: nil)
+			let url = authData.identityURL
+			let params = ["version" : version]
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
 			
 		case let .limits(version):
-			return (method: .get, path: "/services/data/v\(version)/limits", parameters: nil, headers: nil)
-			
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/limits")
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
+
 		case let .query(soql, version):
-			return (method: .get, path: "/services/data/v\(version)/query", parameters: ["q": soql], headers: nil)
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/query")
+			let params = ["q" : soql]
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
 			
 		case let .queryNext(path):
-			return (method: .get, path: path, parameters: nil, headers: nil)
+			let url = authData.instanceURL.appendingPathComponent(path)
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
 			
 		case let .retrieve(type, id, fields, version):
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)")
 			let params: [String: Any]? = {
 				if let fieldNames = fields?.joined(separator: ",") { return ["fields": fieldNames] }
 				else { return nil }
 			}()
-			return (method: .get, path: "/services/data/v\(version)/sobjects/\(type)/\(id)", parameters: params, headers: nil)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
 			
-		case let .insert(type, fields, version):
-			let params = fields.mapValues { $0 ?? NSNull() }
-			return (method: .post, path: "/services/data/v\(version)/sobjects/\(type)/", parameters: params, headers: ["Content-Type" : "application/json"])
+		case let .insert(type, data, version):
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/")
+			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .post, contentType: .json)
 			
-		case let .update(type, id, fields, version):
-			let params = fields.mapValues { $0 ?? NSNull() }
-			return (method: .patch, path: "/services/data/v\(version)/sobjects/\(type)/\(id)", parameters: params, headers: ["Content-Type" : "application/json"])
-			
+		case let .update(type, id, data, version):
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)")
+			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .patch, contentType: .json)
+
 		case let .delete(type, id, version):
-			return (method: .delete, path: "/services/data/v\(version)/sobjects/\(type)/\(id)", parameters: nil, headers: nil)
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)")
+			return try URLRequest(url: url, authData: authData, httpMethod: .delete, contentType: .urlEncoded)
 			
 		case let .describe(type, version):
-			return (method: .get, path: "/services/data/v\(version)/sobjects/\(type)/describe", parameters: nil, headers: nil)
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/describe")
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
 			
 		case let .describeGlobal(version):
-			return (method: .get, path: "/services/data/v\(version)/sobjects/", parameters: nil, headers: nil)
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/")
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
+
+		case let .fetchFile(baseURL, path, contentType):
+			var url = (baseURL ?? authData.instanceURL)
+			if let path = path {
+				url.appendPathComponent(path)
+			}
+			return try URLRequest(url: url, authData: authData, headers: ["Accept": contentType], httpMethod: .get, contentType: .urlEncoded)
 			
 		case let .registerForNotifications(deviceToken, version):
-			return (method: .post, path: "/services/data/v\(version)/sobjects/MobilePushServiceDevice", parameters: ["ConnectionToken" : deviceToken, "ServiceType" : "Apple" ], headers: ["Content-Type" : "application/json"])
-		
-		case let .apex(method, path, parameters, headers):
-			return (method: method, path: "/services/apexrest\(path)", parameters: parameters, headers: headers)
+			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/MobilePushServiceDevice")
+			let data = try JSONEncoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter).encode(["ConnectionToken" : deviceToken, "ServiceType" : "Apple" ])
+			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .post, contentType: .json)
+
+		case let .apex(method, path, queryParameters, data, headers):
+			let url = authData.instanceURL.appendingPathComponent("/services/apexrest\(path)")
+			let contentType: ContentType = (data == nil ? .urlEncoded : .json)
+			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: data, headers: headers, httpMethod: method, contentType: contentType)
 			
-		case let .custom(method, _, path, parameters, headers):
-			return (method: method, path: path, parameters: parameters, headers: headers)
+		case let .custom(method, baseURL, path, queryParameters, data, headers):
+			var url: URL = (baseURL ?? authData.instanceURL)
+			if let path = path {
+				url.appendPathComponent(path)
+			}
+			let contentType: ContentType = (data == nil ? .urlEncoded : .json)
+			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: data, headers: headers, httpMethod: method, contentType: contentType)
 			
-		case let .revoke(token, _):
-			return (method: .get, path: "/services/oauth2/revoke", parameters: ["token": token], headers: nil)
-			
-		case let .refresh(refreshToken, consumerKey, _):
-			let parameters = [
+		case let .revoke(token, host):
+			guard let url = URL(string: "https://\(host)") else {
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
+			}
+			let params = ["token": token]
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
+
+		case let .refresh(refreshToken, consumerKey, host):
+			guard let url = URL(string: "https://\(host)") else {
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
+			}
+			let params = [
 				"format" : "urlencoded",
 				"grant_type": "refresh_token",
 				"client_id": consumerKey,
 				"refresh_token": refreshToken]
-			return (method: .get, path: "/services/oauth2/token", parameters: parameters, headers: nil)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
 		}
 	}
+}
 
-	internal func asURLRequest(authData: OAuth2Result) throws -> URLRequest {
-		
-		let parts = self.parts
+fileprivate extension URLRequest {
+	
+	fileprivate init(url: URL, authData: OAuth2Result, queryParameters: [String: Any?]? = nil, httpBody: Data? = nil, headers: [String: String]? = nil, httpMethod: Resource.HTTPMethod, contentType: Resource.ContentType) throws {
 		
 		// URL
-		var url: URL
-		switch self {
-		case .identity:
-			url = authData.identityURL
-		case let .custom(_, baseURL, _, _, _):
-			url = (baseURL ?? authData.instanceURL)
-		case .revoke(_, let host), .refresh(_, _, let host):
-			url = URL(string: "https://\(host)")!
-		default:
-			url = authData.instanceURL
+		if let params = queryParameters {
+			guard var _comps = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: nil)
+			}
+			_comps.queryItems = params.map {
+				param in
+				if let value = param.value {
+					return URLQueryItem(name: param.key, value: "\(value)")
+				}
+				else {
+					return URLQueryItem(name: param.key, value: nil)
+				}
+			}
+			guard let _url = _comps.url else {
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: nil)
+			}
+			self.init(url: _url)
 		}
-		if let path = parts.path {
-			url = url.appendingPathComponent(path)
+		else {
+			self.init(url: url)
 		}
 		
-		// URL request
-		var request = URLRequest(url: url)
-		request.httpMethod = parts.method.rawValue
-		request.addValue("application/json", forHTTPHeaderField: "Accept")
-		request.addValue("Bearer \(authData.accessToken)", forHTTPHeaderField: "Authorization")
-		if let headers = parts.headers {
-			for (key, value) in headers {
-				request.addValue(value, forHTTPHeaderField: key)
+		// Standard headers
+		self.setValue("Bearer \(authData.accessToken)", forHTTPHeaderField: "Authorization")
+		self.setValue("application/json", forHTTPHeaderField: "Accept")
+		self.httpMethod = httpMethod.rawValue
+		self.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+		
+		// Custom headers
+		if let headers = headers {
+			for header in headers {
+				self.setValue(header.value, forHTTPHeaderField: header.key)
 			}
 		}
 		
-		// Encode parameters
-		if let parameters = parts.parameters {
-			
-			switch parts.method {
-				
-			case .get, .head, .delete:
-				// Encode as query string in URL
-				var comps = URLComponents(url: url, resolvingAgainstBaseURL: false)
-				comps?.queryItems = parameters.map {
-					return URLQueryItem(name: $0.key, value: String(describing: $0.value))
-				}
-				request.url = comps?.url
-				request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
-				
-			default:
-				// Encode as JSON in request body
-				let modifiedParameters = parameters.mapValues {
-					(value: Any) -> Any in
-					if let url = value as? URL {
-						return url.absoluteString
-					}
-					if let date = value as? Date {
-						return DateFormatter.salesforceDateTimeFormatter.string(from: date)
-					}
-					return value
-				}
-				request.httpBody = try JSONSerialization.data(withJSONObject: modifiedParameters, options: [])
-				request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-			}
-		}
-		
-		return request
+		// Body data
+		self.httpBody = httpBody ?? nil
 	}
 }
