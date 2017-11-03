@@ -170,17 +170,3 @@ extension Record: Codable {
 	}
 }
 
-extension Record: CustomStringConvertible {
-	
-	var description: String {
-		
-		return """
-		Record
-		------
-		Salesforce type: \(type)
-		Record ID: \(id ?? (N/A))
-		Mutable fields: \(mutableFields)
-		"""
-	}
-}
-
