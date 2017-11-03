@@ -9,9 +9,9 @@
 /// Standard objects' compound address field data. 
 /// See https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_address.htm
 
-public struct Address: Codable {
+public struct Address: Decodable {
 	
-	public enum GeocodeAccuracy: String, Codable {
+	public enum GeocodeAccuracy: String, Decodable {
 		case address = "Address"
 		case nearAddress = "NearAddress"
 		case block = "Block"
