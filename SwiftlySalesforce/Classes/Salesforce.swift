@@ -211,7 +211,7 @@ open class Salesforce {
 	/// Asynchronously updates a record in Salesforce
 	/// - Parameter type: Type of record to be updated (for example, "Account" or "Lead")
 	/// - Parameter id: Unique ID of record to be updated
-	/// - Parameter record: record with updates
+	/// - Parameter record: record with updates (record should not encode an "Id" property, or other non-updateable fields)
 	/// - Returns: Promise<Void>
 	open func update<T: Encodable>(type: String, id: String, record: T) -> Promise<Void> {
 		var data: Data
@@ -236,7 +236,7 @@ open class Salesforce {
 	/// Asynchronously updates a record in Salesforce
 	/// - Parameter type: Type of record to be updated (for example, "Account" or "Lead")
 	/// - Parameter id: Unique ID of record to be updated
-	/// - Parameter fields: Dictionary of field name and field value pairs.
+	/// - Parameter fields: Dictionary of updated field name and value pairs.
 	/// - Returns: Promise<Void>
 	open func update(type: String, id: String, fields: [String: Encodable?]) -> Promise<Void> {
 		let record = Record(type: type, fields: fields)
