@@ -15,8 +15,8 @@ public struct Record {
 	/// Salesforce record ID
 	public var id: String?
 	
-	/// Fields and values that would be encoded for update or insert to Salesforce
-	public private(set) var mutableFields = [String: Encodable?]()
+	/// Fields and their values that would be encoded for update or insert to Salesforce
+	public private(set) var updatedFields = [String: Encodable?]()
 	
 	fileprivate var container: KeyedDecodingContainer<RecordCodingKey>?
 	
@@ -70,8 +70,8 @@ public struct Record {
 	
 	/// Returns the value for the given field
 	public func value<Value: Decodable>(forField field: String) -> Value? {
-		if mutableFields.keys.contains(field) {
-			return mutableFields[field] as? Value
+		if updatedFields.keys.contains(field) {
+			return updatedFields[field] as? Value
 		}
 		else {
 			if let c = container, let key = RecordCodingKey(stringValue: field) {
@@ -85,14 +85,14 @@ public struct Record {
 	
 	/// Sets the value for the given field
 	public mutating func setValue(_ value: Encodable?, forField field: String) {
-		mutableFields.updateValue(value, forKey: field)
+		updatedFields.updateValue(value, forKey: field)
 	}
 	
 	public init(type: String, id: String? = nil, fields: [String: Encodable?]? = nil) {
 		self.type = type
 		self.id = id 
 		if let fields = fields {
-			self.mutableFields = fields
+			self.updatedFields = fields
 		}
 	}
 }
@@ -132,9 +132,9 @@ extension Record: Codable {
 	/// and should not include fields that can't be updated, e.g. Id or CreatedDate
 	public func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: RecordCodingKey.self)
-		for field in mutableFields {
+		for field in updatedFields {
 			let codingKey = RecordCodingKey(stringValue: field.key)!
-			if let value = mutableFields[field.key], value != nil {
+			if let value = updatedFields[field.key], value != nil {
 				if let v = value as? Bool {
 					try container.encode(v, forKey: codingKey)
 				}
