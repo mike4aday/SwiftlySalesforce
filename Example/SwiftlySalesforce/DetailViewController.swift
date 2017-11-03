@@ -43,8 +43,8 @@ final class DetailViewController: UITableViewController {
 		
 		salesforce.query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder")
 		.then {
-			(result: QueryResult<SObject>) -> () in
-			self.statuses = result.records.flatMap { (try! $0.string(named: "MasterLabel"))  }
+			(result: QueryResult<Record>) -> () in
+			self.statuses = result.records.flatMap { $0.string(forField: "MasterLabel")  }
 			return 
 		}.always {
 			self.infoLabel.text = "Select task status"
@@ -65,7 +65,7 @@ final class DetailViewController: UITableViewController {
 		
 		infoLabel.text = "Saving changes..."
 		
-		let recordUpdate: [String: Any] = ["Status" : selectedStatus]
+		let recordUpdate: [String: Encodable?] = ["Status" : selectedStatus]
 		salesforce.update(type: "Task", id: task.id, fields: recordUpdate)
 		.then {
 			(_) -> () in
