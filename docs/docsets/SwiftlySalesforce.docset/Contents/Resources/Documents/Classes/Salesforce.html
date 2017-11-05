@@ -14,7 +14,7 @@
     <a title="Salesforce Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SwiftlySalesforce Docs</a> (32% documented)</p>
+        <p><a href="../index.html">SwiftlySalesforce Docs</a> (35% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -69,6 +69,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/JSONDecoder.html">JSONDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONEncoder.html">JSONEncoder</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Promise.html">Promise</a>
@@ -131,16 +134,16 @@
                 <a href="../Structs/ObjectMetadata.html">ObjectMetadata</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs.html#/s:17SwiftlySalesforce12OrganizationV">Organization</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/PicklistItemMetadata.html">PicklistItemMetadata</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryResult.html">QueryResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RecordAttributes.html">RecordAttributes</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/SObject.html">SObject</a>
+                <a href="../Structs/Record.html">Record</a>
               </li>
             </ul>
           </li>
@@ -176,7 +179,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="k">let</span> <span class="nv">defaultVersion</span> <span class="o">=</span> <span class="s">"40.0"</span> <span class="c1">// Summer '17</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="k">let</span> <span class="nv">defaultVersion</span> <span class="o">=</span> <span class="s">"41.0"</span> <span class="c1">// Winter '18</span></code></pre>
 
                         </div>
                       </div>
@@ -240,25 +243,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C7decoder10Foundation11JSONDecoderCv"></a>
-                    <a name="//apple_ref/swift/Property/decoder" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C7decoder10Foundation11JSONDecoderCv">decoder</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:17SwiftlySalesforce0B0CAcA12ConnectedAppC09connectedD0_SS7versiontcfc"></a>
                     <a name="//apple_ref/swift/Method/init(connectedApp:version:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:17SwiftlySalesforce0B0CAcA12ConnectedAppC09connectedD0_SS7versiontcfc">init(connectedApp:version:)</a>
@@ -283,6 +267,10 @@
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -311,6 +299,69 @@ See <a href="https://help.salesforce.com/articleView?id=remoteaccess_using_openi
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce0B0C12organization10PromiseKit0D0CyAA12OrganizationVGyF"></a>
+                    <a name="//apple_ref/swift/Method/organization()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C12organization10PromiseKit0D0CyAA12OrganizationVGyF">organization()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronously retrieves information about the Salesforce organization (<q>org</q>)
+See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_objects_organization.htm">https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_objects_organization.htm</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">organization</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:17SwiftlySalesforce12OrganizationV">Organization</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce0B0C3org10PromiseKit0D0CyAA12OrganizationVGyF"></a>
+                    <a name="//apple_ref/swift/Method/org()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C3org10PromiseKit0D0CyAA12OrganizationVGyF">org()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Same as <code><a href="../Classes/Salesforce.html#/s:17SwiftlySalesforce0B0C12organization10PromiseKit0D0CyAA12OrganizationVGyF">organization()</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">org</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:17SwiftlySalesforce12OrganizationV">Organization</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -343,6 +394,17 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Query%20methods"></a>
+                <a name="//apple_ref/swift/Section/Query methods" class="dashAnchor"></a>
+                <a href="#/Query%20methods">
+                  <h3 class="section-name">Query methods</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -397,9 +459,9 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CyAA11QueryResultVyAA7SObjectVGGSS4soql_tF"></a>
+                    <a name="/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CyAA11QueryResultVyAA6RecordVGGSS4soql_tF"></a>
                     <a name="//apple_ref/swift/Method/query(soql:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CyAA11QueryResultVyAA7SObjectVGGSS4soql_tF">query(soql:)</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CyAA11QueryResultVyAA6RecordVGGSS4soql_tF">query(soql:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -415,7 +477,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">query</span><span class="p">(</span><span class="nv">soql</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SObject.html">SObject</a></span><span class="o">&gt;&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">query</span><span class="p">(</span><span class="nv">soql</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Record.html">Record</a></span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -440,7 +502,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Promise of a QueryResult whose records, if any, are decoded as SObjects</p>
+                        <p>Promise of a QueryResult whose records, if any, are decoded as Records</p>
                       </div>
                     </section>
                   </div>
@@ -499,9 +561,9 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CySayAA11QueryResultVyAA7SObjectVGGGSaySSG4soql_tF"></a>
+                    <a name="/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CySayAA11QueryResultVyAA6RecordVGGGSaySSG4soql_tF"></a>
                     <a name="//apple_ref/swift/Method/query(soql:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CySayAA11QueryResultVyAA7SObjectVGGGSaySSG4soql_tF">query(soql:)</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C5query10PromiseKit0D0CySayAA11QueryResultVyAA6RecordVGGGSaySSG4soql_tF">query(soql:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -517,7 +579,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">query</span><span class="p">(</span><span class="nv">soql</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SObject.html">SObject</a></span><span class="o">&gt;</span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">query</span><span class="p">(</span><span class="nv">soql</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Record.html">Record</a></span><span class="o">&gt;</span><span class="p">]</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -601,9 +663,9 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C9queryNext10PromiseKit0E0CyAA11QueryResultVyAA7SObjectVGGSS4path_tF"></a>
+                    <a name="/s:17SwiftlySalesforce0B0C9queryNext10PromiseKit0E0CyAA11QueryResultVyAA6RecordVGGSS4path_tF"></a>
                     <a name="//apple_ref/swift/Method/queryNext(path:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C9queryNext10PromiseKit0E0CyAA11QueryResultVyAA7SObjectVGGSS4path_tF">queryNext(path:)</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C9queryNext10PromiseKit0E0CyAA11QueryResultVyAA6RecordVGGSS4path_tF">queryNext(path:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -619,7 +681,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">queryNext</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SObject.html">SObject</a></span><span class="o">&gt;&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">queryNext</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Record.html">Record</a></span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -649,6 +711,17 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Retrieve%20methods"></a>
+                <a name="//apple_ref/swift/Section/Retrieve methods" class="dashAnchor"></a>
+                <a href="#/Retrieve%20methods">
+                  <h3 class="section-name">Retrieve methods</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -718,7 +791,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Promise of a dictionary keyed by field names (aka <q>Record</q>)</p>
+                        <p>Promise of a Decodable instance</p>
                       </div>
                     </section>
                   </div>
@@ -726,9 +799,9 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CyAA7SObjectVGSS4type_SS2idSaySSGSg6fieldstF"></a>
+                    <a name="/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CyAA6RecordVGSS4type_SS2idSaySSGSg6fieldstF"></a>
                     <a name="//apple_ref/swift/Method/retrieve(type:id:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CyAA7SObjectVGSS4type_SS2idSaySSGSg6fieldstF">retrieve(type:id:fields:)</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CyAA6RecordVGSS4type_SS2idSaySSGSg6fieldstF">retrieve(type:id:fields:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -743,7 +816,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">retrieve</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SObject.html">SObject</a></span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">retrieve</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Record.html">Record</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -792,7 +865,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Promise of a dictionary keyed by field names (aka <q>Record</q>)</p>
+                        <p>Promise of a Record instance</p>
                       </div>
                     </section>
                   </div>
@@ -866,7 +939,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Promise of an array of dictionaries, keyed by field names, and in the same order as the <q>ids</q> parameter</p>
+                        <p>Promise of an array of Decodable instances</p>
                       </div>
                     </section>
                   </div>
@@ -874,9 +947,9 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CySayAA7SObjectVGGSS4type_SaySSG3idsAMSg6fieldstF"></a>
+                    <a name="/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CySayAA6RecordVGGSS4type_SaySSG3idsAMSg6fieldstF"></a>
                     <a name="//apple_ref/swift/Method/retrieve(type:ids:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CySayAA7SObjectVGGSS4type_SaySSG3idsAMSg6fieldstF">retrieve(type:ids:fields:)</a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C8retrieve10PromiseKit0D0CySayAA6RecordVGGSS4type_SaySSG3idsAMSg6fieldstF">retrieve(type:ids:fields:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -891,7 +964,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">retrieve</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ids</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/SObject.html">SObject</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">retrieve</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ids</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/Record.html">Record</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -940,17 +1013,28 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Promise of an array of dictionaries, keyed by field names, and in the same order as the <q>ids</q> parameter</p>
+                        <p>Promise of an array of Record instances in the same order as the <q>ids</q> parameter</p>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Insert%20methods"></a>
+                <a name="//apple_ref/swift/Section/Insert methods" class="dashAnchor"></a>
+                <a href="#/Insert%20methods">
+                  <h3 class="section-name">Insert methods</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGSS4type_s10DictionaryVySSypSgG6fieldstF"></a>
-                    <a name="//apple_ref/swift/Method/insert(type:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGSS4type_s10DictionaryVySSypSgG6fieldstF">insert(type:fields:)</a>
+                    <a name="/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGSS4type_x6recordts9EncodableRzlF"></a>
+                    <a name="//apple_ref/swift/Method/insert(type:record:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGSS4type_x6recordts9EncodableRzlF">insert(type:record:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -965,7 +1049,96 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?])</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">insert</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Encodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">record</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of the record to be inserted, e.g. <q>Account</q>, <q>Contact</q> or <q>MyCustomObject__c</q></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>record</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an Encodable object that will be inserted as a new record in Salesforce</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Promise of a string which holds the ID of the newly-inserted record</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGAA6RecordV6record_tF"></a>
+                    <a name="//apple_ref/swift/Method/insert(record:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGAA6RecordV6record_tF">insert(record:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Ansynchronously creates a new record in Salesforce</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="nv">record</span><span class="p">:</span> <span class="kt"><a href="../Structs/Record.html">Record</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGSS4type_s10DictionaryVySSs9Encodable_pSgG6fieldstF"></a>
+                    <a name="//apple_ref/swift/Method/insert(type:fields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6insert10PromiseKit0D0CySSGSS4type_s10DictionaryVySSs9Encodable_pSgG6fieldstF">insert(type:fields:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronously creates a new record in Salesforce</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Encodable</span><span class="p">?])</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1007,12 +1180,23 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Update%20methods"></a>
+                <a name="//apple_ref/swift/Section/Update methods" class="dashAnchor"></a>
+                <a href="#/Update%20methods">
+                  <h3 class="section-name">Update methods</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGSS4type_SS2ids10DictionaryVySSypSgG6fieldstF"></a>
-                    <a name="//apple_ref/swift/Method/update(type:id:fields:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGSS4type_SS2ids10DictionaryVySSypSgG6fieldstF">update(type:id:fields:)</a>
+                    <a name="/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGSS4type_SS2idx6recordts9EncodableRzlF"></a>
+                    <a name="//apple_ref/swift/Method/update(type:id:record:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGSS4type_SS2idx6recordts9EncodableRzlF">update(type:id:record:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1027,7 +1211,108 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?])</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">update</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Encodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">record</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of record to be updated (for example, <q>Account</q> or <q>Lead</q>)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique ID of record to be updated</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>record</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>record with updates (record should not encode an <q>Id</q> property, or other non-updateable fields)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Promise<Void></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGAA6RecordV6record_tF"></a>
+                    <a name="//apple_ref/swift/Method/update(record:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGAA6RecordV6record_tF">update(record:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronously updates a record in Salesforce</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">record</span><span class="p">:</span> <span class="kt"><a href="../Structs/Record.html">Record</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGSS4type_SS2ids10DictionaryVySSs9Encodable_pSgG6fieldstF"></a>
+                    <a name="//apple_ref/swift/Method/update(type:id:fields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6update10PromiseKit0D0CyytGSS4type_SS2ids10DictionaryVySSs9Encodable_pSgG6fieldstF">update(type:id:fields:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronously updates a record in Salesforce</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Encodable</span><span class="p">?])</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1067,7 +1352,7 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                               </td>
                               <td>
                                 <div>
-                                  <p>Dictionary of field name and field value pairs.</p>
+                                  <p>Dictionary of updated field name and value pairs.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1081,6 +1366,17 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Delete%20methods"></a>
+                <a name="//apple_ref/swift/Section/Delete methods" class="dashAnchor"></a>
+                <a href="#/Delete%20methods">
+                  <h3 class="section-name">Delete methods</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1143,6 +1439,36 @@ See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce0B0C6delete10PromiseKit0D0CyytGAA6RecordV6record_tF"></a>
+                    <a name="//apple_ref/swift/Method/delete(record:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce0B0C6delete10PromiseKit0D0CyytGAA6RecordV6record_tF">delete(record:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Describe%20methods"></a>
+                <a name="//apple_ref/swift/Section/Describe methods" class="dashAnchor"></a>
+                <a href="#/Describe%20methods">
+                  <h3 class="section-name">Describe methods</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1276,6 +1602,17 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Image%20methods"></a>
+                <a name="//apple_ref/swift/Section/Image methods" class="dashAnchor"></a>
+                <a href="#/Image%20methods">
+                  <h3 class="section-name">Image methods</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1378,6 +1715,17 @@ Use this method only for small images, e.g. User.SmallPhotoUrl or User.FullPhoto
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Registration%20for%20mobile%20push%20notification"></a>
+                <a name="//apple_ref/swift/Section/Registration for mobile push notification" class="dashAnchor"></a>
+                <a href="#/Registration%20for%20mobile%20push%20notification">
+                  <h3 class="section-name">Registration for mobile push notification</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1428,6 +1776,10 @@ Use this method only for small images, e.g. User.SmallPhotoUrl or User.FullPhoto
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1619,7 +1971,7 @@ Note: baseURL and path should not both be nil</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/mike4aday/SwiftlySalesforce" target="_blank" rel="external">Michael Epstein</a>. All rights reserved. (Last updated: 2017-10-15)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/mike4aday/SwiftlySalesforce" target="_blank" rel="external">Michael Epstein</a>. All rights reserved. (Last updated: 2017-11-04)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

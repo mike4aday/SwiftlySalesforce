@@ -157,7 +157,7 @@
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/ConnectedApp.swift",
       "line": 17,
-      "symbol": "ConnectedApp.redirectURL",
+      "symbol": "ConnectedApp.callbackURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -338,8 +338,22 @@
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Extensions.swift",
-      "line": 97,
+      "line": 49,
+      "symbol": "JSONEncoder.init(dateFormatter:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Extensions.swift",
+      "line": 105,
       "symbol": "URLComponents.init(string:parameters:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Extensions.swift",
+      "line": 110,
+      "symbol": "URLComponents.init(url:parameters:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -597,6 +611,13 @@
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
+      "line": null,
+      "symbol": "LoginDelegate",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/LoginDelegate.swift",
       "line": 12,
       "symbol": "LoginDelegate",
       "symbol_kind": "source.lang.swift.decl.protocol",
@@ -806,17 +827,24 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
-      "line": null,
-      "symbol": "RecordAttributes",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Record.swift",
+      "line": 63,
+      "symbol": "Record.address(forField:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/RecordAttributes.swift",
-      "line": 9,
-      "symbol": "RecordAttributes",
-      "symbol_kind": "source.lang.swift.decl.struct",
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Record.swift",
+      "line": 67,
+      "symbol": "Record.subqueryResult(forField:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Record.swift",
+      "line": 91,
+      "symbol": "Record.init(type:id:fields:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -906,104 +934,111 @@
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
       "line": 20,
-      "symbol": "Resource.registerForNotifications",
+      "symbol": "Resource.fetchFile",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
       "line": 21,
-      "symbol": "Resource.apex",
+      "symbol": "Resource.registerForNotifications",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
       "line": 22,
-      "symbol": "Resource.custom",
+      "symbol": "Resource.apex",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
       "line": 23,
-      "symbol": "Resource.revoke",
+      "symbol": "Resource.custom",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
       "line": 24,
+      "symbol": "Resource.revoke",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
+      "line": 25,
       "symbol": "Resource.refresh",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 29,
+      "line": 30,
       "symbol": "Resource.HTTPMethod",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 30,
+      "line": 31,
       "symbol": "Resource.HTTPMethod.options",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 31,
+      "line": 32,
       "symbol": "Resource.HTTPMethod.get",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 32,
+      "line": 33,
       "symbol": "Resource.HTTPMethod.head",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 33,
+      "line": 34,
       "symbol": "Resource.HTTPMethod.post",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 34,
+      "line": 35,
       "symbol": "Resource.HTTPMethod.put",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 35,
+      "line": 36,
       "symbol": "Resource.HTTPMethod.patch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 36,
+      "line": 37,
       "symbol": "Resource.HTTPMethod.delete",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 37,
+      "line": 38,
       "symbol": "Resource.HTTPMethod.trace",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Resource.swift",
-      "line": 38,
+      "line": 39,
       "symbol": "Resource.HTTPMethod.connect",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -1017,9 +1052,9 @@
     },
     {
       "file": "/Users/mepstein/Documents/Projects/SwiftlySalesforce/SwiftlySalesforce/Classes/Salesforce.swift",
-      "line": 26,
-      "symbol": "Salesforce.decoder",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "line": 276,
+      "symbol": "Salesforce.delete(record:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
   ],

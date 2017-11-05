@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ObjectMetadata Structure Reference</title>
+    <title>Record Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/ObjectMetadata" class="dashAnchor"></a>
-    <a title="ObjectMetadata Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/Record" class="dashAnchor"></a>
+    <a title="Record Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftlySalesforce Docs</a> (35% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftlySalesforce Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ObjectMetadata Structure Reference
+        Record Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -152,15 +152,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ObjectMetadata</h1>
+            <h1>Record</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Record</span></code></pre>
 
                 </div>
               </div>
-            <p>Salesforce object metadata
-See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm">https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm</a></p>
+            <p>Represents a generic record of a Salesforce object</p>
 
           </section>
           <section class="section task-group-section">
@@ -169,9 +168,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV6fieldsSayAA05FieldD0VGSgv"></a>
-                    <a name="//apple_ref/swift/Property/fields" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV6fieldsSayAA05FieldD0VGSgv">fields</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV4typeSSv"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV4typeSSv">type</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -179,14 +178,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Salesforce type corresponding to this record</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -196,9 +195,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV12isCreateableSbv"></a>
-                    <a name="//apple_ref/swift/Property/isCreateable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV12isCreateableSbv">isCreateable</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV2idSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV2idSSSgv">id</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -206,14 +205,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Salesforce record ID</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -223,9 +222,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV8isCustomSbv"></a>
-                    <a name="//apple_ref/swift/Property/isCustom" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV8isCustomSbv">isCustom</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV13updatedFieldss10DictionaryVySSs9Encodable_pSgGv"></a>
+                    <a name="//apple_ref/swift/Property/updatedFields" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV13updatedFieldss10DictionaryVySSs9Encodable_pSgGv">updatedFields</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -233,14 +232,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Fields and their values that would be encoded for update or insert to Salesforce</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">updatedFields</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Encodable</span><span class="p">?]()</span></code></pre>
 
                         </div>
                       </div>
@@ -250,9 +249,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV15isCustomSettingSbv"></a>
-                    <a name="//apple_ref/swift/Property/isCustomSetting" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV15isCustomSettingSbv">isCustomSetting</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV9subscriptxSgSScs9DecodableRzlui"></a>
+                    <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV9subscriptxSgSScs9DecodableRzlui">subscript(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -260,14 +259,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Subscript by field name; read only</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">subscript</span><span class="o">&lt;</span><span class="kt">Value</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -277,9 +276,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV11isDeletableSbv"></a>
-                    <a name="//apple_ref/swift/Property/isDeletable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV11isDeletableSbv">isDeletable</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV6stringSSSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/string(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV6stringSSSgSS8forField_tF">string(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -287,14 +286,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field as a String</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">string</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -304,9 +303,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV13isFeedEnabledSbv"></a>
-                    <a name="//apple_ref/swift/Property/isFeedEnabled" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV13isFeedEnabledSbv">isFeedEnabled</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV4date10Foundation4DateVSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/date(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV4date10Foundation4DateVSgSS8forField_tF">date(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -314,14 +313,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field as a Date</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">date</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -331,9 +330,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV11isQueryableSbv"></a>
-                    <a name="//apple_ref/swift/Property/isQueryable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV11isQueryableSbv">isQueryable</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV3url10Foundation3URLVSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/url(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV3url10Foundation3URLVSgSS8forField_tF">url(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -341,14 +340,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field as a URL</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">url</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URL</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -358,9 +357,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV12isSearchableSbv"></a>
-                    <a name="//apple_ref/swift/Property/isSearchable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV12isSearchableSbv">isSearchable</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV3intSiSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/int(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV3intSiSgSS8forField_tF">int(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -368,14 +367,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field as an Int</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">int</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -385,9 +384,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV13isTriggerableSbv"></a>
-                    <a name="//apple_ref/swift/Property/isTriggerable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV13isTriggerableSbv">isTriggerable</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV5floatSfSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/float(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV5floatSfSgSS8forField_tF">float(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -395,14 +394,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field as a Float</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">float</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Float</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -412,9 +411,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV13isUndeletableSbv"></a>
-                    <a name="//apple_ref/swift/Property/isUndeletable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV13isUndeletableSbv">isUndeletable</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV6doubleSdSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/double(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV6doubleSdSgSS8forField_tF">double(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -422,14 +421,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field as a Double</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">double</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -439,9 +438,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV12isUpdateableSbv"></a>
-                    <a name="//apple_ref/swift/Property/isUpdateable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV12isUpdateableSbv">isUpdateable</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV4boolSbSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/bool(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV4boolSbSgSS8forField_tF">bool(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -449,14 +448,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field as a Bool</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">bool</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -466,9 +465,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV9keyPrefixSSSgv"></a>
-                    <a name="//apple_ref/swift/Property/keyPrefix" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV9keyPrefixSSSgv">keyPrefix</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV7addressAA7AddressVSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/address(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV7addressAA7AddressVSgSS8forField_tF">address(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -483,7 +482,7 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Record</span></code></pre>
 
                         </div>
                       </div>
@@ -493,9 +492,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV5labelSSv"></a>
-                    <a name="//apple_ref/swift/Property/label" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV5labelSSv">label</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV14subqueryResultAA05QueryE0VyACGSgSS8forField_tF"></a>
+                    <a name="//apple_ref/swift/Method/subqueryResult(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV14subqueryResultAA05QueryE0VyACGSgSS8forField_tF">subqueryResult(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -510,7 +509,7 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Record</span></code></pre>
 
                         </div>
                       </div>
@@ -520,9 +519,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV11labelPluralSSv"></a>
-                    <a name="//apple_ref/swift/Property/labelPlural" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV11labelPluralSSv">labelPlural</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV5valuexSgSS8forField_ts9DecodableRzlF"></a>
+                    <a name="//apple_ref/swift/Method/value(forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV5valuexSgSS8forField_ts9DecodableRzlF">value(forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -530,14 +529,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the value for the given field</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -547,9 +546,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV4nameSSv"></a>
-                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV4nameSSv">name</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV8setValueys9Encodable_pSg_SS8forFieldtF"></a>
+                    <a name="//apple_ref/swift/Method/setValue(_:forField:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV8setValueys9Encodable_pSg_SS8forFieldtF">setValue(_:forField:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -557,14 +556,14 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the value for the given field</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">setValue</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Encodable</span><span class="p">?,</span> <span class="n">forField</span> <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -574,9 +573,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV8idPrefixSSSgv"></a>
-                    <a name="//apple_ref/swift/Property/idPrefix" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV8idPrefixSSSgv">idPrefix</a>
+                    <a name="/s:17SwiftlySalesforce6RecordVACSS4type_SSSg2ids10DictionaryVySSs9Encodable_pSgGSg6fieldstcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(type:id:fields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordVACSS4type_SSSg2ids10DictionaryVySSs9Encodable_pSgGSg6fieldstcfc">init(type:id:fields:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -591,7 +590,37 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Record</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -601,9 +630,9 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17SwiftlySalesforce14ObjectMetadataV11pluralLabelSSv"></a>
-                    <a name="//apple_ref/swift/Property/pluralLabel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17SwiftlySalesforce14ObjectMetadataV11pluralLabelSSv">pluralLabel</a>
+                    <a name="/s:17SwiftlySalesforce6RecordV6encodeys7Encoder_p2to_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce6RecordV6encodeys7Encoder_p2to_tKF">encode(to:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -611,14 +640,17 @@ See: <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/ap
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Encodes this record.
+NOTE! Only the values set by calling <code>setValue(_:,forField:)</code> are encoded; values that were decoded from
+Salesforce are not encoded here. That&rsquo;s by design since an <code>insert</code> or <code>update</code> operation requires only new values,
+and should not include fields that can&rsquo;t be updated, e.g. Id or CreatedDate</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
