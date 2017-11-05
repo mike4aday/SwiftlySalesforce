@@ -51,6 +51,24 @@ open class Salesforce {
 		}
 	}
 	
+	// MARK: -
+	
+	/// Asynchronously retrieves information about the Salesforce organization ("org")
+	/// See: https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_objects_organization.htm
+	open func organization() -> Promise<Organization> {
+		return identity().then {
+			(identity: Identity) -> Promise<Organization> in
+			self.retrieve(type: "Organization", id: identity.orgID)
+		}
+	}
+	
+	/// Same as `organization()`
+	open func org() -> Promise<Organization> {
+		return organization()
+	}
+	
+	// MARK: -
+	
 	/// Asynchronously retrieves information about org limits
 	/// - Returns: Promise of a dictionary of Limits, keyed by limit name
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
@@ -131,7 +149,7 @@ open class Salesforce {
 	/// - Parameter type: The type of the record, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter id: ID of the record to retrieve
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
-	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
+	/// - Returns: Promise of a Decodable instance
 	open func retrieve<T: Decodable>(type: String, id: String, fields: [String]? = nil) -> Promise<T> {
 		let resource = Resource.retrieve(type: type, id: id, fields: fields, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
@@ -143,7 +161,7 @@ open class Salesforce {
 	/// - Parameter type: The type of the record, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter id: ID of the record to retrieve
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
-	/// - Returns: Promise of a dictionary keyed by field names (aka "Record")
+	/// - Returns: Promise of a Record instance
 	open func retrieve(type: String, id: String, fields: [String]? = nil) -> Promise<Record> {
 		let resource = Resource.retrieve(type: type, id: id, fields: fields, version: version)
 		return requestor.request(resource: resource, connectedApp: connectedApp).then(on: q) {
@@ -155,7 +173,7 @@ open class Salesforce {
 	/// - Parameter type: The type of the records to retrieve, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter ids: IDs of the records to retrieve. All records must be of the same type.
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
-	/// - Returns: Promise of an array of dictionaries, keyed by field names, and in the same order as the "ids" parameter
+	/// - Returns: Promise of an array of Decodable instances
 	open func retrieve<T: Decodable>(type: String, ids: [String], fields: [String]? = nil) -> Promise<[T]> {
 		let promises: [Promise<T>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
 		return when(fulfilled: promises)
@@ -165,7 +183,7 @@ open class Salesforce {
 	/// - Parameter type: The type of the records to retrieve, e.g. "Account", "Contact" or "MyCustomObject__c"
 	/// - Parameter ids: IDs of the records to retrieve. All records must be of the same type.
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
-	/// - Returns: Promise of an array of dictionaries, keyed by field names, and in the same order as the "ids" parameter
+	/// - Returns: Promise of an array of Record instances in the same order as the "ids" parameter
 	open func retrieve(type: String, ids: [String], fields: [String]? = nil) -> Promise<[Record]> {
 		let promises: [Promise<Record>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
 		return when(fulfilled: promises)
@@ -193,6 +211,7 @@ open class Salesforce {
 		}
 	}
 	
+	/// Ansynchronously creates a new record in Salesforce
 	open func insert(record: Record) -> Promise<String> {
 		return insert(type: record.type, record: record)
 	}
