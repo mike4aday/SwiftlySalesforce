@@ -110,12 +110,12 @@ open class ConnectedApp {
 	}
 	
 	/// Called by LoginDelegate when OAuth2 "dance" is completed
-	/// - Parameter redirectURL: URL returned by Salesforce after OAuth2 authentication & authorization
-	public func loginCompleted(redirectURL: URL) {
+	/// - Parameter callbackURL: URL returned by Salesforce after authentication & authorization, and with appended access token
+	public func loginCompleted(callbackURL: URL) {
 		
 		// Note: docs are wrong - if the redirect URL contains an error,
 		// the error information may be in the URL fragment *or* in the query string...
-		if let urlEncodedString = redirectURL.fragment ?? redirectURL.query, let authData = try? OAuth2Result(urlEncodedString: urlEncodedString) {
+		if let urlEncodedString = callbackURL.fragment ?? callbackURL.query, let authData = try? OAuth2Result(urlEncodedString: urlEncodedString) {
 			self.authData = authData
 			if let pending = self.pendingAuthorization, pending.promise.isPending {
 				pending.fulfill(authData)

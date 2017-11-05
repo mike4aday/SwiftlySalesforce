@@ -65,7 +65,7 @@ extension LoginDelegate {
 	/// - Parameter connectedApp: Connected App involved in the current OAuth2 authentication
 	public func handleCallbackURL(_ url: URL, for connectedApp: ConnectedApp) {
 		
-		connectedApp.loginCompleted(redirectURL: url)
+		connectedApp.loginCompleted(callbackURL: url)
 		
 		// Restore the original root view controller
 		if let window = UIApplication.shared.keyWindow, let currentRootVC = window.rootViewController as? LoginViewController, let replacedRootVC = currentRootVC.replacedRootViewController {
