@@ -3,7 +3,7 @@
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2016. All rights reserved.
+//  Copyright (c) 2017. All rights reserved.
 //
 
 import SafariServices
@@ -24,7 +24,7 @@ fileprivate final class SafariLoginViewController: SFSafariViewController, Login
 	var replacedRootViewController: UIViewController?
 }
 
-// MARK: - Extension
+// MARK: -
 extension LoginDelegate {
 	
 	public var loggingIn: Bool {
@@ -63,7 +63,7 @@ extension LoginDelegate {
 	/// Restores the root view controller that was replaced by the Salesforce-hosted login web form
 	/// - Parameter url: URL returned by Salesforce after OAuth2 authentication & authorization
 	/// - Parameter connectedApp: Connected App involved in the current OAuth2 authentication
-	public func handleRedirectURL(_ url: URL, for connectedApp: ConnectedApp) {
+	public func handleCallbackURL(_ url: URL, for connectedApp: ConnectedApp) {
 		
 		connectedApp.loginCompleted(redirectURL: url)
 		
@@ -97,5 +97,22 @@ extension LoginDelegate {
 				reject(error)
 			}
 		}
+	}
+}
+
+// MARK: - Extension constrained to UIApplicationDelegate
+extension LoginDelegate where Self: UIApplicationDelegate {
+	
+	/// Helper method to configure a Salesforce instance
+	/// - Paramater consumerKey: "Consumer Key" from Connected App
+	/// - Parameter callbackURL: "Callback URL" from Connected App
+	/// - Parameter loginHost: Host to which users will be directed if authentication is necessary. Defaults to "login.salesforce.com"
+	/// - Parameter userID: User's record ID. Used for multi-user switching
+	/// - Parameter orgID: User's org ID. Used for multi-user switching
+	/// - Parameter version: version of the Salesforce API
+	/// - Returns: configured instance of Salesforce
+	public func configureSalesforce(consumerKey: String, callbackURL: URL, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, version: String = Salesforce.defaultVersion) -> Salesforce {
+		let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL, loginDelegate: self, loginHost: loginHost, userID: userID, orgID: orgID)
+		return Salesforce(connectedApp: connectedApp, version: version)
 	}
 }
