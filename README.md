@@ -503,7 +503,7 @@ Upon successful OAuth2 authorization, Salesforce will redirect the Safari View C
     <string>SalesforceOAuth2</string>
     <key>CFBundleURLSchemes</key>
     <array>
-      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL! Must be custom scheme, not https) --></string>
+      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL! Not http or https!) --></string>
     </array>
   </dict>
 </array>
