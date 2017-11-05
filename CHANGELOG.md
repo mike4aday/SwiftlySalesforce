@@ -1,5 +1,15 @@
 # Change Log 
 
+## Version 6.0.0 (Nov. 5, 2017)
+This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
+Highlights of changes and improvements:
+- Incorporated Swift 4's new `Codable` protocol (i.e. `Decodable` and `Encodable` throughout. This simplifies both Swiftly Salesforce's code and the creation of your own models that represent Salesforce objects.
+- Simpler and faster to incorporate Swiftly Salesforce in your apps.
+- New `Record` type to represent generic Salesforce object records, replaces `SObject` from version 5.0.0. If you prefer, you could create your own model objects and use those instead, via the magic of Swift generics and the new `Codable` protocol. See the [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and example app for samples.
+- New `Organization` type holds information about the Salesforce "org." Call `salesforce.org( )` to retrieve org information.
+- References to `redirectURL` replaced with `callbackURL` to be consistent with Salesforce [Connected App](https://help.salesforce.com/articleView?id=connected_app_overview.htm&type=0) terminology.
+- More and better test coverage.
+
 ## Version 5.0.0 (Oct. 15, 2017)
 This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
 Highlights of changes and improvements:
