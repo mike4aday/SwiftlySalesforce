@@ -11,18 +11,13 @@ import XCTest
 
 class AddressTests: XCTestCase, MockData {
 	
-	let decoder = JSONDecoder()
-	
-	override func setUp() {
-		super.setUp()
-		decoder.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateFormatter)
-	}
+	let decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	
     override func tearDown() {
         super.tearDown()
     }
     
-	func testThatItInits() {
+	func testThatItInitsFromDecoder() {
 		
 		let data = read(fileName: "MockAddress", ofType: "json")!
 		let address = try! decoder.decode(Address.self, from: data)

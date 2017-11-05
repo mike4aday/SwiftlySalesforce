@@ -33,7 +33,7 @@ class ConnectedAppTests: XCTestCase, MockData, LoginDelegate {
 		XCTAssertNotNil(loginURL)
 		XCTAssertEqual(loginURL.value(forQueryItem: "response_type"), "token")
 		XCTAssertEqual(loginURL.value(forQueryItem: "client_id"), salesforce.connectedApp.consumerKey)
-		XCTAssertEqual(loginURL.value(forQueryItem: "redirect_uri"), salesforce.connectedApp.redirectURL.absoluteString)
+		XCTAssertEqual(loginURL.value(forQueryItem: "redirect_uri"), salesforce.connectedApp.callbackURL.absoluteString)
 		XCTAssertEqual(loginURL.value(forQueryItem: "prompt"), "login consent")
 		XCTAssertEqual(loginURL.value(forQueryItem: "display"), "touch")
 	}

@@ -19,7 +19,6 @@ class ResourceTests: XCTestCase {
 	func testIdentity() {
 		
 		let authData = OAuth2Result(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: refreshToken)
-		
 		let req = try! Resource.identity(version: "41.0").asURLRequest(authData: authData)
 		
 		XCTAssertEqual(req.httpMethod, Resource.HTTPMethod.get.rawValue)
@@ -35,7 +34,6 @@ class ResourceTests: XCTestCase {
 		let id = "12345"
 		let fields = ["Id","Name","Custom1__c"]
 		let version = "41.0"
-		
 		let req = try! Resource.retrieve(type: type, id: id, fields: fields, version: version).asURLRequest(authData: authData)
 		
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/data/v41.0/sobjects/Account/12345?fields=Id,Name,Custom1__c")

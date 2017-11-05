@@ -59,4 +59,18 @@ class ExtensionTests: XCTestCase {
 		XCTAssertNil(url.value(forQueryItem: "SOMETHING"))
 		XCTAssertNil(url2.value(forQueryItem: "SOMETHING"))
 	}
+	
+	func testThatItInitsQueryComponentsFromURLString() {
+		
+		let s = "https://www.salesforce.com"
+		let params: [String: Any] = ["q": "SELECT Id FROM Account", "Age": 23, "City": ""]
+		let comps = URLComponents(string: s, parameters: params)!
+		let url = comps.url
+		debugPrint(comps)
+		XCTAssertEqual("www.salesforce.com", url?.host)
+		XCTAssertTrue(comps.queryItems!.count == 3)
+		XCTAssertTrue(comps.queryItems!.contains(URLQueryItem(name: "Age", value: "23")))
+		XCTAssertTrue(comps.queryItems!.contains(URLQueryItem(name: "q", value: "SELECT Id FROM Account")))
+		XCTAssertTrue(comps.queryItems!.contains(URLQueryItem(name: "City", value: "")))
+	}
 }

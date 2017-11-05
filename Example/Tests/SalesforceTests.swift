@@ -93,7 +93,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			(accountID: String) -> Promise<(String, String)> in
 			return self.salesforce.insert(type: "Contact", fields: contact).then { (accountID, $0) }
 		}.then {
-			(accountID, contactID) -> Promise<[QueryResult<SObject>]> in
+			(accountID, contactID) -> Promise<[QueryResult<Record>]> in
 			let q1 = "SELECT Id FROM Account WHERE Id = '\(accountID)'"
 			let q2 = "SELECT Id FROM Contact WHERE Id = '\(contactID)'"
 			return self.salesforce.query(soql: [q1, q2])
@@ -119,12 +119,12 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		
 		salesforce.query(soql: soql)
 			.then {
-				(queryResult) -> Promise<SObject> in
+				(queryResult) -> Promise<Record> in
 				XCTAssertTrue(queryResult.records.count > 0)
-				return self.salesforce.retrieve(type: "Account", id: queryResult.records[0].id)
+				return self.salesforce.retrieve(type: "Account", id: queryResult.records[0].id!)
 			}.then {
 				// Then
-				(record: SObject) -> () in
+				(record: Record) -> () in
 				XCTAssertEqual("Account", record.type)
 				exp.fulfill()
 			}.catch {
@@ -137,12 +137,10 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 	func testThatItQueriesAndDecodes() {
 		
 		struct Account: Decodable {
-			var attributes: RecordAttributes
 			var id: String
 			var name: String
 			var lastModifiedDate: Date
 			enum CodingKeys: String, CodingKey {
-				case attributes = "attributes"
 				case id = "Id"
 				case name = "Name"
 				case lastModifiedDate = "LastModifiedDate"
@@ -150,14 +148,12 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		}
 		
 		struct Contact: Decodable {
-			var attributes: RecordAttributes
 			var id: String
 			var firstName: String
 			var lastName: String
 			var createdDate: Date
 			var account: Account?
 			enum CodingKeys: String, CodingKey {
-				case attributes
 				case id = "Id"
 				case firstName = "FirstName"
 				case lastName = "LastName"
@@ -172,13 +168,9 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		salesforce.query(soql: soql).then {
 			(queryResult: QueryResult<Contact>) -> () in
 			for contact in queryResult.records {
-				XCTAssertEqual(contact.attributes.type, "Contact")
-				XCTAssertEqual(contact.attributes.id, contact.id)
-				XCTAssertTrue(contact.attributes.id.hasPrefix("003"))
+				XCTAssertTrue(contact.id.hasPrefix("003"))
 				if let account = contact.account {
-					XCTAssertEqual(account.attributes.type, "Account")
-					XCTAssertEqual(account.attributes.id, account.id)
-					XCTAssertTrue(account.attributes.id.hasPrefix("001"))
+					XCTAssertTrue(account.id.hasPrefix("001"))
 				}
 			}
 			exp.fulfill()
@@ -197,35 +189,24 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		let accountFields = ["Name": "Corp1, Inc.", "Website": "http://www.mycorp1.com"]
 		let contactFields = ["FirstName": "Joseph", "LastName": "Jones", "Email": "jj@mycorp1.com", "Phone": "+1 212-555-1212"]
 		fulfill(salesforce.insert(type: "Account", fields: accountFields), salesforce.insert(type: "Contact", fields: contactFields)).then {
-			(accountID: String, contactID: String) -> Promise<Array<QueryResult<SObject>>> in
+			(accountID: String, contactID: String) -> Promise<Array<QueryResult<Record>>> in
 			let accountQuery = "SELECT Id, Name, Website FROM Account WHERE Id = '\(accountID)'"
-			let contactQuery = "SELECT FirstName, LastName, Email, LastModifiedDate FROM Contact WHERE Id = '\(contactID)'"
+			let contactQuery = "SELECT Id, FirstName, LastName, Email, LastModifiedDate FROM Contact WHERE Id = '\(contactID)'"
 			return self.salesforce.query(soql: [accountQuery, contactQuery])
 		}.then {
-			(queryResults: [QueryResult<SObject>]) -> () in
+			(queryResults: [QueryResult<Record>]) -> () in
 			
 			XCTAssert(queryResults.count == 2)
 			
 			let account = queryResults[0].records[0]
-			XCTAssertEqual(account.type, "Account")
-			guard let name: String = try account.value(named: "Name"), let website: URL = try account.value(named: "Website") else {
-				return XCTFail()
-			}
-			XCTAssertEqual(name, try account.string(named: "Name"))
-			XCTAssertEqual(website, try account.url(named: "Website"))
+			XCTAssertEqual(account["Name"], "Corp1, Inc.")
+			XCTAssertEqual(account["Website"], URL(string: "http://www.mycorp1.com")!)
 			
 			let contact = queryResults[1].records[0]
-			XCTAssertEqual(contact.type, "Contact")
-			guard let firstName: String = try contact.value(named: "FirstName"),
-				let lastName: String = try contact.value(named: "LastName"),
-				let email: String = try contact.value(named: "Email"),
-				let modDate: Date = try contact.value(named: "LastModifiedDate") else {
-				return XCTFail()
-			}
-			XCTAssertEqual(lastName, try contact.string(named: "LastName"))
-			XCTAssertEqual(firstName, try contact.string(named: "FirstName"))
-			XCTAssertEqual(email, try contact.string(named: "Email"))
-			XCTAssertEqual(modDate, try contact.date(named: "LastModifiedDate"))
+			XCTAssertEqual("Jones", contact["LastName"])
+			XCTAssertEqual("Joseph", contact["FirstName"])
+			XCTAssertEqual("jj@mycorp1.com", contact["Email"])
+			XCTAssertNotNil(contact.date(forField: "LastModifiedDate"))
 			
 			exp.fulfill()
 		}.catch {
@@ -235,52 +216,156 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
-	func testThatItUpdates() {
+	func testThatItUpdatesForFields() {
 		
-		let exp = expectation(description: "Retrieve and decode")
+		let exp = expectation(description: "Update with fields dictionary")
 		
 		salesforce.insert(type: "Account", fields: ["Name": "Important Corp., Inc.", "Website": "http://importantcorp.com", "Sic": "A123"]).then {
-			(id: String) -> Promise<SObject> in
+			(id: String) -> Promise<Record> in
 			return self.salesforce.retrieve(type: "Account", id: id)
-			}.then {
-				(account: SObject) -> SObject in
-				XCTAssertEqual(try account.string(named: "Name"), "Important Corp., Inc.")
-				XCTAssertEqual(try account.url(named: "Website"), URL(string: "http://importantcorp.com"))
-				XCTAssertNil(try account.address(named: "BillingAddress"))
-				XCTAssertEqual(try account.string(named: "Sic"), "A123")
-				return account
-			}.then {
-				(account: SObject) -> Promise<String> in
-				let fields = [
-					"Name": "My New Corp.",
-					"Website": nil,
-					"BillingStreet": "123 Main St.",
-					"BillingCity": "St. Paul",
-					"Sic": nil
-				]
-				return self.salesforce.update(type: account.type, id: account.id, fields: fields).then { account.id }
-			}.then {
-				(id: String) -> Promise<SObject> in
-				return self.salesforce.retrieve(type: "Account", id: id)
-			}.then {
-				(account: SObject) -> () in
-				XCTAssertEqual(try account.string(named: "Name"), "My New Corp.")
-				XCTAssertNil(try account.url(named: "Website"))
-				XCTAssertEqual(try account.string(named: "BillingStreet"), "123 Main St.")
-				XCTAssertEqual(try account.string(named: "BillingCity"), "St. Paul")
-				XCTAssertNil(try account.string(named: "Sic"))
-				exp.fulfill()
-			}.catch {
-				XCTFail(String(describing: $0))
+		}.then {
+			(account: Record) -> Record in
+			XCTAssertEqual(account.string(forField: "Name"), "Important Corp., Inc.")
+			XCTAssertEqual(account.url(forField: "Website"), URL(string: "http://importantcorp.com"))
+			XCTAssertNil(account.address(forField: "BillingAddress"))
+			XCTAssertEqual(account.string(forField: "Sic"), "A123")
+			return account
+		}.then {
+			(account: Record) -> Promise<String> in
+			let fields = [
+				"Name": "My New Corp.",
+				"Website": nil,
+				"BillingStreet": "123 Main St.",
+				"BillingCity": "St. Paul",
+				"Sic": nil
+			]
+			return self.salesforce.update(type: account.type, id: account.id!, fields: fields).then { account.id! }
+		}.then {
+			(id: String) -> Promise<Record> in
+			return self.salesforce.retrieve(type: "Account", id: id)
+		}.then {
+			(account: Record) -> () in
+			XCTAssertEqual(account.string(forField: "Name"), "My New Corp.")
+			XCTAssertNil(account.url(forField: "Website"))
+			XCTAssertEqual(account.string(forField: "BillingStreet"), "123 Main St.")
+			XCTAssertEqual(account.string(forField: "BillingCity"), "St. Paul")
+			XCTAssertNil(account.string(forField: "Sic"))
+		}.catch {
+			XCTFail(String(describing: $0))
+		}.always {
+			exp.fulfill()
 		}
 		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
+	func testThatItUpdatesForRecord() {
+		
+		let exp = expectation(description: "Update Salesforce using Record instance")
+		let fields: [String: Encodable?] = ["Name": "Important Corp., Inc.", "Website": "http://importantcorp.com", "Sic": "A123", "BillingPostalCode": nil, "NumberOfEmployees": 10]
+		
+		salesforce.insert(record: Record(type: "Account", fields: fields)).then {
+			(id: String) -> Promise<Record> in
+			return self.salesforce.retrieve(type: "Account", id: id)
+		}.then {
+			(returnValue: Record) -> Promise<String> in
+			
+			var account = returnValue // returnValue is 'let' constant; we need 'var'
+			
+			XCTAssertNotNil(account.id)
+			XCTAssertEqual(account.type, "Account")
+			XCTAssertEqual(account.string(forField: "Name"), "Important Corp., Inc.")
+			XCTAssertEqual(account.url(forField: "Website"), URL(string: "http://importantcorp.com"))
+			XCTAssertNil(account.address(forField: "BillingAddress"))
+			XCTAssertEqual(account.string(forField: "Sic"), "A123")
+			XCTAssertEqual(account.int(forField: "NumberOfEmployees"), 10)
+
+			account.setValue("My New Corp.", forField: "Name")
+			account.setValue(nil, forField: "Website")
+			account.setValue("123 Main St.", forField: "BillingStreet")
+			account.setValue("St. Paul", forField: "BillingCity")
+			account.setValue(nil, forField: "Sic")
+			
+			XCTAssertNotNil(account.id)
+			XCTAssertEqual(account.type, "Account")
+			XCTAssertEqual(account.string(forField: "Name"), "My New Corp.")
+			XCTAssertNil(account.url(forField: "Website"))
+			XCTAssertEqual(account.string(forField: "BillingStreet"), "123 Main St.")
+			XCTAssertNil(account.string(forField: "Sic"))
+
+			return self.salesforce.update(record: account).then {
+				account.id!
+			}
+		}.then {
+			(id: String) -> Promise<Record> in
+			// Retrieve the account from Salesforce again
+			return self.salesforce.retrieve(type: "Account", id: id)
+		}.then {
+			(account: Record) -> () in
+			XCTAssertEqual(account.type, "Account")
+			XCTAssertEqual(account.string(forField: "Name"), "My New Corp.")
+			XCTAssertNil(account.url(forField: "Website"))
+			XCTAssertEqual(account.string(forField: "BillingStreet"), "123 Main St.")
+			XCTAssertEqual(account.string(forField: "BillingCity"), "St. Paul")
+			XCTAssertNil(account.string(forField: "Sic"))
+		}.catch {
+			XCTFail(String(describing: $0))
+		}.always {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItUpdatesForCodable() {
+		
+		let exp = expectation(description: "Update Salesforce using custom Codable instance")
+		let df = DateFormatter()
+		df.dateFormat = "YYYY-MM-DD"
+		
+		first {
+			return salesforce.insert(type: "Contact", record: MyContact(firstName: "John", lastName: "Doe", birthdate: nil))
+		}.then {
+			return self.salesforce.retrieve(type: "Contact", id: $0)
+		}.then {
+			(retrieved: MyContact) -> Promise<String> in
+			
+			var contact = retrieved // Make it writeable
+			
+			XCTAssertNotNil(contact.id)
+			XCTAssertEqual("John", contact.firstName)
+			XCTAssertEqual("Doe", contact.lastName)
+			XCTAssertNil(contact.birthdate)
+			
+			contact.birthdate = df.date(from: "1975-05-02")
+			contact.firstName = "Fred"
+			return self.salesforce.update(type: "Contact", id: contact.id!, record: contact).then { contact.id! }
+		}.then {
+			(id: String) -> Promise<MyContact> in
+			// Retrieve again
+			return self.salesforce.retrieve(type: "Contact", id: id)
+		}.then {
+			(contact: MyContact) -> Void in
+			
+			// Confirm updates
+			XCTAssertEqual("Fred", contact.firstName)
+			XCTAssertEqual("Doe", contact.lastName)
+			XCTAssertEqual(contact.birthdate, df.date(from: "1975-05-02"))
+		}.catch {
+			error in
+			debugPrint("\(error)")
+			XCTFail()
+		}.always {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
+	
 	func testThatItRetrievesAndDecodes() {
 		
 		struct MyAccount: Decodable {
-			var attributes: RecordAttributes
+			var Id: String
 			var Name: String
 			var LastModifiedDate: String
 			var Website: URL?
@@ -296,7 +381,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			XCTAssertEqual(account.Name, "Important Corp., Inc.")
 			XCTAssertEqual(account.Website, URL(string: "http://importantcorp.com"))
 			XCTAssertNotNil(account.LastModifiedDate)
-			return account.attributes.id
+			return account.Id
 		}.then {
 			(id: String) -> Promise<String> in
 			return self.salesforce.update(type: "Account", id: id, fields: ["Name": "My New Corp.", "Website": nil]).then { id }
@@ -328,11 +413,9 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		}.then {
 			(data: Data) -> () in
 			let decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
-			let sobject = try decoder.decode(SObject.self, from: data)
-			//XCTAssertEqual(id, sobject.id)
-			XCTAssertEqual("Account", sobject.type)
-			XCTAssertEqual("My Company", try sobject.string(named: "Name"))
-			XCTAssertEqual("http://www.mycompany.com", try sobject.url(named: "Website")!.absoluteString)
+			let record = try decoder.decode(Record.self, from: data)
+			XCTAssertEqual("My Company", record.string(forField: "Name"))
+			XCTAssertEqual("http://www.mycompany.com", record.url(forField: "Website")!.absoluteString)
 			exp.fulfill()
 		}.catch {
 			XCTFail(String(describing: $0))
@@ -351,7 +434,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			salesforce.retrieve(type: type, id: id)
 			}.then {
 				// Then
-				(result: QueryResult<SObject>) -> () in
+				(result: QueryResult<Record>) -> () in
 				XCTFail()
 			}.catch {
 				error in
@@ -361,9 +444,9 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
-	func testThatItInsertsAccount() {
+	func testThatItInsertsAccountForFields() {
 	
-		let fields: [String: Any?] = [
+		let fields: [String: Encodable?] = [
 			"Name" : "Megacorp, Inc.",
 			"BillingPostalCode": "12345",
 			"Website": URL(string: "http://megacorp.com")!,
@@ -391,9 +474,39 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
+	func testThatItInsertsAccountForRecord() {
+		
+		var record = Record(type: "Account")
+		record.setValue("Worldwide Shirts, Inc.", forField: "Name")
+		record.setValue("(212) 555-1212", forField: "Phone")
+		record.setValue(5, forField: "NumberOfEmployees")
+		record.setValue(nil, forField: "AnnualRevenue")
+		record.setValue(Date(), forField: "playgroundorg__SLAExpirationDate__c")
+		let exp = expectation(description: "Insert Account record")
+		
+		first {
+			salesforce.insert(record: record)
+		}.then {
+			// Then
+			id -> String in
+			XCTAssertTrue(id.hasPrefix("001"))
+			XCTAssertTrue(id.characters.count >= 15)
+			return id
+		}.then {
+			// Delete record that was just inserted
+			return self.salesforce.delete(type: "Account", id: $0)
+		}.catch {
+			XCTFail(String(describing: $0))
+		}.always {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
 	func testThatItInsertsTask() {
 		
-		let fields: [String: Any?] = [
+		let fields: [String: Encodable?] = [
 			"Subject" : "A Superhuman Task",
 			"IsReminderSet": true,
 			"ReminderDateTime": Date(timeIntervalSinceNow: 125000),
@@ -422,10 +535,10 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 	
-	func testThatItDeletes() {
+	func testThatItDeletesForID() {
 		
 		let fields = [ "Name" : "Worldwide Stuff, Inc.", "BillingPostalCode": "44554"]
-		let exp = expectation(description: "Delete Account record")
+		let exp = expectation(description: "Delete Account record by ID")
 		
 		first {
 			// Insert it
@@ -436,15 +549,47 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			return self.salesforce.delete(type: "Account", id: id).then { id }
 		}.then {
 			// Try to query it
-			(id: String) -> Promise<QueryResult<SObject>> in
+			(id: String) -> Promise<QueryResult<Record>> in
 			return self.salesforce.query(soql: "SELECT Id FROM Account WHERE Id = '\(id)'")
 		}.then {
 			// Then shoudn't be found
 			(queryResult: QueryResult) -> Void in
 			XCTAssert(queryResult.totalSize == 0)
-			exp.fulfill()
 		}.catch {
-			XCTFail(String(describing: $0))
+			XCTFail("\($0)")
+		}.always {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItDeletesForRecord() {
+		
+		let fields = [ "Name" : "Worldwide Stuff, Inc.", "BillingPostalCode": "44554"]
+		var record = Record(type: "Account", fields: fields)
+		let exp = expectation(description: "Delete Account record by Record instance")
+		
+		first {
+			// Insert it
+			salesforce.insert(record: record)
+		}.then {
+			// Delete it
+			(id: String) -> Promise<String> in
+			record.id = id
+			return self.salesforce.delete(record: record).then { id }
+		}.then {
+			// Try to query it
+			(id: String) -> Promise<QueryResult<Record>> in
+			return self.salesforce.query(soql: "SELECT Id FROM Account WHERE Id = '\(id)'")
+		}.then {
+			// Then shoudn't be found
+			(queryResult: QueryResult) -> Void in
+			XCTAssert(queryResult.totalSize == 0)
+		}.catch {
+			XCTFail("\($0)")
+		}.always {
+			exp.fulfill()
 		}
 		
 		waitForExpectations(timeout: 5.0, handler: nil)
@@ -462,6 +607,7 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 			XCTAssertTrue(fields.count > 0)
 			XCTAssertNotNil(fields["Type"])
 			XCTAssertEqual(fields["Type"]!.type, "picklist")
+			XCTAssertEqual(fields["MasterRecordId"]!.referenceTo![0], "Account")
 			exp.fulfill()
 		}.catch {
 			XCTFail(String(describing: $0))
@@ -502,7 +648,6 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 				XCTFail()
 			}.catch {
 				error in
-				debugPrint(error)
 				exp.fulfill()
 		}
 		
@@ -536,13 +681,14 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		
 		first {
 			salesforce.describe(types: types)
-			}.then {
-				result -> () in
-				XCTFail()
-			}.catch {
-				error in
-				debugPrint(error)
-				exp.fulfill()
+		}.then {
+			result -> () in
+			XCTFail()
+		}.catch {
+			error in
+			// Ignore
+		}.always {
+			exp.fulfill()
 		}
 		
 		waitForExpectations(timeout: 5.0, handler: nil)
@@ -557,20 +703,94 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		}.then {
 			// Retrieve photo
 			(identity: Identity) -> Promise<UIImage> in
-			guard let url = identity.photoURL else {
-				throw NSError()
-			}
-			return self.salesforce.fetchImage(url: url)
+			return self.salesforce.fetchImage(url: identity.photoURL!)
 		}.then {
 			(image: UIImage) -> Void in
 			XCTAssert(image.size.width > 0)
 			XCTAssert(image.size.height > 0)
-			exp.fulfill()
 		}.catch {
-			(error: Error) in
-			XCTFail(error.localizedDescription)
+			error in
+			debugPrint(error)
+			XCTFail()
+		}.always {
+			exp.fulfill()
 		}
 		
 		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+	
+	func testThatItRetrievesOrg() {
+		
+		let exp = expectation(description: "Retrieve org")
+		
+		first {
+			return salesforce.org()
+		}.then {
+			(org) -> () in
+			XCTAssertTrue(org.createdDate < Date())
+		}.catch {
+			XCTFail("\($0)")
+		}.always {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
+}
+
+// MARK: -
+struct MyContact {
+	
+	var id: String?
+	var firstName: String?
+	var lastName: String
+	var birthdate: Date?
+	
+	init(id: String? = nil, firstName: String? = nil, lastName: String, birthdate: Date? = nil) {
+		self.id = id
+		self.firstName = firstName
+		self.lastName = lastName
+		self.birthdate = birthdate
+	}
+}
+
+extension MyContact: Encodable {
+	
+	enum EncodingKeys: String, CodingKey {
+		case firstName = "FirstName"
+		case lastName = "LastName"
+		case birthdate = "Birthdate"
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: EncodingKeys.self)
+		try container.encode(firstName, forKey: .firstName)
+		try container.encode(lastName, forKey: .lastName)
+		try container.encode(birthdate, forKey: .birthdate)
+	}
+}
+
+extension MyContact: Decodable {
+	
+	enum DecodingKeys: String, CodingKey {
+		case id = "Id"
+		case firstName = "FirstName"
+		case lastName = "LastName"
+		case birthdate = "Birthdate"
+	}
+	
+	init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: DecodingKeys.self)
+		self.id = try values.decode(String.self, forKey: .id)
+		self.firstName = try values.decodeIfPresent(String.self, forKey: .firstName)
+		self.lastName = try values.decode(String.self, forKey: .lastName)
+		
+		// Birthdate JSON has different format than other dates (date, not date/time)
+		let bdayString = try values.decodeIfPresent(String.self, forKey: .birthdate)
+		if let s = bdayString {
+			let df = DateFormatter()
+			df.dateFormat = "YYYY-MM-DD"
+			self.birthdate = df.date(from: s)
+		}
 	}
 }
