@@ -56,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
     let callbackURL = URL(string: "<YOUR CONNECTED APP’S CALLBACK URL HERE>")!
 
 	var window: UIWindow?
-	var connectedApp: ConnectedApp!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         salesforce = configureSalesforce(consumerKey: consumerKey, callbackURL: callbackURL) /* 3 */
