@@ -14,7 +14,7 @@ import PromiseKit
 open class ConnectedApp {
 	
 	public let consumerKey: String
-	public let redirectURL: URL
+	public let callbackURL: URL
 	public let loginHost: String
 	
 	weak public var loginDelegate: LoginDelegate?
@@ -68,20 +68,20 @@ open class ConnectedApp {
 	
 	/// Initializer
 	/// - Parameter consumerKey: Connected App's consumer key
-	/// - Parameter redirectURL: Connected App's redirect URL
+	/// - Parameter callbackURL: Connected App's callback URL
 	/// - Parameter loginDelegate: will handle user login when needed
 	/// - Parameter loginHost: Salesforce authorization server (if sandbox org, set to "test.salesforce.com")
 	/// - Parameter userID: record ID of user; useful for supporting multi-user switching
 	/// - Parameter orgID: record ID of org; useful for supporting mutli-user switching
-	public convenience init(consumerKey: String, redirectURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID) {
-		self.init(consumerKey: consumerKey, redirectURL: redirectURL, loginDelegate: loginDelegate, loginHost: loginHost, userID: userID, orgID: orgID, authData: nil)
+	public convenience init(consumerKey: String, callbackURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID) {
+		self.init(consumerKey: consumerKey, callbackURL: callbackURL, loginDelegate: loginDelegate, loginHost: loginHost, userID: userID, orgID: orgID, authData: nil)
 	}
 	
 	/// Internal initializer
-	internal init(consumerKey: String, redirectURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, authData: OAuth2Result? = nil) {
+	internal init(consumerKey: String, callbackURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, authData: OAuth2Result? = nil) {
 		
 		self.consumerKey = consumerKey
-		self.redirectURL = redirectURL
+		self.callbackURL = callbackURL
 		self.loginDelegate = loginDelegate
 		self.loginHost = loginHost
 		self.storeKey = OAuth2ResultStore.Key(userID: userID, orgID: orgID, consumerKey: consumerKey)
@@ -100,7 +100,7 @@ open class ConnectedApp {
 		let params = [
 			"response_type" : "token",
 			"client_id" : consumerKey,
-			"redirect_uri" : redirectURL.absoluteString,
+			"redirect_uri" : callbackURL.absoluteString,
 			"prompt" : "login consent",
 			"display" : "touch" ]
 		guard let comps = URLComponents(string: "https://\(loginHost)/services/oauth2/authorize", parameters: params), let url = comps.url else {
