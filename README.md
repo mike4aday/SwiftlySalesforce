@@ -63,8 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate /* 1 */ {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-		handleCallbackURL(url, for: salesforce.connectedApp) /* 4 */
-		return true
+        handleCallbackURL(url, for: salesforce.connectedApp) /* 4 */
+        return true
     }
 }
 ```
@@ -175,7 +175,7 @@ salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Co
 ```
 The `always` closure will be called regardless of success or failure elsewhere in the promise chain.
 
-You could also use the `Record` type to update a record in Salesforce, for example:
+You could also use the `Record` type to update a record in Salesforce. For example:
 
 ```
 // `account` is a Record we retrieved earlier...
