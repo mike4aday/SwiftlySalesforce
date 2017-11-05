@@ -553,8 +553,8 @@ Questions, suggestions, bug reports and code contributions welcome:
    [Example]: <https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce>
    [Mobile SDK for iOS]: <https://github.com/forcedotcom/SalesforceMobileSDK-iOS>
 
-   [Salesforce.swift]: <Pod/Classes/Salesforce.swift>
-   [Resource.swift]: <Pod/Classes/Resource.swift>
-   [OAuth2Result.swift]: <Pod/Classes/OAuth2Result.swift>
-   [Extensions.swift]: <Pod/Classes/Extensions.swift>
-   [ConnectedApp.swift]: <Pod/Classes/ConnectedApp.swift>
+   [Salesforce.swift]: <SwiftlySalesforce/Classes/Salesforce.swift>
+   [Resource.swift]: <SwiftlySalesforce/Classes/Resource.swift>
+   [OAuth2Result.swift]: <SwiftlySalesforce/Classes/OAuth2Result.swift>
+   [Extensions.swift]: <SwiftlySalesforce/Classes/Extensions.swift>
+   [ConnectedApp.swift]: <SwiftlySalesforce/Classes/ConnectedApp.swift>
