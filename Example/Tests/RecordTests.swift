@@ -138,15 +138,14 @@ class RecordTests: XCTestCase, MockData {
 		let exp = expectation(description: "Account query")
 		
 		salesforce.query(soql: soql).then {
-			
 			(queryResult: QueryResult) -> () in
 			for record in queryResult.records {
 				XCTAssertTrue(record.id!.starts(with: "001"))
 			}
 			exp.fulfill()
-			}.catch {
-				error in
-				XCTFail(String(describing: error))
+		}.catch {
+			error in
+			XCTFail(String(describing: error))
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
