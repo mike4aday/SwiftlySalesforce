@@ -755,6 +755,29 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		}
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
+	
+	func testThatItPostsAccountToApexResource() {
+		
+		let namespace = "playgroundorg"
+		let json = """
+		{
+			"name" : "Wingo Ducks",
+			"phone" : "707-555-1234",
+			"website" : "www.wingo.ca.us"
+		}
+		"""
+		let body = json.data(using: .utf8)
+		let exp = expectation(description: "Retrieve Account record via custom Apex REST method")
+		
+		salesforce.apex(method: .post, path: "/\(namespace)/Account/)", parameters: nil, body: body, contentType: nil, headers: nil).then {
+			(data) -> () in
+			let _ = String(data: data, encoding: .utf8)
+			exp.fulfill()
+		}.catch {
+			XCTFail(String(describing: $0))
+		}
+		waitForExpectations(timeout: 10.0, handler: nil)
+	}
 }
 
 // MARK: -
