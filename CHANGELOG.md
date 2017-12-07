@@ -1,5 +1,8 @@
 # Change Log 
 
+## Version 6.0.1 (Dec. 7, 2017)
+Fixed bug in `Salesorce.apex` and `Salesforce.custom` methods so that callers can now set the HTTP body data.
+
 ## Version 6.0.0 (Nov. 5, 2017)
 This release contains breaking changes. See [README](https://github.com/mike4aday/SwiftlySalesforce/blob/master/README.md) and [documentation](http://cocoadocs.org/docsets/SwiftlySalesforce).
 Highlights of changes and improvements:
