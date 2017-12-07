@@ -25,6 +25,7 @@ class ResourceTests: XCTestCase {
 		XCTAssertEqual(req.url!.absoluteString, identityURL.absoluteString + "?version=41.0")
 		XCTAssertEqual(req.url!.value(forQueryItem: "version"), "41.0")
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
 	}
 	
 	func testRetrieve() {
@@ -39,5 +40,17 @@ class ResourceTests: XCTestCase {
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/data/v41.0/sobjects/Account/12345?fields=Id,Name,Custom1__c")
 		XCTAssertEqual(req.httpMethod, Resource.HTTPMethod.get.rawValue)
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
+	}
+	
+	func testApexGet() {
+		
+		let authData = OAuth2Result(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: refreshToken)
+		let req = try! Resource.apex(method: .get, path: "/MyRESTResource/test", queryParameters: ["id" : "00112345"], body: nil, contentType: "application/x-www-form-urlencoded; charset=utf-8", headers: nil).asURLRequest(authData: authData)
+
+		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/apexrest/MyRESTResource/test?id=00112345")
+		XCTAssertEqual(req.httpMethod, Resource.HTTPMethod.get.rawValue)
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
 	}
 }
