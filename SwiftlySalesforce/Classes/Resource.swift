@@ -19,8 +19,8 @@ public enum Resource {
 	case describeGlobal(version: String)
 	case fetchFile(baseURL: URL?, path: String?, contentType: String)
 	case registerForNotifications(deviceToken: String, version: String)
-	case apex(method: HTTPMethod, path: String, queryParameters: [String: Any?]?, data: Data?, headers: [String: String]?)
-	case custom(method: HTTPMethod, baseURL: URL?, path: String?, queryParameters: [String: Any?]?, data: Data?, headers: [String: String]?)
+	case apex(method: HTTPMethod, path: String, queryParameters: [String: Any?]?, body: Data?, contentType: String, headers: [String: String]?)
+	case custom(method: HTTPMethod, baseURL: URL?, path: String?, queryParameters: [String: Any?]?, body: Data?, contentType: String, headers: [String: String]?)
 	case revoke(token: String, host: String)
 	case refresh(refreshToken: String, consumerKey: String, host: String)
 }
@@ -42,32 +42,30 @@ public extension Resource {
 
 internal extension Resource {
 	
-	fileprivate enum ContentType: String {
-		case json = "application/json"
-		case urlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
-	}
-	
 	internal func asURLRequest(authData: OAuth2Result) throws -> URLRequest {
+		
+		let contentTypeJSON = "application/json"
+		let contentTypeURLEncoded = "application/x-www-form-urlencoded; charset=utf-8"
 		
 		switch self {
 			
 		case let .identity(version):
 			let url = authData.identityURL
 			let params = ["version" : version]
-			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 			
 		case let .limits(version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/limits")
-			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: contentTypeURLEncoded)
 
 		case let .query(soql, version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/query")
 			let params = ["q" : soql]
-			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 			
 		case let .queryNext(path):
 			let url = authData.instanceURL.appendingPathComponent(path)
-			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: contentTypeURLEncoded)
 			
 		case let .retrieve(type, id, fields, version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)")
@@ -75,59 +73,57 @@ internal extension Resource {
 				if let fieldNames = fields?.joined(separator: ",") { return ["fields": fieldNames] }
 				else { return nil }
 			}()
-			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 			
 		case let .insert(type, data, version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/")
-			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .post, contentType: .json)
+			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .post, contentType: contentTypeJSON)
 			
 		case let .update(type, id, data, version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)")
-			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .patch, contentType: .json)
+			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .patch, contentType: contentTypeJSON)
 
 		case let .delete(type, id, version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)")
-			return try URLRequest(url: url, authData: authData, httpMethod: .delete, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, httpMethod: .delete, contentType: contentTypeURLEncoded)
 			
 		case let .describe(type, version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/describe")
-			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: contentTypeURLEncoded)
 			
 		case let .describeGlobal(version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/")
-			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, httpMethod: .get, contentType: contentTypeURLEncoded)
 
 		case let .fetchFile(baseURL, path, contentType):
 			var url = (baseURL ?? authData.instanceURL)
 			if let path = path {
 				url.appendPathComponent(path)
 			}
-			return try URLRequest(url: url, authData: authData, headers: ["Accept": contentType], httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, headers: ["Accept": contentType], httpMethod: .get, contentType: contentTypeURLEncoded)
 			
 		case let .registerForNotifications(deviceToken, version):
 			let url = authData.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/MobilePushServiceDevice")
 			let data = try JSONEncoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter).encode(["ConnectionToken" : deviceToken, "ServiceType" : "Apple" ])
-			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .post, contentType: .json)
+			return try URLRequest(url: url, authData: authData, httpBody: data, httpMethod: .post, contentType: contentTypeJSON)
 
-		case let .apex(method, path, queryParameters, data, headers):
+		case let .apex(method, path, queryParameters, body, contentType, headers):
 			let url = authData.instanceURL.appendingPathComponent("/services/apexrest\(path)")
-			let contentType: ContentType = (data == nil ? .urlEncoded : .json)
-			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: data, headers: headers, httpMethod: method, contentType: contentType)
+			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: body, headers: headers, httpMethod: method, contentType: contentType)
 			
-		case let .custom(method, baseURL, path, queryParameters, data, headers):
+		case let .custom(method, baseURL, path, queryParameters, body, contentType, headers):
 			var url: URL = (baseURL ?? authData.instanceURL)
 			if let path = path {
 				url.appendPathComponent(path)
 			}
-			let contentType: ContentType = (data == nil ? .urlEncoded : .json)
-			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: data, headers: headers, httpMethod: method, contentType: contentType)
+			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: body, headers: headers, httpMethod: method, contentType: contentType)
 			
 		case let .revoke(token, host):
 			guard let url = URL(string: "https://\(host)") else {
 				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
 			}
 			let params = ["token": token]
-			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 
 		case let .refresh(refreshToken, consumerKey, host):
 			guard let url = URL(string: "https://\(host)") else {
@@ -138,14 +134,21 @@ internal extension Resource {
 				"grant_type": "refresh_token",
 				"client_id": consumerKey,
 				"refresh_token": refreshToken]
-			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: .urlEncoded)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 		}
 	}
 }
 
 fileprivate extension URLRequest {
 	
-	fileprivate init(url: URL, authData: OAuth2Result, queryParameters: [String: Any?]? = nil, httpBody: Data? = nil, headers: [String: String]? = nil, httpMethod: Resource.HTTPMethod, contentType: Resource.ContentType) throws {
+	fileprivate init(
+		url: URL,
+		authData: OAuth2Result,
+		queryParameters: [String: Any?]? = nil,
+		httpBody: Data? = nil,
+		headers: [String: String]? = nil,
+		httpMethod: Resource.HTTPMethod,
+		contentType: String) throws {
 		
 		// URL
 		if let params = queryParameters {
@@ -174,7 +177,7 @@ fileprivate extension URLRequest {
 		self.setValue("Bearer \(authData.accessToken)", forHTTPHeaderField: "Authorization")
 		self.setValue("application/json", forHTTPHeaderField: "Accept")
 		self.httpMethod = httpMethod.rawValue
-		self.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+		self.setValue(contentType, forHTTPHeaderField: "Content-Type")
 		
 		// Custom headers
 		if let headers = headers {

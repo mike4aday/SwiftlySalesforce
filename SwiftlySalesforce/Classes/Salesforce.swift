@@ -356,11 +356,20 @@ open class Salesforce {
 	/// See https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST
 	/// - Parameter method: HTTP method
 	/// - Parameter path: String that gets appended to instance URL; should begin with "/"
-	/// - Parameter parameters: Dictionary of parameter name/value pairs
-	/// - Parameter headers: Dictionary of HTTP header values
+	/// - Parameter parameters: Dictionary of query string parameters
+	/// - Parameter body: Data to be sent in the body of the request, e.g. JSON as Data in the body of a POST request
+	/// - Parameter contentType: the MIME type of the request content; defaults to "application/json"
+	/// - Parameter headers: Dictionary of custom HTTP header values
 	/// - Returns: Promise of Data
-	open func apex(method: Resource.HTTPMethod = .get, path: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		let resource = Resource.apex(method: method, path: path, queryParameters: parameters, data: nil, headers: headers)
+	open func apex(
+		method: Resource.HTTPMethod = .get,
+		path: String,
+		parameters: [String: Any]? = nil,
+		body: Data? = nil,
+		contentType: String = "application/json",
+		headers: [String: String]? = nil) -> Promise<Data> {
+		let resource = Resource.apex(method: method, path: path, queryParameters: parameters, body: body, contentType: contentType, headers: headers)
+		//let resource = Resource.apex(method: method, path: path, queryParameters: parameters, data: nil, headers: headers)
 		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
 
@@ -369,11 +378,20 @@ open class Salesforce {
 	/// - Parameter method: HTTP method
 	/// - Parameter baseURL: Base URL to which the path parameter will be appended. If nil, then user's "instance URL" will be used
 	/// - Parameter path: Absolute path to endpoint, relative to "baseURL" parameter or, if "baseURL" is nil, then relative to the user's "instance URL"
-	/// - Parameter parameters: Dictionary of parameter name/value pairs
-	/// - Parameter headers: Dictionary of HTTP header values
+	/// - Parameter parameters: Dictionary of query string parameters
+	/// - Parameter body: Data to be sent in the body of the request, e.g. JSON as Data in the body of a POST request
+	/// - Parameter contentType: the MIME type of the request content; defaults to "application/json"
+	/// - Parameter headers: Dictionary of custom HTTP header values
 	/// - Returns: Promise of Data
-	open func custom(method: Resource.HTTPMethod = .get, baseURL: URL? = nil, path: String? = nil, parameters: [String: Any]? = nil, headers: [String: String]? = nil) -> Promise<Data> {
-		let resource = Resource.custom(method: method, baseURL: baseURL, path: path, queryParameters: parameters, data: nil, headers: headers)
+	open func custom(
+		method: Resource.HTTPMethod = .get,
+		baseURL: URL? = nil,
+		path: String? = nil,
+		parameters: [String: Any]? = nil,
+		body: Data? = nil,
+		contentType: String = "application/json",
+		headers: [String: String]? = nil) -> Promise<Data> {
+		let resource = Resource.custom(method: method, baseURL: baseURL, path: path, queryParameters: parameters, body: body, contentType: contentType, headers: headers)
 		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
 }
