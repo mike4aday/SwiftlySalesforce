@@ -358,7 +358,7 @@ open class Salesforce {
 	/// - Parameter path: String that gets appended to instance URL; should begin with "/"
 	/// - Parameter parameters: Dictionary of query string parameters
 	/// - Parameter body: Data to be sent in the body of the request, e.g. JSON as Data in the body of a POST request
-	/// - Parameter contentType: the MIME type of the request content; defaults to "application/json"
+	/// - Parameter contentType: the MIME type of the request content
 	/// - Parameter headers: Dictionary of custom HTTP header values
 	/// - Returns: Promise of Data
 	open func apex(
@@ -366,9 +366,10 @@ open class Salesforce {
 		path: String,
 		parameters: [String: Any]? = nil,
 		body: Data? = nil,
-		contentType: String = "application/json",
+		contentType: String? = nil,
 		headers: [String: String]? = nil) -> Promise<Data> {
-		let resource = Resource.apex(method: method, path: path, queryParameters: parameters, body: body, contentType: contentType, headers: headers)
+		let ct = contentType ?? ( method == .get || method == .delete ? "application/x-www-form-urlencoded; charset=utf-8" : "application/json")
+		let resource = Resource.apex(method: method, path: path, queryParameters: parameters, body: body, contentType: ct, headers: headers)
 		//let resource = Resource.apex(method: method, path: path, queryParameters: parameters, data: nil, headers: headers)
 		return requestor.request(resource: resource, connectedApp: connectedApp)
 	}
