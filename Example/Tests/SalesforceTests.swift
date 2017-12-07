@@ -736,6 +736,25 @@ class SalesforceTests: XCTestCase, MockData, LoginDelegate {
 		
 		waitForExpectations(timeout: 5.0, handler: nil)
 	}
+	
+	func testThatItGetsAccountFromApexResource() {
+		
+		let namespace = "playgroundorg"
+		let acctID = "001i000000JEK7m" // This must exist already
+		let exp = expectation(description: "Retrieve Account record via custom Apex REST method")
+		
+		salesforce.apex(method: .get, path: "/\(namespace)/Account/\(acctID)", parameters: nil, body: nil, contentType: nil, headers: nil).then {
+			(data) -> () in
+			let decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
+			let record = try decoder.decode(Record.self, from: data)
+			XCTAssertTrue(record.type == "Account")
+			XCTAssertTrue(record.id!.starts(with: acctID))
+			exp.fulfill()
+		}.catch {
+			XCTFail(String(describing: $0))
+		}
+		waitForExpectations(timeout: 5.0, handler: nil)
+	}
 }
 
 // MARK: -
