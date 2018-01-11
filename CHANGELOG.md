@@ -1,6 +1,6 @@
 # Change Log
 
-##Version 6.0.2 (Jan. 11, 2018)
+## Version 6.0.2 (Jan. 11, 2018)
 - Clear token from secure storage after revocation ([issue #57](https://github.com/mike4aday/SwiftlySalesforce/issues/57)).
 - Fixed error in revocation endpoint URL. (Thanks to [@daichi1021](https://github.com/daichi1021) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/56).)
 
