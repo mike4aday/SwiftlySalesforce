@@ -211,6 +211,9 @@ open class ConnectedApp {
 				(token: String) -> Promise<Void> in
 				let resource = Resource.revoke(token: token, host: self.loginHost)
 				return Requestor.data.request(resource: resource, connectedApp: self).asVoid()
+			}.then {
+				() -> () in
+				self.authData = nil
 			}
 			self.promisedRevocation = promise
 			return promise

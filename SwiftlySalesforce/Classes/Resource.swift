@@ -126,7 +126,7 @@ internal extension Resource {
 			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 
 		case let .refresh(refreshToken, consumerKey, host):
-			guard let url = URL(string: "https://\(host)") else {
+			guard let url = URL(string: "https://\(host)/services/oauth2/token") else {
 				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
 			}
 			let params = [
@@ -134,7 +134,7 @@ internal extension Resource {
 				"grant_type": "refresh_token",
 				"client_id": consumerKey,
 				"refresh_token": refreshToken]
-			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
+			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .post, contentType: contentTypeURLEncoded)
 		}
 	}
 }
