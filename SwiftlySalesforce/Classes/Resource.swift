@@ -164,6 +164,7 @@ fileprivate extension URLRequest {
 					return URLQueryItem(name: param.key, value: nil)
 				}
 			}
+			_comps.percentEncodedQuery = _comps.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
 			guard let _url = _comps.url else {
 				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: nil)
 			}
