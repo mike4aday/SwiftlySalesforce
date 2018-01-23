@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 6.0.3 (Jan. 23, 2018)
+Replace '+' with '%2B' in URLRequest.queryParameters. (Resolves [issue #58](https://github.com/mike4aday/SwiftlySalesforce/issues/58). Thanks to [@hmuronaka](https://github.com/hmuronaka) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/59)).
+
 ## Version 6.0.2 (Jan. 11, 2018)
 - Clear token from secure storage after revocation ([issue #57](https://github.com/mike4aday/SwiftlySalesforce/issues/57)).
 - Fixed error in revocation endpoint URL. (Thanks to [@daichi1021](https://github.com/daichi1021) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/56).)
