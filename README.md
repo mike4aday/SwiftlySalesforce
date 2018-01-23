@@ -1,11 +1,11 @@
 
 <img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="76%"/>
 
-![Swift](https://img.shields.io/badge/%20in-swift%204-orange.svg)
-[![Version](https://img.shields.io/cocoapods/v/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License](https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce)
-[![Platform](https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat)](http://cocoadocs.org/docsets/SwiftlySalesforce)
+<img src="https://img.shields.io/badge/%20in-swift%204-orange.svg"/>
+<img src="https://img.shields.io/cocoapods/v/SwiftlySalesforce.svg?style=flat"/>
+<img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"/>
+<img src="https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat"/>
+<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>
 
 Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platform/overview/) with Swiftly Salesforce:
 * Written entirely in [Swift](https://developer.apple.com/swift/).
