@@ -197,7 +197,7 @@ open class ConnectedApp {
 	/// Parameter accessTokenOnly: intended for testing; if true, will only attempt to revoke the access token.
 	/// See: https://help.salesforce.com/articleView?id=remoteaccess_revoke_token.htm
 	/// - Returns: Asynchronous 'promise'
-	internal func revoke(accessTokenOnly: Bool = false) -> Promise<Void> {
+	public func revoke(accessTokenOnly: Bool = false) -> Promise<Void> {
 		if let promise = self.promisedRevocation, promise.isPending {
 			return promise
 		}
