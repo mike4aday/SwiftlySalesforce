@@ -129,6 +129,35 @@ open class ConnectedApp {
 		}
 	}
 	
+	/// Revokes the stored refresh token or, if the refresh token is not available, then revokes the stored access token.
+	/// Depending on the scopes configured in the Salesforce Connected app definition, a refresh token may not be issued upon authentication.
+	/// Salesforce revokes any associated access tokens when revoking the refresh token.
+	/// Parameter accessTokenOnly: intended for testing; if true, will only attempt to revoke the access token.
+	/// See: https://help.salesforce.com/articleView?id=remoteaccess_revoke_token.htm
+	/// - Returns: Asynchronous 'promise'
+	public func revoke(accessTokenOnly: Bool = false) -> Promise<Void> {
+		if let promise = self.promisedRevocation, promise.isPending {
+			return promise
+		}
+		else {
+			let promise = first {
+				guard let token = (accessTokenOnly ? self.authData?.accessToken : self.authData?.refreshToken) else {
+					return Promise(error: ApplicationError.invalidState(message: "No token to revoke"))
+				}
+				return Promise(value: token)
+			}.then {
+				(token: String) -> Promise<Void> in
+				let resource = Resource.revoke(token: token, host: self.loginHost)
+				return Requestor.data.request(resource: resource, connectedApp: self).asVoid()
+			}.then {
+				() -> () in
+				self.authData = nil
+			}
+			self.promisedRevocation = promise
+			return promise
+		}
+	}
+	
 	/// Asks Salesforce to authorize user by refreshing the access token
 	/// or, if that fails or there's no refresh token, then the user is asked
 	/// to re-authenticate via the Salesforce-hosted login web form.
@@ -188,35 +217,6 @@ open class ConnectedApp {
 				}
 			}
 			return pending.promise
-		}
-	}
-	
-	/// Revokes the stored refresh token or, if the refresh token is not available, then revokes the stored access token.
-	/// Depending on the scopes configured in the Salesforce Connected app definition, a refresh token may not be issued upon authentication.
-	/// Salesforce revokes any associated access tokens when revoking the refresh token.
-	/// Parameter accessTokenOnly: intended for testing; if true, will only attempt to revoke the access token.
-	/// See: https://help.salesforce.com/articleView?id=remoteaccess_revoke_token.htm
-	/// - Returns: Asynchronous 'promise'
-	public func revoke(accessTokenOnly: Bool = false) -> Promise<Void> {
-		if let promise = self.promisedRevocation, promise.isPending {
-			return promise
-		}
-		else {
-			let promise = first {
-				guard let token = (accessTokenOnly ? self.authData?.accessToken : self.authData?.refreshToken) else {
-					return Promise(error: ApplicationError.invalidState(message: "No token to revoke"))
-				}
-				return Promise(value: token)
-			}.then {
-				(token: String) -> Promise<Void> in
-				let resource = Resource.revoke(token: token, host: self.loginHost)
-				return Requestor.data.request(resource: resource, connectedApp: self).asVoid()
-			}.then {
-				() -> () in
-				self.authData = nil
-			}
-			self.promisedRevocation = promise
-			return promise
 		}
 	}
 	
