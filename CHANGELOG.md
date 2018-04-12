@@ -1,10 +1,13 @@
 # Change Log
 
+## Version 6.0.5 (Apr. 12, 2018)
+Fixed error in identity method's response handler. (Resolves [issue #60](https://github.com/mike4aday/SwiftlySalesforce/issues/60).)
+
 ## Version 6.0.4 (Mar. 1, 2018)
 Change access to `ConnectedApp.revoke` method from `internal` to `public`.
 
 ## Version 6.0.3 (Jan. 23, 2018)
-Replace '+' with '%2B' in URLRequest.queryParameters. (Resolves [issue #58](https://github.com/mike4aday/SwiftlySalesforce/issues/58). Thanks to [@hmuronaka](https://github.com/hmuronaka) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/59)).
+Replace '+' with '%2B' in URLRequest.queryParameters. (Resolves [issue #58](https://github.com/mike4aday/SwiftlySalesforce/issues/58).) Thanks to [@hmuronaka](https://github.com/hmuronaka) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/59)).
 
 ## Version 6.0.2 (Jan. 11, 2018)
 - Clear token from secure storage after revocation ([issue #57](https://github.com/mike4aday/SwiftlySalesforce/issues/57)).
