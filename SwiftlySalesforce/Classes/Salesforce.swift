@@ -40,7 +40,7 @@ open class Salesforce {
 	open func identity() -> Promise<Identity> {
 		let handler: Requestor.ResponseHandler = {
 			(data, response, error) throws -> Data in
-			guard let resp = response as? HTTPURLResponse, resp.statusCode != 403 else {
+			if let resp = response as? HTTPURLResponse, resp.statusCode == 403 {
 				throw RequestError.userAuthenticationRequired
 			}
 			return try Requestor.defaultResponseHandler(data, response, error)
