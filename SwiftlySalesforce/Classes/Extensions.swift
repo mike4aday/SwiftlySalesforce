@@ -13,6 +13,7 @@ public extension DateFormatter {
 	public static let salesforceDateTimeFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
+		formatter.locale = Locale(identifier: "en_US_POSIX")
 		return formatter
 	}()
 	
