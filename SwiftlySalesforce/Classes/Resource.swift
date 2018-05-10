@@ -119,14 +119,14 @@ internal extension Resource {
 			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: body, headers: headers, httpMethod: method, contentType: contentType)
 			
 		case let .revoke(token, host):
-			guard let url = URL(string: "https://\(host)/services/oauth2/revoke") else {
+			guard let url = URL(string: "https://\(authData.identityURL.host ?? host)/services/oauth2/revoke") else {
 				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
 			}
 			let params = ["token": token]
 			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 
 		case let .refresh(refreshToken, consumerKey, host):
-			guard let url = URL(string: "https://\(host)/services/oauth2/token") else {
+			guard let url = URL(string: "https://\(authData.identityURL.host ?? host)/services/oauth2/token") else {
 				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
 			}
 			let params = [
