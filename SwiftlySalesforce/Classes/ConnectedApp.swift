@@ -147,7 +147,7 @@ open class ConnectedApp {
 				return Promise(value: token)
 			}.then {
 				(token: String) -> Promise<Void> in
-				let resource = Resource.revoke(token: token, host: self.loginHost)
+				let resource = Resource.revoke(token: token)
 				return Requestor.data.request(resource: resource, connectedApp: self).asVoid()
 			}.then {
 				() -> () in
@@ -224,7 +224,7 @@ open class ConnectedApp {
 	/// - Parameter refreshToken: The value of the OAuth2 refresh token obtained during authorization
 	/// - Returns: Promise of OAuth2Result
 	private func refresh(refreshToken: String) -> Promise<OAuth2Result> {
-		let resource = Resource.refresh(refreshToken: refreshToken, consumerKey: consumerKey, host: loginHost)
+		let resource = Resource.refresh(refreshToken: refreshToken, consumerKey: consumerKey)
 		return Requestor.data.request(resource: resource, connectedApp: self).asString().then {
 			(urlEncodedString) -> OAuth2Result in
 			return try OAuth2Result(urlEncodedString: urlEncodedString, refreshToken: refreshToken)
