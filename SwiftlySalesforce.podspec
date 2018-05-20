@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-s.version          = "6.0.6"
+s.version          = "7.0.0"
 s.summary          = "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform"
 
 
@@ -15,7 +15,7 @@ s.summary          = "A Swift framework for the rapid development of native iOS 
   s.source           = { :git => "https://github.com/mike4aday/SwiftlySalesforce.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/mike4aday'
 
-  s.platform     = :ios, '10.3'
+  s.platform     = :ios, '11.3'
   s.requires_arc = true
 
   s.source_files = 'SwiftlySalesforce/Classes/**/*'
@@ -23,6 +23,6 @@ s.summary          = "A Swift framework for the rapid development of native iOS 
 
   }
 
-  s.dependency 'PromiseKit', '~> 4.0'
+  s.dependency 'PromiseKit', '~> 6.0'
 
 end

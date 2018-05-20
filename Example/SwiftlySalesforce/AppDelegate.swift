@@ -13,20 +13,24 @@ import UserNotifications
 var salesforce: Salesforce!
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, LoginDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCenterDelegate, LoginDelegate {
 
-	let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
-	let callbackURL = URL(string: "<YOUR CONNECTED APP'S REDIRECT URL HERE>")!
-	
+	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkiguvTQSOZIWjqkAIkqFwbKfS6RHNjbI28Lvkvigc5KOJWsaFJCxpZvfAMA4Q"
+	let callbackURL = URL(string: "taskforce://authorized")!
+
 	var window: UIWindow?
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		salesforce = configureSalesforce(consumerKey: consumerKey, callbackURL: callbackURL)
+		let config = Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
+		salesforce = Salesforce(configuration: config)
+		if let navVC = window?.rootViewController as? UINavigationController, let topVC = navVC.topViewController as? TaskTableViewController {
+			topVC.salesforce = salesforce
+		}
 		return true
 	}
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-		handleCallbackURL(url, for: salesforce.connectedApp)
+	//	handleCallbackURL(url, for: salesforce.connectedApp)
 		return true
 	}
 }
