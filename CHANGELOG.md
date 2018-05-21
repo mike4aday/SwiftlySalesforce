@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 6.0.7 (May 21, 2018)
+Resolves [issue #69](https://github.com/mike4aday/SwiftlySalesforce/issues/69). Thanks to [@hmuronaka](https://github.com/hmuronaka) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/72).
+
 ## Version 6.0.6 (May 8, 2018)
 Resolves [issue #70](https://github.com/mike4aday/SwiftlySalesforce/issues/70). Thanks to [@hmuronaka](https://github.com/hmuronaka) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/71).
 
