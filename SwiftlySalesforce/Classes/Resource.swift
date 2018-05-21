@@ -21,8 +21,8 @@ public enum Resource {
 	case registerForNotifications(deviceToken: String, version: String)
 	case apex(method: HTTPMethod, path: String, queryParameters: [String: Any?]?, body: Data?, contentType: String, headers: [String: String]?)
 	case custom(method: HTTPMethod, baseURL: URL?, path: String?, queryParameters: [String: Any?]?, body: Data?, contentType: String, headers: [String: String]?)
-	case revoke(token: String, host: String)
-	case refresh(refreshToken: String, consumerKey: String, host: String)
+	case revoke(token: String)
+	case refresh(refreshToken: String, consumerKey: String)
 }
 
 public extension Resource {
@@ -118,16 +118,16 @@ internal extension Resource {
 			}
 			return try URLRequest(url: url, authData: authData, queryParameters: queryParameters, httpBody: body, headers: headers, httpMethod: method, contentType: contentType)
 			
-		case let .revoke(token, host):
-			guard let url = URL(string: "https://\(host)/services/oauth2/revoke") else {
-				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
+		case let .revoke(token):
+			guard let host = authData.identityURL.host, let url = URL(string: "https://\(host)/services/oauth2/revoke") else {
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: nil)
 			}
 			let params = ["token": token]
 			return try URLRequest(url: url, authData: authData, queryParameters: params, httpMethod: .get, contentType: contentTypeURLEncoded)
 
-		case let .refresh(refreshToken, consumerKey, host):
-			guard let url = URL(string: "https://\(host)/services/oauth2/token") else {
-				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: host])
+		case let .refresh(refreshToken, consumerKey):
+			guard let host = authData.identityURL.host, let url = URL(string: "https://\(host)/services/oauth2/token") else {
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: nil)
 			}
 			let params = [
 				"format" : "urlencoded",
