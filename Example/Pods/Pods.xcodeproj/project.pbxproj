@@ -73,13 +73,13 @@
 		DB746D36FFFEBBA15A9F56415AA2D11A /* Pods-SwiftlySalesforce_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 57726273156A5128C5F0A0E73BED8670 /* Pods-SwiftlySalesforce_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DFC50F9A13AB212CB94F5670EC0AB2E7 /* after.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7BCCE65AF248F80F0D46C5AE596E90 /* after.m */; };
 		E557A98820B832D003C8A0850CDCC9F4 /* Catchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BD0408009FAE1B0F5B668107777D23 /* Catchable.swift */; };
-		EA04749D20AA20A000BDABEB /* UIWindow+VisibleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA04749B20AA208600BDABEB /* UIWindow+VisibleViewController.swift */; };
 		EA0474A120AA21AC00BDABEB /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474A020AA21AC00BDABEB /* Authorization.swift */; };
 		EA0474A320AA2F9300BDABEB /* Salesforce+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474A220AA2F9300BDABEB /* Salesforce+Configuration.swift */; };
-		EA0474A720AA3B9400BDABEB /* URLComponents+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474A620AA3B9400BDABEB /* URLComponents+Parameters.swift */; };
 		EA0474AB20AA496400BDABEB /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474AA20AA496400BDABEB /* Salesforce.swift */; };
 		EA8E48AB20B0C8710088C32E /* Salesforce+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E48A920B0C7AB0088C32E /* Salesforce+Query.swift */; };
 		EA8E48AD20B0D2E40088C32E /* QueryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C39BADD02D2D468DEAF123E98BC977 /* QueryResult.swift */; };
+		EA8E48B020B1BDA90088C32E /* URLComponents+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */; };
+		EA8E48B320B1D8020088C32E /* AuthorizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E48B120B1D7D40088C32E /* AuthorizationStore.swift */; };
 		EA8FC92520AF1B3300691DB5 /* Salesforce+Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8FC92420AF1B3300691DB5 /* Salesforce+Authorization.swift */; };
 		F19A3DC6843C9305A4D50B241CD9082F /* race.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FDEE17D70F8C60C7B4C8F178B29BDA /* race.swift */; };
 		F1BDA51BCAE33859C41801698D43D620 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E0B0C7B18E5747ECDC5A8EF6F5F16 /* Identity.swift */; };
@@ -225,12 +225,12 @@
 		DB7BCCE65AF248F80F0D46C5AE596E90 /* after.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = after.m; path = Sources/after.m; sourceTree = "<group>"; };
 		E3DCFF6D937BA5F116EDC2B07D4ECBD3 /* NSURLSession+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSURLSession+Promise.swift"; path = "Extensions/Foundation/Sources/NSURLSession+Promise.swift"; sourceTree = "<group>"; };
 		E59739BA1D2420165DD40F8FEAD47AE0 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = SwiftlySalesforce/Classes/Extensions.swift; sourceTree = "<group>"; };
-		EA04749B20AA208600BDABEB /* UIWindow+VisibleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIWindow+VisibleViewController.swift"; path = "../Extensions/UIWindow+VisibleViewController.swift"; sourceTree = "<group>"; };
 		EA0474A020AA21AC00BDABEB /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Authorization.swift; path = SwiftlySalesforce/Classes/Authorization.swift; sourceTree = "<group>"; };
 		EA0474A220AA2F9300BDABEB /* Salesforce+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+Configuration.swift"; sourceTree = "<group>"; };
-		EA0474A620AA3B9400BDABEB /* URLComponents+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Parameters.swift"; sourceTree = "<group>"; };
 		EA0474AA20AA496400BDABEB /* Salesforce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce.swift; sourceTree = "<group>"; };
 		EA8E48A920B0C7AB0088C32E /* Salesforce+Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+Query.swift"; sourceTree = "<group>"; };
+		EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Parameters.swift"; sourceTree = "<group>"; };
+		EA8E48B120B1D7D40088C32E /* AuthorizationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStore.swift; sourceTree = "<group>"; };
 		EA8FC92420AF1B3300691DB5 /* Salesforce+Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+Authorization.swift"; sourceTree = "<group>"; };
 		EBA0823419954654E89B5C0D270F4FD2 /* SwiftlySalesforce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftlySalesforce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE45835539718AE1F15F89B7FC69541F /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -419,6 +419,8 @@
 			children = (
 				EA8E48AC20B0D2D50088C32E /* Models */,
 				EA0474A020AA21AC00BDABEB /* Authorization.swift */,
+				EA8E48B120B1D7D40088C32E /* AuthorizationStore.swift */,
+				B7AD16F573EF2C536F2A0B55787FE6F2 /* Keychain.swift */,
 				EA0474AA20AA496400BDABEB /* Salesforce.swift */,
 				EA8FC92420AF1B3300691DB5 /* Salesforce+Authorization.swift */,
 				EA0474A220AA2F9300BDABEB /* Salesforce+Configuration.swift */,
@@ -432,7 +434,6 @@
 				386966432BF6E5420D59BFDB62E7336F /* Globals.swift */,
 				CD3E0B0C7B18E5747ECDC5A8EF6F5F16 /* Identity.swift */,
 				39E4B04F4D27967A73EB968598FEC2E0 /* Info.plist */,
-				B7AD16F573EF2C536F2A0B55787FE6F2 /* Keychain.swift */,
 				756A950D7B46C7255AD774467E8CF449 /* Limit.swift */,
 				5F693D3AB8FF05B12E4C9A5D109FD6B6 /* LoginDelegate.swift */,
 				730F214A5950A57CA43169E77B35FB3B /* OAuth2Result.swift */,
@@ -517,8 +518,7 @@
 		EA04749A20AA207200BDABEB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				EA04749B20AA208600BDABEB /* UIWindow+VisibleViewController.swift */,
-				EA0474A620AA3B9400BDABEB /* URLComponents+Parameters.swift */,
+				EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */,
 			);
 			name = Extensions;
 			path = SwiftlySalesforce/Classes/Extensions;
@@ -711,15 +711,15 @@
 				EA0474AB20AA496400BDABEB /* Salesforce.swift in Sources */,
 				EA0474A120AA21AC00BDABEB /* Authorization.swift in Sources */,
 				EA8E48AB20B0C8710088C32E /* Salesforce+Query.swift in Sources */,
-				EA0474A720AA3B9400BDABEB /* URLComponents+Parameters.swift in Sources */,
 				EA0474A320AA2F9300BDABEB /* Salesforce+Configuration.swift in Sources */,
+				EA8E48B320B1D8020088C32E /* AuthorizationStore.swift in Sources */,
 				413B165B2D123CAA5F8D118DFB7E7098 /* Keychain.swift in Sources */,
 				1E76B9240C00AF3EFAEA647384577B9E /* Limit.swift in Sources */,
 				004D9393991645F7D0DA37327CD39047 /* ObjectMetadata.swift in Sources */,
 				EA8E48AD20B0D2E40088C32E /* QueryResult.swift in Sources */,
 				28C6910433C74B40344C73B111E38AA8 /* Organization.swift in Sources */,
 				26A45E19C76736F9FE0AEB77C18748AD /* PicklistItemMetadata.swift in Sources */,
-				EA04749D20AA20A000BDABEB /* UIWindow+VisibleViewController.swift in Sources */,
+				EA8E48B020B1BDA90088C32E /* URLComponents+Parameters.swift in Sources */,
 				28B8404603FC01A86B362C5569FE15D7 /* Record.swift in Sources */,
 				633238B93DC394FD49EF5A4F5CBC4476 /* SwiftlySalesforce-dummy.m in Sources */,
 			);

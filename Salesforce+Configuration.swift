@@ -36,21 +36,26 @@ public extension Salesforce {
 		}
 		
 		internal func authorizationURL() throws -> URL {
-			var params = [
+			
+			var params: [String: String] = [
 				"response_type" : "token",
 				"client_id" : consumerKey,
 				"redirect_uri" : callbackURL.absoluteString,
 				"prompt" : "login consent",
 				"display" : "touch" ]
-			if let addtlParams = authorizationParameters {
-				for (key,value) in addtlParams {
+			
+			if let additionalParams = authorizationParameters {
+				for (key,value) in additionalParams {
 					params[key] = value
 				}
 			}
+			
 			let urlString = "https://\(authorizationHost)/services/oauth2/authorize"
 			guard let comps = URLComponents(string: urlString, parameters: params), let url = comps.url else {
-				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [kCFErrorLocalizedDescriptionKey: "Invalid URL: \(urlString)"])
+				let userInfo: [String: Any] = [NSURLErrorFailingURLErrorKey: urlString, NSLocalizedDescriptionKey: "Invalid authorization URL", "Parameters": params]
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: userInfo)
 			}
+			
 			return url
 		}
 	}

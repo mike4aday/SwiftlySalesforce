@@ -9,10 +9,21 @@ import Foundation
 
 public struct Authorization {
 	
-	let accessToken: String
-	let refreshToken: String?
-	let instanceURL: URL
-	let identityURL: URL
+	public let accessToken: String
+	public let instanceURL: URL
+	public let identityURL: URL
+	public let refreshToken: String?
+	
+	public var userID: String {
+		return identityURL.lastPathComponent
+	}
+	
+	public var orgID: String {
+		return identityURL.deletingLastPathComponent().lastPathComponent
+	}
+}
+
+extension Authorization {
 	
 	init(withRedirectURL redirectURL: URL) throws {
 		
@@ -29,9 +40,8 @@ public struct Authorization {
 		else {
 			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLStringErrorKey: redirectURL])
 		}
-		self.accessToken = accessToken
-		self.refreshToken = queryItems.filter({ $0.name == "refresh_token" }).first?.value
-		self.instanceURL = instanceURL
-		self.identityURL = identityURL
+		let refreshToken: String? = queryItems.filter({ $0.name == "refresh_token" }).first?.value
+		
+		self.init(accessToken: accessToken, instanceURL: instanceURL, identityURL: identityURL, refreshToken: refreshToken)
 	}
 }

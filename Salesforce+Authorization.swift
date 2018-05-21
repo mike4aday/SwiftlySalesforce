@@ -25,6 +25,7 @@ extension Salesforce {
 				guard session.start() else {
 					throw AuthorizationError.sessionStartFailure
 				}
+				authSession = session 
 			}.map { url in
 				return try Authorization(withRedirectURL: url)
 			}

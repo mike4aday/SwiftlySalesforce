@@ -13,8 +13,6 @@ import SafariServices
 class TaskTableViewController: UITableViewController {
 	
 	var salesforce: Salesforce!
-	var authSession: SFAuthenticationSession?
-	var authPromise: Promise<Authorization>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
