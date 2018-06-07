@@ -110,9 +110,10 @@ extension LoginDelegate where Self: UIApplicationDelegate {
 	/// - Parameter userID: User's record ID. Used for multi-user switching
 	/// - Parameter orgID: User's org ID. Used for multi-user switching
 	/// - Parameter version: version of the Salesforce API
+    /// - Parameter extraUrl: add extra path to login url
 	/// - Returns: configured instance of Salesforce
-	public func configureSalesforce(consumerKey: String, callbackURL: URL, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, version: String = Salesforce.defaultVersion) -> Salesforce {
-		let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL, loginDelegate: self, loginHost: loginHost, userID: userID, orgID: orgID)
+    public func configureSalesforce(consumerKey: String, callbackURL: URL, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, version: String = Salesforce.defaultVersion, extraUrl: String) -> Salesforce {
+        let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL, loginDelegate: self, loginHost: loginHost, userID: userID, orgID: orgID, extraUrl: extraUrl)
 		return Salesforce(connectedApp: connectedApp, version: version)
 	}
 }

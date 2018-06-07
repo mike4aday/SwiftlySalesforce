@@ -16,6 +16,7 @@ open class ConnectedApp {
 	public let consumerKey: String
 	public let callbackURL: URL
 	public let loginHost: String
+    public let extraUrl: String
 	
 	weak public var loginDelegate: LoginDelegate?
 	
@@ -73,18 +74,20 @@ open class ConnectedApp {
 	/// - Parameter loginHost: Salesforce authorization server (if sandbox org, set to "test.salesforce.com")
 	/// - Parameter userID: record ID of user; useful for supporting multi-user switching
 	/// - Parameter orgID: record ID of org; useful for supporting mutli-user switching
-	public convenience init(consumerKey: String, callbackURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID) {
-		self.init(consumerKey: consumerKey, callbackURL: callbackURL, loginDelegate: loginDelegate, loginHost: loginHost, userID: userID, orgID: orgID, authData: nil)
+    /// - Parameter extraUrl: add extra path to login url
+    public convenience init(consumerKey: String, callbackURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, extraUrl: String) {
+        self.init(consumerKey: consumerKey, callbackURL: callbackURL, loginDelegate: loginDelegate, loginHost: loginHost, userID: userID, orgID: orgID, authData: nil, extraUrl: extraUrl)
 	}
 	
 	/// Internal initializer
-	internal init(consumerKey: String, callbackURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, authData: OAuth2Result? = nil) {
+    internal init(consumerKey: String, callbackURL: URL, loginDelegate: LoginDelegate, loginHost: String = ConnectedApp.defaultLoginHost, userID: String = ConnectedApp.defaultUserID, orgID: String = ConnectedApp.defaultOrgID, authData: OAuth2Result? = nil, extraUrl: String = "") {
 		
 		self.consumerKey = consumerKey
 		self.callbackURL = callbackURL
 		self.loginDelegate = loginDelegate
 		self.loginHost = loginHost
 		self.storeKey = OAuth2ResultStore.Key(userID: userID, orgID: orgID, consumerKey: consumerKey)
+        self.extraUrl = extraUrl
 		
 		if let auth = authData {
 			self.authData = auth
@@ -95,15 +98,16 @@ open class ConnectedApp {
 	}
 	
 	/// Builds the login URL with OAuth2 'user-agent' flow parameters
+    /// - Parameter extraUrl: add extra path to login url
 	/// - Returns: login URL
-	public func loginURL() throws -> URL {
+    public func loginURL(_ extraUrl: String = "") throws -> URL {
 		let params = [
 			"response_type" : "token",
 			"client_id" : consumerKey,
 			"redirect_uri" : callbackURL.absoluteString,
 			"prompt" : "login consent",
 			"display" : "touch" ]
-		guard let comps = URLComponents(string: "https://\(loginHost)/services/oauth2/authorize", parameters: params), let url = comps.url else {
+		guard let comps = URLComponents(string: "https://\(loginHost)/services/oauth2/authorize\(extraUrl)", parameters: params), let url = comps.url else {
 			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: nil)
 		}
 		return url
@@ -185,7 +189,7 @@ open class ConnectedApp {
 					do {
 						// Refresh attempt failed, so user authentication required
 						if let delegate = self.loginDelegate {
-							try delegate.login(url: self.loginURL())
+							try delegate.login(url: self.loginURL(self.extraUrl))
 						}
 						else {
 							// Shouldn't happen; delegate is usually UIApplicationDelegate
@@ -204,7 +208,7 @@ open class ConnectedApp {
 				do {
 					// No refresh token available, user authentication required
 					if let delegate = loginDelegate {
-						try delegate.login(url: loginURL())
+						try delegate.login(url: loginURL(self.extraUrl))
 					}
 					else {
 						fatalError("No delegate available to handle user login!")
