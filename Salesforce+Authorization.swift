@@ -17,7 +17,7 @@ extension Salesforce {
 		}
 		else {
 			let promise = Promise<URL> { seal in
-				let authURL = try configuration.authorizationURL()
+				let authURL = configuration.authorizationURL
 				let scheme = configuration.callbackURL.scheme
 				let session = SFAuthenticationSession(url: authURL, callbackURLScheme: scheme) { url, error in
 					seal.resolve(url, error)
@@ -27,7 +27,7 @@ extension Salesforce {
 				}
 				authSession = session 
 			}.map { url in
-				return try Authorization(withRedirectURL: url)
+				return try Authorization(with: url)
 			}
 			self.authPromise = promise
 			return promise
