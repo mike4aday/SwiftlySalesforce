@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Authorization {
+public struct Authorization: Codable {
 	
 	public let accessToken: String
 	public let instanceURL: URL

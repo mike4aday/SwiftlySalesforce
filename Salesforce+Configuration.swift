@@ -16,10 +16,10 @@ public extension Salesforce {
 		
 		public let consumerKey: String
 		public let callbackURL: URL
-		public let version: String
 		public let authorizationURL: URL
-		
-		public init(consumerKey: String, callbackURL: URL, version: String, authorizationURL: URL) {
+		public let version: String
+
+		public init(consumerKey: String, callbackURL: URL, authorizationURL: URL, version: String) {
 			self.consumerKey = consumerKey
 			self.callbackURL = callbackURL
 			self.version = version
@@ -41,7 +41,7 @@ public extension Salesforce {
 				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: userInfo)
 			}
 			
-			self.init(consumerKey: consumerKey, callbackURL: callbackURL, version: version, authorizationURL: authorizationURL)
+			self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authorizationURL, version: version)
 		}
 	}
 }
