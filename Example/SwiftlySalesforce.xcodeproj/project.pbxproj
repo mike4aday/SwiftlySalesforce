@@ -19,6 +19,7 @@
 		EA62C67E1F196E9500D6CF4E /* MockIdentity.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6681F196E6600D6CF4E /* MockIdentity.json */; };
 		EA774E9A20CC2B560076D71C /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9920CC2B560076D71C /* AuthorizationTests.swift */; };
 		EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */; };
+		EA774E9D20CC72520076D71C /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB438941F65E26100C9ED97 /* KeychainTests.swift */; };
 		EAA2C9DF1FA97DEB00155409 /* MockAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = EABF486F1FA7F45B00702175 /* MockAccount.json */; };
 		EAA7699D1FAD5F9B00089EAB /* MockOrganization.json in Resources */ = {isa = PBXBuildFile; fileRef = EAA769991FAD5B8100089EAB /* MockOrganization.json */; };
 		EAB7EDAD1F8AEC0B00788A20 /* MockLimits.json in Resources */ = {isa = PBXBuildFile; fileRef = EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */; };
@@ -166,7 +167,6 @@
 				EA62C65E1F196E6600D6CF4E /* ConnectedAppTests.swift */,
 				EABD72531DC05A8800790BCB /* ExtensionTests.swift */,
 				EA62C6641F196E6600D6CF4E /* IdentityTests.swift */,
-				EAB438941F65E26100C9ED97 /* KeychainTests.swift */,
 				EA62C6631F196E6600D6CF4E /* MockData.swift */,
 				EA62C6671F196E6600D6CF4E /* OAuth2ResultTests.swift */,
 				EA62C65F1F196E6600D6CF4E /* OAuth2ResultStoreTests.swift */,
@@ -179,6 +179,7 @@
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				EA774E9920CC2B560076D71C /* AuthorizationTests.swift */,
 				EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */,
+				EAB438941F65E26100C9ED97 /* KeychainTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -476,6 +477,7 @@
 			files = (
 				EA774E9A20CC2B560076D71C /* AuthorizationTests.swift in Sources */,
 				EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */,
+				EA774E9D20CC72520076D71C /* KeychainTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
