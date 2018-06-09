@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct AuthorizationStore {
+internal struct AuthorizationStore {
 	
-	struct User {
+	internal struct Key {
 		
 		let userID: String
 		let organizationID: String
@@ -20,26 +20,25 @@ struct AuthorizationStore {
 		}
 		
 		fileprivate var keychainService: String {
-			return "SwiftlySalesforce.\(consumerKey)"
+			return consumerKey
 		}
 	}
 	
-	static func retrieveAuthorization(for user: User) -> Authorization? {
-		guard let data = try? Keychain.read(service: user.keychainService, account: user.keychainAccount),
-			let auth = NSKeyedUnarchiver.unarchiveObject(with: data) as? Authorization else {
+	internal static func retrieve(for key: Key) -> Authorization? {
+		guard let data = try? Keychain.read(service: key.keychainService, account: key.keychainAccount), let auth = try? JSONDecoder().decode(Authorization.self, from: data) else {
 			return nil
 		}
 		return auth
 	}
 	
-	static func storeAuthorization(_ authorization: Authorization, for user: User) throws {
-		let data = NSKeyedArchiver.archivedData(withRootObject: authorization)
-		try Keychain.write(data: data, service: user.keychainService, account: user.keychainAccount)
+	internal static func store(_ authorization: Authorization, for key: Key) throws {
+		let data = try JSONEncoder().encode(authorization)
+		try Keychain.write(data: data, service: key.keychainService, account: key.keychainAccount)
 	}
 	
-	static func clearAuthorization(for user: User) throws {
+	internal static func clear(for key: Key) throws {
 		do {
-			try Keychain.delete(service: user.keychainService, account: user.keychainAccount)
+			try Keychain.delete(service: key.keychainService, account: key.keychainAccount)
 		}
 		catch(error: KeychainError.itemNotFound) {
 			// Ignore

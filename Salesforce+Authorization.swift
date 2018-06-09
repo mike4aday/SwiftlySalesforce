@@ -26,8 +26,11 @@ extension Salesforce {
 					throw AuthorizationError.sessionStartFailure
 				}
 				authSession = session 
-			}.map { url in
-				return try Authorization(with: url)
+			}.map { url -> Authorization in
+				let auth = try Authorization(with: url)
+				let key = AuthorizationStore.Key(userID: auth.userID, organizationID: auth.orgID, consumerKey: self.configuration.consumerKey)
+				try AuthorizationStore.store(auth, for: key)
+				return auth
 			}
 			self.authPromise = promise
 			return promise

@@ -76,7 +76,6 @@
 		EA0474A120AA21AC00BDABEB /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474A020AA21AC00BDABEB /* Authorization.swift */; };
 		EA0474A320AA2F9300BDABEB /* Salesforce+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474A220AA2F9300BDABEB /* Salesforce+Configuration.swift */; };
 		EA0474AB20AA496400BDABEB /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474AA20AA496400BDABEB /* Salesforce.swift */; };
-		EA774E9820CB35100076D71C /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9720CB35100076D71C /* Resource.swift */; };
 		EA8E48AB20B0C8710088C32E /* Salesforce+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E48A920B0C7AB0088C32E /* Salesforce+Query.swift */; };
 		EA8E48AD20B0D2E40088C32E /* QueryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C39BADD02D2D468DEAF123E98BC977 /* QueryResult.swift */; };
 		EA8E48B020B1BDA90088C32E /* URLComponents+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */; };
@@ -229,7 +228,6 @@
 		EA0474A020AA21AC00BDABEB /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Authorization.swift; path = SwiftlySalesforce/Classes/Authorization.swift; sourceTree = "<group>"; };
 		EA0474A220AA2F9300BDABEB /* Salesforce+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+Configuration.swift"; sourceTree = "<group>"; };
 		EA0474AA20AA496400BDABEB /* Salesforce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce.swift; sourceTree = "<group>"; };
-		EA774E9720CB35100076D71C /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		EA8E48A920B0C7AB0088C32E /* Salesforce+Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+Query.swift"; sourceTree = "<group>"; };
 		EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Parameters.swift"; sourceTree = "<group>"; };
 		EA8E48B120B1D7D40088C32E /* AuthorizationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStore.swift; sourceTree = "<group>"; };
@@ -423,7 +421,6 @@
 				EA0474A020AA21AC00BDABEB /* Authorization.swift */,
 				EA8E48B120B1D7D40088C32E /* AuthorizationStore.swift */,
 				B7AD16F573EF2C536F2A0B55787FE6F2 /* Keychain.swift */,
-				EA774E9720CB35100076D71C /* Resource.swift */,
 				EA0474AA20AA496400BDABEB /* Salesforce.swift */,
 				EA8FC92420AF1B3300691DB5 /* Salesforce+Authorization.swift */,
 				EA0474A220AA2F9300BDABEB /* Salesforce+Configuration.swift */,
@@ -707,7 +704,6 @@
 				EA8FC92520AF1B3300691DB5 /* Salesforce+Authorization.swift in Sources */,
 				862BD3A08EEC617E88E3F34F04EF55C8 /* Address.swift in Sources */,
 				468344D48B2BDE155159FD9AB61AB0A7 /* Error.swift in Sources */,
-				EA774E9820CB35100076D71C /* Resource.swift in Sources */,
 				D283BD069CD6E20143197BE453743708 /* FieldMetadata.swift in Sources */,
 				69CD6E97F68A9616C1FB1BE7446DA234 /* Globals.swift in Sources */,
 				F1BDA51BCAE33859C41801698D43D620 /* Identity.swift in Sources */,
@@ -1002,7 +998,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
@@ -1162,7 +1158,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

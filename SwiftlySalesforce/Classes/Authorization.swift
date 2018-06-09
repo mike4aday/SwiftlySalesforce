@@ -2,12 +2,16 @@
 //  Authorization.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 5/14/18.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
+
+/// Holds result of successful OAuth2 user-agent flow
+/// See https://help.salesforce.com/articleView?id=remoteaccess_oauth_user_agent_flow.htm
 
 import Foundation
 
-public struct Authorization: Codable {
+public struct Authorization: Codable, Equatable {
 	
 	public let accessToken: String
 	public let instanceURL: URL
