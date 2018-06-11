@@ -65,7 +65,32 @@ extension Salesforce {
 		}
 	}
 	
-	public enum AuthorizationError: Error {
-		case sessionStartFailure
+	func dataTask(with resource: Resource) -> Promise<Data> {
+		
+		let go: (URLRequest) -> Promise<Data> = { request in
+			return URLSession.shared.dataTask(.promise, with: request)
+		}
+		
+		return Promise<Authorization> { seal in
+			if let auth = self.authorization {
+				seal.fulfill(auth)
+			}
+			else {
+				seal.reject(ErrorResponse.unauthorized)
+			}
+		}.then {
+			try go(resource.request(with: $0))
+		}.recover {
+			(error: Error) -> Promise<Data> in
+			if case ErrorResponse.unauthorized = error {
+				return self.authorize().then {
+					try go(resource.request(with: $0))
+				}
+			}
+			else {
+				throw error
+			}
+		}
 	}
 }
+

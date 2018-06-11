@@ -81,6 +81,9 @@
 		EA8E48B020B1BDA90088C32E /* URLComponents+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */; };
 		EA8E48B320B1D8020088C32E /* AuthorizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E48B120B1D7D40088C32E /* AuthorizationStore.swift */; };
 		EA8F166520CE424300D03501 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F166420CE424300D03501 /* Resource.swift */; };
+		EA8F166720CEDC2600D03501 /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F166620CEDC2600D03501 /* URLRequest+.swift */; };
+		EA8F166920CF191A00D03501 /* Promise+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F166820CF191A00D03501 /* Promise+Validate.swift */; };
+		EA8F166B20CF1FD900D03501 /* Salesforce+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F166A20CF1FD900D03501 /* Salesforce+Error.swift */; };
 		F19A3DC6843C9305A4D50B241CD9082F /* race.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FDEE17D70F8C60C7B4C8F178B29BDA /* race.swift */; };
 		F1BDA51BCAE33859C41801698D43D620 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E0B0C7B18E5747ECDC5A8EF6F5F16 /* Identity.swift */; };
 		F4DA1E2AE15CAB183C0B15DF4B577492 /* NSNotificationCenter+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DDD967C34F88FD5F0B45C87FA10D0B /* NSNotificationCenter+AnyPromise.m */; };
@@ -232,6 +235,9 @@
 		EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Parameters.swift"; sourceTree = "<group>"; };
 		EA8E48B120B1D7D40088C32E /* AuthorizationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStore.swift; sourceTree = "<group>"; };
 		EA8F166420CE424300D03501 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		EA8F166620CEDC2600D03501 /* URLRequest+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+.swift"; sourceTree = "<group>"; };
+		EA8F166820CF191A00D03501 /* Promise+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Promise+Validate.swift"; sourceTree = "<group>"; };
+		EA8F166A20CF1FD900D03501 /* Salesforce+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+Error.swift"; sourceTree = "<group>"; };
 		EBA0823419954654E89B5C0D270F4FD2 /* SwiftlySalesforce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftlySalesforce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE45835539718AE1F15F89B7FC69541F /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F323FCFC7CDFB9EBC4DBD5C36B381BD6 /* PromiseKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PromiseKit.xcconfig; sourceTree = "<group>"; };
@@ -425,6 +431,7 @@
 				EA8F166420CE424300D03501 /* Resource.swift */,
 				EA0474AA20AA496400BDABEB /* Salesforce.swift */,
 				EA8E48A920B0C7AB0088C32E /* Salesforce+CRUD.swift */,
+				EA8F166A20CF1FD900D03501 /* Salesforce+Error.swift */,
 				EA04749A20AA207200BDABEB /* Extensions */,
 				21101430B4B9E8355E61DB626C74BE67 /* Address.swift */,
 				5940879EC2ED3D4C4A4ED5D69BBA7E4D /* ConnectedApp.swift */,
@@ -519,6 +526,8 @@
 			isa = PBXGroup;
 			children = (
 				EA8E48AE20B1BD700088C32E /* URLComponents+Parameters.swift */,
+				EA8F166620CEDC2600D03501 /* URLRequest+.swift */,
+				EA8F166820CF191A00D03501 /* Promise+Validate.swift */,
 			);
 			name = Extensions;
 			path = SwiftlySalesforce/Classes/Extensions;
@@ -710,11 +719,14 @@
 				EA8F166520CE424300D03501 /* Resource.swift in Sources */,
 				EA0474AB20AA496400BDABEB /* Salesforce.swift in Sources */,
 				EA0474A120AA21AC00BDABEB /* Authorization.swift in Sources */,
+				EA8F166720CEDC2600D03501 /* URLRequest+.swift in Sources */,
 				EA8E48AB20B0C8710088C32E /* Salesforce+CRUD.swift in Sources */,
 				EA774E9F20CCDD4E0076D71C /* Configuration.swift in Sources */,
 				EA8E48B320B1D8020088C32E /* AuthorizationStore.swift in Sources */,
+				EA8F166B20CF1FD900D03501 /* Salesforce+Error.swift in Sources */,
 				413B165B2D123CAA5F8D118DFB7E7098 /* Keychain.swift in Sources */,
 				1E76B9240C00AF3EFAEA647384577B9E /* Limit.swift in Sources */,
+				EA8F166920CF191A00D03501 /* Promise+Validate.swift in Sources */,
 				004D9393991645F7D0DA37327CD39047 /* ObjectMetadata.swift in Sources */,
 				EA8E48AD20B0D2E40088C32E /* QueryResult.swift in Sources */,
 				28C6910433C74B40344C73B111E38AA8 /* Organization.swift in Sources */,
