@@ -16,13 +16,10 @@ class TaskTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		print("STARTING AUTH")
-		salesforce.authorize().catch { (error) in
-			debugPrint(error)
-		}
-		print("STARTING AUTH **AGAIN**")
-		salesforce.authorize().catch { (error) in
-			debugPrint(error)
+		salesforce.query(soql: "SELECT Id,Name FROM Account").done {
+			print($0)
+		}.catch {
+			print($0)
 		}
     }
 

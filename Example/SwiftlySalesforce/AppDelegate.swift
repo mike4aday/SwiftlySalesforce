@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCen
 	var window: UIWindow?
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		let config = try! Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
+		let config = try! Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
 		salesforce = Salesforce(configuration: config)
 		if let navVC = window?.rootViewController as? UINavigationController, let topVC = navVC.topViewController as? TaskTableViewController {
 			topVC.salesforce = salesforce
