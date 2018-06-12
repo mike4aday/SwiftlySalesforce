@@ -219,7 +219,7 @@
 		CD3E0B0C7B18E5747ECDC5A8EF6F5F16 /* Identity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		CE6EA8AAE07996E3CC58205C32C80BDE /* hang.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = hang.m; path = Sources/hang.m; sourceTree = "<group>"; };
 		D02281F8574A81635ECECA645F542BC1 /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Sources/Configuration.swift; sourceTree = "<group>"; };
-		D5411198DE5F6393F23FA9B8C64F87E3 /* FieldMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FieldMetadata.swift; path = SwiftlySalesforce/Classes/FieldMetadata.swift; sourceTree = "<group>"; };
+		D5411198DE5F6393F23FA9B8C64F87E3 /* FieldMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FieldMetadata.swift; sourceTree = "<group>"; };
 		D64224D037D7DA354E196E34EE6EF080 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6913CF47D82EBE6F424078D86F27520 /* PromiseKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PromiseKit-dummy.m"; sourceTree = "<group>"; };
 		D793AFE16130D73C93C2641C0A2D3ED0 /* Guarantee.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Guarantee.swift; path = Sources/Guarantee.swift; sourceTree = "<group>"; };
@@ -442,7 +442,6 @@
 				5940879EC2ED3D4C4A4ED5D69BBA7E4D /* ConnectedApp.swift */,
 				10B1EE3F89FE7038D223ECD94586286A /* Error.swift */,
 				E59739BA1D2420165DD40F8FEAD47AE0 /* Extensions.swift */,
-				D5411198DE5F6393F23FA9B8C64F87E3 /* FieldMetadata.swift */,
 				39E4B04F4D27967A73EB968598FEC2E0 /* Info.plist */,
 				5F693D3AB8FF05B12E4C9A5D109FD6B6 /* LoginDelegate.swift */,
 				730F214A5950A57CA43169E77B35FB3B /* OAuth2Result.swift */,
@@ -525,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				21101430B4B9E8355E61DB626C74BE67 /* Address.swift */,
+				D5411198DE5F6393F23FA9B8C64F87E3 /* FieldMetadata.swift */,
 				CD3E0B0C7B18E5747ECDC5A8EF6F5F16 /* Identity.swift */,
 				756A950D7B46C7255AD774467E8CF449 /* Limit.swift */,
 				2F69B3BD58D36BF47FE1AE28865E5B55 /* ObjectMetadata.swift */,
