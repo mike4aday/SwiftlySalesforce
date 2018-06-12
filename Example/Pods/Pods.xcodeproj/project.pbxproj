@@ -76,7 +76,6 @@
 		EAD4198220D06EA20064AFB1 /* ObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4196120D06EA10064AFB1 /* ObjectMetadata.swift */; };
 		EAD4198320D06EA20064AFB1 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4196220D06EA10064AFB1 /* Record.swift */; };
 		EAD4198420D06EA20064AFB1 /* FieldMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4196320D06EA10064AFB1 /* FieldMetadata.swift */; };
-		EAD4198520D06EA20064AFB1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4196420D06EA10064AFB1 /* Error.swift */; };
 		EAD4198720D06EA20064AFB1 /* Promise+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4196620D06EA10064AFB1 /* Promise+Validate.swift */; };
 		EAD4198920D06EA20064AFB1 /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4196820D06EA10064AFB1 /* Salesforce.swift */; };
 		EAD4198A20D06EA20064AFB1 /* Salesforce+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4196920D06EA10064AFB1 /* Salesforce+Query.swift */; };
@@ -221,26 +220,18 @@
 		EAD4196120D06EA10064AFB1 /* ObjectMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectMetadata.swift; sourceTree = "<group>"; };
 		EAD4196220D06EA10064AFB1 /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		EAD4196320D06EA10064AFB1 /* FieldMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldMetadata.swift; sourceTree = "<group>"; };
-		EAD4196420D06EA10064AFB1 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = SwiftlySalesforce/Sources/Error.swift; sourceTree = "<group>"; };
 		EAD4196520D06EA10064AFB1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = SwiftlySalesforce/Sources/Extensions.swift; sourceTree = "<group>"; };
 		EAD4196620D06EA10064AFB1 /* Promise+Validate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Promise+Validate.swift"; path = "SwiftlySalesforce/Sources/Promise+Validate.swift"; sourceTree = "<group>"; };
-		EAD4196720D06EA10064AFB1 /* Requestor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requestor.swift; path = SwiftlySalesforce/Sources/Requestor.swift; sourceTree = "<group>"; };
 		EAD4196820D06EA10064AFB1 /* Salesforce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Salesforce.swift; path = SwiftlySalesforce/Sources/Salesforce.swift; sourceTree = "<group>"; };
 		EAD4196920D06EA10064AFB1 /* Salesforce+Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Salesforce+Query.swift"; path = "SwiftlySalesforce/Sources/Salesforce+Query.swift"; sourceTree = "<group>"; };
 		EAD4196A20D06EA10064AFB1 /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authorization.swift; path = SwiftlySalesforce/Sources/Authorization.swift; sourceTree = "<group>"; };
 		EAD4196B20D06EA10064AFB1 /* Salesforce+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Salesforce+Error.swift"; path = "SwiftlySalesforce/Sources/Salesforce+Error.swift"; sourceTree = "<group>"; };
 		EAD4196C20D06EA10064AFB1 /* AuthorizationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationStore.swift; path = SwiftlySalesforce/Sources/AuthorizationStore.swift; sourceTree = "<group>"; };
-		EAD4196D20D06EA10064AFB1 /* LoginDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginDelegate.swift; path = SwiftlySalesforce/Sources/LoginDelegate.swift; sourceTree = "<group>"; };
 		EAD4196E20D06EA10064AFB1 /* Salesforce+Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Salesforce+Request.swift"; path = "SwiftlySalesforce/Sources/Salesforce+Request.swift"; sourceTree = "<group>"; };
-		EAD4196F20D06EA10064AFB1 /* OAuth2ResultStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuth2ResultStore.swift; path = SwiftlySalesforce/Sources/OAuth2ResultStore.swift; sourceTree = "<group>"; };
 		EAD4197020D06EA10064AFB1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SwiftlySalesforce/Sources/Info.plist; sourceTree = "<group>"; };
 		EAD4197120D06EA10064AFB1 /* URLComponents+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "URLComponents+Parameters.swift"; path = "SwiftlySalesforce/Sources/URLComponents+Parameters.swift"; sourceTree = "<group>"; };
-		EAD4197220D06EA20064AFB1 /* Salesforce.old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Salesforce.old.swift; path = SwiftlySalesforce/Sources/Salesforce.old.swift; sourceTree = "<group>"; };
 		EAD4197320D06EA20064AFB1 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = SwiftlySalesforce/Sources/Configuration.swift; sourceTree = "<group>"; };
 		EAD4197420D06EA20064AFB1 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = SwiftlySalesforce/Sources/Globals.swift; sourceTree = "<group>"; };
-		EAD4197520D06EA20064AFB1 /* ConnectedApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectedApp.swift; path = SwiftlySalesforce/Sources/ConnectedApp.swift; sourceTree = "<group>"; };
-		EAD4197620D06EA20064AFB1 /* OAuth2Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuth2Result.swift; path = SwiftlySalesforce/Sources/OAuth2Result.swift; sourceTree = "<group>"; };
-		EAD4197720D06EA20064AFB1 /* Resource.old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resource.old.swift; path = SwiftlySalesforce/Sources/Resource.old.swift; sourceTree = "<group>"; };
 		EBA0823419954654E89B5C0D270F4FD2 /* SwiftlySalesforce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftlySalesforce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE45835539718AE1F15F89B7FC69541F /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F323FCFC7CDFB9EBC4DBD5C36B381BD6 /* PromiseKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PromiseKit.xcconfig; sourceTree = "<group>"; };
@@ -426,25 +417,17 @@
 		A94E0F7D5CF4D65A239342D4175F27D9 /* SwiftlySalesforce */ = {
 			isa = PBXGroup;
 			children = (
-				EAD4196D20D06EA10064AFB1 /* LoginDelegate.swift */,
 				EAD4196A20D06EA10064AFB1 /* Authorization.swift */,
 				EAD4196C20D06EA10064AFB1 /* AuthorizationStore.swift */,
 				EAD4197320D06EA20064AFB1 /* Configuration.swift */,
-				EAD4197520D06EA20064AFB1 /* ConnectedApp.swift */,
 				EAD4195720D06EA10064AFB1 /* DateFormatter+Salesforce.swift */,
-				EAD4196420D06EA10064AFB1 /* Error.swift */,
 				EAD4196520D06EA10064AFB1 /* Extensions.swift */,
 				EAD4197420D06EA20064AFB1 /* Globals.swift */,
 				EAD4197020D06EA10064AFB1 /* Info.plist */,
 				EAD4195920D06EA10064AFB1 /* Keychain.swift */,
 				EAD4195A20D06EA10064AFB1 /* Models */,
-				EAD4197620D06EA20064AFB1 /* OAuth2Result.swift */,
-				EAD4196F20D06EA10064AFB1 /* OAuth2ResultStore.swift */,
 				EAD4196620D06EA10064AFB1 /* Promise+Validate.swift */,
-				EAD4196720D06EA10064AFB1 /* Requestor.swift */,
-				EAD4197720D06EA20064AFB1 /* Resource.old.swift */,
 				EAD4195620D06EA10064AFB1 /* Resource.swift */,
-				EAD4197220D06EA20064AFB1 /* Salesforce.old.swift */,
 				EAD4196820D06EA10064AFB1 /* Salesforce.swift */,
 				EAD4196B20D06EA10064AFB1 /* Salesforce+Error.swift */,
 				EAD4196920D06EA10064AFB1 /* Salesforce+Query.swift */,
@@ -732,7 +715,6 @@
 				EAD4197B20D06EA20064AFB1 /* Keychain.swift in Sources */,
 				EAD4198020D06EA20064AFB1 /* Organization.swift in Sources */,
 				EAD4198120D06EA20064AFB1 /* PicklistItemMetadata.swift in Sources */,
-				EAD4198520D06EA20064AFB1 /* Error.swift in Sources */,
 				EAD4198720D06EA20064AFB1 /* Promise+Validate.swift in Sources */,
 				EAD4197D20D06EA20064AFB1 /* Address.swift in Sources */,
 			);
