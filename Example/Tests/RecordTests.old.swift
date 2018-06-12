@@ -9,33 +9,112 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class RecordTests: XCTestCase, MockData {
-	
-	let decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
-	let encoder = JSONEncoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
+class RecordTests: XCTestCase {
 
-	var salesforce: Salesforce!
+	let json = """
+	{
+		"attributes" : {
+			"type" : "Account",
+			"url" : "/services/data/v41.0/sobjects/Account/0011Y00002LZRxeQAH"
+		},
+		"Id" : "0011Y00002LZRxeQAH",
+		"IsDeleted" : false,
+		"MasterRecordId" : null,
+		"Name" : "Megacorp, Inc.",
+		"Type" : null,
+		"RecordTypeId" : null,
+		"ParentId" : null,
+		"BillingStreet" : null,
+		"BillingCity" : null,
+		"BillingState" : null,
+		"BillingPostalCode" : "55141",
+		"BillingCountry" : "US",
+		"BillingLatitude" : null,
+		"BillingLongitude" : null,
+		"BillingGeocodeAccuracy" : null,
+		"BillingAddress" : {
+			"city" : "Pleasant Prairie",
+			"country" : "US",
+			"geocodeAccuracy" : null,
+			"latitude" : null,
+			"longitude" : null,
+			"postalCode" : "55141",
+			"state" : "WI",
+			"street" : null
+		},
+		"ShippingStreet" : null,
+		"ShippingCity" : null,
+		"ShippingState" : null,
+		"ShippingPostalCode" : null,
+		"ShippingCountry" : null,
+		"ShippingLatitude" : null,
+		"ShippingLongitude" : null,
+		"ShippingGeocodeAccuracy" : null,
+		"ShippingAddress" : null,
+		"Phone" : null,
+		"Fax" : null,
+		"AccountNumber" : null,
+		"Website" : "https://www.megacorp.com",
+		"PhotoUrl" : "/services/images/photo/0011Y00002LZRxeQAH",
+		"Sic" : null,
+		"Industry" : null,
+		"AnnualRevenue" : 543210.0,
+		"NumberOfEmployees" : 12345,
+		"Ownership" : null,
+		"TickerSymbol" : null,
+		"Description" : null,
+		"Rating" : null,
+		"Site" : null,
+		"OwnerId" : "005i00000016PdaAAE",
+		"CreatedDate" : "2017-10-11T13:11:58.000+0000",
+		"CreatedById" : "005i00000016PdaAAE",
+		"LastModifiedDate" : "2017-10-11T13:11:58.000+0000",
+		"LastModifiedById" : "005i00000016PdaAAE",
+		"SystemModstamp" : "2017-10-12T00:02:54.000+0000",
+		"LastActivityDate" : null,
+		"LastViewedDate" : null,
+		"LastReferencedDate" : null,
+		"Jigsaw" : null,
+		"JigsawCompanyId" : null,
+		"AccountSource" : null,
+		"SicDesc" : null,
+		"playground__CustomerPriority__c" : null,
+		"playground__SLA__c" : null,
+		"playground__Active__c" : null,
+		"playground__NumberofLocations__c" : null,
+		"playground__UpsellOpportunity__c" : null,
+		"playground__SLASerialNumber__c" : null,
+		"playground__SLAExpirationDate__c" : null,
+		"playground__Owners_Manager_Name__c" : "User, Test",
+	}
+	"""
+	
+	let decoder: JSONDecoder = {
+		let d = JSONDecoder()
+		d.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
+		return d
+	}()
+	let encoder: JSONEncoder = {
+		let e = JSONEncoder()
+		e.dateEncodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
+		return e
+	}()
 	
 	override func setUp() {
-		
 		super.setUp()
-		
-		let config = readPropertyList(fileName: "OAuth2")!
-		let consumerKey = config["ConsumerKey"] as! String
-		let redirectURLWithAuth = URL(string: config["RedirectURLWithAuthData"] as! String)!
-		salesforce = TestUtils.shared.createSalesforce(consumerKey: consumerKey, enrichedRedirectURL: redirectURLWithAuth)
 	}
 	
 	override func tearDown() {
-		// Put teardown code here. This method is called after the invocation of each test method in the class.
 		super.tearDown()
 	}
     
     func testThatItInitsFromCoder() {
 		
-		let data = read(fileName: "MockAccount", ofType: "json")!
-		let account = try! decoder.decode(Record.self, from: data)
-
+		guard let data = json.data(using: .utf8), let account = try? decoder.decode(Record.self, from: data) else {
+			XCTFail()
+			return
+		}
+		
 		XCTAssertEqual(account.id, "0011Y00002LZRxeQAH")
 		XCTAssertEqual(account.id, account.string(forField: "Id"))
 		XCTAssertEqual(account.type, "Account")
@@ -87,8 +166,10 @@ class RecordTests: XCTestCase, MockData {
 	
 	func testThatItMutates() {
 		
-		let data = read(fileName: "MockAccount", ofType: "json")!
-		var account = try! decoder.decode(Record.self, from: data)
+		guard let data = json.data(using: .utf8), var account = try? decoder.decode(Record.self, from: data) else {
+			XCTFail()
+			return
+		}
 		
 		account.setValue("Huge Corporation, Inc.", forField: "Name")
 		account.setValue("Conglomerate", forField: "Type")
@@ -130,46 +211,5 @@ class RecordTests: XCTestCase, MockData {
 		XCTAssertEqual(account.value(forField: "TaxRate"), 0.050)
 		XCTAssertEqual(account.url(forField: "Website"), URL(string: "https://tiny.biz")!)
 		XCTAssertFalse(account.bool(forField: "BigCompany?")!)
-	}
-	
-	func testThatItDecodesAccount() {
-		
-		let soql = "SELECT Id, Name, CreatedDate, LastModifiedDate, Website FROM Account"
-		let exp = expectation(description: "Account query")
-		
-		salesforce.query(soql: soql).then {
-			(queryResult: QueryResult) -> () in
-			for record in queryResult.records {
-				XCTAssertTrue(record.id!.starts(with: "001"))
-			}
-			exp.fulfill()
-		}.catch {
-			error in
-			XCTFail(String(describing: error))
-		}
-		waitForExpectations(timeout: 5.0, handler: nil)
-	}
-	
-	func testThatItDecodesSubquery() {
-		
-		let soql = "SELECT Id, Name, CreatedDate, LastModifiedDate, Website, (SELECT Id, Name, CreatedDate, LastModifiedDate FROM Contacts) FROM Account"
-		let exp = expectation(description: "Account query with contacts sub-query")
-		
-		salesforce.query(soql: soql).then {
-			(queryResult: QueryResult) -> () in
-			for record in queryResult.records {
-				if let contacts = record.subqueryResult(forField: "Contacts") {
-					XCTAssertTrue(contacts.totalSize > 0)
-					XCTAssertNotNil(contacts.records[0].string(forField: "Id"))
-					XCTAssertEqual(contacts.records[0].string(forField: "Id"), contacts.records[0].id)
-					XCTAssertNotNil(contacts.records[0].date(forField: "LastModifiedDate"))
-				}
-			}
-			exp.fulfill()
-			}.catch {
-				error in
-				XCTFail(String(describing: error))
-		}
-		waitForExpectations(timeout: 5.0, handler: nil)
 	}
 }

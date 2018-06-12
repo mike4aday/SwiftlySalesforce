@@ -18,7 +18,7 @@ s.summary          = "A Swift framework for the rapid development of native iOS 
   s.platform     = :ios, '11.3'
   s.requires_arc = true
 
-  s.source_files = 'SwiftlySalesforce/Classes/**/*'
+  s.source_files = 'SwiftlySalesforce/Sources/**/*'
   s.resource_bundles = {
 
   }
