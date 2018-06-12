@@ -20,6 +20,7 @@
 		EA774E9A20CC2B560076D71C /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9920CC2B560076D71C /* AuthorizationTests.swift */; };
 		EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */; };
 		EA774E9D20CC72520076D71C /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB438941F65E26100C9ED97 /* KeychainTests.swift */; };
+		EA8F167120CF81CB00D03501 /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */; };
 		EAA2C9DF1FA97DEB00155409 /* MockAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = EABF486F1FA7F45B00702175 /* MockAccount.json */; };
 		EAA7699D1FAD5F9B00089EAB /* MockOrganization.json in Resources */ = {isa = PBXBuildFile; fileRef = EAA769991FAD5B8100089EAB /* MockOrganization.json */; };
 		EAB7EDAD1F8AEC0B00788A20 /* MockLimits.json in Resources */ = {isa = PBXBuildFile; fileRef = EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */; };
@@ -70,6 +71,7 @@
 		EA774E9920CC2B560076D71C /* AuthorizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
 		EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStoreTests.swift; sourceTree = "<group>"; };
 		EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockContactMetadata.json; sourceTree = "<group>"; };
+		EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
 		EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
 		EAA769991FAD5B8100089EAB /* MockOrganization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockOrganization.json; sourceTree = "<group>"; };
 		EAA7699B1FAD5C6300089EAB /* OrganizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationTests.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				EA774E9920CC2B560076D71C /* AuthorizationTests.swift */,
 				EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */,
+				EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */,
 				EAB438941F65E26100C9ED97 /* KeychainTests.swift */,
 			);
 			path = Tests;
@@ -477,6 +480,7 @@
 			files = (
 				EA774E9A20CC2B560076D71C /* AuthorizationTests.swift in Sources */,
 				EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */,
+				EA8F167120CF81CB00D03501 /* ConfigurationTests.swift in Sources */,
 				EA774E9D20CC72520076D71C /* KeychainTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

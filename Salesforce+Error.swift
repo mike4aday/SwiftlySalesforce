@@ -23,8 +23,6 @@ public extension Salesforce {
 			switch self {
 			case .sessionStartFailure:
 				return NSLocalizedString("Unable to start user authorization session.", comment: "")
-			default:
-				return ""
 			}
 		}
 	}

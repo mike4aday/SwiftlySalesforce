@@ -64,7 +64,7 @@ extension AuthorizationStore {
 			}
 		}
 		set {
-			// This could fail silently...
+			//TODO: This could fail silently...
 			if let key = newValue, let data = try? encoder.encode(key) {
 				defaults.set(data, forKey: "LastStoredKey")
 			}

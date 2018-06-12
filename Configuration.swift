@@ -2,7 +2,7 @@
 //  Configuration.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 6/9/18.
+//  Created by Michael Epstein on 6/11/18.
 //
 
 import Foundation
@@ -17,17 +17,18 @@ public struct Configuration {
 	public let version: String
 }
 
-extension Configuration {
+public extension Configuration {
 	
-	public init(consumerKey: String, callbackURL: URL, authorizationHost: String = "login.salesforce.com", version: String = Configuration.defaultVersion) throws {
+	public init(consumerKey: String, callbackURL: URL, authorizationHost: String = "login.salesforce.com", authorizationParameters: [String: String]? = nil, version: String = defaultVersion) throws {
 		
 		// Build authorization URL
-		let params: [String: String] = [
+		var params: [String: String] = [
 			"response_type" : "token",
 			"client_id" : consumerKey,
 			"redirect_uri" : callbackURL.absoluteString,
 			"prompt" : "login consent",
 			"display" : "touch" ]
+		params.merge(authorizationParameters ?? [:]) { (_, new) in new }
 		let urlString = "https://\(authorizationHost)/services/oauth2/authorize"
 		guard let comps = URLComponents(string: urlString, parameters: params), let authorizationURL = comps.url else {
 			let userInfo: [String: Any] = [NSURLErrorFailingURLErrorKey: urlString, NSLocalizedDescriptionKey: "Invalid authorization URL", "Parameters": params]

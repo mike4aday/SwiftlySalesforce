@@ -46,9 +46,9 @@ class AuthorizationStoreTests: XCTestCase {
 	func testThatItClears() {
 		
 		try! AuthorizationStore.store(auth, for: key)
-		try! AuthorizationStore.clear(for: key)
-		let retrievedAuth = AuthorizationStore.retrieve(for: key)
+		XCTAssertNotNil(AuthorizationStore.retrieve(for: key))
 		
-		XCTAssertNil(retrievedAuth)
+		try! AuthorizationStore.clear(for: key)
+		XCTAssertNil(AuthorizationStore.retrieve(for: key))
 	}
 }
