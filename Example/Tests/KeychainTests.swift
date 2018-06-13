@@ -74,7 +74,7 @@ class KeychainTests: XCTestCase {
 		do {
 			let _ = try Keychain.read(service: service, account: account)
 		}
-		catch (error: KeychainError.itemNotFound) {
+		catch (error: Keychain.Error.itemNotFound) {
 			// Expected
 		}
 		catch {

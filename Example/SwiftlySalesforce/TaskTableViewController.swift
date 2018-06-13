@@ -23,7 +23,7 @@ class TaskTableViewController: UITableViewController {
 				debugPrint("ID: \(id), NAME: \(name)")
 			}
 		}.catch {
-			print($0)
+			print($0.localizedDescription)
 		}
     }
 
