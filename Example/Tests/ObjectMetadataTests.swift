@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class ObjectMetadataTests: XCTestCase, MockData {
+class ObjectMetadataTests: XCTestCase {
     
 	var decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	
@@ -23,10 +23,13 @@ class ObjectMetadataTests: XCTestCase, MockData {
     
 	func testThatItInitsObjectMetadataForAccount() {
 		
-		let data = read(fileName: "MockAccountMetadata", ofType: "json")!
+		let data = TestUtils.shared.read(fileName: "MockAccountMetadata", ofType: "json")!
 		let desc = try! decoder.decode(ObjectMetadata.self, from: data)
-		let fields = Dictionary(items: desc.fields!, key: { $0.name })
-		let field = fields["Type"]!
+		var fields = [String: FieldMetadata]()
+		for (name, fieldMetadata) in zip(desc.fields!.map({ $0.name }), desc.fields!) {
+			fields[name] = fieldMetadata
+		}
+		let accountTypeField = fields["Type"]!
 
 		XCTAssertTrue(desc.isCreateable)
 		XCTAssertFalse(desc.isCustom)
@@ -46,30 +49,33 @@ class ObjectMetadataTests: XCTestCase, MockData {
 		XCTAssertEqual(desc.pluralLabel, desc.labelPlural)
 		XCTAssertTrue(desc.fields!.count > 0)
 		
-		XCTAssertTrue(field.isCreateable)
-		XCTAssertFalse(field.isCustom)
-		XCTAssertNil(field.defaultValue)
-		XCTAssertNil(field.helpText)
-		XCTAssertEqual(field.helpText, field.inlineHelpText)
-		XCTAssertFalse(field.isEncrypted)
-		XCTAssertTrue(field.isSortable)
-		XCTAssertEqual(field.label, "Account Type")
-		XCTAssertEqual(field.length, 40)
-		XCTAssertEqual(field.name, "Type")
-		XCTAssertTrue(field.isNillable)
-		XCTAssertTrue(field.relatedTypes.count == 0)
-		XCTAssertNil(field.relationshipName)
-		XCTAssertEqual(field.type, "picklist")
-		XCTAssertTrue(field.isUpdateable)
-		XCTAssertTrue(field.picklistValues.count > 0)
+		XCTAssertTrue(accountTypeField.isCreateable)
+		XCTAssertFalse(accountTypeField.isCustom)
+		XCTAssertNil(accountTypeField.defaultValue)
+		XCTAssertNil(accountTypeField.helpText)
+		XCTAssertEqual(accountTypeField.helpText, accountTypeField.inlineHelpText)
+		XCTAssertFalse(accountTypeField.isEncrypted)
+		XCTAssertTrue(accountTypeField.isSortable)
+		XCTAssertEqual(accountTypeField.label, "Account Type")
+		XCTAssertEqual(accountTypeField.length, 40)
+		XCTAssertEqual(accountTypeField.name, "Type")
+		XCTAssertTrue(accountTypeField.isNillable)
+		XCTAssertTrue(accountTypeField.relatedTypes.count == 0)
+		XCTAssertNil(accountTypeField.relationshipName)
+		XCTAssertEqual(accountTypeField.type, "picklist")
+		XCTAssertTrue(accountTypeField.isUpdateable)
+		XCTAssertTrue(accountTypeField.picklistValues.count > 0)
 	}
 	
 	func testThatItInitsObjectMetadataForContact() {
 		
-		let data = read(fileName: "MockContactMetadata", ofType: "json")!
+		let data = TestUtils.shared.read(fileName: "MockContactMetadata", ofType: "json")!
 		let desc = try! decoder.decode(ObjectMetadata.self, from: data)
-		let fields = Dictionary(items: desc.fields!, key: { $0.name })
-		let field = fields["ReportsToId"]!
+		var fields = [String: FieldMetadata]()
+		for (name, fieldMetadata) in zip(desc.fields!.map({ $0.name }), desc.fields!) {
+			fields[name] = fieldMetadata
+		}
+		let reportsToField = fields["ReportsToId"]!
 		
 		XCTAssertTrue(desc.isCreateable)
 		XCTAssertFalse(desc.isCustom)
@@ -89,21 +95,22 @@ class ObjectMetadataTests: XCTestCase, MockData {
 		XCTAssertEqual(desc.pluralLabel, desc.labelPlural)
 		XCTAssertTrue(desc.fields!.count > 0)
 		
-		XCTAssertTrue(field.isCreateable)
-		XCTAssertFalse(field.isCustom)
-		XCTAssertNil(field.defaultValue)
-		XCTAssertNil(field.helpText)
-		XCTAssertEqual(field.helpText, field.inlineHelpText)
-		XCTAssertFalse(field.isEncrypted)
-		XCTAssertTrue(field.isSortable)
-		XCTAssertEqual(field.label, "Reports To ID")
-		XCTAssertEqual(field.length, 18)
-		XCTAssertEqual(field.name, "ReportsToId")
-		XCTAssertTrue(field.isNillable)
-		XCTAssertTrue(field.relatedTypes == ["Contact"])
-		XCTAssertEqual(field.relationshipName, "ReportsTo")
-		XCTAssertEqual(field.type, "reference")
-		XCTAssertTrue(field.isUpdateable)
-		XCTAssertTrue(field.picklistValues.count == 0)
+		XCTAssertTrue(reportsToField.isCreateable)
+		XCTAssertFalse(reportsToField.isCustom)
+		XCTAssertNil(reportsToField.defaultValue)
+		XCTAssertNil(reportsToField.helpText)
+		XCTAssertEqual(reportsToField.helpText, reportsToField.inlineHelpText)
+		XCTAssertFalse(reportsToField.isEncrypted)
+		XCTAssertTrue(reportsToField.isSortable)
+		XCTAssertEqual(reportsToField.label, "Reports To ID")
+		XCTAssertEqual(reportsToField.length, 18)
+		XCTAssertEqual(reportsToField.name, "ReportsToId")
+		XCTAssertTrue(reportsToField.isNillable)
+		XCTAssertTrue(reportsToField.relatedTypes == ["Contact"])
+		XCTAssertEqual(reportsToField.relatedTypes, reportsToField.referenceTo)
+		XCTAssertEqual(reportsToField.relationshipName, "ReportsTo")
+		XCTAssertEqual(reportsToField.type, "reference")
+		XCTAssertTrue(reportsToField.isUpdateable)
+		XCTAssertTrue(reportsToField.picklistValues.count == 0)
 	}
 }
