@@ -10,7 +10,10 @@ import SafariServices
 
 public class Salesforce {
 	
-	public typealias User = (userID: String, organizationID: String)
+	public struct User {
+		let userID: String
+		let organizationID: String
+	}
 	
 	public let configuration: Configuration
 	
