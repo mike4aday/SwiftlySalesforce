@@ -89,11 +89,7 @@ class RecordTests: XCTestCase {
 	}
 	"""
 	
-	let decoder: JSONDecoder = {
-		let d = JSONDecoder()
-		d.dateDecodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
-		return d
-	}()
+	let decoder = JSONDecoder(dateFormatter: .salesforceDateTimeFormatter)
 	let encoder: JSONEncoder = {
 		let e = JSONEncoder()
 		e.dateEncodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
