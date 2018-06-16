@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## PromiseKit
 
-Copyright 2016, Max Howell; mxcl@me.com
+Copyright 2016-present, Max Howell; mxcl@me.com
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the
@@ -27,7 +27,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## SwiftlySalesforce
 
-Copyright (c) 2016-2017 Michael Epstein <@mike4aday>
+Copyright (c) 2016-2018 Michael Epstein <@mike4aday>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

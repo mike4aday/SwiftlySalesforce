@@ -32,7 +32,7 @@ class Salesforce_RequestTests: XCTestCase {
     }
     
 	func testThatItAuthorizesNewUser() {
-		let exp = expectation(description: "Authorization")
+		let exp = expectation(description: "Authorizes new user via user-agent flow & Safari-hosted login form")
 		// Create Salesforce with user guaranteed not to exist
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString))
 		salesforce.authorize().done {
@@ -40,6 +40,23 @@ class Salesforce_RequestTests: XCTestCase {
 			exp.fulfill()
 		}.catch { (error) in
 			XCTFail(error.localizedDescription)
+		}
+		waitForExpectations(timeout: 10.0*60, handler: nil)
+	}
+	
+	func testThatItDoesntAuthorizeNewUser() {
+		let exp = expectation(description: "Authorizes new user via user-agent flow & Safari-hosted login form")
+		// Create Salesforce with user guaranteed not to exist
+		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString))
+		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1", shouldAuthorize: false).done { _ in
+			XCTFail("Shouldn't authorize")
+		}.catch { (error) in
+			if case Salesforce.ErrorResponse.unauthorized = error {
+				exp.fulfill()
+			}
+			else {
+				XCTFail(error.localizedDescription)
+			}
 		}
 		waitForExpectations(timeout: 10.0*60, handler: nil)
 	}

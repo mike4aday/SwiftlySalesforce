@@ -22,6 +22,7 @@
 		EA774E9A20CC2B560076D71C /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9920CC2B560076D71C /* AuthorizationTests.swift */; };
 		EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */; };
 		EA774E9D20CC72520076D71C /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB438941F65E26100C9ED97 /* KeychainTests.swift */; };
+		EA8A687420D55528007622D7 /* Salesforce+QueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687320D55528007622D7 /* Salesforce+QueryTests.swift */; };
 		EA8F167120CF81CB00D03501 /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */; };
 		EAAC9E8020D2D6C000F0E16B /* IdentityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C6641F196E6600D6CF4E /* IdentityTests.swift */; };
 		EAAC9E8220D2DC9500F0E16B /* DateFormatter+SalesforceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9E8120D2DC9500F0E16B /* DateFormatter+SalesforceTests.swift */; };
@@ -71,6 +72,7 @@
 		EA774E9920CC2B560076D71C /* AuthorizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
 		EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStoreTests.swift; sourceTree = "<group>"; };
 		EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockContactMetadata.json; sourceTree = "<group>"; };
+		EA8A687320D55528007622D7 /* Salesforce+QueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+QueryTests.swift"; sourceTree = "<group>"; };
 		EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
 		EAAC9E8120D2DC9500F0E16B /* DateFormatter+SalesforceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+SalesforceTests.swift"; sourceTree = "<group>"; };
 		EAAC9EB620D420AD00F0E16B /* Salesforce+RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+RequestTests.swift"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				EAEE66A51F8DD18E0032A597 /* ObjectMetadataTests.swift */,
 				EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */,
 				EABF48711FA7F51200702175 /* RecordTests.swift */,
+				EA8A687320D55528007622D7 /* Salesforce+QueryTests.swift */,
 				EAAC9EB620D420AD00F0E16B /* Salesforce+RequestTests.swift */,
 				EA133DA91F91DC060055DC2F /* TestUtils.swift */,
 			);
@@ -469,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA774E9A20CC2B560076D71C /* AuthorizationTests.swift in Sources */,
+				EA8A687420D55528007622D7 /* Salesforce+QueryTests.swift in Sources */,
 				EA57EBF420D2B84200374451 /* ObjectMetadataTests.swift in Sources */,
 				EAAC9EB720D420AD00F0E16B /* Salesforce+RequestTests.swift in Sources */,
 				EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */,
