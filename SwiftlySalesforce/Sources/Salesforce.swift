@@ -74,9 +74,23 @@ internal extension Salesforce {
 	}
 	
 	internal func refresh(authorization: Authorization) -> Promise<Authorization> {
-		return Promise<Authorization> { seal in
-			let resource = OAuth2Resource.refresh(configuration: configuration)
-			let req = try resource.request(with: authorization)
+		
+		struct RefreshResponse: Decodable {
+			let id: URL
+			let instance_url: URL
+			let access_token: String
+		}
+		
+		return Promise { seal in
+			let res = OAuth2Resource.refresh(configuration: configuration)
+			let req = try res.request(with: authorization)
+			seal.fulfill(req)
+		}.then {
+			URLSession.shared.dataTask(.promise, with: $0)
+		}.map {
+			let resp = try JSONDecoder().decode(RefreshResponse.self, from: $0.data)
+			let refreshToken = authorization.refreshToken // Re-use since we don't get new refresh token here
+			return Authorization(accessToken: resp.access_token, instanceURL: resp.instance_url, identityURL: resp.id, refreshToken: refreshToken)
 		}
 	}
 	

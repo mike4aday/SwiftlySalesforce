@@ -9,14 +9,14 @@
 /// Holds result of successful OAuth2 user-agent flow
 /// See https://help.salesforce.com/articleView?id=remoteaccess_oauth_user_agent_flow.htm
 
-import Foundation
-
 public struct Authorization: Codable, Equatable {
-	
 	public let accessToken: String
 	public let instanceURL: URL
 	public let identityURL: URL
 	public let refreshToken: String?
+}
+
+public extension Authorization {
 	
 	public var userID: String {
 		return identityURL.lastPathComponent
@@ -27,7 +27,7 @@ public struct Authorization: Codable, Equatable {
 	}
 }
 
-extension Authorization {
+internal extension Authorization {
 	
 	init(with url: URL) throws {
 		

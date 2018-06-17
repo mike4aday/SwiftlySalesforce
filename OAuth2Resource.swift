@@ -24,7 +24,7 @@ extension OAuth2Resource: Resource {
 				accessToken: authorization.accessToken,
 				contentType: .urlEncoded,
 				queryParameters: [
-					"format" : "urlencoded",
+					"format" : "json",
 					"grant_type": "refresh_token",
 					"client_id": configuration.consumerKey,
 					"refresh_token": {
