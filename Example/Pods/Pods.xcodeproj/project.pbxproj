@@ -27,7 +27,6 @@
 		3A758E3F3EF23B697A6801408D320288 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = BA1AAAB5A109D791C977583AC9F55E81 /* Info.plist */; };
 		3BB5A16FD186BC02F73E823BAA17D87A /* Pods-SwiftlySalesforce_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 87842A8D4029BA63F7E53FAF02C95DEC /* Pods-SwiftlySalesforce_Example-dummy.m */; };
 		411B002E2950EE10338918C28D74DFF8 /* CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBCC616171BB87B4E9562277B89D36D /* CustomStringConvertible.swift */; };
-		423007CCD3FB6CE57C4939C4C4F63F4D /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9965683ADEC40591B0D2D47791B85081 /* Salesforce.swift */; };
 		42A1E2FF7C59E63595E7491F08019DB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC1AE1F1C8D18E6F2BAA15E0CD2427B /* Foundation.framework */; };
 		42D15DE6DB3F6D631CC49164ECEA4F4B /* PromiseKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CA5B015354CDD5637EBF087B400B7EF0 /* PromiseKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4303511F16013E37D155C64F0FB97DD2 /* UIView+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 7706AE46B61FF10968A876D23BDD542E /* UIView+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -70,7 +69,6 @@
 		AF968D7B149A1EC834AA8810DDCD87A1 /* AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C31B4E3311758F4359E755B935F2F0 /* AnyPromise.m */; };
 		B370C6B1BB6387FC2F6EDB17285A7BF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC1AE1F1C8D18E6F2BAA15E0CD2427B /* Foundation.framework */; };
 		B754E258FD071AA3A4D834043AC524E1 /* NSNotificationCenter+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218CD9BB493FEFCF6910ACF83CD7C705 /* NSNotificationCenter+Promise.swift */; };
-		B7AFC870685724963710EF614FFB3C72 /* Salesforce+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F8900307AA223D09A1B76C8BB7826 /* Salesforce+Request.swift */; };
 		BADD121124019E6013903CFE781BC52F /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC8EFF828D027F8BD1B3ACD578CA6F2 /* PromiseKit.framework */; };
 		BFA49D15C17EC39C60348DEA84CDEE70 /* Process+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423F49796C4D9E12F3D970133CFBB85 /* Process+Promise.swift */; };
 		C9783E2824F98E6C6BA2CEC79CA38636 /* NSTask+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF26FFC8BC7002CB7362FD969042E3 /* NSTask+AnyPromise.m */; };
@@ -79,18 +77,19 @@
 		D1AD1CDC1D250996D706A00DC6FBA544 /* AuthorizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB192BBC403265564A4BFC87290C466 /* AuthorizationStore.swift */; };
 		D1F0ECABC31B68C35DC5DDBC7E044CAD /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DA9DEE77D4F253AB6F7784F159303 /* Record.swift */; };
 		D47C03B6B298C634673ECD85EBC45442 /* when.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD8707731A4F108194C7B051840A148 /* when.m */; };
-		D74E629B0A7CE44AB756D9DA3D7E1C54 /* Resource+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCC13B6E3763B01F5A7EFBD73C01C9 /* Resource+Request.swift */; };
 		DB746D36FFFEBBA15A9F56415AA2D11A /* Pods-SwiftlySalesforce_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 57726273156A5128C5F0A0E73BED8670 /* Pods-SwiftlySalesforce_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE91C58B243A0230B00DC039672CF1ED /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC64C41890DFBF58FCF320D2347BC026 /* Globals.swift */; };
 		DFC50F9A13AB212CB94F5670EC0AB2E7 /* after.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7BCCE65AF248F80F0D46C5AE596E90 /* after.m */; };
-		E0C8F391F06242F42F6D7BB8AC649938 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29B458412DFFC6E52926102E08D4FE /* Resource.swift */; };
+		E0C8F391F06242F42F6D7BB8AC649938 /* QueryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29B458412DFFC6E52926102E08D4FE /* QueryResource.swift */; };
 		E557A98820B832D003C8A0850CDCC9F4 /* Catchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BD0408009FAE1B0F5B668107777D23 /* Catchable.swift */; };
+		EA8A687E20D6357D007622D7 /* OAuth2Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687C20D63577007622D7 /* OAuth2Resource.swift */; };
+		EA8A688120D6B991007622D7 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688020D6B991007622D7 /* Resource.swift */; };
+		EA8A688320D6BA6B007622D7 /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688220D6BA6B007622D7 /* Salesforce.swift */; };
 		EAAC9EDC20D4821700F0E16B /* JSONDecoder+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9EDA20D4820D00F0E16B /* JSONDecoder+DateFormatter.swift */; };
 		F19A3DC6843C9305A4D50B241CD9082F /* race.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FDEE17D70F8C60C7B4C8F178B29BDA /* race.swift */; };
 		F4DA1E2AE15CAB183C0B15DF4B577492 /* NSNotificationCenter+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DDD967C34F88FD5F0B45C87FA10D0B /* NSNotificationCenter+AnyPromise.m */; };
 		FB9C1DA91CB5DCEA49E114351F8BA376 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC809897EDE4496AD7F968DF3E8BA1 /* Configuration.swift */; };
 		FDE1B6F494960060025A5BC561D8E557 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE10052C8449DD155BCB88F2518387 /* Authorization.swift */; };
-		FE2A23D3096A982AAAA5F5C9FF3CBF4B /* Salesforce+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAA58BC8566C49A37383720FCCD3F2A /* Salesforce+Error.swift */; };
 		FFD2FEAA1534029E559944C0662CE5CC /* firstly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8884A0A21B3B675757D9964A4BD7E74 /* firstly.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,7 +145,6 @@
 		24A261864A241C003A6B99B3073AA501 /* Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Promise.swift; path = Sources/Promise.swift; sourceTree = "<group>"; };
 		24CB20419275E7B717913447BB03647E /* AnyPromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AnyPromise.h; path = Sources/AnyPromise.h; sourceTree = "<group>"; };
 		282ED083D0155AAD398048611F8C354D /* Resolver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Resolver.swift; path = Sources/Resolver.swift; sourceTree = "<group>"; };
-		2AAA58BC8566C49A37383720FCCD3F2A /* Salesforce+Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Salesforce+Error.swift"; path = "SwiftlySalesforce/Sources/Salesforce+Error.swift"; sourceTree = "<group>"; };
 		2D49905E482CDBF56BA92B7D12750F1B /* Pods-SwiftlySalesforce_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftlySalesforce_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		2F8443A78925071E380310E4401D78EA /* DateFormatter+Salesforce.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DateFormatter+Salesforce.swift"; path = "SwiftlySalesforce/Sources/DateFormatter+Salesforce.swift"; sourceTree = "<group>"; };
 		2FC8EFF828D027F8BD1B3ACD578CA6F2 /* PromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +166,6 @@
 		5249267AC01495FF7258B405FF07AB37 /* NSURLSession+AnyPromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURLSession+AnyPromise.h"; path = "Extensions/Foundation/Sources/NSURLSession+AnyPromise.h"; sourceTree = "<group>"; };
 		52BF26FFC8BC7002CB7362FD969042E3 /* NSTask+AnyPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSTask+AnyPromise.m"; path = "Extensions/Foundation/Sources/NSTask+AnyPromise.m"; sourceTree = "<group>"; };
 		57726273156A5128C5F0A0E73BED8670 /* Pods-SwiftlySalesforce_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftlySalesforce_Tests-umbrella.h"; sourceTree = "<group>"; };
-		59CCC13B6E3763B01F5A7EFBD73C01C9 /* Resource+Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Resource+Request.swift"; path = "SwiftlySalesforce/Sources/Resource+Request.swift"; sourceTree = "<group>"; };
 		5A354D447018D0A387E1CBD6A2E8AFD3 /* Pods-SwiftlySalesforce_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SwiftlySalesforce_Tests.modulemap"; sourceTree = "<group>"; };
 		5B5E08281B4CF1DE665C15C804CA8A65 /* URLComponents+Parameters.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLComponents+Parameters.swift"; path = "SwiftlySalesforce/Sources/URLComponents+Parameters.swift"; sourceTree = "<group>"; };
 		6087A2D7E5B8BF74DFE5F84C2E2C53F4 /* Pods-SwiftlySalesforce_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftlySalesforce_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,12 +191,10 @@
 		8EF2E9CE335F17E23381D832EF703D98 /* QueryResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QueryResult.swift; sourceTree = "<group>"; };
 		8F2010105647ABE124F5E98D66BE2126 /* NSObject+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSObject+Promise.swift"; path = "Extensions/Foundation/Sources/NSObject+Promise.swift"; sourceTree = "<group>"; };
 		8F337DB85A2ED3C47A351E3A1410BB39 /* after.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = after.swift; path = Sources/after.swift; sourceTree = "<group>"; };
-		908F8900307AA223D09A1B76C8BB7826 /* Salesforce+Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Salesforce+Request.swift"; path = "SwiftlySalesforce/Sources/Salesforce+Request.swift"; sourceTree = "<group>"; };
 		9110B36ABB3163CA6094B6D5107AC1C0 /* Pods-SwiftlySalesforce_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftlySalesforce_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93A597FF115BC464AE019725893D4033 /* Pods-SwiftlySalesforce_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftlySalesforce_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		98C8B89CA9D7614CF34AD0F89B6E570F /* Salesforce+Query.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Salesforce+Query.swift"; path = "SwiftlySalesforce/Sources/Salesforce+Query.swift"; sourceTree = "<group>"; };
-		9965683ADEC40591B0D2D47791B85081 /* Salesforce.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Salesforce.swift; path = SwiftlySalesforce/Sources/Salesforce.swift; sourceTree = "<group>"; };
 		9F9AFF3DF74F6B79F9659EA563016706 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1FDEE17D70F8C60C7B4C8F178B29BDA /* race.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = race.swift; path = Sources/race.swift; sourceTree = "<group>"; };
 		A9573AF375E3182D12971ABD2EE6DD3A /* Pods-SwiftlySalesforce_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftlySalesforce_Example-umbrella.h"; sourceTree = "<group>"; };
@@ -232,6 +227,9 @@
 		DAA8677B4A5538FF6CC1648DC42FC64D /* UIView+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Promise.swift"; path = "Extensions/UIKit/Sources/UIView+Promise.swift"; sourceTree = "<group>"; };
 		DB7BCCE65AF248F80F0D46C5AE596E90 /* after.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = after.m; path = Sources/after.m; sourceTree = "<group>"; };
 		E3DCFF6D937BA5F116EDC2B07D4ECBD3 /* NSURLSession+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSURLSession+Promise.swift"; path = "Extensions/Foundation/Sources/NSURLSession+Promise.swift"; sourceTree = "<group>"; };
+		EA8A687C20D63577007622D7 /* OAuth2Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Resource.swift; sourceTree = "<group>"; };
+		EA8A688020D6B991007622D7 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = SwiftlySalesforce/Sources/Resource.swift; sourceTree = "<group>"; };
+		EA8A688220D6BA6B007622D7 /* Salesforce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Salesforce.swift; path = SwiftlySalesforce/Sources/Salesforce.swift; sourceTree = "<group>"; };
 		EAAC9EDA20D4820D00F0E16B /* JSONDecoder+DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+DateFormatter.swift"; sourceTree = "<group>"; };
 		EBA0823419954654E89B5C0D270F4FD2 /* SwiftlySalesforce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftlySalesforce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4A5322F36908F0FEBDB4B30032FB4A /* Limit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Limit.swift; sourceTree = "<group>"; };
@@ -241,7 +239,7 @@
 		F4CF4078C61D5915909A37150326F225 /* Pods-SwiftlySalesforce_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftlySalesforce_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F7B6EEED9E143C461CFA0775C8162BA2 /* SwiftlySalesforce-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftlySalesforce-umbrella.h"; sourceTree = "<group>"; };
 		F7F70C8A8907CB1B38DF4EA918BDA8CE /* Pods-SwiftlySalesforce_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftlySalesforce_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		FA29B458412DFFC6E52926102E08D4FE /* Resource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = SwiftlySalesforce/Sources/Resource.swift; sourceTree = "<group>"; };
+		FA29B458412DFFC6E52926102E08D4FE /* QueryResource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QueryResource.swift; path = SwiftlySalesforce/Sources/QueryResource.swift; sourceTree = "<group>"; };
 		FBB66AF919CD6FC604DE59A52A6C0A84 /* Pods-SwiftlySalesforce_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftlySalesforce_Tests-dummy.m"; sourceTree = "<group>"; };
 		FD28F6E174513369F0FC9FFB25EF2E6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -394,12 +392,11 @@
 				EAAC9EDA20D4820D00F0E16B /* JSONDecoder+DateFormatter.swift */,
 				1CE8B81D6E81DB138D2D2196AE412026 /* Keychain.swift */,
 				34405E36E59818373200D52A3169914C /* Promise+Validate.swift */,
-				FA29B458412DFFC6E52926102E08D4FE /* Resource.swift */,
-				59CCC13B6E3763B01F5A7EFBD73C01C9 /* Resource+Request.swift */,
-				9965683ADEC40591B0D2D47791B85081 /* Salesforce.swift */,
-				2AAA58BC8566C49A37383720FCCD3F2A /* Salesforce+Error.swift */,
+				EA8A687C20D63577007622D7 /* OAuth2Resource.swift */,
+				FA29B458412DFFC6E52926102E08D4FE /* QueryResource.swift */,
+				EA8A688020D6B991007622D7 /* Resource.swift */,
+				EA8A688220D6BA6B007622D7 /* Salesforce.swift */,
 				98C8B89CA9D7614CF34AD0F89B6E570F /* Salesforce+Query.swift */,
-				908F8900307AA223D09A1B76C8BB7826 /* Salesforce+Request.swift */,
 				5B5E08281B4CF1DE665C15C804CA8A65 /* URLComponents+Parameters.swift */,
 				51A380F2B150F480819CB34699B0FC2D /* URLRequest+Initializer.swift */,
 				74EF5A5A7F368C4DF2C01B09355EC7CF /* Models */,
@@ -707,7 +704,9 @@
 				FDE1B6F494960060025A5BC561D8E557 /* Authorization.swift in Sources */,
 				D1AD1CDC1D250996D706A00DC6FBA544 /* AuthorizationStore.swift in Sources */,
 				FB9C1DA91CB5DCEA49E114351F8BA376 /* Configuration.swift in Sources */,
+				EA8A687E20D6357D007622D7 /* OAuth2Resource.swift in Sources */,
 				525AAE350768655B55EE7F79C90B0175 /* DateFormatter+Salesforce.swift in Sources */,
+				EA8A688320D6BA6B007622D7 /* Salesforce.swift in Sources */,
 				8924E0A31EA95E54CD92FFFDB5DF75AC /* FieldMetadata.swift in Sources */,
 				DE91C58B243A0230B00DC039672CF1ED /* Globals.swift in Sources */,
 				8833BE3FF7F47877D89D09FA7C805CBE /* Identity.swift in Sources */,
@@ -715,18 +714,15 @@
 				EAAC9EDC20D4821700F0E16B /* JSONDecoder+DateFormatter.swift in Sources */,
 				529E5AD23A633B4CF1A13C18E1F2CCF4 /* Keychain.swift in Sources */,
 				7B84376285285AC4957BB9241F582586 /* Limit.swift in Sources */,
+				EA8A688120D6B991007622D7 /* Resource.swift in Sources */,
 				75DB9B2E62BC6ECF5F949486845BE866 /* ObjectMetadata.swift in Sources */,
 				6F26F4199F68BAED89176FE41CFA8DB7 /* Organization.swift in Sources */,
 				807974DC56C1786AD112B7ED94377FDB /* PicklistItemMetadata.swift in Sources */,
 				66943ADDBCEFDFC349D587BDEB23EC31 /* Promise+Validate.swift in Sources */,
 				86A2891980017B6D5CC69523A71863F3 /* QueryResult.swift in Sources */,
 				D1F0ECABC31B68C35DC5DDBC7E044CAD /* Record.swift in Sources */,
-				D74E629B0A7CE44AB756D9DA3D7E1C54 /* Resource+Request.swift in Sources */,
-				E0C8F391F06242F42F6D7BB8AC649938 /* Resource.swift in Sources */,
-				FE2A23D3096A982AAAA5F5C9FF3CBF4B /* Salesforce+Error.swift in Sources */,
+				E0C8F391F06242F42F6D7BB8AC649938 /* QueryResource.swift in Sources */,
 				5E5D210B55738D034F46A31D2A7D88DF /* Salesforce+Query.swift in Sources */,
-				B7AFC870685724963710EF614FFB3C72 /* Salesforce+Request.swift in Sources */,
-				423007CCD3FB6CE57C4939C4C4F63F4D /* Salesforce.swift in Sources */,
 				73BAC61C47C954FFE697D431474BEB24 /* SwiftlySalesforce-dummy.m in Sources */,
 				052C565B983264B1C77DBE65091CE94A /* URLComponents+Parameters.swift in Sources */,
 				691679ECEEE60099C6C32B73F275011A /* URLRequest+Initializer.swift in Sources */,

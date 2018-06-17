@@ -38,7 +38,6 @@ internal struct AuthorizationStore {
 			}
 		}
 		set {
-			//TODO: This could fail silently...
 			if let key = newValue, let data = try? encoder.encode(key) {
 				defaults.set(data, forKey: "LastStoredKey")
 			}

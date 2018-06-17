@@ -9,6 +9,7 @@
 import UIKit
 import SwiftlySalesforce
 import SafariServices
+import PromiseKit
 
 class TaskTableViewController: UITableViewController {
 	
@@ -16,12 +17,18 @@ class TaskTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		salesforce.query(soql: "SELECT Id,Name FROM Account", shouldAuthorize: false).done {
+		salesforce.query(soql: "SELECT Id,Name FROM Account", shouldAuthorize: true).done {
 			for record in $0.records {
 				let id = record.string(forField: "Id")
 				let name = record.string(forField: "Name")
 				debugPrint("ID: \(id), NAME: \(name)")
 			}
+		}.then {
+			return Promise { seal in
+				throw NSError(domain: "My Domain", code: 100, userInfo: nil)
+			}
+		}.done {
+			print("HI")
 		}.catch {
 			print($0.localizedDescription)
 		}

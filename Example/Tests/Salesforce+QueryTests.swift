@@ -39,11 +39,29 @@ class Salesforce_QueryTests: XCTestCase {
 		salesforce.query(soql: "SELECT Id,Name,CreatedDate FROM Account LIMIT 2").done { (queryResult) in
 			XCTAssertEqual(queryResult.totalSize, 2)
 			XCTAssertEqual(queryResult.records.count, 2)
+			XCTAssertTrue(queryResult.isDone)
 			for record in queryResult.records {
 				XCTAssertNotNil(record.id)
 				XCTAssertNotNil(record.string(forField: "Name"))
 				XCTAssertNotNil(record.date(forField: "CreatedDate"))
 			}
+			exp.fulfill()
+		}.catch { (error) in
+			XCTFail(error.localizedDescription)
+		}
+		waitForExpectations(timeout: 10.0*60, handler: nil)
+	}
+	
+	func testThatItQueriesMultiplePages() {
+		//TODO: don't assume enough existing accounts for multiple pages
+		let exp = expectation(description: "Queries multiple pages of accounts")
+		let batchSize = 201
+		let salesforce = Salesforce(configuration: config)
+		salesforce.query(soql: "SELECT Id,Name,CreatedDate FROM Account", batchSize: batchSize, shouldAuthorize: true).done { (queryResult) in
+			XCTAssertTrue(queryResult.totalSize > batchSize)
+			XCTAssertTrue(queryResult.records.count == batchSize)
+			XCTAssertFalse(queryResult.isDone)
+			XCTAssertNotNil(queryResult.nextRecordsPath)
 			exp.fulfill()
 		}.catch { (error) in
 			XCTFail(error.localizedDescription)
