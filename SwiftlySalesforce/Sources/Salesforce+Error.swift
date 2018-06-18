@@ -9,40 +9,22 @@ import Foundation
 
 public extension Salesforce {
 	
-	public struct ErrorInfo: Decodable {
-		var message: String
-		var errorCode: String?
-		var fields: [String]?
+	public enum Error: Swift.Error {
+		case authenticationRequired
+		case authenticationSessionStartFailure
+		case resourceError(httpStatusCode: Int, message: String, errorCode: String?, fields: [String]?)
+		case other(message: String?)
 	}
+}
+
+extension Salesforce.Error: LocalizedError {
 	
-	public enum AuthorizationError: Error, LocalizedError {
-		
-		case sessionStartFailure
-		case refreshTokenUnavailable
-		
-		public var errorDescription: String? {
-			switch self {
-			case .sessionStartFailure:
-				return NSLocalizedString("Unable to start user authorization session.", comment: "")
-			case .refreshTokenUnavailable:
-				return NSLocalizedString("No refresh token available for OAuth2 'refresh token' flow.", comment: "")
-			}
-		}
-	}
-	
-	public enum ErrorResponse: Error, LocalizedError {
-		
-		case unauthorized
-		case error(httpStatusCode: Int, info: ErrorInfo)
-		case other(httpStatusCode: Int)
-		
-		public var errorDescription: String? {
-			switch self {
-			case .unauthorized:
-				return NSLocalizedString("User authentication required", comment: "")
-			default:
-				return nil
-			}
+	public var errorDescription: String? {
+		switch self {
+		case .authenticationRequired:
+			return NSLocalizedString("User authentication required", comment: "")
+		default:
+			return nil
 		}
 	}
 }
