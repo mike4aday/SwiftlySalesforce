@@ -11,7 +11,7 @@ public extension Salesforce {
 	
 	public enum Error: Swift.Error {
 		case authenticationRequired
-		case authenticationSessionStartFailure
+		case authenticationSessionFailed
 		case resourceError(httpStatusCode: Int, message: String, errorCode: String?, fields: [String]?)
 		case other(message: String?)
 	}
@@ -23,6 +23,8 @@ extension Salesforce.Error: LocalizedError {
 		switch self {
 		case .authenticationRequired:
 			return NSLocalizedString("User authentication required", comment: "")
+		case .authenticationSessionFailed:
+			return NSLocalizedString("Failed to start user authentication session.", comment: "")
 		default:
 			return nil
 		}

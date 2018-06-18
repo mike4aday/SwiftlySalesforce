@@ -52,32 +52,16 @@ internal extension Salesforce {
 	internal func dataTask(resource: Resource, shouldAuthorize: Bool = true, validator: DataResponseValidator? = nil) -> Promise<DataResponse> {
 		
 		let go: (Authorization) throws -> Promise<DataResponse> = {
-			URLSession.shared.dataTask(.promise, with: try resource.request(with: $0)).validated(with: validator).recover({ (error) -> Promise<DataResponse> in
-				guard case ErrorResponse.authenticationRequired = error else {
-					throw error
-				}
-				return self.refresh(authorization: )
-			})
+			URLSession.shared.dataTask(.promise, with: try resource.request(with: $0)).validated(with: validator)
 		}
 		
 		return firstly { () -> Promise<DataResponse> in
 			guard let auth = self.authorization else {
-				throw Salesforce.ErrorResponse.authenticationRequired
+				throw Salesforce.Error.authenticationRequired
 			}
 			return try go(auth)
 		}.recover { error -> Promise<DataResponse> in
-			
-			if case ErrorResponse.authenticationRequired = error {
-				
-				// Try to refresh token
-				if let auth = self.authorization {
-					return self.refresh(authorization: auth).then({ try go($0) })
-				}
-			}
-			
-			
-			
-			guard case ErrorResponse.authenticationRequired = error, shouldAuthorize else {
+			guard case Salesforce.Error.authenticationRequired = error, shouldAuthorize else {
 				throw error
 			}
 			return self.authorize().then { auth -> Promise<DataResponse> in

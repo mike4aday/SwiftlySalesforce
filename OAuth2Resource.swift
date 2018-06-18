@@ -29,7 +29,7 @@ extension OAuth2Resource: Resource {
 					"client_id": configuration.consumerKey,
 					"refresh_token": {
 						guard let refreshToken = authorization.refreshToken else {
-							throw Salesforce.AuthorizationError.refreshTokenUnavailable
+							throw Salesforce.Error.authenticationRequired
 						}
 						return refreshToken
 					}()

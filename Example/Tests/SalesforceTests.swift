@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class Salesforce_RequestTests: XCTestCase {
+class SalesforceTests: XCTestCase {
 	
 	struct ConfigFile: Decodable {
 		let consumerKey: String
@@ -45,13 +45,13 @@ class Salesforce_RequestTests: XCTestCase {
 	}
 	
 	func testThatItDoesntAuthorizeNewUser() {
-		let exp = expectation(description: "Authorizes new user via user-agent flow & Safari-hosted login form")
+		let exp = expectation(description: "Does not authorize new user")
 		// Create Salesforce with user guaranteed not to exist
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString))
 		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1", shouldAuthorize: false).done { _ in
 			XCTFail("Shouldn't authorize")
 		}.catch { (error) in
-			if case Salesforce.ErrorResponse.unauthorized = error {
+			if case Salesforce.Error.authenticationRequired = error {
 				exp.fulfill()
 			}
 			else {
