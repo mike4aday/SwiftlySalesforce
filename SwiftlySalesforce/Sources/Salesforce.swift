@@ -75,20 +75,18 @@ internal extension Salesforce {
 	
 	internal func refresh(authorization: Authorization) -> Promise<Authorization> {
 		
-		struct RefreshResponse: Decodable {
+		struct RefreshResult: Decodable {
 			let id: URL
 			let instance_url: URL
 			let access_token: String
 		}
 		
-		return Promise { seal in
-			let res = OAuth2Resource.refresh(configuration: configuration)
-			let req = try res.request(with: authorization)
-			seal.fulfill(req)
-		}.then {
-			URLSession.shared.dataTask(.promise, with: $0)
-		}.map {
-			let resp = try JSONDecoder().decode(RefreshResponse.self, from: $0.data)
+		return firstly { () -> Promise<DataResponse> in
+			let resource = OAuth2Resource.refresh(configuration: configuration)
+			let request = try resource.request(with: authorization)
+			return URLSession.shared.dataTask(.promise, with: request)
+		}.map { (dataResponse: DataResponse) -> Authorization in
+			let resp = try JSONDecoder().decode(RefreshResult.self, from: dataResponse.data)
 			let refreshToken = authorization.refreshToken // Re-use since we don't get new refresh token here
 			return Authorization(accessToken: resp.access_token, instanceURL: resp.instance_url, identityURL: resp.id, refreshToken: refreshToken)
 		}
@@ -118,46 +116,6 @@ internal extension Salesforce {
 	internal func dataTask<T: Decodable>(resource: Resource, shouldAuthorize: Bool = true, validator: DataResponseValidator? = nil) -> Promise<T> {
 		return dataTask(resource: resource, shouldAuthorize: shouldAuthorize, validator: validator).map {
 			return try JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(T.self, from: $0.data)
-		}
-	}
-}
-
-public extension Salesforce {
-	
-	public struct ErrorInfo: Decodable {
-		var message: String
-		var errorCode: String?
-		var fields: [String]?
-	}
-	
-	public enum AuthorizationError: Error, LocalizedError {
-		
-		case sessionStartFailure
-		case refreshTokenUnavailable
-		
-		public var errorDescription: String? {
-			switch self {
-			case .sessionStartFailure:
-				return NSLocalizedString("Unable to start user authorization session.", comment: "")
-			case .refreshTokenUnavailable:
-				return NSLocalizedString("No refresh token available for OAuth2 'refresh token' flow.", comment: "")
-			}
-		}
-	}
-	
-	public enum ErrorResponse: Error, LocalizedError {
-		
-		case unauthorized
-		case error(httpStatusCode: Int, info: ErrorInfo)
-		case other(httpStatusCode: Int)
-		
-		public var errorDescription: String? {
-			switch self {
-			case .unauthorized:
-				return NSLocalizedString("User authentication required", comment: "")
-			default:
-				return nil
-			}
 		}
 	}
 }
