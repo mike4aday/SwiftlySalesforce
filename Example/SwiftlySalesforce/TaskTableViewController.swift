@@ -23,12 +23,6 @@ class TaskTableViewController: UITableViewController {
 				let name = record.string(forField: "Name")
 				debugPrint("ID: \(id), NAME: \(name)")
 			}
-		}.then {
-			return Promise { seal in
-				throw NSError(domain: "My Domain", code: 100, userInfo: nil)
-			}
-		}.done {
-			print("HI")
 		}.catch {
 			print($0.localizedDescription)
 		}
