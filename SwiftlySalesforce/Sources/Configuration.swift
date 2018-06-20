@@ -37,4 +37,10 @@ public extension Configuration {
 		
 		self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authorizationURL, version: version)
 	}
+	
+	public var oauthBaseURL: URL {
+		var comps = URLComponents(url: authorizationURL.deletingLastPathComponent(), resolvingAgainstBaseURL: false)
+		comps?.queryItems = nil
+		return comps?.url ?? authorizationURL.deletingLastPathComponent()
+	}
 }

@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class SalesforceTests: XCTestCase {
+class Salesforce_OAuth2Tests: XCTestCase {
 	
 	struct ConfigFile: Decodable {
 		let consumerKey: String
@@ -33,9 +33,8 @@ class SalesforceTests: XCTestCase {
     
 	func testThatItAuthorizesNewUser() {
 		let exp = expectation(description: "Authorizes new user via user-agent flow & Safari-hosted login form")
-		// Create Salesforce with user guaranteed not to exist
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString))
-		salesforce.authorize().done {
+		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1").done {
 			debugPrint($0)
 			exp.fulfill()
 		}.catch { (error) in
@@ -46,12 +45,11 @@ class SalesforceTests: XCTestCase {
 	
 	func testThatItDoesntAuthorizeNewUser() {
 		let exp = expectation(description: "Does not authorize new user")
-		// Create Salesforce with user guaranteed not to exist
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString))
-		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1", shouldAuthorize: false).done { _ in
+		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1", options: [.dontAuthenticate]).done { _ in
 			XCTFail("Shouldn't authorize")
 		}.catch { (error) in
-			if case Salesforce.Error.authenticationRequired = error {
+			if case Salesforce.Error.unauthorized = error {
 				exp.fulfill()
 			}
 			else {
@@ -59,5 +57,22 @@ class SalesforceTests: XCTestCase {
 			}
 		}
 		waitForExpectations(timeout: 10.0*60, handler: nil)
+	}
+	
+	func testThatItRefreshes() {
+		let exp = expectation(description: "Refreshes access token")
+		let userID = UUID().uuidString
+		let orgID = UUID().uuidString
+		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: userID, organizationID: orgID))
+		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then {_ in
+			return salesforce.revokeAccessToken()
+		}.then { _ in
+			salesforce.query(soql: "SELECT Id,Name FROM Contact LIMIT 1", options: [.dontAuthenticate])
+		}.done {_ in
+			exp.fulfill()
+		}.catch {error in
+			XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 600, handler: nil)
 	}
 }

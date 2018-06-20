@@ -57,7 +57,7 @@ class Salesforce_QueryTests: XCTestCase {
 		let exp = expectation(description: "Queries multiple pages of accounts")
 		let batchSize = 201
 		let salesforce = Salesforce(configuration: config)
-		salesforce.query(soql: "SELECT Id,Name,CreatedDate FROM Account", batchSize: batchSize, shouldAuthorize: true).done { (queryResult) in
+		salesforce.query(soql: "SELECT Id,Name,CreatedDate FROM Account", batchSize: batchSize).done { (queryResult) in
 			XCTAssertTrue(queryResult.totalSize > batchSize)
 			XCTAssertTrue(queryResult.records.count == batchSize)
 			XCTAssertFalse(queryResult.isDone)

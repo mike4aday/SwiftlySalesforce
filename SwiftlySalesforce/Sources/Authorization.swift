@@ -25,6 +25,10 @@ public extension Authorization {
 	public var orgID: String {
 		return identityURL.deletingLastPathComponent().lastPathComponent
 	}
+	
+	public var baseURL: URL {
+		return instanceURL
+	}
 }
 
 internal extension Authorization {

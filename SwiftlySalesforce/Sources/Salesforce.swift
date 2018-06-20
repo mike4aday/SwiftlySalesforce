@@ -16,6 +16,14 @@ public class Salesforce {
 		let organizationID: String
 	}
 	
+	public struct Options: OptionSet {
+		public let rawValue: Int
+		public static let dontAuthenticate = Options(rawValue: 1 << 0)
+		public init(rawValue: Int) {
+			self.rawValue = rawValue
+		}
+	}
+	
 	public let configuration: Configuration
 	
 	internal var authorizationPromise: Promise<Authorization>?
@@ -49,7 +57,7 @@ public extension Salesforce {
 
 internal extension Salesforce {
 	
-	internal func dataTask(resource: Resource, shouldAuthorize: Bool = true, validator: DataResponseValidator? = nil) -> Promise<DataResponse> {
+	internal func dataTask(resource: Resource, options: Options = [], validator: DataResponseValidator? = nil) -> Promise<DataResponse> {
 		
 		let go: (Authorization) throws -> Promise<DataResponse> = {
 			URLSession.shared.dataTask(.promise, with: try resource.request(with: $0)).validated(with: validator)
@@ -57,11 +65,11 @@ internal extension Salesforce {
 		
 		return firstly { () -> Promise<DataResponse> in
 			guard let auth = self.authorization else {
-				throw Salesforce.Error.authenticationRequired
+				throw Salesforce.Error.unauthorized
 			}
 			return try go(auth)
 		}.recover { error -> Promise<DataResponse> in
-			guard case Salesforce.Error.authenticationRequired = error, shouldAuthorize else {
+			guard case Salesforce.Error.unauthorized = error, !options.contains(.dontAuthenticate) else {
 				throw error
 			}
 			return self.authorize().then { auth -> Promise<DataResponse> in
@@ -70,8 +78,8 @@ internal extension Salesforce {
 		}
 	}
 	
-	internal func dataTask<T: Decodable>(resource: Resource, shouldAuthorize: Bool = true, validator: DataResponseValidator? = nil) -> Promise<T> {
-		return dataTask(resource: resource, shouldAuthorize: shouldAuthorize, validator: validator).map {
+	internal func dataTask<T: Decodable>(resource: Resource, options: Options = [], validator: DataResponseValidator? = nil) -> Promise<T> {
+		return dataTask(resource: resource, options: options, validator: validator).map {
 			return try JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(T.self, from: $0.data)
 		}
 	}

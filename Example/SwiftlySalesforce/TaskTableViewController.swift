@@ -17,15 +17,20 @@ class TaskTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		salesforce.query(soql: "SELECT Id,Name FROM Account", shouldAuthorize: true).done {
-			for record in $0.records {
-				let id = record.string(forField: "Id")
-				let name = record.string(forField: "Name")
-				debugPrint("ID: \(id), NAME: \(name)")
-			}
+		salesforce.query(soql: "SELECT Id,Name FROM Account").done {
+			debugPrint("Accounts: \($0.records.count)")
 		}.catch {
 			print($0.localizedDescription)
 		}
+		
+		DispatchQueue.global(qos: .userInitiated).async {
+			self.salesforce.query(soql: "SELECT Id,Name FROM Contact").done {
+				debugPrint("Contacts: \($0.records.count)")
+			}.catch {
+				print($0.localizedDescription)
+			}
+		}
+		debugPrint("VIEW DID LOAD COMPLETED")
     }
 
     override func didReceiveMemoryWarning() {
