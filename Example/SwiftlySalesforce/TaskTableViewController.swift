@@ -17,6 +17,7 @@ class TaskTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		/*
 		salesforce.query(soql: "SELECT Id,Name FROM Account").done {
 			debugPrint("Accounts: \($0.records.count)")
 		}.catch {
@@ -30,6 +31,7 @@ class TaskTableViewController: UITableViewController {
 				print($0.localizedDescription)
 			}
 		}
+*/
 		debugPrint("VIEW DID LOAD COMPLETED")
     }
 

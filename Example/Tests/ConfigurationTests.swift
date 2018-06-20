@@ -24,7 +24,7 @@ class ConfigurationTests: XCTestCase {
     
     func testThatItInitsWithMinimumArgs() {
 		
-		let config = try! Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
+		let config = try! Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
 		let comps = URLComponents(url: config.authorizationURL, resolvingAgainstBaseURL: false)
 		
 		XCTAssertEqual(config.consumerKey, consumerKey)
@@ -36,7 +36,7 @@ class ConfigurationTests: XCTestCase {
 		XCTAssertEqual(comps?.queryItems?.filter({$0.name == "redirect_uri"}).first?.value, callbackURL.absoluteString)
 		XCTAssertEqual(comps?.queryItems?.filter({$0.name == "prompt"}).first?.value, "login consent")
 		XCTAssertEqual(comps?.queryItems?.filter({$0.name == "display"}).first?.value, "touch")
-		XCTAssertEqual(config.version, Configuration.defaultVersion)
+		XCTAssertEqual(config.version, Salesforce.Configuration.defaultVersion)
 	}
 	
 	func testThatItInitsWithAllArgs() {
@@ -44,7 +44,7 @@ class ConfigurationTests: XCTestCase {
 		let authorizationHost = "myhost.salesforce.com"
 		let authorizationParameters: [String: String] = ["Param1": "Value1", "Param2": "Value2", "response_type": "not_token"] // Note overriding "response_type" value
 		let version = "v999.0"
-		let config = try! Configuration(consumerKey: consumerKey, callbackURL: callbackURL, authorizationHost: authorizationHost, authorizationParameters: authorizationParameters, version: version)
+		let config = try! Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL, authorizationHost: authorizationHost, authorizationParameters: authorizationParameters, version: version)
 		let comps = URLComponents(url: config.authorizationURL, resolvingAgainstBaseURL: false)
 		
 		XCTAssertEqual(config.consumerKey, consumerKey)
@@ -66,7 +66,7 @@ class ConfigurationTests: XCTestCase {
 		let badHostname = "test . salesforce.com"
 		
 		do {
-			let _ = try Configuration(consumerKey: consumerKey, callbackURL: callbackURL, authorizationHost: badHostname)
+			let _ = try Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL, authorizationHost: badHostname)
 			XCTFail()
 		}
 		catch {

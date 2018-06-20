@@ -11,21 +11,27 @@ import SafariServices
 
 extension Salesforce {
 	
-	open func authorize() -> Promise<Authorization> {
+	public func authorize(authenticateIfRequired: Bool = true) -> Promise<Authorization> {
 		if let promise = self.authorizationPromise, promise.isPending {
 			return promise
 		}
 		else {
 			let promise = refreshAccessToken().recover { (error) -> Promise<Authorization> in
-				// Refresh failed for some reason, so authenticate user
+				guard authenticateIfRequired else {
+					throw error
+				}
 				return self.authenticate()
+			}.get { (auth) in
+				let key = AuthorizationStore.Key(userID: auth.userID, organizationID: auth.orgID, consumerKey: self.configuration.consumerKey)
+				try AuthorizationStore.store(auth, for: key)
+				self.authorizationStoreKey = key
 			}
 			self.authorizationPromise = promise
 			return promise
 		}
 	}
 	
-	open func revoke() -> Promise<Void> {
+	public func revoke() -> Promise<Void> {
 		return revokeRefreshToken().recover { (error) -> Promise<Void> in
 			return self.revokeAccessToken()
 		}
@@ -46,11 +52,7 @@ internal extension Salesforce {
 				throw Salesforce.Error.authenticationSessionFailed
 			}
 		}.map { url -> Authorization in
-			let auth = try Authorization(with: url)
-			let key = AuthorizationStore.Key(userID: auth.userID, organizationID: auth.orgID, consumerKey: self.configuration.consumerKey)
-			try AuthorizationStore.store(auth, for: key)
-			self.authorizationStoreKey = key
-			return auth
+			return try Authorization(with: url)
 		}
 	}
 	
@@ -61,15 +63,17 @@ internal extension Salesforce {
 			}
 			let request = try OAuthResource.refreshAccessToken(configuration: configuration).request(with: authorization)
 			return URLSession.shared.dataTask(.promise, with: request).validated().map { ($0, authorization) }
-		}.map { (dataResponse: DataResponse, oldAuthorization: Authorization) -> Authorization in
+		}.map { (dataResponse: DataResponse, oldAuth: Authorization) -> Authorization in
 			struct RefreshResult: Decodable {
 				let id: URL
 				let instance_url: URL
 				let access_token: String
+				let issued_at: String
 			}
 			let result: RefreshResult = try JSONDecoder().decode(RefreshResult.self, from: dataResponse.data)
-			let refreshToken = oldAuthorization.refreshToken // Re-use since we don't get new refresh token
-			return Authorization(accessToken: result.access_token, instanceURL: result.instance_url, identityURL: result.id, refreshToken: refreshToken)
+			let refreshToken = oldAuth.refreshToken // Re-use since we don't get new refresh token
+			let newAuth = Authorization(accessToken: result.access_token, instanceURL: result.instance_url, identityURL: result.id, refreshToken: refreshToken, issuedAt: UInt(result.issued_at))
+			return newAuth
 		}
 	}
 	

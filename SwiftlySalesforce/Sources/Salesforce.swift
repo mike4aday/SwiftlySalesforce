@@ -11,24 +11,29 @@ import PromiseKit
 
 public class Salesforce {
 	
+	public struct Configuration {
+		public static let defaultVersion = "42.0"
+		public static let defaultAuthorizationHost = "login.salesforce.com"
+		public let consumerKey: String
+		public let callbackURL: URL
+		public let authorizationURL: URL
+		public let version: String
+	}
+	
 	public struct User {
-		let userID: String
-		let organizationID: String
+		public let userID: String
+		public let organizationID: String
 	}
 	
 	public struct Options: OptionSet {
-		public let rawValue: Int
 		public static let dontAuthenticate = Options(rawValue: 1 << 0)
+		public let rawValue: Int
 		public init(rawValue: Int) {
 			self.rawValue = rawValue
 		}
 	}
 	
 	public let configuration: Configuration
-	
-	internal var authorizationPromise: Promise<Authorization>?
-	internal var authorizationStoreKey: AuthorizationStore.Key?
-	internal var authenticationSession: SFAuthenticationSession?
 	
 	public init(configuration: Configuration, user: User? = nil) {
 		self.configuration = configuration
@@ -39,9 +44,11 @@ public class Salesforce {
 			authorizationStoreKey = AuthorizationStore.lastStoredKey
 		}
 	}
-}
-
-public extension Salesforce {
+	
+	public convenience init(consumerKey: String, callbackURL: URL) throws {
+		let config = try Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
+		self.init(configuration: config)
+	}
 	
 	public var authorization: Authorization? {
 		guard let key = self.authorizationStoreKey else {
@@ -53,35 +60,39 @@ public extension Salesforce {
 	public var accessToken: String? {
 		return authorization?.accessToken
 	}
+	
+	internal var authorizationPromise: Promise<Authorization>?
+	internal var authorizationStoreKey: AuthorizationStore.Key?
+	internal var authenticationSession: SFAuthenticationSession?
 }
 
-internal extension Salesforce {
+public extension Salesforce.Configuration {
 	
-	internal func dataTask(resource: Resource, options: Options = [], validator: DataResponseValidator? = nil) -> Promise<DataResponse> {
+	public init(consumerKey: String,
+				callbackURL: URL,
+				authorizationHost: String = defaultAuthorizationHost,
+				authorizationParameters: [String: String]? = nil,
+				version: String = defaultVersion) throws {
 		
-		let go: (Authorization) throws -> Promise<DataResponse> = {
-			URLSession.shared.dataTask(.promise, with: try resource.request(with: $0)).validated(with: validator)
+		let defaultParams: [String: String] = [
+			"response_type" : "token",
+			"client_id" : consumerKey,
+			"redirect_uri" : callbackURL.absoluteString,
+			"prompt" : "login consent",
+			"display" : "touch" ]
+		let params = defaultParams.merging(authorizationParameters ?? [:], uniquingKeysWith: { (_, new) in new })
+		let urlString = "https://\(authorizationHost)/services/oauth2/authorize"
+		guard let comps = URLComponents(string: urlString, parameters: params), let authorizationURL = comps.url else {
+			let userInfo: [String: Any] = [NSURLErrorFailingURLErrorKey: urlString, NSLocalizedDescriptionKey: "Invalid authorization URL", "Parameters": params]
+			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: userInfo)
 		}
 		
-		return firstly { () -> Promise<DataResponse> in
-			guard let auth = self.authorization else {
-				throw Salesforce.Error.unauthorized
-			}
-			return try go(auth)
-		}.recover { error -> Promise<DataResponse> in
-			guard case Salesforce.Error.unauthorized = error, !options.contains(.dontAuthenticate) else {
-				throw error
-			}
-			return self.authorize().then { auth -> Promise<DataResponse> in
-				return try go(auth)
-			}
-		}
+		self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authorizationURL, version: version)
 	}
 	
-	internal func dataTask<T: Decodable>(resource: Resource, options: Options = [], validator: DataResponseValidator? = nil) -> Promise<T> {
-		return dataTask(resource: resource, options: options, validator: validator).map {
-			return try JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(T.self, from: $0.data)
-		}
+	public var oauthBaseURL: URL {
+		var comps = URLComponents(url: authorizationURL.deletingLastPathComponent(), resolvingAgainstBaseURL: false)
+		comps?.queryItems = nil
+		return comps?.url ?? authorizationURL.deletingLastPathComponent()
 	}
 }
-

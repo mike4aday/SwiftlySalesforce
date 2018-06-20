@@ -9,21 +9,21 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class Salesforce_OAuth2Tests: XCTestCase {
+class Salesforce_OAuthTests: XCTestCase {
 	
 	struct ConfigFile: Decodable {
 		let consumerKey: String
 		let redirectURL: String
 	}
 	
-	var config: Configuration!
+	var config: Salesforce.Configuration!
 	
     override func setUp() {
         super.setUp()
 		let data = TestUtils.shared.read(fileName: "Configuration")!
 		let configFile = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(ConfigFile.self, from: data)
 		let url = URL(string: configFile.redirectURL)!
-		config = try! Configuration(consumerKey: configFile.consumerKey, callbackURL: url)
+		config = try! Salesforce.Configuration(consumerKey: configFile.consumerKey, callbackURL: url)
     }
     
     override func tearDown() {
@@ -64,11 +64,14 @@ class Salesforce_OAuth2Tests: XCTestCase {
 		let userID = UUID().uuidString
 		let orgID = UUID().uuidString
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: userID, organizationID: orgID))
-		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then {_ in
+		var oldAuth: Authorization?
+		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then { (queryResult: QueryResult) -> Promise<Void> in
+			oldAuth = salesforce.authorization!
 			return salesforce.revokeAccessToken()
 		}.then { _ in
 			salesforce.query(soql: "SELECT Id,Name FROM Contact LIMIT 1", options: [.dontAuthenticate])
 		}.done {_ in
+			XCTAssertNotEqual(oldAuth, salesforce.authorization!)
 			exp.fulfill()
 		}.catch {error in
 			XCTFail("\(error)")

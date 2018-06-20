@@ -7,9 +7,9 @@
 import Foundation
 
 internal enum OAuthResource {
-	case refreshAccessToken(configuration: Configuration)
-	case revokeAccessToken(configuration: Configuration)
-	case revokeRefreshToken(configuration: Configuration)
+	case refreshAccessToken(configuration: Salesforce.Configuration)
+	case revokeAccessToken(configuration: Salesforce.Configuration)
+	case revokeRefreshToken(configuration: Salesforce.Configuration)
 }
 
 extension OAuthResource: Resource {

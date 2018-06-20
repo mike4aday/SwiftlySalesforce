@@ -17,14 +17,14 @@ class Salesforce_QueryTests: XCTestCase {
 		let redirectURL: String
 	}
 	
-	var config: Configuration!
+	var config: Salesforce.Configuration!
 	
 	override func setUp() {
 		super.setUp()
 		let data = TestUtils.shared.read(fileName: "Configuration")!
 		let configFile = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(ConfigFile.self, from: data)
 		let url = URL(string: configFile.redirectURL)!
-		config = try! Configuration(consumerKey: configFile.consumerKey, callbackURL: url)
+		config = try! Salesforce.Configuration(consumerKey: configFile.consumerKey, callbackURL: url)
 	}
 	
 	override func tearDown() {

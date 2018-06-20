@@ -82,6 +82,7 @@
 		DFC50F9A13AB212CB94F5670EC0AB2E7 /* after.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7BCCE65AF248F80F0D46C5AE596E90 /* after.m */; };
 		E0C8F391F06242F42F6D7BB8AC649938 /* QueryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29B458412DFFC6E52926102E08D4FE /* QueryResource.swift */; };
 		E557A98820B832D003C8A0850CDCC9F4 /* Catchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BD0408009FAE1B0F5B668107777D23 /* Catchable.swift */; };
+		EA72A10620D9F72C0056369D /* Salesforce+DataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72A10420D9F70A0056369D /* Salesforce+DataTask.swift */; };
 		EA8A687E20D6357D007622D7 /* OAuthResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687C20D63577007622D7 /* OAuthResource.swift */; };
 		EA8A688120D6B991007622D7 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688020D6B991007622D7 /* Resource.swift */; };
 		EA8A688320D6BA6B007622D7 /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688220D6BA6B007622D7 /* Salesforce.swift */; };
@@ -90,7 +91,6 @@
 		EAAC9EDC20D4821700F0E16B /* JSONDecoder+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9EDA20D4820D00F0E16B /* JSONDecoder+DateFormatter.swift */; };
 		F19A3DC6843C9305A4D50B241CD9082F /* race.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FDEE17D70F8C60C7B4C8F178B29BDA /* race.swift */; };
 		F4DA1E2AE15CAB183C0B15DF4B577492 /* NSNotificationCenter+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DDD967C34F88FD5F0B45C87FA10D0B /* NSNotificationCenter+AnyPromise.m */; };
-		FB9C1DA91CB5DCEA49E114351F8BA376 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC809897EDE4496AD7F968DF3E8BA1 /* Configuration.swift */; };
 		FDE1B6F494960060025A5BC561D8E557 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE10052C8449DD155BCB88F2518387 /* Authorization.swift */; };
 		FFD2FEAA1534029E559944C0662CE5CC /* firstly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8884A0A21B3B675757D9964A4BD7E74 /* firstly.swift */; };
 /* End PBXBuildFile section */
@@ -182,7 +182,6 @@
 		73F8D8132EBD01A9775A2AA16C2086B6 /* PMKUIKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PMKUIKit.h; path = Extensions/UIKit/Sources/PMKUIKit.h; sourceTree = "<group>"; };
 		7706AE46B61FF10968A876D23BDD542E /* UIView+AnyPromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+AnyPromise.h"; path = "Extensions/UIKit/Sources/UIView+AnyPromise.h"; sourceTree = "<group>"; };
 		7ECC37AD751B437BDA4073A962D780C4 /* PromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		84BC809897EDE4496AD7F968DF3E8BA1 /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = SwiftlySalesforce/Sources/Configuration.swift; sourceTree = "<group>"; };
 		8553E6DE049031857F3B3B2F734886A3 /* PMKFoundation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PMKFoundation.h; path = Extensions/Foundation/Sources/PMKFoundation.h; sourceTree = "<group>"; };
 		855C9CFD1A34836226C39697E28B7591 /* when.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = when.swift; path = Sources/when.swift; sourceTree = "<group>"; };
 		87842A8D4029BA63F7E53FAF02C95DEC /* Pods-SwiftlySalesforce_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftlySalesforce_Example-dummy.m"; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		DAA8677B4A5538FF6CC1648DC42FC64D /* UIView+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Promise.swift"; path = "Extensions/UIKit/Sources/UIView+Promise.swift"; sourceTree = "<group>"; };
 		DB7BCCE65AF248F80F0D46C5AE596E90 /* after.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = after.m; path = Sources/after.m; sourceTree = "<group>"; };
 		E3DCFF6D937BA5F116EDC2B07D4ECBD3 /* NSURLSession+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSURLSession+Promise.swift"; path = "Extensions/Foundation/Sources/NSURLSession+Promise.swift"; sourceTree = "<group>"; };
+		EA72A10420D9F70A0056369D /* Salesforce+DataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+DataTask.swift"; sourceTree = "<group>"; };
 		EA8A687C20D63577007622D7 /* OAuthResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResource.swift; sourceTree = "<group>"; };
 		EA8A688020D6B991007622D7 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = SwiftlySalesforce/Sources/Resource.swift; sourceTree = "<group>"; };
 		EA8A688220D6BA6B007622D7 /* Salesforce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Salesforce.swift; path = SwiftlySalesforce/Sources/Salesforce.swift; sourceTree = "<group>"; };
@@ -389,7 +389,6 @@
 			children = (
 				ACAE10052C8449DD155BCB88F2518387 /* Authorization.swift */,
 				8EB192BBC403265564A4BFC87290C466 /* AuthorizationStore.swift */,
-				84BC809897EDE4496AD7F968DF3E8BA1 /* Configuration.swift */,
 				2F8443A78925071E380310E4401D78EA /* DateFormatter+Salesforce.swift */,
 				CC64C41890DFBF58FCF320D2347BC026 /* Globals.swift */,
 				BA1AAAB5A109D791C977583AC9F55E81 /* Info.plist */,
@@ -400,6 +399,7 @@
 				FA29B458412DFFC6E52926102E08D4FE /* QueryResource.swift */,
 				EA8A688020D6B991007622D7 /* Resource.swift */,
 				EA8A688220D6BA6B007622D7 /* Salesforce.swift */,
+				EA72A10420D9F70A0056369D /* Salesforce+DataTask.swift */,
 				EA8A688420D751B0007622D7 /* Salesforce+Error.swift */,
 				EA8A688620D75B98007622D7 /* Salesforce+OAuth.swift */,
 				98C8B89CA9D7614CF34AD0F89B6E570F /* Salesforce+Query.swift */,
@@ -709,7 +709,6 @@
 				0FCEF33203B4CECBA3FC74FEB62654EF /* Address.swift in Sources */,
 				FDE1B6F494960060025A5BC561D8E557 /* Authorization.swift in Sources */,
 				D1AD1CDC1D250996D706A00DC6FBA544 /* AuthorizationStore.swift in Sources */,
-				FB9C1DA91CB5DCEA49E114351F8BA376 /* Configuration.swift in Sources */,
 				EA8A688520D751B0007622D7 /* Salesforce+Error.swift in Sources */,
 				EA8A687E20D6357D007622D7 /* OAuthResource.swift in Sources */,
 				525AAE350768655B55EE7F79C90B0175 /* DateFormatter+Salesforce.swift in Sources */,
@@ -718,6 +717,7 @@
 				DE91C58B243A0230B00DC039672CF1ED /* Globals.swift in Sources */,
 				8833BE3FF7F47877D89D09FA7C805CBE /* Identity.swift in Sources */,
 				3A758E3F3EF23B697A6801408D320288 /* Info.plist in Sources */,
+				EA72A10620D9F72C0056369D /* Salesforce+DataTask.swift in Sources */,
 				EAAC9EDC20D4821700F0E16B /* JSONDecoder+DateFormatter.swift in Sources */,
 				529E5AD23A633B4CF1A13C18E1F2CCF4 /* Keychain.swift in Sources */,
 				7B84376285285AC4957BB9241F582586 /* Limit.swift in Sources */,
