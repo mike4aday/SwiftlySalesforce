@@ -8,10 +8,7 @@
 
 import Foundation
 
-internal enum RESTResource {
-	case query(soql: String, batchSize: Int?, version: String)
-	case queryNext(path: String)
-	case search(sosl: String, version: String)
+internal enum SObjectResource {
 	case retrieve(type: String, id: String, fields: [String]?, version: String)
 	case insert(type: String, data: Data, version: String)
 	case update(type: String, id: String, data: Data, version: String)
@@ -26,47 +23,11 @@ internal enum RESTResource {
 	case registerForNotifications(deviceToken: String, version: String)
 }
 
-extension RESTResource: Resource {
+extension SObjectResource: Resource {
 	
 	internal func request(with authorization: Authorization) throws -> URLRequest {
 		
 		switch self {
-			
-		case let .query(soql, batchSize, version):
-			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/query"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: ["q" : soql],
-				body: nil,
-				headers: {
-					guard let bs = batchSize else  { return nil }
-					return ["Sforce-Query-Options": "batchSize=\(bs)"]
-				}()
-			)
-			
-		case let .queryNext(path):
-			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent(path),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
-				body: nil,
-				headers: nil
-			)
-			
-		case let .search(sosl, version):
-			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v43.0/search/"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: ["q": sosl],
-				body: nil,
-				headers: nil
-			)
 			
 		case let .retrieve(type, id, fields, version):
 			return try URLRequest(
