@@ -14,12 +14,12 @@ public extension Salesforce {
 	//MARK: - Query methods
 	
 	public func query<T: Decodable>(soql: String, batchSize: Int? = nil, options: Options = []) -> Promise<QueryResult<T>> {
-		let resource = RESTResource.query(soql: soql, batchSize: batchSize, version: configuration.version)
+		let resource = QueryResource.query(soql: soql, batchSize: batchSize, version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
 	public func query(soql: String, batchSize: Int? = nil, options: Options = []) -> Promise<QueryResult<Record>> {
-		let resource = RESTResource.query(soql: soql, batchSize: batchSize, version: configuration.version)
+		let resource = QueryResource.query(soql: soql, batchSize: batchSize, version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
@@ -34,19 +34,19 @@ public extension Salesforce {
 	}
 	
 	public func queryNext<T: Decodable>(path: String, options: Options = []) -> Promise<QueryResult<T>> {
-		let resource = RESTResource.queryNext(path: path)
+		let resource = QueryResource.queryNext(path: path)
 		return dataTask(resource: resource, options: options)
 	}
 	
 	public func queryNext(path: String, options: Options = []) -> Promise<QueryResult<Record>> {
-		let resource = RESTResource.queryNext(path: path)
+		let resource = QueryResource.queryNext(path: path)
 		return dataTask(resource: resource, options: options)
 	}
 	
 	// MARK: - Search
 	
 	public func search(sosl: String, options: Options = []) -> Promise<SearchResult> {
-		let resource = RESTResource.search(sosl: sosl, version: configuration.version)
+		let resource = SearchResource.search(sosl: sosl, version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
@@ -58,7 +58,7 @@ public extension Salesforce {
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a Decodable instance
 	public func retrieve<T: Decodable>(type: String, id: String, fields: [String]? = nil, options: Options = []) -> Promise<T> {
-		let resource = RESTResource.retrieve(type: type, id: id, fields: fields, version: configuration.version)
+		let resource = SObjectResource.retrieve(type: type, id: id, fields: fields, version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
@@ -68,7 +68,7 @@ public extension Salesforce {
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a Record instance
 	public func retrieve(type: String, id: String, fields: [String]? = nil, options: Options = []) -> Promise<Record> {
-		let resource = RESTResource.retrieve(type: type, id: id, fields: fields, version: configuration.version)
+		let resource = SObjectResource.retrieve(type: type, id: id, fields: fields, version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
@@ -101,7 +101,7 @@ public extension Salesforce {
 	public func insert<T: Encodable>(type: String, record: T, options: Options = []) -> Promise<String> {
 		return firstly { () -> Promise<InsertResult> in
 			let data = try JSONEncoder(dateFormatter: .salesforceDateTimeFormatter).encode(record)
-			let resource = RESTResource.insert(type: type, data: data, version: configuration.version)
+			let resource = SObjectResource.insert(type: type, data: data, version: configuration.version)
 			return dataTask(resource: resource, options: options)
 		}.map { $0.id }
 	}
@@ -130,7 +130,7 @@ public extension Salesforce {
 	public func update<T: Encodable>(type: String, id: String, record: T, options: Options = []) -> Promise<Void> {
 		return firstly { () -> Promise<DataResponse> in
 			let data = try JSONEncoder(dateFormatter: .salesforceDateTimeFormatter).encode(record)
-			let resource = RESTResource.update(type: type, id: id, data: data, version: configuration.version)
+			let resource = SObjectResource.update(type: type, id: id, data: data, version: configuration.version)
 			return dataTask(resource: resource, options: options)
 		}.done { _ in return }
 	}
@@ -160,7 +160,7 @@ public extension Salesforce {
 	/// - Parameter id: Unique ID of record to be deleted
 	/// - Returns: Promise<Void>
 	public func delete(type: String, id: String, options: Options = []) -> Promise<Void> {
-		let resource = RESTResource.delete(type: type, id: id, version: configuration.version)
+		let resource = SObjectResource.delete(type: type, id: id, version: configuration.version)
 		return dataTask(resource: resource, options: options).done { _ in return }
 	}
 	
@@ -178,7 +178,7 @@ public extension Salesforce {
 	/// - Parameter type: Object name
 	/// - Returns: Promise<ObjectDescription>
 	public func describe(type: String, options: Options = []) -> Promise<ObjectMetadata> {
-		let resource = RESTResource.describe(type: type, version: configuration.version)
+		let resource = SObjectResource.describe(type: type, version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
@@ -194,7 +194,7 @@ public extension Salesforce {
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
 	/// - Returns: Promise of an array of ObjectDescriptions
 	public func describeAll(options: Options = []) -> Promise<[ObjectMetadata]> {
-		let resource = RESTResource.describeGlobal(version: configuration.version)
+		let resource = SObjectResource.describeGlobal(version: configuration.version)
 		return dataTask(resource: resource, options: options).map { (result: DescribeAllResult) -> [ObjectMetadata] in
 			return result.sobjects
 		}
@@ -207,7 +207,7 @@ public extension Salesforce {
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	public func fetchImage(path: String, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.fetchFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = SObjectResource.fetchFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -219,7 +219,7 @@ public extension Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	public func fetchImage(url: URL, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.fetchFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = SObjectResource.fetchFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -231,7 +231,7 @@ public extension Salesforce {
 	/// Asynchronously requests information about the current user
 	/// See https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0
 	public func identity(options: Options = []) -> Promise<Identity> {
-		let resource = RESTResource.identity(version: configuration.version)
+		let resource = SObjectResource.identity(version: configuration.version)
 		let validator: DataResponseValidator = {
 			if let httpResp = $0.response as? HTTPURLResponse, httpResp.statusCode == 403 {
 				throw Salesforce.Error.unauthorized
@@ -253,7 +253,7 @@ public extension Salesforce {
 	/// - Returns: Promise of a dictionary of Limits, keyed by limit name
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
 	public func limits(options: Options = []) -> Promise<[String:Limit]> {
-		let resource = RESTResource.limits(version: configuration.version)
+		let resource = SObjectResource.limits(version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
@@ -262,7 +262,7 @@ public extension Salesforce {
 	/// - Returns: Promise of a String which holds the ID of the newly-inserted MobilePushServiceDevice record
 	public func registerForNotifications(deviceToken: String, options: Options = []) -> Promise<String> {
 		return firstly { () -> Promise<InsertResult> in
-			let resource = RESTResource.registerForNotifications(deviceToken: deviceToken, version: configuration.version)
+			let resource = SObjectResource.registerForNotifications(deviceToken: deviceToken, version: configuration.version)
 			return dataTask(resource: resource, options: options)
 		}.map { $0.id }
 	}
@@ -289,7 +289,7 @@ public extension Salesforce {
 		
 		let ct = contentType ?? ( method == .get || method == .delete ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = RESTResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
+		let resource = SObjectResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
 		return dataTask(resource: resource, options: options).map { $0.data }
 	}
 	
@@ -316,7 +316,7 @@ public extension Salesforce {
 		options: Options = []) -> Promise<Data> {
 		
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = RESTResource.custom(method: method, baseURL: baseURL, path: path, queryParameters: params, body: body, contentType: contentType, headers: headers)
+		let resource = SObjectResource.custom(method: method, baseURL: baseURL, path: path, queryParameters: params, body: body, contentType: contentType, headers: headers)
 		return dataTask(resource: resource, options: options).map { $0.data }
 	}
 }
