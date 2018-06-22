@@ -1,8 +1,9 @@
 //
-//  Salesforce+OAuth2.swift
+//  Salesforce+OAuth.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 6/17/18.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import Foundation

@@ -2,8 +2,8 @@
 //  PicklistItemMetadata.swift
 //  SwiftlySalesforce
 //
-//	For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2017. All rights reserved.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 /// Represents options in a Salesforce Picklist-type field (i.e. drop-down list)

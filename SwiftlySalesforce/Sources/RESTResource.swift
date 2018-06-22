@@ -2,7 +2,8 @@
 //  QueryResource.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 6/11/18.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import Foundation

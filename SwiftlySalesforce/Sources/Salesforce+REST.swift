@@ -1,8 +1,9 @@
 //
-//  Salesforce+Query.swift
+//  Salesforce+REST.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 5/14/18.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import Foundation
@@ -182,7 +183,7 @@ public extension Salesforce {
 	}
 	
 	/// Asynchronously retrieves metadata for multiple Salesforce objects.
-	/// - Parameter types: Array of object names
+	/// - Parameter types: Array of object types (e.g. "Account")
 	/// - Returns: Promise<[ObjectDescription]>, a promise of an array of ObjectDescriptions, in the same order as the "types" parameter.
 	public func describe(types: [String], options: Options = []) -> Promise<[ObjectMetadata]> {
 		let promises = types.map { describe(type: $0) }
