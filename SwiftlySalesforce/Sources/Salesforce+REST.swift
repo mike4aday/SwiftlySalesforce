@@ -207,7 +207,7 @@ public extension Salesforce {
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	public func fetchImage(path: String, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.fetchFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.description)
+		let resource = RESTResource.fetchFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -219,7 +219,7 @@ public extension Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	public func fetchImage(url: URL, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.fetchFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.description)
+		let resource = RESTResource.fetchFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -287,7 +287,7 @@ public extension Salesforce {
 		headers: [String: String]? = nil,
 		options: Options = []) -> Promise<Data> {
 		
-		let ct = contentType ?? ( method == .get || method == .delete ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).description
+		let ct = contentType ?? ( method == .get || method == .delete ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
 		let resource = RESTResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
 		return dataTask(resource: resource, options: options).map { $0.data }
@@ -311,7 +311,7 @@ public extension Salesforce {
 		path: String? = nil,
 		parameters: [String: Any?]? = nil,
 		body: Data? = nil,
-		contentType: String = URLRequest.MIMEType.json.description,
+		contentType: String = URLRequest.MIMEType.json.rawValue,
 		headers: [String: String]? = nil,
 		options: Options = []) -> Promise<Data> {
 		

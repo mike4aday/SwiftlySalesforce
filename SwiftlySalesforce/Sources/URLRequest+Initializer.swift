@@ -21,11 +21,10 @@ public extension URLRequest {
 		case connect = "CONNECT"
 	}
 	
-	public struct MIMEType: CustomStringConvertible {
-		public private(set) var description: String
-		public static let json = MIMEType(description: "application/json")
-		public static let urlEncoded = MIMEType(description: "application/x-www-form-urlencoded; charset=utf-8")
-		public static let anyImage = MIMEType(description: "image/*")
+	public enum MIMEType: String {
+		case json = "application/json"
+		case urlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
+		case anyImage = "image/*"
 	}
 	
 	public init(
@@ -39,7 +38,6 @@ public extension URLRequest {
 		
 		// URL
 		guard let comps = URLComponents(url: baseURL, parameters: queryParameters), let url = comps.url else {
-			//TODO: more information in userInfo dictionary
 			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: baseURL])
 		}
 		self.init(url: url)

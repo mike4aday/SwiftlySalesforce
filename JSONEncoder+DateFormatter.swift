@@ -10,7 +10,7 @@ import Foundation
 
 public extension JSONEncoder {
 	
-	convenience init(dateFormatter: DateFormatter) {
+	public convenience init(dateFormatter: DateFormatter) {
 		self.init()
 		self.dateEncodingStrategy = .formatted(dateFormatter)
 	}

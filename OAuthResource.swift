@@ -16,7 +16,7 @@ internal enum OAuthResource {
 
 extension OAuthResource: Resource {
 	
-	func request(with authorization: Authorization) throws -> URLRequest {
+	internal func request(with authorization: Authorization) throws -> URLRequest {
 		
 		switch self {
 			
@@ -28,7 +28,7 @@ extension OAuthResource: Resource {
 				method: .post,
 				baseURL: configuration.oauthBaseURL.appendingPathComponent("token"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: [
 					"format" : "json",
 					"grant_type": "refresh_token",
@@ -42,7 +42,7 @@ extension OAuthResource: Resource {
 				method: .post,
 				baseURL: configuration.oauthBaseURL.appendingPathComponent("revoke"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: ["token" : authorization.accessToken]
 			)
 			
@@ -54,7 +54,7 @@ extension OAuthResource: Resource {
 				method: .post,
 				baseURL: configuration.oauthBaseURL.appendingPathComponent("revoke"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: ["token": refreshToken]
 			)
 		}

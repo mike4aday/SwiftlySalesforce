@@ -7,6 +7,6 @@
 //
 import Foundation
 
-protocol Resource {
+internal protocol Resource {
 	func request(with authorization: Authorization) throws -> URLRequest
 }

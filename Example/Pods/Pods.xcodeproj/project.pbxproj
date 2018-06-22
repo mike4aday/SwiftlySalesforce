@@ -85,6 +85,7 @@
 		EA72A10620D9F72C0056369D /* Salesforce+DataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72A10420D9F70A0056369D /* Salesforce+DataTask.swift */; };
 		EA846FBD20DC63A6004F120E /* JSONEncoder+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA846FBC20DC63A6004F120E /* JSONEncoder+DateFormatter.swift */; };
 		EA846FBF20DCB306004F120E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA846FBE20DCB306004F120E /* SearchResult.swift */; };
+		EA846FC620DD4A16004F120E /* URL+QueryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA846FC520DD4A16004F120E /* URL+QueryItem.swift */; };
 		EA8A687E20D6357D007622D7 /* OAuthResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687C20D63577007622D7 /* OAuthResource.swift */; };
 		EA8A688120D6B991007622D7 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688020D6B991007622D7 /* Resource.swift */; };
 		EA8A688320D6BA6B007622D7 /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688220D6BA6B007622D7 /* Salesforce.swift */; };
@@ -233,6 +234,7 @@
 		EA72A10420D9F70A0056369D /* Salesforce+DataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+DataTask.swift"; sourceTree = "<group>"; };
 		EA846FBC20DC63A6004F120E /* JSONEncoder+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder+DateFormatter.swift"; sourceTree = "<group>"; };
 		EA846FBE20DCB306004F120E /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		EA846FC520DD4A16004F120E /* URL+QueryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URL+QueryItem.swift"; path = "SwiftlySalesforce/Sources/URL+QueryItem.swift"; sourceTree = "<group>"; };
 		EA8A687C20D63577007622D7 /* OAuthResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResource.swift; sourceTree = "<group>"; };
 		EA8A688020D6B991007622D7 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = SwiftlySalesforce/Sources/Resource.swift; sourceTree = "<group>"; };
 		EA8A688220D6BA6B007622D7 /* Salesforce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Salesforce.swift; path = SwiftlySalesforce/Sources/Salesforce.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				EA8A688420D751B0007622D7 /* Salesforce+Error.swift */,
 				EA8A688620D75B98007622D7 /* Salesforce+OAuth.swift */,
 				98C8B89CA9D7614CF34AD0F89B6E570F /* Salesforce+REST.swift */,
+				EA846FC520DD4A16004F120E /* URL+QueryItem.swift */,
 				5B5E08281B4CF1DE665C15C804CA8A65 /* URLComponents+Parameters.swift */,
 				51A380F2B150F480819CB34699B0FC2D /* URLRequest+Initializer.swift */,
 				74EF5A5A7F368C4DF2C01B09355EC7CF /* Models */,
@@ -735,6 +738,7 @@
 				807974DC56C1786AD112B7ED94377FDB /* PicklistItemMetadata.swift in Sources */,
 				66943ADDBCEFDFC349D587BDEB23EC31 /* Promise+Validate.swift in Sources */,
 				EA846FBF20DCB306004F120E /* SearchResult.swift in Sources */,
+				EA846FC620DD4A16004F120E /* URL+QueryItem.swift in Sources */,
 				86A2891980017B6D5CC69523A71863F3 /* QueryResult.swift in Sources */,
 				D1F0ECABC31B68C35DC5DDBC7E044CAD /* Record.swift in Sources */,
 				E0C8F391F06242F42F6D7BB8AC649938 /* RESTResource.swift in Sources */,

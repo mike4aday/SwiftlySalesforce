@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum RESTResource {
+internal enum RESTResource {
 	case query(soql: String, batchSize: Int?, version: String)
 	case queryNext(path: String)
 	case search(sosl: String, version: String)
@@ -37,7 +37,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/query"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: ["q" : soql],
 				body: nil,
 				headers: {
@@ -51,7 +51,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.instanceURL.appendingPathComponent(path),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: nil,
 				body: nil,
 				headers: nil
@@ -62,7 +62,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v43.0/search/"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: ["q": sosl],
 				body: nil,
 				headers: nil
@@ -73,7 +73,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: {
 					guard let fieldNames = fields?.joined(separator: ",") else { return nil }
 					return ["fields": fieldNames]
@@ -87,7 +87,7 @@ extension RESTResource: Resource {
 				method: .post,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.json.description,
+				contentType: URLRequest.MIMEType.json.rawValue,
 				queryParameters: nil,
 				body: data,
 				headers: nil
@@ -98,7 +98,7 @@ extension RESTResource: Resource {
 				method: .patch,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.json.description,
+				contentType: URLRequest.MIMEType.json.rawValue,
 				queryParameters: nil,
 				body: data,
 				headers: nil
@@ -109,7 +109,7 @@ extension RESTResource: Resource {
 				method: .delete,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: nil,
 				body: nil,
 				headers: nil
@@ -120,7 +120,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/describe"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: nil,
 				body: nil,
 				headers: nil
@@ -131,7 +131,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: nil,
 				body: nil,
 				headers: nil
@@ -142,7 +142,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: (baseURL ?? authorization.instanceURL).appendingPathComponent(path ?? ""),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: nil,
 				body: nil,
 				headers:  ["Accept": accept]
@@ -175,7 +175,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.identityURL,
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: ["version" : version],
 				body: nil,
 				headers: nil
@@ -186,7 +186,7 @@ extension RESTResource: Resource {
 				method: .get,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/limits"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.description,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: nil,
 				body: nil,
 				headers: nil
@@ -197,7 +197,7 @@ extension RESTResource: Resource {
 				method: .post,
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/MobilePushServiceDevice"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.json.description,
+				contentType: URLRequest.MIMEType.json.rawValue,
 				queryParameters: nil,
 				body: {
 					let encoder = JSONEncoder()
