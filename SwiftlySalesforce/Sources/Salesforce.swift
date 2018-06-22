@@ -12,7 +12,7 @@ import PromiseKit
 public class Salesforce {
 	
 	public struct Configuration {
-		public static let defaultVersion = "42.0"
+		public static let defaultVersion = "43.0"
 		public static let defaultAuthorizationHost = "login.salesforce.com"
 		public let consumerKey: String
 		public let callbackURL: URL
@@ -45,8 +45,8 @@ public class Salesforce {
 		}
 	}
 	
-	public convenience init(consumerKey: String, callbackURL: URL) throws {
-		let config = try Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
+	public convenience init(consumerKey: String, callbackURL: URL) {
+		let config = try! Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
 		self.init(configuration: config)
 	}
 	

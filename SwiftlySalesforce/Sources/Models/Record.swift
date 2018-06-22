@@ -118,7 +118,7 @@ extension Record: Codable {
 		let type = try attributesContainer.decode(String.self, forKey: AttributeKeys.type)
 		let path = try attributesContainer.decode(String.self, forKey: AttributeKeys.url)
 		guard let id = path.components(separatedBy: "/").last, id.count == 18 || id.count == 15 else {
-			throw DecodingError.dataCorruptedError(forKey: .url, in: attributesContainer, debugDescription: "Unable to parse record ID from path.")
+			throw DecodingError.dataCorruptedError(forKey: .url, in: attributesContainer, debugDescription: "Unable to parse record ID from URL attribute.")
 		}
 		
 		self.type = type

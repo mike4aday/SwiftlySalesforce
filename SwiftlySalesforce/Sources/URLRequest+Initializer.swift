@@ -21,16 +21,18 @@ public extension URLRequest {
 		case connect = "CONNECT"
 	}
 	
-	public enum ContentType: String {
-		case json = "application/json"
-		case urlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
+	public struct MIMEType: CustomStringConvertible {
+		public private(set) var description: String
+		public static let json = MIMEType(description: "application/json")
+		public static let urlEncoded = MIMEType(description: "application/x-www-form-urlencoded; charset=utf-8")
+		public static let anyImage = MIMEType(description: "image/*")
 	}
 	
 	public init(
 		method: HTTPMethod,
 		baseURL: URL,
 		accessToken: String,
-		contentType: ContentType,
+		contentType: String,
 		queryParameters: [String: String]? = nil,
 		body: Data? = nil,
 		headers: [String: String]? = nil) throws {
@@ -48,7 +50,7 @@ public extension URLRequest {
 		// Standard headers
 		self.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
 		self.setValue("application/json", forHTTPHeaderField: "Accept")
-		self.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+		self.setValue(contentType, forHTTPHeaderField: "Content-Type")
 		
 		// Custom headers
 		if let headers = headers {

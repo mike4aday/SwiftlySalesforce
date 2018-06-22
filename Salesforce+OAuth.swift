@@ -34,6 +34,11 @@ extension Salesforce {
 	public func revoke() -> Promise<Void> {
 		return revokeRefreshToken().recover { (error) -> Promise<Void> in
 			return self.revokeAccessToken()
+		}.ensure {
+			// Remove authorization info from keychain
+			if let key = self.authorizationStoreKey {
+				try? AuthorizationStore.clear(for: key)
+			}
 		}
 	}
 }

@@ -34,7 +34,7 @@ class Salesforce_OAuthTests: XCTestCase {
 	func testThatItAuthorizesNewUser() {
 		let exp = expectation(description: "Authorizes new user via user-agent flow & Safari-hosted login form")
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString))
-		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1").done {
+		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1").done { 
 			debugPrint($0)
 			exp.fulfill()
 		}.catch { (error) in
@@ -65,7 +65,7 @@ class Salesforce_OAuthTests: XCTestCase {
 		let orgID = UUID().uuidString
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: userID, organizationID: orgID))
 		var oldAuth: Authorization?
-		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then { (queryResult: QueryResult) -> Promise<Void> in
+		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then { (queryResult: QueryResult<Record>) -> Promise<Void> in
 			oldAuth = salesforce.authorization!
 			return salesforce.revokeAccessToken()
 		}.then { _ in
@@ -75,6 +75,22 @@ class Salesforce_OAuthTests: XCTestCase {
 			exp.fulfill()
 		}.catch {error in
 			XCTFail("\(error)")
+		}
+		waitForExpectations(timeout: 600, handler: nil)
+	}
+	
+	func testThatItRevokes() {
+		let exp = expectation(description: "Refreshes access token")
+		let user = Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString)
+		let salesforce = Salesforce(configuration: config, user: user)
+		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1").then { _ -> Promise<Void> in
+			XCTAssertNotNil(salesforce.authorization)
+			return salesforce.revoke()
+		}.done {
+			XCTAssertNil(salesforce.authorization)
+			exp.fulfill()
+		}.catch {
+			XCTFail("\($0)")
 		}
 		waitForExpectations(timeout: 600, handler: nil)
 	}

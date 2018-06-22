@@ -26,7 +26,7 @@ extension OAuthResource: Resource {
 				method: .post,
 				baseURL: configuration.oauthBaseURL.appendingPathComponent("token"),
 				accessToken: authorization.accessToken,
-				contentType: .urlEncoded,
+				contentType: URLRequest.MIMEType.urlEncoded.description,
 				queryParameters: [
 					"format" : "json",
 					"grant_type": "refresh_token",
@@ -40,7 +40,7 @@ extension OAuthResource: Resource {
 				method: .post,
 				baseURL: configuration.oauthBaseURL.appendingPathComponent("revoke"),
 				accessToken: authorization.accessToken,
-				contentType: .urlEncoded,
+				contentType: URLRequest.MIMEType.urlEncoded.description,
 				queryParameters: ["token" : authorization.accessToken]
 			)
 			
@@ -52,7 +52,7 @@ extension OAuthResource: Resource {
 				method: .post,
 				baseURL: configuration.oauthBaseURL.appendingPathComponent("revoke"),
 				accessToken: authorization.accessToken,
-				contentType: .urlEncoded,
+				contentType: URLRequest.MIMEType.urlEncoded.description,
 				queryParameters: ["token": refreshToken]
 			)
 		}

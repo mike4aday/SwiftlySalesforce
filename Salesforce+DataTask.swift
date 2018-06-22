@@ -31,7 +31,8 @@ internal extension Salesforce {
 	}
 	
 	internal func dataTask<T: Decodable>(resource: Resource, options: Options = [], validator: DataResponseValidator? = nil) -> Promise<T> {
-		return dataTask(resource: resource, options: options, validator: validator).map {
+		let q = DispatchQueue.global(qos: .userInitiated)
+		return dataTask(resource: resource, options: options, validator: validator).map(on: q) {
 			return try JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(T.self, from: $0.data)
 		}
 	}

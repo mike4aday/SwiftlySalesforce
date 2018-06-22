@@ -10,7 +10,7 @@ import XCTest
 @testable import SwiftlySalesforce
 import PromiseKit
 
-class Salesforce_QueryTests: XCTestCase {
+class Salesforce_RESTTests: XCTestCase {
     
 	struct ConfigFile: Decodable {
 		let consumerKey: String
@@ -64,6 +64,29 @@ class Salesforce_QueryTests: XCTestCase {
 			XCTAssertNotNil(queryResult.nextRecordsPath)
 			exp.fulfill()
 		}.catch { (error) in
+			XCTFail(error.localizedDescription)
+		}
+		waitForExpectations(timeout: 10.0*60, handler: nil)
+	}
+	
+	func testThatItSearches() {
+		//TODO: don't assume existing records
+		let exp = expectation(description: "Searches with SOSL")
+		let salesforce = Salesforce(configuration: config)
+		let sosl = """
+			FIND {"A*" OR "B*" OR "C*"} IN Name Fields RETURNING lead(name,phone,Id), contact(name,phone)
+		"""
+		salesforce.search(sosl: sosl).done { result in
+			XCTAssertTrue(result.searchRecords.count > 0)
+			debugPrint("Search result count: \(result.searchRecords.count)")
+			for record in result.searchRecords {
+				XCTAssertTrue(record.type.lowercased() == "lead" || record.type.lowercased() == "contact")
+				XCTAssertNotNil(record.id)
+				XCTAssertNotNil(record.string(forField: "Name"))
+				debugPrint("Name: \(record.string(forField: "Name")!)")
+			}
+			exp.fulfill()
+		}.catch { error in
 			XCTFail(error.localizedDescription)
 		}
 		waitForExpectations(timeout: 10.0*60, handler: nil)

@@ -14,6 +14,7 @@ public extension Salesforce {
 		case authenticationSessionFailed
 		case refreshTokenUnavailable
 		case resourceError(httpStatusCode: Int, errorCode: String?, message: String?, fields: [String]?)
+		case invalidArgument(name: String, value: Any?, message: String?)
 		case other(message: String?)
 	}
 }

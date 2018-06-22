@@ -22,8 +22,8 @@
 		EA774E9A20CC2B560076D71C /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9920CC2B560076D71C /* AuthorizationTests.swift */; };
 		EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */; };
 		EA774E9D20CC72520076D71C /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB438941F65E26100C9ED97 /* KeychainTests.swift */; };
-		EA8A687F20D6B907007622D7 /* Salesforce_QueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */; };
-		EA8F167120CF81CB00D03501 /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */; };
+		EA8A687F20D6B907007622D7 /* Salesforce_RESTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687320D55528007622D7 /* Salesforce_RESTTests.swift */; };
+		EA8F167120CF81CB00D03501 /* SalesforceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F167020CF81CB00D03501 /* SalesforceTests.swift */; };
 		EAAC9E8220D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9E8120D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift */; };
 		EAAC9EB720D420AD00F0E16B /* Salesforce_OAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */; };
 		EAAC9EB920D44F5500F0E16B /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = EAAC9EB820D44F5500F0E16B /* Configuration.json */; };
@@ -49,7 +49,7 @@
 		111732379560F313E6BB7A77 /* Pods-SwiftlySalesforce_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Example/Pods-SwiftlySalesforce_Example.release.xcconfig"; sourceTree = "<group>"; };
 		21D41C68BF76D2015A912F59 /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24705FBC892656066700574C /* Pods-SwiftlySalesforce_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Example/Pods-SwiftlySalesforce_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		607FACD01AFB9204008FA782 /* SwiftlySalesforce_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftlySalesforce_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* Task Force Sample App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task Force Sample App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -70,8 +70,8 @@
 		EA774E9920CC2B560076D71C /* AuthorizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
 		EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStoreTests.swift; sourceTree = "<group>"; };
 		EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockContactMetadata.json; sourceTree = "<group>"; };
-		EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_QueryTests.swift; sourceTree = "<group>"; };
-		EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
+		EA8A687320D55528007622D7 /* Salesforce_RESTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_RESTTests.swift; sourceTree = "<group>"; };
+		EA8F167020CF81CB00D03501 /* SalesforceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesforceTests.swift; sourceTree = "<group>"; };
 		EAAC9E8120D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter_SalesforceTests.swift; sourceTree = "<group>"; };
 		EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_OAuthTests.swift; sourceTree = "<group>"; };
 		EAAC9EB820D44F5500F0E16B /* Configuration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* SwiftlySalesforce_Example.app */,
+				607FACD01AFB9204008FA782 /* Task Force Sample App.app */,
 				607FACE51AFB9204008FA782 /* SwiftlySalesforce_Tests.xctest */,
 			);
 			name = Products;
@@ -170,14 +170,14 @@
 				EAD4195020D0221C0064AFB1 /* AddressTests.swift */,
 				EA774E9920CC2B560076D71C /* AuthorizationTests.swift */,
 				EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */,
-				EA8F167020CF81CB00D03501 /* ConfigurationTests.swift */,
 				EAAC9E8120D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift */,
 				EAB438941F65E26100C9ED97 /* KeychainTests.swift */,
 				EAEE66A51F8DD18E0032A597 /* ObjectMetadataTests.swift */,
 				EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */,
 				EABF48711FA7F51200702175 /* RecordTests.swift */,
-				EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */,
+				EA8F167020CF81CB00D03501 /* SalesforceTests.swift */,
 				EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */,
+				EA8A687320D55528007622D7 /* Salesforce_RESTTests.swift */,
 				EA133DA91F91DC060055DC2F /* TestUtils.swift */,
 			);
 			path = Tests;
@@ -230,9 +230,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* SwiftlySalesforce_Example */ = {
+		607FACCF1AFB9204008FA782 /* Task Force Sample App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "SwiftlySalesforce_Example" */;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Task Force Sample App" */;
 			buildPhases = (
 				94C5C296D807F3283F86EA54 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
@@ -245,9 +245,9 @@
 			);
 			dependencies = (
 			);
-			name = SwiftlySalesforce_Example;
+			name = "Task Force Sample App";
 			productName = SwiftlySalesforce;
-			productReference = 607FACD01AFB9204008FA782 /* SwiftlySalesforce_Example.app */;
+			productReference = 607FACD01AFB9204008FA782 /* Task Force Sample App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		607FACE41AFB9204008FA782 /* SwiftlySalesforce_Tests */ = {
@@ -312,7 +312,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* SwiftlySalesforce_Example */,
+				607FACCF1AFB9204008FA782 /* Task Force Sample App */,
 				607FACE41AFB9204008FA782 /* SwiftlySalesforce_Tests */,
 			);
 		};
@@ -472,8 +472,8 @@
 				EA57EBF420D2B84200374451 /* ObjectMetadataTests.swift in Sources */,
 				EAAC9EB720D420AD00F0E16B /* Salesforce_OAuthTests.swift in Sources */,
 				EA774E9C20CC61A50076D71C /* AuthorizationStoreTests.swift in Sources */,
-				EA8F167120CF81CB00D03501 /* ConfigurationTests.swift in Sources */,
-				EA8A687F20D6B907007622D7 /* Salesforce_QueryTests.swift in Sources */,
+				EA8F167120CF81CB00D03501 /* SalesforceTests.swift in Sources */,
+				EA8A687F20D6B907007622D7 /* Salesforce_RESTTests.swift in Sources */,
 				EA57EBF320D2B7E300374451 /* TestUtils.swift in Sources */,
 				EAAC9E8220D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift in Sources */,
 				EA2399F820D1E93B00E7FF32 /* OrganizationTests.swift in Sources */,
@@ -488,7 +488,7 @@
 /* Begin PBXTargetDependency section */
 		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* SwiftlySalesforce_Example */;
+			target = 607FACCF1AFB9204008FA782 /* Task Force Sample App */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -653,7 +653,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftlySalesforce_Example.app/SwiftlySalesforce_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Task Force Sample App.app/Task Force Sample App";
 			};
 			name = Debug;
 		};
@@ -673,7 +673,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftlySalesforce_Example.app/SwiftlySalesforce_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Task Force Sample App.app/Task Force Sample App";
 			};
 			name = Release;
 		};
@@ -689,7 +689,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "SwiftlySalesforce_Example" */ = {
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Task Force Sample App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,

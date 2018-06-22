@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class ConfigurationTests: XCTestCase {
+class SalesforceTests: XCTestCase {
 	
 	let consumerKey = "CONSUMER_KEY"
 	let callbackURL = URL(string: "hello://world")!
@@ -22,7 +22,7 @@ class ConfigurationTests: XCTestCase {
         super.tearDown()
     }
     
-    func testThatItInitsWithMinimumArgs() {
+    func testThatConfigurationInitsWithMinimumArgs() {
 		
 		let config = try! Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
 		let comps = URLComponents(url: config.authorizationURL, resolvingAgainstBaseURL: false)
@@ -39,10 +39,10 @@ class ConfigurationTests: XCTestCase {
 		XCTAssertEqual(config.version, Salesforce.Configuration.defaultVersion)
 	}
 	
-	func testThatItInitsWithAllArgs() {
+	func testThatConfigurationInitsWithAllArgs() {
 		
 		let authorizationHost = "myhost.salesforce.com"
-		let authorizationParameters: [String: String] = ["Param1": "Value1", "Param2": "Value2", "response_type": "not_token"] // Note overriding "response_type" value
+		let authorizationParameters: [String: String] = ["Param1": "Value1", "Param2": "Value2", "response_type": "not_token"] // Note: overriding "response_type" value
 		let version = "v999.0"
 		let config = try! Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL, authorizationHost: authorizationHost, authorizationParameters: authorizationParameters, version: version)
 		let comps = URLComponents(url: config.authorizationURL, resolvingAgainstBaseURL: false)
@@ -61,10 +61,8 @@ class ConfigurationTests: XCTestCase {
 		XCTAssertEqual(config.version, version)
 	}
 	
-	func testThatItWontInitWithBadHostname() {
-		
+	func testThatConfigurationWontInitWithBadHostname() {
 		let badHostname = "test . salesforce.com"
-		
 		do {
 			let _ = try Salesforce.Configuration(consumerKey: consumerKey, callbackURL: callbackURL, authorizationHost: badHostname)
 			XCTFail()
