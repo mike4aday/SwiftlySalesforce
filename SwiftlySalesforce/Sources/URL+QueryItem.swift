@@ -18,8 +18,6 @@ public extension URL {
 	}
 
 	public func queryItems(named: String) -> [URLQueryItem]? {
-		return queryItems?.filter { (queryItem) -> Bool in
-			queryItem.name == named 
-		}
+		return queryItems?.filter { $0.name == named } 
 	}
 }
