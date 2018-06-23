@@ -94,6 +94,7 @@
 		EA8A688520D751B0007622D7 /* Salesforce+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688420D751B0007622D7 /* Salesforce+Error.swift */; };
 		EA8A688720D75B98007622D7 /* Salesforce+OAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A688620D75B98007622D7 /* Salesforce+OAuth.swift */; };
 		EAAC9EDC20D4821700F0E16B /* JSONDecoder+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9EDA20D4820D00F0E16B /* JSONDecoder+DateFormatter.swift */; };
+		EAD3F34420DE08D700F2F705 /* RESTResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3F34220DDFF9100F2F705 /* RESTResource.swift */; };
 		F19A3DC6843C9305A4D50B241CD9082F /* race.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FDEE17D70F8C60C7B4C8F178B29BDA /* race.swift */; };
 		F4DA1E2AE15CAB183C0B15DF4B577492 /* NSNotificationCenter+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DDD967C34F88FD5F0B45C87FA10D0B /* NSNotificationCenter+AnyPromise.m */; };
 		FDE1B6F494960060025A5BC561D8E557 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE10052C8449DD155BCB88F2518387 /* Authorization.swift */; };
@@ -245,6 +246,7 @@
 		EA8A688420D751B0007622D7 /* Salesforce+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Salesforce+Error.swift"; path = "SwiftlySalesforce/Sources/Salesforce+Error.swift"; sourceTree = "<group>"; };
 		EA8A688620D75B98007622D7 /* Salesforce+OAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salesforce+OAuth.swift"; sourceTree = "<group>"; };
 		EAAC9EDA20D4820D00F0E16B /* JSONDecoder+DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+DateFormatter.swift"; sourceTree = "<group>"; };
+		EAD3F34220DDFF9100F2F705 /* RESTResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTResource.swift; sourceTree = "<group>"; };
 		EBA0823419954654E89B5C0D270F4FD2 /* SwiftlySalesforce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftlySalesforce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4A5322F36908F0FEBDB4B30032FB4A /* Limit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Limit.swift; sourceTree = "<group>"; };
 		EE45835539718AE1F15F89B7FC69541F /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -398,7 +400,6 @@
 		75FAA6FB1B51F83B38561E246757E61C /* SwiftlySalesforce */ = {
 			isa = PBXGroup;
 			children = (
-				EA846FCB20DD8C72004F120E /* Resources */,
 				ACAE10052C8449DD155BCB88F2518387 /* Authorization.swift */,
 				8EB192BBC403265564A4BFC87290C466 /* AuthorizationStore.swift */,
 				2F8443A78925071E380310E4401D78EA /* DateFormatter+Salesforce.swift */,
@@ -416,6 +417,7 @@
 				EA846FC520DD4A16004F120E /* URL+QueryItem.swift */,
 				5B5E08281B4CF1DE665C15C804CA8A65 /* URLComponents+Parameters.swift */,
 				51A380F2B150F480819CB34699B0FC2D /* URLRequest+Initializer.swift */,
+				EA846FCB20DD8C72004F120E /* Resources */,
 				74EF5A5A7F368C4DF2C01B09355EC7CF /* Models */,
 				746FB5936C95255170E66A63D266A1BB /* Support Files */,
 			);
@@ -546,9 +548,10 @@
 			children = (
 				EA8A687C20D63577007622D7 /* OAuthResource.swift */,
 				EA846FC720DD8A96004F120E /* QueryResource.swift */,
-				FA29B458412DFFC6E52926102E08D4FE /* SObjectResource.swift */,
+				EAD3F34220DDFF9100F2F705 /* RESTResource.swift */,
 				EA8A688020D6B991007622D7 /* Resource.swift */,
 				EA846FC920DD8B97004F120E /* SearchResource.swift */,
+				FA29B458412DFFC6E52926102E08D4FE /* SObjectResource.swift */,
 			);
 			name = Resources;
 			path = SwiftlySalesforce/Sources/Resources;
@@ -741,6 +744,7 @@
 				DE91C58B243A0230B00DC039672CF1ED /* Globals.swift in Sources */,
 				EA846FBD20DC63A6004F120E /* JSONEncoder+DateFormatter.swift in Sources */,
 				8833BE3FF7F47877D89D09FA7C805CBE /* Identity.swift in Sources */,
+				EAD3F34420DE08D700F2F705 /* RESTResource.swift in Sources */,
 				3A758E3F3EF23B697A6801408D320288 /* Info.plist in Sources */,
 				EA846FC820DD8A96004F120E /* QueryResource.swift in Sources */,
 				EA72A10620D9F72C0056369D /* Salesforce+DataTask.swift in Sources */,

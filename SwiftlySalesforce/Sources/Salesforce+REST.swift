@@ -207,7 +207,7 @@ public extension Salesforce {
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	public func fetchImage(path: String, options: Options = []) -> Promise<UIImage> {
-		let resource = SObjectResource.fetchFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = RESTResource.fetchFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -219,7 +219,7 @@ public extension Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	public func fetchImage(url: URL, options: Options = []) -> Promise<UIImage> {
-		let resource = SObjectResource.fetchFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = RESTResource.fetchFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -231,7 +231,7 @@ public extension Salesforce {
 	/// Asynchronously requests information about the current user
 	/// See https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0
 	public func identity(options: Options = []) -> Promise<Identity> {
-		let resource = SObjectResource.identity(version: configuration.version)
+		let resource = RESTResource.identity(version: configuration.version)
 		let validator: DataResponseValidator = {
 			if let httpResp = $0.response as? HTTPURLResponse, httpResp.statusCode == 403 {
 				throw Salesforce.Error.unauthorized
@@ -253,7 +253,7 @@ public extension Salesforce {
 	/// - Returns: Promise of a dictionary of Limits, keyed by limit name
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
 	public func limits(options: Options = []) -> Promise<[String:Limit]> {
-		let resource = SObjectResource.limits(version: configuration.version)
+		let resource = RESTResource.limits(version: configuration.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
@@ -289,7 +289,7 @@ public extension Salesforce {
 		
 		let ct = contentType ?? ( method == .get || method == .delete ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = SObjectResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
+		let resource = RESTResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
 		return dataTask(resource: resource, options: options).map { $0.data }
 	}
 	
@@ -316,7 +316,7 @@ public extension Salesforce {
 		options: Options = []) -> Promise<Data> {
 		
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = SObjectResource.custom(method: method, baseURL: baseURL, path: path, queryParameters: params, body: body, contentType: contentType, headers: headers)
+		let resource = RESTResource.custom(method: method, baseURL: baseURL, path: path, queryParameters: params, body: body, contentType: contentType, headers: headers)
 		return dataTask(resource: resource, options: options).map { $0.data }
 	}
 }

@@ -39,7 +39,7 @@ class RESTResourceTests: XCTestCase {
 	
 	func testIdentity() {
 		
-		let req = try! SObjectResource.identity(version: "41.0").request(with: auth)
+		let req = try! RESTResource.identity(version: "41.0").request(with: auth)
 		
 		XCTAssertEqual(req.httpMethod, URLRequest.HTTPMethod.get.rawValue)
 		XCTAssertEqual(req.url!.absoluteString, auth.identityURL.absoluteString + "?version=41.0")
@@ -50,7 +50,7 @@ class RESTResourceTests: XCTestCase {
 	
 	func testLimits() {
 		
-		let req = try! SObjectResource.limits(version: "123").request(with: auth)
+		let req = try! RESTResource.limits(version: "123").request(with: auth)
 		
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/data/v123/limits")
 		XCTAssertEqual(req.httpMethod, URLRequest.HTTPMethod.get.rawValue)
@@ -75,7 +75,7 @@ class RESTResourceTests: XCTestCase {
 	
 	func testApexGet() {
 		
-		let req = try! SObjectResource.apex(method: .get, path: "/MyRESTResource/test", queryParameters: ["id" : "00112345"], body: nil, contentType: "application/x-www-form-urlencoded; charset=utf-8", headers: nil).request(with: auth)
+		let req = try! RESTResource.apex(method: .get, path: "/MyRESTResource/test", queryParameters: ["id" : "00112345"], body: nil, contentType: "application/x-www-form-urlencoded; charset=utf-8", headers: nil).request(with: auth)
 
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/apexrest/MyRESTResource/test?id=00112345")
 		XCTAssertEqual(req.httpMethod, URLRequest.HTTPMethod.get.rawValue)

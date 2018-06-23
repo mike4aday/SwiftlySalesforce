@@ -62,6 +62,14 @@ public class Salesforce {
 		return authorization?.accessToken
 	}
 	
+	public var refreshToken: String? {
+		return authorization?.refreshToken
+	}
+	
+	public var config: Configuration {
+		return configuration
+	}
+	
 	internal var authorizationPromise: Promise<Authorization>?
 	internal var authorizationStoreKey: AuthorizationStore.Key?
 	internal var authenticationSession: SFAuthenticationSession?
@@ -89,11 +97,5 @@ public extension Salesforce.Configuration {
 		}
 		
 		self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authorizationURL, version: version)
-	}
-	
-	public var oauthBaseURL: URL {
-		var comps = URLComponents(url: authorizationURL.deletingLastPathComponent(), resolvingAgainstBaseURL: false)
-		comps?.queryItems = nil
-		return comps?.url ?? authorizationURL.deletingLastPathComponent()
 	}
 }
