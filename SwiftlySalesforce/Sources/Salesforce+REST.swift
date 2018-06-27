@@ -18,7 +18,7 @@ public extension Salesforce {
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	public func fetchImage(path: String, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.fetchFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = RESTResource.smallFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -30,7 +30,7 @@ public extension Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	public func fetchImage(url: URL, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.fetchFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = RESTResource.smallFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)

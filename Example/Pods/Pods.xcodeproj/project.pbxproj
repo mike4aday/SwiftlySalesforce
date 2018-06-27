@@ -46,16 +46,16 @@
 		72005DED19AD9D893DE1622B912BB761 /* PromiseKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3807300C8E7EDFB5FA1D6370BB883E63 /* PromiseKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73BAC61C47C954FFE697D431474BEB24 /* SwiftlySalesforce-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C06FB8F7024BC13215F803A1EA61BB /* SwiftlySalesforce-dummy.m */; };
 		751B60CAA6E758C0AE7912AA3B8BEA2E /* Pods-SwiftlySalesforce_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB66AF919CD6FC604DE59A52A6C0A84 /* Pods-SwiftlySalesforce_Tests-dummy.m */; };
-		75DB9B2E62BC6ECF5F949486845BE866 /* ObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5A7E318BE423AC613ABA425AAA550F /* ObjectMetadata.swift */; };
+		75DB9B2E62BC6ECF5F949486845BE866 /* ObjectDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5A7E318BE423AC613ABA425AAA550F /* ObjectDescription.swift */; };
 		76767FC0D5D5C657771E70E5E9EF846C /* PMKFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8553E6DE049031857F3B3B2F734886A3 /* PMKFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		791673E3309DF199726EAD16F3F88FBC /* UIView+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA8677B4A5538FF6CC1648DC42FC64D /* UIView+Promise.swift */; };
 		7B84376285285AC4957BB9241F582586 /* Limit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4A5322F36908F0FEBDB4B30032FB4A /* Limit.swift */; };
 		7C4D91457104D8AF38083EF10E7B88B3 /* Deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6D99A6796F8C53940EC8C8C13293D4 /* Deprecations.swift */; };
-		807974DC56C1786AD112B7ED94377FDB /* PicklistItemMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FEAD4D5080A275F48C00CF3DA088D5 /* PicklistItemMetadata.swift */; };
+		807974DC56C1786AD112B7ED94377FDB /* PicklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FEAD4D5080A275F48C00CF3DA088D5 /* PicklistItem.swift */; };
 		86A2891980017B6D5CC69523A71863F3 /* QueryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF2E9CE335F17E23381D832EF703D98 /* QueryResult.swift */; };
 		87779532AE48F8B18358657B0D837D49 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50283146AFDFB186F9CDE282BCE07F39 /* Box.swift */; };
 		8833BE3FF7F47877D89D09FA7C805CBE /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F5C8F4FFAD22518F8DE9F6F01E9A02 /* Identity.swift */; };
-		8924E0A31EA95E54CD92FFFDB5DF75AC /* FieldMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4594568245DFD188CC7FD9FEB25EF7 /* FieldMetadata.swift */; };
+		8924E0A31EA95E54CD92FFFDB5DF75AC /* FieldDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4594568245DFD188CC7FD9FEB25EF7 /* FieldDescription.swift */; };
 		8D7315C19D8B68FA47469469ADE13255 /* PMKUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 73F8D8132EBD01A9775A2AA16C2086B6 /* PMKUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8F89FA29C5D0CBF13D0AC16D515566E0 /* AnyPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B4F988139EA59A545B13BD5417AEBE /* AnyPromise.swift */; };
 		934E7E0455BD80D5F908BB12EBF3D5F5 /* NSNotificationCenter+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = B99AFA7E97E0FA16F5D4E88E0A12140B /* NSNotificationCenter+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -91,7 +91,6 @@
 		EA43399D20DE9E5E00290C4B /* Salesforce+SObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43399C20DE9E5E00290C4B /* Salesforce+SObject.swift */; };
 		EA43399F20DEBCFC00290C4B /* UIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43399E20DEBCFC00290C4B /* UIResource.swift */; };
 		EA4339A120DEC35200290C4B /* Salesforce+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4339A020DEC35200290C4B /* Salesforce+UI.swift */; };
-		EA4339A720DEC52600290C4B /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4339A620DEC52600290C4B /* FieldValue.swift */; };
 		EA846FBF20DCB306004F120E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA846FBE20DCB306004F120E /* SearchResult.swift */; };
 		EA846FC620DD4A16004F120E /* URL+QueryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA846FC520DD4A16004F120E /* URL+QueryItem.swift */; };
 		EA846FC820DD8A96004F120E /* QueryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA846FC720DD8A96004F120E /* QueryResource.swift */; };
@@ -152,7 +151,7 @@
 		13F5C8F4FFAD22518F8DE9F6F01E9A02 /* Identity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		1653E73710988AE5AAFFE3CFAEABF5CE /* Pods-SwiftlySalesforce_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftlySalesforce_Example-frameworks.sh"; sourceTree = "<group>"; };
 		1790BDD002D41030F81BD6F3E8011928 /* Thenable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Thenable.swift; path = Sources/Thenable.swift; sourceTree = "<group>"; };
-		1B4594568245DFD188CC7FD9FEB25EF7 /* FieldMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FieldMetadata.swift; sourceTree = "<group>"; };
+		1B4594568245DFD188CC7FD9FEB25EF7 /* FieldDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FieldDescription.swift; sourceTree = "<group>"; };
 		1C97F79F78AA0533197902BDCE42DB61 /* Pods-SwiftlySalesforce_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftlySalesforce_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		1CE8B81D6E81DB138D2D2196AE412026 /* Keychain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = SwiftlySalesforce/Sources/Keychain.swift; sourceTree = "<group>"; };
 		218CD9BB493FEFCF6910ACF83CD7C705 /* NSNotificationCenter+Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSNotificationCenter+Promise.swift"; path = "Extensions/Foundation/Sources/NSNotificationCenter+Promise.swift"; sourceTree = "<group>"; };
@@ -211,11 +210,11 @@
 		9F9AFF3DF74F6B79F9659EA563016706 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1FDEE17D70F8C60C7B4C8F178B29BDA /* race.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = race.swift; path = Sources/race.swift; sourceTree = "<group>"; };
 		A9573AF375E3182D12971ABD2EE6DD3A /* Pods-SwiftlySalesforce_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftlySalesforce_Example-umbrella.h"; sourceTree = "<group>"; };
-		A9FEAD4D5080A275F48C00CF3DA088D5 /* PicklistItemMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PicklistItemMetadata.swift; sourceTree = "<group>"; };
+		A9FEAD4D5080A275F48C00CF3DA088D5 /* PicklistItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PicklistItem.swift; sourceTree = "<group>"; };
 		AC7DA9DEE77D4F253AB6F7784F159303 /* SObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SObject.swift; sourceTree = "<group>"; };
 		ACAE10052C8449DD155BCB88F2518387 /* Authorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Authorization.swift; path = SwiftlySalesforce/Sources/Authorization.swift; sourceTree = "<group>"; };
 		AE96F4344118B8D1C3CACE98B376C5AD /* dispatch_promise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = dispatch_promise.m; path = Sources/dispatch_promise.m; sourceTree = "<group>"; };
-		AF5A7E318BE423AC613ABA425AAA550F /* ObjectMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ObjectMetadata.swift; sourceTree = "<group>"; };
+		AF5A7E318BE423AC613ABA425AAA550F /* ObjectDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ObjectDescription.swift; sourceTree = "<group>"; };
 		AF8C5D125DC4623C1B601103BADAA4CC /* UIView+AnyPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+AnyPromise.m"; path = "Extensions/UIKit/Sources/UIView+AnyPromise.m"; sourceTree = "<group>"; };
 		B2C06FB8F7024BC13215F803A1EA61BB /* SwiftlySalesforce-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftlySalesforce-dummy.m"; sourceTree = "<group>"; };
 		B99AFA7E97E0FA16F5D4E88E0A12140B /* NSNotificationCenter+AnyPromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSNotificationCenter+AnyPromise.h"; path = "Extensions/Foundation/Sources/NSNotificationCenter+AnyPromise.h"; sourceTree = "<group>"; };
@@ -249,7 +248,6 @@
 		EA43399C20DE9E5E00290C4B /* Salesforce+SObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Salesforce+SObject.swift"; path = "SwiftlySalesforce/Sources/Salesforce+SObject.swift"; sourceTree = "<group>"; };
 		EA43399E20DEBCFC00290C4B /* UIResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResource.swift; sourceTree = "<group>"; };
 		EA4339A020DEC35200290C4B /* Salesforce+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Salesforce+UI.swift"; path = "SwiftlySalesforce/Sources/Salesforce+UI.swift"; sourceTree = "<group>"; };
-		EA4339A620DEC52600290C4B /* FieldValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		EA846FBE20DCB306004F120E /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		EA846FC520DD4A16004F120E /* URL+QueryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URL+QueryItem.swift"; path = "SwiftlySalesforce/Sources/URL+QueryItem.swift"; sourceTree = "<group>"; };
 		EA846FC720DD8A96004F120E /* QueryResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryResource.swift; sourceTree = "<group>"; };
@@ -395,16 +393,15 @@
 			isa = PBXGroup;
 			children = (
 				8D9E72E2654BFECDC0EC212AB1B59BFF /* Address.swift */,
-				1B4594568245DFD188CC7FD9FEB25EF7 /* FieldMetadata.swift */,
+				1B4594568245DFD188CC7FD9FEB25EF7 /* FieldDescription.swift */,
 				13F5C8F4FFAD22518F8DE9F6F01E9A02 /* Identity.swift */,
 				ED4A5322F36908F0FEBDB4B30032FB4A /* Limit.swift */,
-				AF5A7E318BE423AC613ABA425AAA550F /* ObjectMetadata.swift */,
+				AF5A7E318BE423AC613ABA425AAA550F /* ObjectDescription.swift */,
 				37B2CC85FD723B2B562DF30527B3D342 /* Organization.swift */,
-				A9FEAD4D5080A275F48C00CF3DA088D5 /* PicklistItemMetadata.swift */,
+				A9FEAD4D5080A275F48C00CF3DA088D5 /* PicklistItem.swift */,
 				8EF2E9CE335F17E23381D832EF703D98 /* QueryResult.swift */,
 				EA846FBE20DCB306004F120E /* SearchResult.swift */,
 				AC7DA9DEE77D4F253AB6F7784F159303 /* SObject.swift */,
-				EA4339A620DEC52600290C4B /* FieldValue.swift */,
 			);
 			name = Models;
 			path = SwiftlySalesforce/Sources/Models;
@@ -764,8 +761,7 @@
 				EA43399F20DEBCFC00290C4B /* UIResource.swift in Sources */,
 				525AAE350768655B55EE7F79C90B0175 /* DateFormatter+Salesforce.swift in Sources */,
 				EA8A688320D6BA6B007622D7 /* Salesforce.swift in Sources */,
-				EA4339A720DEC52600290C4B /* FieldValue.swift in Sources */,
-				8924E0A31EA95E54CD92FFFDB5DF75AC /* FieldMetadata.swift in Sources */,
+				8924E0A31EA95E54CD92FFFDB5DF75AC /* FieldDescription.swift in Sources */,
 				DE91C58B243A0230B00DC039672CF1ED /* Globals.swift in Sources */,
 				8833BE3FF7F47877D89D09FA7C805CBE /* Identity.swift in Sources */,
 				EAD3F34420DE08D700F2F705 /* RESTResource.swift in Sources */,
@@ -775,9 +771,9 @@
 				7B84376285285AC4957BB9241F582586 /* Limit.swift in Sources */,
 				EA8A688120D6B991007622D7 /* Resource.swift in Sources */,
 				EA43399520DE9DC100290C4B /* Salesforce+DataTask.swift in Sources */,
-				75DB9B2E62BC6ECF5F949486845BE866 /* ObjectMetadata.swift in Sources */,
+				75DB9B2E62BC6ECF5F949486845BE866 /* ObjectDescription.swift in Sources */,
 				6F26F4199F68BAED89176FE41CFA8DB7 /* Organization.swift in Sources */,
-				807974DC56C1786AD112B7ED94377FDB /* PicklistItemMetadata.swift in Sources */,
+				807974DC56C1786AD112B7ED94377FDB /* PicklistItem.swift in Sources */,
 				66943ADDBCEFDFC349D587BDEB23EC31 /* Promise+Validate.swift in Sources */,
 				EA846FBF20DCB306004F120E /* SearchResult.swift in Sources */,
 				EA846FC620DD4A16004F120E /* URL+QueryItem.swift in Sources */,

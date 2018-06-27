@@ -11,7 +11,7 @@ import Foundation
 internal enum RESTResource {
 	case identity(version: String)
 	case limits(version: String)
-	case fetchFile(baseURL: URL?, path: String?, accept: String)
+	case smallFile(baseURL: URL?, path: String?, accept: String)
 	case apex(method: URLRequest.HTTPMethod, path: String, queryParameters: [String: String]?, body: Data?, contentType: String, headers: [String: String]?)
 	case custom(method: URLRequest.HTTPMethod, baseURL: URL?, path: String?, queryParameters: [String: String]?, body: Data?, contentType: String, headers: [String: String]?)
 }
@@ -44,7 +44,7 @@ extension RESTResource: Resource {
 				headers: nil
 			)
 			
-		case let .fetchFile(baseURL, path, accept):
+		case let .smallFile(baseURL, path, accept):
 			return try URLRequest(
 				method: .get,
 				baseURL: (baseURL ?? authorization.instanceURL).appendingPathComponent(path ?? ""),

@@ -138,7 +138,7 @@ public extension Salesforce {
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm
 	/// - Parameter type: Object name
 	/// - Returns: Promise<ObjectDescription>
-	public func describe(type: String, options: Options = []) -> Promise<ObjectMetadata> {
+	public func describe(type: String, options: Options = []) -> Promise<ObjectDescription> {
 		let resource = SObjectResource.describe(type: type, version: config.version)
 		return dataTask(resource: resource, options: options)
 	}
@@ -146,7 +146,7 @@ public extension Salesforce {
 	/// Asynchronously retrieves metadata for multiple Salesforce objects.
 	/// - Parameter types: Array of object types (e.g. "Account")
 	/// - Returns: Promise<[ObjectDescription]>, a promise of an array of ObjectDescriptions, in the same order as the "types" parameter.
-	public func describe(types: [String], options: Options = []) -> Promise<[ObjectMetadata]> {
+	public func describe(types: [String], options: Options = []) -> Promise<[ObjectDescription]> {
 		let promises = types.map { describe(type: $0) }
 		return when(fulfilled: promises)
 	}
@@ -154,9 +154,9 @@ public extension Salesforce {
 	/// Asynchronously retrieves object-level metadata about all objects defined in the org.
 	/// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
 	/// - Returns: Promise of an array of ObjectDescriptions
-	public func describeAll(options: Options = []) -> Promise<[ObjectMetadata]> {
+	public func describeAll(options: Options = []) -> Promise<[ObjectDescription]> {
 		let resource = SObjectResource.describeGlobal(version: config.version)
-		return dataTask(resource: resource, options: options).map { (result: DescribeAllResult) -> [ObjectMetadata] in
+		return dataTask(resource: resource, options: options).map { (result: DescribeAllResult) -> [ObjectDescription] in
 			return result.sobjects
 		}
 	}
@@ -180,6 +180,6 @@ fileprivate extension Salesforce {
 	}
 	
 	fileprivate struct DescribeAllResult: Decodable {
-		var sobjects: [ObjectMetadata]
+		var sobjects: [ObjectDescription]
 	}
 }

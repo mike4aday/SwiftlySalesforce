@@ -1,5 +1,5 @@
 //
-//  ObjectMetadata.swift
+//  ObjectDescription.swift
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
@@ -8,9 +8,9 @@
 
 /// Salesforce object metadata
 /// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
-public struct ObjectMetadata: Decodable {
+public struct ObjectDescription: Decodable {
 	
-	public let fields: [FieldMetadata]?
+	public let fields: [FieldDescription]?
 	public let isCreateable: Bool
 	public let isCustom: Bool
 	public let isCustomSetting: Bool

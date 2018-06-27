@@ -6,8 +6,9 @@
 //  Copyright (c) 2018. All rights reserved.
 //
 
-/// Represents options in a Salesforce Picklist-type field (i.e. drop-down list)
-public struct PicklistItemMetadata: Decodable {
+/// Represents an option in a Salesforce Picklist-type field (i.e. drop-down list)
+
+public struct PicklistItem: Decodable {
 	
 	public let isActive: Bool
 	public let isDefault: Bool

@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class ObjectMetadataTests: XCTestCase {
+class ObjectDescriptionTests: XCTestCase {
     
 	var decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
 	

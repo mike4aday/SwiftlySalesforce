@@ -1,5 +1,5 @@
 //
-//  FieldMetadata.swift
+//  FieldDescription.swift
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
@@ -11,7 +11,7 @@ import Foundation
 /// Salesforce field metadata
 /// See: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
 
-public struct FieldMetadata {
+public struct FieldDescription {
 	
 	public let defaultValue: Any?
 	public let defaultValueFormula: String?
@@ -25,7 +25,7 @@ public struct FieldMetadata {
 	public let label: String
 	public let length: UInt?
 	public let name: String
-	public let picklistValues: [PicklistItemMetadata]
+	public let picklistValues: [PicklistItem]
 	public let relatedTypes: [String]
 	public let relationshipName: String?
 	public let type: String
@@ -39,7 +39,7 @@ public struct FieldMetadata {
 	}
 }
 
-extension FieldMetadata: Decodable {
+extension FieldDescription: Decodable {
 	
 	enum CodingKeys: String, CodingKey {
 		case defaultValue
@@ -87,7 +87,7 @@ extension FieldMetadata: Decodable {
 		self.label = try container.decode(String.self, forKey: .label)										// Required property
 		self.length = try container.decodeIfPresent(UInt.self, forKey: .length)								// Optional property
 		self.name = try container.decode(String.self, forKey: .name)										// Required property
-		self.picklistValues = try container.decode([PicklistItemMetadata].self, forKey: .picklistValues)	// Required property
+		self.picklistValues = try container.decode([PicklistItem].self, forKey: .picklistValues)	// Required property
 		self.relatedTypes = try container.decode([String].self, forKey: .relatedTypes)						// Required property
 		self.relationshipName = try container.decodeIfPresent(String.self, forKey: .relationshipName)		// Optional property
 		self.type = try container.decode(String.self, forKey: .type)										// Required property
