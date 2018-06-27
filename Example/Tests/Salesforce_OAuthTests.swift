@@ -65,7 +65,7 @@ class Salesforce_OAuthTests: XCTestCase {
 		let orgID = UUID().uuidString
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: userID, organizationID: orgID))
 		var oldAuth: Authorization?
-		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then { (queryResult: QueryResult<Record>) -> Promise<Void> in
+		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then { (queryResult: QueryResult<SObject>) -> Promise<Void> in
 			oldAuth = salesforce.authorization!
 			return salesforce.revokeAccessToken()
 		}.then { _ in

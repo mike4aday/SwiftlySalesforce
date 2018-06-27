@@ -1,5 +1,5 @@
 //
-//  Record.swift
+//  SObject.swift
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
@@ -7,7 +7,7 @@
 //
 
 /// Represents a generic record of a Salesforce object
-public struct Record {
+public struct SObject {
 	
 	/// Salesforce type corresponding to this record
 	public var type: String
@@ -64,7 +64,7 @@ public struct Record {
 		return value(forField: field)
 	}
 	
-	public func subqueryResult(forField field: String) -> QueryResult<Record>? {
+	public func subqueryResult(forField field: String) -> QueryResult<SObject>? {
 		return value(forField: field)
 	}
 	
@@ -89,7 +89,7 @@ public struct Record {
 	}
 }
 
-extension Record: Codable {
+extension SObject: Codable {
 	
 	fileprivate struct RecordCodingKey: CodingKey {
 		var stringValue: String

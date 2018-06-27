@@ -24,8 +24,8 @@ class ObjectMetadataTests: XCTestCase {
 	func testThatItInitsObjectMetadataForAccount() {
 		
 		let data = TestUtils.shared.read(fileName: "MockAccountMetadata", ofType: "json")!
-		let desc = try! decoder.decode(ObjectMetadata.self, from: data)
-		var fields = [String: FieldMetadata]()
+		let desc = try! decoder.decode(ObjectDescription.self, from: data)
+		var fields = [String: FieldDescription]()
 		for (name, fieldMetadata) in zip(desc.fields!.map({ $0.name }), desc.fields!) {
 			fields[name] = fieldMetadata
 		}
@@ -70,8 +70,8 @@ class ObjectMetadataTests: XCTestCase {
 	func testThatItInitsObjectMetadataForContact() {
 		
 		let data = TestUtils.shared.read(fileName: "MockContactMetadata", ofType: "json")!
-		let desc = try! decoder.decode(ObjectMetadata.self, from: data)
-		var fields = [String: FieldMetadata]()
+		let desc = try! decoder.decode(ObjectDescription.self, from: data)
+		var fields = [String: FieldDescription]()
 		for (name, fieldMetadata) in zip(desc.fields!.map({ $0.name }), desc.fields!) {
 			fields[name] = fieldMetadata
 		}

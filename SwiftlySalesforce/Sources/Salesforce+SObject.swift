@@ -28,7 +28,7 @@ public extension Salesforce {
 	/// - Parameter id: ID of the record to retrieve
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of a Record instance
-	public func retrieve(type: String, id: String, fields: [String]? = nil, options: Options = []) -> Promise<Record> {
+	public func retrieve(type: String, id: String, fields: [String]? = nil, options: Options = []) -> Promise<SObject> {
 		let resource = SObjectResource.retrieve(type: type, id: id, fields: fields, version: config.version)
 		return dataTask(resource: resource, options: options)
 	}
@@ -48,8 +48,8 @@ public extension Salesforce {
 	/// - Parameter ids: IDs of the records to retrieve. All records must be of the same type.
 	/// - Parameter fields: Optional array of field names to retrieve. If nil, all fields will be retrieved
 	/// - Returns: Promise of an array of Record instances in the same order as the "ids" parameter
-	public func retrieve(type: String, ids: [String], fields: [String]? = nil, options: Options = []) -> Promise<[Record]> {
-		let promises: [Promise<Record>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
+	public func retrieve(type: String, ids: [String], fields: [String]? = nil, options: Options = []) -> Promise<[SObject]> {
+		let promises: [Promise<SObject>] = ids.map { retrieve(type: type, id: $0, fields: fields) }
 		return when(fulfilled: promises)
 	}
 	
@@ -68,7 +68,7 @@ public extension Salesforce {
 	}
 	
 	/// Ansynchronously creates a new record in Salesforce
-	public func insert(record: Record, options: Options = []) -> Promise<String> {
+	public func insert(record: SObject, options: Options = []) -> Promise<String> {
 		return insert(type: record.type, record: record)
 	}
 	
@@ -77,7 +77,7 @@ public extension Salesforce {
 	/// - Parameter fields: Dictionary of field names and values to be set on the newly-inserted record.
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
 	public func insert(type: String, fields: [String: Encodable?], options: Options = []) -> Promise<String> {
-		let record = Record(type: type, fields: fields)
+		let record = SObject(type: type, fields: fields)
 		return insert(type: type, record: record)
 	}
 	
@@ -97,7 +97,7 @@ public extension Salesforce {
 	}
 	
 	/// Asynchronously updates a record in Salesforce
-	public func update(record: Record, options: Options = []) -> Promise<Void> {
+	public func update(record: SObject, options: Options = []) -> Promise<Void> {
 		guard let id = record.id else {
 			return Promise(error: Salesforce.Error.invalidArgument(name: "record", value: nil, message: "Record ID can't be nil."))
 		}
@@ -110,7 +110,7 @@ public extension Salesforce {
 	/// - Parameter fields: Dictionary of updated field name and value pairs.
 	/// - Returns: Promise<Void>
 	public func update(type: String, id: String, fields: [String: Encodable?], options: Options = []) -> Promise<Void> {
-		let record = Record(type: type, fields: fields)
+		let record = SObject(type: type, fields: fields)
 		return update(type: type, id: id, record: record)
 	}
 	
@@ -125,7 +125,7 @@ public extension Salesforce {
 		return dataTask(resource: resource, options: options).done { _ in return }
 	}
 	
-	public func delete(record: Record, options: Options = []) -> Promise<Void> {
+	public func delete(record: SObject, options: Options = []) -> Promise<Void> {
 		guard let id = record.id else {
 			return Promise(error: Salesforce.Error.invalidArgument(name: "record", value: nil, message: "Record ID can't be nil."))
 		}

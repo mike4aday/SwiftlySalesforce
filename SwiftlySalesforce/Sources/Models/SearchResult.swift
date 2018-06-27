@@ -13,5 +13,5 @@ import Foundation
 
 public struct SearchResult: Decodable {
 	
-	public let searchRecords: [Record]
+	public let searchRecords: [SObject]
 }

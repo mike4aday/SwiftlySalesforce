@@ -106,7 +106,7 @@ class RecordTests: XCTestCase {
     
     func testThatItInitsFromCoder() {
 		
-		guard let data = json.data(using: .utf8), let account = try? decoder.decode(Record.self, from: data) else {
+		guard let data = json.data(using: .utf8), let account = try? decoder.decode(SObject.self, from: data) else {
 			XCTFail()
 			return
 		}
@@ -130,7 +130,7 @@ class RecordTests: XCTestCase {
 	
 	func testThatItEncodesAndDecodes() {
 		
-		var record = Record(type: "Account")
+		var record = SObject(type: "Account")
 		
 		record.setValue("Mega Corp., Inc.", forField: "Name")
 		record.setValue(URL(string: "https://www.mycompany.com")!, forField: "Website")
@@ -144,7 +144,7 @@ class RecordTests: XCTestCase {
 		// "Re-hydrate"
 		dict["attributes"] = ["url": "/services/data/v41.0/sobjects/Account/0011Y00002LZRxeQAH", "type": "Account"]
 		let data = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-		let record2 = try! decoder.decode(Record.self, from: data)
+		let record2 = try! decoder.decode(SObject.self, from: data)
 		
 		XCTAssertEqual(record2.id, "0011Y00002LZRxeQAH")
 		XCTAssertEqual(record2.url(forField: "Website"), URL(string: "https://www.mycompany.com")!)
@@ -162,7 +162,7 @@ class RecordTests: XCTestCase {
 	
 	func testThatItMutates() {
 		
-		guard let data = json.data(using: .utf8), var account = try? decoder.decode(Record.self, from: data) else {
+		guard let data = json.data(using: .utf8), var account = try? decoder.decode(SObject.self, from: data) else {
 			XCTFail()
 			return
 		}
@@ -198,7 +198,7 @@ class RecordTests: XCTestCase {
 			"Website" : URL(string: "https://tiny.biz"),
 			"BigCompany?" : false
 		]
-		let account = Record(type: "Account", fields: dict)
+		let account = SObject(type: "Account", fields: dict)
 		
 		XCTAssertEqual(account["Name"], "Tiny Biz, Inc.")
 		XCTAssertEqual(account["NumberOfEmployees"], 123)
