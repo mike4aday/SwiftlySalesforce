@@ -12,8 +12,7 @@ internal enum RESTResource {
 	case identity(version: String)
 	case limits(version: String)
 	case smallFile(baseURL: URL?, path: String?, accept: String)
-	case apex(method: URLRequest.HTTPMethod, path: String, queryParameters: [String: String]?, body: Data?, contentType: String, headers: [String: String]?)
-	case custom(method: URLRequest.HTTPMethod, baseURL: URL?, path: String?, queryParameters: [String: String]?, body: Data?, contentType: String, headers: [String: String]?)
+	case apex(method: String, path: String, queryParameters: [String: String]?, body: Data?, contentType: String, headers: [String: String]?)
 }
 
 extension RESTResource: Resource {
@@ -57,19 +56,13 @@ extension RESTResource: Resource {
 			
 		case let .apex(method, path, queryParameters, body, contentType, headers):
 			return try URLRequest(
-				method: method,
+				method: {
+					guard let httpMethod = URLRequest.HTTPMethod(rawValue: method) else {
+						throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnsupportedURL, userInfo: [NSLocalizedDescriptionKey: "Unsupported method: \(method)"])
+					}
+					return httpMethod
+				}(),
 				baseURL: authorization.instanceURL.appendingPathComponent("/services/apexrest\(path)"),
-				accessToken: authorization.accessToken,
-				contentType: contentType,
-				queryParameters: queryParameters,
-				body: body,
-				headers:  headers
-			)
-			
-		case let .custom(method, baseURL, path, queryParameters, body, contentType, headers):
-			return try URLRequest(
-				method: method,
-				baseURL: (baseURL ?? authorization.instanceURL).appendingPathComponent(path ?? ""),
 				accessToken: authorization.accessToken,
 				contentType: contentType,
 				queryParameters: queryParameters,

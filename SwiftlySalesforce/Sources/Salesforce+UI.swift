@@ -29,8 +29,8 @@ public extension Salesforce {
 		case view = "View"
 	}
 	
-	public func getRecordsAndMetadata<T: Decodable>(
-		ids: [String],
+	public func recordsAndMetadata<T: Decodable>(
+		recordIds: [String],
 		childRelationships: [String]?,
 		formFactor: FormFactor?,
 		layoutTypes: [LayoutType]?,
@@ -40,7 +40,7 @@ public extension Salesforce {
 		options: Options) -> Promise<T> {
 		
 		let resource = UIResource.records(
-			ids: ids,
+			recordIds: recordIds,
 			childRelationships: childRelationships,
 			formFactor: formFactor?.rawValue,
 			layoutTypes: layoutTypes?.map { $0.rawValue },
@@ -51,35 +51,44 @@ public extension Salesforce {
 		return dataTask(resource: resource, options: options)
 	}
 	
-	public func getDefaultsForCloning<T: Decodable>(
-		id: String,
+	public func defaultsForCloning<T: Decodable>(
+		recordId: String,
 		formFactor: FormFactor?,
 		optionalFields: [String]?,
-		recordTypeID: String?,
+		recordTypeId: String?,
 		options: Options) -> Promise<T> {
 		
 		let resource = UIResource.defaultsForCloning(
-			id: id,
+			recordId: recordId,
 			formFactor: formFactor?.rawValue,
 			optionalFields: optionalFields,
-			recordTypeID: recordTypeID,
+			recordTypeId: recordTypeId,
 			version: config.version)
 		return dataTask(resource: resource, options: options)
 	}
 	
-	public func getDefaultsForCreating<T: Decodable>(
-		type: String,
+	public func defaultsForCreating<T: Decodable>(
+		objectApiName: String,
 		formFactor: FormFactor?,
 		optionalFields: [String]?,
-		recordTypeID: String?,
+		recordTypeId: String?,
 		options: Options) -> Promise<T> {
 		
 		let resource = UIResource.defaultsForCreating(
-			type: type,
+			objectApiName: objectApiName,
 			formFactor: formFactor?.rawValue,
 			optionalFields: optionalFields,
-			recordTypeID: recordTypeID,
+			recordTypeId: recordTypeId,
 			version: config.version)
+		return dataTask(resource: resource, options: options)
+	}
+	
+	public func picklistValues<T: Decodable>(
+		objectApiName: String,
+		recordTypeId: String,
+		options: Options) -> Promise<T> {
+		
+		let resource = UIResource.picklistValues(objectApiName: objectApiName, recordTypeId: recordTypeId, version: config.version)
 		return dataTask(resource: resource, options: options)
 	}
 }

@@ -2,7 +2,8 @@
 //  UIResource.swift
 //  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 6/23/18.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +12,7 @@ internal enum UIResource {
 	
 	// Get record data and metadata
 	case records(
-		ids: [String],
+		recordIds: [String],
 		childRelationships: [String]?,
 		formFactor: String?,
 		layoutTypes: [String]?,
@@ -22,21 +23,26 @@ internal enum UIResource {
 	)
 	
 	case defaultsForCloning(
-		id: String,
+		recordId: String,
 		formFactor: String?,
 		optionalFields: [String]?,
-		recordTypeID: String?,
+		recordTypeId: String?,
 		version: String
 	)
 	
 	case defaultsForCreating(
-		type: String,
+		objectApiName: String,
 		formFactor: String?,
 		optionalFields: [String]?,
-		recordTypeID: String?,
+		recordTypeId: String?,
 		version: String
 	)
 	
+	case picklistValues(
+		objectApiName: String,
+		recordTypeId: String,
+		version: String
+	)
 }
 
 extension UIResource: Resource {
@@ -82,19 +88,30 @@ extension UIResource: Resource {
 				headers: nil
 			)
 			
-		case let .defaultsForCreating(type, formFactor, optionalFields, recordTypeID, version):
+		case let .defaultsForCreating(objectApiName, formFactor, optionalFields, recordTypeId, version):
 			 return try URLRequest(
 				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/create/\(type)"),
+				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/create/\(objectApiName)"),
 				accessToken: authorization.accessToken,
 				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
 				queryParameters: {
 					var params: [String: String] = [:]
 					if let formFactor = formFactor { params["formFactor"] = formFactor }
 					if let optionalFields = optionalFields { params["optionalFields"] = optionalFields.joined(separator: ",") }
-					if let recordTypeID = recordTypeID { params["recordTypeId"] = recordTypeID }
+					if let recordTypeId = recordTypeId { params["recordTypeId"] = recordTypeId }
 					return params.count > 0 ? params : nil
 			}(),
+				body: nil,
+				headers: nil
+			)
+			
+		case let .picklistValues(objectApiName, recordTypeId, version):
+			return try URLRequest(
+				method: .get,
+				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/object-info/\(objectApiName)/picklist-values/\(recordTypeId)"),
+				accessToken: authorization.accessToken,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
+				queryParameters: nil,
 				body: nil,
 				headers: nil
 			)

@@ -9,8 +9,8 @@
 import PromiseKit
 
 public typealias Promise = PromiseKit.Promise
-internal typealias DataResponse = (data: Data, response: URLResponse)
-internal typealias DataResponseValidator = (DataResponse) throws -> DataResponse
+public typealias DataResponse = (data: Data, response: URLResponse)
+public typealias Validator = (DataResponse) throws -> DataResponse
 
 /// An "alias" for PromiseKit's "firstly" function
 /// See "firstly" at https://github.com/mxcl/PromiseKit/blob/master/Documentation/GettingStarted.md#firstly

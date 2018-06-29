@@ -43,7 +43,7 @@ public extension Salesforce {
 	/// See https://help.salesforce.com/articleView?id=remoteaccess_using_openid.htm&type=0
 	public func identity(options: Options = []) -> Promise<Identity> {
 		let resource = RESTResource.identity(version: configuration.version)
-		let validator: DataResponseValidator = {
+		let validator: Validator = {
 			if let httpResp = $0.response as? HTTPURLResponse, httpResp.statusCode == 403 {
 				throw Salesforce.Error.unauthorized
 			}
@@ -90,34 +90,7 @@ public extension Salesforce {
 		
 		let ct = contentType ?? ( method == .get || method == .delete ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = RESTResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
-		return dataTask(resource: resource, options: options).map { $0.data }
-	}
-	
-	// MARK: - Custom
-	
-	/// Use this method to call a Salesforce REST API endpoint that's not covered by the other methods.
-	/// Note: baseURL and path should not both be nil
-	/// - Parameter method: HTTP method
-	/// - Parameter baseURL: Base URL to which the path parameter will be appended. If nil, then user's "instance URL" will be used
-	/// - Parameter path: Absolute path to endpoint, relative to "baseURL" parameter or, if "baseURL" is nil, then relative to the user's "instance URL"
-	/// - Parameter parameters: Dictionary of query string parameters
-	/// - Parameter body: Data to be sent in the body of the request, e.g. JSON as Data in the body of a POST request
-	/// - Parameter contentType: the MIME type of the request content; defaults to "application/json"
-	/// - Parameter headers: Dictionary of custom HTTP header values
-	/// - Returns: Promise of Data
-	public func custom(
-		method: URLRequest.HTTPMethod = .get,
-		baseURL: URL? = nil,
-		path: String? = nil,
-		parameters: [String: Any?]? = nil,
-		body: Data? = nil,
-		contentType: String = URLRequest.MIMEType.json.rawValue,
-		headers: [String: String]? = nil,
-		options: Options = []) -> Promise<Data> {
-		
-		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = RESTResource.custom(method: method, baseURL: baseURL, path: path, queryParameters: params, body: body, contentType: contentType, headers: headers)
+		let resource = RESTResource.apex(method: method.rawValue, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
 		return dataTask(resource: resource, options: options).map { $0.data }
 	}
 }

@@ -75,7 +75,8 @@ class RESTResourceTests: XCTestCase {
 	
 	func testApexGet() {
 		
-		let req = try! RESTResource.apex(method: .get, path: "/MyRESTResource/test", queryParameters: ["id" : "00112345"], body: nil, contentType: "application/x-www-form-urlencoded; charset=utf-8", headers: nil).request(with: auth)
+		let res = RESTResource.apex(method: URLRequest.HTTPMethod.get.rawValue, path: "/MyRESTResource/test", queryParameters: ["id": "00112345"], body: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue, headers: ["header1": "value1"])
+		let req  = try! res.request(with: auth)
 
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/apexrest/MyRESTResource/test?id=00112345")
 		XCTAssertEqual(req.httpMethod, URLRequest.HTTPMethod.get.rawValue)

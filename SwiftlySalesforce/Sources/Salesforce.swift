@@ -35,6 +35,9 @@ public class Salesforce {
 	}
 	
 	public let configuration: Configuration
+	internal var authorizationPromise: Promise<Authorization>?
+	internal var authorizationStoreKey: AuthorizationStore.Key?
+	internal var authenticationSession: SFAuthenticationSession?
 	
 	public init(configuration: Configuration, user: User? = nil) {
 		self.configuration = configuration
@@ -66,13 +69,13 @@ public class Salesforce {
 		return authorization?.refreshToken
 	}
 	
+	public var instanceURL: URL? {
+		return authorization?.instanceURL
+	}
+	
 	public var config: Configuration {
 		return configuration
 	}
-	
-	internal var authorizationPromise: Promise<Authorization>?
-	internal var authorizationStoreKey: AuthorizationStore.Key?
-	internal var authenticationSession: SFAuthenticationSession?
 }
 
 public extension Salesforce.Configuration {
