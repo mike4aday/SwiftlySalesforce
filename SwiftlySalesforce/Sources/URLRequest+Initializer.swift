@@ -29,36 +29,45 @@ public extension URLRequest {
 	}
 	
 	public init(
-		method: HTTPMethod,
-		baseURL: URL,
-		accessToken: String,
-		contentType: String,
-		queryParameters: [String: String]? = nil,
+		method: String = HTTPMethod.get.rawValue,
+		url: URL,
 		body: Data? = nil,
-		headers: [String: String]? = nil) throws {
+		accessToken: String,
+		additionalQueryParameters: [String: String]? = nil,
+		additionalHeaders: [String: String]? = nil,
+		contentType: String = MIMEType.urlEncoded.rawValue) throws {
 		
-		// URL
-		guard let comps = URLComponents(url: baseURL, parameters: queryParameters), let url = comps.url else {
-			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: baseURL])
+		// Components from URL
+		guard var comps = URLComponents(url: url) else {
+			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: url])
+		}
+		
+		// Query items
+		if let additionalQueryItems = additionalQueryParameters?.map({ URLQueryItem(name: $0.key, value: $0.value) }) {
+			let allQueryItems = additionalQueryItems + (comps.queryItems ?? [])
+			comps.queryItems = allQueryItems
+		}
+		comps.percentEncodedQuery = comps.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+
+		// The final URL
+		guard let url = comps.url else {
+			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSLocalizedDescriptionKey: "Can't create URL from components"])
 		}
 		self.init(url: url)
 		
 		// Method
-		self.httpMethod = method.rawValue
+		self.httpMethod = method
 		
 		// Standard headers
 		self.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-		self.setValue("application/json", forHTTPHeaderField: "Accept")
 		self.setValue(contentType, forHTTPHeaderField: "Content-Type")
 		
-		// Custom headers
-		if let headers = headers {
-			for header in headers {
-				self.setValue(header.value, forHTTPHeaderField: header.key)
-			}
+		// Additional headers (these could override standard headers)
+		for header in (additionalHeaders ?? [:]) {
+			self.setValue(header.value, forHTTPHeaderField: header.key)
 		}
 		
 		// Body data
 		self.httpBody = body ?? nil
-	}
+	}	
 }

@@ -9,9 +9,10 @@
 import Foundation
 import PromiseKit
 
-internal extension Promise where T == DataResponse {
+public extension Promise where T == DataResponse {
 	
 	internal static var defaultValidator: Validator {
+		
 		return {
 			guard let response = $0.response as? HTTPURLResponse else {
 				return $0
@@ -37,7 +38,7 @@ internal extension Promise where T == DataResponse {
 		}
 	}
 	
-	internal func validated(with validator: Validator? = nil) -> Promise<T> {
+	public func validated(with validator: Validator? = nil) -> Promise<T> {
 		return map(validator ?? Promise<T>.defaultValidator)
 	}
 }

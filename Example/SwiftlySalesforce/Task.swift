@@ -10,9 +10,9 @@ import Foundation
 
 public final class Task: Decodable {
 	
-	public var id: String
+	public var id: String = ""
 	public var subject: String?
-	public var createdDate: Date
+	public var createdDate: Date = Date()
 	public var status: String?
 	public var priority: String?
 	public var isHighPriority: Bool = false

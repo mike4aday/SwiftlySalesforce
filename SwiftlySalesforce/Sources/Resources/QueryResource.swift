@@ -21,27 +21,27 @@ extension QueryResource: Resource {
 			
 		case let .query(soql, batchSize, version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/query"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: ["q" : soql],
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/query"),
 				body: nil,
-				headers: {
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: ["q" : soql],
+				additionalHeaders: {
 					guard let bs = batchSize else  { return nil }
 					return ["Sforce-Query-Options": "batchSize=\(bs)"]
-				}()
+				}(),
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .queryNext(path):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent(path),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent(path),
 				body: nil,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 		}
 	}

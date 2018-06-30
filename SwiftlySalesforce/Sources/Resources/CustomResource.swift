@@ -11,7 +11,7 @@ import Foundation
 
 internal struct CustomResource {
 	var method: String
-	var baseURL: URL?
+	var url: URL?
 	var path: String?
 	var queryParameters: [String: String]?
 	var body: Data?
@@ -23,18 +23,17 @@ extension CustomResource: Resource {
 	
 	func request(with authorization: Authorization) throws -> URLRequest {
 		return try URLRequest(
-			method: {
-				guard let httpMethod = URLRequest.HTTPMethod(rawValue: method) else {
-					throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnsupportedURL, userInfo: [NSLocalizedDescriptionKey: "Unsupported method: \(method)"])
+			method: method,
+			url: {
+				var u = url ?? authorization.instanceURL
+				if let path = path {
+					u.appendPathComponent(path)
 				}
-				return httpMethod
+				return u
 			}(),
-			baseURL: (baseURL ?? authorization.instanceURL).appendingPathComponent(path ?? ""),
-			accessToken: authorization.accessToken,
-			contentType: contentType,
-			queryParameters: queryParameters,
-			body: body,
-			headers:  headers
+			body: body, accessToken: authorization.accessToken,
+			additionalQueryParameters: queryParameters,
+			additionalHeaders:  headers, contentType: contentType
 		)
 	}
 }

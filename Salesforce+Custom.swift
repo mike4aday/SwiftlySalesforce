@@ -22,8 +22,8 @@ public extension Salesforce {
 	/// - Parameter headers: Dictionary of custom HTTP header values
 	/// - Returns: Promise of Data
 	public func custom<T: Decodable>(
-		method: URLRequest.HTTPMethod = .get,
-		baseURL: URL? = nil,
+		method: String,
+		url: URL? = nil,
 		path: String? = nil,
 		parameters: [String: Any?]? = nil,
 		body: Data? = nil,
@@ -33,7 +33,7 @@ public extension Salesforce {
 		options: Options = []) -> Promise<T> {
 		
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = CustomResource(method: method.rawValue, baseURL: baseURL, path: path, queryParameters: params, body: body, contentType: contentType, headers: headers)
+		let resource = CustomResource(method: method, url: url, path: path, queryParameters: params, body: body, contentType: contentType, headers: headers)
 		return dataTask(resource: resource, options: options, validator: validator)
 	}
 }

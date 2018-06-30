@@ -26,86 +26,86 @@ extension SObjectResource: Resource {
 			
 		case let .retrieve(type, id, fields, version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
+				body: nil,
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: {
+				additionalQueryParameters: {
 					guard let fieldNames = fields?.joined(separator: ",") else { return nil }
 					return ["fields": fieldNames]
 				}(),
-				body: nil,
-				headers: nil
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .insert(type, data, version):
 			return try URLRequest(
-				method: .post,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.json.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.post.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/"),
 				body: data,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.json.rawValue
 			)
 			
 		case let .update(type, id, data, version):
 			return try URLRequest(
-				method: .patch,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.json.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.patch.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				body: data,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.json.rawValue
 			)
 			
 		case let .delete(type, id, version):
 			return try URLRequest(
-				method: .delete,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.delete.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				body: nil,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 
 		case let .describe(type, version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/describe"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/describe"),
 				body: nil,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .describeGlobal(version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/"),
 				body: nil,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .registerForNotifications(deviceToken, version):
 			return try URLRequest(
-				method: .post,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/MobilePushServiceDevice"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.json.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.post.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/MobilePushServiceDevice"),
 				body: {
 					let encoder = JSONEncoder()
 					encoder.dateEncodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
 					return try encoder.encode(["ConnectionToken" : deviceToken, "ServiceType" : "Apple" ])
 				}(),
-				headers:  nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders:  nil,
+				contentType: URLRequest.MIMEType.json.rawValue
 			)
 		}
 	}

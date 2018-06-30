@@ -13,8 +13,9 @@ public extension Salesforce {
 	
 	public func dataTask(resource: Resource, options: Options = [], validator: Validator? = nil) -> Promise<DataResponse> {
 		
-		let go: (Authorization) throws -> Promise<DataResponse> = {
-			URLSession.shared.dataTask(.promise, with: try resource.request(with: $0)).validated(with: validator)
+		let go: (Authorization) throws -> Promise<DataResponse> = { auth in 
+			let req = try resource.request(with: auth)
+			return URLSession.shared.dataTask(.promise, with: req).validated(with: validator)
 		}
 		
 		return firstly { () -> Promise<DataResponse> in

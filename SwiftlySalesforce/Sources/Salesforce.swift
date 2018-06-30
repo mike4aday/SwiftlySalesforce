@@ -73,6 +73,14 @@ public class Salesforce {
 		return authorization?.instanceURL
 	}
 	
+	public var userID: String? {
+		return authorization?.userID
+	}
+	
+	public var orgID: String? {
+		return authorization?.orgID
+	}
+	
 	public var config: Configuration {
 		return configuration
 	}

@@ -11,7 +11,7 @@ import Foundation
 internal enum RESTResource {
 	case identity(version: String)
 	case limits(version: String)
-	case smallFile(baseURL: URL?, path: String?, accept: String)
+	case smallFile(url: URL?, path: String?)
 	case apex(method: String, path: String, queryParameters: [String: String]?, body: Data?, contentType: String, headers: [String: String]?)
 }
 
@@ -23,51 +23,46 @@ extension RESTResource: Resource {
 			
 		case let .identity(version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.identityURL,
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: ["version" : version],
-				body: nil,
-				headers: nil
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.identityURL,
+				body: nil, accessToken: authorization.accessToken,
+				additionalQueryParameters: ["version" : version], additionalHeaders: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .limits(version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/limits"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
-				body: nil,
-				headers: nil
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/limits"),
+				body: nil, accessToken: authorization.accessToken,
+				additionalQueryParameters: nil, additionalHeaders: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
-		case let .smallFile(baseURL, path, accept):
+		case let .smallFile(url, path):
 			return try URLRequest(
-				method: .get,
-				baseURL: (baseURL ?? authorization.instanceURL).appendingPathComponent(path ?? ""),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: {
+					var u = url ?? authorization.instanceURL
+					if let path = path {
+						u.appendPathComponent(path)
+					}
+					return u
+				}(),
 				body: nil,
-				headers:  ["Accept": accept]
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
+				additionalHeaders:  nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .apex(method, path, queryParameters, body, contentType, headers):
 			return try URLRequest(
-				method: {
-					guard let httpMethod = URLRequest.HTTPMethod(rawValue: method) else {
-						throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnsupportedURL, userInfo: [NSLocalizedDescriptionKey: "Unsupported method: \(method)"])
-					}
-					return httpMethod
-				}(),
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/apexrest\(path)"),
-				accessToken: authorization.accessToken,
-				contentType: contentType,
-				queryParameters: queryParameters,
+				method: method,
+				url: authorization.instanceURL.appendingPathComponent("/services/apexrest\(path)"),
 				body: body,
-				headers:  headers
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: queryParameters,
+				additionalHeaders: headers,
+				contentType: contentType
 			)
 		}
 	}

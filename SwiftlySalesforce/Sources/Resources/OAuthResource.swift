@@ -25,25 +25,28 @@ extension OAuthResource: Resource {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
 			return try URLRequest(
-				method: .post,
-				baseURL: baseOAuthURL(from: authorizationURL).appendingPathComponent("token"),
+				method: URLRequest.HTTPMethod.post.rawValue,
+				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("token"),
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: [
+				additionalQueryParameters: [
 					"format" : "json",
 					"grant_type": "refresh_token",
 					"client_id": consumerKey,
 					"refresh_token": refreshToken
-				]
+				],
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 						
 		case let .revokeAccessToken(authorizationURL):
 			return try URLRequest(
-				method: .post,
-				baseURL: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
+				method: URLRequest.HTTPMethod.post.rawValue,
+				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
+				body: nil,
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: ["token" : authorization.accessToken]
+				additionalQueryParameters: ["token" : authorization.accessToken],
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .revokeRefreshToken(authorizationURL):
@@ -51,11 +54,13 @@ extension OAuthResource: Resource {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
 			return try URLRequest(
-				method: .post,
-				baseURL: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
+				method: URLRequest.HTTPMethod.post.rawValue,
+				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
+				body: nil,
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: ["token": refreshToken]
+				additionalQueryParameters: ["token": refreshToken],
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 		}
 	}

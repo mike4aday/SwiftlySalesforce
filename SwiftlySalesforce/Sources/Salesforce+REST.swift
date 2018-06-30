@@ -18,7 +18,7 @@ public extension Salesforce {
 	/// - Parameter path: path relative to the user's instance URL
 	/// - Returns: Promise of an image
 	public func fetchImage(path: String, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.smallFile(baseURL: nil, path: path, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = RESTResource.smallFile(url: nil, path: path)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -30,7 +30,7 @@ public extension Salesforce {
 	/// - Parameter url: URL to the image to be retrieved
 	/// - Returns: Promise of an image
 	public func fetchImage(url: URL, options: Options = []) -> Promise<UIImage> {
-		let resource = RESTResource.smallFile(baseURL: url, path: nil, accept: URLRequest.MIMEType.anyImage.rawValue)
+		let resource = RESTResource.smallFile(url: url, path: nil)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
@@ -80,7 +80,7 @@ public extension Salesforce {
 	/// - Parameter headers: Dictionary of custom HTTP header values
 	/// - Returns: Promise of Data
 	public func apex(
-		method: URLRequest.HTTPMethod = .get,
+		method: String,
 		path: String,
 		parameters: [String: Any?]? = nil,
 		body: Data? = nil,
@@ -88,9 +88,9 @@ public extension Salesforce {
 		headers: [String: String]? = nil,
 		options: Options = []) -> Promise<Data> {
 		
-		let ct = contentType ?? ( method == .get || method == .delete ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
+		let ct = contentType ?? ( method.lowercased() == URLRequest.HTTPMethod.get.rawValue.lowercased() || method == URLRequest.HTTPMethod.delete.rawValue.lowercased() ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
 		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
-		let resource = RESTResource.apex(method: method.rawValue, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
+		let resource = RESTResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
 		return dataTask(resource: resource, options: options).map { $0.data }
 	}
 }

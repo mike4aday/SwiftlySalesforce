@@ -12,9 +12,10 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		EA0474A520AA382300BDABEB /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0474A420AA382300BDABEB /* TaskTableViewController.swift */; };
 		EA223AD91F8DD532003DC025 /* MockContactMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */; };
 		EA2399F820D1E93B00E7FF32 /* OrganizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */; };
+		EA3DA7E120E68F4800648FE0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723A1DC0455C00790BCB /* MasterViewController.swift */; };
+		EA3DA7E220E68F4C00648FE0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723F1DC0455C00790BCB /* DetailViewController.swift */; };
 		EA57EBF320D2B7E300374451 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA133DA91F91DC060055DC2F /* TestUtils.swift */; };
 		EA57EBF420D2B84200374451 /* ObjectDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */; };
 		EA62C6781F196E7C00D6CF4E /* MockAccountMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6621F196E6600D6CF4E /* MockAccountMetadata.json */; };
@@ -62,7 +63,6 @@
 		CBB0C3BD871818BF7C186464 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		CE2B0F9745755F5A69D654A8 /* Pods_SwiftlySalesforce_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34715B1ED2A8E40E849172A /* SwiftlySalesforce.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftlySalesforce.podspec; path = ../SwiftlySalesforce.podspec; sourceTree = "<group>"; };
-		EA0474A420AA382300BDABEB /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		EA133DA91F91DC060055DC2F /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		EA18C7A91C4404F800DAED6A /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationTests.swift; sourceTree = "<group>"; };
@@ -82,7 +82,6 @@
 		EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockLimits.json; sourceTree = "<group>"; };
 		EABD723A1DC0455C00790BCB /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		EABD723B1DC0455C00790BCB /* TaskForceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskForceError.swift; sourceTree = "<group>"; };
-		EABD723C1DC0455C00790BCB /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		EABD723D1DC0455C00790BCB /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		EABD723E1DC0455C00790BCB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EABD723F1DC0455C00790BCB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -139,10 +138,8 @@
 		607FACD21AFB9204008FA782 /* Example for SwiftlySalesforce */ = {
 			isa = PBXGroup;
 			children = (
-				EA0474A420AA382300BDABEB /* TaskTableViewController.swift */,
 				EABD723A1DC0455C00790BCB /* MasterViewController.swift */,
 				EABD723B1DC0455C00790BCB /* TaskForceError.swift */,
-				EABD723C1DC0455C00790BCB /* TaskStore.swift */,
 				EABD723D1DC0455C00790BCB /* Task.swift */,
 				EABD723E1DC0455C00790BCB /* AppDelegate.swift */,
 				EABD723F1DC0455C00790BCB /* DetailViewController.swift */,
@@ -461,9 +458,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3DA7E120E68F4800648FE0 /* MasterViewController.swift in Sources */,
 				EABD72431DC0455C00790BCB /* Task.swift in Sources */,
 				EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */,
-				EA0474A520AA382300BDABEB /* TaskTableViewController.swift in Sources */,
+				EA3DA7E220E68F4C00648FE0 /* DetailViewController.swift in Sources */,
 				EABD72441DC0455C00790BCB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

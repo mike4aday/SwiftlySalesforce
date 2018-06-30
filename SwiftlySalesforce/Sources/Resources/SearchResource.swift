@@ -20,13 +20,13 @@ extension SearchResource: Resource {
 			
 		case let .search(sosl, version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/search/"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: ["q": sosl],
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/search/"),
 				body: nil,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters:  ["q": sosl],
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 		}
 	}

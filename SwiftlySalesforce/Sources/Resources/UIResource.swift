@@ -53,11 +53,11 @@ extension UIResource: Resource {
 			
 		case let .records(ids, childRelationships, formFactor, layoutTypes, modes, optionalFields, pageSize, version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-ui/\(ids.joined(separator: ","))"),
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-ui/\(ids.joined(separator: ","))"),
+				body: nil,
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: {
+				additionalQueryParameters: {
 					var params: [String: String] = [:]
 					if let childRelationships = childRelationships { params["childRelationships"] = childRelationships.joined(separator: ",") }
 					if let formFactor = formFactor { params["formFactor"] = formFactor }
@@ -66,54 +66,50 @@ extension UIResource: Resource {
 					if let optionalFields = optionalFields { params["optionalFields"] = optionalFields.joined(separator: ",") }
 					if let pageSize = pageSize { params["pageSize"] = "\(pageSize)" }
 					return params.count > 0 ? params : nil
-			}(),
-				body: nil,
-				headers: nil
+				}(),
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .defaultsForCloning(id, formFactor, optionalFields, recordTypeID, version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/clone/\(id)"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: {
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/clone/\(id)"),
+				body: nil, accessToken: authorization.accessToken,
+				additionalQueryParameters: {
 					var params: [String: String] = [:]
 					if let formFactor = formFactor { params["formFactor"] = formFactor }
 					if let optionalFields = optionalFields { params["optionalFields"] = optionalFields.joined(separator: ",") }
 					if let recordTypeID = recordTypeID { params["recordTypeId"] = recordTypeID }
 					return params.count > 0 ? params : nil
-			}(),
-				body: nil,
-				headers: nil
+				}(),
+				additionalHeaders: nil,
+				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 			
 		case let .defaultsForCreating(objectApiName, formFactor, optionalFields, recordTypeId, version):
 			 return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/create/\(objectApiName)"),
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/create/\(objectApiName)"),
+				body: nil,
 				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: {
+				additionalQueryParameters: {
 					var params: [String: String] = [:]
 					if let formFactor = formFactor { params["formFactor"] = formFactor }
 					if let optionalFields = optionalFields { params["optionalFields"] = optionalFields.joined(separator: ",") }
 					if let recordTypeId = recordTypeId { params["recordTypeId"] = recordTypeId }
 					return params.count > 0 ? params : nil
-			}(),
-				body: nil,
-				headers: nil
+				}(),
+				additionalHeaders: nil
 			)
 			
 		case let .picklistValues(objectApiName, recordTypeId, version):
 			return try URLRequest(
-				method: .get,
-				baseURL: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/object-info/\(objectApiName)/picklist-values/\(recordTypeId)"),
-				accessToken: authorization.accessToken,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue,
-				queryParameters: nil,
+				method: URLRequest.HTTPMethod.get.rawValue,
+				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/object-info/\(objectApiName)/picklist-values/\(recordTypeId)"),
 				body: nil,
-				headers: nil
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil, additionalHeaders: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 		}
 	}

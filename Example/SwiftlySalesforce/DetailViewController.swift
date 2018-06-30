@@ -41,17 +41,13 @@ final class DetailViewController: UITableViewController {
 		
 		infoLabel.text = "Loading task statuses..."
 		
-		salesforce.query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder")
-		.then {
-			(result: QueryResult<Record>) -> () in
-			self.statuses = result.records.flatMap { $0.string(forField: "MasterLabel")  }
-			return 
-		}.always {
+		salesforce.query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder").done { (queryResult) in
+			self.statuses = queryResult.records.compactMap { $0.string(forField: "MasterLabel") }
+		}.ensure {
 			self.infoLabel.text = "Select task status"
 			self.tableView.reloadData()
 			self.refreshControl?.endRefreshing()
-		}.catch {
-			(error) -> () in
+		}.catch { (error) -> () in
 			self.alert(title: "Error!", error: error)
 		}
 	}
@@ -66,24 +62,19 @@ final class DetailViewController: UITableViewController {
 		infoLabel.text = "Saving changes..."
 		
 		let recordUpdate: [String: Encodable?] = ["Status" : selectedStatus]
-		salesforce.update(type: "Task", id: task.id, fields: recordUpdate)
-		.then {
-			(_) -> () in
+		salesforce.update(type: "Task", id: task.id, fields: recordUpdate).done {
 			self.alert(title: "Success!", message: "Updated task status to \(selectedStatus)")
-		}.then {
-			(_) -> () in
 			self.task?.status = selectedStatus
 			self.saveButton.isEnabled = false
-		}.always {
+		}.ensure {
 			self.infoLabel.text = "Select task status"
 			self.refreshControl?.endRefreshing()
-		}.catch {
-			error in
+		}.catch { error in
 			self.alert(title: "Error!", error: error)
 		}
 	}
 	
-	func handleRefresh(refreshControl: UIRefreshControl) {
+	@objc func handleRefresh(refreshControl: UIRefreshControl) {
 		loadData()
 	}
 	
