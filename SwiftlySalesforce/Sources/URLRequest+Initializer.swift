@@ -38,7 +38,7 @@ public extension URLRequest {
 		contentType: String = MIMEType.urlEncoded.rawValue) throws {
 		
 		// Components from URL
-		guard var comps = URLComponents(url: url) else {
+		guard var comps = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
 			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: url])
 		}
 		

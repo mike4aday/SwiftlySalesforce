@@ -49,8 +49,8 @@ public class Salesforce {
 		}
 	}
 	
-	public convenience init(consumerKey: String, callbackURL: URL) {
-		let config = try! Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
+	public convenience init(consumerKey: String, callbackURL: URL) throws {
+		let config = try Configuration(consumerKey: consumerKey, callbackURL: callbackURL)
 		self.init(configuration: config)
 	}
 	
@@ -101,10 +101,14 @@ public extension Salesforce.Configuration {
 			"prompt" : "login consent",
 			"display" : "touch" ]
 		let params = defaultParams.merging(authorizationParameters ?? [:], uniquingKeysWith: { (_, new) in new })
+		
 		let urlString = "https://\(authorizationHost)/services/oauth2/authorize"
-		guard let comps = URLComponents(string: urlString, parameters: params), let authorizationURL = comps.url else {
-			let userInfo: [String: Any] = [NSURLErrorFailingURLErrorKey: urlString, NSLocalizedDescriptionKey: "Invalid authorization URL", "Parameters": params]
-			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: userInfo)
+		guard var comps = URLComponents(string: urlString) else {
+			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: urlString])
+		}
+		comps.queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }
+		guard let authorizationURL = comps.url else {
+			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: urlString])
 		}
 		
 		self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authorizationURL, version: version)

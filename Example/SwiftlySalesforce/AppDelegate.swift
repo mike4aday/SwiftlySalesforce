@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCen
 	var window: UIWindow?
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		salesforce = Salesforce(consumerKey: consumerKey, callbackURL: callbackURL)
+		salesforce = try! Salesforce(consumerKey: consumerKey, callbackURL: callbackURL)
 		return true
 	}
 }
