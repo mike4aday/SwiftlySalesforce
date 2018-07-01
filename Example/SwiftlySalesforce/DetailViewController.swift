@@ -15,6 +15,7 @@ final class DetailViewController: UITableViewController {
 	@IBOutlet weak var infoLabel: UILabel!
 	
 	public var statuses: [String] = Array<String>()
+	public var onSave: ((Task) -> ())!
 	public var task: Task? {
 		didSet {
 			selectedStatus = task?.status
@@ -28,7 +29,6 @@ final class DetailViewController: UITableViewController {
 			}
 		}
 	}
-	
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
@@ -66,6 +66,7 @@ final class DetailViewController: UITableViewController {
 			self.alert(title: "Success!", message: "Updated task status to \(selectedStatus)")
 			self.task?.status = selectedStatus
 			self.saveButton.isEnabled = false
+			self.onSave(task)
 		}.ensure {
 			self.infoLabel.text = "Select task status"
 			self.refreshControl?.endRefreshing()

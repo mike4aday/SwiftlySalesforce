@@ -31,8 +31,13 @@ final class MasterViewController: UITableViewController {
 			let cell = sender as? UITableViewCell,
 			let indexPath = tableView.indexPath(for: cell) {
 			let task = tasks[indexPath.row]
+			let onSave = { (task: Task) -> () in
+				self.tasks[indexPath.row] = task
+				self.tableView.reloadRows(at: [indexPath], with: .automatic)
+			}
 			destinationVC.task = task
 			destinationVC.title = task.subject ?? ""
+			destinationVC.onSave = onSave
 		}
 	}
 	
@@ -42,7 +47,7 @@ final class MasterViewController: UITableViewController {
 		}.ensure {
 			self.tasks.removeAll()
 			self.photoView.image = nil
-			self.nameLabel.text = nil
+			self.nameLabel.text = "Welcome"
 			self.statusLabel.text = "Pull to login or refresh."
 			self.tableView.reloadData()
 		}.catch {
@@ -50,8 +55,9 @@ final class MasterViewController: UITableViewController {
 		}
 	}
 	
-	func loadUserPhoto() {
+	func loadUserInfo() {
 		salesforce.identity().compactMap { (identity) -> URL? in
+			self.nameLabel.text = identity.displayName
 			return identity.photoURL
 		}.then { (url) -> Promise<UIImage> in
 			salesforce.fetchImage(url: url)
@@ -98,7 +104,7 @@ final class MasterViewController: UITableViewController {
 	/// Refresh control handler
 	@objc func handleRefresh(refreshControl: UIRefreshControl) {
 		loadTasks()
-		loadUserPhoto()
+		loadUserInfo()
 	}
 }
 
@@ -127,8 +133,8 @@ extension MasterViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell")!
 		let task = tasks[indexPath.row]
 		if let subject = task.subject, let status = task.status  {
-			cell.textLabel?.text = "\(subject) (Status: \(status))"
-			cell.detailTextLabel?.text = task.relatedRecord?.name
+			cell.textLabel?.text = subject
+			cell.detailTextLabel?.text = status
 		}
 		return cell
 	}
