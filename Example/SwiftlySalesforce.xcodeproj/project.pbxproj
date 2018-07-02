@@ -52,7 +52,7 @@
 		111732379560F313E6BB7A77 /* Pods-SwiftlySalesforce_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Example/Pods-SwiftlySalesforce_Example.release.xcconfig"; sourceTree = "<group>"; };
 		21D41C68BF76D2015A912F59 /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24705FBC892656066700574C /* Pods-SwiftlySalesforce_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Example/Pods-SwiftlySalesforce_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		607FACD01AFB9204008FA782 /* Task Force Sample App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task Force Sample App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* SwiftlySalesforce_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftlySalesforce_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* Task Force Sample App.app */,
+				607FACD01AFB9204008FA782 /* SwiftlySalesforce_Example.app */,
 				607FACE51AFB9204008FA782 /* SwiftlySalesforce_Tests.xctest */,
 			);
 			name = Products;
@@ -231,9 +231,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* Task Force Sample App */ = {
+		607FACCF1AFB9204008FA782 /* SwiftlySalesforce_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Task Force Sample App" */;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "SwiftlySalesforce_Example" */;
 			buildPhases = (
 				94C5C296D807F3283F86EA54 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
@@ -246,9 +246,9 @@
 			);
 			dependencies = (
 			);
-			name = "Task Force Sample App";
+			name = SwiftlySalesforce_Example;
 			productName = SwiftlySalesforce;
-			productReference = 607FACD01AFB9204008FA782 /* Task Force Sample App.app */;
+			productReference = 607FACD01AFB9204008FA782 /* SwiftlySalesforce_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 		607FACE41AFB9204008FA782 /* SwiftlySalesforce_Tests */ = {
@@ -313,7 +313,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* Task Force Sample App */,
+				607FACCF1AFB9204008FA782 /* SwiftlySalesforce_Example */,
 				607FACE41AFB9204008FA782 /* SwiftlySalesforce_Tests */,
 			);
 		};
@@ -492,7 +492,7 @@
 /* Begin PBXTargetDependency section */
 		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* Task Force Sample App */;
+			target = 607FACCF1AFB9204008FA782 /* SwiftlySalesforce_Example */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -693,7 +693,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Task Force Sample App" */ = {
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "SwiftlySalesforce_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,

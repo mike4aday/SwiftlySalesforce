@@ -2,9 +2,9 @@
 //  Resource.swift
 //  SwiftlySalesforce
 //
-//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2018. All rights reserved.
+//  Created by Michael Epstein on 7/2/18.
 //
+
 import Foundation
 
 public protocol Resource {

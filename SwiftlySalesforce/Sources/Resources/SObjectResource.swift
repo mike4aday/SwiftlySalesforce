@@ -18,6 +18,16 @@ internal enum SObjectResource {
 	case registerForNotifications(deviceToken: String, version: String)
 }
 
+extension SObjectResource: URLRequestConvertible {
+	func request() throws -> URLRequest {
+		switch self {
+			
+		default:
+			return URLRequest(url: URL(string: "")!)
+		}
+	}
+}
+
 extension SObjectResource: Resource {
 	
 	internal func request(with authorization: Authorization) throws -> URLRequest {

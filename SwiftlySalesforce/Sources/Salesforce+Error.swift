@@ -13,10 +13,10 @@ public extension Salesforce {
 	public enum Error: Swift.Error {
 		case unauthorized
 		case authenticationSessionFailed
+		case invalidArgument(name: String, value: Any?, message: String?)
 		case refreshTokenUnavailable
 		case resourceError(httpStatusCode: Int, errorCode: String?, message: String?, fields: [String]?)
-		case invalidArgument(name: String, value: Any?, message: String?)
-		case other(message: String?)
+		case miscellaneous(message: String?)
 	}
 }
 
