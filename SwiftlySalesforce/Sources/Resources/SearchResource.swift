@@ -20,7 +20,7 @@ extension SearchResource: Resource {
 			
 		case let .search(sosl, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/search/"),
 				body: nil,
 				accessToken: authorization.accessToken,

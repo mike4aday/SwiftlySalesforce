@@ -25,26 +25,27 @@ extension OAuthResource: Resource {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.post.rawValue,
+				method: "POST",
 				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("token"),
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: [
+				body: [
 					"format" : "json",
 					"grant_type": "refresh_token",
 					"client_id": consumerKey,
 					"refresh_token": refreshToken
-				],
+				].percentEncodedString()?.data(using: .utf8),
+				accessToken: authorization.accessToken,
+				additionalQueryParameters: nil,
 				additionalHeaders: nil,
 				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
 						
 		case let .revokeAccessToken(authorizationURL):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.post.rawValue,
+				method: "POST",
 				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
-				body: nil,
+				body: ["token" : authorization.accessToken].percentEncodedString()?.data(using: .utf8),
 				accessToken: authorization.accessToken,
-				additionalQueryParameters: ["token" : authorization.accessToken],
+				additionalQueryParameters: nil,
 				additionalHeaders: nil,
 				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)
@@ -54,11 +55,11 @@ extension OAuthResource: Resource {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.post.rawValue,
+				method: "POST",
 				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
-				body: nil,
+				body: ["token": refreshToken].percentEncodedString()?.data(using: .utf8),
 				accessToken: authorization.accessToken,
-				additionalQueryParameters: ["token": refreshToken],
+				additionalQueryParameters: nil,
 				additionalHeaders: nil,
 				contentType: URLRequest.MIMEType.urlEncoded.rawValue
 			)

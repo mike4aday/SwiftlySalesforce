@@ -10,18 +10,6 @@ import Foundation
 
 public extension URLRequest {
 	
-	public enum HTTPMethod: String {
-		case options = "OPTIONS"
-		case get     = "GET"
-		case head    = "HEAD"
-		case post    = "POST"
-		case put     = "PUT"
-		case patch   = "PATCH"
-		case delete  = "DELETE"
-		case trace   = "TRACE"
-		case connect = "CONNECT"
-	}
-	
 	public enum MIMEType: String {
 		case json = "application/json"
 		case urlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
@@ -29,7 +17,7 @@ public extension URLRequest {
 	}
 	
 	public init(
-		method: String = HTTPMethod.get.rawValue,
+		method: String = "GET",
 		url: URL,
 		body: Data? = nil,
 		accessToken: String,

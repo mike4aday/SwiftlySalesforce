@@ -26,7 +26,7 @@ extension SObjectResource: Resource {
 			
 		case let .retrieve(type, id, fields, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				body: nil,
 				accessToken: authorization.accessToken,
@@ -40,7 +40,7 @@ extension SObjectResource: Resource {
 			
 		case let .insert(type, data, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.post.rawValue,
+				method: "POST",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/"),
 				body: data,
 				accessToken: authorization.accessToken,
@@ -51,7 +51,7 @@ extension SObjectResource: Resource {
 			
 		case let .update(type, id, data, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.patch.rawValue,
+				method: "PATCH",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				body: data,
 				accessToken: authorization.accessToken,
@@ -62,7 +62,7 @@ extension SObjectResource: Resource {
 			
 		case let .delete(type, id, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.delete.rawValue,
+				method: "DELETE",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/\(id)"),
 				body: nil,
 				accessToken: authorization.accessToken,
@@ -73,7 +73,7 @@ extension SObjectResource: Resource {
 
 		case let .describe(type, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/\(type)/describe"),
 				body: nil,
 				accessToken: authorization.accessToken,
@@ -84,7 +84,7 @@ extension SObjectResource: Resource {
 			
 		case let .describeGlobal(version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/"),
 				body: nil,
 				accessToken: authorization.accessToken,
@@ -95,7 +95,7 @@ extension SObjectResource: Resource {
 			
 		case let .registerForNotifications(deviceToken, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.post.rawValue,
+				method: "POST",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/sobjects/MobilePushServiceDevice"),
 				body: {
 					let encoder = JSONEncoder()

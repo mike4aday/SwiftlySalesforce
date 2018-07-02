@@ -23,7 +23,7 @@ extension RESTResource: Resource {
 			
 		case let .identity(version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.identityURL,
 				body: nil, accessToken: authorization.accessToken,
 				additionalQueryParameters: ["version" : version], additionalHeaders: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue
@@ -31,7 +31,7 @@ extension RESTResource: Resource {
 			
 		case let .limits(version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/limits"),
 				body: nil, accessToken: authorization.accessToken,
 				additionalQueryParameters: nil, additionalHeaders: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue
@@ -39,7 +39,7 @@ extension RESTResource: Resource {
 			
 		case let .smallFile(url, path):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: {
 					var u = url ?? authorization.instanceURL
 					if let path = path {

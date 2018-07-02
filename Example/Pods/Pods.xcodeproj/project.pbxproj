@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		017B72A1768F5A3CAA931E048BAE3778 /* UIView+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8C5D125DC4623C1B601103BADAA4CC /* UIView+AnyPromise.m */; };
 		018624434199E5B769E99CF178787AFF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD28F6E174513369F0FC9FFB25EF2E6F /* UIKit.framework */; };
-		052C565B983264B1C77DBE65091CE94A /* URLComponents+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5E08281B4CF1DE665C15C804CA8A65 /* URLComponents+Parameters.swift */; };
 		0974B9858A7323328C86D6B466BF7507 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC1AE1F1C8D18E6F2BAA15E0CD2427B /* Foundation.framework */; };
 		0FCEF33203B4CECBA3FC74FEB62654EF /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9E72E2654BFECDC0EC212AB1B59BFF /* Address.swift */; };
 		0FF2890C2D356B388F3DA4083707C186 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02281F8574A81635ECECA645F542BC1 /* Configuration.swift */; };
@@ -183,7 +182,6 @@
 		52BF26FFC8BC7002CB7362FD969042E3 /* NSTask+AnyPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSTask+AnyPromise.m"; path = "Extensions/Foundation/Sources/NSTask+AnyPromise.m"; sourceTree = "<group>"; };
 		57726273156A5128C5F0A0E73BED8670 /* Pods-SwiftlySalesforce_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftlySalesforce_Tests-umbrella.h"; sourceTree = "<group>"; };
 		5A354D447018D0A387E1CBD6A2E8AFD3 /* Pods-SwiftlySalesforce_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SwiftlySalesforce_Tests.modulemap"; sourceTree = "<group>"; };
-		5B5E08281B4CF1DE665C15C804CA8A65 /* URLComponents+Parameters.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLComponents+Parameters.swift"; path = "SwiftlySalesforce/Sources/URLComponents+Parameters.swift"; sourceTree = "<group>"; };
 		6087A2D7E5B8BF74DFE5F84C2E2C53F4 /* Pods-SwiftlySalesforce_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftlySalesforce_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		622B99D68B1432DD0BE7AE5840EB62C7 /* fwd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = fwd.h; path = Sources/fwd.h; sourceTree = "<group>"; };
 		62DDD967C34F88FD5F0B45C87FA10D0B /* NSNotificationCenter+AnyPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSNotificationCenter+AnyPromise.m"; path = "Extensions/Foundation/Sources/NSNotificationCenter+AnyPromise.m"; sourceTree = "<group>"; };
@@ -437,7 +435,6 @@
 				EA43399C20DE9E5E00290C4B /* Salesforce+SObject.swift */,
 				EA4339A020DEC35200290C4B /* Salesforce+UI.swift */,
 				EA846FC520DD4A16004F120E /* URL+QueryItem.swift */,
-				5B5E08281B4CF1DE665C15C804CA8A65 /* URLComponents+Parameters.swift */,
 				51A380F2B150F480819CB34699B0FC2D /* URLRequest+Initializer.swift */,
 				EA846FCB20DD8C72004F120E /* Resources */,
 				74EF5A5A7F368C4DF2C01B09355EC7CF /* Models */,
@@ -796,7 +793,6 @@
 				E0C8F391F06242F42F6D7BB8AC649938 /* SObjectResource.swift in Sources */,
 				5E5D210B55738D034F46A31D2A7D88DF /* Salesforce+REST.swift in Sources */,
 				73BAC61C47C954FFE697D431474BEB24 /* SwiftlySalesforce-dummy.m in Sources */,
-				052C565B983264B1C77DBE65091CE94A /* URLComponents+Parameters.swift in Sources */,
 				EA43399B20DE9E0A00290C4B /* Salesforce+Search.swift in Sources */,
 				691679ECEEE60099C6C32B73F275011A /* URLRequest+Initializer.swift in Sources */,
 			);

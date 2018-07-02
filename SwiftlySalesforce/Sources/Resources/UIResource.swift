@@ -53,7 +53,7 @@ extension UIResource: Resource {
 			
 		case let .records(ids, childRelationships, formFactor, layoutTypes, modes, optionalFields, pageSize, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-ui/\(ids.joined(separator: ","))"),
 				body: nil,
 				accessToken: authorization.accessToken,
@@ -73,7 +73,7 @@ extension UIResource: Resource {
 			
 		case let .defaultsForCloning(id, formFactor, optionalFields, recordTypeID, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/clone/\(id)"),
 				body: nil, accessToken: authorization.accessToken,
 				additionalQueryParameters: {
@@ -89,7 +89,7 @@ extension UIResource: Resource {
 			
 		case let .defaultsForCreating(objectApiName, formFactor, optionalFields, recordTypeId, version):
 			 return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/record-defaults/create/\(objectApiName)"),
 				body: nil,
 				accessToken: authorization.accessToken,
@@ -105,7 +105,7 @@ extension UIResource: Resource {
 			
 		case let .picklistValues(objectApiName, recordTypeId, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/ui-api/object-info/\(objectApiName)/picklist-values/\(recordTypeId)"),
 				body: nil,
 				accessToken: authorization.accessToken,

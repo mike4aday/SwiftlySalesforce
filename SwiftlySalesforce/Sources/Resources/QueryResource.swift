@@ -21,7 +21,7 @@ extension QueryResource: Resource {
 			
 		case let .query(soql, batchSize, version):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/query"),
 				body: nil,
 				accessToken: authorization.accessToken,
@@ -35,7 +35,7 @@ extension QueryResource: Resource {
 			
 		case let .queryNext(path):
 			return try URLRequest(
-				method: URLRequest.HTTPMethod.get.rawValue,
+				method: "GET",
 				url: authorization.instanceURL.appendingPathComponent(path),
 				body: nil,
 				accessToken: authorization.accessToken,

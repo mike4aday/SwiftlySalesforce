@@ -74,23 +74,23 @@ public extension Salesforce {
 	/// See https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST
 	/// - Parameter method: HTTP method
 	/// - Parameter path: String that gets appended to instance URL; should begin with "/"
-	/// - Parameter parameters: Dictionary of query string parameters
+	/// - Parameter queryParameters: Dictionary of query string parameters
 	/// - Parameter body: Data to be sent in the body of the request, e.g. JSON as Data in the body of a POST request
 	/// - Parameter contentType: the MIME type of the request content
 	/// - Parameter headers: Dictionary of custom HTTP header values
-	/// - Returns: Promise of Data
-	public func apex(
+	/// - Returns: Promise of Decodable type
+	public func apex<T: Decodable>(
 		method: String,
 		path: String,
-		parameters: [String: Any?]? = nil,
+		queryParameters: [String: Any?]? = nil,
 		body: Data? = nil,
 		contentType: String? = nil,
 		headers: [String: String]? = nil,
-		options: Options = []) -> Promise<Data> {
+		options: Options = []) -> Promise<T> {
 		
-		let ct = contentType ?? ( method.lowercased() == URLRequest.HTTPMethod.get.rawValue.lowercased() || method == URLRequest.HTTPMethod.delete.rawValue.lowercased() ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
-		let params: [String: String]? = parameters?.mapValues { "\($0 ?? "")" }
+		let ct = contentType ?? ( method.uppercased() == "GET" || method.uppercased() == "DELETE" ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
+		let params: [String: String]? = queryParameters?.mapValues { "\($0 ?? "")" }
 		let resource = RESTResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
-		return dataTask(resource: resource, options: options).map { $0.data }
+		return dataTask(resource: resource, options: options)
 	}
 }

@@ -161,6 +161,8 @@ public extension Salesforce {
 		}
 	}
 	
+	// MARK: - Register for push notifications
+	
 	/// Use this method to register your device to receive push notifications from the Salesforce Universal Push Notification service.
 	/// - Parameter devicetoken: the device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
 	/// - Returns: Promise of a String which holds the ID of the newly-inserted MobilePushServiceDevice record
