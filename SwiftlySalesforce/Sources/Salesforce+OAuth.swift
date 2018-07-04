@@ -68,7 +68,7 @@ internal extension Salesforce {
 				throw Salesforce.Error.unauthorized
 			}
 			let resource = OAuthResource.refreshAccessToken(authorizationURL: config.authorizationURL, consumerKey: config.consumerKey)
-			let request = try resource.request(with: authorization)
+			let request = try resource.asURLRequest(with: authorization)
 			return URLSession.shared.dataTask(.promise, with: request).validated().map { ($0, authorization) }
 		}.map { (dataResponse: DataResponse, oldAuth: Authorization) -> Authorization in
 			struct RefreshResult: Decodable {
@@ -90,7 +90,7 @@ internal extension Salesforce {
 				throw Salesforce.Error.unauthorized
 			}
 			let resource = OAuthResource.revokeRefreshToken(authorizationURL: config.authorizationURL)
-			let request = try resource.request(with: authorization)
+			let request = try resource.asURLRequest(with: authorization)
 			return URLSession.shared.dataTask(.promise, with: request).validated().done { _ in return }
 		}
 	}
@@ -101,7 +101,7 @@ internal extension Salesforce {
 				throw Salesforce.Error.unauthorized
 			}
 			let resource = OAuthResource.revokeAccessToken(authorizationURL: config.authorizationURL)
-			let request = try resource.request(with: authorization)
+			let request = try resource.asURLRequest(with: authorization)
 			return URLSession.shared.dataTask(.promise, with: request).validated().done { _ in return }
 		}
 	}

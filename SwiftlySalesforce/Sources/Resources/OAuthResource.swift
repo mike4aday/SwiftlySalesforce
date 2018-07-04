@@ -14,9 +14,13 @@ internal enum OAuthResource {
 	case revokeRefreshToken(authorizationURL: URL)
 }
 
-extension OAuthResource: Resource {
+extension OAuthResource: URLRequestConvertible {
 	
-	internal func request(with authorization: Authorization) throws -> URLRequest {
+	func asURLRequest(with authorization: Authorization) throws -> URLRequest {
+		
+		var url: URL
+		var method: String = "GET"
+		var body: Data? = nil
 		
 		switch self {
 			
@@ -24,55 +28,29 @@ extension OAuthResource: Resource {
 			guard let refreshToken = authorization.refreshToken else {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
-			return try URLRequest(
-				method: "POST",
-				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("token"),
-				body: [
-					"format" : "json",
-					"grant_type": "refresh_token",
-					"client_id": consumerKey,
-					"refresh_token": refreshToken
-				].percentEncodedString()?.data(using: .utf8),
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: nil,
-				additionalHeaders: nil,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			url = authorizationURL.deletingLastPathComponent().appendingPathComponent("token")
+			method = "POST"
+			body = [
+				"format" : "json",
+				"grant_type": "refresh_token",
+				"client_id": consumerKey,
+				"refresh_token": refreshToken
+			].asPercentEncodedString()?.data(using: .utf8)
 						
 		case let .revokeAccessToken(authorizationURL):
-			return try URLRequest(
-				method: "POST",
-				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
-				body: ["token" : authorization.accessToken].percentEncodedString()?.data(using: .utf8),
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: nil,
-				additionalHeaders: nil,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			url = authorizationURL.deletingLastPathComponent().appendingPathComponent("revoke")
+			method = "POST"
+			body = ["token" : authorization.accessToken].asPercentEncodedString()?.data(using: .utf8)
 			
 		case let .revokeRefreshToken(authorizationURL):
 			guard let refreshToken = authorization.refreshToken else {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
-			return try URLRequest(
-				method: "POST",
-				url: baseOAuthURL(from: authorizationURL).appendingPathComponent("revoke"),
-				body: ["token": refreshToken].percentEncodedString()?.data(using: .utf8),
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: nil,
-				additionalHeaders: nil,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			url = authorizationURL.deletingLastPathComponent().appendingPathComponent("revoke")
+			method = "POST"
+			body = ["token" : refreshToken].asPercentEncodedString()?.data(using: .utf8)
 		}
-	}
-}
-
-private extension OAuthResource {
-	
-	// Helper function
-	private func baseOAuthURL(from authorizationURL: URL) -> URL {
-		var comps = URLComponents(url: authorizationURL.deletingLastPathComponent(), resolvingAgainstBaseURL: false)
-		comps?.queryItems = nil
-		return comps?.url ?? authorizationURL.deletingLastPathComponent()
+		
+		return try URLRequest(url: url, authorization: authorization, method: method, body: body)
 	}
 }

@@ -12,58 +12,37 @@ internal enum RESTResource {
 	case identity(version: String)
 	case limits(version: String)
 	case smallFile(url: URL?, path: String?)
-	case apex(method: String, path: String, queryParameters: [String: String]?, body: Data?, contentType: String, headers: [String: String]?)
+	case apex(method: String, path: String, parameters: [String: String]?, body: Data?, headers: [String: String]?)
 }
 
-extension RESTResource: Resource {
+extension RESTResource: URLRequestConvertible {
 
-	func request(with authorization: Authorization) throws -> URLRequest {
+	func asURLRequest(with authorization: Authorization) throws -> URLRequest {
 
 		switch self {
 			
 		case let .identity(version):
-			return try URLRequest(
-				method: "GET",
-				url: authorization.identityURL,
-				body: nil, accessToken: authorization.accessToken,
-				additionalQueryParameters: ["version" : version], additionalHeaders: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			let url = authorization.identityURL
+			let queryItems = ["version" : version].map { URLQueryItem(name: $0.key, value: $0.value) }
+			return try URLRequest(url: url, authorization: authorization, queryItems: queryItems)
 			
 		case let .limits(version):
-			return try URLRequest(
-				method: "GET",
-				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/limits"),
-				body: nil, accessToken: authorization.accessToken,
-				additionalQueryParameters: nil, additionalHeaders: nil, contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			let path = "/services/data/v\(version)/limits"
+			return try URLRequest(path: path, authorization: authorization)
 			
 		case let .smallFile(url, path):
-			return try URLRequest(
-				method: "GET",
-				url: {
-					var u = url ?? authorization.instanceURL
-					if let path = path {
-						u.appendPathComponent(path)
-					}
-					return u
-				}(),
-				body: nil,
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: nil,
-				additionalHeaders:  nil,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			var u: URL = url ?? authorization.instanceURL
+			if let p = path {
+				u.appendPathComponent(p)
+			}
+			return try URLRequest(url: u, authorization: authorization)
 			
-		case let .apex(method, path, queryParameters, body, contentType, headers):
-			return try URLRequest(
-				method: method,
-				url: authorization.instanceURL.appendingPathComponent("/services/apexrest\(path)"),
-				body: body,
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: queryParameters,
-				additionalHeaders: headers,
-				contentType: contentType
-			)
+		case let .apex(method, path, parameters, body, headers):
+			let url = authorization.instanceURL.appendingPathComponent("/services/apexrest").appendingPathComponent(path)
+			let queryItems = parameters?.map { URLQueryItem(name: $0.key, value: $0.value) }
+			var req = try URLRequest(url: url, authorization: authorization, queryItems: queryItems, method: method, body: body)
+			let _ = headers?.map { req.addValue($0.value, forHTTPHeaderField: $0.key) }
+			return req
 		}
 	}
 }

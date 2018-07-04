@@ -12,22 +12,16 @@ internal enum SearchResource {
 	case search(sosl: String, version: String)
 }
 
-extension SearchResource: Resource {
+extension SearchResource: URLRequestConvertible {
 	
-	internal func request(with authorization: Authorization) throws -> URLRequest {
-		
+	func asURLRequest(with authorization: Authorization) throws -> URLRequest {
+
 		switch self {
 			
 		case let .search(sosl, version):
-			return try URLRequest(
-				method: "GET",
-				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/search/"),
-				body: nil,
-				accessToken: authorization.accessToken,
-				additionalQueryParameters:  ["q": sosl],
-				additionalHeaders: nil,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			let path = "/services/data/v\(version)/search/"
+			let queryItems = ["q": sosl].map { URLQueryItem(name: $0.key, value: $0.value) }
+			return try URLRequest(path: path, authorization: authorization, queryItems: queryItems)
 		}
 	}
 }

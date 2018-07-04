@@ -20,29 +20,16 @@ extension QueryResource: Resource {
 		switch self {
 			
 		case let .query(soql, batchSize, version):
-			return try URLRequest(
-				method: "GET",
-				url: authorization.instanceURL.appendingPathComponent("/services/data/v\(version)/query"),
-				body: nil,
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: ["q" : soql],
-				additionalHeaders: {
-					guard let bs = batchSize else  { return nil }
-					return ["Sforce-Query-Options": "batchSize=\(bs)"]
-				}(),
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			let path = "/services/data/v\(version)/query"
+			let queryItems = ["q" : soql].map { URLQueryItem(name: $0.key, value: $0.value)	}
+			var req = try URLRequest(path: path, authorization: authorization, queryItems: queryItems)
+			if let batchSize = batchSize {
+				req.setValue("batchSize=\(batchSize)", forHTTPHeaderField: "Sforce-Query-Options")
+			}
+			return req
 			
 		case let .queryNext(path):
-			return try URLRequest(
-				method: "GET",
-				url: authorization.instanceURL.appendingPathComponent(path),
-				body: nil,
-				accessToken: authorization.accessToken,
-				additionalQueryParameters: nil,
-				additionalHeaders: nil,
-				contentType: URLRequest.MIMEType.urlEncoded.rawValue
-			)
+			return try URLRequest(path: path, authorization: authorization)
 		}
 	}
 }

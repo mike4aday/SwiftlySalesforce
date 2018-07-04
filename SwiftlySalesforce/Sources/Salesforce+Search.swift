@@ -12,6 +12,6 @@ public extension Salesforce {
 	
 	public func search(sosl: String, options: Options = []) -> Promise<SearchResult> {
 		let resource = SearchResource.search(sosl: sosl, version: configuration.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 }

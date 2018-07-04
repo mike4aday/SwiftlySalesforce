@@ -20,7 +20,7 @@ public extension Salesforce {
 	/// - Returns: Promise of a Decodable instance
 	public func retrieve<T: Decodable>(type: String, id: String, fields: [String]? = nil, options: Options = []) -> Promise<T> {
 		let resource = SObjectResource.retrieve(type: type, id: id, fields: fields, version: config.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	/// Asynchronously retrieves a single record (non-generic function version).
@@ -30,7 +30,7 @@ public extension Salesforce {
 	/// - Returns: Promise of a Record instance
 	public func retrieve(type: String, id: String, fields: [String]? = nil, options: Options = []) -> Promise<SObject> {
 		let resource = SObjectResource.retrieve(type: type, id: id, fields: fields, version: config.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	/// Asynchronously retrieves multiple records of the same type, by ID.
@@ -63,13 +63,13 @@ public extension Salesforce {
 		return firstly { () -> Promise<InsertResult> in
 			let data = try JSONEncoder(dateFormatter: .salesforceDateTimeFormatter).encode(record)
 			let resource = SObjectResource.insert(type: type, data: data, version: config.version)
-			return dataTask(resource: resource, options: options)
-			}.map { $0.id }
+			return dataTask(with: resource, options: options)
+		}.map { $0.id }
 	}
 	
 	/// Ansynchronously creates a new record in Salesforce
 	public func insert(record: SObject, options: Options = []) -> Promise<String> {
-		return insert(type: record.type, record: record)
+		return insert(type: record.type, record: record, options: options)
 	}
 	
 	/// Asynchronously creates a new record in Salesforce
@@ -78,7 +78,7 @@ public extension Salesforce {
 	/// - Returns: Promise of a string which holds the ID of the newly-inserted record
 	public func insert(type: String, fields: [String: Encodable?], options: Options = []) -> Promise<String> {
 		let record = SObject(type: type, fields: fields)
-		return insert(type: type, record: record)
+		return insert(type: type, record: record, options: options)
 	}
 	
 	// MARK: - Update methods
@@ -92,8 +92,8 @@ public extension Salesforce {
 		return firstly { () -> Promise<DataResponse> in
 			let data = try JSONEncoder(dateFormatter: .salesforceDateTimeFormatter).encode(record)
 			let resource = SObjectResource.update(type: type, id: id, data: data, version: config.version)
-			return dataTask(resource: resource, options: options)
-			}.done { _ in return }
+			return dataTask(with: resource, options: options)
+		}.done { _ in return }
 	}
 	
 	/// Asynchronously updates a record in Salesforce
@@ -122,7 +122,7 @@ public extension Salesforce {
 	/// - Returns: Promise<Void>
 	public func delete(type: String, id: String, options: Options = []) -> Promise<Void> {
 		let resource = SObjectResource.delete(type: type, id: id, version: config.version)
-		return dataTask(resource: resource, options: options).done { _ in return }
+		return dataTask(with: resource, options: options).done { _ in return }
 	}
 	
 	public func delete(record: SObject, options: Options = []) -> Promise<Void> {
@@ -140,7 +140,7 @@ public extension Salesforce {
 	/// - Returns: Promise<ObjectDescription>
 	public func describe(type: String, options: Options = []) -> Promise<ObjectDescription> {
 		let resource = SObjectResource.describe(type: type, version: config.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	/// Asynchronously retrieves metadata for multiple Salesforce objects.
@@ -156,7 +156,7 @@ public extension Salesforce {
 	/// - Returns: Promise of an array of ObjectDescriptions
 	public func describeAll(options: Options = []) -> Promise<[ObjectDescription]> {
 		let resource = SObjectResource.describeGlobal(version: config.version)
-		return dataTask(resource: resource, options: options).map { (result: DescribeAllResult) -> [ObjectDescription] in
+		return dataTask(with: resource, options: options).map { (result: DescribeAllResult) -> [ObjectDescription] in
 			return result.sobjects
 		}
 	}
@@ -169,8 +169,8 @@ public extension Salesforce {
 	public func registerForNotifications(deviceToken: String, options: Options = []) -> Promise<String> {
 		return firstly { () -> Promise<InsertResult> in
 			let resource = SObjectResource.registerForNotifications(deviceToken: deviceToken, version: config.version)
-			return dataTask(resource: resource, options: options)
-			}.map { $0.id }
+			return dataTask(with: resource, options: options)
+		}.map { $0.id }
 	}
 }
 

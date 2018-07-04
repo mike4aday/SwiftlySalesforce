@@ -20,7 +20,7 @@ public extension Salesforce {
 	public func fetchImage(path: String, options: Options = []) -> Promise<UIImage> {
 		let resource = RESTResource.smallFile(url: nil, path: path)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
-		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
+		return dataTask(with: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
 		}
 	}
@@ -32,7 +32,7 @@ public extension Salesforce {
 	public func fetchImage(url: URL, options: Options = []) -> Promise<UIImage> {
 		let resource = RESTResource.smallFile(url: url, path: nil)
 		let bgq = DispatchQueue.global(qos: .userInitiated)
-		return dataTask(resource: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
+		return dataTask(with: resource, options: options).compactMap(on: bgq) { (result: DataResponse) -> UIImage? in
 			UIImage(data: result.data)
 		}
 	}
@@ -49,7 +49,7 @@ public extension Salesforce {
 			}
 			return try Promise.defaultValidator($0)
 		}
-		return dataTask(resource: resource, options: options, validator: validator)
+		return dataTask(with: resource, options: options, validator: validator)
 	}
 	
 	/// Asynchronously retrieves information about the Salesforce organization ("org")
@@ -65,7 +65,7 @@ public extension Salesforce {
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
 	public func limits(options: Options = []) -> Promise<[String:Limit]> {
 		let resource = RESTResource.limits(version: configuration.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	// MARK: - Apex web services
@@ -74,23 +74,19 @@ public extension Salesforce {
 	/// See https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST
 	/// - Parameter method: HTTP method
 	/// - Parameter path: String that gets appended to instance URL; should begin with "/"
-	/// - Parameter queryParameters: Dictionary of query string parameters
+	/// - Parameter parameters: Dictionary of query string parameters
 	/// - Parameter body: Data to be sent in the body of the request, e.g. JSON as Data in the body of a POST request
-	/// - Parameter contentType: the MIME type of the request content
-	/// - Parameter headers: Dictionary of custom HTTP header values
+	/// - Parameter headers: Dictionary of HTTP header values
 	/// - Returns: Promise of Decodable type
 	public func apex<T: Decodable>(
-		method: String,
+		method: String = "GET",
 		path: String,
-		queryParameters: [String: Any?]? = nil,
+		parameters: [String: String]? = nil,
 		body: Data? = nil,
-		contentType: String? = nil,
 		headers: [String: String]? = nil,
 		options: Options = []) -> Promise<T> {
 		
-		let ct = contentType ?? ( method.uppercased() == "GET" || method.uppercased() == "DELETE" ? URLRequest.MIMEType.urlEncoded : URLRequest.MIMEType.json).rawValue
-		let params: [String: String]? = queryParameters?.mapValues { "\($0 ?? "")" }
-		let resource = RESTResource.apex(method: method, path: path, queryParameters: params, body: body, contentType: ct, headers: headers)
-		return dataTask(resource: resource, options: options)
+		let resource = RESTResource.apex(method: method, path: path, parameters: parameters, body: body, headers: nil)
+		return dataTask(with: resource, options: options)
 	}
 }

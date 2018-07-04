@@ -8,54 +8,49 @@
 
 import Foundation
 
-public extension URLRequest {
-	
-	public enum MIMEType: String {
-		case json = "application/json"
-		case urlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
-		case anyImage = "image/*"
+internal extension URLRequest {
+
+	internal init(path: String, authorization: Authorization, queryItems: [URLQueryItem]? = nil, method: String = "GET", body: Data? = nil) throws {
+		let url = authorization.instanceURL.appendingPathComponent(path)
+		try self.init(url: url, authorization: authorization, queryItems: queryItems, method: method, body: body)
 	}
 	
-	public init(
-		method: String = "GET",
-		url: URL,
-		body: Data? = nil,
-		accessToken: String,
-		additionalQueryParameters: [String: String]? = nil,
-		additionalHeaders: [String: String]? = nil,
-		contentType: String = MIMEType.urlEncoded.rawValue) throws {
+	internal init(url: URL, authorization: Authorization, queryItems: [URLQueryItem]? = nil, method: String = "GET", body: Data? = nil) throws {
+		var myURL = url
+		if let additionalQueryItems = queryItems {
+			guard var comps = URLComponents(url: myURL, resolvingAgainstBaseURL: false) else {
+				throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: myURL.absoluteString])
+			}
+			comps.queryItems = additionalQueryItems + (comps.queryItems ?? [])
+			guard let updatedURL = comps.url else {
+				throw Salesforce.Error.badRequest(message: nil)
+			}
+			myURL = updatedURL
+		}
+		self.init(url: myURL)
+		try apply(authorization)
+	}
+	
+	internal mutating func apply(_ authorization: Authorization) throws {
 		
-		// Components from URL
-		guard var comps = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSURLErrorFailingURLErrorKey: url])
+		guard let url = self.url, var comps = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+			throw Salesforce.Error.badRequest(message: "Unable to apply authorization values to URL request.")
 		}
 		
-		// Query items
-		if let additionalQueryItems = additionalQueryParameters?.map({ URLQueryItem(name: $0.key, value: $0.value) }) {
-			let allQueryItems = additionalQueryItems + (comps.queryItems ?? [])
-			comps.queryItems = allQueryItems
+		// Set access token header
+		setValue("Bearer \(authorization.accessToken)", forHTTPHeaderField: "Authorization")
+		
+		// Hostname & scheme set?
+		if comps.host == nil {
+			comps.host = authorization.instanceURL.host
 		}
-		comps.percentEncodedQuery = comps.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-
-		// The final URL
-		guard let url = comps.url else {
-			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [NSLocalizedDescriptionKey: "Can't create URL from components"])
-		}
-		self.init(url: url)
-		
-		// Method
-		self.httpMethod = method
-		
-		// Standard headers
-		self.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-		self.setValue(contentType, forHTTPHeaderField: "Content-Type")
-		
-		// Additional headers (these could override standard headers)
-		for header in (additionalHeaders ?? [:]) {
-			self.setValue(header.value, forHTTPHeaderField: header.key)
+		if comps.scheme == nil {
+			comps.scheme = authorization.instanceURL.scheme
 		}
 		
-		// Body data
-		self.httpBody = body ?? nil
-	}	
+		// In case any query string value contains "+"...
+		comps.percentEncodedQuery = comps.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B") // As Salesforce expects
+		
+		self.url = comps.url
+	}
 }
