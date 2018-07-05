@@ -25,14 +25,14 @@ class OrganizationTests: XCTestCase {
 		"State" : "NY",
 		"PostalCode" : "10024",
 		"Country" : "US",
-		"Latitude" : null,
+		"Latitude" : 40.1234,
 		"Longitude" : null,
 		"GeocodeAccuracy" : null,
 		"Address" : {
 			"city" : "New York",
 			"country" : "US",
 			"geocodeAccuracy" : null,
-			"latitude" : null,
+			"latitude" : 40.1234,
 			"longitude" : null,
 			"postalCode" : "10024",
 			"state" : "NY",
@@ -102,6 +102,7 @@ class OrganizationTests: XCTestCase {
 		XCTAssertEqual("NY", org.address?.state)
 		XCTAssertEqual("10024", org.address?.postalCode)
 		XCTAssertEqual("US", org.address?.country)
+		XCTAssertEqual(40.1234, org.address?.latitude)
 		XCTAssertEqual("(212) 555-1212", org.phone)
 		XCTAssertEqual("Jane Jackson", org.primaryContact)
 		XCTAssertEqual("jane.jackson.1234@yahoo.com", org.complianceBCCEmail)

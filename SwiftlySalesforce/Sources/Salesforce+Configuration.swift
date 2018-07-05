@@ -35,14 +35,6 @@ public extension Salesforce.Configuration {
 		
 		self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authorizationURL, version: version ?? Salesforce.Configuration.defaultVersion)
 	}
-	
-	public init(consumerKey: String,
-				callbackURL: URL,
-				authorizationURL: URL,
-				version: String? = nil) {
-		
-		self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authorizationURL, version: version ?? Salesforce.Configuration.defaultVersion)
-	}
 }
 
 extension Salesforce.Configuration: Decodable {
@@ -71,12 +63,10 @@ extension Salesforce.Configuration: Decodable {
 		let version = try values.decodeIfPresent(String.self, forKey: .version)
 		
 		if let authURL = authorizationURL {
-			self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authURL, version: version)
+			self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationURL: authURL, version: version ?? Salesforce.Configuration.defaultVersion)
 		}
 		else {
 			try self.init(consumerKey: consumerKey, callbackURL: callbackURL, authorizationHost: authorizationHost, authorizationParameters: authorizationParameters, version: version)
 		}
-		
-		self.init(consumerKey: "HI", callbackURL: URL(string: "")!, authorizationURL: URL(string: "")!, version: "HI")
 	}
 }

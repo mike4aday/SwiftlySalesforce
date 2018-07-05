@@ -37,5 +37,4 @@ class IdentityTests: XCTestCase {
 		XCTAssertEqual(identity.locale!, "en_US")
 		XCTAssertEqual(identity.thumbnailURL!, URL(string: "https://c.na85.content.force.com/profilephoto/005/T"))
 	}
-    
 }

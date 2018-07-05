@@ -1,5 +1,5 @@
 //
-//  RESTResourceTests.swift
+//  ResourceTests.swift
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
@@ -10,7 +10,7 @@ import XCTest
 @testable import SwiftlySalesforce
 
 class RESTResourceTests: XCTestCase {
-    
+	
 	var auth: Authorization!
 	
 	override func setUp() {
@@ -23,48 +23,57 @@ class RESTResourceTests: XCTestCase {
 	}
 	
 	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
 		super.tearDown()
 	}
-    
-	func testIdentity() {
-		
-		let req = try! RESTResource.identity(version: "41.0").asURLRequest(with: auth)
-		
-		XCTAssertEqual(req.url!.absoluteString, auth.identityURL.absoluteString + "?version=41.0")
+	
+	func testDescribe() {
+		let req = try! SObjectResource.describe(type: "Account", version: "99.3").asURLRequest(with: auth)
 		XCTAssertEqual(req.httpMethod, "GET")
+		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/data/v99.3/sobjects/Account/describe")
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
+	}
+	
+	func testIdentity() {
+		let req = try! RESTResource.identity(version: "41.0").asURLRequest(with: auth)
+		XCTAssertEqual(req.httpMethod, "GET")
+		XCTAssertEqual(req.url!.absoluteString, auth.identityURL.absoluteString + "?version=41.0")
 		XCTAssertEqual(req.url!.queryItems(named: "version")!.first!.value!, "41.0")
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
 	}
 	
 	func testLimits() {
-		
 		let req = try! RESTResource.limits(version: "123").asURLRequest(with: auth)
-		
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/data/v123/limits")
 		XCTAssertEqual(req.httpMethod, "GET")
-		XCTAssertNil(req.url!.queryItems)
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
 	}
 	
-	func testSmallFile() {
+	func testRetrieve() {
 		
-		let req = try! RESTResource.smallFile(url: nil, path: "path/to/my/photo.jpg").asURLRequest(with: auth)
+		let type = "Account"
+		let id = "12345"
+		let fields = ["Id","Name","Custom1__c"]
+		let version = "41.0"
+		let req = try! SObjectResource.retrieve(type: type, id: id, fields: fields, version: version).asURLRequest(with: auth)
 		
-		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/path/to/my/photo.jpg")
+		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/data/v41.0/sobjects/Account/12345?fields=Id,Name,Custom1__c")
 		XCTAssertEqual(req.httpMethod, "GET")
-		XCTAssertNil(req.url!.queryItems)
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
+		XCTAssertEqual(req.url!.queryItems(named: "fields")!.first!.value, "Id,Name,Custom1__c")
 	}
 	
 	func testApexGet() {
 		
 		let res = RESTResource.apex(method: "GET", path: "/MyRESTResource/test", parameters: ["id": "00112345"], body: nil, headers: ["header1": "value1"])
 		let req  = try! res.asURLRequest(with: auth)
-		
+
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/services/apexrest/MyRESTResource/test?id=00112345")
 		XCTAssertEqual(req.httpMethod, "GET")
 		XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization")!, "Bearer ACCESS_TOKEN")
+		XCTAssertEqual(req.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
 		XCTAssertEqual(req.url!.queryItems(named: "id")!.first!.value!, "00112345")
-		XCTAssertEqual(req.value(forHTTPHeaderField: "header1")!, "value1")
 	}
 }
