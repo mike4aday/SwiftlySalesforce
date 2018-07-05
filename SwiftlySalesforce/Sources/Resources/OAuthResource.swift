@@ -51,6 +51,6 @@ extension OAuthResource: URLRequestConvertible {
 			body = ["token" : refreshToken].asPercentEncodedString()?.data(using: .utf8)
 		}
 		
-		return try URLRequest(url: url, authorization: authorization, method: method, body: body)
+		return try URLRequest(url: url, authorization: authorization, method: method, body: body, contentType: URLRequest.MIMEType.urlEncoded.rawValue)
 	}
 }

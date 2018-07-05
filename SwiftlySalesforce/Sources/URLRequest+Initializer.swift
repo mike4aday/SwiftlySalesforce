@@ -9,13 +9,41 @@
 import Foundation
 
 internal extension URLRequest {
+	
+	internal enum MIMEType: String {
+		case json = "application/json"
+		case urlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
+	}
 
-	internal init(path: String, authorization: Authorization, queryItems: [URLQueryItem]? = nil, method: String = "GET", body: Data? = nil) throws {
+	internal init(path: String,
+				  authorization: Authorization,
+				  queryItems: [URLQueryItem]? = nil,
+				  method: String? = nil,
+				  body: Data? = nil,
+				  contentType: String? = nil,
+				  accept: String? = nil) throws {
+		
 		let url = authorization.instanceURL.appendingPathComponent(path)
 		try self.init(url: url, authorization: authorization, queryItems: queryItems, method: method, body: body)
 	}
 	
-	internal init(url: URL, authorization: Authorization, queryItems: [URLQueryItem]? = nil, method: String = "GET", body: Data? = nil) throws {
+	internal init(url: URL,
+				  authorization: Authorization,
+				  queryItems: [URLQueryItem]? = nil,
+				  method: String? = nil,
+				  body: Data? = nil,
+				  contentType: String? = nil,
+				  accept: String? = nil) throws {
+		
+		// Set default values, if not specified
+		var method = method ?? "GET"
+		var contentType = contentType ??
+			method.uppercased() == "GET" || method.uppercased() == "DELETE"
+			? MIMEType.urlEncoded.rawValue
+			: MIMEType.json.rawValue
+		var accept = accept ?? MIMEType.json.rawValue
+		
+		// Add additional query items, if any
 		var myURL = url
 		if let additionalQueryItems = queryItems {
 			guard var comps = URLComponents(url: myURL, resolvingAgainstBaseURL: false) else {
@@ -27,7 +55,12 @@ internal extension URLRequest {
 			}
 			myURL = updatedURL
 		}
+		
 		self.init(url: myURL)
+		self.httpMethod = method
+		self.httpBody = body
+		self.setValue(contentType, forHTTPHeaderField: "Content-Type")
+		self.setValue(accept, forHTTPHeaderField: "Accept")
 		try apply(authorization)
 	}
 	

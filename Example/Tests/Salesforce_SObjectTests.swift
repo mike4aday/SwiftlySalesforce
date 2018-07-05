@@ -11,20 +11,14 @@ import XCTest
 import PromiseKit
 
 class Salesforce_SObjectTests: XCTestCase {
-    
-	struct TestConfig: Decodable {
-		let consumerKey: String
-		let redirectURL: String
-	}
 	
 	var salesforce: Salesforce!
 	
 	override func setUp() {
 		super.setUp()
 		let data = TestUtils.shared.read(fileName: "Configuration")!
-		let testConfig = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(TestConfig.self, from: data)
-		let url = URL(string: testConfig.redirectURL)!
-		salesforce = try! Salesforce(consumerKey: testConfig.consumerKey, callbackURL: url)
+		let testConfig = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(Salesforce.Configuration.self, from: data)
+		salesforce = Salesforce(configuration: testConfig)
 	}
     
     override func tearDown() {
@@ -33,7 +27,7 @@ class Salesforce_SObjectTests: XCTestCase {
     }
 
 	func testThatItInsertsRetrievesAndDeletes() {
-		let exp = expectation(description: "Inserts and retrieves 1 account")
+		let exp = expectation(description: "Inserts, retrieves and deletes 1 account")
 		firstly {
 			salesforce.insert(type: "Account", fields: ["Name":"Really Large Corp., Inc.", "ShippingCountry": "Canada"])
 		}

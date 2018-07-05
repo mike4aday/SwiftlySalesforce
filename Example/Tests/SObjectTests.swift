@@ -1,5 +1,5 @@
 //
-//  RecordTests.swift
+//  SObjectTests.swift
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftlySalesforce
 
-class RecordTests: XCTestCase {
+class SObjectTests: XCTestCase {
 
 	let json = """
 	{
@@ -90,11 +90,7 @@ class RecordTests: XCTestCase {
 	"""
 	
 	let decoder = JSONDecoder(dateFormatter: .salesforceDateTimeFormatter)
-	let encoder: JSONEncoder = {
-		let e = JSONEncoder()
-		e.dateEncodingStrategy = .formatted(DateFormatter.salesforceDateTimeFormatter)
-		return e
-	}()
+	let encoder = JSONEncoder(dateFormatter: .salesforceDateTimeFormatter)
 	
 	override func setUp() {
 		super.setUp()
@@ -120,6 +116,7 @@ class RecordTests: XCTestCase {
 		XCTAssertEqual(account.float(forField: "AnnualRevenue"), 543210.0)
 		XCTAssertNotNil(account.date(forField: "CreatedDate"))
 		XCTAssertEqual(account.value(forField: "BillingCountry"), "US")
+		XCTAssertEqual(account.address(forField: "BillingAddress")!.country, "US")
 		XCTAssertNotNil(account.value(forField: "LastModifiedDate") as Date?)
 		XCTAssertNil(account.value(forField: "LastReferencedDate") as Date?)
 		XCTAssertEqual(account["Name"], "Megacorp, Inc.")

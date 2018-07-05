@@ -1,5 +1,5 @@
 //
-//  ObjectMetadataTests.swift
+//  ObjectDescriptionTests.swift
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
