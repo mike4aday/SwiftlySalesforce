@@ -47,9 +47,9 @@ internal enum UIResource {
 	)
 }
 
-extension UIResource: Resource {
+extension UIResource: URLRequestConvertible {
 	
-	func request(with authorization: Authorization) throws -> URLRequest {
+	func asURLRequest(with authorization: Authorization) throws -> URLRequest {
 		
 		switch self {
 			

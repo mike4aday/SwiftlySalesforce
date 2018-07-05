@@ -48,7 +48,7 @@ public extension Salesforce {
 			optionalFields: optionalFields,
 			pageSize: pageSize,
 			version: config.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	public func defaultsForCloning<T: Decodable>(
@@ -64,7 +64,7 @@ public extension Salesforce {
 			optionalFields: optionalFields,
 			recordTypeId: recordTypeId,
 			version: config.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	public func defaultsForCreating<T: Decodable>(
@@ -80,7 +80,7 @@ public extension Salesforce {
 			optionalFields: optionalFields,
 			recordTypeId: recordTypeId,
 			version: config.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	public func picklistValues<T: Decodable>(
@@ -89,6 +89,6 @@ public extension Salesforce {
 		options: Options) -> Promise<T> {
 		
 		let resource = UIResource.picklistValues(objectApiName: objectApiName, recordTypeId: recordTypeId, version: config.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 }

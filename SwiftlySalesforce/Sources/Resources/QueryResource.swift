@@ -13,9 +13,9 @@ internal enum QueryResource {
 	case queryNext(path: String)
 }
 
-extension QueryResource: Resource {
+extension QueryResource: URLRequestConvertible {
 	
-	internal func request(with authorization: Authorization) throws -> URLRequest {
+	internal func asURLRequest(with authorization: Authorization) throws -> URLRequest {
 
 		switch self {
 			

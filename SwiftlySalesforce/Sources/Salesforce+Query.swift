@@ -13,12 +13,12 @@ public extension Salesforce {
 	
 	public func query<T: Decodable>(soql: String, batchSize: Int? = nil, options: Options = []) -> Promise<QueryResult<T>> {
 		let resource = QueryResource.query(soql: soql, batchSize: batchSize, version: configuration.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	public func query(soql: String, batchSize: Int? = nil, options: Options = []) -> Promise<QueryResult<SObject>> {
 		let resource = QueryResource.query(soql: soql, batchSize: batchSize, version: configuration.version)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	public func query<T: Decodable>(soql: [String], batchSize: Int? = nil, options: Options = []) -> Promise<[QueryResult<T>]> {
@@ -33,11 +33,11 @@ public extension Salesforce {
 	
 	public func queryNext<T: Decodable>(path: String, options: Options = []) -> Promise<QueryResult<T>> {
 		let resource = QueryResource.queryNext(path: path)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 	
 	public func queryNext(path: String, options: Options = []) -> Promise<QueryResult<SObject>> {
 		let resource = QueryResource.queryNext(path: path)
-		return dataTask(resource: resource, options: options)
+		return dataTask(with: resource, options: options)
 	}
 }
