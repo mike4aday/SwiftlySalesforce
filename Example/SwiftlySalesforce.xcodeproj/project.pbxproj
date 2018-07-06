@@ -23,6 +23,7 @@
 		EA7BDBDB20EFD99D0026856B /* Salesforce_SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62132120EAD6AC009F1C52 /* Salesforce_SearchTests.swift */; };
 		EA7BDBDD20EFDA440026856B /* URL_QueryItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBDC20EFDA440026856B /* URL_QueryItemTests.swift */; };
 		EA7BDBDF20EFDB5D0026856B /* UIResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBDE20EFDB5D0026856B /* UIResourceTests.swift */; };
+		EA7BDBE120EFFFDE0026856B /* Salesforce_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBE020EFFFDE0026856B /* Salesforce_UITests.swift */; };
 		EAAC9EB920D44F5500F0E16B /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = EAAC9EB820D44F5500F0E16B /* Configuration.json */; };
 		EAB7EDAD1F8AEC0B00788A20 /* MockLimits.json in Resources */ = {isa = PBXBuildFile; fileRef = EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */; };
 		EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723B1DC0455C00790BCB /* TaskForceError.swift */; };
@@ -81,6 +82,7 @@
 		EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStoreTests.swift; sourceTree = "<group>"; };
 		EA7BDBDC20EFDA440026856B /* URL_QueryItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_QueryItemTests.swift; sourceTree = "<group>"; };
 		EA7BDBDE20EFDB5D0026856B /* UIResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResourceTests.swift; sourceTree = "<group>"; };
+		EA7BDBE020EFFFDE0026856B /* Salesforce_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_UITests.swift; sourceTree = "<group>"; };
 		EA846FC020DCBB16004F120E /* IdentityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTests.swift; sourceTree = "<group>"; };
 		EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockContactMetadata.json; sourceTree = "<group>"; };
 		EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_QueryTests.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */,
 				EA62132120EAD6AC009F1C52 /* Salesforce_SearchTests.swift */,
 				EA62132520EADA3F009F1C52 /* Salesforce_SObjectTests.swift */,
+				EA7BDBE020EFFFDE0026856B /* Salesforce_UITests.swift */,
 				EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */,
 				EABF48711FA7F51200702175 /* SObjectTests.swift */,
 				EA133DA91F91DC060055DC2F /* TestUtils.swift */,
@@ -497,6 +500,7 @@
 				EAD8EF2020EED0F6009E9D56 /* Salesforce_SObjectTests.swift in Sources */,
 				EA57EBF320D2B7E300374451 /* TestUtils.swift in Sources */,
 				EAD8EF6420EEEC65009E9D56 /* Salesforce_RESTTests.swift in Sources */,
+				EA7BDBE120EFFFDE0026856B /* Salesforce_UITests.swift in Sources */,
 				EAD8EF1A20EDCA39009E9D56 /* OrganizationTests.swift in Sources */,
 				EAD8EF1C20EE9BEB009E9D56 /* ObjectDescriptionTests.swift in Sources */,
 				EAD8EF1B20EDCB24009E9D56 /* SObjectTests.swift in Sources */,
