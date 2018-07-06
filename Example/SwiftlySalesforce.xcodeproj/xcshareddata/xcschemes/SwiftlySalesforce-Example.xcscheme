@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "SwiftlySalesforce_Example.app"
-               BlueprintName = "SwiftlySalesforce_Example"
+               BuildableName = "Task Force Sample App.app"
+               BlueprintName = "Task Force Sample App"
                ReferencedContainer = "container:SwiftlySalesforce.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,9 +40,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      codeCoverageEnabled = "YES"
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -59,8 +58,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "SwiftlySalesforce_Example.app"
-            BlueprintName = "SwiftlySalesforce_Example"
+            BuildableName = "Task Force Sample App.app"
+            BlueprintName = "Task Force Sample App"
             ReferencedContainer = "container:SwiftlySalesforce.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -71,7 +70,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -83,8 +81,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "SwiftlySalesforce_Example.app"
-            BlueprintName = "SwiftlySalesforce_Example"
+            BuildableName = "Task Force Sample App.app"
+            BlueprintName = "Task Force Sample App"
             ReferencedContainer = "container:SwiftlySalesforce.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -102,8 +100,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "SwiftlySalesforce_Example.app"
-            BlueprintName = "SwiftlySalesforce_Example"
+            BuildableName = "Task Force Sample App.app"
+            BlueprintName = "Task Force Sample App"
             ReferencedContainer = "container:SwiftlySalesforce.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -1,16 +1,8 @@
 //
 //  Salesforce+Query.swift
-//  SwiftlySalesforce
+//  Pods-SwiftlySalesforce_Example
 //
-//  Created by Michael Epstein on 5/14/18.
+//  Created by Michael Epstein on 6/23/18.
 //
 
 import Foundation
-import PromiseKit
-
-extension Salesforce {
-	
-	open func query(soql: String, shouldAuthorize: Bool = true) -> Promise<QueryResult<Record>> {
-		return dataTask(resource: .query(soql: soql, version: version), shouldAuthorize: shouldAuthorize)
-	}
-}
