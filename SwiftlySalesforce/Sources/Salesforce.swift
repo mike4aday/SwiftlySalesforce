@@ -27,7 +27,7 @@ public class Salesforce {
 	}
 	
 	public struct Options: OptionSet {
-		public static let dontAuthenticate = Options(rawValue: 1 << 0) // If set, automatic authentication won't start
+		public static let dontAuthenticate = Options(rawValue: 1 << 0) // Set this in functions to defer login
 		public let rawValue: Int
 		public init(rawValue: Int) {
 			self.rawValue = rawValue
