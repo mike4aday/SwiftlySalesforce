@@ -248,26 +248,38 @@ class Salesforce_SObjectTests: XCTestCase {
 		waitForExpectations(timeout: 600, handler: nil)
 	}
 	
+	func testThatItFailsToDescribe() {
+		
+		let exp = expectation(description: "Doesn't describe fake custom object")
+		
+		firstly { () -> Promise<ObjectDescription> in
+			salesforce.describe(type: UUID().uuidString)
+		}.done { description in
+			XCTFail("Shouldn't have retrieved fake object")
+		}.catch {error in
+			guard case let Salesforce.Error.resourceError(statusCode, _, _, _) = error, statusCode == 404 else {
+				XCTFail(error.localizedDescription)
+				return
+			}
+		}.finally {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 600, handler: nil)
+	}
+	
 	func testThatItDescribesAll() {
 		
 		let exp = expectation(description: "Describes Account and Contact")
 		
 		firstly { () -> Promise<[ObjectDescription]> in
-			
 			salesforce.describeAll()
-			
 		}.done { (descriptions: [ObjectDescription]) -> () in
-			
 			XCTAssertNotNil(descriptions.filter { $0.name == "Account" }.first)
-			
 		}.catch { error in
-			
 			XCTFail(error.localizedDescription)
-			
 		}.finally {
-				
 			exp.fulfill()
-				
 		}
 		
 		waitForExpectations(timeout: 600, handler: nil)

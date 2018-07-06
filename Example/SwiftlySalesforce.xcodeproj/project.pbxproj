@@ -35,6 +35,7 @@
 		EAD8EF1C20EE9BEB009E9D56 /* ObjectDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */; };
 		EAD8EF1F20EE9F2D009E9D56 /* SObjectResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */; };
 		EAD8EF2020EED0F6009E9D56 /* Salesforce_SObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62132520EADA3F009F1C52 /* Salesforce_SObjectTests.swift */; };
+		EAD8EF6420EEEC65009E9D56 /* Salesforce_RESTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		EAD8EF1120EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_ConfigurationTests.swift; sourceTree = "<group>"; };
 		EAD8EF1420EDC65D009E9D56 /* RESTResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTResourceTests.swift; sourceTree = "<group>"; };
 		EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SObjectResourceTests.swift; sourceTree = "<group>"; };
+		EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_RESTTests.swift; sourceTree = "<group>"; };
 		EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDescriptionTests.swift; sourceTree = "<group>"; };
 		F7891B295CCEE606466284B0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F8FEE5B2427F471C6FAA4ACD /* Pods-SwiftlySalesforce_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Tests/Pods-SwiftlySalesforce_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */,
 				EAD8EF1420EDC65D009E9D56 /* RESTResourceTests.swift */,
 				EAD8EF1120EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift */,
+				EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */,
 				EA62132520EADA3F009F1C52 /* Salesforce_SObjectTests.swift */,
 				EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */,
 				EABF48711FA7F51200702175 /* SObjectTests.swift */,
@@ -493,6 +496,7 @@
 				EAD8EF1020EDA912009E9D56 /* AuthorizationTests.swift in Sources */,
 				EAD8EF2020EED0F6009E9D56 /* Salesforce_SObjectTests.swift in Sources */,
 				EA57EBF320D2B7E300374451 /* TestUtils.swift in Sources */,
+				EAD8EF6420EEEC65009E9D56 /* Salesforce_RESTTests.swift in Sources */,
 				EAD8EF1A20EDCA39009E9D56 /* OrganizationTests.swift in Sources */,
 				EAD8EF1C20EE9BEB009E9D56 /* ObjectDescriptionTests.swift in Sources */,
 				EAD8EF1B20EDCB24009E9D56 /* SObjectTests.swift in Sources */,
