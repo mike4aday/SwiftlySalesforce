@@ -1,9 +1,9 @@
 //
 //  UIResourceTests.swift
-//  SwiftlySalesforce_Tests
+//  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 7/6/18.
-//  Copyright © 2018 CocoaPods. All rights reserved.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import XCTest
@@ -46,5 +46,39 @@ class UIResourceTests: XCTestCase {
 		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "layoutTypes" }.first!.value, "Compact,Full")
 		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "modes" }.first!.value, "Create,Edit")
 		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "optionalFields" }.first!.value, "BillingCity,ShippingCity") 
+	}
+	
+	func testDefaultsForCloning() {
+		
+		let recordID = "001123"
+		let formFactor = "Medium"
+		let optionalFields = ["BillingCity","ShippingCity"]
+		let recordTypeID = "00N123"
+		let version = "99.1"
+		let res = UIResource.defaultsForCloning(recordId: recordID, formFactor: formFactor, optionalFields: optionalFields, recordTypeId: recordTypeID, version: version)
+		let req = try! res.asURLRequest(with: auth)
+		let comps = URLComponents(url: req.url!, resolvingAgainstBaseURL: false)
+		
+		XCTAssertEqual(req.url!.path, "/services/data/v99.1/ui-api/record-defaults/clone/001123")
+		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "formFactor" }.first!.value, "Medium")
+		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "optionalFields" }.first!.value, "BillingCity,ShippingCity")
+		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "recordTypeId" }.first!.value, "00N123")
+	}
+	
+	func testDefaultsForCreating() {
+		
+		let type = "Account"
+		let formFactor = "Medium"
+		let optionalFields = ["BillingCity","ShippingCity"]
+		let recordTypeID = "00N123"
+		let version = "99.1"
+		let res = UIResource.defaultsForCreating(objectApiName: type, formFactor: formFactor, optionalFields: optionalFields, recordTypeId: recordTypeID, version: version)
+		let req = try! res.asURLRequest(with: auth)
+		let comps = URLComponents(url: req.url!, resolvingAgainstBaseURL: false)
+		
+		XCTAssertEqual(req.url!.path, "/services/data/v99.1/ui-api/record-defaults/create/Account")
+		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "formFactor" }.first!.value, "Medium")
+		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "optionalFields" }.first!.value, "BillingCity,ShippingCity")
+		XCTAssertEqual(comps!.queryItems!.filter{ $0.name == "recordTypeId" }.first!.value, "00N123")
 	}
 }

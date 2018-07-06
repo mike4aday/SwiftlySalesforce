@@ -1,9 +1,9 @@
 //
 //  Salesforce_RESTTests.swift
-//  SwiftlySalesforce_Tests
+//  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 7/5/18.
-//  Copyright © 2018 CocoaPods. All rights reserved.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import XCTest
@@ -58,4 +58,69 @@ class Salesforce_RESTTests: XCTestCase {
 		
 		waitForExpectations(timeout: 600, handler: nil)
 	}
+	
+	func testOrganization() {
+		
+		let exp = expectation(description: "Fetch organization object")
+		
+		firstly { () -> Promise<Organization> in
+			salesforce.organization()
+		}.done { org in
+			XCTAssertTrue(org.createdDate < Date())
+		}.catch {
+			XCTFail("\($0)")
+		}.finally {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 600, handler: nil)
+	}
+	
+	func testFetchImageByURL() {
+		
+		let exp = expectation(description: "Fetch image by URL")
+		
+		firstly { () -> Promise<Identity> in
+			salesforce.identity()
+		}.then { identity -> Promise<UIImage> in
+			self.salesforce.fetchImage(url: identity.thumbnailURL!)
+		}.done { image in
+			// Done
+		}.catch {
+			XCTFail("\($0)")
+		}.finally {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 600, handler: nil)
+	}
+	
+/*
+TODO: why does this fail with status code 404 when the image is present?
+	func testFetchImageByPath() {
+		
+		struct Account: Decodable {
+			let Id: String
+			let Name: String
+			let PhotoUrl: String?
+		}
+		
+		let exp = expectation(description: "Fetch image by relative path")
+		
+		firstly { () -> Promise<QueryResult<Account>> in
+			salesforce.query(soql: "SELECT Id,Name,PhotoUrl FROM Account WHERE PhotoUrl != NULL")
+		}.then { queryResult -> Promise<UIImage> in
+			let path = queryResult.records[0].PhotoUrl!
+			self.salesforce.fetchImage(path: path)
+		}.done { image in
+			// Done
+		}.catch {
+			XCTFail("\($0)")
+		}.finally {
+			exp.fulfill()
+		}
+		
+		waitForExpectations(timeout: 600, handler: nil)
+	}
+*/
 }

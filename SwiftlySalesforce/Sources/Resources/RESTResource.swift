@@ -11,7 +11,7 @@ import Foundation
 internal enum RESTResource {
 	case identity(version: String)
 	case limits(version: String)
-	case smallFile(url: URL?, path: String?)
+	case smallFile(url: URL?, path: String?, accept: String?)
 	case apex(method: String, path: String, parameters: [String: String]?, body: Data?, headers: [String: String]?)
 }
 
@@ -30,12 +30,12 @@ extension RESTResource: URLRequestConvertible {
 			let path = "/services/data/v\(version)/limits"
 			return try URLRequest(path: path, authorization: authorization)
 			
-		case let .smallFile(url, path):
+		case let .smallFile(url, path, accept):
 			var u: URL = url ?? authorization.instanceURL
 			if let p = path {
 				u.appendPathComponent(p)
 			}
-			return try URLRequest(url: u, authorization: authorization)
+			return try URLRequest(url: u, authorization: authorization, accept: accept)
 			
 		case let .apex(method, path, parameters, body, headers):
 			let url = authorization.instanceURL.appendingPathComponent("/services/apexrest").appendingPathComponent(path)

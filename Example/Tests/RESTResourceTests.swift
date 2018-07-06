@@ -48,7 +48,7 @@ class RESTResourceTests: XCTestCase {
 	
 	func testSmallFile() {
 		
-		let req = try! RESTResource.smallFile(url: nil, path: "path/to/my/photo.jpg").asURLRequest(with: auth)
+		let req = try! RESTResource.smallFile(url: nil, path: "path/to/my/photo.jpg", accept: "image/*").asURLRequest(with: auth)
 		
 		XCTAssertEqual(req.url!.absoluteString, "https://na15.salesforce.com/path/to/my/photo.jpg")
 		XCTAssertEqual(req.httpMethod, "GET")

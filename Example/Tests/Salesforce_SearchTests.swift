@@ -1,9 +1,9 @@
 //
 //  Salesforce_SearchTests.swift
-//  SwiftlySalesforce_Tests
+//  SwiftlySalesforce
 //
-//  Created by Michael Epstein on 7/2/18.
-//  Copyright © 2018 CocoaPods. All rights reserved.
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import XCTest
@@ -37,7 +37,6 @@ class Salesforce_SearchTests: XCTestCase {
 				XCTAssertTrue(record.type.lowercased() == "lead" || record.type.lowercased() == "contact")
 				XCTAssertNotNil(record.id)
 				XCTAssertNotNil(record.string(forField: "Name"))
-				debugPrint("Name: \(record.string(forField: "Name")!)")
 			}
 		}.catch { error in
 			XCTFail(error.localizedDescription)
