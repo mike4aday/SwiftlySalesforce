@@ -10,6 +10,9 @@
 import Foundation
 import PromiseKit
 
+/// Enables interaction with the Salesforce User Interface API
+/// See https://developer.salesforce.com/docs/atlas.en-us.uiapi.meta/uiapi/ui_api_get_started.htm
+
 public extension Salesforce {
 	
 	public enum FormFactor: String {
@@ -29,6 +32,10 @@ public extension Salesforce {
 		case view = "View"
 	}
 	
+	/**
+	Get records data and object metadata in a single call. See link for parameter descriptions and examples.
+	- SeeAlso: https://developer.salesforce.com/docs/atlas.en-us.uiapi.meta/uiapi/ui_api_resources_record_ui.htm
+	*/
 	public func recordsAndMetadata<T: Decodable>(
 		recordIds: [String],
 		childRelationships: [String]? = nil,
@@ -51,6 +58,10 @@ public extension Salesforce {
 		return dataTask(with: resource, options: options)
 	}
 	
+	/**
+	Get defaults for cloning a record. See link for parameter descriptions and examples.
+	- SeeAlso: https://developer.salesforce.com/docs/atlas.en-us.uiapi.meta/uiapi/ui_api_resources_record_defaults_clone.htm
+	*/
 	public func defaultsForCloning<T: Decodable>(
 		recordId: String,
 		formFactor: FormFactor? = nil,
@@ -67,6 +78,10 @@ public extension Salesforce {
 		return dataTask(with: resource, options: options)
 	}
 	
+	/**
+	Get defaults for creating a record. See link for parameter descriptions and examples.
+	- SeeAlso: https://developer.salesforce.com/docs/atlas.en-us.uiapi.meta/uiapi/ui_api_resources_record_defaults_create.htm
+	*/
 	public func defaultsForCreating<T: Decodable>(
 		objectApiName: String,
 		formFactor: FormFactor? = nil,
@@ -80,15 +95,6 @@ public extension Salesforce {
 			optionalFields: optionalFields,
 			recordTypeId: recordTypeId,
 			version: config.version)
-		return dataTask(with: resource, options: options)
-	}
-	
-	public func picklistValues<T: Decodable>(
-		objectApiName: String,
-		recordTypeId: String,
-		options: Options) -> Promise<T> {
-		
-		let resource = UIResource.picklistValues(objectApiName: objectApiName, recordTypeId: recordTypeId, version: config.version)
 		return dataTask(with: resource, options: options)
 	}
 }

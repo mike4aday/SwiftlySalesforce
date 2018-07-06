@@ -39,12 +39,6 @@ internal enum UIResource {
 		recordTypeId: String?,
 		version: String
 	)
-	
-	case picklistValues(
-		objectApiName: String,
-		recordTypeId: String,
-		version: String
-	)
 }
 
 extension UIResource: URLRequestConvertible {
@@ -103,10 +97,6 @@ extension UIResource: URLRequestConvertible {
 				queryItems.append(URLQueryItem(name: "recordTypeId", value: recordTypeId))
 			}
 			return try URLRequest(path: path, authorization: authorization, queryItems: queryItems)
-			
-		case let .picklistValues(objectApiName, recordTypeId, version):
-			let path = "/services/data/v\(version)/ui-api/object-info/\(objectApiName)/picklist-values/\(recordTypeId)"
-			return try URLRequest(path: path, authorization: authorization)
 		}
 	}
 }

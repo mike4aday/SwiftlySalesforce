@@ -91,7 +91,7 @@ class Salesforce_UITests: XCTestCase {
 				// Get defaults for creating
 				let formFactor = Salesforce.FormFactor.medium
 				let optionalFields = ["Account.BillingCity","Account.BillingCountry"]
-				return self.salesforce.defaultsForCreating(objectApiName: "Account", formFactor: formFactor, optionalFields: optionalFields)
+				return salesforce.defaultsForCreating(objectApiName: "Account", formFactor: formFactor, optionalFields: optionalFields)
 			}.done { (data) -> () in
 				// Done
 			}.catch { error in
