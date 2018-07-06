@@ -17,8 +17,8 @@ class Salesforce_RESTTests: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		let data = TestUtils.shared.read(fileName: "Configuration")!
-		let testConfig = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(Salesforce.Configuration.self, from: data)
-		salesforce = Salesforce(configuration: testConfig)
+		let config = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(Salesforce.Configuration.self, from: data)
+		salesforce = Salesforce(configuration: config)
 	}
 	
 	override func tearDown() {

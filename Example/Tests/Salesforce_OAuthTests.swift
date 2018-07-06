@@ -11,19 +11,12 @@ import XCTest
 
 class Salesforce_OAuthTests: XCTestCase {
 	
-	struct ConfigFile: Decodable {
-		let consumerKey: String
-		let redirectURL: String
-	}
-	
 	var config: Salesforce.Configuration!
 	
     override func setUp() {
         super.setUp()
 		let data = TestUtils.shared.read(fileName: "Configuration")!
-		let configFile = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(ConfigFile.self, from: data)
-		let url = URL(string: configFile.redirectURL)!
-		config = try! Salesforce.Configuration(consumerKey: configFile.consumerKey, callbackURL: url)
+		config = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(Salesforce.Configuration.self, from: data)
     }
     
     override func tearDown() {
@@ -36,9 +29,10 @@ class Salesforce_OAuthTests: XCTestCase {
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString))
 		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1").done { 
 			debugPrint($0)
-			exp.fulfill()
 		}.catch { (error) in
 			XCTFail(error.localizedDescription)
+		}.finally {
+			exp.fulfill()
 		}
 		waitForExpectations(timeout: 10.0*60, handler: nil)
 	}
@@ -49,48 +43,53 @@ class Salesforce_OAuthTests: XCTestCase {
 		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1", options: [.dontAuthenticate]).done { _ in
 			XCTFail("Shouldn't authorize")
 		}.catch { (error) in
-			if case Salesforce.Error.unauthorized = error {
-				exp.fulfill()
-			}
-			else {
+			guard case Salesforce.Error.unauthorized = error else {
 				XCTFail(error.localizedDescription)
+				return
 			}
+		}.finally {
+			exp.fulfill()
 		}
 		waitForExpectations(timeout: 10.0*60, handler: nil)
 	}
 	
 	func testThatItRefreshes() {
+		
 		let exp = expectation(description: "Refreshes access token")
 		let userID = UUID().uuidString
 		let orgID = UUID().uuidString
 		let salesforce = Salesforce(configuration: config, user: Salesforce.User(userID: userID, organizationID: orgID))
-		var oldAuth: Authorization?
-		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then { (queryResult: QueryResult<SObject>) -> Promise<Void> in
-			oldAuth = salesforce.authorization!
-			return salesforce.revokeAccessToken()
-		}.then { _ in
-			salesforce.query(soql: "SELECT Id,Name FROM Contact LIMIT 1", options: [.dontAuthenticate])
-		}.done {_ in
+		
+		salesforce.query(soql: "SELECT Id,Name FROM Account LIMIT 1").then { (queryResult: QueryResult<SObject>) -> Promise<Authorization> in
+			let oldAuth = salesforce.authorization!
+			return salesforce.revokeAccessToken().map { oldAuth }
+		}.then { oldAuth -> Promise<Authorization> in
+			salesforce.query(soql: "SELECT Id,Name FROM Contact LIMIT 1", options: [.dontAuthenticate]).map { _ in oldAuth }
+		}.done { oldAuth in
 			XCTAssertNotEqual(oldAuth, salesforce.authorization!)
+		}.catch {
+			XCTFail($0.localizedDescription)
+		}.finally {
 			exp.fulfill()
-		}.catch {error in
-			XCTFail("\(error)")
 		}
 		waitForExpectations(timeout: 600, handler: nil)
 	}
 	
 	func testThatItRevokes() {
-		let exp = expectation(description: "Refreshes access token")
+		
+		let exp = expectation(description: "Revoke tokens")
 		let user = Salesforce.User(userID: UUID().uuidString, organizationID: UUID().uuidString)
 		let salesforce = Salesforce(configuration: config, user: user)
+		
 		salesforce.query(soql: "SELECT Id FROM Account LIMIT 1").then { _ -> Promise<Void> in
 			XCTAssertNotNil(salesforce.authorization)
 			return salesforce.revoke()
 		}.done {
 			XCTAssertNil(salesforce.authorization)
-			exp.fulfill()
 		}.catch {
-			XCTFail("\($0)")
+			XCTFail($0.localizedDescription)
+		}.finally {
+			exp.fulfill()
 		}
 		waitForExpectations(timeout: 600, handler: nil)
 	}

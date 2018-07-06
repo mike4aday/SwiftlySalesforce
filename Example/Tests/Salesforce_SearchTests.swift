@@ -11,19 +11,13 @@ import XCTest
 
 class Salesforce_SearchTests: XCTestCase {
     
-	struct TestConfig: Decodable {
-		let consumerKey: String
-		let redirectURL: String
-	}
-	
 	var salesforce: Salesforce!
 	
 	override func setUp() {
 		super.setUp()
 		let data = TestUtils.shared.read(fileName: "Configuration")!
-		let testConfig = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(TestConfig.self, from: data)
-		let url = URL(string: testConfig.redirectURL)!
-		salesforce = try! Salesforce(consumerKey: testConfig.consumerKey, callbackURL: url)
+		let config = try! JSONDecoder(dateFormatter: .salesforceDateTimeFormatter).decode(Salesforce.Configuration.self, from: data)
+		salesforce = Salesforce(configuration: config)
 	}
     
     override func tearDown() {

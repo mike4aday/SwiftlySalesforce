@@ -18,7 +18,7 @@ extension OAuthResource: URLRequestConvertible {
 	
 	func asURLRequest(with authorization: Authorization) throws -> URLRequest {
 		
-		var url: URL
+		var url: URL? = nil
 		var method: String = "GET"
 		var body: Data? = nil
 		
@@ -28,7 +28,7 @@ extension OAuthResource: URLRequestConvertible {
 			guard let refreshToken = authorization.refreshToken else {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
-			url = authorizationURL.deletingLastPathComponent().appendingPathComponent("token")
+			url = URL(string: "token", relativeTo: authorizationURL)
 			method = "POST"
 			body = [
 				"format" : "json",
@@ -38,7 +38,7 @@ extension OAuthResource: URLRequestConvertible {
 			].asPercentEncodedString()?.data(using: .utf8)
 						
 		case let .revokeAccessToken(authorizationURL):
-			url = authorizationURL.deletingLastPathComponent().appendingPathComponent("revoke")
+			url = URL(string: "revoke", relativeTo: authorizationURL)
 			method = "POST"
 			body = ["token" : authorization.accessToken].asPercentEncodedString()?.data(using: .utf8)
 			
@@ -46,11 +46,15 @@ extension OAuthResource: URLRequestConvertible {
 			guard let refreshToken = authorization.refreshToken else {
 				throw Salesforce.Error.refreshTokenUnavailable
 			}
-			url = authorizationURL.deletingLastPathComponent().appendingPathComponent("revoke")
+			url = URL(string: "revoke", relativeTo: authorizationURL)
 			method = "POST"
 			body = ["token" : refreshToken].asPercentEncodedString()?.data(using: .utf8)
 		}
 		
-		return try URLRequest(url: url, authorization: authorization, method: method, body: body, contentType: URLRequest.MIMEType.urlEncoded.rawValue)
+		guard let u = url else {
+			throw NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL, userInfo: [:])
+		}
+		let req = try URLRequest(url: u, authorization: authorization, method: method, body: body, contentType: URLRequest.MIMEType.urlEncoded.rawValue)
+		return req
 	}
 }
