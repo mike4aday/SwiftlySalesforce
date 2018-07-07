@@ -19,10 +19,9 @@ You can be up and running in a few minutes by following these steps:
     - [CocoaPods](http://www.cocoapods.org): add `pod 'SwiftlySalesforce'` to your [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
     - [Carthage](https://github.com/Carthage/Carthage): add `github "mike4aday/SwiftlySalesforce"` to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile)
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
-1. Register your Connected App's callback URL scheme with iOS ([example](#example-register-your-connected-apps-callback-url-scheme-with-ios))
 
 ## Minimum Requirements
-* iOS 10
+* iOS 11
 * Swift 4
 * Xcode 9
 
@@ -486,23 +485,6 @@ target 'MyApp' do
   pod 'SwiftlySalesforce'
   # Another pod here
 end
-```
-
-### Example: Register Your Connected App's Callback URL Scheme with iOS
-Upon successful OAuth2 authorization, Salesforce will redirect the Safari View Controller back to the callback URL that you specified in your Connected App settings, and will append the access token (among other things) to that callback URL. Add the following to your app's .plist file, so iOS will know how to handle the callback URL, and will pass it to your app's delegate.
-```xml
-<!-- ADD TO YOUR APP'S .PLIST FILE -->
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLName</key>
-    <string>SalesforceOAuth2</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string><!-- YOUR CALLBACK URL'S SCHEME HERE (scheme only, not entire URL! Not http or https!) --></string>
-    </array>
-  </dict>
-</array>
 ```
 
 ## Main Components of Swiftly Salesforce
