@@ -30,7 +30,7 @@ extension Salesforce.Error: LocalizedError {
 		case .authenticationSessionFailed:
 			return NSLocalizedString("Failed to start user authentication session.", comment: "")
 		default:
-			return nil
+			return "\(self)"
 		}
 	}
 }

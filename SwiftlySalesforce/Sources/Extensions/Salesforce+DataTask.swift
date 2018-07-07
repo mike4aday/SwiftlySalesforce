@@ -33,6 +33,15 @@ public extension Salesforce {
 		}
 	}
 	
+	/// Makes an asynchronous call to Salesforce. Typically you won't need to call this method directly,
+	/// but if you need to access a Salesforce endpoint that's not covered by one of the provided 'resources,' then
+	/// you can create your own URLRequest and pass it as an argument to this method. If you don't specify a
+	/// hostname for your URLRequest's URL, then the user's 'instance URL' will be used.
+	/// - Parameter with: instance that conforms to URLRequestConvertible protocol, e.g. URLRequest
+	/// - Parameter options: if you want to defer login, set to [.dontAuthenticate]
+	/// - Parameter validator: optional, custom validator to handle the result. Set to `nil` to use the default validator.
+	/// - Returns: Promise of an instance that conforms to Decodable.
+	/// - SeeAlso: URLRequest+URLRequestConvertible.swift
 	public func dataTask<T: Decodable>(with request: URLRequestConvertible, options: Options = [], validator: Validator? = nil) -> Promise<T> {
 		let q = DispatchQueue.global(qos: .userInitiated)
 		return dataTask(with: request, options: options, validator: validator).map(on: q) { response in
