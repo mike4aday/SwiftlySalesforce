@@ -1,7 +1,7 @@
 {
   "name": "SwiftlySalesforce",
   "version": "7.0.0",
-  "summary": "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform",
+  "summary": "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform",
   "description": "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform. Swiftly Salesforce uses 'promises' to simplify Salesforce REST API calls, and OAuth2 authentication.",
   "homepage": "https://github.com/mike4aday/SwiftlySalesforce",
   "license": "MIT",
