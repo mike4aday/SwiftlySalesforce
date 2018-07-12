@@ -4,7 +4,7 @@
 - Deferred login (set `options` in function argument to `[.dontAuthenticate]`)
 - Simplifies app configuration (no more need to set URL scheme in plist file)
 - Simplifies calling custom endpoints (call `Salesforce.dataTask` with your own `URLRequest` and `Decodable` model object)
-- Simplifies & improves user login experience with iOS 11's new [`SFAuthenticationSession`](https://developer.apple.com/documentation/safariservices/sfauthenticationsession) (Apple already deprecated it in iOS 12 in favor of very similar `ASWebAuthenticationSession`(https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession) - Swiftly Salesforce will be updated after iOS 12 is released, likely with a non-breaking release)
+- Simplifies & improves user login experience with iOS 11's new [`SFAuthenticationSession`](https://developer.apple.com/documentation/safariservices/sfauthenticationsession) (Apple already deprecated it in iOS 12 in favor of very similar [`ASWebAuthenticationSession`](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession) - Swiftly Salesforce will be updated after iOS 12 is released)
 - Supports Salesforce's new [UI API](https://developer.salesforce.com/blogs/2018/01/introduction-salesforce-ui-api.html)
 - Supports SOSL searching
 - Enables full control over authorization URL (useful for Community or custom login flows)
