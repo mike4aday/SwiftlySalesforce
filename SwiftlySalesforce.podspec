@@ -4,7 +4,6 @@ s.name             = "SwiftlySalesforce"
 s.version          = "7.0.0"
 s.summary          = "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform"
 
-
   s.description      = <<-DESC
 				An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform. Swiftly Salesforce uses 'promises' to simplify Salesforce REST API calls, and OAuth2 authentication.
                        DESC
