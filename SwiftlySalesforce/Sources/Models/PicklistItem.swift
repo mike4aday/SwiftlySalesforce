@@ -1,5 +1,5 @@
 //
-//  PicklistItemMetadata.swift
+//  PicklistItem.swift
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
