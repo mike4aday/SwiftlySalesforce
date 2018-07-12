@@ -48,7 +48,7 @@ var salesforce: Salesforce!
 class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCenterDelegate, LoginDelegate {
 
     let consumerKey = "YOUR CONNECTED APP'S CONSUMER KEY HERE"
-    let callbackURL = URL(string: "taskforce://authorized")!
+    let callbackURL = "YOUR CONNECTED APP'S CALLBACK URL HERE"
 
     var window: UIWindow?
 	
