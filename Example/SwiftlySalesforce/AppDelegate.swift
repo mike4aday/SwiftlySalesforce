@@ -12,7 +12,6 @@ import UserNotifications
 
 // Global Salesforce variable - in your real-world app
 // you could 'inject' it into view controllers instead
-
 var salesforce: Salesforce!
 
 @UIApplicationMain
