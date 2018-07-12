@@ -1,6 +1,18 @@
 # Change Log
 
-## Version 7.0.0 (July 5, 2018)
+## Version 7.0.0 (July 12, 2018)
+- Deferred login (set `options` in function argument to `[.dontAuthenticate]`)
+- Simplifies app configuration (no more need to set URL scheme in plist file)
+- Simplifies calling custom endpoints (call `Salesforce.dataTask` with your own `URLRequest` and `Decodable` model object)
+- Simplifies & improves user login experience with iOS 11's new [`SFAuthenticationSession`](https://developer.apple.com/documentation/safariservices/sfauthenticationsession) (Apple already deprecated it in iOS 12 in favor of very similar `ASWebAuthenticationSession`(https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession) - Swiftly Salesforce will be updated after iOS 12 is released, likely with a non-breaking release)
+- Supports Salesforce's new [UI API](https://developer.salesforce.com/blogs/2018/01/introduction-salesforce-ui-api.html)
+- Supports SOSL searching
+- Enables full control over authorization URL (useful for Community or custom login flows)
+- Works with latest PromiseKit version
+- Resolves issue [issue #73](https://github.com/mike4aday/SwiftlySalesforce/issues/73)
+- Resolves issue [issue #68](https://github.com/mike4aday/SwiftlySalesforce/issues/68)
+- Resolves issue [issue #63](https://github.com/mike4aday/SwiftlySalesforce/issues/63)
+- Resolves issue [issue #32](https://github.com/mike4aday/SwiftlySalesforce/issues/32)
 
 ## Version 6.0.6 (May 8, 2018)
 Resolves [issue #70](https://github.com/mike4aday/SwiftlySalesforce/issues/70). Thanks to [@hmuronaka](https://github.com/hmuronaka) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/71).
