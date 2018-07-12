@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
 s.version          = "7.0.0"
-s.summary          = "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform"
+s.summary          = "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform"
 
 
   s.description      = <<-DESC
