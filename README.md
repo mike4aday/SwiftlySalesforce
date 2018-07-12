@@ -265,8 +265,7 @@ first {
             print("Account name = \(name)")
         }
     }
-}.catch {
-    error in
+}.catch { error in
     // Handle error
 }
 ```
@@ -360,22 +359,18 @@ first {
 ```
 
 ### Example: Handling Errors
-The following code is adapted from the example file, [TaskStore.swift](Example/SwiftlySalesforce/TaskStore.swift) and shows how to handle errors:
 ```swift
-first {
-    // Get ID of current user
-    //TODO: if user already authorized, then we could just get user ID from salesforce.authData
-    salesforce.identity()
-}.then { userInfo -> Promise<QueryResult<Task>> in
-    // Get tasks owned by user (we assume all records are returned in a single 'page'...)
-    let soql = "SELECT Id,CreatedDate,Subject,Status,IsHighPriority,What.Name FROM Task WHERE OwnerId = '\(userInfo.userID)' ORDER BY CreatedDate DESC"
-    return salesforce.query(soql: soql)
-}.then { (result: QueryResult<Task>) -> () in
-    // Automatically parse JSON into `Decodable` Task instances
-    let tasks: [Task] = result.records
-    // Do something with tasks, e.g. display in table view
-}.catch { error in
-    // Handle error
+func loadUserInfo() {
+    salesforce.identity().compactMap { (identity) -> URL? in
+        self.nameLabel.text = identity.displayName
+        return identity.photoURL
+    }.then { (url) -> Promise<UIImage> in
+        salesforce.fetchImage(url: url)
+    }.done { image -> () in
+        self.photoView.image = image
+    }.catch {
+        debugPrint("Unable to load user photo! (\($0.localizedDescription))")
+    }
 }
 ```
 
@@ -403,8 +398,7 @@ first {
         let industryOptions = fieldDict["Industry"]?.picklistValues
         // Populate a drop-down menu with the picklist values...
     }
-}.catch {
-    error in
+}.catch { error in
     debugPrint(error)
 }
 ```
