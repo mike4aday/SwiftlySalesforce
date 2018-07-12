@@ -2,9 +2,8 @@
 //  AppDelegate.swift
 //  Example for SwiftlySalesforce
 //
-//  Created by Michael Epstein on 10/03/2016.
-//  Copyright (c) 2016 Michael Epstein. All rights reserved.
-//
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2017. All rights reserved.
 
 import UIKit
 import SwiftlySalesforce
