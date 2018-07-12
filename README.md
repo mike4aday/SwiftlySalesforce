@@ -72,12 +72,12 @@ salesforce.retrieve(type: "Account", id: "0013000001FjCcF", fields: fields)
 ```
 Note that `retrieve` is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:
 ```swift
-let promise: Promise<Record> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
+let promise: Promise<SObject> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
 And you can add a closure that will be called later, when the promise is fulfilled:
 ```swift
-salesforce.retrieve(type: "Account", id: "0013000001FjCcF").done { (queryResult: QueryResult<Record>) -> () in
-    for record: Record in queryResult.records {
+salesforce.retrieve(type: "Account", id: "0013000001FjCcF").done { (queryResult: QueryResult<SObject>) -> () in
+    for record: SObject in queryResult.records {
         // Do something more interesting with each record
         debugPrint(record.type)
     }
@@ -104,7 +104,7 @@ first {
 ```
 
 ### Example: Custom Model Objects (NEW!)
-Instead of using `Record`, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
+Instead of using `SObject`, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
 ```swift
 struct MyAccountModel: Decodable {
 
