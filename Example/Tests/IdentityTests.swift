@@ -3,18 +3,18 @@
 //  SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2017. All rights reserved.
+//  Copyright (c) 2018. All rights reserved.
 //
 
 import XCTest
 @testable import SwiftlySalesforce
 
-class IdentityTests: XCTestCase, MockData {
+class IdentityTests: XCTestCase {
 	
 	var decoder = JSONDecoder(dateFormatter: DateFormatter.salesforceDateTimeFormatter)
-	
+
     override func setUp() {
-		super.setUp()
+        super.setUp()
     }
     
     override func tearDown() {
@@ -23,7 +23,7 @@ class IdentityTests: XCTestCase, MockData {
 	
 	func testThatItInits() {
 		
-		let data = read(fileName: "MockIdentity")!
+		let data = TestUtils.shared.read(fileName: "MockIdentity", ofType: "json")!
 		let identity = try! decoder.decode(Identity.self, from: data)
 		
 		XCTAssertEqual(identity.displayName, "Martin Van Nostrand")

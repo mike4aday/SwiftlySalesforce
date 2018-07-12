@@ -2,31 +2,26 @@
 //  AppDelegate.swift
 //  Example for SwiftlySalesforce
 //
-//  Created by Michael Epstein on 10/03/2016.
-//  Copyright (c) 2016 Michael Epstein. All rights reserved.
-//
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2017. All rights reserved.
 
 import UIKit
 import SwiftlySalesforce
-import UserNotifications
 
+// Global Salesforce variable - in your real-world app
+// you could 'inject' it into view controllers instead
 var salesforce: Salesforce!
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, LoginDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCenterDelegate, LoginDelegate {
 
-	let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
-	let callbackURL = URL(string: "<YOUR CONNECTED APP'S REDIRECT URL HERE>")!
-	
+	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkiguvTQSOZIWjqkAIkqFwbKfS6RHNjbI28Lvkvigc5KOJWsaFJCxpZvfAMA4Q"
+	let callbackURL = URL(string: "taskforce://authorized")!
+
 	var window: UIWindow?
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		salesforce = configureSalesforce(consumerKey: consumerKey, callbackURL: callbackURL)
-		return true
-	}
-	
-	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-		handleCallbackURL(url, for: salesforce.connectedApp)
+		salesforce = try! Salesforce(consumerKey: consumerKey, callbackURL: callbackURL)
 		return true
 	}
 }

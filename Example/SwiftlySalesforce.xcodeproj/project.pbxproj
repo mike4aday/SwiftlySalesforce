@@ -12,34 +12,39 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		EA133DAB1F91DCC60055DC2F /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA133DA91F91DC060055DC2F /* TestUtils.swift */; };
 		EA223AD91F8DD532003DC025 /* MockContactMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */; };
-		EA62C6741F196E6E00D6CF4E /* ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C65E1F196E6600D6CF4E /* ConnectedAppTests.swift */; };
-		EA62C6751F196E7100D6CF4E /* OAuth2ResultStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C65F1F196E6600D6CF4E /* OAuth2ResultStoreTests.swift */; };
-		EA62C6771F196E7700D6CF4E /* ResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C6611F196E6600D6CF4E /* ResourceTests.swift */; };
+		EA3DA7E120E68F4800648FE0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723A1DC0455C00790BCB /* MasterViewController.swift */; };
+		EA3DA7E220E68F4C00648FE0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723F1DC0455C00790BCB /* DetailViewController.swift */; };
+		EA57EBF320D2B7E300374451 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA133DA91F91DC060055DC2F /* TestUtils.swift */; };
 		EA62C6781F196E7C00D6CF4E /* MockAccountMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6621F196E6600D6CF4E /* MockAccountMetadata.json */; };
-		EA62C6791F196E8100D6CF4E /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C6631F196E6600D6CF4E /* MockData.swift */; };
-		EA62C67A1F196E8500D6CF4E /* IdentityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C6641F196E6600D6CF4E /* IdentityTests.swift */; };
-		EA62C67B1F196E8900D6CF4E /* AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C6651F196E6600D6CF4E /* AddressTests.swift */; };
-		EA62C67C1F196E8D00D6CF4E /* MockAddress.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6661F196E6600D6CF4E /* MockAddress.json */; };
-		EA62C67D1F196E9100D6CF4E /* OAuth2ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62C6671F196E6600D6CF4E /* OAuth2ResultTests.swift */; };
 		EA62C67E1F196E9500D6CF4E /* MockIdentity.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6681F196E6600D6CF4E /* MockIdentity.json */; };
-		EA87A4BC1F8DD1D800C16580 /* ObjectMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEE66A51F8DD18E0032A597 /* ObjectMetadataTests.swift */; };
-		EAA2C9DF1FA97DEB00155409 /* MockAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = EABF486F1FA7F45B00702175 /* MockAccount.json */; };
-		EAA7699C1FAD5C6300089EAB /* OrganizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA7699B1FAD5C6300089EAB /* OrganizationTests.swift */; };
-		EAA7699D1FAD5F9B00089EAB /* MockOrganization.json in Resources */ = {isa = PBXBuildFile; fileRef = EAA769991FAD5B8100089EAB /* MockOrganization.json */; };
-		EAB438951F65E26100C9ED97 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB438941F65E26100C9ED97 /* KeychainTests.swift */; };
+		EA7BDBD920EFC5890026856B /* Salesforce_QueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */; };
+		EA7BDBDA20EFD41C0026856B /* AuthorizationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */; };
+		EA7BDBDB20EFD99D0026856B /* Salesforce_SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62132120EAD6AC009F1C52 /* Salesforce_SearchTests.swift */; };
+		EA7BDBDD20EFDA440026856B /* URL_QueryItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBDC20EFDA440026856B /* URL_QueryItemTests.swift */; };
+		EA7BDBDF20EFDB5D0026856B /* UIResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBDE20EFDB5D0026856B /* UIResourceTests.swift */; };
+		EA7BDBE120EFFFDE0026856B /* Salesforce_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBE020EFFFDE0026856B /* Salesforce_UITests.swift */; };
+		EAAAB52E20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAAB52D20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift */; };
+		EAAC9EB920D44F5500F0E16B /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = EAAC9EB820D44F5500F0E16B /* Configuration.json */; };
 		EAB7EDAD1F8AEC0B00788A20 /* MockLimits.json in Resources */ = {isa = PBXBuildFile; fileRef = EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */; };
-		EABD72401DC0455C00790BCB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723A1DC0455C00790BCB /* MasterViewController.swift */; };
 		EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723B1DC0455C00790BCB /* TaskForceError.swift */; };
-		EABD72421DC0455C00790BCB /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723C1DC0455C00790BCB /* TaskStore.swift */; };
 		EABD72431DC0455C00790BCB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723D1DC0455C00790BCB /* Task.swift */; };
 		EABD72441DC0455C00790BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723E1DC0455C00790BCB /* AppDelegate.swift */; };
-		EABD72451DC0455C00790BCB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723F1DC0455C00790BCB /* DetailViewController.swift */; };
-		EABD72551DC05A8800790BCB /* SalesforceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD724B1DC05A8800790BCB /* SalesforceTests.swift */; };
-		EABD72581DC05A8800790BCB /* OAuth2.plist in Resources */ = {isa = PBXBuildFile; fileRef = EABD724E1DC05A8800790BCB /* OAuth2.plist */; };
-		EABD725D1DC05A8800790BCB /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD72531DC05A8800790BCB /* ExtensionTests.swift */; };
-		EABF48721FA7F51200702175 /* RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABF48711FA7F51200702175 /* RecordTests.swift */; };
+		EAD8EF0F20EDA8B3009E9D56 /* AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4195020D0221C0064AFB1 /* AddressTests.swift */; };
+		EAD8EF1020EDA912009E9D56 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9920CC2B560076D71C /* AuthorizationTests.swift */; };
+		EAD8EF1220EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF1120EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift */; };
+		EAD8EF1320EDC5B7009E9D56 /* DateFormatter_SalesforceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9E8120D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift */; };
+		EAD8EF1520EDC65D009E9D56 /* RESTResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF1420EDC65D009E9D56 /* RESTResourceTests.swift */; };
+		EAD8EF1620EDC8EB009E9D56 /* IdentityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA846FC020DCBB16004F120E /* IdentityTests.swift */; };
+		EAD8EF1720EDC99C009E9D56 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB438941F65E26100C9ED97 /* KeychainTests.swift */; };
+		EAD8EF1A20EDCA39009E9D56 /* OrganizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */; };
+		EAD8EF1B20EDCB24009E9D56 /* SObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABF48711FA7F51200702175 /* SObjectTests.swift */; };
+		EAD8EF1C20EE9BEB009E9D56 /* ObjectDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */; };
+		EAD8EF1F20EE9F2D009E9D56 /* SObjectResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */; };
+		EAD8EF2020EED0F6009E9D56 /* Salesforce_SObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62132520EADA3F009F1C52 /* Salesforce_SObjectTests.swift */; };
+		EAD8EF6420EEEC65009E9D56 /* Salesforce_RESTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */; };
+		EAD8EF6520EEF749009E9D56 /* Salesforce_OAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */; };
+		EAD8EF6720EEFC49009E9D56 /* OAuthResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF6620EEFC49009E9D56 /* OAuthResourceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,34 +74,38 @@
 		D34715B1ED2A8E40E849172A /* SwiftlySalesforce.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftlySalesforce.podspec; path = ../SwiftlySalesforce.podspec; sourceTree = "<group>"; };
 		EA133DA91F91DC060055DC2F /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		EA18C7A91C4404F800DAED6A /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		EA62C65E1F196E6600D6CF4E /* ConnectedAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedAppTests.swift; sourceTree = "<group>"; };
-		EA62C65F1F196E6600D6CF4E /* OAuth2ResultStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2ResultStoreTests.swift; sourceTree = "<group>"; };
-		EA62C6611F196E6600D6CF4E /* ResourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
+		EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationTests.swift; sourceTree = "<group>"; };
+		EA62132120EAD6AC009F1C52 /* Salesforce_SearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_SearchTests.swift; sourceTree = "<group>"; };
+		EA62132520EADA3F009F1C52 /* Salesforce_SObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_SObjectTests.swift; sourceTree = "<group>"; };
 		EA62C6621F196E6600D6CF4E /* MockAccountMetadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockAccountMetadata.json; sourceTree = "<group>"; };
-		EA62C6631F196E6600D6CF4E /* MockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
-		EA62C6641F196E6600D6CF4E /* IdentityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityTests.swift; sourceTree = "<group>"; };
-		EA62C6651F196E6600D6CF4E /* AddressTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTests.swift; sourceTree = "<group>"; };
-		EA62C6661F196E6600D6CF4E /* MockAddress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockAddress.json; sourceTree = "<group>"; };
-		EA62C6671F196E6600D6CF4E /* OAuth2ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2ResultTests.swift; sourceTree = "<group>"; };
 		EA62C6681F196E6600D6CF4E /* MockIdentity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockIdentity.json; sourceTree = "<group>"; };
+		EA774E9920CC2B560076D71C /* AuthorizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
+		EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStoreTests.swift; sourceTree = "<group>"; };
+		EA7BDBDC20EFDA440026856B /* URL_QueryItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_QueryItemTests.swift; sourceTree = "<group>"; };
+		EA7BDBDE20EFDB5D0026856B /* UIResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResourceTests.swift; sourceTree = "<group>"; };
+		EA7BDBE020EFFFDE0026856B /* Salesforce_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_UITests.swift; sourceTree = "<group>"; };
+		EA846FC020DCBB16004F120E /* IdentityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTests.swift; sourceTree = "<group>"; };
 		EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockContactMetadata.json; sourceTree = "<group>"; };
-		EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SwiftlySalesforce_Example.entitlements; sourceTree = "<group>"; };
-		EAA769991FAD5B8100089EAB /* MockOrganization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockOrganization.json; sourceTree = "<group>"; };
-		EAA7699B1FAD5C6300089EAB /* OrganizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationTests.swift; sourceTree = "<group>"; };
+		EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_QueryTests.swift; sourceTree = "<group>"; };
+		EAAAB52D20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest_URLRequestConvertibleTests.swift; sourceTree = "<group>"; };
+		EAAC9E8120D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter_SalesforceTests.swift; sourceTree = "<group>"; };
+		EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_OAuthTests.swift; sourceTree = "<group>"; };
+		EAAC9EB820D44F5500F0E16B /* Configuration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 		EAB438941F65E26100C9ED97 /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockLimits.json; sourceTree = "<group>"; };
 		EABD723A1DC0455C00790BCB /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		EABD723B1DC0455C00790BCB /* TaskForceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskForceError.swift; sourceTree = "<group>"; };
-		EABD723C1DC0455C00790BCB /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		EABD723D1DC0455C00790BCB /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		EABD723E1DC0455C00790BCB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EABD723F1DC0455C00790BCB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		EABD724B1DC05A8800790BCB /* SalesforceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesforceTests.swift; sourceTree = "<group>"; };
-		EABD724E1DC05A8800790BCB /* OAuth2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OAuth2.plist; sourceTree = "<group>"; };
-		EABD72531DC05A8800790BCB /* ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTests.swift; sourceTree = "<group>"; };
-		EABF486F1FA7F45B00702175 /* MockAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAccount.json; sourceTree = "<group>"; };
-		EABF48711FA7F51200702175 /* RecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTests.swift; sourceTree = "<group>"; };
-		EAEE66A51F8DD18E0032A597 /* ObjectMetadataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectMetadataTests.swift; sourceTree = "<group>"; };
+		EABF48711FA7F51200702175 /* SObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SObjectTests.swift; sourceTree = "<group>"; };
+		EAD4195020D0221C0064AFB1 /* AddressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTests.swift; sourceTree = "<group>"; };
+		EAD8EF1120EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_ConfigurationTests.swift; sourceTree = "<group>"; };
+		EAD8EF1420EDC65D009E9D56 /* RESTResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTResourceTests.swift; sourceTree = "<group>"; };
+		EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SObjectResourceTests.swift; sourceTree = "<group>"; };
+		EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_RESTTests.swift; sourceTree = "<group>"; };
+		EAD8EF6620EEFC49009E9D56 /* OAuthResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResourceTests.swift; sourceTree = "<group>"; };
+		EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDescriptionTests.swift; sourceTree = "<group>"; };
 		F7891B295CCEE606466284B0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F8FEE5B2427F471C6FAA4ACD /* Pods-SwiftlySalesforce_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Tests/Pods-SwiftlySalesforce_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,7 +133,6 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				EA91F0051DC060BC006F5BF2 /* SwiftlySalesforce_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for SwiftlySalesforce */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -146,15 +154,14 @@
 		607FACD21AFB9204008FA782 /* Example for SwiftlySalesforce */ = {
 			isa = PBXGroup;
 			children = (
-				EABD723A1DC0455C00790BCB /* MasterViewController.swift */,
-				EABD723B1DC0455C00790BCB /* TaskForceError.swift */,
-				EABD723C1DC0455C00790BCB /* TaskStore.swift */,
-				EABD723D1DC0455C00790BCB /* Task.swift */,
 				EABD723E1DC0455C00790BCB /* AppDelegate.swift */,
 				EABD723F1DC0455C00790BCB /* DetailViewController.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				EABD723A1DC0455C00790BCB /* MasterViewController.swift */,
+				EABD723D1DC0455C00790BCB /* Task.swift */,
+				EABD723B1DC0455C00790BCB /* TaskForceError.swift */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for SwiftlySalesforce";
@@ -172,20 +179,29 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				EA62C6651F196E6600D6CF4E /* AddressTests.swift */,
-				EA62C65E1F196E6600D6CF4E /* ConnectedAppTests.swift */,
-				EABD72531DC05A8800790BCB /* ExtensionTests.swift */,
-				EA62C6641F196E6600D6CF4E /* IdentityTests.swift */,
+				EAD4195020D0221C0064AFB1 /* AddressTests.swift */,
+				EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */,
+				EA774E9920CC2B560076D71C /* AuthorizationTests.swift */,
+				EAAC9E8120D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift */,
+				EA846FC020DCBB16004F120E /* IdentityTests.swift */,
 				EAB438941F65E26100C9ED97 /* KeychainTests.swift */,
-				EA62C6631F196E6600D6CF4E /* MockData.swift */,
-				EA62C6671F196E6600D6CF4E /* OAuth2ResultTests.swift */,
-				EA62C65F1F196E6600D6CF4E /* OAuth2ResultStoreTests.swift */,
-				EAEE66A51F8DD18E0032A597 /* ObjectMetadataTests.swift */,
-				EAA7699B1FAD5C6300089EAB /* OrganizationTests.swift */,
-				EABF48711FA7F51200702175 /* RecordTests.swift */,
-				EA62C6611F196E6600D6CF4E /* ResourceTests.swift */,
-				EABD724B1DC05A8800790BCB /* SalesforceTests.swift */,
+				EAD8EF6620EEFC49009E9D56 /* OAuthResourceTests.swift */,
+				EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */,
+				EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */,
+				EAD8EF1420EDC65D009E9D56 /* RESTResourceTests.swift */,
+				EAD8EF1120EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift */,
+				EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */,
+				EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */,
+				EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */,
+				EA62132120EAD6AC009F1C52 /* Salesforce_SearchTests.swift */,
+				EA62132520EADA3F009F1C52 /* Salesforce_SObjectTests.swift */,
+				EA7BDBE020EFFFDE0026856B /* Salesforce_UITests.swift */,
+				EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */,
+				EABF48711FA7F51200702175 /* SObjectTests.swift */,
 				EA133DA91F91DC060055DC2F /* TestUtils.swift */,
+				EA7BDBDE20EFDB5D0026856B /* UIResourceTests.swift */,
+				EA7BDBDC20EFDA440026856B /* URL_QueryItemTests.swift */,
+				EAAAB52D20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -194,14 +210,11 @@
 		607FACE91AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EABF486F1FA7F45B00702175 /* MockAccount.json */,
+				EAAC9EB820D44F5500F0E16B /* Configuration.json */,
 				EA62C6621F196E6600D6CF4E /* MockAccountMetadata.json */,
-				EA62C6661F196E6600D6CF4E /* MockAddress.json */,
 				EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */,
 				EA62C6681F196E6600D6CF4E /* MockIdentity.json */,
 				EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */,
-				EAA769991FAD5B8100089EAB /* MockOrganization.json */,
-				EABD724E1DC05A8800790BCB /* OAuth2.plist */,
 				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -298,14 +311,14 @@
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 2R46AVEA2Z;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0940;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -345,13 +358,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EABD72581DC05A8800790BCB /* OAuth2.plist in Resources */,
 				EA62C6781F196E7C00D6CF4E /* MockAccountMetadata.json in Resources */,
-				EAA7699D1FAD5F9B00089EAB /* MockOrganization.json in Resources */,
 				EA62C67E1F196E9500D6CF4E /* MockIdentity.json in Resources */,
-				EAA2C9DF1FA97DEB00155409 /* MockAccount.json in Resources */,
+				EAAC9EB920D44F5500F0E16B /* Configuration.json in Resources */,
 				EA223AD91F8DD532003DC025 /* MockContactMetadata.json in Resources */,
-				EA62C67C1F196E8D00D6CF4E /* MockAddress.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,12 +481,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3DA7E120E68F4800648FE0 /* MasterViewController.swift in Sources */,
 				EABD72431DC0455C00790BCB /* Task.swift in Sources */,
-				EABD72401DC0455C00790BCB /* MasterViewController.swift in Sources */,
 				EABD72411DC0455C00790BCB /* TaskForceError.swift in Sources */,
-				EABD72451DC0455C00790BCB /* DetailViewController.swift in Sources */,
+				EA3DA7E220E68F4C00648FE0 /* DetailViewController.swift in Sources */,
 				EABD72441DC0455C00790BCB /* AppDelegate.swift in Sources */,
-				EABD72421DC0455C00790BCB /* TaskStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,20 +493,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA62C67B1F196E8900D6CF4E /* AddressTests.swift in Sources */,
-				EA62C6791F196E8100D6CF4E /* MockData.swift in Sources */,
-				EA133DAB1F91DCC60055DC2F /* TestUtils.swift in Sources */,
-				EAB438951F65E26100C9ED97 /* KeychainTests.swift in Sources */,
-				EA62C67A1F196E8500D6CF4E /* IdentityTests.swift in Sources */,
-				EA62C6771F196E7700D6CF4E /* ResourceTests.swift in Sources */,
-				EA62C67D1F196E9100D6CF4E /* OAuth2ResultTests.swift in Sources */,
-				EAA7699C1FAD5C6300089EAB /* OrganizationTests.swift in Sources */,
-				EA62C6741F196E6E00D6CF4E /* ConnectedAppTests.swift in Sources */,
-				EA62C6751F196E7100D6CF4E /* OAuth2ResultStoreTests.swift in Sources */,
-				EABF48721FA7F51200702175 /* RecordTests.swift in Sources */,
-				EABD725D1DC05A8800790BCB /* ExtensionTests.swift in Sources */,
-				EABD72551DC05A8800790BCB /* SalesforceTests.swift in Sources */,
-				EA87A4BC1F8DD1D800C16580 /* ObjectMetadataTests.swift in Sources */,
+				EAD8EF0F20EDA8B3009E9D56 /* AddressTests.swift in Sources */,
+				EA7BDBDA20EFD41C0026856B /* AuthorizationStoreTests.swift in Sources */,
+				EA7BDBD920EFC5890026856B /* Salesforce_QueryTests.swift in Sources */,
+				EAD8EF1520EDC65D009E9D56 /* RESTResourceTests.swift in Sources */,
+				EAD8EF1620EDC8EB009E9D56 /* IdentityTests.swift in Sources */,
+				EAD8EF6520EEF749009E9D56 /* Salesforce_OAuthTests.swift in Sources */,
+				EAD8EF1020EDA912009E9D56 /* AuthorizationTests.swift in Sources */,
+				EAD8EF2020EED0F6009E9D56 /* Salesforce_SObjectTests.swift in Sources */,
+				EAAAB52E20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift in Sources */,
+				EA57EBF320D2B7E300374451 /* TestUtils.swift in Sources */,
+				EAD8EF6420EEEC65009E9D56 /* Salesforce_RESTTests.swift in Sources */,
+				EA7BDBE120EFFFDE0026856B /* Salesforce_UITests.swift in Sources */,
+				EAD8EF1A20EDCA39009E9D56 /* OrganizationTests.swift in Sources */,
+				EAD8EF1C20EE9BEB009E9D56 /* ObjectDescriptionTests.swift in Sources */,
+				EAD8EF1B20EDCB24009E9D56 /* SObjectTests.swift in Sources */,
+				EA7BDBDF20EFDB5D0026856B /* UIResourceTests.swift in Sources */,
+				EAD8EF1720EDC99C009E9D56 /* KeychainTests.swift in Sources */,
+				EAD8EF1F20EE9F2D009E9D56 /* SObjectResourceTests.swift in Sources */,
+				EA7BDBDB20EFD99D0026856B /* Salesforce_SearchTests.swift in Sources */,
+				EAD8EF1220EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift in Sources */,
+				EA7BDBDD20EFDA440026856B /* URL_QueryItemTests.swift in Sources */,
+				EAD8EF1320EDC5B7009E9D56 /* DateFormatter_SalesforceTests.swift in Sources */,
+				EAD8EF6720EEFC49009E9D56 /* OAuthResourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,12 +586,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -607,10 +625,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -621,16 +639,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = SwiftlySalesforce_Example.entitlements;
 				DEVELOPMENT_TEAM = 2R46AVEA2Z;
 				INFOPLIST_FILE = SwiftlySalesforce/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -640,15 +657,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = SwiftlySalesforce_Example.entitlements;
 				DEVELOPMENT_TEAM = 2R46AVEA2Z;
 				INFOPLIST_FILE = SwiftlySalesforce/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -672,7 +688,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftlySalesforce_Example.app/SwiftlySalesforce_Example";
 			};
 			name = Debug;
@@ -692,7 +708,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftlySalesforce_Example.app/SwiftlySalesforce_Example";
 			};
 			name = Release;

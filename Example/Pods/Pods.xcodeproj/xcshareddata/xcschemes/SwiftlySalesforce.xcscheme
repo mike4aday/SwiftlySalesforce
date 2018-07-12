@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8928183C8AAB7E7FB25D3E0835A6725E"
+               BlueprintIdentifier = "AAB1C768E86CAC635CECDF0F5274D77B"
                BuildableName = "SwiftlySalesforce.framework"
                BlueprintName = "SwiftlySalesforce"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,9 +26,39 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AAB1C768E86CAC635CECDF0F5274D77B"
+            BuildableName = "SwiftlySalesforce.framework"
+            BlueprintName = "SwiftlySalesforce"
+            ReferencedContainer = "container:Pods.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "607FACE41AFB9204008FA782"
+               BuildableName = "SwiftlySalesforce_Tests.xctest"
+               BlueprintName = "SwiftlySalesforce_Tests"
+               ReferencedContainer = "container:../SwiftlySalesforce.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AAB1C768E86CAC635CECDF0F5274D77B"
+            BuildableName = "SwiftlySalesforce.framework"
+            BlueprintName = "SwiftlySalesforce"
+            ReferencedContainer = "container:Pods.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,7 +75,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8928183C8AAB7E7FB25D3E0835A6725E"
+            BlueprintIdentifier = "AAB1C768E86CAC635CECDF0F5274D77B"
             BuildableName = "SwiftlySalesforce.framework"
             BlueprintName = "SwiftlySalesforce"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,6 +90,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AAB1C768E86CAC635CECDF0F5274D77B"
+            BuildableName = "SwiftlySalesforce.framework"
+            BlueprintName = "SwiftlySalesforce"
+            ReferencedContainer = "container:Pods.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
