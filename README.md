@@ -21,7 +21,7 @@ You can be up and running in a few minutes by following these steps:
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 
 ## Minimum Requirements
-* iOS 11
+* iOS 11.3
 * Swift 4
 * Xcode 9
 
