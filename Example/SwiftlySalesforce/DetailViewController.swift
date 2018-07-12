@@ -41,7 +41,9 @@ final class DetailViewController: UITableViewController {
 		
 		infoLabel.text = "Loading task statuses..."
 		
-		salesforce.query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder").done { (queryResult) in
+		first { () -> Promise<QueryResult<SObject>> in 
+			salesforce.query(soql: "SELECT MasterLabel FROM TaskStatus ORDER BY SortOrder")
+		}.done { (queryResult) in
 			self.statuses = queryResult.records.compactMap { $0.string(forField: "MasterLabel") }
 		}.ensure {
 			self.infoLabel.text = "Select task status"
