@@ -1,6 +1,6 @@
 # Change Log
 
-## Version 7.0.0 (July 5, 2018)
+## Version 7.0.0 (July 12, 2018)
 - Deferred login (set `options` in function argument to `[.dontAuthenticate]`)
 - Simplifies app configuration (no more need to set URL scheme in plist file)
 - Simplifies calling custom endpoints (call `Salesforce.dataTask` with your own `URLRequest` and `Decodable` model object)
