@@ -2,17 +2,16 @@
 //  Task.swift
 //  Example for SwiftlySalesforce
 //
-//  Created by Michael Epstein on 10/21/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
-//
+//  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
+//  Copyright (c) 2018. All rights reserved.
 
 import Foundation
 
 public final class Task: Decodable {
 	
-	public var id: String
+	public var id: String = ""
 	public var subject: String?
-	public var createdDate: Date
+	public var createdDate: Date = Date()
 	public var status: String?
 	public var priority: String?
 	public var isHighPriority: Bool = false

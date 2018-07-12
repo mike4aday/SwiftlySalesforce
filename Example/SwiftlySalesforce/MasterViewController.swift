@@ -3,10 +3,11 @@
 //  Example for SwiftlySalesforce
 //
 //  For license & details see: https://www.github.com/mike4aday/SwiftlySalesforce
-//  Copyright (c) 2017. All rights reserved.
+//  Copyright (c) 2018. All rights reserved.
 
 import UIKit
 import SwiftlySalesforce
+import PromiseKit
 
 final class MasterViewController: UITableViewController {
 	
@@ -14,83 +15,96 @@ final class MasterViewController: UITableViewController {
 	@IBOutlet weak var photoView: UIImageView!
 	@IBOutlet weak var statusLabel: UILabel!
 	@IBOutlet weak var logoutButton: UIBarButtonItem!
+	@IBOutlet weak var noDataView: UIView!
+	
+	// In-memory list of Tasks. In real-world app, you might
+	// store them in local datastore, e.g. Realm.
+	private var tasks: [Task] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		refreshControl?.addTarget(self, action: #selector(MasterViewController.handleRefresh), for: UIControlEvents.valueChanged)
-		loadData(refresh: true)
-	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		loadData(refresh: false)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let destinationVC = segue.destination as? DetailViewController,
 			let cell = sender as? UITableViewCell,
-			let indexPath = tableView.indexPath(for: cell),
-			let task = TaskStore.shared.cache?[indexPath.row] {
+			let indexPath = tableView.indexPath(for: cell) {
+			let task = tasks[indexPath.row]
+			let onSave = { (task: Task) -> () in
+				self.tasks[indexPath.row] = task
+				self.tableView.reloadRows(at: [indexPath], with: .automatic)
+			}
 			destinationVC.task = task
 			destinationVC.title = task.subject ?? ""
+			destinationVC.onSave = onSave
 		}
 	}
 	
 	@IBAction func logoutButtonPressed(sender: AnyObject) {
-		if let app = UIApplication.shared.delegate as? LoginDelegate {
-			app.logout(from: salesforce.connectedApp).then {
-				() -> () in
-				TaskStore.shared.clear()
-				self.photoView.image = nil
-				self.nameLabel.text = nil
-				self.tableView.reloadData()
-				return
-			}.catch {
-				error in
-				debugPrint(error)
-			}
+		salesforce.revoke().done {
+			debugPrint("Access token revoked.")
+		}.ensure {
+			self.tasks.removeAll()
+			self.photoView.image = nil
+			self.nameLabel.text = "Welcome"
+			self.statusLabel.text = "Pull to login or refresh."
+			self.tableView.reloadData()
+		}.catch {
+			debugPrint("Unable to revoke user access token: \($0.localizedDescription)")
+		}
+	}
+	
+	func loadUserInfo() {
+		salesforce.identity().compactMap { (identity) -> URL? in
+			self.nameLabel.text = identity.displayName
+			return identity.photoURL
+		}.then { (url) -> Promise<UIImage> in
+			salesforce.fetchImage(url: url)
+		}.done { image -> () in
+			self.photoView.image = image
+		}.catch {
+			debugPrint("Unable to load user photo! (\($0.localizedDescription))")
 		}
 	}
 	
 	/// Asynchronously load current user's tasks
-	func loadData(refresh: Bool = false) {
+	func loadTasks() {
 		
 		statusLabel.text = "Loading tasks..."
 		self.refreshControl?.isEnabled = false
 		
-		/// "first" is an optional way to make chained calls look better...
-		first {
-			// Note we're running 2 tasks in parallel here...
-			fulfill(TaskStore.shared.getTasks(refresh: refresh), salesforce.identity())
-		}.then {
-			(_, identity) -> Promise<UIImage> in
-			self.nameLabel.text = identity.displayName
-			if let photoURL = identity.photoURL {
-				return salesforce.fetchImage(url: photoURL)
+		firstly { () -> Promise<String> in
+			if let userID = salesforce.userID {
+				return Promise.value(userID)
 			}
 			else {
-				throw TaskForceError.generic(code: -231, message: "No image URL!")
+				return salesforce.identity().map { return $0.userID }
 			}
-		}.then {
-			image in
-			self.photoView.image = image
-		}.always {
+		}.then { userID -> Promise<QueryResult<Task>> in
+			let soql = """
+				SELECT Id,CreatedDate,Subject,Status,IsHighPriority,What.Name
+				FROM Task WHERE OwnerId = '\(userID)'
+				ORDER BY CreatedDate DESC
+			"""
+			return salesforce.query(soql: soql)
+		}.map { (queryResult) -> () in
+			self.tasks = queryResult.records
+		}.ensure {
 			self.refreshControl?.endRefreshing()
 			self.refreshControl?.isEnabled = true
 			self.tableView.reloadData()
-			self.statusLabel.text = "You have \(TaskStore.shared.cache?.count ?? 0) tasks. Pull to refresh."
-			self.logoutButton.isEnabled = salesforce.connectedApp.accessToken != nil
-		}.catch {
-			// Handle any errors
-			(error) -> () in
-			debugPrint(String(describing: error))
+			self.statusLabel.text = "You have \(self.tasks.count) tasks. Pull to refresh."
+			self.logoutButton.isEnabled = salesforce.accessToken != nil
+		}.catch { (error) -> () in
 			self.alert(title: "Error!", error: error)
 		}
 	}
 	
 	/// Refresh control handler
-	func handleRefresh(refreshControl: UIRefreshControl) {
-		loadData(refresh: true)
+	@objc func handleRefresh(refreshControl: UIRefreshControl) {
+		loadTasks()
+		loadUserInfo()
 	}
 }
 
@@ -98,15 +112,29 @@ final class MasterViewController: UITableViewController {
 // MARK: - Extension
 extension MasterViewController {
 	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		if tasks.count > 0 {
+			tableView.backgroundView = nil
+			tableView.separatorStyle = .singleLine
+			return 1
+		}
+		else {
+			tableView.backgroundView = noDataView
+			tableView.separatorStyle = .none
+			return 0
+		}
+	}
+	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return TaskStore.shared.cache?.count ?? 0
+		return tasks.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell")!
-		if let task = TaskStore.shared.cache?[indexPath.row], let subject = task.subject, let status = task.status  {
-			cell.textLabel?.text = "\(subject) (Status: \(status))"
-			cell.detailTextLabel?.text = task.relatedRecord?.name
+		let task = tasks[indexPath.row]
+		if let subject = task.subject, let status = task.status  {
+			cell.textLabel?.text = subject
+			cell.detailTextLabel?.text = status
 		}
 		return cell
 	}
@@ -116,12 +144,19 @@ extension MasterViewController {
 extension UIViewController {
 	
 	func alert(title: String, message: String) {
+		if let presented = self.presentedViewController {
+			presented.dismiss(animated: true) {
+				self.alert(title: title, message: message)
+			}
+			return
+		}
 		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
 		alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: nil))
 		self.present(alert, animated: true, completion: nil)
 	}
 	
 	func alert(title: String, error: Error) {
+		debugPrint(error.localizedDescription)
 		return alert(title: title, message: error.localizedDescription)
 	}
 	

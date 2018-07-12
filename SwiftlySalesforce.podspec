@@ -1,9 +1,8 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-s.version          = "6.0.7"
-s.summary          = "A Swift framework for the rapid development of native iOS apps on the Salesforce Platform"
-
+s.version          = "7.0.0"
+s.summary          = "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform"
 
   s.description      = <<-DESC
 				An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform. Swiftly Salesforce uses 'promises' to simplify Salesforce REST API calls, and OAuth2 authentication.
@@ -15,14 +14,14 @@ s.summary          = "A Swift framework for the rapid development of native iOS 
   s.source           = { :git => "https://github.com/mike4aday/SwiftlySalesforce.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/mike4aday'
 
-  s.platform     = :ios, '10.3'
+  s.platform     = :ios, '11.3'
   s.requires_arc = true
 
-  s.source_files = 'SwiftlySalesforce/Classes/**/*'
+  s.source_files = 'SwiftlySalesforce/Sources/**/*'
   s.resource_bundles = {
 
   }
 
-  s.dependency 'PromiseKit', '~> 4.0'
+  s.dependency 'PromiseKit', '~> 6.0'
 
 end
