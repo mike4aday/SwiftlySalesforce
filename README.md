@@ -154,7 +154,7 @@ The `finally` closure will be called regardless of success or failure elsewhere 
 
 You could also use the `Record` type to update a record in Salesforce. For example:
 
-```
+```swift
 // `account` is a Record we retrieved earlier...
 account.setValue("My New Corp.", forField: "Name")
 account.setValue(URL(string: "https://www.mynewcorp.com")!, forField: "Website")
