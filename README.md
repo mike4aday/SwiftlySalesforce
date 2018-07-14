@@ -103,7 +103,7 @@ first {
 }
 ```
 
-### Example: Custom Model Objects (NEW!)
+### Example: Custom Model Objects
 Instead of using `SObject`, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
 ```swift
 struct MyAccountModel: Decodable {
@@ -195,7 +195,7 @@ first {
 }
 ```
 
-### Example: Decode Query Results as Custom Model Objects (NEW!)
+### Example: Decode Query Results as Custom Model Objects
 You can easily perform complex queries, traversing object relationships, and have all the results decoded automatically into your custom model objects that implement the [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
 ```swift 
 struct Account: Decodable {
