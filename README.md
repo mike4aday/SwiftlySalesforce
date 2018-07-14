@@ -286,10 +286,10 @@ first {
     }
 }.done { image in
     self.photoView.image = image
-}.finally {
-    self.refreshControl?.endRefreshing()
 }.catch { (error) -> () in
     // Handle any errors
+}.finally {
+    self.refreshControl?.endRefreshing()
 }
 ```
 
@@ -309,10 +309,10 @@ first {
 }.done { (image: UIImage) -> () in
     // Do something interesting with the image, e.g. display in a view:
     // self.photoView.image = image
-}.finally {
-    self.refreshControl?.endRefreshing()
 }.catch { (error) -> () in
     // Handle any errors
+}.finally {
+    self.refreshControl?.endRefreshing()
 }
 ```
 
