@@ -45,7 +45,7 @@ import SwiftlySalesforce
 var salesforce: Salesforce!
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCenterDelegate, LoginDelegate {
+class AppDelegate: UIApplicationDelegate {
 
     let consumerKey = "YOUR CONNECTED APP'S CONSUMER KEY HERE"
     let callbackURL = "YOUR CONNECTED APP'S CALLBACK URL HERE"
