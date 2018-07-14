@@ -150,7 +150,7 @@ salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Co
     // Update the UI
 }
 ```
-The `always` closure will be called regardless of success or failure elsewhere in the promise chain.
+The `finally` closure will be called regardless of success or failure elsewhere in the promise chain.
 
 You could also use the `Record` type to update a record in Salesforce. For example:
 
