@@ -155,7 +155,7 @@ The `finally` closure will be called regardless of success or failure elsewhere 
 You could also use the `SObject` type to update a record in Salesforce. For example:
 
 ```swift
-// `account` is a Record we retrieved earlier...
+// `account` is an SObject we retrieved earlier...
 account.setValue("My New Corp.", forField: "Name")
 account.setValue(URL(string: "https://www.mynewcorp.com")!, forField: "Website")
 account.setValue("123 Main St.", forField: "BillingStreet")
@@ -188,7 +188,7 @@ You could also execute multiple queries at once and wait for them all to complet
 first {
     let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
     return salesforce.query(soql: queries)
-}.done { (queryResults: [QueryResult<Record>]) -> () in
+}.done { (queryResults: [QueryResult<SObject>]) -> () in
     // Results are in the same order as the queries
 }.catch { error in
     // Handle the error
