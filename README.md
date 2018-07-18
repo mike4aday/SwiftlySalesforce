@@ -253,7 +253,7 @@ Let's say we want to retrieve a random zip/postal code from a [custom Apex REST]
 first {
     // Make GET request of custom Apex REST resource that returns a zip code as a string
     return salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
-}.then { (result: Data) -> Promise<QueryResult<Record>> in
+}.then { (result: Data) -> Promise<QueryResult<SObject>> in
     // Query accounts in that zip code
     guard let zip = String(data: result, encoding: .utf8) else {
         throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
