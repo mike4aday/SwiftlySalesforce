@@ -9,6 +9,7 @@ Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platf
 * Manages the Salesforce [OAuth2] process (the "OAuth dance") automatically and transparently.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * Easy to install and update.
+* [See what's new](./CHANGELOG.md) in this version.
 
 ## Quick Start
 You can be up and running in a few minutes by following these steps:
