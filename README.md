@@ -9,7 +9,7 @@ Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platf
 * Manages the Salesforce [OAuth2] process (the "OAuth dance") automatically and transparently.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * Easy to install and update.
-* [See what's new](./CHANGELOG.md) in this version.
+* [See what's new](./CHANGELOG.md).
 
 ## Quick Start
 You can be up and running in a few minutes by following these steps:
@@ -105,7 +105,7 @@ first {
 ```
 
 ### Example: Custom Model Objects
-Instead of using `SObject`, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
+Instead of using the generic `SObject`, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift's [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
 ```swift
 struct MyAccountModel: Decodable {
 
