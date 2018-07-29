@@ -49,7 +49,7 @@ var salesforce: Salesforce!
 class AppDelegate: UIApplicationDelegate {
 
     let consumerKey = "YOUR CONNECTED APP'S CONSUMER KEY HERE"
-    let callbackURL = "YOUR CONNECTED APP'S CALLBACK URL HERE"
+    let callbackURL = URL(string: "YOUR CONNECTED APP'S CALLBACK URL HERE")!
 
     var window: UIWindow?
 	
