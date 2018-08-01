@@ -11,23 +11,23 @@
 
 public struct Organization: Decodable {
 	
-	var id: String
-	var name: String
-	var division: String?
-	var address: Address?
-	var phone: String?
-	var fax: String?
-	var primaryContact: String?
-	var languageLocaleKey: String?
-	var complianceBCCEmail: String?
-	var trialExpirationDate: Date?
-	var type: String
-	var namespacePrefix: String?
-	var instanceName: String
-	var isSandbox: Bool
-	var monthlyPageViewsUsed: Int
-	var monthlyPageViewsEntitlement: Int
-	var createdDate: Date
+	public let id: String
+	public let name: String
+	public let division: String?
+	public let address: Address?
+	public let phone: String?
+	public let fax: String?
+	public let primaryContact: String?
+	public let languageLocaleKey: String?
+	public let complianceBCCEmail: String?
+	public let trialExpirationDate: Date?
+	public let type: String
+	public let namespacePrefix: String?
+	public let instanceName: String
+	public let isSandbox: Bool
+	public let monthlyPageViewsUsed: Int
+	public let monthlyPageViewsEntitlement: Int
+	public let createdDate: Date
 	
 	enum CodingKeys: String, CodingKey {
 		case id = "Id"
