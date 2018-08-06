@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 7.0.1 (Aug. 6, 2018)
+Fixed access to `Organization` properties. Was `internal`, now `public`. Thanks to [@joaoamaral](https://github.com/joaoamaral) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/84).
+
 ## Version 7.0.0 (July 12, 2018)
 - Deferred login (set `options` in function argument to `[.dontAuthenticate]`)
 - Simplifies app configuration (no more need to set URL scheme in plist file)
