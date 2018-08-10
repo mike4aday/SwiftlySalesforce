@@ -430,6 +430,22 @@ If you want to log out the current Salesforce user, and then clear any locally-c
 }
 ```
 
+### Example: Search with Salesforce Object Search Language (SOSL)
+[Read more about SOSL](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_sosl.htm)
+```swift
+let sosl = """
+    FIND {"A*" OR "B*" OR "C*"} IN Name Fields RETURNING lead(name,phone,Id), contact(name,phone)
+"""
+salesforce.search(sosl: sosl).done { result in
+    debugPrint("Search result count: \(result.searchRecords.count)")
+    for record in result.searchRecords {
+        // Do something with each record in the search result
+    }
+}.catch { error in
+    // Handle error
+}
+```
+
 ### Example: Add Swiftly Salesforce to Your CocoaPods [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
 ```
 target 'MyApp' do
