@@ -25,7 +25,7 @@ public extension Salesforce {
 	/// Asynchronsouly executes a SOQL query
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: SOQL query
-	/// - Parameter batchSize: maximum number of records returned per result set (i.e. pagination)
+	/// - Parameter batchSize: number of records returned per result set; minimum 200, maximum 2000.
 	/// - Parameter options: if you want to defer login, set to [.dontAuthenticate]
 	/// - Returns: Promise of a QueryResult whose records, if any, are decoded as SObjects
 	public func query(soql: String, batchSize: Int? = nil, options: Options = []) -> Promise<QueryResult<SObject>> {
@@ -36,7 +36,7 @@ public extension Salesforce {
 	/// Asynchronsouly executes multiple SOQL queries in parallel.
 	/// See https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm
 	/// - Parameter soql: Array of SOQL queries
-	/// - Parameter batchSize: maximum number of records returned per result set (i.e. pagination)
+	/// - Parameter batchSize: number of records returned per result set; minimum 200, maximum 2000.
 	/// - Parameter options: if you want to defer login, set to [.dontAuthenticate]
 	/// - Returns: Promise of an array of QueryResults, in the same order as the "soql" parameter
 	public func query<T: Decodable>(soql: [String], batchSize: Int? = nil, options: Options = []) -> Promise<[QueryResult<T>]> {
