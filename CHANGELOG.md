@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 7.0.2 (Aug. 10, 2018)
+Added SOSL search example to README, and some inline documentation.
+
 ## Version 7.0.1 (Aug. 6, 2018)
 Fixed access to `Organization` properties. Was `internal`, now `public`. Thanks to [@joaoamaral](https://github.com/joaoamaral) for [pull request](https://github.com/mike4aday/SwiftlySalesforce/pull/84).
 
