@@ -6,9 +6,10 @@
 Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platform/overview/) with Swiftly Salesforce:
 * Written entirely in [Swift](https://developer.apple.com/swift/).
 * Uses [promises](https://en.wikipedia.org/wiki/Futures_and_promises) to simplify complex, asynchronous [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/) interactions.
-* Manages the Salesforce [OAuth2] process (the "OAuth dance") automatically and transparently.
+* Manages the Salesforce [OAuth2] user authentication and authorization process (the "OAuth dance") automatically.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * Easy to install and update.
+* Compatible with [Realm](http://realm.io) for a complete, offline mobile solution.
 * [See what's new](./CHANGELOG.md).
 
 ## Quick Start
