@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 7.0.3 (Aug. 28, 2018)
+Updated connected app's consumer key in example app.
+
 ## Version 7.0.2 (Aug. 10, 2018)
 Added SOSL search example to README, and some inline documentation.
 
