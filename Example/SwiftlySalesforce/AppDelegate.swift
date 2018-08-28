@@ -13,7 +13,7 @@ import SwiftlySalesforce
 var salesforce: Salesforce!
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCenterDelegate, LoginDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkiuG.Y1epLf6raoqyNRl6rh89ffM3ugG92nuAkbjDslWsiu6iVIfP2dgSJjIt"
 	let callbackURL = URL(string: "taskforce://authorized")!
