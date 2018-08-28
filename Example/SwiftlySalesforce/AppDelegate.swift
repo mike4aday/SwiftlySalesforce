@@ -15,7 +15,7 @@ var salesforce: Salesforce!
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {//, UNUserNotificationCenterDelegate, LoginDelegate {
 
-	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkiguvTQSOZIWjqkAIkqFwbKfS6RHNjbI28Lvkvigc5KOJWsaFJCxpZvfAMA4Q"
+	let consumerKey = "3MVG91ftikjGaMd_SSivaqQgkiuG.Y1epLf6raoqyNRl6rh89ffM3ugG92nuAkbjDslWsiu6iVIfP2dgSJjIt"
 	let callbackURL = URL(string: "taskforce://authorized")!
 
 	var window: UIWindow?
