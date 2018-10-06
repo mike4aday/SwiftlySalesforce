@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 7.0.4 (Oct. 5, 2018)
+Updated podspec 'source_files' attribute to avoid Xcode 10 build errors. 
+
 ## Version 7.0.3 (Aug. 28, 2018)
 Updated connected app's consumer key in example app.
 
