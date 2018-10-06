@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-s.version          = "7.0.3"
+s.version          = "7.0.4"
 s.summary          = "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform"
 
   s.description      = <<-DESC
@@ -17,7 +17,7 @@ s.summary          = "An easy-to-use Swift framework for building iOS apps that 
   s.platform     = :ios, '11.3'
   s.requires_arc = true
 
-  s.source_files = 'SwiftlySalesforce/Sources/**/*'
+  s.source_files = 'SwiftlySalesforce/Sources/**/*.swift'
   s.resource_bundles = {
 
   }
