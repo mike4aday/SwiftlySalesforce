@@ -45,6 +45,7 @@
 		EAD8EF6420EEEC65009E9D56 /* Salesforce_RESTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */; };
 		EAD8EF6520EEF749009E9D56 /* Salesforce_OAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */; };
 		EAD8EF6720EEFC49009E9D56 /* OAuthResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EF6620EEFC49009E9D56 /* OAuthResourceTests.swift */; };
+		EAE59BE8216D200A00680CF2 /* RefreshTokenResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE59BE7216D200A00680CF2 /* RefreshTokenResultTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		EAD8EF1E20EE9F2D009E9D56 /* SObjectResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SObjectResourceTests.swift; sourceTree = "<group>"; };
 		EAD8EF6320EEEC65009E9D56 /* Salesforce_RESTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_RESTTests.swift; sourceTree = "<group>"; };
 		EAD8EF6620EEFC49009E9D56 /* OAuthResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResourceTests.swift; sourceTree = "<group>"; };
+		EAE59BE7216D200A00680CF2 /* RefreshTokenResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenResultTests.swift; sourceTree = "<group>"; };
 		EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDescriptionTests.swift; sourceTree = "<group>"; };
 		F7891B295CCEE606466284B0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F8FEE5B2427F471C6FAA4ACD /* Pods-SwiftlySalesforce_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlySalesforce_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlySalesforce_Tests/Pods-SwiftlySalesforce_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				EAD8EF6620EEFC49009E9D56 /* OAuthResourceTests.swift */,
 				EAEE66A51F8DD18E0032A597 /* ObjectDescriptionTests.swift */,
 				EA2399F720D1E93B00E7FF32 /* OrganizationTests.swift */,
+				EAE59BE7216D200A00680CF2 /* RefreshTokenResultTests.swift */,
 				EAD8EF1420EDC65D009E9D56 /* RESTResourceTests.swift */,
 				EAD8EF1120EDAADF009E9D56 /* Salesforce_ConfigurationTests.swift */,
 				EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */,
@@ -263,7 +266,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				94729BEEC5107C5207BB88DB /* [CP] Embed Pods Frameworks */,
-				67930267F652C9ED66935CD2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -283,7 +285,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				85243745D5983CDEE2C67E64 /* [CP] Embed Pods Frameworks */,
-				2A4C0DDAE1A0B07F17928343 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -368,36 +369,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A4C0DDAE1A0B07F17928343 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftlySalesforce_Tests/Pods-SwiftlySalesforce_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		67930267F652C9ED66935CD2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftlySalesforce_Example/Pods-SwiftlySalesforce_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		85243745D5983CDEE2C67E64 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -495,6 +466,7 @@
 			files = (
 				EAD8EF0F20EDA8B3009E9D56 /* AddressTests.swift in Sources */,
 				EA7BDBDA20EFD41C0026856B /* AuthorizationStoreTests.swift in Sources */,
+				EAE59BE8216D200A00680CF2 /* RefreshTokenResultTests.swift in Sources */,
 				EA7BDBD920EFC5890026856B /* Salesforce_QueryTests.swift in Sources */,
 				EAD8EF1520EDC65D009E9D56 /* RESTResourceTests.swift in Sources */,
 				EAD8EF1620EDC8EB009E9D56 /* IdentityTests.swift in Sources */,
