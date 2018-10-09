@@ -69,17 +69,9 @@ internal extension Salesforce {
 			}
 			let resource = OAuthResource.refreshAccessToken(authorizationURL: config.authorizationURL, consumerKey: config.consumerKey)
 			return dataTask(with: resource).map { ($0, authorization) }
-		}.map { (dataResponse: DataResponse, oldAuth: Authorization) -> Authorization in
-			struct RefreshResult: Decodable {
-				let id: URL
-				let instance_url: URL
-				let access_token: String
-				let issued_at: String
-			}
-			let result: RefreshResult = try JSONDecoder().decode(RefreshResult.self, from: dataResponse.data)
-			let refreshToken = oldAuth.refreshToken // Re-use since we don't get new refresh token
-			let newAuth = Authorization(accessToken: result.access_token, instanceURL: result.instance_url, identityURL: result.id, refreshToken: refreshToken, issuedAt: UInt(result.issued_at))
-			return newAuth
+		}.map { (response: DataResponse, oldAuth: Authorization) -> Authorization in
+			let result = try JSONDecoder().decode(RefreshTokenResult.self, from: response.data)
+			return oldAuth.refreshedWith(result: result)
 		}
 	}
 	
