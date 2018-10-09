@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal struct RefreshTokenResult {
+struct RefreshTokenResult {
 	let accessToken: String
 	let instanceURL: URL
 	let identityURL: URL
@@ -25,5 +25,24 @@ extension RefreshTokenResult: Decodable {
 		case issuedAt = "issued_at"
 		case communityURL = "sfdc_community_url"
 		case communityID = "sfdc_community_id"
+	}
+	
+	public init(from decoder: Decoder) throws {
+		
+		// Top level container
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		
+		// Set properties
+		self.accessToken = try container.decode(String.self, forKey: .accessToken)
+		self.instanceURL = try container.decode(URL.self, forKey: .instanceURL)
+		self.identityURL = try container.decode(URL.self, forKey: .identityURL)
+		self.issuedAt = try {
+			guard let s = try container.decodeIfPresent(String.self, forKey: .issuedAt) else {
+				return nil
+			}
+			return UInt(s)
+		}()
+		self.communityURL = try container.decodeIfPresent(URL.self, forKey: .communityURL)
+		self.communityID = try container.decodeIfPresent(String.self, forKey: .communityID)
 	}
 }
