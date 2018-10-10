@@ -1,4 +1,4 @@
 {
-	"consumerKey": "YOUR CONNECTED APP'S CONSUMER KEY HERE",
-	"callbackURL": "sfdc://mytestapplogin"
+	"consumerKey": "",
+	"callbackURL": ""
 }
