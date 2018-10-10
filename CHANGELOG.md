@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 7.1.0 (Oct. 10, 2018)
+Support OpenID Connect 'ID token.' Resolves issue [issue #92](https://github.com/mike4aday/SwiftlySalesforce/issues/92)
+
 ## Version 7.0.4 (Oct. 5, 2018)
 Updated podspec 'source_files' attribute to avoid Xcode 10 build errors. 
 
