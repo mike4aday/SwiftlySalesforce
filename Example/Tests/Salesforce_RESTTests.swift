@@ -33,6 +33,8 @@ class Salesforce_RESTTests: XCTestCase {
 			salesforce.identity()
 		}.done { identity in
 			debugPrint("User ID: \(identity.userID)")
+			debugPrint("User Name: \(identity.username)")
+			debugPrint("Last Modified Date: \(identity.lastModifiedDate)")
 		}.catch {
 			XCTFail($0.localizedDescription)
 		}.finally {

@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 7.1.1 (Oct. 11, 2018)
+Adapt to Winter '19 date format change in `identity` JSON response. See [release notes](https://releasenotes.docs.salesforce.com/en-us/winter19/release-notes/rn_security_auth_json_value_endpoints.htm). 
+Resolves issue [issue #91](https://github.com/mike4aday/SwiftlySalesforce/issues/91)
+
 ## Version 7.1.0 (Oct. 10, 2018)
 Support OpenID Connect 'ID token.' Resolves issue [issue #92](https://github.com/mike4aday/SwiftlySalesforce/issues/92)
 
