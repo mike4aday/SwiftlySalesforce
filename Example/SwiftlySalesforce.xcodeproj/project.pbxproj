@@ -17,13 +17,14 @@
 		EA3DA7E220E68F4C00648FE0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD723F1DC0455C00790BCB /* DetailViewController.swift */; };
 		EA57EBF320D2B7E300374451 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA133DA91F91DC060055DC2F /* TestUtils.swift */; };
 		EA62C6781F196E7C00D6CF4E /* MockAccountMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6621F196E6600D6CF4E /* MockAccountMetadata.json */; };
-		EA62C67E1F196E9500D6CF4E /* MockIdentity.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6681F196E6600D6CF4E /* MockIdentity.json */; };
+		EA62C67E1F196E9500D6CF4E /* MockIdentityPreWinter19.json in Resources */ = {isa = PBXBuildFile; fileRef = EA62C6681F196E6600D6CF4E /* MockIdentityPreWinter19.json */; };
 		EA7BDBD920EFC5890026856B /* Salesforce_QueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */; };
 		EA7BDBDA20EFD41C0026856B /* AuthorizationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */; };
 		EA7BDBDB20EFD99D0026856B /* Salesforce_SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62132120EAD6AC009F1C52 /* Salesforce_SearchTests.swift */; };
 		EA7BDBDD20EFDA440026856B /* URL_QueryItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBDC20EFDA440026856B /* URL_QueryItemTests.swift */; };
 		EA7BDBDF20EFDB5D0026856B /* UIResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBDE20EFDB5D0026856B /* UIResourceTests.swift */; };
 		EA7BDBE120EFFFDE0026856B /* Salesforce_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BDBE020EFFFDE0026856B /* Salesforce_UITests.swift */; };
+		EA99C045216F05F900FD8976 /* MockIdentityPostWinter19.json in Resources */ = {isa = PBXBuildFile; fileRef = EA99C043216F03E600FD8976 /* MockIdentityPostWinter19.json */; };
 		EAAAB52E20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAAB52D20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift */; };
 		EAAC9EB920D44F5500F0E16B /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = EAAC9EB820D44F5500F0E16B /* Configuration.json */; };
 		EAB7EDAD1F8AEC0B00788A20 /* MockLimits.json in Resources */ = {isa = PBXBuildFile; fileRef = EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */; };
@@ -79,7 +80,7 @@
 		EA62132120EAD6AC009F1C52 /* Salesforce_SearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_SearchTests.swift; sourceTree = "<group>"; };
 		EA62132520EADA3F009F1C52 /* Salesforce_SObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_SObjectTests.swift; sourceTree = "<group>"; };
 		EA62C6621F196E6600D6CF4E /* MockAccountMetadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockAccountMetadata.json; sourceTree = "<group>"; };
-		EA62C6681F196E6600D6CF4E /* MockIdentity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockIdentity.json; sourceTree = "<group>"; };
+		EA62C6681F196E6600D6CF4E /* MockIdentityPreWinter19.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockIdentityPreWinter19.json; sourceTree = "<group>"; };
 		EA774E9920CC2B560076D71C /* AuthorizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
 		EA774E9B20CC61A50076D71C /* AuthorizationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStoreTests.swift; sourceTree = "<group>"; };
 		EA7BDBDC20EFDA440026856B /* URL_QueryItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_QueryItemTests.swift; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		EA846FC020DCBB16004F120E /* IdentityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTests.swift; sourceTree = "<group>"; };
 		EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockContactMetadata.json; sourceTree = "<group>"; };
 		EA8A687320D55528007622D7 /* Salesforce_QueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_QueryTests.swift; sourceTree = "<group>"; };
+		EA99C043216F03E600FD8976 /* MockIdentityPostWinter19.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockIdentityPostWinter19.json; sourceTree = "<group>"; };
 		EAAAB52D20F0FCB60079B88B /* URLRequest_URLRequestConvertibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest_URLRequestConvertibleTests.swift; sourceTree = "<group>"; };
 		EAAC9E8120D2DC9500F0E16B /* DateFormatter_SalesforceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter_SalesforceTests.swift; sourceTree = "<group>"; };
 		EAAC9EB620D420AD00F0E16B /* Salesforce_OAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce_OAuthTests.swift; sourceTree = "<group>"; };
@@ -216,7 +218,8 @@
 				EAAC9EB820D44F5500F0E16B /* Configuration.json */,
 				EA62C6621F196E6600D6CF4E /* MockAccountMetadata.json */,
 				EA87A4BD1F8DD2C100C16580 /* MockContactMetadata.json */,
-				EA62C6681F196E6600D6CF4E /* MockIdentity.json */,
+				EA62C6681F196E6600D6CF4E /* MockIdentityPreWinter19.json */,
+				EA99C043216F03E600FD8976 /* MockIdentityPostWinter19.json */,
 				EAB7EDAC1F8AEC0B00788A20 /* MockLimits.json */,
 				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
@@ -359,8 +362,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA99C045216F05F900FD8976 /* MockIdentityPostWinter19.json in Resources */,
 				EA62C6781F196E7C00D6CF4E /* MockAccountMetadata.json in Resources */,
-				EA62C67E1F196E9500D6CF4E /* MockIdentity.json in Resources */,
+				EA62C67E1F196E9500D6CF4E /* MockIdentityPreWinter19.json in Resources */,
 				EAAC9EB920D44F5500F0E16B /* Configuration.json in Resources */,
 				EA223AD91F8DD532003DC025 /* MockContactMetadata.json in Resources */,
 			);

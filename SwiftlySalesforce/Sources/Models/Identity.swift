@@ -63,7 +63,21 @@ extension Identity: Decodable {
 		// Set properties
 		self.displayName = try container.decode(String.self, forKey: .displayName)
 		self.language = try container.decodeIfPresent(String.self, forKey: .language)
-		self.lastModifiedDate = try container.decode(Date.self, forKey: .lastModifiedDate)
+		self.lastModifiedDate = try {
+			// In Winter '19, date format changed for this field so we need to try both
+			// formats until Winter '19 is deployed in all orgs, then only new format.
+			// See: https://releasenotes.docs.salesforce.com/en-us/winter19/release-notes/rn_security_auth_json_value_endpoints.htm
+			//TODO: more comprehensive solution that could handle all formats in decoder?
+			if let date = try? container.decode(Date.self, forKey: .lastModifiedDate) {
+				return date
+			}
+			let formatter = ISO8601DateFormatter()
+			formatter.formatOptions = [.withInternetDateTime]
+			guard let string = try? container.decode(String.self, forKey: .lastModifiedDate), let date = formatter.date(from: string) else {
+				throw DecodingError.dataCorruptedError(forKey: .lastModifiedDate, in: container, debugDescription: "Unable to decode last modified date.")
+			}
+			return date
+		}()
 		self.locale = try container.decodeIfPresent(String.self, forKey: .locale)
 		self.mobilePhone = try container.decodeIfPresent(String.self, forKey: .mobilePhone)
 		self.orgID = try container.decode(String.self, forKey: .orgID)
