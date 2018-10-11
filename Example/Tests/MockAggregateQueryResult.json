@@ -1,0 +1,17 @@
+{
+	"totalSize" : 2,
+	"done" : true,
+	"records" : [ {
+		"attributes" : {
+			"type" : "AggregateResult"
+		},
+		"AccountId" : "001B000000oAiZAIA0",
+		"expr0" : 2
+	}, {
+		"attributes" : {
+			"type" : "AggregateResult"
+		},
+		"AccountId" : "001B000000oAiZ9IAK",
+		"expr0" : 1
+	} ]
+}

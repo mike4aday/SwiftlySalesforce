@@ -10,84 +10,6 @@ import XCTest
 @testable import SwiftlySalesforce
 
 class SObjectTests: XCTestCase {
-
-	let json = """
-	{
-		"attributes" : {
-			"type" : "Account",
-			"url" : "/services/data/v41.0/sobjects/Account/0011Y00002LZRxeQAH"
-		},
-		"Id" : "0011Y00002LZRxeQAH",
-		"IsDeleted" : false,
-		"MasterRecordId" : null,
-		"Name" : "Megacorp, Inc.",
-		"Type" : null,
-		"RecordTypeId" : null,
-		"ParentId" : null,
-		"BillingStreet" : null,
-		"BillingCity" : null,
-		"BillingState" : null,
-		"BillingPostalCode" : "55141",
-		"BillingCountry" : "US",
-		"BillingLatitude" : null,
-		"BillingLongitude" : null,
-		"BillingGeocodeAccuracy" : null,
-		"BillingAddress" : {
-			"city" : "Pleasant Prairie",
-			"country" : "US",
-			"geocodeAccuracy" : null,
-			"latitude" : null,
-			"longitude" : null,
-			"postalCode" : "55141",
-			"state" : "WI",
-			"street" : null
-		},
-		"ShippingStreet" : null,
-		"ShippingCity" : null,
-		"ShippingState" : null,
-		"ShippingPostalCode" : null,
-		"ShippingCountry" : null,
-		"ShippingLatitude" : null,
-		"ShippingLongitude" : null,
-		"ShippingGeocodeAccuracy" : null,
-		"ShippingAddress" : null,
-		"Phone" : null,
-		"Fax" : null,
-		"AccountNumber" : null,
-		"Website" : "https://www.megacorp.com",
-		"PhotoUrl" : "/services/images/photo/0011Y00002LZRxeQAH",
-		"Sic" : null,
-		"Industry" : null,
-		"AnnualRevenue" : 543210.0,
-		"NumberOfEmployees" : 12345,
-		"Ownership" : null,
-		"TickerSymbol" : null,
-		"Description" : null,
-		"Rating" : null,
-		"Site" : null,
-		"OwnerId" : "005i00000016PdaAAE",
-		"CreatedDate" : "2017-10-11T13:11:58.000+0000",
-		"CreatedById" : "005i00000016PdaAAE",
-		"LastModifiedDate" : "2017-10-11T13:11:58.000+0000",
-		"LastModifiedById" : "005i00000016PdaAAE",
-		"SystemModstamp" : "2017-10-12T00:02:54.000+0000",
-		"LastActivityDate" : null,
-		"LastViewedDate" : null,
-		"LastReferencedDate" : null,
-		"Jigsaw" : null,
-		"JigsawCompanyId" : null,
-		"AccountSource" : null,
-		"SicDesc" : null,
-		"playground__CustomerPriority__c" : null,
-		"playground__SLA__c" : null,
-		"playground__Active__c" : null,
-		"playground__NumberofLocations__c" : null,
-		"playground__UpsellOpportunity__c" : null,
-		"playground__SLASerialNumber__c" : null,
-		"playground__SLAExpirationDate__c" : null,
-		"playground__Owners_Manager_Name__c" : "User, Test",
-	}
-	"""
 	
 	let decoder = JSONDecoder(dateFormatter: .salesforceDateTimeFormatter)
 	let encoder = JSONEncoder(dateFormatter: .salesforceDateTimeFormatter)
@@ -100,9 +22,10 @@ class SObjectTests: XCTestCase {
 		super.tearDown()
 	}
     
-    func testThatItInitsFromCoder() {
+    func testThatItInitsSObject() {
 		
-		guard let data = json.data(using: .utf8), let account = try? decoder.decode(SObject.self, from: data) else {
+		let data = TestUtils.shared.read(fileName: "MockAccount", ofType: "json")!
+		guard let account = try? decoder.decode(SObject.self, from: data) else {
 			XCTFail()
 			return
 		}
@@ -124,6 +47,20 @@ class SObjectTests: XCTestCase {
 		XCTAssertNotNil(account["PhotoUrl"] as String?)
 		XCTAssertNil(account["Phone"] as String?)
     }
+	
+	func testThatItInitsAggregateResult() {
+		
+		let data = TestUtils.shared.read(fileName: "MockAggregateQueryResult", ofType: "json")!
+		guard let results = try? decoder.decode(QueryResult<SObject>.self, from: data) else {
+			XCTFail()
+			return
+		}
+		XCTAssertEqual(results.records.count, 2)
+		for sobj in results.records {
+			XCTAssertEqual(sobj.type, "AggregateResult")
+			XCTAssertNil(sobj.id)
+		}
+	}
 	
 	func testThatItEncodesAndDecodes() {
 		
@@ -159,7 +96,8 @@ class SObjectTests: XCTestCase {
 	
 	func testThatItMutates() {
 		
-		guard let data = json.data(using: .utf8), var account = try? decoder.decode(SObject.self, from: data) else {
+		let data = TestUtils.shared.read(fileName: "MockAccount", ofType: "json")!
+		guard var account = try? decoder.decode(SObject.self, from: data) else {
 			XCTFail()
 			return
 		}
