@@ -1,11 +1,14 @@
 # Change Log
 
+## Version 7.1.2 (Oct. 11, 2018)
+Support aggregate query result. Resolves issue [issue #88](https://github.com/mike4aday/SwiftlySalesforce/issues/88).
+
 ## Version 7.1.1 (Oct. 11, 2018)
 Adapt to Winter '19 date format change in `identity` JSON response. See [release notes](https://releasenotes.docs.salesforce.com/en-us/winter19/release-notes/rn_security_auth_json_value_endpoints.htm). 
-Resolves issue [issue #91](https://github.com/mike4aday/SwiftlySalesforce/issues/91)
+Resolves issue [issue #91](https://github.com/mike4aday/SwiftlySalesforce/issues/91).
 
 ## Version 7.1.0 (Oct. 10, 2018)
-Support OpenID Connect 'ID token.' Resolves issue [issue #92](https://github.com/mike4aday/SwiftlySalesforce/issues/92)
+Support OpenID Connect 'ID token.' Resolves issue [issue #92](https://github.com/mike4aday/SwiftlySalesforce/issues/92).
 
 ## Version 7.0.4 (Oct. 5, 2018)
 Updated podspec 'source_files' attribute to avoid Xcode 10 build errors. 

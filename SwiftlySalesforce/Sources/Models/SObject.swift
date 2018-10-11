@@ -18,7 +18,7 @@ public struct SObject {
 	/// Fields and their values that would be encoded for update or insert to Salesforce
 	public fileprivate(set) var updatedFields = [String: Encodable?]()
 	
-	fileprivate var container: KeyedDecodingContainer<RecordCodingKey>?
+	fileprivate var container: KeyedDecodingContainer<SObjectCodingKey>?
 	
 	/// Subscript by field name; read only
 	subscript<Value: Decodable>(field: String) -> Value? {
@@ -74,7 +74,7 @@ public struct SObject {
 			return updatedFields[field] as? Value
 		}
 		else {
-			if let c = container, let key = RecordCodingKey(stringValue: field) {
+			if let c = container, let key = SObjectCodingKey(stringValue: field) {
 				return try? c.decode(Value.self, forKey: key)
 			}
 			else {
@@ -91,11 +91,16 @@ public struct SObject {
 
 extension SObject: Codable {
 	
-	fileprivate struct RecordCodingKey: CodingKey {
+	fileprivate struct SObjectCodingKey: CodingKey {
 		var stringValue: String
 		var intValue: Int? = nil
 		init?(stringValue: String) { self.stringValue = stringValue }
 		init?(intValue: Int) { return nil }
+	}
+	
+	fileprivate struct Attributes: Decodable {
+		var type: String
+		var url: String?
 	}
 	
 	fileprivate enum AttributeKeys: String, CodingKey {
@@ -112,17 +117,25 @@ extension SObject: Codable {
 	
 	public init(from decoder: Decoder) throws {
 		
-		let topContainer = try decoder.container(keyedBy: RecordCodingKey.self)
-		let attributesKey = RecordCodingKey(stringValue: "attributes")!
-		let attributesContainer = try topContainer.nestedContainer(keyedBy: AttributeKeys.self, forKey: attributesKey)
-		let type = try attributesContainer.decode(String.self, forKey: AttributeKeys.type)
-		let path = try attributesContainer.decode(String.self, forKey: AttributeKeys.url)
-		guard let id = path.components(separatedBy: "/").last, id.count == 18 || id.count == 15 else {
-			throw DecodingError.dataCorruptedError(forKey: .url, in: attributesContainer, debugDescription: "Unable to parse record ID from URL attribute.")
+		let topContainer = try decoder.container(keyedBy: SObjectCodingKey.self)
+		let attributes = try topContainer.decode(Attributes.self, forKey: SObjectCodingKey(stringValue: "attributes")!)
+		
+		// Type of SObject
+		self.type = attributes.type
+		
+		// Record ID
+		if let id = try topContainer.decodeIfPresent(String.self, forKey: SObjectCodingKey(stringValue: "Id")!) {
+			// "Id" was one of the fields queried or retrieved
+			self.id = id
+		}
+		else {
+			if let path = attributes.url, let id = path.components(separatedBy: "/").last, id.count == 18 || id.count == 15 {
+				// ID can be extracted from the record URL string
+				self.id = id
+			}
 		}
 		
-		self.type = type
-		self.id = id
+		// Retain the top level container for later use
 		self.container = topContainer
 	}
 	
@@ -131,9 +144,9 @@ extension SObject: Codable {
 	/// Salesforce are not encoded here. That's by design since an `insert` or `update` operation requires only new values,
 	/// and should not include fields that can't be updated, e.g. Id or CreatedDate
 	public func encode(to encoder: Encoder) throws {
-		var container = encoder.container(keyedBy: RecordCodingKey.self)
+		var container = encoder.container(keyedBy: SObjectCodingKey.self)
 		for field in updatedFields {
-			let codingKey = RecordCodingKey(stringValue: field.key)!
+			let codingKey = SObjectCodingKey(stringValue: field.key)!
 			if let value = updatedFields[field.key], value != nil {
 				if let v = value as? Bool {
 					try container.encode(v, forKey: codingKey)

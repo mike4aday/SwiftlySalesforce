@@ -47,14 +47,21 @@ class Salesforce_QueryTests: XCTestCase {
 	}
 	
 	func testThatItQueriesMultiplePages() {
-		//TODO: don't assume enough existing accounts for multiple pages
 		let exp = expectation(description: "Queries multiple pages of accounts")
 		let batchSize = 201
 		salesforce.query(soql: "SELECT Id,Name,CreatedDate FROM Account", batchSize: batchSize).done { (queryResult) in
-			XCTAssertTrue(queryResult.totalSize > batchSize)
-			XCTAssertTrue(queryResult.records.count == batchSize)
-			XCTAssertFalse(queryResult.isDone)
-			XCTAssertNotNil(queryResult.nextRecordsPath)
+			if queryResult.totalSize > batchSize {
+				// Multiple pages of results
+				XCTAssertTrue(queryResult.records.count == batchSize)
+				XCTAssertFalse(queryResult.isDone)
+				XCTAssertNotNil(queryResult.nextRecordsPath)
+			}
+			else {
+				// Single page of results, or none
+				XCTAssertTrue(queryResult.records.count <= batchSize)
+				XCTAssertTrue(queryResult.isDone)
+				XCTAssertNil(queryResult.nextRecordsPath)
+			}
 		}.catch { (error) in
 			XCTFail(error.localizedDescription)
 		}.finally {
