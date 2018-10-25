@@ -179,7 +179,7 @@ public extension Salesforce {
 	// MARK: - Register for push notifications
 	
 	/// Use this method to register your device to receive push notifications from the Salesforce Universal Push Notification service.
-	/// - Parameter deviceToken: Device token returned from a successful UIApplication.shared.registerForRemoteNotification() invocation.
+	/// - Parameter deviceToken: Device token returned from a successful UIApplication.shared.registerForRemoteNotifications() invocation.
 	/// - Parameter options: If you want to defer login, set to [.dontAuthenticate]
 	/// - Returns: Promise of a String which holds the ID of the newly-inserted MobilePushServiceDevice record
 	public func registerForNotifications(deviceToken: String, options: Options = []) -> Promise<String> {
