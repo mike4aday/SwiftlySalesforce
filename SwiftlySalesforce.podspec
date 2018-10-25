@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-s.version          = "7.1.2"
-s.summary          = "An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform"
+s.version          = "7.1.3"
+s.summary          = "The swiftest way to build iOS apps that connect to Salesforce."
 
   s.description      = <<-DESC
 				An easy-to-use Swift framework for building iOS apps that integrate with the Salesforce Platform. Swiftly Salesforce uses 'promises' to simplify Salesforce REST API calls, and OAuth2 authentication.
