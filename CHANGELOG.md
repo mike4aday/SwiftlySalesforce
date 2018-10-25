@@ -1,7 +1,10 @@
 # Change Log
 
+## Version 7.1.4 (Oct. 25, 2018)
+Added Cartfile entry for PromiseKit's Foundation extensions.
+
 ## Version 7.1.3 (Oct. 24, 2018)
-- Updated Cartfile.resolved; was out of date
+- Updated Cartfile.resolved; was out of date.
 - Fixed documentation [issue #96](https://github.com/mike4aday/SwiftlySalesforce/issues/96). Thanks to [@pbrondum](https://github.com/pbrondum).
 
 ## Version 7.1.2 (Oct. 11, 2018)
