@@ -15,7 +15,16 @@ public extension Salesforce {
 		
 		let go: (Authorization) throws -> Promise<DataResponse> = { auth in
 			let req = try request.asURLRequest(with: auth)
-			return URLSession.shared.dataTask(.promise, with: req).validated(with: validator)
+			return Promise { seal in
+				URLSession.shared.dataTask(with: req) { (data, response, error) in
+					if let data = data, let response = response {
+						seal.resolve((data, response), error)
+					}
+					else {
+						seal.reject(Salesforce.Error.miscellaneous(message: "Unable to process response."))
+					}
+				}.resume()
+			}.validated(with: validator)
 		}
 		
 		return firstly { () -> Promise<DataResponse> in
