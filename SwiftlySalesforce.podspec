@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-s.version          = "7.1.4"
+s.version          = "7.1.5"
 s.summary          = "The swiftest way to build iOS apps that connect to Salesforce."
 
   s.description      = <<-DESC
@@ -22,6 +22,6 @@ s.summary          = "The swiftest way to build iOS apps that connect to Salesfo
 
   }
 
-  s.dependency 'PromiseKit', '~> 6.0'
+  s.dependency 'PromiseKit/CorePromise', '~> 6.0'
 
 end

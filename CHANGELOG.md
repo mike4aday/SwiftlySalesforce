@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 7.1.5 (Oct. 26, 2018)
+Removed dependency on PromiseKit's Foundation extension
+
 ## Version 7.1.4 (Oct. 25, 2018)
 Added Cartfile entry for PromiseKit's Foundation extensions.
 
