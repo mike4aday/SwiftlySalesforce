@@ -13,7 +13,7 @@
     <a title="SwiftlySalesforce  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftlySalesforce Docs</a> (30% documented)</p>
+        <p><a href="index.html">SwiftlySalesforce Docs</a> (28% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -74,6 +74,9 @@
                 <a href="Extensions/Promise.html">Promise</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/RefreshTokenResult.html">RefreshTokenResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/URL.html">URL</a>
               </li>
               <li class="nav-group-task">
@@ -85,10 +88,10 @@
             <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:17SwiftlySalesforce5first10PromiseKit0D0Cy1TQzGxyKc7execute_tAC8ThenableRzlF">first(execute:)</a>
+                <a href="Functions.html#/s:17SwiftlySalesforce5first7execute10PromiseKit0E0Cy1TQzGxyKXE_tAD8ThenableRzlF">first(execute:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:17SwiftlySalesforce5first10PromiseKit9GuaranteeCyxGAFyc7execute_tlF">first(execute:)</a>
+                <a href="Functions.html#/s:17SwiftlySalesforce5first7execute10PromiseKit9GuaranteeCyxGAGyXE_tlF">first(execute:)</a>
               </li>
             </ul>
           </li>
@@ -125,7 +128,7 @@
                 <a href="Structs/ObjectDescription.html">ObjectDescription</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs.html#/s:17SwiftlySalesforce12OrganizationV">Organization</a>
+                <a href="Structs/Organization.html">Organization</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/PicklistItem.html">PicklistItem</a>
@@ -170,9 +173,11 @@
 <ul>
 <li>Written entirely in <a href="https://developer.apple.com/swift/">Swift</a>.</li>
 <li>Uses <a href="https://en.wikipedia.org/wiki/Futures_and_promises">promises</a> to simplify complex, asynchronous <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/">Salesforce API</a> interactions.</li>
-<li>Manages the Salesforce <a href="https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com">OAuth2</a> process (the <q>OAuth dance</q>) automatically and transparently.</li>
+<li>Manages the Salesforce <a href="https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com">OAuth2</a> user authentication and authorization process (the <q>OAuth dance</q>) automatically.</li>
 <li>Simpler and lighter alternative to the Salesforce <a href="https://github.com/forcedotcom/SalesforceMobileSDK-iOS">Mobile SDK for iOS</a>.</li>
 <li>Easy to install and update.</li>
+<li>Compatible with <a href="http://realm.io">Realm</a> for a complete, offline mobile solution.</li>
+<li><a href="./CHANGELOG.md">See what&rsquo;s new</a>.</li>
 </ul>
 <h2 id='quick-start' class='heading'>Quick Start</h2>
 
@@ -201,7 +206,7 @@
 <p>Documentation is <a href="http://mike4aday.github.io/SwiftlySalesforce/docs">here</a>. See especially the public methods of the <code><a href="Classes/Salesforce.html">Salesforce</a></code> class - those are likely all you&rsquo;ll need to call from your code.</p>
 <h2 id='examples' class='heading'>Examples</h2>
 
-<p>Below are some examples to illustrate how to use Swiftly Salesforce, and how you can chain complex asynchronous calls. You can also find a complete example app <a href="Example/SwiftlySalesforce">here</a>; it retrieves the logged-in user’s task records from Salesforce, and lets the user update the status of a task.</p>
+<p>Below are some examples that illustrate how to use Swiftly Salesforce, and how you can chain complex asynchronous calls. You can also find a complete example app <a href="Example/SwiftlySalesforce">here</a>; it retrieves the logged-in user’s task records from Salesforce, and lets the user update the status of a task.</p>
 
 <p>Swiftly Salesforce will automatically manage the entire Salesforce <a href="https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com">OAuth2</a> process (the <q>OAuth dance</q>). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn&rsquo;t have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.</p>
 
@@ -215,10 +220,10 @@
 <span class="k">var</span> <span class="nv">salesforce</span><span class="p">:</span> <span class="kt">Salesforce</span><span class="o">!</span>
 
 <span class="kd">@UIApplicationMain</span>
-<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span> <span class="p">{</span><span class="c1">//, UNUserNotificationCenterDelegate, LoginDelegate {</span>
+<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIApplicationDelegate</span> <span class="p">{</span>
 
     <span class="k">let</span> <span class="nv">consumerKey</span> <span class="o">=</span> <span class="s">"YOUR CONNECTED APP'S CONSUMER KEY HERE"</span>
-    <span class="k">let</span> <span class="nv">callbackURL</span> <span class="o">=</span> <span class="s">"YOUR CONNECTED APP'S CALLBACK URL HERE"</span>
+    <span class="k">let</span> <span class="nv">callbackURL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"YOUR CONNECTED APP'S CALLBACK URL HERE"</span><span class="p">)</span><span class="o">!</span>
 
     <span class="k">var</span> <span class="nv">window</span><span class="p">:</span> <span class="kt">UIWindow</span><span class="p">?</span>
 
@@ -272,9 +277,9 @@
     <span class="c1">// Handle error...</span>
 <span class="p">}</span>
 </code></pre>
-<h3 id='example-custom-model-objects-new' class='heading'>Example: Custom Model Objects (NEW!)</h3>
+<h3 id='example-custom-model-objects' class='heading'>Example: Custom Model Objects</h3>
 
-<p>Instead of using <code><a href="Structs/SObject.html">SObject</a></code>, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift&rsquo;s <a href="https://developer.apple.com/documentation/swift/decodable"><code>Decodable</code></a> protocol:</p>
+<p>Instead of using the generic <code><a href="Structs/SObject.html">SObject</a></code>, you could define your own model objects. Swiftly Salesforce will automatically decode the Salesforce response into your model objects, as long as they implement Swift&rsquo;s <a href="https://developer.apple.com/documentation/swift/decodable"><code>Decodable</code></a> protocol:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">MyAccountModel</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="p">{</span>
 
     <span class="k">var</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span>
@@ -318,20 +323,20 @@
 <span class="p">}</span>
 </code></pre>
 
-<p>The <code>always</code> closure will be called regardless of success or failure elsewhere in the promise chain.</p>
+<p>The <code>finally</code> closure will be called regardless of success or failure elsewhere in the promise chain.</p>
 
-<p>You could also use the <code>Record</code> type to update a record in Salesforce. For example:</p>
-<pre class="highlight plaintext"><code>// `account` is a Record we retrieved earlier...
-account.setValue("My New Corp.", forField: "Name")
-account.setValue(URL(string: "https://www.mynewcorp.com")!, forField: "Website")
-account.setValue("123 Main St.", forField: "BillingStreet")
-account.setValue(nil, forField: "Sic")
-salesforce.update(record: account).done {
-    print("Account updated...")
-}.catch {
-    error in
-    // Handle error
-}
+<p>You could also use the <code><a href="Structs/SObject.html">SObject</a></code> type to update a record in Salesforce. For example:</p>
+<pre class="highlight swift"><code><span class="c1">// `account` is an SObject we retrieved earlier...</span>
+<span class="n">account</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="s">"My New Corp."</span><span class="p">,</span> <span class="nv">forField</span><span class="p">:</span> <span class="s">"Name"</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://www.mynewcorp.com"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span> <span class="nv">forField</span><span class="p">:</span> <span class="s">"Website"</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="s">"123 Main St."</span><span class="p">,</span> <span class="nv">forField</span><span class="p">:</span> <span class="s">"BillingStreet"</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span> <span class="nv">forField</span><span class="p">:</span> <span class="s">"Sic"</span><span class="p">)</span>
+<span class="n">salesforce</span><span class="o">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">record</span><span class="p">:</span> <span class="n">account</span><span class="p">)</span><span class="o">.</span><span class="n">done</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Account updated..."</span><span class="p">)</span>
+<span class="p">}</span><span class="o">.</span><span class="k">catch</span> <span class="p">{</span>
+    <span class="n">error</span> <span class="k">in</span>
+    <span class="c1">// Handle error</span>
+<span class="p">}</span>
 </code></pre>
 <h3 id='example-query-salesforce' class='heading'>Example: Query Salesforce</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">soql</span> <span class="o">=</span> <span class="s">"SELECT Id,Name FROM Account WHERE BillingPostalCode = '10024'"</span>
@@ -351,13 +356,13 @@ salesforce.update(record: account).done {
 <pre class="highlight swift"><code><span class="n">first</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">queries</span> <span class="o">=</span> <span class="p">[</span><span class="s">"SELECT Name FROM Account"</span><span class="p">,</span> <span class="s">"SELECT Id FROM Contact"</span><span class="p">,</span> <span class="s">"Select Owner.Name FROM Lead"</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">salesforce</span><span class="o">.</span><span class="nf">query</span><span class="p">(</span><span class="nv">soql</span><span class="p">:</span> <span class="n">queries</span><span class="p">)</span>
-<span class="p">}</span><span class="o">.</span><span class="n">done</span> <span class="p">{</span> <span class="p">(</span><span class="nv">queryResults</span><span class="p">:</span> <span class="p">[</span><span class="kt">QueryResult</span><span class="o">&lt;</span><span class="kt">Record</span><span class="o">&gt;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="k">in</span>
+<span class="p">}</span><span class="o">.</span><span class="n">done</span> <span class="p">{</span> <span class="p">(</span><span class="nv">queryResults</span><span class="p">:</span> <span class="p">[</span><span class="kt">QueryResult</span><span class="o">&lt;</span><span class="kt">SObject</span><span class="o">&gt;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="k">in</span>
     <span class="c1">// Results are in the same order as the queries</span>
 <span class="p">}</span><span class="o">.</span><span class="k">catch</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
     <span class="c1">// Handle the error</span>
 <span class="p">}</span>
 </code></pre>
-<h3 id='example-decode-query-results-as-custom-model-objects-new' class='heading'>Example: Decode Query Results as Custom Model Objects (NEW!)</h3>
+<h3 id='example-decode-query-results-as-custom-model-objects' class='heading'>Example: Decode Query Results as Custom Model Objects</h3>
 
 <p>You can easily perform complex queries, traversing object relationships, and have all the results decoded automatically into your custom model objects that implement the <a href="https://developer.apple.com/documentation/swift/decodable"><code>Decodable</code></a> protocol:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Account</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="p">{</span>
@@ -413,7 +418,7 @@ salesforce.update(record: account).done {
 <span class="n">first</span> <span class="p">{</span>
     <span class="c1">// Make GET request of custom Apex REST resource that returns a zip code as a string</span>
     <span class="k">return</span> <span class="n">salesforce</span><span class="o">.</span><span class="nf">apex</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="s">"/MyApexResourceThatEmitsRandomZip"</span><span class="p">)</span>
-<span class="p">}</span><span class="o">.</span><span class="n">then</span> <span class="p">{</span> <span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">QueryResult</span><span class="o">&lt;</span><span class="kt">Record</span><span class="o">&gt;&gt;</span> <span class="k">in</span>
+<span class="p">}</span><span class="o">.</span><span class="n">then</span> <span class="p">{</span> <span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">QueryResult</span><span class="o">&lt;</span><span class="kt">SObject</span><span class="o">&gt;&gt;</span> <span class="k">in</span>
     <span class="c1">// Query accounts in that zip code</span>
     <span class="k">guard</span> <span class="k">let</span> <span class="nv">zip</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="kt">NSError</span><span class="p">(</span><span class="nv">domain</span><span class="p">:</span> <span class="kt">NSURLErrorDomain</span><span class="p">,</span> <span class="nv">code</span><span class="p">:</span> <span class="kt">NSURLErrorUnknown</span><span class="p">,</span> <span class="nv">userInfo</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
@@ -446,10 +451,10 @@ salesforce.update(record: account).done {
     <span class="p">}</span>
 <span class="p">}</span><span class="o">.</span><span class="n">done</span> <span class="p">{</span> <span class="n">image</span> <span class="k">in</span>
     <span class="k">self</span><span class="o">.</span><span class="n">photoView</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
-<span class="p">}</span><span class="o">.</span><span class="n">finally</span> <span class="p">{</span>
-    <span class="k">self</span><span class="o">.</span><span class="n">refreshControl</span><span class="p">?</span><span class="o">.</span><span class="nf">endRefreshing</span><span class="p">()</span>
 <span class="p">}</span><span class="o">.</span><span class="k">catch</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="k">in</span>
     <span class="c1">// Handle any errors</span>
+<span class="p">}</span><span class="o">.</span><span class="n">finally</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">refreshControl</span><span class="p">?</span><span class="o">.</span><span class="nf">endRefreshing</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
 <h3 id='example-retrieve-a-contact-39-s-photo' class='heading'>Example: Retrieve a Contact&rsquo;s Photo</h3>
@@ -467,10 +472,10 @@ salesforce.update(record: account).done {
 <span class="p">}</span><span class="o">.</span><span class="n">done</span> <span class="p">{</span> <span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="k">in</span>
     <span class="c1">// Do something interesting with the image, e.g. display in a view:</span>
     <span class="c1">// self.photoView.image = image</span>
-<span class="p">}</span><span class="o">.</span><span class="n">finally</span> <span class="p">{</span>
-    <span class="k">self</span><span class="o">.</span><span class="n">refreshControl</span><span class="p">?</span><span class="o">.</span><span class="nf">endRefreshing</span><span class="p">()</span>
 <span class="p">}</span><span class="o">.</span><span class="k">catch</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="k">in</span>
     <span class="c1">// Handle any errors</span>
+<span class="p">}</span><span class="o">.</span><span class="n">finally</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">refreshControl</span><span class="p">?</span><span class="o">.</span><span class="nf">endRefreshing</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
 <h3 id='example-retrieve-an-account-39-s-billing-address' class='heading'>Example: Retrieve an Account&rsquo;s Billing Address</h3>
@@ -578,6 +583,21 @@ salesforce.update(record: account).done {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
+<h3 id='example-search-with-salesforce-object-search-language-sosl' class='heading'>Example: Search with Salesforce Object Search Language (SOSL)</h3>
+
+<p><a href="https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_sosl.htm">Read more about SOSL</a></p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sosl</span> <span class="o">=</span> <span class="s">"""
+    FIND {"</span><span class="kt">A</span><span class="o">*</span><span class="s">" OR "</span><span class="kt">B</span><span class="o">*</span><span class="s">" OR "</span><span class="kt">C</span><span class="o">*</span><span class="s">"} IN Name Fields RETURNING lead(name,phone,Id), contact(name,phone)
+"""</span>
+<span class="n">salesforce</span><span class="o">.</span><span class="nf">search</span><span class="p">(</span><span class="nv">sosl</span><span class="p">:</span> <span class="n">sosl</span><span class="p">)</span><span class="o">.</span><span class="n">done</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Search result count: </span><span class="se">\(</span><span class="n">result</span><span class="o">.</span><span class="n">searchRecords</span><span class="o">.</span><span class="n">count</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="k">in</span> <span class="n">result</span><span class="o">.</span><span class="n">searchRecords</span> <span class="p">{</span>
+        <span class="c1">// Do something with each record in the search result</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="o">.</span><span class="k">catch</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="c1">// Handle error</span>
+<span class="p">}</span>
+</code></pre>
 <h3 id='example-add-swiftly-salesforce-to-your-cocoapods-a-href-https-guides-cocoapods-org-syntax-podfile-html-podfile-a' class='heading'>Example: Add Swiftly Salesforce to Your CocoaPods <a href="https://guides.cocoapods.org/syntax/podfile.html">Podfile</a></h3>
 <pre class="highlight plaintext"><code>target 'MyApp' do
   use_frameworks!
@@ -613,7 +633,7 @@ end
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/mike4aday/SwiftlySalesforce" target="_blank" rel="external">Michael Epstein</a>. All rights reserved. (Last updated: 2018-07-13)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/mike4aday/SwiftlySalesforce" target="_blank" rel="external">Michael Epstein</a>. All rights reserved. (Last updated: 2018-11-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
