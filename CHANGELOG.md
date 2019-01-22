@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 7.1.6 (Jan. 22, 2019)
+Minor release. Updated default Salesforce API version to 44.0 (Winter '19).
+
 ## Version 7.1.5 (Oct. 26, 2018)
 Removed dependency on PromiseKit's Foundation extension
 
