@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = "SwiftlySalesforce"
-s.version          = "7.1.5"
+s.version          = "7.1.6"
 s.summary          = "The swiftest way to build iOS apps that connect to Salesforce."
 
   s.description      = <<-DESC
