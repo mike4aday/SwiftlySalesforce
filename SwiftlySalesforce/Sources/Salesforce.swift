@@ -13,7 +13,7 @@ import PromiseKit
 public class Salesforce {
 	
 	public struct Configuration {
-		public static let defaultVersion = "43.0"
+		public static let defaultVersion = "44.0"
 		public static let defaultAuthorizationHost = "login.salesforce.com"
 		public let consumerKey: String
 		public let callbackURL: URL
