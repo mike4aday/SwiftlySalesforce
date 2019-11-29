@@ -18,7 +18,7 @@ You can be up and running in a few minutes by following these steps:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
-1. [Add Swiftly Salesforce to your Xcode project as a package dependency](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
+1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) Swiftly Salesforce to your Xcode project as a package dependency, with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 
 ## Minimum Requirements
@@ -252,16 +252,17 @@ If you want to log out the current Salesforce user, and then clear any locally-c
 [Read more about SOSL](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_sosl.htm)
 ```swift
 let sosl = """
-    FIND {"A*" OR "B*" OR "C*"} IN Name Fields RETURNING lead(name,phone,Id), contact(name,phone)
+    FIND {"A*" OR "B*" OR "C*" OR "D*"} IN Name Fields RETURNING Lead(name,phone,Id), Contact(name,phone)
 """
-salesforce.search(sosl: sosl).done { result in
-    debugPrint("Search result count: \(result.searchRecords.count)")
-    for record in result.searchRecords {
-        // Do something with each record in the search result
+salesforce.search(sosl: sosl)
+    .sink(receiveCompletion: { (completion) in
+        //TODO: completed
+    }) { (results: [SObject]) in
+        for result in results {
+           print("Object type: \(result.object)")
+        }
     }
-}.catch { error in
-    // Handle error
-}
+    .store(in: &subscriptions)
 ```
 
 ## Resources
