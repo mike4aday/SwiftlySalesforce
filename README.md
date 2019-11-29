@@ -18,8 +18,7 @@ You can be up and running in a few minutes by following these steps:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
-1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) Swiftly Salesforce to your Xcode project as a package dependency, with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
-1. Configure your app delegate ([example](#example-configure-your-app-delegate))
+1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) Swiftly Salesforce to your Xcode project as a package dependency, with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git). 
 
 ## Minimum Requirements
 * iOS 13.0
