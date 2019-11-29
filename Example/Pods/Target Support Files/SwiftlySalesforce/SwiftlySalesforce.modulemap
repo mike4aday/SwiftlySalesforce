@@ -1,6 +1,0 @@
-framework module SwiftlySalesforce {
-  umbrella header "SwiftlySalesforce-umbrella.h"
-
-  export *
-  module * { export * }
-}
