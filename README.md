@@ -5,10 +5,11 @@
 
 Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platform/overview/) with Swiftly Salesforce:
 * Written entirely in [Swift](https://developer.apple.com/swift/).
-* Uses [promises](https://en.wikipedia.org/wiki/Futures_and_promises) to simplify complex, asynchronous [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/) interactions.
+* Uses Swift's new [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex , asynchronous [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/) interactions.
+* Works with SwiftUI
 * Manages the Salesforce [OAuth2] user authentication and authorization process (the "OAuth dance") automatically.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
-* Easy to install and update.
+* Easy to install and update with Swift Package Manager (SPM)
 * Compatible with [Realm](http://realm.io) for a complete, offline mobile solution.
 * [See what's new](./CHANGELOG.md).
 
@@ -23,9 +24,9 @@ You can be up and running in a few minutes by following these steps:
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 
 ## Minimum Requirements
-* iOS 11.3
-* Swift 4
-* Xcode 9
+* iOS 13.0+
+* Swift 5.1+
+* Xcode 11+
 
 ## [Documentation](http://mike4aday.github.io/SwiftlySalesforce/docs)
 Documentation is [here](http://mike4aday.github.io/SwiftlySalesforce/docs). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
