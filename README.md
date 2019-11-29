@@ -95,7 +95,7 @@ var subscriptions = Set<AnyCancellable>()
 let pub1 = salesforce.retrieve(object: "Account", id: "0013000001FjCcF")
 let pub2 = salesforce.retrieve(object: "Contact", id: "0034000002AdCdD")
 let pub3 = salesforce.retrieve(object: "Opportunity", id: "0065000002AdNdH")
-pub1.zip(pub2).sink(receiveCompletion: { (completion) in
+pub1.zip(pub2, pub3).sink(receiveCompletion: { (completion) in
     //TODO:
 }) { (account, contact, opportunity) in
     //TODO
