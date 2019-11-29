@@ -18,9 +18,7 @@ You can be up and running in a few minutes by following these steps:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
-1. Add Swiftly Salesforce to your Xcode project
-    - [CocoaPods](http://www.cocoapods.org): add `pod 'SwiftlySalesforce'` to your [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
-    - [Carthage](https://github.com/Carthage/Carthage): add `github "mike4aday/SwiftlySalesforce"` to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile)
+1. [Add Swiftly Salesforce to your Xcode project as a package dependency](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) (URL: [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 
 ## Minimum Requirements
