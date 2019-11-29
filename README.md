@@ -73,9 +73,9 @@ Note that `retrieve` is an asynchronous function, whose return value is a [Combi
 ```swift
 let pub: AnyPublisher<Record, Error> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
-And you could use the `sink` subscriber to handle the result:
+And you could use the `sink` subscriber to [handle the result](https://developer.apple.com/documentation/combine/receiving_and_handling_events_with_combine):
 ```swift
-let subscription = salesforce.retrieve(object: "Account", id: "0013000001FjCcF", fields: ["Name, BillingCity"])
+let subscription = salesforce.retrieve(object: "Account", id: "0013000001FjCcF")
 .sink(receiveCompletion: { (completion) in
     switch completion {
     case .finished:
@@ -380,18 +380,6 @@ func loadUserInfo() {
 }
 ```
 
-You could also recover from an error, and continue with the chain, using a `recover` closure. The following snippet is from PromiseKit's [documentation](http://promisekit.org/recovering-from-errors):
-```swift
-CLLocationManager.promise().recover { err in
-    guard !err.fatal else { throw err }
-    return CLLocationChicago
-}.done { location in
-    // the user’s location, or Chicago if an error occurred
-}.finally { err in
-    // the error was fatal
-}
-```
-
 ### Example: Retrieve Object Metadata
 If, for example, you want to determine whether the user has permission to update or delete a record so you can disable editing in your UI, or if you want to retrieve all the options in a picklist, rather than hardcoding them in your mobile app, then call `salesforce.describe(type:)` to retrieve an object's [metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm):
 ```swift
@@ -451,18 +439,6 @@ salesforce.search(sosl: sosl).done { result in
 }
 ```
 
-### Example: Add Swiftly Salesforce to Your CocoaPods [Podfile](https://guides.cocoapods.org/syntax/podfile.html)
-```
-target 'MyApp' do
-  use_frameworks!
-  pod 'SwiftlySalesforce'
-  # Another pod here
-end
-```
-
-## Dependent Framework
-Swiftly Salesforce depends on [PromiseKit](http://promisekit.org): "Not just a promises implementation, it is also a collection of helper functions that make the typical asynchronous patterns we use as iOS developers delightful too."
-
 ## Resources
 If you're new to the Salesforce Platform or the Salesforce REST API, you might find the following resources useful:
 * [Salesforce REST API Developer's Guide][REST API]
@@ -470,7 +446,7 @@ If you're new to the Salesforce Platform or the Salesforce REST API, you might f
 * [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
 * [Salesforce Partner Community](https://partners.salesforce.com): "Innovate, grow, connect" with Salesforce ISVs. Join the [Salesforce + iOS Mobile][sfdc-ios Chatter] Chatter group
 * [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: Salesforce-supported SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
-* [When to Use the Salesforce1 Platform vs. Creating Custom Apps](https://help.salesforce.com/HTViewSolution?id=000192840&language=en_US)
+* [Use of Salesforce for Android and iOS platform versus creation of custom app](https://help.salesforce.com/HTViewSolution?id=000192840&language=en_US)
 
 ## Contact
 Questions, suggestions, bug reports and code contributions welcome:
@@ -478,7 +454,6 @@ Questions, suggestions, bug reports and code contributions welcome:
 * Twitter [@mike4aday]
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
 
-   [PromiseKit]: <https://github.com/mxcl/PromiseKit>
    [OAuth2]: <https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com>
    [REST API]: <https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/>
    [Swift]: <https://developer.apple.com/swift/>
