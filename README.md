@@ -26,9 +26,6 @@ You can be up and running in a few minutes by following these steps:
 * Swift 5.1
 * Xcode 11
 
-## [Documentation](http://mike4aday.github.io/SwiftlySalesforce/docs)
-Documentation is [here](http://mike4aday.github.io/SwiftlySalesforce/docs). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
-
 ## Examples
 Below are some examples that illustrate how to use Swiftly Salesforce. Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
 
@@ -164,7 +161,6 @@ salesforce.query(soql: soql)
     .sink(receiveCompletion: { (completion) in
         //TODO: completed
     }) { (queryResult: QueryResult<SObject>) in
-        //TODO:
         for record in queryResult.records {
             if let name = record.string(forField: "Name") {
                 print(name)
@@ -224,77 +220,17 @@ func getContactsWithAccounts() -> () {
     }
 ```
 
-### Example: Retrieve a User's Photo
-```swift
-// "first" block is an optional way to make chained calls easier to read...
-first {
-    salesforce.identity()
-}.then { (identity) -> Promise<UIImage> in
-    if let photoURL = identity.photoURL {
-        return salesforce.fetchImage(url: photoURL)
-    }
-    else {
-        // Return the default image instead
-        return Promise(value: defaultImage)
-    }
-}.done { image in
-    self.photoView.image = image
-}.catch { (error) -> () in
-    // Handle any errors
-}.finally {
-    self.refreshControl?.endRefreshing()
-}
-```
-
-### Example: Retrieve a Contact's Photo
-```swift	
-first {
-    salesforce.retrieve(type: "Contact", id: "003f40000027GugAAE")
-}.then { (record: Record) -> Promise<UIImage> in
-    if let photoPath = record.string(forField: "PhotoUrl") {
-        // Fetch image
-        return salesforce.fetchImage(path: photoPath)
-    }
-    else {
-        // Return a pre-defined default image
-        return Promise(value: self.defaultImage)
-    }
-}.done { (image: UIImage) -> () in
-    // Do something interesting with the image, e.g. display in a view:
-    // self.photoView.image = image
-}.catch { (error) -> () in
-    // Handle any errors
-}.finally {
-    self.refreshControl?.endRefreshing()
-}
-```
-
 ### Example: Retrieve Object Metadata
 If, for example, you want to determine whether the user has permission to update or delete a record so you can disable editing in your UI, or if you want to retrieve all the options in a picklist, rather than hardcoding them in your mobile app, then call `salesforce.describe(type:)` to retrieve an object's [metadata](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_describe.htm):
 ```swift
-first {
-    salesforce.describe(type: "Account")
-}.done { (accountMetadata) -> () in
-    self.saveButton.isEnabled = accountMetadata.isUpdateable
-    if let fields = accountMetadata.fields {
-        let fieldDict = Dictionary(items: fields, key: { $0.name })
-        let industryOptions = fieldDict["Industry"]?.picklistValues
-        // Populate a drop-down menu with the picklist values...
+salesforce.describe(object: "Account")
+    .sink(receiveCompletion: { (completion) in
+        //TODO: completed
+    }) { (acctMetadata) in
+        //TODO: update UI
+        let editable = acctMetadata.isUpdateable
     }
-}.catch { error in
-    debugPrint(error)
-}
-```
-
-You can retrieve metadata for multiple objects in parallel, and wait for all before proceeding:
-```swift
-first {
-    salesforce.describe(types: ["Account", "Contact", "Task", "CustomObject__c"])
-}.then { results -> () in
-    // results is an array of ObjectMetadatas, in the same order as requested
-}.catch { error in
-    // Handle the error
-}
+    .store(in: &subscriptions)
 ```
 
 ### Example: Log Out
