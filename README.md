@@ -3,6 +3,9 @@
 
 <img src="https://img.shields.io/badge/%20in-swift%205.1-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/v/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/cocoapods/l/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>
 
+<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>&nbsp;
+<img src="https://img.shields.io/github/v/tag/mike4aday/SwiftlySalesforce?label=Latest"/>
+
 Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platform/overview/) with Swiftly Salesforce:
 * Written entirely in [Swift](https://developer.apple.com/swift/).
 * Uses Swift's new [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex , asynchronous [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/) interactions.
