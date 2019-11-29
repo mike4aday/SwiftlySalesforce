@@ -98,10 +98,12 @@ You can retrieve multiple records in parallel, and wait for them all before proc
 ```swift
 var subscriptions = Set<AnyCancellable>()
 //...
+let pub1 = salesforce.retrieve(object: "Account", id: "0013000001FjCcF")
+let pub2 = salesforce.retrieve(object: "Contact", id: "0024000002AdCdD")
 pub1.zip(pub2).sink(receiveCompletion: { (completion) in
-	//TODO:
+    //TODO:
 }) { (account, contact) in
-	//TODO
+    //TODO
 }.store(in: &subscriptions)
 ```
 
@@ -126,22 +128,7 @@ struct MyAccountModel: Decodable {
 }
 
 //...
-first {
-    // (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
-    let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
-    return salesforce.retrieve(type: "Account", ids: ids)
-}.done { (records: [MyAccountModel]) -> () in
-    for record in records {
-        // Do something more interesting with record data
-        let id = record.id
-        let name = record.name
-        let createdDate = record.createdDate
-        let billingAddress = record.billingAddress
-        let website = record.website
-    }
-}.catch { error in
-    // Handle error...
-}
+let pub: AnyPublisher<MyAccountModel, Error> = salesforce.retrieve(object: "Account", id: "0013000001FjCcF")
 ```
 
 ### Example: Update a Salesforce Record
