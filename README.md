@@ -6,7 +6,7 @@
 Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platform/overview/) with Swiftly Salesforce:
 * Written entirely in [Swift](https://developer.apple.com/swift/).
 * Uses Swift's new [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex , asynchronous [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/) interactions.
-* Works with SwiftUI
+* Works with [SwiftUI](https://developer.apple.com/documentation/swiftui)
 * Manages the Salesforce [OAuth2] user authentication and authorization process (the "OAuth dance") automatically.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * Easy to install and update with Swift Package Manager (SPM)
