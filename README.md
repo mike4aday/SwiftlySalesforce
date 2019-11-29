@@ -18,13 +18,13 @@ You can be up and running in a few minutes by following these steps:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
-1. [Add Swiftly Salesforce to your Xcode project as a package dependency](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) (URL: [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
+1. [Add Swiftly Salesforce to your Xcode project as a package dependency](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 
 ## Minimum Requirements
-* iOS 13.0+
-* Swift 5.1+
-* Xcode 11+
+* iOS 13.0
+* Swift 5.1
+* Xcode 11
 
 ## [Documentation](http://mike4aday.github.io/SwiftlySalesforce/docs)
 Documentation is [here](http://mike4aday.github.io/SwiftlySalesforce/docs). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
@@ -34,29 +34,41 @@ Below are some examples that illustrate how to use Swiftly Salesforce, and how y
 
 Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
 
-### Example: Configure Your App Delegate
+### Example: Setup
+You can create a re-usable reference to Salesforce in your `SceneDelegate.swift` file:
 ```swift
 import UIKit
+import SwiftUI
 import SwiftlySalesforce
+import Combine
 
-// Global Salesforce variable - in your real-world app
-// you could 'inject' it into view controllers instead
-var salesforce: Salesforce!
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-@UIApplicationMain
-class AppDelegate: UIApplicationDelegate {
+    var salesforce: Salesforce!
 
-    let consumerKey = "YOUR CONNECTED APP'S CONSUMER KEY HERE"
-    let callbackURL = URL(string: "YOUR CONNECTED APP'S CALLBACK URL HERE")!
-
-    var window: UIWindow?
-	
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        salesforce = try! Salesforce(consumerKey: consumerKey, callbackURL: callbackURL)
-        return true
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        //...
+        // Copy consumer key and callback URL from your Salesforce connected app definition
+        let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
+        let callbackURL = URL(string: "<YOUR CONNECTED APP'S CALLBACK URL HERE>")!
+        let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL)
+        sfdc = Salesforce(connectedApp: connectedApp)
     }
+    
+    //...
+}
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        //...
+        // Copy consumer key and callback URL from your Salesforce connected app definition
+        let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
+        let callbackURL = URL(string: "<YOUR CONNECTED APP'S CALLBACK URL HERE>")!
+        let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL)
+        sfdc = Salesforce(connectedApp: connectedApp)
+
 }
 ```
+
 In the example above, we created a `Salesforce` instance with the Connected App's consumer key and callback URL. `salesforce` is an implicitly-unwrapped, optional, global variable, but you could also inject a `Salesforce` instance into your root view controller, for example, instead of using a global variable.
 
 ### Example: Retrieve Salesforce Records
