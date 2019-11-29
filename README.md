@@ -209,19 +209,19 @@ struct Contact: Decodable {
 
 func getContactsWithAccounts() -> () {
     let soql = "SELECT Id, FirstName, LastName, CreatedDate, Account.Id, Account.Name, Account.LastModifiedDate FROM Contact"
-    salesforce.query(soql: soql).done { (queryResult: QueryResult<Contact>) -> () in
-        for contact in queryResult.records {
-            // Do something more interesting with each Contact record
-            debugPrint(contact.lastName)
-            if let account = contact.account {
-                // Do something more interesting with each Account record
-                debugPrint(account.name)
+    salesforce.query(soql: soql)
+        .sink(receiveCompletion: { (completion) in
+            //TODO: completed
+        }) { (queryResult: QueryResult<Contact>) in
+            for contact in queryResult.records {
+                print(contact.lastName)
+                if let account = contact.account {
+                    print(account.name)
+                }
             }
         }
-    }.catch { error in
-        // Handle error
+        .store(in: &subscriptions)
     }
-}
 ```
 
 ### Example: Retrieve a User's Photo
