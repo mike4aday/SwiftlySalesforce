@@ -140,19 +140,19 @@ salesforce.update(object: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "
 }.store(in: &subscriptions)
 ```
 
-You could also use the generic `Record` to update a record in Salesforce. For example:
+You could also use the generic `SObject` (typealias for `SwiftlySalesforce.Record`) to update a record in Salesforce. For example:
 
 ```swift
-// `account` is a Record we retrieved earlier...
+// `account` is an SObject we retrieved earlier...
 account.setValue("My New Corp.", forField: "Name")
 account.setValue(URL(string: "https://www.mynewcorp.com")!, forField: "Website")
 account.setValue("123 Main St.", forField: "BillingStreet")
 account.setValue(nil, forField: "Sic")
 salesforce.update(record: account)
     .sink(receiveCompletion: { (completion) in
-        //TODO:
+        //TODO: handle completion
     }) { _ in
-        //TODO:
+        //TODO: successfully updated
     }
     .store(in: &subscriptions)
 ```
@@ -160,31 +160,21 @@ salesforce.update(record: account)
 ### Example: Query Salesforce
 ```swift
 let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '10024'"
-salesforce.query(soql: soql).done { (queryResult: QueryResult) -> () in
-    for record in queryResult.records {
-        // Do something more interesting with each record
-        if let name = record.string(forField: "Name") {
-            print("Account name: \(name)")
+salesforce.query(soql: soql)
+    .sink(receiveCompletion: { (completion) in
+        //TODO: completed
+    }) { (queryResult: QueryResult<SObject>) in
+        //TODO:
+        for record in queryResult.records {
+            if let name = record.string(forField: "Name") {
+                print(name)
+            }
         }
     }
-}.catch { error in
-    // Handle the error
-}
+    .store(in: &subscriptions)
 ```
 
-You could also execute multiple queries at once and wait for them all to complete before proceeding:
-```swift
-first {
-    let queries = ["SELECT Name FROM Account", "SELECT Id FROM Contact", "Select Owner.Name FROM Lead"]
-    return salesforce.query(soql: queries)
-}.done { (queryResults: [QueryResult<SObject>]) -> () in
-    // Results are in the same order as the queries
-}.catch { error in
-    // Handle the error
-}
-```
-
-### Example: Decode Query Results as Custom Model Objects
+### Example: Decode Query Results as Your Custom Model Objects
 You can easily perform complex queries, traversing object relationships, and have all the results decoded automatically into your custom model objects that implement the [`Decodable`](https://developer.apple.com/documentation/swift/decodable) protocol:
 ```swift 
 struct Account: Decodable {
