@@ -133,11 +133,11 @@ let pub: AnyPublisher<MyAccountModel, Error> = salesforce.retrieve(object: "Acco
 ### Example: Update a Salesforce Record
 ```swift
 salesforce.update(object: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"])
-.sink(receiveCompletion: { (completion) in
-    //TODO: handle completion
-}) { _ in
-    //TODO: successfully updated
-}.store(in: &subscriptions)
+    .sink(receiveCompletion: { (completion) in
+        //TODO: handle completion
+    }) { _ in
+        //TODO: successfully updated
+    }.store(in: &subscriptions)
 ```
 
 You could also use the generic `SObject` (typealias for `SwiftlySalesforce.Record`) to update a record in Salesforce. For example:
@@ -224,32 +224,6 @@ func getContactsWithAccounts() -> () {
 }
 ```
 
-### Example: Chaining Asynchronous Requests
-Let's say we want to retrieve a random zip/postal code from a [custom Apex REST](https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST) resource, and then use that zip code in a query:
-```swift
-// Chained asynch requests
-first {
-    // Make GET request of custom Apex REST resource that returns a zip code as a string
-    return salesforce.apex(path: "/MyApexResourceThatEmitsRandomZip")
-}.then { (result: Data) -> Promise<QueryResult<SObject>> in
-    // Query accounts in that zip code
-    guard let zip = String(data: result, encoding: .utf8) else {
-        throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
-    }
-    let soql = "SELECT Id,Name FROM Account WHERE BillingPostalCode = '\(zip)'"
-    return salesforce.query(soql: soql)
-}.done { queryResult -> () in
-    for record in queryResult.records {
-        if let name = record.string(forField: "Name") {
-            print("Account name = \(name)")
-        }
-    }
-}.catch { error in
-    // Handle error
-}
-```
-You could repeat this chaining multiple times, feeding the result of one asynchronous operation as the input to the next. Or you could spawn multiple, simultaneous operations and easily specify logic to be executed when all operations complete, or when just the first completes, or when any one operation fails, etc. PromiseKit is an amazingly-powerful framework for handling multiple asynchronous operations that would otherwise be very difficult to coordinate. See [PromiseKit documentation](http://promisekit.org) for more examples.
-
 ### Example: Retrieve a User's Photo
 ```swift
 // "first" block is an optional way to make chained calls easier to read...
@@ -292,64 +266,6 @@ first {
     // Handle any errors
 }.finally {
     self.refreshControl?.endRefreshing()
-}
-```
-
-### Example: Retrieve an Account's Billing Address
-Addresses for standard objects, e.g. Account and Contact, are stored in a ['compound' Address field](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_address.htm), and, if you enable the [geocode data integration rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_admin_clean_rules.htm&language=en_US&type=0) in your org, Salesforce will automatically geocode those addresses, giving you latitude and longitude values you could use for map markers. 
-```swift
-first {
-    salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
-}.then { (record: Record) -> () in
-    if let address = record.address(forField: "BillingAddress"), let lon = address.longitude, let lat = address.latitude {
-	// You could put a marker on a map...
-        print("LAT/LON: \(lat)/\(lon)")
-    }
-}.catch { (error) -> () in
-    // Handle any errors
-}
-```
-
-Or use your own custom `Decodable` model class, instead of the default `Record`:
-```swift
-struct MyAccountModel: Decodable {
-			
-    var id: String
-    var name: String
-    var billingAddress: Address?
-			
-    enum CodingKeys: String, CodingKey {
-        case id = "Id"
-        case name = "Name"
-        case billingAddress = "BillingAddress"
-    }
-}
-// ...
-first {
-    salesforce.retrieve(type: "Account", id: "001f40000036J5mAAE")
-}.then { (record: MyAccountModel) -> () in
-    if let address = record.billingAddress, let lon = address.longitude, let lat = address.latitude {
-        // You could put a marker on a map...
-        print("LAT/LON: \(lat)/\(lon)")
-    }
-}.catch { (error) -> () in
-    // Handle any errors
-}
-```
-
-### Example: Handling Errors
-```swift
-func loadUserInfo() {
-    salesforce.identity().compactMap { (identity) -> URL? in
-        self.nameLabel.text = identity.displayName
-        return identity.photoURL
-    }.then { (url) -> Promise<UIImage> in
-        salesforce.fetchImage(url: url)
-    }.done { image -> () in
-        self.photoView.image = image
-    }.catch {
-        debugPrint("Unable to load user photo! (\($0.localizedDescription))")
-    }
 }
 ```
 
