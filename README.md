@@ -52,7 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
         let callbackURL = URL(string: "<YOUR CONNECTED APP'S CALLBACK URL HERE>")!
         let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL)
-        sfdc = Salesforce(connectedApp: connectedApp)
+        salesforce = Salesforce(connectedApp: connectedApp)
     }
     
     //...
