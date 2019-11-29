@@ -69,7 +69,7 @@ salesforce.retrieve(type: "Account", id: "0013000001FjCcF", fields: fields)
 ```
 Note that `retrieve` is an asynchronous function, whose return value is a [Combine publisher](https://developer.apple.com/documentation/combine/publisher):
 ```swift
-let pub: AnyPublisher<Record, Error> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
+let pub: AnyPublisher<SObject, Error> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
 And you could use the `sink` subscriber to [handle the result](https://developer.apple.com/documentation/combine/receiving_and_handling_events_with_combine):
 ```swift
@@ -236,16 +236,8 @@ salesforce.describe(object: "Account")
 ### Example: Log Out
 If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. Swiftly Salesforce will revoke and remove any stored credentials.
 ```swift
-@IBAction func logoutButtonPressed(sender: AnyObject) {
-    salesforce.revoke().done {
-        debugPrint("Access token revoked.")
-    }.ensure {
-        self.tasks.removeAll()
-        self.tableView.reloadData()
-    }.catch {
-        debugPrint("Unable to revoke user access token: \($0.localizedDescription)")
-    }
-}
+let pub: AnyPublisher<Void, Error> = salesforce.logout()
+//TODO: Connect to UI element with SwiftUI
 ```
 
 ### Example: Search with Salesforce Object Search Language (SOSL)
