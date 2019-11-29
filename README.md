@@ -1,7 +1,7 @@
 
 <img src="http://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo.png" width="76%"/>
 
-<img src="https://img.shields.io/badge/%20in-swift%205.1-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>&nbsp;<img src="https://img.shields.io/github/v/tag/mike4aday/SwiftlySalesforce?label=latest"/>
+<img src="https://img.shields.io/badge/%20in-swift%205.1-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>
 
 Build iOS apps fast on the [Salesforce Platform](http://www.salesforce.com/platform/overview/) with Swiftly Salesforce:
 * Written entirely in [Swift](https://developer.apple.com/swift/).
