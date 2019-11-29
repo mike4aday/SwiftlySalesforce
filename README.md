@@ -34,8 +34,6 @@ Below are some examples that illustrate how to use Swiftly Salesforce, and how y
 
 Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
 
-Behind the scenes, Swiftly Salesforce leverages [PromiseKit][PromiseKit], a very widely-adopted framework for elegant handling of asynchronous operations.
-
 ### Example: Configure Your App Delegate
 ```swift
 import UIKit
@@ -71,20 +69,27 @@ To specify which fields should be retrieved:
 let fields = ["AccountNumber", "BillingCity", "MyCustomField__c"]
 salesforce.retrieve(type: "Account", id: "0013000001FjCcF", fields: fields)
 ```
-Note that `retrieve` is an asynchronous function, whose return value is a "promise" that will be fulfilled at some point in the future:
+Note that `retrieve` is an asynchronous function, whose return value is a [Combine publisher](https://developer.apple.com/documentation/combine/publisher):
 ```swift
-let promise: Promise<SObject> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
+let pub: AnyPublisher<Record, Error> = salesforce.retrieve(type: "Account", id: "0013000001FjCcF")
 ```
-And you can add a closure that will be called later, when the promise is fulfilled:
+And you could use the `sink` subscriber to handle the result:
 ```swift
-salesforce.retrieve(type: "Account", id: "0013000001FjCcF").done { (queryResult: QueryResult<SObject>) -> () in
-    for record: SObject in queryResult.records {
-        // Do something more interesting with each record
-        debugPrint(record.type)
+let subscription = salesforce.retrieve(object: "Account", id: "0013000001FjCcF", fields: ["Name, BillingCity"])
+.sink(receiveCompletion: { (completion) in
+    switch completion {
+    case .finished:
+        print("Done")
+    case let .failure(error):
+        //TODO: handle the error
+        print(error)
     }
-}.catch { (error: Error) in
-    // Do something with the error
-}
+}, receiveValue: { (record) in
+    //TODO: something more interesting with the result
+    if let name = record.string(forField: "Name") {
+        print(name)
+    }
+})
 ```
 You can retrieve multiple records in parallel, and wait for them all before proceeding:
 ```swift
