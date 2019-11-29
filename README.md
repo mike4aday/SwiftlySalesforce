@@ -30,9 +30,7 @@ You can be up and running in a few minutes by following these steps:
 Documentation is [here](http://mike4aday.github.io/SwiftlySalesforce/docs). See especially the public methods of the `Salesforce` class - those are likely all you'll need to call from your code.
 
 ## Examples
-Below are some examples that illustrate how to use Swiftly Salesforce, and how you can chain complex asynchronous calls. You can also find a complete example app [here](Example/SwiftlySalesforce); it retrieves the logged-in user’s task records from Salesforce, and lets the user update the status of a task.
-
-Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
+Below are some examples that illustrate how to use Swiftly Salesforce. Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
 
 ### Example: Setup
 You can create a re-usable reference to Salesforce in your `SceneDelegate.swift` file:
@@ -99,10 +97,11 @@ You can retrieve multiple records in parallel, and wait for them all before proc
 var subscriptions = Set<AnyCancellable>()
 //...
 let pub1 = salesforce.retrieve(object: "Account", id: "0013000001FjCcF")
-let pub2 = salesforce.retrieve(object: "Contact", id: "0024000002AdCdD")
+let pub2 = salesforce.retrieve(object: "Contact", id: "0034000002AdCdD")
+let pub3 = salesforce.retrieve(object: "Opportunity", id: "0065000002AdNdH")
 pub1.zip(pub2).sink(receiveCompletion: { (completion) in
     //TODO:
-}) { (account, contact) in
+}) { (account, contact, opportunity) in
     //TODO
 }.store(in: &subscriptions)
 ```
@@ -133,28 +132,29 @@ let pub: AnyPublisher<MyAccountModel, Error> = salesforce.retrieve(object: "Acco
 
 ### Example: Update a Salesforce Record
 ```swift
-salesforce.update(type: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"]).done { (_) -> () in
-    // Update the local model
-}.finally {
-    // Update the UI
-}
+salesforce.update(object: "Task", id: "00T1500001h3V5NEAU", fields: ["Status": "Completed"])
+.sink(receiveCompletion: { (completion) in
+    //TODO: handle completion
+}) { _ in
+    //TODO: successfully updated
+}.store(in: &subscriptions)
 ```
-The `finally` closure will be called regardless of success or failure elsewhere in the promise chain.
 
-You could also use the `SObject` type to update a record in Salesforce. For example:
+You could also use the generic `Record` to update a record in Salesforce. For example:
 
 ```swift
-// `account` is an SObject we retrieved earlier...
+// `account` is a Record we retrieved earlier...
 account.setValue("My New Corp.", forField: "Name")
 account.setValue(URL(string: "https://www.mynewcorp.com")!, forField: "Website")
 account.setValue("123 Main St.", forField: "BillingStreet")
 account.setValue(nil, forField: "Sic")
-salesforce.update(record: account).done {
-    print("Account updated...")
-}.catch {
-    error in
-    // Handle error
-}
+salesforce.update(record: account)
+    .sink(receiveCompletion: { (completion) in
+        //TODO:
+    }) { _ in
+        //TODO:
+    }
+    .store(in: &subscriptions)
 ```
 
 ### Example: Query Salesforce
