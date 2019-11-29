@@ -57,16 +57,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     //...
 }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        //...
-        // Copy consumer key and callback URL from your Salesforce connected app definition
-        let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
-        let callbackURL = URL(string: "<YOUR CONNECTED APP'S CALLBACK URL HERE>")!
-        let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL)
-        sfdc = Salesforce(connectedApp: connectedApp)
-
-}
 ```
 
 In the example above, we created a `Salesforce` instance with the Connected App's consumer key and callback URL. `salesforce` is an implicitly-unwrapped, optional, global variable, but you could also inject a `Salesforce` instance into your root view controller, for example, instead of using a global variable.
