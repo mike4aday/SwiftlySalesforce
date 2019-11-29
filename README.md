@@ -18,7 +18,7 @@ You can be up and running in a few minutes by following these steps:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
-1. [Add Swiftly Salesforce to your Xcode project as a package dependency](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
+1. [Add Swiftly Salesforce to your Xcode project as a package dependency](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git)). 
 1. Configure your app delegate ([example](#example-configure-your-app-delegate))
 
 ## Minimum Requirements
@@ -44,9 +44,10 @@ import Combine
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    var window: UIWindow?
     var salesforce: Salesforce!
 
-    func sceneDidBecomeActive(_ scene: UIScene) {
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         //...
         // Copy consumer key and callback URL from your Salesforce connected app definition
         let consumerKey = "<YOUR CONNECTED APP'S CONSUMER KEY HERE>"
@@ -95,20 +96,13 @@ let subscription = salesforce.retrieve(object: "Account", id: "0013000001FjCcF")
 ```
 You can retrieve multiple records in parallel, and wait for them all before proceeding:
 ```swift
-first {
-    // (Enclosing this in a ‘first’ block is optional; it keeps things neat.)
-    let ids = ["001i0000020i19F", "001i0000034i18A", "001i0000020i22B"]
-    return salesforce.retrieve(type: "Account", ids: ids)
-}.done { (records: [Record]) -> () in
-    for record in records {
-        if let name = record.string(forField: "Name"), let modifiedDate = record.date(forField: "LastModifiedDate") {
-            debugPrint(name)
-            debugPrint(modifiedDate)
-        }
-    }
-}.catch { error in
-    // Handle error...
-}
+var subscriptions = Set<AnyCancellable>()
+//...
+pub1.zip(pub2).sink(receiveCompletion: { (completion) in
+	//TODO:
+}) { (account, contact) in
+	//TODO
+}.store(in: &subscriptions)
 ```
 
 ### Example: Custom Model Objects
