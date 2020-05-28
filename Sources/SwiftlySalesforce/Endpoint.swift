@@ -83,7 +83,7 @@ extension Endpoint: URLRequestConvertible {
             return try request(credential: credential, urlComponents: comps)
         
         case let .describeLayout(type, version, id):
-            let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe/layout/\(id)")
+            let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe/layouts/\(id)")
             return try request(credential: credential, urlComponents: comps)
 
         case let .describeGlobal(version):
