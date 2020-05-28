@@ -22,6 +22,7 @@ public enum Endpoint {
     case search(sosl: String, version: String)
         
     case describe(type: String, version: String)
+    case describeLayout(type: String, version: String, id: String)
     case describeGlobal(version: String)
         
     case identity(version: String)
@@ -80,7 +81,11 @@ extension Endpoint: URLRequestConvertible {
         case let .describe(type, version):
             let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe")
             return try request(credential: credential, urlComponents: comps)
-            
+        
+        case let .describeLayout(type, version, id):
+            let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe/layout/\(id)")
+            return try request(credential: credential, urlComponents: comps)
+
         case let .describeGlobal(version):
             let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/")
             return try request(credential: credential, urlComponents: comps)
