@@ -235,7 +235,7 @@ salesforce.describe(object: "Account")
 ### Example: Log Out
 If you want to log out the current Salesforce user, and then clear any locally-cached data, you could call the following. Swiftly Salesforce will revoke and remove any stored credentials.
 ```swift
-let pub: AnyPublisher<Void, Error> = salesforce.logout()
+let pub: AnyPublisher<Void, Error> = salesforce.logOut()
 //TODO: Connect to UI element with SwiftUI
 ```
 
