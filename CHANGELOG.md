@@ -1,4 +1,9 @@
 # Change Log
+
+## Version 8.0.1 (July 10, 2020)
+- Made RequestConfig constructor public.
+- Updated default Salesforce API version to 48.0 (Spring '20).
+
 ## Version 8.0.0 (Nov. 29, 2019)
 Major release. Requires iO3 13, Swift 5.1, XCode 11.
 - Swift Combine framework.
