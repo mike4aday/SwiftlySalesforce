@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 8.0.2 (Feb. 16, 2021)
+- Updated default Salesforce API version to 49.0 (Summer '20).
+- Minor updates to README file.
+
 ## Version 8.0.1 (July 10, 2020)
 - Made RequestConfig constructor public.
 - Updated default Salesforce API version to 48.0 (Spring '20).
@@ -8,13 +12,13 @@
 Major release. Requires iO3 13, Swift 5.1, XCode 11.
 - Swift Combine framework.
 - Swift Package Manager (SPM).
-- Removed last dependency (PromiseKit)
+- Removed last dependency (PromiseKit).
 
 ## Version 7.1.6 (Jan. 22, 2019)
 Minor release. Updated default Salesforce API version to 44.0 (Winter '19).
 
 ## Version 7.1.5 (Oct. 26, 2018)
-Removed dependency on PromiseKit's Foundation extension
+Removed dependency on PromiseKit's Foundation extension.
 
 ## Version 7.1.4 (Oct. 25, 2018)
 Added Cartfile entry for PromiseKit's Foundation extensions.
