@@ -40,7 +40,7 @@ open class Salesforce {
         public static let shared = RequestConfig()
         
         public init(
-            version: String = "48.0",
+            version: String = "49.0",
             session: URLSession = .shared,
             authenticateIfRequired: Bool = true,
             retries: Int = 0
