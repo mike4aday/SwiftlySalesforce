@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 9.0.0 (May 30, 2021)
+Major release. Requires iOS 14, Swift 5.3, XCode 12.
+
 ## Version 8.0.2 (Feb. 16, 2021)
 - Updated default Salesforce API version to 49.0 (Summer '20).
 - Minor updates to README file.
