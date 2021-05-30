@@ -1,7 +1,8 @@
 # Change Log
 
 ## Version 9.0.0 (May 30, 2021)
-Major release. Requires iOS 14, Swift 5.3, XCode 12.
+- Major release. Requires iOS 14, Swift 5.3, Xcode 12.
+- Updated default Salesforce API version to 52.0 (Summer '21).
 
 ## Version 8.0.2 (Feb. 16, 2021)
 - Updated default Salesforce API version to 49.0 (Summer '20).
@@ -12,7 +13,7 @@ Major release. Requires iOS 14, Swift 5.3, XCode 12.
 - Updated default Salesforce API version to 48.0 (Spring '20).
 
 ## Version 8.0.0 (Nov. 29, 2019)
-Major release. Requires iO3 13, Swift 5.1, XCode 11.
+Major release. Requires iO3 13, Swift 5.1, Xcode 11.
 - Swift Combine framework.
 - Swift Package Manager (SPM).
 - Removed last dependency (PromiseKit).
