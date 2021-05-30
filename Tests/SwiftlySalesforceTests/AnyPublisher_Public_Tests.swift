@@ -7,7 +7,7 @@ Copyright (c) 2021. All rights reserved.
 import Foundation
 import Combine
 import XCTest
-@testable import SwiftlySalesforce9
+@testable import SwiftlySalesforce
 
 class AnyPublisher_Public_Tests: XCTestCase {
     

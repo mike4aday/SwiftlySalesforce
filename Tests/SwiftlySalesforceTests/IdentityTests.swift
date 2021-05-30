@@ -6,7 +6,7 @@ Copyright (c) 2021. All rights reserved.
 
 import Foundation
 import XCTest
-@testable import SwiftlySalesforce9
+@testable import SwiftlySalesforce
 
 class IdentityTests: XCTestCase {
  
