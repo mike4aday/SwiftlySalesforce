@@ -45,7 +45,7 @@ public struct Record: Decodable {
         return try container.decodeIfPresent(Value.self, forKey: key)
     }
     
-    subscript<Value: Decodable>(field: String) -> Value? {
+    public subscript<Value: Decodable>(field: String) -> Value? {
         return try? value(forField: field)
     }
 }
