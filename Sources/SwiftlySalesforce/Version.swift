@@ -8,7 +8,7 @@ import Foundation
 
 /// Represents the version of the Salesforce API used by Swiftly Salesforce
 public struct Version {
-    public var major: Int = 52 // Summer '21
+    public var major: Int = 51 // Spring '21
     public var minor: Int = 0
     public static var `default` = Version()
 }
