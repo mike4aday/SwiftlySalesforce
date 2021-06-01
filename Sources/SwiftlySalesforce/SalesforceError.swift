@@ -30,6 +30,6 @@ public struct SalesforceError: Error, Decodable, Equatable {
 extension SalesforceError: LocalizedError {
         
     public var errorDescription: String? {
-        return NSLocalizedString("\(message) (Code: \(code))", comment: code)
+        return NSLocalizedString(message, comment: code)
     }
 }
