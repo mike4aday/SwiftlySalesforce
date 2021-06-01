@@ -18,11 +18,18 @@ public struct SalesforceError: Error, Decodable, Equatable {
         case fields
     }
     
-    static let userAuthenticationRequired = SalesforceError(code: "INVALID_SESSION_ID", message: "Session expired or invalid")
+    static let userAuthenticationRequired = SalesforceError(code: "INVALID_SESSION_ID", message: "Session expired or invalid.")
     
     static func responseError(response: HTTPURLResponse) -> Self {
         let code = "HTTP status code: \(response.statusCode)"
-        let msg = "There was an error. Requested URL: \(response.url?.absoluteString ?? "not available")"
+        let msg = "There was an error. Requested URL: \(response.url?.absoluteString ?? "not available")."
         return SalesforceError(code: code, message: msg)
+    }
+}
+
+extension SalesforceError: LocalizedError {
+        
+    public var errorDescription: String? {
+        return NSLocalizedString("\(message) (Code: \(code))", comment: code)
     }
 }
