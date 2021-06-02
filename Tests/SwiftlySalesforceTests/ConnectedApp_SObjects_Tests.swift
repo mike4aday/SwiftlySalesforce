@@ -34,7 +34,7 @@ class ConnectApp_SObjects_Tests: XCTestCase {
         
         // Given
         struct MyAccount: Decodable {
-            var id: String
+            var Id: String
             var Name: String
             var LastModifiedDate: Date
         }
@@ -51,7 +51,7 @@ class ConnectApp_SObjects_Tests: XCTestCase {
         let retrievedRecord: MyAccount = try waitFor(app.retrieve(type: "Account", id: recordID, session: session), timeout: 300)
 
         // Then
-        XCTAssertEqual(retrievedRecord.id, recordID)
+        XCTAssertEqual(retrievedRecord.Id, recordID)
     }
     
     func testThatItFailsToRetrieveRecord() throws {
