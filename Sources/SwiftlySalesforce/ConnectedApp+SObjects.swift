@@ -16,10 +16,10 @@ public extension ConnectedApp {
     ///   - fields: Fields to retrieve. If nil, then all fields will be retrieved.
     ///   - session: URL session for the request.
     ///   - allowsLogin: If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.
-    /// - Returns: Publisher of a Record
+    /// - Returns: Publisher of a `Decodable` record
     /// # Reference
     /// [Working with Records](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/using_resources_working_with_records.htm)
-    func retrieve(type: String, id: String, fields: [String]? = nil, session: URLSession = .shared, allowsLogin: Bool = true) -> AnyPublisher<Record, Error> {
+    func retrieve<T: Decodable>(type: String, id: String, fields: [String]? = nil, session: URLSession = .shared, allowsLogin: Bool = true) -> AnyPublisher<T, Error> {
         go(service: SObjectsService(.read(type: type, id: id, fields: fields)), session: session, allowsLogin: allowsLogin)
     }
     
