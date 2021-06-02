@@ -15,16 +15,16 @@ public extension ConnectedApp {
     ///   - batchSize: A numeric value that specifies the number of records returned for a query request. Child objects count toward the number of records for the batch size. For example, in relationship queries, multiple child objects are returned per parent row returned. The default is 2,000; the minimum is 200, and the maximum is 2,000. There is no guarantee that the requested batch size is the actual batch size. Changes are made as necessary to maximize performance.
     ///   - session: URL session for the request.
     ///   - allowsLogin: If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.
-    /// - Returns: Publisher of query results.
+    /// - Returns: Publisher of `QueryResult` of `Decodable` instances.
     /// # Reference
     /// - [Query](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm)
     /// - [SOQL and SOSL Reference](https://developer.salesforce.com/docs/atlas.en-us.232.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_sosl_intro.htm)
-    func query(
+    func query<T: Decodable>(
         soql: String,
         batchSize: Int = 2000,
         session: URLSession = .shared,
         allowsLogin: Bool = true
-    ) -> AnyPublisher<QueryResult<Record>, Error> {
+    ) -> AnyPublisher<QueryResult<T>, Error> {
     
         let service = QueryService(.execute(soql: soql, batchSize: batchSize))
         return go(service: service, session: session, allowsLogin: allowsLogin)
@@ -37,15 +37,15 @@ public extension ConnectedApp {
     ///   - path: The path to the next page of query results, as returned by the previous call to `query` or `nextResultPage`.
     ///   - session: URL session for the request.
     ///   - allowsLogin: If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.
-    /// - Returns: Publisher of query results.
+    /// - Returns: Publisher of `QueryResult` of `Decodable` instances.
     /// # Reference
     /// [Execute a SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.232.0.api_rest.meta/api_rest/dome_query.htm)
     ///
-    func nextResultPage(
+    func nextResultPage<T: Decodable>(
         at path: String,
         session: URLSession = .shared,
         allowsLogin: Bool = true
-    ) -> AnyPublisher<QueryResult<Record>, Error> {
+    ) -> AnyPublisher<QueryResult<T>, Error> {
     
         let service = QueryService(.nextResultPage(at: path))
         return go(service: service, session: session, allowsLogin: allowsLogin)
@@ -60,8 +60,8 @@ public extension ConnectedApp {
     ///   - user: Specified user, or nil to use the last authenticated user.
     ///   - session: URL session for the request.
     ///   - allowsLogin: If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.
-    /// - Returns: Publisher of `QueryResult` of `Record` instances.
-    func myRecords(
+    /// - Returns: Publisher of `QueryResult` of `Decodable` instances.
+    func myRecords<T: Decodable>(
         type: String,
         fields: [String]? = nil,
         limit: Int? = nil,
@@ -69,7 +69,7 @@ public extension ConnectedApp {
         user: UserIdentifier? = nil,
         session: URLSession = .shared,
         allowsLogin: Bool = true
-    ) -> AnyPublisher<QueryResult<Record>, Error> {
+    ) -> AnyPublisher<QueryResult<T>, Error> {
     
         let allFields = "FIELDS(ALL)"
         
