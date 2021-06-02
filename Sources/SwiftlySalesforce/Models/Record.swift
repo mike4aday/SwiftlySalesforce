@@ -14,8 +14,8 @@ public typealias SalesforceRecord = Record
 /// Field values can be accessed via a number of getter methods, depending on the return type, or via a subscript using the field name as a key.
 /// # Example
 /// ```
-///  var record: SalesforceRecord // Alias for Record
-///  ...
+///  var record: SalesforceRecord
+///  //...
 ///  let acctName: String? = record.string(forField: "Name")
 ///  let alsoAcctName: String? = record["Name"]
 /// ```
