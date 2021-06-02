@@ -7,6 +7,7 @@
 
 import Foundation
 
+public typealias SObject = Record 
 public typealias SalesforceRecord = Record
 
 /// Represents a Salesforce record.

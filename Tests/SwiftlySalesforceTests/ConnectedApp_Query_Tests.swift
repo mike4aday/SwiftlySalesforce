@@ -18,7 +18,7 @@ class ConnectedApp_Query_Tests: XCTestCase {
         let soql = "SELECT Id,Name,Website,BillingAddress FROM Account"
         
         // When
-        let result = try waitFor(app.query(soql: soql), timeout: 300)
+        let result: QueryResult<SalesforceRecord> = try waitFor(app.query(soql: soql), timeout: 300)
         
         // Then
         debugPrint("Query result: \(result.records.count) records")
@@ -33,7 +33,7 @@ class ConnectedApp_Query_Tests: XCTestCase {
         let app = try ConnectedApp()
 
         // When
-        let result = try waitFor(app.myRecords(type: "Account"), timeout: 300)
+        let result: QueryResult<SalesforceRecord> = try waitFor(app.myRecords(type: "Account"), timeout: 300)
         let identity = try waitFor(app.identity(), timeout: 300)
         
         // Then
@@ -50,7 +50,7 @@ class ConnectedApp_Query_Tests: XCTestCase {
         var error: SalesforceError?
         
         // When
-        XCTAssertThrowsError(try waitFor(app.query(soql: soql), timeout: 300)) {
+        XCTAssertThrowsError(try waitFor(app.query(soql: soql) as AnyPublisher<QueryResult<SalesforceRecord>, Error>, timeout: 300)) {
             error = ($0 as? SalesforceError)
         }
         

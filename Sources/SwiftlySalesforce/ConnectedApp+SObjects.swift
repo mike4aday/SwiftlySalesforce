@@ -23,10 +23,6 @@ public extension ConnectedApp {
         go(service: SObjectsService(.read(type: type, id: id, fields: fields)), session: session, allowsLogin: allowsLogin)
     }
     
-    func retrieve(type: String, id: String, fields: [String]? = nil, session: URLSession = .shared, allowsLogin: Bool = true) -> AnyPublisher<SalesforceRecord, Error> {
-        go(service: SObjectsService(.read(type: type, id: id, fields: fields)), session: session, allowsLogin: allowsLogin)
-    }
-    
     /// Inserts a Salesforce record
     /// - Parameters:
     ///   - type: Type of record (e.g. `Account`, `Contact` or `MyCustomObject__c`).

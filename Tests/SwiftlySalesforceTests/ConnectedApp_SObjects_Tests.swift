@@ -24,7 +24,31 @@ class ConnectApp_SObjects_Tests: XCTestCase {
             let response = HTTPURLResponse.init(url: request.url!, statusCode: 200, httpVersion: "2.0", headerFields: nil)!
             return (response, data)
         }
-        let retrievedRecord = try waitFor(app.retrieve(type: "Account", id: recordID, session: session), timeout: 300)
+        let retrievedRecord: SalesforceRecord = try waitFor(app.retrieve(type: "Account", id: recordID, session: session), timeout: 300)
+
+        // Then
+        XCTAssertEqual(retrievedRecord.id, recordID)
+    }
+    
+    func testThatItRetreivesMockRecordAndDecodesIt() throws {
+        
+        // Given
+        struct MyAccount: Decodable {
+            var id: String
+            var Name: String
+            var LastModifiedDate: Date
+        }
+        let app = try ConnectedApp()
+        let recordID = "0011Y00003HVMu4FAN"
+        let session = mockURLSession(protocolClasses: [MockURLProtocol.self])
+        
+        // When
+        MockURLProtocol.requestHandler = {request in
+            let data: Data = MockAccountResponse(id: recordID).json.data(using: .utf8)!
+            let response = HTTPURLResponse.init(url: request.url!, statusCode: 200, httpVersion: "2.0", headerFields: nil)!
+            return (response, data)
+        }
+        let retrievedRecord: MyAccount = try waitFor(app.retrieve(type: "Account", id: recordID, session: session), timeout: 300)
 
         // Then
         XCTAssertEqual(retrievedRecord.id, recordID)
@@ -37,7 +61,7 @@ class ConnectApp_SObjects_Tests: XCTestCase {
         var error: SalesforceError?
         
         // When
-        XCTAssertThrowsError(try waitFor(app.retrieve(type: "Account", id: "001IdThatDoesNotExist"), timeout: 300)) {
+        XCTAssertThrowsError(try waitFor(app.retrieve(type: "Account", id: "001IdThatDoesNotExist") as AnyPublisher<SObject, Error>, timeout: 300)) {
             error = ($0 as? SalesforceError)
         }
         
@@ -59,7 +83,7 @@ class ConnectApp_SObjects_Tests: XCTestCase {
         
         // When
         let id: String = try waitFor(app.insert(type: "Account", fields: fields), timeout: 300)
-        let retrievedRecord = try waitFor(app.retrieve(type: "Account", id: id))
+        let retrievedRecord: SObject = try waitFor(app.retrieve(type: "Account", id: id))
         
         // Then
         XCTAssert(retrievedRecord["Name"] as String? == "Acme Construction Co., Inc.")
@@ -101,7 +125,7 @@ class ConnectApp_SObjects_Tests: XCTestCase {
         // When
         let id: String = try waitFor(app.insert(type: "Account", fields: fields, allowsLogin: true), timeout: 300)
         try waitFor(app.update(type: "Account", id: id, fields: ["BillingState": "IL", "BillingCity": "Chicago"]), timeout: 300)
-        let retrievedRecord = try waitFor(app.retrieve(type: "Account", id: id), timeout: 300)
+        let retrievedRecord: SObject = try waitFor(app.retrieve(type: "Account", id: id), timeout: 300)
         
         // Then
         XCTAssert(retrievedRecord.string(forField: "BillingState") == "IL")
@@ -121,8 +145,8 @@ class ConnectApp_SObjects_Tests: XCTestCase {
         // When
         let id: String = try waitFor(app.insert(type: "Account", fields: fields, allowsLogin: true), timeout: 300)
         try waitFor(app.delete(type: "Account", id: id), timeout: 300)
-        XCTAssertThrowsError(try waitFor(app.retrieve(type: "Account", id: id), timeout: 300)) {
-            error = ($0 as! SalesforceError)
+        XCTAssertThrowsError(try waitFor(app.retrieve(type: "Account", id: id) as AnyPublisher<SObject, Error>, timeout: 300)) {
+            error = ($0 as? SalesforceError)
         }
         
         // Then
