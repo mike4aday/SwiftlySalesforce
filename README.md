@@ -16,8 +16,8 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 ## Quick Start
 Get up and running in a few minutes:
 
-1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
-1. Create a Salesforce [Connected App] in your new Developer Edition
+1. Get a free Salesforce [Developer Edition](https://developer.salesforce.com/signup) 
+1. Create a [Connected App] in your new Developer Edition environment
 1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) Swiftly Salesforce to your Xcode project as a package dependency, with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git). 
 
 ## Minimum Requirements
