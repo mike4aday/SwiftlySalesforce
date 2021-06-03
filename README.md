@@ -13,17 +13,17 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 * Easy to install, update and debug with [Xcode](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app).
 * [See what's new](./CHANGELOG.md).
 
+## Minimum Requirements
+* iOS 14.0
+* Swift 5.3
+* Xcode 12
+
 ## Quick Start
 Get up and running in a few minutes:
 
 1. Get a free Salesforce [Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a [Connected App] in your new Developer Edition environment
 1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) Swiftly Salesforce to your Xcode project as a package dependency, with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git). 
-
-## Minimum Requirements
-* iOS 14.0
-* Swift 5.3
-* Xcode 12
 
 ## Examples
 Below are some examples that illustrate how to use Swiftly Salesforce. Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
