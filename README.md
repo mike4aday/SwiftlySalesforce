@@ -20,8 +20,8 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 ## Quick Start
 Get up and running in a few minutes:
 1. Get a free Salesforce [Developer Edition](https://developer.salesforce.com/signup) environment ("org")
-1. Create a [Connected App] in your new org
-1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) Swiftly Salesforce to your Xcode project as a package dependency, with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git). 
+1. [Create a Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your new org
+1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) the Swiftly Salesforce package to your Xcode project using URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git). 
 
 ## Examples
 Below are some examples that illustrate how to use Swiftly Salesforce. Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
@@ -274,7 +274,6 @@ Questions, suggestions, bug reports and code contributions welcome:
    [Swift]: <https://developer.apple.com/swift/>
    [sfdc-ios Chatter]: <http://sfdc.co/sfdc-ios>
    [@mike4aday]: <https://twitter.com/mike4aday>
-   [Connected App]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_overview.htm>
    [Partner Community]: <https://p.force.com>
    [Apex REST]: <https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST>
    [OAuth2 user-agent flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_user_agent_flow.htm&language=en>
