@@ -254,27 +254,7 @@ salesforce.search(sosl: sosl)
     .store(in: &subscriptions)
 ```
 
-## Contact
-Questions, suggestions, bug reports and code contributions welcome:
+## Questions, suggestions and bug reports...
 * Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues)
-* Twitter [@mike4aday]
+* Twitter direct message [@mike4aday]
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
-
-   [OAuth2]: <https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com>
-   [REST API]: <https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/>
-   [Swift]: <https://developer.apple.com/swift/>
-   [sfdc-ios Chatter]: <http://sfdc.co/sfdc-ios>
-   [@mike4aday]: <https://twitter.com/mike4aday>
-   [Partner Community]: <https://p.force.com>
-   [Apex REST]: <https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST>
-   [OAuth2 user-agent flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_user_agent_flow.htm&language=en>
-   [OAuth2 username-password flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_username_password_flow.htm&language=en>
-   [OAuth2 refresh token flow]: <https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_refresh_token_flow.htm&language=en_US>
-   [Example]: <https://github.com/mike4aday/SwiftlySalesforce/tree/master/Example/SwiftlySalesforce>
-   [Mobile SDK for iOS]: <https://github.com/forcedotcom/SalesforceMobileSDK-iOS>
-
-   [Salesforce.swift]: <SwiftlySalesforce/Classes/Salesforce.swift>
-   [Resource.swift]: <SwiftlySalesforce/Classes/Resource.swift>
-   [OAuth2Result.swift]: <SwiftlySalesforce/Classes/OAuth2Result.swift>
-   [Extensions.swift]: <SwiftlySalesforce/Classes/Extensions.swift>
-   [ConnectedApp.swift]: <SwiftlySalesforce/Classes/ConnectedApp.swift>
