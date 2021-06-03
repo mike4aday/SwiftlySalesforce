@@ -3,7 +3,7 @@
 
 <img src="https://img.shields.io/badge/%20in-swift%205.3-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>
 
-Swiftly Salesforce is the Swift-est way to build native, mobile apps that connect to [Salesforce](http://www.salesforce.com/platform/overview/).
+Swiftly Salesforce is the Swift-est way to build native mobile apps that connect to [Salesforce](http://www.salesforce.com/platform/overview/).
 * Written entirely in [Swift](https://developer.apple.com/swift/).
 * Built with Apple's [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex, asynchronous call to the [Salesforce REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/).
 * Works great with [SwiftUI](https://developer.apple.com/documentation/swiftui/), the modern, declarative way to build iOS apps.
