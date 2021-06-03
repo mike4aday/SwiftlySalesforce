@@ -254,15 +254,6 @@ salesforce.search(sosl: sosl)
     .store(in: &subscriptions)
 ```
 
-## Resources
-If you're new to the Salesforce Platform or the Salesforce REST API, you might find the following resources useful:
-* [Salesforce REST API Developer's Guide][REST API]
-* [Salesforce Platform](http://www.salesforce.com/platform)
-* [Salesforce Developers](https://developer.salesforce.com): official Salesforce developers' site; training, documentation, SDKs, etc.
-* [Salesforce Partner Community](https://partners.salesforce.com): "Innovate, grow, connect" with Salesforce ISVs. Join the [Salesforce + iOS Mobile][sfdc-ios Chatter] Chatter group
-* [Salesforce Mobile SDK for iOS][Mobile SDK for iOS]: Salesforce-supported SDK for developing mobile apps. Written in Objective-C. Available for [Android](https://github.com/forcedotcom/SalesforceMobileSDK-Android), too
-* [Use of Salesforce for Android and iOS platform versus creation of custom app](https://help.salesforce.com/HTViewSolution?id=000192840&language=en_US)
-
 ## Contact
 Questions, suggestions, bug reports and code contributions welcome:
 * Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues)
