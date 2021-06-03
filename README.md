@@ -7,7 +7,7 @@ Swiftly Salesforce is the Swift-est way to build native, mobile apps that connec
 * Written entirely in [Swift](https://developer.apple.com/swift/).
 * Built with Apple's [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex, asynchronous interactions with the Salesforce [REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/).
 * Works great with [SwiftUI](https://developer.apple.com/documentation/swiftui/), the modern, declarative way to build iOS apps.
-* Manages the Salesforce [OAuth2] user authentication and authorization process automatically.
+* Manages the Salesforce [OAuth] authorization flows automatically.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * Pair with [Core Data](https://developer.apple.com/documentation/coredata) for a complete, offline mobile solution.
 * Easy to install and update with Swift Package Manager (SPM)
