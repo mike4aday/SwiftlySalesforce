@@ -255,6 +255,6 @@ salesforce.search(sosl: sosl)
 ```
 
 ## Questions, suggestions and bug reports...
-* Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues)
-* Twitter direct message [@mike4aday]
+* Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues/new)
+* Twitter direct message [@mike4aday](https://twitter.com/mike4aday)
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
