@@ -23,7 +23,16 @@ Get up and running in a few minutes:
 1. [Create a Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your new environment.
 1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) the Swiftly Salesforce package to your Xcode project with URL https://github.com/mike4aday/SwiftlySalesforce.git. 
 
-## Examples
+## User Authorization
+Swiftly Salesforce will automatically manage all required Salesforce authorization flows. If Swiftly Salesforce already has a valid access token in its secure  store, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form. 
+
+You can modify this default authorization behavior (if, for example, you don't want the user interrupted by the authentication form), by setting the argument `allowsLogin = false` in `public` methods that call Salesforce.
+
+## Complete Sample App
+Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses SwiftUI, Combine and Swiftly Salesforce to display the user's account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect to Salesforce.
+
+* Create a file called `Salesforce.json` and add your Salesforce Connected App's consumer key and callback URL.
+* 
 Below are some examples that illustrate how to use Swiftly Salesforce. Swiftly Salesforce will automatically manage the entire Salesforce [OAuth2][OAuth2] process (the "OAuth dance"). If Swiftly Salesforce has a valid access token, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
 
 ### Example: Setup
