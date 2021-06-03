@@ -10,11 +10,11 @@ Swiftly Salesforce is the Swift-est way to build native, mobile apps that connec
 * Manages the Salesforce [OAuth] authorization flows automatically.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * Pair with [Core Data](https://developer.apple.com/documentation/coredata) for a complete, offline mobile solution.
-* Easy to install and update with Swift Package Manager (SPM)
+* Easy to install, update and debug with [Xcode](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app).
 * [See what's new](./CHANGELOG.md).
 
 ## Quick Start
-You can be up and running in a few minutes by following these steps:
+Get up and running in a few minutes:
 
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) 
 1. Create a Salesforce [Connected App] in your new Developer Edition
