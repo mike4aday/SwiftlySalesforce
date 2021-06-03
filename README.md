@@ -7,9 +7,9 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 * Built with Apple's [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex, asynchronous calls to the [Salesforce REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/).
 * Works great with [SwiftUI](https://developer.apple.com/documentation/swiftui/), the modern, declarative way to build iOS apps.
 * Manages the Salesforce [OAuth](https://help.salesforce.com/articleView?id=sf.remoteaccess_oauth_flows.htm&type=5) user authorization flows automatically.
-* Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * Pair with [Core Data](https://developer.apple.com/documentation/coredata) for a complete offline mobile solution.
 * Easy to install, update and debug with [Xcode](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app).
+* Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
 * [See what's new](./CHANGELOG.md).
 
 ## Minimum Requirements
@@ -19,9 +19,8 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 
 ## Quick Start
 Get up and running in a few minutes:
-
-1. Get a free Salesforce [Developer Edition](https://developer.salesforce.com/signup) 
-1. Create a [Connected App] in your new Developer Edition environment
+1. Get a free Salesforce [Developer Edition](https://developer.salesforce.com/signup) environment ("org")
+1. Create a [Connected App] in your new org
 1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) Swiftly Salesforce to your Xcode project as a package dependency, with URL [https://github.com/mike4aday/SwiftlySalesforce.git](https://github.com/mike4aday/SwiftlySalesforce.git). 
 
 ## Examples
