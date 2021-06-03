@@ -26,7 +26,7 @@ Get up and running in a few minutes:
 ## User Authorization
 Swiftly Salesforce will automatically manage all required Salesforce authorization flows. If Swiftly Salesforce already has a valid access token in its secure  store, it will include that token in the header of every API request. If the token has expired, and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token, without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form. 
 
-You can modify this default authorization behavior (if, for example, you don't want the user interrupted by the authentication form), by setting the argument `allowsLogin = false` in `public` methods that call Salesforce.
+You can modify this default authorization behavior (if, for example, you don't want the user interrupted by the authentication form). Public methods that call Salesforce (for example: ) have an argument `allowsLogin` which is `true` by default. If you set `allowsLogin = false`, Swiftly Salesforce will attempt to refresh the token without interrupting the user and, if that attempt is unsuccessful, the call will fail and you can catch the resulting [error](./sources/SalesforceError.swift) in your code and handle it accordingly. 
 
 ## Complete Sample App
 Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses SwiftUI, Combine and Swiftly Salesforce to display the user's account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect to Salesforce.
