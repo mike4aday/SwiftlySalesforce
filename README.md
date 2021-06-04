@@ -30,6 +30,9 @@ Swiftly Salesforce will automatically manage all required Salesforce [authorizat
 
 You could modify this default authorization behavior if you don't want the user interrupted by the authentication form. Many methods have an argument, `allowsLogin`, which is `true` by default ([example](https://github.com/mike4aday/SwiftlySalesforce/blob/6134e06e46f333a7398915f2fce2e80d51475dac/Sources/SwiftlySalesforce/ConnectedApp%2BQuery.swift#L71)). But if you set `allowsLogin` to `false`, Swiftly Salesforce would attempt to refresh the token without interrupting the user, and if that attempt is unsuccessful the call would fail. The user would not be prompted for the username and password, and you could catch the resulting [error](https://github.com/mike4aday/SwiftlySalesforce/blob/9d7bbf08c4ea9ba1edd8d0428df280ad9f944a35/Sources/SwiftlySalesforce/SalesforceError.swift#L21) and handle it as you see fit.
 
+## Documentation
+[Swiftly Salesforce documentation]((https://mike4aday.github.io/SwiftlySalesforce/docs))
+
 ## Sample App
 Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses [SwiftUI](https://developer.apple.com/documentation/swiftui/), [Combine](https://developer.apple.com/documentation/combine) and Swiftly Salesforce to display the user's Salesforce account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect it to Salesforce. See especially [MyAccountsLoader.swift](https://github.com/mike4aday/MySalesforceAccounts/blob/6e4e0f864c79c62b0b77009ce3d0122218320a01/MySalesforceAccounts/MyAccountsLoader.swift), [ContentView.swift](https://github.com/mike4aday/MySalesforceAccounts/blob/6e4e0f864c79c62b0b77009ce3d0122218320a01/MySalesforceAccounts/ContentView.swift) and [Salesforce.json](https://github.com/mike4aday/MySalesforceAccounts/blob/6e4e0f864c79c62b0b77009ce3d0122218320a01/MySalesforceAccounts/Salesforce.json).
 
