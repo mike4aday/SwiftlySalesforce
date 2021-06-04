@@ -31,7 +31,7 @@ You could modify this default authorization behavior if you don't want the user 
 ## Sample App
 Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses SwiftUI, Combine and Swiftly Salesforce to display the user's Salesforce account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect it to Salesforce.
 
-## Questions, suggestions and bug reports...
+## Questions, Suggestions & Bug Reports
 * Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues/new)
 * Twitter [@mike4aday](https://twitter.com/mike4aday)
 * Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
