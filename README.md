@@ -23,7 +23,7 @@ Get up and running in a few minutes:
 1. [Create a Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your new environment.
 1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) the Swiftly Salesforce package to your Xcode project with URL https://github.com/mike4aday/SwiftlySalesforce.git. 
 
-Check out this screenshot for an example Connected App definition. Note that "Require Secret for Refresh Token Flow" should *not* be selected.
+Check out this [screenshot](http://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppSettings.png) for an example Connected App definition. Note that "Require Secret for Refresh Token Flow" should *not* be selected.
 
 ## User Authorization
 Swiftly Salesforce will automatically manage all required Salesforce [authorization flows](https://help.salesforce.com/articleView?id=sf.remoteaccess_oauth_flows.htm&type=5). If Swiftly Salesforce already has a valid access token in its secure  store, it will include that token in the header of every API request. If the token has expired and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form. 
