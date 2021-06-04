@@ -10,7 +10,7 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 * Pair with [Core Data](https://developer.apple.com/documentation/coredata) for a complete offline mobile solution.
 * Easy to install, update and debug with [Xcode](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app).
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS].
-* [See what's new](./CHANGELOG.md).
+* See [what's new](./CHANGELOG.md) in this release.
 
 ## Minimum Requirements
 * iOS 14.0
