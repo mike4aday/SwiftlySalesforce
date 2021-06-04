@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ConnectedApp Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/ConnectedApp" class="dashAnchor"></a>
+    <a title="ConnectedApp Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SwiftlySalesforce Docs</a> (22% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SwiftlySalesforce Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ConnectedApp Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/AnyPublisher.html">AnyPublisher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/DateFormatter.html">DateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/DateFormatter/Length.html">– Length</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONDecoder.html">JSONDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONEncoder.html">JSONEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Publisher.html">Publisher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLComponents.html">URLComponents</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Service.html">Service</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Address.html">Address</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Address/GeocodeAccuracy.html">– GeocodeAccuracy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ApexService.html">ApexService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectedApp.html">ConnectedApp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credential.html">Credential</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultValueEncoded.html">DefaultValueEncoded</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FieldDescription.html">FieldDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:17SwiftlySalesforce4HTTPV">HTTP</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity.html">Identity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity.html#/s:17SwiftlySalesforce8IdentityV6PhotosV">– Photos</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IdentityService.html">IdentityService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Limit.html">Limit</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Limit/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LimitsService.html">LimitsService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectDescription.html">ObjectDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PicklistItem.html">PicklistItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResult.html">QueryResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryService.html">QueryService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryService/Endpoint.html">– Endpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Record.html">Record</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SObjectsService.html">SObjectsService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SObjectsService/Endpoint.html">– Endpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SalesforceError.html">SalesforceError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Validator.html">Validator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Version.html">Version</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:17SwiftlySalesforce7SObjecta">SObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:17SwiftlySalesforce0B6Recorda">SalesforceRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:17SwiftlySalesforce14UserIdentifiera">UserIdentifier</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ConnectedApp</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConnectedApp</span></code></pre>
+
+                </div>
+              </div>
+            <p>Represents a Salesforce Connected App.</p>
+<h1 id='reference' class='heading'>Reference</h1>
+
+<p><a href="https://help.salesforce.com/articleView?id=sf.connected_app_overview.htm&type=5">Connected Apps</a> in Salesforce help</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV4apex6method9namespace12relativePath10queryItems7headers4body9validator7decoder7session11allowsLogin7Combine12AnyPublisherVyxs5Error_pGSSSg_ATSSSay10Foundation12URLQueryItemVGSgSDyS2SGSgAU4DataVSgAA9ValidatorVAU11JSONDecoderCSo12NSURLSessionCSbtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/apex(method:namespace:relativePath:queryItems:headers:body:validator:decoder:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV4apex6method9namespace12relativePath10queryItems7headers4body9validator7decoder7session11allowsLogin7Combine12AnyPublisherVyxs5Error_pGSSSg_ATSSSay10Foundation12URLQueryItemVGSgSDyS2SGSgAU4DataVSgAA9ValidatorVAU11JSONDecoderCSo12NSURLSessionCSbtSeRzlF">apex(method:<wbr>namespace:<wbr>relativePath:<wbr>queryItems:<wbr>headers:<wbr>body:<wbr>validator:<wbr>decoder:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Represents a call to an Apex class exposed as a REST service.</p>
+
+<p>You can expose your Apex class and methods so that external applications can access your code and your application through the REST architecture. This is done by defining your Apex class with the @RestResource annotation to expose it as a REST resource. Similarly, add annotations to your methods to expose them through REST. For example, you can add the @HttpGet annotation to your method to expose it as a REST resource that can be called by an HTTP GET request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">apex</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">method</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">namespace</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">queryItems</span><span class="p">:</span> <span class="p">[</span><span class="kt">URLQueryItem</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">body</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">validator</span><span class="p">:</span> <span class="kt"><a href="../Structs/Validator.html">Validator</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span>
+    <span class="nv">decoder</span><span class="p">:</span> <span class="kt">JSONDecoder</span> <span class="o">=</span> <span class="o">.</span><span class="n">salesforce</span><span class="p">,</span>
+    <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+    <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>method</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of the Apex method to call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>namespace</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Managed package namespace, if any. Optional.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Path to the Apex REST service, as defined in the <code>urlMapping</code> of the <code>@RestResource</code> annotation on the target class.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queryItems</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional query items to include in the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional <code><a href="../Structs.html#/s:17SwiftlySalesforce4HTTPV">HTTP</a></code> headers to include in the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>body</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Request body for a <code>POST</code> , <code>PATCH</code> or <code>PUT</code>  request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>validator</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Validator to validate the server response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>decoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON decoder to use to decode the results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Pubisher
+# Reference
+<a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_rest_intro.htm">Introduction to Apex REST</a></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV8identity7session11allowsLogin7Combine12AnyPublisherVyAA8IdentityVs5Error_pGSo12NSURLSessionC_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/identity(session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV8identity7session11allowsLogin7Combine12AnyPublisherVyAA8IdentityVs5Error_pGSo12NSURLSessionC_SbtF">identity(session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets information about the current user</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">identity</span><span class="p">(</span><span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Identity.html">Identity</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV6limits7session11allowsLogin7Combine12AnyPublisherVySDySSAA5LimitVGs5Error_pGSo12NSURLSessionC_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/limits(session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV6limits7session11allowsLogin7Combine12AnyPublisherVySDySSAA5LimitVGs5Error_pGSo12NSURLSessionC_SbtF">limits(session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">limits</span><span class="p">(</span><span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt"><a href="../Structs/Limit.html">Limit</a></span><span class="p">],</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV5query4soql9batchSize7session11allowsLogin7Combine12AnyPublisherVyAA11QueryResultVyxGs5Error_pGSS_SiSo12NSURLSessionCSbtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/query(soql:batchSize:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV5query4soql9batchSize7session11allowsLogin7Combine12AnyPublisherVyAA11QueryResultVyxGs5Error_pGSS_SiSo12NSURLSessionCSbtSeRzlF">query(soql:<wbr>batchSize:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Performs a query</p>
+
+<ul>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm">Query</a></li>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.232.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_sosl_intro.htm">SOQL and SOSL Reference</a></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">query</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">soql</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">batchSize</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+    <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>soql</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A SOQL query.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>batchSize</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A numeric value that specifies the number of records returned for a query request. Child objects count toward the number of records for the batch size. For example, in relationship queries, multiple child objects are returned per parent row returned. The default is 2,000; the minimum is 200, and the maximum is 2,000. There is no guarantee that the requested batch size is the actual batch size. Changes are made as necessary to maximize performance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher of <code><a href="../Structs/QueryResult.html">QueryResult</a></code> of <code>Decodable</code> instances.
+# Reference</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV14nextResultPage2at7session11allowsLogin7Combine12AnyPublisherVyAA05QueryF0VyxGs5Error_pGSS_So12NSURLSessionCSbtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/nextResultPage(at:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV14nextResultPage2at7session11allowsLogin7Combine12AnyPublisherVyAA05QueryF0VyxGs5Error_pGSS_So12NSURLSessionCSbtSeRzlF">nextResultPage(at:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves the next page of query results.</p>
+
+<p>If the initial query returns only part of the results, the <code><a href="../Structs/QueryResult.html">QueryResult</a></code> will contain a value in <code>nextRecordsPath</code> which can be used as the <code>path</code> argument for this method.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">nextResultPage</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+    <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The path to the next page of query results, as returned by the previous call to <code>query</code> or <code>nextResultPage</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher of <code><a href="../Structs/QueryResult.html">QueryResult</a></code> of <code>Decodable</code> instances.
+# Reference
+<a href="https://developer.salesforce.com/docs/atlas.en-us.232.0.api_rest.meta/api_rest/dome_query.htm">Execute a SOQL Query</a></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV9myRecords4type6fields5limit9batchSize4user7session11allowsLogin7Combine12AnyPublisherVyAA11QueryResultVyxGs5Error_pGSS_SaySSGSgSiSgSi10Foundation3URLVSgSo12NSURLSessionCSbtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/myRecords(type:fields:limit:batchSize:user:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV9myRecords4type6fields5limit9batchSize4user7session11allowsLogin7Combine12AnyPublisherVyAA11QueryResultVyxGs5Error_pGSS_SaySSGSgSiSgSi10Foundation3URLVSgSo12NSURLSessionCSbtSeRzlF">myRecords(type:<wbr>fields:<wbr>limit:<wbr>batchSize:<wbr>user:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Queries all records of the specified type which are owned by the user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">myRecords</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">batchSize</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:17SwiftlySalesforce14UserIdentifiera">UserIdentifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+    <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResult.html">QueryResult</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of record (e.g. <code>Account</code>, <code>Contact</code> or <code>MyCustomObject__c</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Fields to retrieve. If nil, then all fields will be retrieved.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of rows to return.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>batchSize</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The batch size for a query determines the number of rows that are returned in the query results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>user</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specified user, or nil to use the last authenticated user.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher of <code><a href="../Structs/QueryResult.html">QueryResult</a></code> of <code>Decodable</code> instances.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV8retrieve4type2id6fields7session11allowsLogin7Combine12AnyPublisherVyxs5Error_pGSS_SSSaySSGSgSo12NSURLSessionCSbtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/retrieve(type:id:fields:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV8retrieve4type2id6fields7session11allowsLogin7Combine12AnyPublisherVyxs5Error_pGSS_SSSaySSGSgSo12NSURLSessionCSbtSeRzlF">retrieve(type:<wbr>id:<wbr>fields:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves a Salesforce record</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">retrieve</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of record (e.g. &ldquo;Account&rdquo;, &ldquo;Contact&rdquo; or &ldquo;MyCustomObject__c&rdquo;).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique ID of the record; 15 or 18 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Fields to retrieve. If nil, then all fields will be retrieved.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher of a <code>Decodable</code> record
+# Reference
+<a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/using_resources_working_with_records.htm">Working with Records</a></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV6insert4type6fields7session11allowsLogin7Combine12AnyPublisherVySSs5Error_pGSS_SDySSxGSo12NSURLSessionCSbtSERzlF"></a>
+                    <a name="//apple_ref/swift/Method/insert(type:fields:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV6insert4type6fields7session11allowsLogin7Combine12AnyPublisherVySSs5Error_pGSS_SDySSxGSo12NSURLSessionCSbtSERzlF">insert(type:<wbr>fields:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Inserts a Salesforce record</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">insert</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">T</span><span class="p">],</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of record (e.g. <code>Account</code>, <code>Contact</code> or <code>MyCustomObject__c</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Dictionary of fields names and values to insert.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher that emits the ID of the successfully-inserted record, or an error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV6update4type2id6fields7session11allowsLogin7Combine12AnyPublisherVyyts5Error_pGSS_SSSDySSxGSo12NSURLSessionCSbtSERzlF"></a>
+                    <a name="//apple_ref/swift/Method/update(type:id:fields:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV6update4type2id6fields7session11allowsLogin7Combine12AnyPublisherVyyts5Error_pGSS_SSSDySSxGSo12NSURLSessionCSbtSERzlF">update(type:<wbr>id:<wbr>fields:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates a Salesforce record</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">update</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">T</span><span class="p">],</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of record (e.g. <code>Account</code>, <code>Contact</code> or <code>MyCustomObject__c</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique ID of the record; 15 or 18 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Dictionary of fields names and values to update.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV6delete4type2id7session11allowsLogin7Combine12AnyPublisherVyyts5Error_pGSS_SSSo12NSURLSessionCSbtF"></a>
+                    <a name="//apple_ref/swift/Method/delete(type:id:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV6delete4type2id7session11allowsLogin7Combine12AnyPublisherVyyts5Error_pGSS_SSSo12NSURLSessionCSbtF">delete(type:<wbr>id:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deletes a Salesforce record</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of record (e.g. <code>Account</code>, <code>Contact</code> or <code>MyCustomObject__c</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique ID of the record; 15 or 18 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV8describe4type7session11allowsLogin7Combine12AnyPublisherVyAA17ObjectDescriptionVs5Error_pGSS_So12NSURLSessionCSbtF"></a>
+                    <a name="//apple_ref/swift/Method/describe(type:session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV8describe4type7session11allowsLogin7Combine12AnyPublisherVyAA17ObjectDescriptionVs5Error_pGSS_So12NSURLSessionCSbtF">describe(type:<wbr>session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves metadata about a Salesforce object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">describe</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ObjectDescription.html">ObjectDescription</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of record (e.g. <code>Account</code>, <code>Contact</code> or <code>MyCustomObject__c</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher of metadata about the object.
+# Reference
+<a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm">sObject Describe</a></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV11describeAll7session11allowsLogin7Combine12AnyPublisherVySayAA17ObjectDescriptionVGs5Error_pGSo12NSURLSessionC_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/describeAll(session:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV11describeAll7session11allowsLogin7Combine12AnyPublisherVySayAA17ObjectDescriptionVGs5Error_pGSo12NSURLSessionC_SbtF">describeAll(session:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Describes all accessible objects in the user&rsquo;s Salesforce org</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">describeAll</span><span class="p">(</span><span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/ObjectDescription.html">ObjectDescription</a></span><span class="p">],</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session for the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher of an array of object metadata.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV3urlAC10Foundation3URLVSg_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(url:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV3urlAC10Foundation3URLVSg_tKcfc">init(url:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a Connected App representation</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Error if the JSON configuration data cannot be decoded.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL to JSON configuration file. If nil, a file called <code>Salesforce.json</code> in the main app bundle is used by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV11consumerKey11callbackURL15defaultAuthHostACSS_10Foundation0H0VSStcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(consumerKey:callbackURL:defaultAuthHost:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV11consumerKey11callbackURL15defaultAuthHostACSS_10Foundation0H0VSStcfc">init(consumerKey:<wbr>callbackURL:<wbr>defaultAuthHost:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a Connected App representation</p>
+<h1 id='reference' class='heading'>Reference</h1>
+
+<p><a href="https://trailhead.salesforce.com/en/content/learn/modules/identity_login/identity_login_my_domain">Customize Your Login Process with My Domain</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">consumerKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">callbackURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">defaultAuthHost</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"login.salesforce.com"</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>consumerKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The consumer key from your Connected App definition</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callbackURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback URL from your Connected App definition</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>defaultAuthHost</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Hostname for OAuth authentication. Default is &ldquo;login.salesforce.com&rdquo;. For sandbox orgs use &ldquo;test.salesforce.com&rdquo; or for a custom domain use, for example &ldquo;somethingReallycool.my.salesforce.com&rdquo;</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV5logIn7Combine12AnyPublisherVyAA10CredentialVs5Error_pGyF"></a>
+                    <a name="//apple_ref/swift/Method/logIn()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV5logIn7Combine12AnyPublisherVyAA10CredentialVs5Error_pGyF">logIn()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Logs in a new user and returns the new credential</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">logIn</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Credential.html">Credential</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV6logOut4user7Combine12AnyPublisherVyyts5Error_pG10Foundation3URLVSg_tF"></a>
+                    <a name="//apple_ref/swift/Method/logOut(user:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV6logOut4user7Combine12AnyPublisherVyyts5Error_pG10Foundation3URLVSg_tF">logOut(user:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Revokes a user&rsquo;s refresh and/or access tokens and clears the credential from the local, secure cache.</p>
+<h1 id='reference' class='heading'>Reference</h1>
+
+<ul>
+<li><a href="https://help.salesforce.com/articleView?id=sf.remoteaccess_using_openid.htm&type=5">Identity URL</a></li>
+<li><a href="https://help.salesforce.com/articleView?id=sf.remoteaccess_revoke_token.htm&type=5">Revoke OAuth Tokens</a></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">logOut</span><span class="p">(</span><span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:17SwiftlySalesforce14UserIdentifiera">UserIdentifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>user</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Identifier for the specified user or, if nil, the last authenticated user. (UserIdentifier is an alias for the user&rsquo;s identity URL.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A publisher that completes when the underlying OAuth2 token revoke request completes.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV13getCredential3for11allowsLogin7Combine12AnyPublisherVyAA0F0Vs5Error_pG10Foundation3URLVSg_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/getCredential(for:allowsLogin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV13getCredential3for11allowsLogin7Combine12AnyPublisherVyAA0F0Vs5Error_pG10Foundation3URLVSg_SbtF">getCredential(for:<wbr>allowsLogin:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets the Credential for the specified user or, if no user is specified, then for the last authenticated user.</p>
+
+<ul>
+<li><a href="https://help.salesforce.com/articleView?id=sf.remoteaccess_using_openid.htm&type=5">Identity URL</a></li>
+<li><a href="https://help.salesforce.com/articleView?id=sf.remoteaccess_oauth_user_agent_flow.htm&type=5">OAuth 2.0 User-Agent Flow</a></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getCredential</span><span class="p">(</span><span class="k">for</span> <span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:17SwiftlySalesforce14UserIdentifiera">UserIdentifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Credential.html">Credential</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>user</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Identifier for the specified user or, if nil, the last authenticated user. (UserIdentifier is an alias for the user&rsquo;s identity URL.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A publisher of a Credential
+# Reference</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce12ConnectedAppV2go7service7session4user11allowsLogin9validator7decoder7Combine12AnyPublisherVyq_s5Error_pGx_So12NSURLSessionC10Foundation3URLVSgSbAA9ValidatorVAR11JSONDecoderCtAA7ServiceRzSeR_r0_lF"></a>
+                    <a name="//apple_ref/swift/Method/go(service:session:user:allowsLogin:validator:decoder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce12ConnectedAppV2go7service7session4user11allowsLogin9validator7decoder7Combine12AnyPublisherVyq_s5Error_pGx_So12NSURLSessionC10Foundation3URLVSgSbAA9ValidatorVAR11JSONDecoderCtAA7ServiceRzSeR_r0_lF">go(service:<wbr>session:<wbr>user:<wbr>allowsLogin:<wbr>validator:<wbr>decoder:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes an asynchronous request for data from a Salesforce API endpoint. You will likely not need to call this method directly.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">go</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">Output</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">service</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span>
+    <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+    <span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:17SwiftlySalesforce14UserIdentifiera">UserIdentifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">allowsLogin</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nv">validator</span><span class="p">:</span> <span class="kt"><a href="../Structs/Validator.html">Validator</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span>
+    <span class="nv">decoder</span><span class="p">:</span> <span class="kt">JSONDecoder</span> <span class="o">=</span> <span class="o">.</span><span class="n">salesforce</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Output</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Service.html">Service</a></span><span class="p">,</span> <span class="kt">Output</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>service</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Service</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL session</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>user</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>User identifier</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowsLogin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>validator</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Validator</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>decoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON decoder</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Publisher of decoded output</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-06-04)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

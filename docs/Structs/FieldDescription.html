@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FieldDescription Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/FieldDescription" class="dashAnchor"></a>
+    <a title="FieldDescription Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SwiftlySalesforce Docs</a> (22% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SwiftlySalesforce Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        FieldDescription Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/AnyPublisher.html">AnyPublisher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/DateFormatter.html">DateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/DateFormatter/Length.html">– Length</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONDecoder.html">JSONDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONEncoder.html">JSONEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Publisher.html">Publisher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLComponents.html">URLComponents</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Service.html">Service</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Address.html">Address</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Address/GeocodeAccuracy.html">– GeocodeAccuracy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ApexService.html">ApexService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConnectedApp.html">ConnectedApp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credential.html">Credential</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultValueEncoded.html">DefaultValueEncoded</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FieldDescription.html">FieldDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:17SwiftlySalesforce4HTTPV">HTTP</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity.html">Identity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Identity.html#/s:17SwiftlySalesforce8IdentityV6PhotosV">– Photos</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IdentityService.html">IdentityService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Limit.html">Limit</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Limit/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LimitsService.html">LimitsService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectDescription.html">ObjectDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PicklistItem.html">PicklistItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResult.html">QueryResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryService.html">QueryService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryService/Endpoint.html">– Endpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Record.html">Record</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SObjectsService.html">SObjectsService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SObjectsService/Endpoint.html">– Endpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SalesforceError.html">SalesforceError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Validator.html">Validator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Version.html">Version</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:17SwiftlySalesforce7SObjecta">SObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:17SwiftlySalesforce0B6Recorda">SalesforceRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:17SwiftlySalesforce14UserIdentifiera">UserIdentifier</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>FieldDescription</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FieldDescription</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">FieldDescription</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                </div>
+              </div>
+            <p>Salesforce field metadata.
+See <a href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm">SObject Describe</a>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV12defaultValueypSgvp"></a>
+                    <a name="//apple_ref/swift/Property/defaultValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV12defaultValueypSgvp">defaultValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd"><a href="../Structs/DefaultValueEncoded.html">@DefaultValueEncoded</a></span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultValue</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV19defaultValueFormulaSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/defaultValueFormula" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV19defaultValueFormulaSSSgvp">defaultValueFormula</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">defaultValueFormula</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV14inlineHelpTextSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/inlineHelpText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV14inlineHelpTextSSSgvp">inlineHelpText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">inlineHelpText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV12isCreateableSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isCreateable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV12isCreateableSbvp">isCreateable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isCreateable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV8isCustomSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isCustom" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV8isCustomSbvp">isCustom</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isCustom</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV11isEncryptedSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isEncrypted" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV11isEncryptedSbvp">isEncrypted</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isEncrypted</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV10isNillableSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isNillable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV10isNillableSbvp">isNillable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isNillable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV10isSortableSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isSortable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV10isSortableSbvp">isSortable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isSortable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV12isUpdateableSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isUpdateable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV12isUpdateableSbvp">isUpdateable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isUpdateable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV5labelSSvp"></a>
+                    <a name="//apple_ref/swift/Property/label" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV5labelSSvp">label</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV6lengthSuSgvp"></a>
+                    <a name="//apple_ref/swift/Property/length" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV6lengthSuSgvp">length</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV4nameSSvp"></a>
+                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV4nameSSvp">name</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV14picklistValuesSayAA12PicklistItemVGvp"></a>
+                    <a name="//apple_ref/swift/Property/picklistValues" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV14picklistValuesSayAA12PicklistItemVGvp">picklistValues</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">picklistValues</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PicklistItem.html">PicklistItem</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV12relatedTypesSaySSGvp"></a>
+                    <a name="//apple_ref/swift/Property/relatedTypes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV12relatedTypesSaySSGvp">relatedTypes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">relatedTypes</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV16relationshipNameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relationshipName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV16relationshipNameSSSgvp">relationshipName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">relationshipName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV4typeSSvp"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV4typeSSvp">type</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV8helpTextSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/helpText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV8helpTextSSSgvp">helpText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">helpText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftlySalesforce16FieldDescriptionV11referenceToSaySSGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/referenceTo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftlySalesforce16FieldDescriptionV11referenceToSaySSGSgvp">referenceTo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">referenceTo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-06-04)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
