@@ -1,79 +1,56 @@
-import XCTest
+/*
+"Swiftly Salesforce: the Swift-est way to build iOS apps that connect to Salesforce"
+For more information and license see: https://www.github.com/mike4aday/SwiftlySalesforce
+Copyright (c) 2021. All rights reserved.
+*/
+
+import Foundation
 import Combine
+import XCTest
 @testable import SwiftlySalesforce
 
 class UserAgentFlowTests: XCTestCase {
-
-    var subscriptions = Set<AnyCancellable>()
-
-    override func setUp() {
+    
+    override func setUpWithError() throws {
+        
     }
 
-    override func tearDown() {
-    }
-
-    func testThatItAuthenticates() {
+    override func tearDownWithError() throws {
         
-        // Given
-        let connectedApp = Util.connectedApp
-        let exp = expectation(description: "Authentication")
-        
-        // When
-        let pub = UserAgentFlow().publisher(connectedApp: connectedApp, hostname: "login.salesforce.com")
-        
-        // Then
-        pub.sink(receiveCompletion: { (completion) in
-            exp.fulfill()
-            switch completion {
-            case let .failure(error):
-                XCTFail("\(error)")
-            case .finished:
-                break
-            }
-        }) { (credential) in
-            XCTAssertNotNil(credential.accessToken)
-            XCTAssertNotNil(credential.identityURL)
-        }.store(in: &subscriptions)
-        
-        waitForExpectations(timeout: 120, handler: nil)
     }
     
-    func testThatItAuthenticatesMultipleTimesSimultaneously() {
+    // Testing user should "Deny" when asked to authorize app
+    func testThatItFailsWhenAuthorizationDenied() throws {
+     
+        debugPrint(">>> Deny authorization when prompted!")
         
         // Given
-        let connectedApp = Util.connectedApp
-        let exp = expectation(description: "Authentication")
-        
+        let app = try ConnectedApp()
+        let provider = app.credentialManager
+        let flow = UserAgentFlow(host: provider.defaultHost, consumerKey: provider.consumerKey, callbackURL: provider.callbackURL)
+        var error: SalesforceError?
+            
         // When
-        let pub1 = UserAgentFlow().publisher(connectedApp: connectedApp, hostname: "login.salesforce.com")
-        let pub2 = UserAgentFlow().publisher(connectedApp: connectedApp, hostname: "login.salesforce.com")
-        let pub3 = UserAgentFlow().publisher(connectedApp: connectedApp, hostname: "login.salesforce.com")
-        let pub4 = UserAgentFlow().publisher(connectedApp: connectedApp, hostname: "login.salesforce.com")
+        XCTAssertThrowsError(try waitFor(flow.publisher, timeout: 300)) {
+            error = ($0 as? SalesforceError)
+        }
         
         // Then
-        pub1.zip(pub2, pub3, pub4).sink(receiveCompletion: { (completion) in
-            exp.fulfill()
-            switch completion {
-            case let .failure(error):
-                XCTFail("\(error)")
-            case .finished:
-                break
-            }
-        }) { (credentials) in
-            XCTAssertNotNil(credentials.0.accessToken)
-            XCTAssertNotNil(credentials.1.accessToken)
-            XCTAssertNotNil(credentials.2.accessToken)
-            XCTAssertNotNil(credentials.3.accessToken)
-            XCTAssertEqual(credentials.0.accessToken, credentials.1.accessToken)
-            XCTAssertEqual(credentials.0.accessToken, credentials.2.accessToken)
-            XCTAssertEqual(credentials.0.accessToken, credentials.3.accessToken)
-        }.store(in: &subscriptions)
+        XCTAssertEqual(error?.code.lowercased(), "access_denied")
+    }
+    
+    func testThatItFailsWithBadAuthURL() throws {
         
-        // Verify that all publishers are same instance
-        XCTAssertEqual(ObjectIdentifier(pub1 as AnyObject), ObjectIdentifier(pub2 as AnyObject))
-        XCTAssertEqual(ObjectIdentifier(pub1 as AnyObject), ObjectIdentifier(pub3 as AnyObject))
-        XCTAssertEqual(ObjectIdentifier(pub1 as AnyObject), ObjectIdentifier(pub4 as AnyObject))
+        // Given
+        let flow = UserAgentFlow(host: "login.salesforce.com", consumerKey: "consumer-key", callbackURL: URL(string: "/path/but/no/scheme")!)
+        var error: URLError?
+            
+        // When
+        XCTAssertThrowsError(try waitFor(flow.publisher, timeout: 300)) {
+            error = ($0 as? URLError)
+        }
         
-        waitForExpectations(timeout: 120, handler: nil)
+        // Then
+        XCTAssertEqual(error?.code, URLError.badURL)
     }
 }
