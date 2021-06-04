@@ -34,4 +34,3 @@ Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccoun
 ## Questions, Suggestions & Bug Reports
 * Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues/new)
 * Twitter [@mike4aday](https://twitter.com/mike4aday)
-* Join the Salesforce [Partner Community] and post to the '[Salesforce + iOS Mobile][sfdc-ios Chatter]' Chatter group
