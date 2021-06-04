@@ -20,7 +20,7 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 ## Quick Start
 Get up and running in a few minutes:
 1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) environment.
-1. [Create a Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your new environment.
+1. [Create a Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your new environment. ([Example](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png))
 1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) the Swiftly Salesforce package to your Xcode project with URL https://github.com/mike4aday/SwiftlySalesforce.git. 
 
 Check out this [screenshot](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png) for an example Connected App definition. Note that the checkbox for "Require Secret for Refresh Token Flow" should *not* be selected.
