@@ -1,6 +1,4 @@
-![Swiftly Salesforce](https://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo9.png)
-
-# Swiftly Salesforce
+<h1>![Swiftly Salesforce](https://mike4aday.github.io/SwiftlySalesforce/images/SwiftlySalesforceLogo9.png)Swiftly Salesforce</h1>
 
 <img src="https://img.shields.io/badge/%20in-swift%205.3-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>
 
