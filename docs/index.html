@@ -212,6 +212,12 @@
 </ol>
 
 <p>Check out this <a href="https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png">screenshot</a> for an example Connected App definition. Note that the checkbox for &ldquo;Require Secret for Refresh Token Flow&rdquo; should <em>not</em> be selected.</p>
+
+<p>Most of your interactions with Swiftly Salesforce will be via the <code>ConnectedApp</code> struct, which represents the Salesforce Connected App 
+  you created above. For example, you could <code>query</code>, <code>insert</code>, <code>retrieve</code>, <code>update</code> or <code>delete</code> Salesforce records using ConnectedApp's relevant convenience methods. 
+  Or, you could create your own struct that implements the <code>Service</code> protocol, and overrides the default property implementations or the <code>buildRequest</code> method. 
+  Then use your custom service as an argument to ConnectedApp's <code>go</code> method.</p>
+            
 <h2 id='sample-app' class='heading'>Sample App</h2>
 
 <p>Check out <a href="https://github.com/mike4aday/MySalesforceAccounts">MySalesforceAccounts</a> for a complete, working app that uses <a href="https://developer.apple.com/documentation/swiftui/">SwiftUI</a>, <a href="https://developer.apple.com/documentation/combine">Combine</a> and Swiftly Salesforce to display the user&rsquo;s Salesforce account records. Though it&rsquo;s a relatively-trival app, it illustrates how to configure an app and quickly connect it to Salesforce. See especially <a href="https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/MyAccountsLoader.swift">MyAccountsLoader.swift</a>, <a href="https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/ContentView.swift">ContentView.swift</a> and <a href="https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/Salesforce.json">Salesforce.json</a>.</p>
