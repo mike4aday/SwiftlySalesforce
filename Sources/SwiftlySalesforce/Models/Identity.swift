@@ -8,31 +8,31 @@
 import Foundation
 
 public struct Identity: Codable {
-    var userID: String
-    var orgID: String
-    var username: String
-    var displayName: String
-    var email: String
-    var firstName: String
-    var lastName: String
-    var timezone: String
-    var photos: Photos
-    var street: String?
-    var city: String?
-    var country: String?
-    var state: String?
-    var zip: String?
-    var mobilePhone: String?
-    var isActive: Bool
-    var userType: String
-    var language: String
-    var locale: String
-    var utcOffset: Int
-    var lastModifiedDate: Date
+    public var userID: String
+    public var orgID: String
+    public var username: String
+    public var displayName: String
+    public var email: String
+    public var firstName: String
+    public var lastName: String
+    public var timezone: String
+    public var photos: Photos
+    public var street: String?
+    public var city: String?
+    public var country: String?
+    public var state: String?
+    public var zip: String?
+    public var mobilePhone: String?
+    public var isActive: Bool
+    public var userType: String
+    public var language: String
+    public var locale: String
+    public var utcOffset: Int
+    public var lastModifiedDate: Date
     
     public struct Photos: Codable {
-        var picture: URL
-        var thumbnail: URL
+        public var picture: URL
+        public var thumbnail: URL
     }
 }
 
