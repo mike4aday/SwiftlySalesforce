@@ -12,7 +12,7 @@ import Foundation
 public struct Limit {
     public let maximum: Int
     public let remaining: Int
-    var used: Int {
+    public var used: Int {
         return maximum - remaining
     }
 }
