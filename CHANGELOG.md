@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 9.0.1 (June 6, 2021)
+Minor release. Updated README.md, and made properties of `Identity` public.
+
 ## Version 9.0.0 (June 4, 2021)
 Major 'breaking' release. Requires iOS 14, Swift 5.3, Xcode 12.
 
