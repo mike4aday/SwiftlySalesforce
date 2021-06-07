@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 9.0.3 (June 7, 2021)
+Patch release. Deleted no-longer-used support files.
+
 ## Version 9.0.2 (June 7, 2021)
 Patch release. Added documentation to [`myRecords`](https://github.com/mike4aday/SwiftlySalesforce/blob/e17c02b9b9837415290fef67f2098edf4226fd58/Sources/SwiftlySalesforce/ConnectedApp%2BQuery.swift#L55) method re. `OwnerId` field on target `type`, and fixed broken link in README.md.
 
