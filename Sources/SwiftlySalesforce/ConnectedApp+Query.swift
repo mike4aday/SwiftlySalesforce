@@ -40,7 +40,6 @@ public extension ConnectedApp {
     /// - Returns: Publisher of `QueryResult` of `Decodable` instances.
     /// # Reference
     /// [Execute a SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.232.0.api_rest.meta/api_rest/dome_query.htm)
-    ///
     func nextResultPage<T: Decodable>(
         at path: String,
         session: URLSession = .shared,
@@ -53,7 +52,7 @@ public extension ConnectedApp {
     
     /// Queries all records of the specified type which are owned by the user.
     /// - Parameters:
-    ///   - type: Type of record (e.g. `Account`, `Contact` or `MyCustomObject__c`).
+    ///   - type: Type of record (e.g. `Account`, `Contact` or `MyCustomObject__c`) which has an `OwnerId` field.
     ///   - fields: Fields to retrieve. If nil, then all fields will be retrieved.
     ///   - limit: The maximum number of rows to return.
     ///   - batchSize: The batch size for a query determines the number of rows that are returned in the query results.
@@ -61,6 +60,8 @@ public extension ConnectedApp {
     ///   - session: URL session for the request.
     ///   - allowsLogin: If authentication is required and allowsLogin is true, the user will be prompted to authenticate via the Salesforce-hosted web login form.
     /// - Returns: Publisher of `QueryResult` of `Decodable` instances.
+    /// # Reference
+    /// [Frequently-Occurring Fields](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_objects_fequently_occurring_fields.htm)
     func myRecords<T: Decodable>(
         type: String,
         fields: [String]? = nil,
