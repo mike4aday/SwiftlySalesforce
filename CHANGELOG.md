@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 9.0.4 (June 25, 2021)
+Minor release. Updated README.md.
+
 ## Version 9.0.3 (June 7, 2021)
 Patch release. Deleted no-longer-used support files.
 
