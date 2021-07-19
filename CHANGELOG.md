@@ -1,7 +1,7 @@
 # Change Log
 
 ## Version 9.0.5 (July 19, 2021)
-Minor release. Updated default API version to 52.0 (Summer '21)
+Updated default API version to 52.0 (Summer '21)
 
 ## Version 9.0.4 (June 25, 2021)
 Minor release. Updated README.md.
