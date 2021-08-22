@@ -22,26 +22,38 @@ public typealias SalesforceRecord = Record
 /// ```
 public struct Record: Decodable {
     
-    public let id: String
+    public let id: String // May be empty string, e.g. for AggregateResult query results
     public let type: String
     private var container: KeyedDecodingContainer<RecordCodingKey>
     
     public init(from decoder: Decoder) throws {
         
-        container = try decoder.container(keyedBy: RecordCodingKey.self)
-        
         struct Attributes: Decodable {
             var type: String
-            var url: String
+            var url: String?
         }
-        
-        let key = RecordCodingKey(stringValue: "attributes")!
-        let attrs = try container.decode(Attributes.self, forKey: key)
-        guard let id = attrs.url.components(separatedBy: "/").last, id.count == 15 || id.count == 18 else {
-            throw DecodingError.dataCorruptedError(forKey: key, in: container, debugDescription: "Failed to decode record ID from url attribute.")
+            
+        container = try decoder.container(keyedBy: RecordCodingKey.self)
+        let attributes = try container.decode(Attributes.self, forKey: RecordCodingKey(stringValue: "attributes")!)
+            
+        // Type of SObject
+        self.type = attributes.type
+            
+        // Record ID
+        if let id = try container.decodeIfPresent(String.self, forKey: RecordCodingKey(stringValue: "Id")!) {
+            // "Id" was one of the fields queried or retrieved
+            self.id = id
         }
-        self.id = id
-        self.type = attrs.type
+        else {
+            if let path = attributes.url, let id = path.components(separatedBy: "/").last, id.count == 18 || id.count == 15 {
+                // ID can be extracted from the record URL string
+                self.id = id
+            }
+            else {
+                // There is no record ID, e.g. in case of AggregateResult of a query
+                self.id = ""
+            }
+        }
     }
     
     public func hasField(named field: String) -> Bool {
