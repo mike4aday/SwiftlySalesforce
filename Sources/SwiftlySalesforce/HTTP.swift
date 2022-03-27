@@ -1,9 +1,3 @@
-/*
-"Swiftly Salesforce: the Swift-est way to build iOS apps that connect to Salesforce"
-For more information and license see: https://www.github.com/mike4aday/SwiftlySalesforce
-Copyright (c) 2021. All rights reserved.
-*/
-
 import Foundation
 
 public struct HTTP {
@@ -18,19 +12,12 @@ public struct HTTP {
     }
     
     struct MIMEType {
-        static let json = "application/json"
-        static let formUrlEncoded = "application/x-www-form-urlencoded; charset=utf-8"
+        static let json = "application/json;charset=UTF-8"
+        static let formUrlEncoded = "application/x-www-form-urlencoded;charset=utf-8"
     }
     
     struct Header {
-        static func accept(_ mimeType: String) -> (String, String) {
-            return ("Accept", mimeType)
-        }
-        static func contentType(_ mimeType: String) -> (String, String) {
-            return ("Content-Type", mimeType)
-        }
-        static func authorization(accessToken: String) -> (String, String) {
-            return ("Authorization", "Bearer \(accessToken)")
-        }
+        static let accept = "Accept"
+        static let contentType = "Content-Type"
     }
 }

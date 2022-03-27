@@ -1,13 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by Michael Epstein on 5/5/21.
-//
-
 import Foundation
 
-public struct Identity: Codable {
+public struct Identity {
+    
     public var userID: String
     public var orgID: String
     public var username: String
@@ -36,7 +30,7 @@ public struct Identity: Codable {
     }
 }
 
-extension Identity {
+extension Identity: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"

@@ -1,9 +1,4 @@
-//
-//  File.swift
-//  
-//
-//  Created by Michael Epstein on 4/25/21.
-//
+import Foundation
 
 /// Salesforce object metadata.
 /// See [SObject Describe](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm).
