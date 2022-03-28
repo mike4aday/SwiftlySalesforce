@@ -37,7 +37,8 @@ Get up and running in less than 5 minutes:
 }
 ```
 
-5. **Connect to Salesforce:** Connect to Salesforce and you're ready to go! If you're using SwiftUI, you could call the following from your main application file and store the Salesforce connection in your environment. Swiftly Salesforce will automatically handle all the OAuth flows, authenticating the user on the first use of your app, and then silently refreshing the user's access token when it expires.
+5. **Connect to Salesforce:** Connect to Salesforce and you're ready to go! If you're using SwiftUI, you could call the following from your main application file and store the Salesforce connection in the environment. Swiftly Salesforce will automatically handle all the OAuth flows, authenticating users on their first use of your app, and then silently refreshing their access tokens when they expire.
+
 ```swift
 // MySalesforceAccountsApp.swift
 import SwiftUI
