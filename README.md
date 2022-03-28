@@ -13,9 +13,9 @@ Swiftly Salesforce is the Swift-est way to build native mobile apps that connect
 * See [what's new](./CHANGELOG.md) in this release.
 
 ## Minimum Requirements
-* iOS 14.0
-* Swift 5.3
-* Xcode 12
+* iOS 15.0
+* Swift 5.5
+* Xcode 13
 
 ## Quick Start
 Get up and running in a few minutes:
