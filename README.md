@@ -1,6 +1,6 @@
 ![Swiftly Salesforce](https://mike4aday.github.io/SwiftlySalesforce/images/Headline.png)
 
-<img src="https://img.shields.io/badge/%20in-swift%205.3-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>
+<img src="https://img.shields.io/badge/%20in-swift%205.5-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>
 
 Swiftly Salesforce is the Swift-est way to build native mobile apps that connect to [Salesforce](https://www.salesforce.com/products/platform/overview/):
 * Written entirely in [Swift](https://developer.apple.com/swift/).
