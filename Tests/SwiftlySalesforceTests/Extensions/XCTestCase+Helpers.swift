@@ -7,7 +7,7 @@ extension XCTestCase {
     static var connection: Connection = try! Salesforce.connect()
     
     func load(resource: String, withExtension: String = "json", inBundle: Bundle? = nil) throws -> Data {
-        let bundle = inBundle ?? Bundle(for: Self.self)
+        let bundle = inBundle ?? Bundle.module
         guard let url = bundle.url(forResource: resource, withExtension: withExtension) else {
             throw URLError(.fileDoesNotExist, userInfo: [NSURLErrorFailingURLErrorKey: "\(resource).\(withExtension)"])
         }
