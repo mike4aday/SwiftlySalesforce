@@ -65,11 +65,25 @@ import SwiftlySalesforce
 //...
 @Environment var salesforce: Connection
 //...
+// Query the current user's accounts
 let queryResults: QueryResult<Record> = try await salesforce.myRecords(type: "Account")
+
+// Search for a string in Salesforce records
 let searchResults: [Record] = try await salesforce.search(sosl: "FIND {Joe Smith}")
+
+// Get info about the current user
 let userInfo: Identity = try await salesforce.identity()
-let account: Record = try await salesforce.read(type: "Account", id: "0011Y00003HVMu4QAH"
+
+// Retrieve all fields of an Account record
+let account: Record = try await salesforce.read(type: "Account", id: "0011Y00003HVMu4QAH")
+
+// Retrieve all fields of an Account record and decode them into your own, custom Decodable instance
+let account2: CustomAccount = try await salesforce.read(type: "Account", id: "0011Y00003HVMu4QAH") 
+
+// Insert a new record
 let id: String = try await salesforce.create(type: "Account", fields: ["Name": "Acme Corp."]
+
+// Update a record
 try await salesforce.update(type: "Account", id: "0011Y00003HVMu4QAH", fields: ["BillingCity": "Austin"])
 ```
 
