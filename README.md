@@ -69,6 +69,8 @@ let queryResults: QueryResult<Record> = try await salesforce.myRecords(type: "Ac
 let searchResults: [Record] = try await salesforce.search(sosl: "FIND {Joe Smith}")
 let userInfo: Identity = try await salesforce.identity()
 let account: Record = try await salesforce.read(type: "Account", id: "0011Y00003HVMu4QAH"
+let id: String = try await salesforce.create(type: "Account", fields: ["Name": "Acme Corp."]
+try await salesforce.update(type: "Account", id: "0011Y00003HVMu4QAH", fields: ["BillingCity": "Austin"])
 ```
 
 ## User Authorization
