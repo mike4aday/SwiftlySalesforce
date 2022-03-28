@@ -21,12 +21,43 @@
 * Xcode 13
 
 ## Quick Start
-Get up and running in a few minutes:
-1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) environment.
-1. [Create a Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your new environment. ([Example](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png))
-1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) the Swiftly Salesforce package to your Xcode project with URL https://github.com/mike4aday/SwiftlySalesforce.git. 
+Get up and running in less than 5 minutes:
 
-Check out this [screenshot](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png) for an example Connected App definition. Note that the checkbox for "Require Secret for Refresh Token Flow" should *not* be selected.
+1. **Get a free Salesforce Developer Edition:** You can sign up for a free developer environment (also called an "organization" or "org") [here](https://developer.salesforce.com/signup). It will never expire as long as you log in at least once every 6 months.
+
+2. **Create a Salesforce Connected App:** Create a new [Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your developer environment. [This screenshot](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png) shows an example; you can copy the settings that I've entered. Be sure that "Require Secret for Refresh Token Flow" is *not* checked.
+
+3. **Add Swiftly Salesforce to your project:** Add the Swiftly Salesforce package to your Xcode project, according to [these instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app), and using the URL https://github.com/mike4aday/SwiftlySalesforce.git
+
+4. **Create a configuration file:** In your Xcode project, create an empty file named 'Salesforce.json' and add the following JSON text, using the actual values for your Connected App's consumer key and callback URL instead of the placeholder text:
+```json
+{
+    "consumerKey" : "<Replace with the consumer key from your Connected App definition>",
+    "callbackURL" : "<Replace with the callback URL from your Connected App definition>"
+}
+```
+
+5. **Connect to Salesforce:** Connect to Salesforce and you're ready to go! If you're using SwiftUI, you could call the following from your main application file and store the Salesforce connection in your environment. Swiftly Salesforce will automatically handle all the OAuth flows, authenticating the user on first use of your app, and then refreshing the access token when it expires.
+```swift
+//... MySalesforceAccountsApp.swift
+import SwiftUI
+import SwiftlySalesforce
+
+@main
+struct MySalesforceAccountsApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView().environmentObject(try! Salesforce.connect())
+        }
+    }
+}
+```
+```swift
+//... ContentView.swift
+@Environment var salesforce: Connection
+//...
+let queryResults = try await salesforce.myRecords(type: "Account")
+```
 
 ## Sample App
 Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses [SwiftUI](https://developer.apple.com/documentation/swiftui/), [Swift concurrency](https://developer.apple.com/news/?id=2o3euotz) and Swiftly Salesforce to display the user's Salesforce account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect it to Salesforce.
