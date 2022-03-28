@@ -26,6 +26,17 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "SwiftlySalesforceTests",
-            dependencies: ["SwiftlySalesforce"]),
+            dependencies: ["SwiftlySalesforce"],
+            resources: [
+                .copy("MockAccount.json"),
+                .copy("MockAccountMetadata.json"),
+                .copy("MockAccountMissingURLAttribute.json"),
+                .copy("MockAggregateQueryResult.json"),
+                .copy("MockConfig.json"),
+                .copy("MockIdentity.json"),
+                .copy("MockLimits.json"),
+                .copy("MockSearchResults.json")
+            ]
+        ),
     ]
 )
