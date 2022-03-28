@@ -1,13 +1,16 @@
 import Foundation
 import SwiftUI
 
+/// Handles the interaction with the Salesforce REST API.
+/// Your app should only have a single `Connection` instance.
 public class Connection: ObservableObject {
     
     internal let authorizer: Authorizer
     internal let credentialStore: CredentialStore
     internal let defaults: UserDefaults
     internal let session: URLSession
-      
+    
+    /// Unique identifier for current Salesforce user.
     public var userIdentifier: UserIdentifier? {
         get {
             return defaults.userIdentifier
@@ -27,6 +30,10 @@ public class Connection: ObservableObject {
         self.session = session
     }
     
+    /// Makes an asynchronous request for data from the Salesforce REST API.
+    /// - Parameters:
+    ///   - service: The `DataService` instance from which you're requesting data
+    /// - Returns: Output from the service endpoint
     public func request<T: DataService>(service: T) async throws -> T.Output {
         let credential = try await getCredential()
         do {
