@@ -1,4 +1,5 @@
-![Swiftly Salesforce](https://mike4aday.github.io/SwiftlySalesforce/images/Swiftly-Salesforce-Hexagon-Logo.png) 
+<img src="https://mike4aday.github.io/SwiftlySalesforce/images/Swiftly-Salesforce-Logo.svg" width="105px" /> 
+
 # Swiftly Salesforce
 *The Swift-est way to build native mobile apps that connect to [Salesforce](https://www.salesforce.com/products/platform/overview/)*
 
