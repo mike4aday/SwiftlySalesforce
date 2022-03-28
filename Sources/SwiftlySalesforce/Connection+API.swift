@@ -2,6 +2,8 @@ import Foundation
 
 public extension Connection {
     
+    /// Queries Salesforce for the
+    /// - Returns: A dictionary of ``Limit`` instances
     func limits() async throws -> [String: Limit] {
         return try await request(service: Resource.Limits())
     }
@@ -54,10 +56,25 @@ public extension Connection {
         return try await request(service: Resource.SObjects.DescribeGlobal())
     }
     
+    /// Gets information about the current user
+    /// - Returns: An ``Identity`` instance.
     func identity() async throws -> Identity {
         return try await request(service: IdentityService())
     }
     
+    /// Represents a call to an Apex class exposed as a REST service.
+    ///
+    /// You can expose your Apex class and methods so that external applications can access your code and your application through the REST architecture. This is done by defining your Apex class with the @RestResource annotation to expose it as a REST resource. Similarly, add annotations to your methods to expose them through REST. For example, you can add the @HttpGet annotation to your method to expose it as a REST resource that can be called by an HTTP GET request.
+    /// - Parameters:
+    ///   - method: Optional, HTTP method to use; if `nil` then GET will be used in the request.
+    ///   - path: Path to the Apex REST service, as defined in the `urlMapping` of the `@RestResource` annotation on the target class.
+    ///   - queryItems: Optional query items to include in the request.
+    ///   - headers: Optional `HTTP` headers to include in the request.
+    ///   - body: Request body for a `POST` , `PATCH` or `PUT`  request.
+    ///   - timeoutInterval: request timeout interval, in seconds.
+    /// - Returns: The `Decodable` return value from the Apex class.
+    ///
+    /// See [Introduction to Apex REST](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_rest_intro.htm).
     func apex<T: Decodable>(
         method: String? = nil,
         path: String,
