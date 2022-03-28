@@ -7,8 +7,8 @@
 
 * Written entirely in [Swift](https://developer.apple.com/swift/).
 * Very easy to install and update with [Swift Package Manager](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app).
-* Built with Apple's [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex, asynchronous calls to the [Salesforce REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/).
-* Works great with [SwiftUI](https://developer.apple.com/documentation/swiftui/), the modern, declarative way to build iOS apps.
+* Built with Apple's new [Swift concurrency](https://developer.apple.com/news/?id=2o3euotz) model to simplify complex, asynchronous calls to the [Salesforce REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/).
+* Designed for [SwiftUI](https://developer.apple.com/documentation/swiftui/), the modern, declarative way to build iOS apps.
 * Manages the Salesforce [user authorization flows](https://help.salesforce.com/articleView?id=sf.remoteaccess_oauth_flows.htm&type=5) automatically.
 * Pair with [Core Data](https://developer.apple.com/documentation/coredata) for a complete offline mobile solution.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS](https://github.com/forcedotcom/SalesforceMobileSDK-iOS).
