@@ -53,8 +53,15 @@ struct MySalesforceAccountsApp: App {
     }
 }
 ```
+
+I expect that you'll find most of the methods you'll need in the file [`Connection+API.swift`](https://github.com/mike4aday/SwiftlySalesforce/blob/fc9a5cfd659537cdde34059df35e6b5a1f8f229d/Sources/SwiftlySalesforce/Connection+API.swift) but if you require more, you could create your own implementation of [`DataService`](https://github.com/mike4aday/SwiftlySalesforce/blob/fc9a5cfd659537cdde34059df35e6b5a1f8f229d/Sources/SwiftlySalesforce/DataService.swift) and override just the relevant methods. See the source files in the `Services` folder for examples of [`DataService`](https://github.com/mike4aday/SwiftlySalesforce/blob/fc9a5cfd659537cdde34059df35e6b5a1f8f229d/Sources/SwiftlySalesforce/DataService.swift) implementations that I created.
+
+Here are some examples of using the `Connection` class' convenience methods:
+
 ```swift
 // ContentView.swift
+import SwiftUI
+import SwiftlySalesforce
 //...
 @Environment var salesforce: Connection
 //...
