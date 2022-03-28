@@ -37,9 +37,9 @@ Get up and running in less than 5 minutes:
 }
 ```
 
-5. **Connect to Salesforce:** Connect to Salesforce and you're ready to go! If you're using SwiftUI, you could call the following from your main application file and store the Salesforce connection in your environment. Swiftly Salesforce will automatically handle all the OAuth flows, authenticating the user on first use of your app, and then refreshing the access token when it expires.
+5. **Connect to Salesforce:** Connect to Salesforce and you're ready to go! If you're using SwiftUI, you could call the following from your main application file and store the Salesforce connection in your environment. Swiftly Salesforce will automatically handle all the OAuth flows, authenticating the user on the first use of your app, and then silently refreshing the user's access token when it expires.
 ```swift
-//... MySalesforceAccountsApp.swift
+// MySalesforceAccountsApp.swift
 import SwiftUI
 import SwiftlySalesforce
 
@@ -53,10 +53,13 @@ struct MySalesforceAccountsApp: App {
 }
 ```
 ```swift
-//... ContentView.swift
+// ContentView.swift
 @Environment var salesforce: Connection
 //...
-let queryResults = try await salesforce.myRecords(type: "Account")
+let queryResults: QueryResult<Record> = try await salesforce.myRecords(type: "Account")
+let searchResults: [Record] = try await salesforce.search(sosl: "FIND {Joe Smith}")
+let userInfo: Identity = try await salesforce.identity()
+let account: Record = try await salesforce.read(type: "Account", id: "0011Y00003HVMu4QAH"
 ```
 
 ## Sample App
