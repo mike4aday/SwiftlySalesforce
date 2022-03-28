@@ -55,6 +55,7 @@ struct MySalesforceAccountsApp: App {
 ```
 ```swift
 // ContentView.swift
+//...
 @Environment var salesforce: Connection
 //...
 let queryResults: QueryResult<Record> = try await salesforce.myRecords(type: "Account")
