@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 10.0.0 (March 28, 2022)
+Major 'breaking' release. Highlights:
+* Replaces Swift Combine with Swift Concurrency (async/await)
+* Requires iOS 15+, Swift 5.5+ and Xcode 13+
+* Adds SOSL search convenience method
+
 ## Version 9.0.5 (July 19, 2021)
 Updated default API version to 52.0 (Summer '21).
 
