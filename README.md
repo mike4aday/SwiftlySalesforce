@@ -33,7 +33,7 @@ Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccoun
 
 Before you run the sample app, edit [Salesforce.json](https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/Salesforce.json) and replace the temporary values for the consumer key and callback URL with those of your own Connected App.
 
-## Documentation
+## Online Documentation
 Comning soon.
 
 ## User Authorization
