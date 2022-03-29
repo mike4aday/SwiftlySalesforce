@@ -1,0 +1,69 @@
+{
+    "totalSize": 7,
+    "done": true,
+    "records": [
+        {
+            "attributes": {
+                "type": "AggregateResult"
+            },
+            "WhatId": null,
+            "ActivityDate": null,
+            "Status": "Not Started",
+            "MyCount": 10
+        },
+        {
+            "attributes": {
+                "type": "AggregateResult"
+            },
+            "WhatId": null,
+            "ActivityDate": null,
+            "Status": "Deferred",
+            "MyCount": 3
+        },
+        {
+            "attributes": {
+                "type": "AggregateResult"
+            },
+            "WhatId": null,
+            "ActivityDate": "2017-10-15",
+            "Status": "Not Started",
+            "MyCount": 1
+        },
+        {
+            "attributes": {
+                "type": "AggregateResult"
+            },
+            "WhatId": null,
+            "ActivityDate": "2017-10-15",
+            "Status": "Waiting on someone else",
+            "MyCount": 1
+        },
+        {
+            "attributes": {
+                "type": "AggregateResult"
+            },
+            "WhatId": null,
+            "ActivityDate": "2017-10-15",
+            "Status": "Deferred",
+            "MyCount": 1
+        },
+        {
+            "attributes": {
+                "type": "AggregateResult"
+            },
+            "WhatId": "006i0000005W4fdAAC",
+            "ActivityDate": null,
+            "Status": "Deferred",
+            "MyCount": 1
+        },
+        {
+            "attributes": {
+                "type": "AggregateResult"
+            },
+            "WhatId": "500i0000001ruqeAAA",
+            "ActivityDate": "2017-10-03",
+            "Status": "Not Started",
+            "MyCount": 1
+        }
+    ]
+}

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Michael Epstein on 4/25/21.
-//
-
 import Foundation
 
 /// Salesforce field metadata.

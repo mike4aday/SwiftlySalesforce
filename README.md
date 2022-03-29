@@ -1,46 +1,105 @@
-![Swiftly Salesforce](https://mike4aday.github.io/SwiftlySalesforce/images/Headline.png)
+<img src="https://mike4aday.github.io/SwiftlySalesforce/images/Swiftly-Salesforce-Logo.svg" width="88px"/> 
 
-<img src="https://img.shields.io/badge/%20in-swift%205.3-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>
+# Swiftly Salesforce
 
-Swiftly Salesforce is the Swift-est way to build native mobile apps that connect to [Salesforce](https://www.salesforce.com/products/platform/overview/):
+<img src="https://img.shields.io/badge/%20in-swift%205.5-orange.svg"/>&nbsp;<img src="https://img.shields.io/cocoapods/p/SwiftlySalesforce.svg?style=flat"/>&nbsp;<img src="https://img.shields.io/github/license/mike4aday/SwiftlySalesforce"/>
+
+"The Swift-est way to build native mobile apps that connect to [Salesforce](https://www.salesforce.com/products/platform/overview/)."
+
 * Written entirely in [Swift](https://developer.apple.com/swift/).
 * Very easy to install and update with [Swift Package Manager](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app).
-* Built with Apple's [Combine](https://developer.apple.com/documentation/combine) framework to simplify complex, asynchronous calls to the [Salesforce REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/).
-* Works great with [SwiftUI](https://developer.apple.com/documentation/swiftui/), the modern, declarative way to build iOS apps.
+* Built with Apple's new [Swift concurrency](https://developer.apple.com/news/?id=2o3euotz) model to simplify complex, asynchronous calls to the [Salesforce REST API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/).
+* Designed for [SwiftUI](https://developer.apple.com/documentation/swiftui/), the modern, declarative way to build iOS apps.
 * Manages the Salesforce [user authorization flows](https://help.salesforce.com/articleView?id=sf.remoteaccess_oauth_flows.htm&type=5) automatically.
 * Pair with [Core Data](https://developer.apple.com/documentation/coredata) for a complete offline mobile solution.
 * Simpler and lighter alternative to the Salesforce [Mobile SDK for iOS](https://github.com/forcedotcom/SalesforceMobileSDK-iOS).
 * See [what's new](./CHANGELOG.md) in this release.
 
 ## Minimum Requirements
-* iOS 14.0
-* Swift 5.3
-* Xcode 12
+* iOS 15.0
+* Swift 5.5
+* Xcode 13
 
 ## Quick Start
-Get up and running in a few minutes:
-1. [Get a free Salesforce Developer Edition](https://developer.salesforce.com/signup) environment.
-1. [Create a Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your new environment. ([Example](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png))
-1. [Add](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) the Swiftly Salesforce package to your Xcode project with URL https://github.com/mike4aday/SwiftlySalesforce.git. 
+Get up and running in less than 5 minutes:
 
-Check out this [screenshot](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png) for an example Connected App definition. Note that the checkbox for "Require Secret for Refresh Token Flow" should *not* be selected.
+1. **Get a free Salesforce Developer Edition:** You can sign up for a free developer environment (also called an "organization" or "org") [here](https://developer.salesforce.com/signup). It will never expire as long as you log in at least once every 6 months.
 
-Most of your interactions with Swiftly Salesforce will be via the [`ConnectedApp`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/ConnectedApp.swift) struct, which represents your Salesforce [Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5). For example, you could [`query`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/ConnectedApp%2BQuery.swift#L22), [`insert`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/ConnectedApp%2BSObjects.swift#L33), [`retrieve`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/ConnectedApp%2BSObjects.swift#L22), [`update`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/ConnectedApp%2BSObjects.swift#L51) or [`delete`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/ConnectedApp%2BSObjects.swift#L66) Salesforce records using `ConnectedApp`'s relevant convenience methods. 
+2. **Create a Salesforce Connected App:** Create a new [Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your developer environment. [This screenshot](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png) shows an example; you can copy the settings that I've entered. Be sure that "Require Secret for Refresh Token Flow" is *not* checked.
 
-Or you could create your own struct that implements the [`Service`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/Service.swift) protocol and overrides its [default property implementations](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/Service.swift#L26). Then use your custom service as an argument to `ConnectedApp`'s [`go`](https://github.com/mike4aday/SwiftlySalesforce/blob/cf4becddd63d1a4a6900da5ec3afd0fd87401b0b/Sources/SwiftlySalesforce/ConnectedApp.swift#L87) method.
+3. **Add Swiftly Salesforce to your project:** Add the Swiftly Salesforce package to your Xcode project, according to [these instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app), and using the URL https://github.com/mike4aday/SwiftlySalesforce.git.
 
-## Sample App
-Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses [SwiftUI](https://developer.apple.com/documentation/swiftui/), [Combine](https://developer.apple.com/documentation/combine) and Swiftly Salesforce to display the user's Salesforce account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect it to Salesforce. See especially [MyAccountsLoader.swift](https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/MyAccountsLoader.swift), [ContentView.swift](https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/ContentView.swift) and [Salesforce.json](https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/Salesforce.json).
+4. **Create a configuration file:** In your Xcode project, create an empty file named [`Salesforce.json`](https://github.com/mike4aday/MySalesforceAccounts/blob/51cda01bc5c867643a9ef5085ede05e91151dfda/MySalesforceAccounts/Salesforce.json) and add the following JSON text, and replace the placeholder text with the actual values for your Connected App's consumer key and callback URL:
+```json
+{
+    "consumerKey" : "<Replace with the consumer key from your Connected App definition>",
+    "callbackURL" : "<Replace with the callback URL from your Connected App definition>"
+}
+```
 
-Before you run the sample app, edit [Salesforce.json](https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/Salesforce.json) and replace the temporary values for the consumer key and callback URL with those of your own Connected App.
+5. **Connect to Salesforce:** Create a `Connection` instance and you're ready to go! If you're using SwiftUI, you could call the following from your main application file and store the Salesforce connection in the environment. Swiftly Salesforce will automatically handle all the OAuth flows, authenticating users on their first use of your app and then silently refreshing their access tokens when required.
 
-## Documentation
-[Swiftly Salesforce documentation](https://mike4aday.github.io/SwiftlySalesforce/docs/index.html)
+```swift
+// MySalesforceAccountsApp.swift
+import SwiftUI
+import SwiftlySalesforce
+
+@main
+struct MySalesforceAccountsApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView().environmentObject(try! Salesforce.connect())
+        }
+    }
+}
+```
+
+I expect that you'll find most of the methods you'll need in the file [`Connection+API.swift`](https://github.com/mike4aday/SwiftlySalesforce/blob/fc9a5cfd659537cdde34059df35e6b5a1f8f229d/Sources/SwiftlySalesforce/Connection+API.swift) but if you require more, you could create your own implementation of [`DataService`](https://github.com/mike4aday/SwiftlySalesforce/blob/fc9a5cfd659537cdde34059df35e6b5a1f8f229d/Sources/SwiftlySalesforce/DataService.swift) and override just the relevant methods. See the source files in the `Sources/SwiftlySalesforce/Services` folder for examples of [`DataService`](https://github.com/mike4aday/SwiftlySalesforce/blob/fc9a5cfd659537cdde34059df35e6b5a1f8f229d/Sources/SwiftlySalesforce/DataService.swift) implementations that I created.
+
+Here are some examples of using the `Connection` class' convenience methods:
+
+```swift
+// ContentView.swift
+import SwiftUI
+import SwiftlySalesforce
+//...
+@Environment var salesforce: Connection
+//...
+// Query the current user's accounts
+let queryResults: QueryResult<Record> = try await salesforce.myRecords(type: "Account")
+
+// Search for a string in Salesforce records
+let searchResults: [Record] = try await salesforce.search(sosl: "FIND {Joe Smith}")
+
+// Get info about the current user
+let userInfo: Identity = try await salesforce.identity()
+
+// Retrieve all fields of an Account record
+let account: Record = try await salesforce.read(type: "Account", id: "0011Y00003HVMu4QAH")
+
+// Retrieve all fields of an Account record and decode them into your own, custom Decodable instance
+let account2: CustomAccount = try await salesforce.read(type: "Account", id: "0011Y00003HVMu4QAH") 
+
+// Insert a new record
+let recordID: String = try await salesforce.create(type: "Account", fields: ["Name": "Acme Corp."]
+
+// Update a record
+try await salesforce.update(type: "Account", id: "0011Y00003HVMu4QAH", fields: ["BillingCity": "Austin"])
+
+// Get metadata about any Salesforce object, including custom fields, labels, validation rules, etc.
+let accountMetadata = try await salesforce.describe("Account")
+```
 
 ## User Authorization
-Swiftly Salesforce will automatically manage all required Salesforce [authorization flows](https://help.salesforce.com/articleView?id=sf.remoteaccess_oauth_flows.htm&type=5). If Swiftly Salesforce already has a valid access token in its secure  store, it will include that token in the header of every API request. If the token has expired and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form. 
+Swiftly Salesforce will automatically manage all required Salesforce [authorization flows](https://help.salesforce.com/articleView?id=sf.remoteaccess_oauth_flows.htm&type=5). If Swiftly Salesforce already has a valid access token in its secure  store, it will include that token in the header of every API request. If the token has expired and Salesforce rejects the request, then Swiftly Salesforce will attempt to refresh the access token without bothering the user to re-enter the username and password. If Swiftly Salesforce doesn't have a valid access token, or is unable to refresh it, then Swiftly Salesforce will direct the user to the Salesforce-hosted login form.
 
-You could modify this default authorization behavior if you don't want your user interrupted by Salesforce's authentication form. Many methods have an argument, `allowsLogin`, which is `true` by default ([example](https://github.com/mike4aday/SwiftlySalesforce/blob/6134e06e46f333a7398915f2fce2e80d51475dac/Sources/SwiftlySalesforce/ConnectedApp%2BQuery.swift#L71)). But if you set `allowsLogin` to `false`, Swiftly Salesforce would attempt to refresh the token without interrupting the user, and if that attempt is unsuccessful the call would fail. The user would not be prompted for the username and password, and you could catch the resulting [error](https://github.com/mike4aday/SwiftlySalesforce/blob/9d7bbf08c4ea9ba1edd8d0428df280ad9f944a35/Sources/SwiftlySalesforce/SalesforceError.swift#L21) and handle it as you see fit.
+## Sample App
+Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses [SwiftUI](https://developer.apple.com/documentation/swiftui/), [Swift concurrency](https://developer.apple.com/news/?id=2o3euotz) and Swiftly Salesforce to display the user's Salesforce account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect it to Salesforce.
+
+Before you run the sample app, edit [Salesforce.json](https://github.com/mike4aday/MySalesforceAccounts/blob/51cda01bc5c867643a9ef5085ede05e91151dfda/MySalesforceAccounts/Salesforce.json) and replace the temporary values for the consumer key and callback URL with those of your own Connected App.
+
+## Online Documentation
+Comning soon. 
 
 ## Questions, Suggestions & Bug Reports
 * Open a [GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues/new)

@@ -1,0 +1,56 @@
+{
+    "searchRecords": [
+        {
+            "attributes": {
+                "type": "Contact",
+                "url": "/services/data/v53.0/sobjects/Contact/0035d00006bOrFOAA0"
+            },
+            "FirstName": "Dirk",
+            "LastName": "Birk",
+            "Department": null
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "url": "/services/data/v53.0/sobjects/Contact/003i000000DsuoGAAR"
+            },
+            "FirstName": "Rose",
+            "LastName": "Gonzalez",
+            "Department": "Procurement"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "url": "/services/data/v53.0/sobjects/Contact/003i000000DsuoHAAR"
+            },
+            "FirstName": "Sean",
+            "LastName": "Forbes",
+            "Department": "Finance"
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "url": "/services/data/v53.0/sobjects/Account/0011Y00003I0OpPQAV"
+            },
+            "Name": "Acme Construction Co., Inc.",
+            "BillingCity": "Round Rock",
+            "NumberOfEmployees": null
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "url": "/services/data/v53.0/sobjects/Account/001i000000JEK7mAAH"
+            },
+            "Name": "Edge Communications",
+            "BillingCity": "Champaign",
+            "NumberOfEmployees": 1000
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "url": "/services/data/v53.0/sobjects/Case/500i0000001ruqgAAA"
+            },
+            "CaseNumber": "00001002"
+        }
+    ]
+}

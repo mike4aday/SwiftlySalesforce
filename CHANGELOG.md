@@ -1,5 +1,16 @@
 # Change Log
 
+## Version 10.0.0 (March 28, 2022)
+Major 'breaking' release. Highlights:
+* Replaces Swift Combine publishers with Swift Concurrency (async/await) model
+* Requires iOS 15+, Swift 5.5+ and Xcode 13+
+* Adds SOSL search convenience method
+* Improves performance of OAuth2 authorization flows
+* Resolves issue #135
+* Resolves issue #138
+* Updates default Salesforce API version to 54.0 (Spring '22)
+* Removes capability to disable automatic user authentication when required. (It's complicated with the new Swift Concurrency and the improved performance mentioned above. If you require this feature, please let me know by creating a [new GitHub issue](https://github.com/mike4aday/SwiftlySalesforce/issues/new).) 
+
 ## Version 9.0.5 (July 19, 2021)
 Updated default API version to 52.0 (Summer '21).
 

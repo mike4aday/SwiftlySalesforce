@@ -1,0 +1,5 @@
+{
+    "consumerKey": "consumer-key",
+    "callbackURL": "myplaygroundapp://authorized",
+    "authorizingHost": "login.salesforce.com"
+}
