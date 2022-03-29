@@ -29,7 +29,7 @@ Get up and running in less than 5 minutes:
 
 3. **Add Swiftly Salesforce to your project:** Add the Swiftly Salesforce package to your Xcode project, according to [these instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app), and using the URL https://github.com/mike4aday/SwiftlySalesforce.git.
 
-4. **Create a configuration file:** In your Xcode project, create an empty file named 'Salesforce.json' and add the following JSON text, using the actual values for your Connected App's consumer key and callback URL instead of the placeholder text:
+4. **Create a configuration file:** In your Xcode project, create an empty file named `Salesforce.json` and add the following JSON text, using the actual values for your Connected App's consumer key and callback URL instead of the placeholder text:
 ```json
 {
     "consumerKey" : "<Replace with the consumer key from your Connected App definition>",
