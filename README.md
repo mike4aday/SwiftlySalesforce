@@ -85,6 +85,9 @@ let recordID: String = try await salesforce.create(type: "Account", fields: ["Na
 
 // Update a record
 try await salesforce.update(type: "Account", id: "0011Y00003HVMu4QAH", fields: ["BillingCity": "Austin"])
+
+// Get metadata about any Salesforce object, including custom fields, labels, validation rules, etc.
+let accountMetadata = try await salesforce.describe("Account")
 ```
 
 ## User Authorization
