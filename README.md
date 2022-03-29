@@ -29,7 +29,7 @@ Get up and running in less than 5 minutes:
 
 3. **Add Swiftly Salesforce to your project:** Add the Swiftly Salesforce package to your Xcode project, according to [these instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app), and using the URL https://github.com/mike4aday/SwiftlySalesforce.git.
 
-4. **Create a configuration file:** In your Xcode project, create an empty file named `Salesforce.json` and add the following JSON text, and replace the placeholder text with the actual values for your Connected App's consumer key and callback URL:
+4. **Create a configuration file:** In your Xcode project, create an empty file named [`Salesforce.json`](https://github.com/mike4aday/MySalesforceAccounts/blob/51cda01bc5c867643a9ef5085ede05e91151dfda/MySalesforceAccounts/Salesforce.json) and add the following JSON text, and replace the placeholder text with the actual values for your Connected App's consumer key and callback URL:
 ```json
 {
     "consumerKey" : "<Replace with the consumer key from your Connected App definition>",
@@ -93,7 +93,7 @@ Swiftly Salesforce will automatically manage all required Salesforce [authorizat
 ## Sample App
 Check out [MySalesforceAccounts](https://github.com/mike4aday/MySalesforceAccounts) for a complete, working app that uses [SwiftUI](https://developer.apple.com/documentation/swiftui/), [Swift concurrency](https://developer.apple.com/news/?id=2o3euotz) and Swiftly Salesforce to display the user's Salesforce account records. Though it's a relatively-trival app, it illustrates how to configure an app and quickly connect it to Salesforce.
 
-Before you run the sample app, edit [Salesforce.json](https://github.com/mike4aday/MySalesforceAccounts/blob/2fa839ad30155d384712c3b155dddb2ed19119b8/MySalesforceAccounts/Salesforce.json) and replace the temporary values for the consumer key and callback URL with those of your own Connected App.
+Before you run the sample app, edit [Salesforce.json](https://github.com/mike4aday/MySalesforceAccounts/blob/51cda01bc5c867643a9ef5085ede05e91151dfda/MySalesforceAccounts/Salesforce.json) and replace the temporary values for the consumer key and callback URL with those of your own Connected App.
 
 ## Online Documentation
 Comning soon. 
