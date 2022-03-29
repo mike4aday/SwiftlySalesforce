@@ -4,8 +4,8 @@
 Major 'breaking' release. Highlights:
 * Replaces Swift Combine publishers with Swift Concurrency (async/await) model
 * Requires iOS 15+, Swift 5.5+ and Xcode 13+
-* Adds SOSL search convenience method
 * Improves performance of OAuth2 authorization flows
+* Adds [SOSL search convenience method](https://github.com/mike4aday/SwiftlySalesforce/blob/27f79a1b6ba8b0be5695c02d6c0282dbf57394a7/Sources/SwiftlySalesforce/Connection%2BAPI.swift#L27)
 * Resolves issue #135
 * Resolves issue #138
 * Updates default Salesforce API version to 54.0 (Spring '22)
