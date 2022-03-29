@@ -15,7 +15,7 @@
     "BillingState" : "AK",
     "BillingPostalCode" : "99501",
     "BillingCountry" : "US",
-    "BillingLatitude" : 61.217061,
+    "BillingLatitude" : 61.217062,
     "BillingLongitude" : -149.894342,
     "BillingGeocodeAccuracy" : "Address",
     "BillingAddress" : {
