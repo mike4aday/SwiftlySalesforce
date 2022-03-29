@@ -27,7 +27,7 @@ Get up and running in less than 5 minutes:
 
 2. **Create a Salesforce Connected App:** Create a new [Connected App](https://help.salesforce.com/articleView?id=sf.connected_app_create.htm&type=5) in your developer environment. [This screenshot](https://mike4aday.github.io/SwiftlySalesforce/images/ConnectedAppDefinition.png) shows an example; you can copy the settings that I've entered. Be sure that "Require Secret for Refresh Token Flow" is *not* checked.
 
-3. **Add Swiftly Salesforce to your project:** Add the Swiftly Salesforce package to your Xcode project, according to [these instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app), and using the URL https://github.com/mike4aday/SwiftlySalesforce.git
+3. **Add Swiftly Salesforce to your project:** Add the Swiftly Salesforce package to your Xcode project, according to [these instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app), and using the URL https://github.com/mike4aday/SwiftlySalesforce.git.
 
 4. **Create a configuration file:** In your Xcode project, create an empty file named 'Salesforce.json' and add the following JSON text, using the actual values for your Connected App's consumer key and callback URL instead of the placeholder text:
 ```json
