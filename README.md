@@ -62,8 +62,10 @@ Here are some examples of using the `Connection` class' convenience methods:
 // ContentView.swift
 import SwiftUI
 import SwiftlySalesforce
+
 //...
-@Environment var salesforce: Connection
+@EnvironmentObject var salesforce: Connection
+
 //...
 // Query the current user's accounts
 let queryResults: QueryResult<Record> = try await salesforce.myRecords(type: "Account")
