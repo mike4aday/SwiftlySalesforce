@@ -12,6 +12,17 @@ public extension Connection {
         return try await request(service: Resource.Limits())
     }
     
+    /// Performs a query.
+    ///
+    /// See: 
+    /// - [Query](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm)
+    /// - [SOQL and SOSL Reference](https://developer.salesforce.com/docs/atlas.en-us.232.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_sosl_intro.htm)
+    ///
+    /// - Parameters:
+    ///   - soql: A SOQL query.
+    ///   - batchSize: A numeric value that specifies the number of records returned for a query request. Child objects count toward the number of records for the batch size. For example, in relationship queries, multiple child objects are returned per parent row returned. The default is 2,000; the minimum is 200, and the maximum is 2,000. There is no guarantee that the requested batch size is the actual batch size. Changes are made as necessary to maximize performance.
+    /// - Returns: Publisher of `QueryResult` of `Decodable` instances.
+    /// 
     func query<T: Decodable>(soql: String, batchSize: Int? = nil) async throws -> QueryResult<T> {
         return try await request(service: Resource.Query.Run(soql: soql, batchSize: batchSize))
     }
