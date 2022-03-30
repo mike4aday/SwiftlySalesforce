@@ -2,7 +2,11 @@ import Foundation
 
 public extension Connection {
     
-    /// Queries Salesforce for the
+    /// Retrieves information about limits in your org. 
+    /// For each limit, this method returns the maximum allocation and the remaining allocation based on usage.
+    /// 
+    /// See: [Limits](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm)
+    ///
     /// - Returns: A dictionary of ``Limit`` instances
     func limits() async throws -> [String: Limit] {
         return try await request(service: Resource.Limits())
