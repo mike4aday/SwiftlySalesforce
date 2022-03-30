@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 10.0.1 (March 29, 2022)
+Minor update. Added some inline code documentation and updated README.md.
+
 ## Version 10.0.0 (March 28, 2022)
 Major 'breaking' release. Highlights:
 * Replaces Swift Combine publishers with Swift Concurrency (async/await) model
