@@ -2,22 +2,22 @@ import Foundation
 
 public struct HTTP {
     
-    struct Method {
-        static let get = "GET"
-        static let delete = "DELETE"
-        static let post = "POST"
-        static let patch = "PATCH"
-        static let head = "HEAD"
-        static let put = "PUT"
+    public struct Method {
+        public static let get = "GET"
+        public static let delete = "DELETE"
+        public static let post = "POST"
+        public static let patch = "PATCH"
+        public static let head = "HEAD"
+        public static let put = "PUT"
     }
     
-    struct MIMEType {
-        static let json = "application/json;charset=UTF-8"
-        static let formUrlEncoded = "application/x-www-form-urlencoded;charset=utf-8"
+    public struct MIMEType {
+        public static let json = "application/json;charset=UTF-8"
+        public static let formUrlEncoded = "application/x-www-form-urlencoded;charset=utf-8"
     }
     
-    struct Header {
-        static let accept = "Accept"
-        static let contentType = "Content-Type"
+    public struct Header {
+        public static let accept = "Accept"
+        public static let contentType = "Content-Type"
     }
 }

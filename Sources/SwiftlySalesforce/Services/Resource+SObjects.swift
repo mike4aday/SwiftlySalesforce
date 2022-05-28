@@ -4,15 +4,33 @@ extension Resource {
     
     struct SObjects {
                 
-        struct Create<E: Encodable>: DataService {
+        struct Create: DataService {
                                     
             let type: String
-            let fields: [String: E]
+            let encode: () throws -> Data
+            
+            init<T>(type: String, fields: [String: T]) where T: Encodable {
+                self.type = type
+                self.encode = { try JSONEncoder().encode(fields) }
+            }
+            
+            init<T>(type: String, record: T, encoder: JSONEncoder) where T: Encodable {
+                self.type = type
+                self.encode = { try encoder.encode(record) }
+            }
+            
+            init<T, CodingKeys>(type: String, record: T, keysToEncode: [CodingKeys]) where T: Encodable {
+                self.type = type
+                self.encode = {
+                    let encoder = JSONEncoder().withEncodeSubset(keysToEncode: keysToEncode)
+                    return try encoder.encode(record)
+                }
+            }
                         
             func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.post
                 let path = Resource.path(for: "sobjects/\(type)")
-                let body = try JSONEncoder().encode(fields)
+                let body = try encode()
                 return try URLRequest(credential: credential, method: method, path: path, body: body)
             }
             
