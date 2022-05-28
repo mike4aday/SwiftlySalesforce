@@ -7,7 +7,7 @@ class Resource_SObjectsTests: DataServiceTests {
         
         // Given
         let fields = ["Name": "Acme Corp."]
-        let service = Resource.SObjects.Create(type: "Account", fields: fields)
+        let service = try Resource.SObjects.Create(type: "Account", fields: fields)
         
         // When
         let req = try service.createRequest(with: mockCredential)
@@ -24,7 +24,7 @@ class Resource_SObjectsTests: DataServiceTests {
         // Given
         let data = "{\"id\":\"0015d00003TCWCUAA5\",\"success\":true,\"errors\":[]}".data(using: .utf8)!
         let session = URLSession.mock(responseBody: data, statusCode: 201)
-        let service = Resource.SObjects.Create(type: "Account", fields: ["Name": "Acme Corp."])
+        let service = try Resource.SObjects.Create(type: "Account", fields: ["Name": "Acme Corp."])
 
         // When
         let recordID = try await service.request(with: mockCredential, using: session)
@@ -37,7 +37,7 @@ class Resource_SObjectsTests: DataServiceTests {
         
         // Given
         let fields = ["BillingCity": "Austin"]
-        let service = Resource.SObjects.Create(type: "Account", fields: fields)
+        let service = try Resource.SObjects.Create(type: "Account", fields: fields)
         
         // When
         var err: Error?

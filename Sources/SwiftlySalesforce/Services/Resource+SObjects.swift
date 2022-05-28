@@ -7,24 +7,23 @@ public extension Resource {
         public struct Create: DataService {
                                     
             let type: String
-            let encode: () throws -> Data
+            let body: Data
             
             @available(*, deprecated, message: "Call init(type: String, encode: () throws -> Data) instead.")
-            public init<T>(type: String, fields: [String: T]) where T: Encodable {
+            public init<T>(type: String, fields: [String: T]) throws where T: Encodable {
                 self.type = type
-                self.encode = { try JSONEncoder().encode(fields) }
+                self.body = try JSONEncoder().encode(fields)
             }
             
-            public init(type: String, encode: @escaping () throws -> Data) {
+            public init(type: String, body: Data) {
                 self.type = type
-                self.encode = encode 
+                self.body = body
             }
             
             public func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.post
                 let path = Resource.path(for: "sobjects/\(type)")
-                let body = try encode()
-                return try URLRequest(credential: credential, method: method, path: path, body: body)
+                return try URLRequest(credential: credential, method: method, path: path, body: self.body)
             }
             
             public func transform(data: Data) throws -> String {
