@@ -1,40 +1,33 @@
 import Foundation
 
-extension Resource {
+public extension Resource {
     
     struct SObjects {
                 
-        struct Create: DataService {
+        public struct Create: DataService {
                                     
             let type: String
             let encode: () throws -> Data
             
-            init<T>(type: String, fields: [String: T]) where T: Encodable {
+            @available(*, deprecated, message: "Call init(type: String, encode: () throws -> Data) instead.")
+            public init<T>(type: String, fields: [String: T]) where T: Encodable {
                 self.type = type
                 self.encode = { try JSONEncoder().encode(fields) }
             }
             
-            init<T>(type: String, record: T, encoder: JSONEncoder) where T: Encodable {
+            public init(type: String, encode: @escaping () throws -> Data) {
                 self.type = type
-                self.encode = { try encoder.encode(record) }
+                self.encode = encode 
             }
             
-            init<T, CodingKeys>(type: String, record: T, keysToEncode: [CodingKeys]) where T: Encodable {
-                self.type = type
-                self.encode = {
-                    let encoder = JSONEncoder().withEncodeSubset(keysToEncode: keysToEncode)
-                    return try encoder.encode(record)
-                }
-            }
-                        
-            func createRequest(with credential: Credential) throws -> URLRequest {
+            public func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.post
                 let path = Resource.path(for: "sobjects/\(type)")
                 let body = try encode()
                 return try URLRequest(credential: credential, method: method, path: path, body: body)
             }
             
-            func transform(data: Data) throws -> String {
+            public func transform(data: Data) throws -> String {
                 let result = try JSONDecoder(dateFormatter: .salesforce(.long)).decode(Result.self, from: data)
                 return result.id
             }
@@ -45,16 +38,16 @@ extension Resource {
         }
         
         //MARK: - Read record -
-        struct Read<D: Decodable>: DataService {
+        public struct Read<D: Decodable>: DataService {
             
-            typealias Output = D
+            public typealias Output = D
             
             let type: String
             let id: String
             
             var fields: [String]? = nil
 
-            func createRequest(with credential: Credential) throws -> URLRequest {
+            public func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.get
                 let path = Resource.path(for: "sobjects/\(type)/\(id)")
                 let queryItems = fields.map { ["fields": $0.joined(separator: ",")] }
@@ -63,9 +56,9 @@ extension Resource {
         }
         
         //MARK: - Update record -
-        struct Update<E: Encodable>: DataService {
+        public struct Update<E: Encodable>: DataService {
                         
-            typealias Output = Void
+            public typealias Output = Void
             
             let type: String
             let id: String
@@ -81,14 +74,14 @@ extension Resource {
         }
         
         //MARK: - Delete record -
-        struct Delete: DataService {
+        public struct Delete: DataService {
             
-            typealias Output = Void
+            public typealias Output = Void
             
             let type: String
             let id: String
                         
-            func createRequest(with credential: Credential) throws -> URLRequest {
+            public func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.delete
                 let path = Resource.path(for: "sobjects/\(type)/\(id)")
                 return try URLRequest(credential: credential, method: method, path: path)
@@ -96,13 +89,13 @@ extension Resource {
         }
         
         //MARK: - Describe SObject -
-        struct Describe: DataService {
+        public struct Describe: DataService {
             
-            typealias Output = ObjectDescription
+            public typealias Output = ObjectDescription
             
             let type: String
                         
-            func createRequest(with credential: Credential) throws -> URLRequest {
+            public func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.get
                 let path = Resource.path(for: "sobjects/\(type)/describe")
                 return try URLRequest(credential: credential, method: method, path: path)
@@ -110,15 +103,15 @@ extension Resource {
         }
         
         //MARK: - Describe all SObjects -
-        struct DescribeGlobal: DataService {
+        public struct DescribeGlobal: DataService {
                         
-            func createRequest(with credential: Credential) throws -> URLRequest {
+            public func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.get
                 let path = Resource.path(for: "sobjects")
                 return try URLRequest(credential: credential, method: method, path: path)
             }
             
-            func transform(data: Data) throws -> [ObjectDescription] {
+            public func transform(data: Data) throws -> [ObjectDescription] {
                 struct Result: Decodable {
                     var sobjects: [ObjectDescription]
                 }

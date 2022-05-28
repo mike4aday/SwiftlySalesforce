@@ -63,7 +63,29 @@ public extension Connection {
     /// - Returns: Publisher that emits the ID of the successfully-inserted record, or an error.
     ///
     func insert<T: Encodable>(type: String, fields: [String: T]) async throws -> String {
-        return try await request(service: Resource.SObjects.Create(type: type, fields: fields))
+        let encode = { try JSONEncoder().encode(fields) }
+        return try await request(service: Resource.SObjects.Create(type: type, encode: encode))
+    }
+    
+    func insert<T: Encodable>(type: String, record: T, encoder: JSONEncoder = JSONEncoder()) async throws -> String {
+        let encode = { try encoder.encode(record) }
+        return try await request(service: Resource.SObjects.Create(type: type, encode: encode))
+    }
+    
+    func insert<T: Encodable, CodingKeys>(type: String, record: T, keysToEncode: [CodingKeys]?) async throws -> String {
+        let encode = { () throws -> Data in
+            let encoder = JSONEncoder()
+            if let keys = keysToEncode {
+                encoder.userInfo[.keysToEncode] = keys
+            }
+            return try encoder.encode(record)
+        }
+        return try await request(service: Resource.SObjects.Create(type: type, encode: encode))
+    }
+    
+    func insert(type: String, body: Data) async throws -> String {
+        let encode = { () throws -> Data in body }
+        return try await request(service: Resource.SObjects.Create(type: type, encode: encode))
     }
     
     /// Retrieves a Salesforce record.
