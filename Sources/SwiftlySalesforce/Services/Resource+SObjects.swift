@@ -4,29 +4,29 @@ public extension Resource {
     
     struct SObjects {
                 
-        public struct Create: DataService {
+        struct Create: DataService {
                                     
             let type: String
             let body: Data
             
-            @available(*, deprecated, message: "Call init(type: String, encode: () throws -> Data) instead.")
-            public init<T>(type: String, fields: [String: T]) throws where T: Encodable {
+            @available(*, deprecated, message: "Call init(type: String, body: Data) instead.")
+            init<T>(type: String, fields: [String: T]) throws where T: Encodable {
                 self.type = type
                 self.body = try JSONEncoder().encode(fields)
             }
             
-            public init(type: String, body: Data) {
+            init(type: String, body: Data) {
                 self.type = type
                 self.body = body
             }
             
-            public func createRequest(with credential: Credential) throws -> URLRequest {
+            func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.post
                 let path = Resource.path(for: "sobjects/\(type)")
                 return try URLRequest(credential: credential, method: method, path: path, body: self.body)
             }
             
-            public func transform(data: Data) throws -> String {
+            func transform(data: Data) throws -> String {
                 let result = try JSONDecoder(dateFormatter: .salesforce(.long)).decode(Result.self, from: data)
                 return result.id
             }
@@ -37,7 +37,7 @@ public extension Resource {
         }
         
         //MARK: - Read record -
-        public struct Read<D: Decodable>: DataService {
+        struct Read<D: Decodable>: DataService {
             
             public typealias Output = D
             
@@ -55,9 +55,9 @@ public extension Resource {
         }
         
         //MARK: - Update record -
-        public struct Update<E: Encodable>: DataService {
+        struct Update<E: Encodable>: DataService {
                         
-            public typealias Output = Void
+            typealias Output = Void
             
             let type: String
             let id: String
@@ -73,14 +73,14 @@ public extension Resource {
         }
         
         //MARK: - Delete record -
-        public struct Delete: DataService {
+        struct Delete: DataService {
             
-            public typealias Output = Void
+            typealias Output = Void
             
             let type: String
             let id: String
                         
-            public func createRequest(with credential: Credential) throws -> URLRequest {
+            func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.delete
                 let path = Resource.path(for: "sobjects/\(type)/\(id)")
                 return try URLRequest(credential: credential, method: method, path: path)
@@ -88,13 +88,13 @@ public extension Resource {
         }
         
         //MARK: - Describe SObject -
-        public struct Describe: DataService {
+        struct Describe: DataService {
             
-            public typealias Output = ObjectDescription
+            typealias Output = ObjectDescription
             
             let type: String
                         
-            public func createRequest(with credential: Credential) throws -> URLRequest {
+            func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.get
                 let path = Resource.path(for: "sobjects/\(type)/describe")
                 return try URLRequest(credential: credential, method: method, path: path)
@@ -102,15 +102,15 @@ public extension Resource {
         }
         
         //MARK: - Describe all SObjects -
-        public struct DescribeGlobal: DataService {
+        struct DescribeGlobal: DataService {
                         
-            public func createRequest(with credential: Credential) throws -> URLRequest {
+            func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.get
                 let path = Resource.path(for: "sobjects")
                 return try URLRequest(credential: credential, method: method, path: path)
             }
             
-            public func transform(data: Data) throws -> [ObjectDescription] {
+            func transform(data: Data) throws -> [ObjectDescription] {
                 struct Result: Decodable {
                     var sobjects: [ObjectDescription]
                 }
