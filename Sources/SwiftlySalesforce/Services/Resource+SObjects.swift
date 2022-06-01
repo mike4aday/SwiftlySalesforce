@@ -4,15 +4,14 @@ extension Resource {
     
     struct SObjects {
                 
-        struct Create<E: Encodable>: DataService {
+        struct Create: DataService {
                                     
             let type: String
-            let fields: [String: E]
+            let body: Data
                         
             func createRequest(with credential: Credential) throws -> URLRequest {
                 let method = HTTP.Method.post
                 let path = Resource.path(for: "sobjects/\(type)")
-                let body = try JSONEncoder().encode(fields)
                 return try URLRequest(credential: credential, method: method, path: path, body: body)
             }
             

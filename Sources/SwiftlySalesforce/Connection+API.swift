@@ -58,12 +58,39 @@ public extension Connection {
     ///
     /// - Parameters:
     ///     - type: Type of record (e.g. `Account`, `Contact` or `MyCustomObject__c`).
+    ///     - record: Encodable representation of Salesforce record to insert.
+    ///     - encoder: JSON encoder to use for encoding the record.
+    ///
+    /// - Returns: Publisher that emits the ID of the successfully-inserted record, or an error.
+    ///
+    func insert<T: Encodable>(type: String, record: T, encoder: JSONEncoder = JSONEncoder()) async throws -> String {
+        let body = try encoder.encode(record)
+        return try await request(service: Resource.SObjects.Create(type: type, body: body))
+    }
+    
+    /// Inserts a Salesforce record
+    ///
+    /// - Parameters:
+    ///     - type: Type of record (e.g. `Account`, `Contact` or `MyCustomObject__c`).
     ///     - fields: Dictionary of fields names and values to insert.
     ///
     /// - Returns: Publisher that emits the ID of the successfully-inserted record, or an error.
     ///
     func insert<T: Encodable>(type: String, fields: [String: T]) async throws -> String {
-        return try await request(service: Resource.SObjects.Create(type: type, fields: fields))
+        let body = try JSONEncoder().encode(fields)
+        return try await request(service: Resource.SObjects.Create(type: type, body: body))
+    }
+    
+    /// Inserts a Salesforce record
+    ///
+    /// - Parameters:
+    ///     - type: Type of record (e.g. `Account`, `Contact` or `MyCustomObject__c`).
+    ///     - data: JSON-encoded data representation of Salesforce record to insert.
+    ///
+    /// - Returns: Publisher that emits the ID of the successfully-inserted record, or an error.
+    ///
+    func insert(type: String, body: Data) async throws -> String {
+        return try await request(service: Resource.SObjects.Create(type: type, body: body))
     }
     
     /// Retrieves a Salesforce record.

@@ -7,7 +7,8 @@ class Resource_SObjectsTests: DataServiceTests {
         
         // Given
         let fields = ["Name": "Acme Corp."]
-        let service = Resource.SObjects.Create(type: "Account", fields: fields)
+        let data = try JSONEncoder().encode(fields)
+        let service = Resource.SObjects.Create(type: "Account", body: data)
         
         // When
         let req = try service.createRequest(with: mockCredential)
@@ -24,7 +25,9 @@ class Resource_SObjectsTests: DataServiceTests {
         // Given
         let data = "{\"id\":\"0015d00003TCWCUAA5\",\"success\":true,\"errors\":[]}".data(using: .utf8)!
         let session = URLSession.mock(responseBody: data, statusCode: 201)
-        let service = Resource.SObjects.Create(type: "Account", fields: ["Name": "Acme Corp."])
+        let fields = ["Name": "Acme Corp."]
+        let requestBody = try JSONEncoder().encode(fields)
+        let service = Resource.SObjects.Create(type: "Account", body: requestBody)
 
         // When
         let recordID = try await service.request(with: mockCredential, using: session)
@@ -37,7 +40,8 @@ class Resource_SObjectsTests: DataServiceTests {
         
         // Given
         let fields = ["BillingCity": "Austin"]
-        let service = Resource.SObjects.Create(type: "Account", fields: fields)
+        let body = try JSONEncoder().encode(fields)
+        let service = Resource.SObjects.Create(type: "Account", body: body)
         
         // When
         var err: Error?
@@ -145,7 +149,8 @@ class Resource_SObjectsTests: DataServiceTests {
         let uuid = UUID().uuidString
         
         // When
-        let id = try await XCTestCase.connection.request(service: Resource.SObjects.Create(type: "Account", fields: ["Name": uuid]))
+        let body = try JSONEncoder().encode(["Name": uuid])
+        let id = try await XCTestCase.connection.request(service: Resource.SObjects.Create(type: "Account", body: body))
         try await XCTestCase.connection.request(service: Resource.SObjects.Update(type: "Account", id: id, fields: ["BillingCity": uuid]))
         let account = try await XCTestCase.connection.request(service: Resource.SObjects.Read<Record>(type: "Account", id: id))
         try await XCTestCase.connection.request(service: Resource.SObjects.Delete(type: "Account", id: id)) // Remove the just-created record
