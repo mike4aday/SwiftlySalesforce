@@ -2,15 +2,15 @@ import Foundation
 
 public struct UserIdentifier {
     
-    let identityURL: URL
+    public let identityURL: URL
     
     /// The ID of the Salesforce User record associated with this credential.
-    var userID: String {
+    public var userID: String {
         return identityURL.lastPathComponent
     }
     
     /// The ID of the Salesforce Organization record associated with this credential.
-    var orgID: String {
+    public var orgID: String {
         return identityURL.deletingLastPathComponent().lastPathComponent
     }
     
