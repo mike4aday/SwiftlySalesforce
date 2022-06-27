@@ -67,7 +67,7 @@ public class Connection: ObservableObject {
     public func authenticate(refreshing: Credential? = nil) async throws -> Credential {
         let cred = try await authorizer.grantCredential(refreshing: refreshing)
         try await credentialStore.save(credential: cred)
-        self.userIdentifier = cred.identityURL
+        self.userIdentifier = UserIdentifier(rawValue: cred.identityURL)
         return cred
     }
     

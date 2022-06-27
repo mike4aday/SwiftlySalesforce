@@ -29,9 +29,38 @@ extension DefaultCredentialStore: CredentialStore {
         }
     }
     
+    func retrieve(for userIdentifier: UserIdentifier) async throws -> Credential? {
+        do {
+            let data = try Keychain.read(service: consumerKey, account: userIdentifier.rawValue.absoluteString)
+            return try decoder.decode(Credential.self, from: data)
+        }
+        catch {
+            if case KeychainError.itemNotFound = error {
+                return nil
+            }
+            else {
+                throw error
+            }
+        }
+    }
+    
     func delete(for userIdentifier: URL) throws -> () {
         do {
             try Keychain.delete(service: consumerKey, account: userIdentifier.absoluteString)
+        }
+        catch {
+            if case KeychainError.itemNotFound = error {
+                return
+            }
+            else {
+                throw error
+            }
+        }
+    }
+    
+    func delete(for userIdentifier: UserIdentifier) async throws {
+        do {
+            try Keychain.delete(service: consumerKey, account: userIdentifier.rawValue.absoluteString)
         }
         catch {
             if case KeychainError.itemNotFound = error {

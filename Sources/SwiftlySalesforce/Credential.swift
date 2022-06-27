@@ -27,13 +27,20 @@ public struct Credential: Codable, Equatable {
         self.siteURL = siteURL
         self.siteID = siteID
     }
+
+    /// The User Identifier associated with this credential.
+    var userIdentifier: UserIdentifier {
+        return UserIdentifier(rawValue: identityURL)
+    }
     
     /// The ID of the Salesforce User record associated with this credential.
+    @available(*, deprecated, message: "Use userIdentifier.userID instead")
     var userID: String {
         return identityURL.lastPathComponent
     }
     
     /// The ID of the Salesforce Organization record associated with this credential.
+    @available(*, deprecated, message: "Use userIdentifier.orgID instead")
     var orgID: String {
         return identityURL.deletingLastPathComponent().lastPathComponent
     }

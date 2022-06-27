@@ -45,7 +45,7 @@ extension Resource {
             var batchSize: Int? = nil
             
             func createRequest(with credential: Credential) throws -> URLRequest {
-                let ownerId = credential.userID
+                let ownerId = credential.userIdentifier.userID
                 let fieldSpec = fields.map { $0.joined(separator: ",") } ?? "FIELDS(ALL)"
                 let limitSpec = limit.map { "LIMIT \($0)" } ?? fields.map { _ in "" } ?? "LIMIT 200"
                 let soql = "SELECT \(fieldSpec) FROM \(type) WHERE OwnerId = '\(ownerId)' \(limitSpec)"
