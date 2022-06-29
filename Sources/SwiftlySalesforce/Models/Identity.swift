@@ -30,7 +30,7 @@ public struct Identity {
     }
 }
 
-extension Identity: Decodable {
+extension Identity: Codable {
     
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"
