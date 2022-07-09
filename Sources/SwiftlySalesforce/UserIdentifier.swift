@@ -36,3 +36,7 @@ extension UserIdentifier: CustomStringConvertible {
         return "User identifier: org ID \(orgID); user ID \(userID)"
     }
 }
+
+extension UserIdentifier: Codable {
+    
+}
