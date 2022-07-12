@@ -40,3 +40,7 @@ extension UserIdentifier: CustomStringConvertible {
 extension UserIdentifier: Codable {
     
 }
+
+extension UserIdentifier: Equatable {
+    
+}
