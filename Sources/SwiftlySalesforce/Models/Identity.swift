@@ -31,7 +31,7 @@ public struct Identity {
     }
 }
 
-extension Identity {
+public extension Identity {
     
     var userIdentifier: UserIdentifier {
         return UserIdentifier(identityURL: self.identityURL)
