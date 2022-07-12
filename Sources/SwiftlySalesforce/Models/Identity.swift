@@ -2,6 +2,7 @@ import Foundation
 
 public struct Identity {
     
+    public var identityURL: URL
     public var userID: String
     public var orgID: String
     public var username: String
@@ -30,9 +31,17 @@ public struct Identity {
     }
 }
 
+extension Identity {
+    
+    var userIdentifier: UserIdentifier {
+        return UserIdentifier(identityURL: self.identityURL)
+    }
+}
+
 extension Identity: Codable {
     
     enum CodingKeys: String, CodingKey {
+        case identityURL = "id"
         case userID = "user_id"
         case orgID = "organization_id"
         case username
