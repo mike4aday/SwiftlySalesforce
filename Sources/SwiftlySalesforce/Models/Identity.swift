@@ -65,3 +65,11 @@ extension Identity: Codable {
         case lastModifiedDate = "last_modified_date"
     }
 }
+
+extension Identity: Equatable {
+    
+}
+
+extension Identity.Photos: Equatable {
+    
+}
