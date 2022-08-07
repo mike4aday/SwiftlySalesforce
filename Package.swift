@@ -6,6 +6,7 @@ let package = Package(
     name: "SwiftlySalesforce",
     platforms: [
         .iOS(.v15),
+        .macOS(.v12)
     ],
     products: [
         .library(
