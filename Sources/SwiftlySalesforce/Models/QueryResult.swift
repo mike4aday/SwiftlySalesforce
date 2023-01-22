@@ -19,3 +19,14 @@ extension QueryResult: Decodable {
         case nextRecordsPath = "nextRecordsUrl"
     }
 }
+
+public extension QueryResult {
+    
+    // Useful for testing/mocking
+    init(records: [T], totalSize: Int, isDone: Bool, nextRecordsPath: String?) {
+        self.records = records
+        self.totalSize = totalSize
+        self.isDone = isDone
+        self.nextRecordsPath = nextRecordsPath
+    }
+}
