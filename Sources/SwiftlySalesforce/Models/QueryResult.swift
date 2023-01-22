@@ -17,13 +17,13 @@ public struct QueryResult<T: Decodable>: Decodable {
     }
 }
 
-public extension QueryResult {
-    
-    // Useful for mocking/testing
-    init(totalSize: Int, isDone: Bool, records: [T], nextRecordsPath: String) {
-        self.totalSize = totalSize
-        self.isDone = isDone
-        self.records = records
-        self.nextRecordsPath = nextRecordsPath
-    }
-}
+//public extension QueryResult {
+//    
+//    // Useful for mocking/testing
+//    init(totalSize: Int, isDone: Bool, records: [T], nextRecordsPath: String?) {
+//        self.totalSize = totalSize
+//        self.isDone = isDone
+//        self.records = records
+//        self.nextRecordsPath = nextRecordsPath
+//    }
+//}
