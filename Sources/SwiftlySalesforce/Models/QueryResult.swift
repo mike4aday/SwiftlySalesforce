@@ -2,7 +2,7 @@ import Foundation
 
 /// Holds the result of a SOQL query.
 /// See [Execute a SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_query.htm).
-public struct QueryResult<T: Decodable> {
+public struct QueryResult<T: Decodable>: Decodable {
     
     public let totalSize: Int
     public let isDone: Bool
@@ -17,5 +17,13 @@ public struct QueryResult<T: Decodable> {
     }
 }
 
-extension QueryResult: Decodable {
+extension QueryResult {
+    
+    // Useful for mocking/testing
+    init(records: [T], nextRecordsPath: String?, totalSize: Int) {
+        self.totalSize = totalSize
+        self.isDone = totalSize == records.count
+        self.records = records
+        self.nextRecordsPath = nextRecordsPath
+    }
 }
