@@ -20,9 +20,9 @@ public struct QueryResult<T: Decodable>: Decodable {
 public extension QueryResult {
     
     // Useful for mocking/testing
-    init(records: [T], nextRecordsPath: String?, totalSize: Int) {
+    init(totalSize: Int, isDone: Bool, records: [T], nextRecordsPath: String) {
         self.totalSize = totalSize
-        self.isDone = totalSize == records.count
+        self.isDone = isDone
         self.records = records
         self.nextRecordsPath = nextRecordsPath
     }
