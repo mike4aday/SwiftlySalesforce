@@ -17,7 +17,7 @@ public struct QueryResult<T: Decodable>: Decodable {
     }
 }
 
-extension QueryResult {
+public extension QueryResult {
     
     // Useful for mocking/testing
     init(records: [T], nextRecordsPath: String?, totalSize: Int) {
