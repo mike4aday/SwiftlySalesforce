@@ -3,7 +3,7 @@ import SwiftUI
 
 /// Handles the interaction with the Salesforce REST API.
 /// Your app should only have a single `Connection` instance.
-open class Connection: ObservableObject {
+public class Connection: ObservableObject {
     
     internal let authorizer: Authorizer
     internal let credentialStore: CredentialStore
