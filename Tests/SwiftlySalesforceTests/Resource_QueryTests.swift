@@ -119,7 +119,7 @@ class Resource_QueryTests: XCTestCase {
         
         // When
         if let path = try await XCTestCase.connection.request(service: service).nextRecordsPath {
-            let nextPage = try await XCTestCase.connection.request(service: Resource.Query.NextResultsPage<Record>(path: path, batchSize: 204))
+            let nextPage = try await XCTestCase.connection.request(service: Resource.Query.NextResultsPage<Record>(path: path))
             XCTAssertTrue(nextPage.isDone == (nextPage.nextRecordsPath == nil))
         }
         

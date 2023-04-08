@@ -32,6 +32,10 @@ public extension Connection {
         return try await request(service: Resource.Query.Run(soql: soql, batchSize: batchSize))
     }
     
+    func queryMore(path: String) async throws -> QueryResult<Record> {
+        return try await request(service: Resource.Query.NextResultsPage(path: path))
+    }
+    
     func myRecords<T: Decodable>(type: String, fields: [String]? = nil, limit: Int? = nil, batchSize: Int? = nil) async throws -> QueryResult<T> {
         return try await request(service: Resource.Query.MyRecords(type: type, fields: fields, limit: limit, batchSize: batchSize))
     }

@@ -25,12 +25,9 @@ extension Resource {
             typealias Output = QueryResult<T>
             
             let path: String
-            
-            var batchSize: Int? = nil
-            
+                        
             func createRequest(with credential: Credential) throws -> URLRequest {
-                let headers = batchSize.map { ["Sforce-Query-Options" : "batchSize=\($0)"] }
-                return try URLRequest(credential: credential, path: path, headers: headers)
+                return try URLRequest(credential: credential, path: path)
             }
         }
         
