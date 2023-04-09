@@ -10,7 +10,7 @@ public struct Credential: Codable, Equatable {
     public let siteURL: URL?
     public let siteID: String?
     
-    internal init(
+    public init(
         accessToken: String,
         instanceURL: URL,
         identityURL: URL,
