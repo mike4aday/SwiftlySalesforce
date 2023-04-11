@@ -44,3 +44,7 @@ extension UserIdentifier: Codable {
 extension UserIdentifier: Equatable {
     
 }
+
+extension UserIdentifier: Hashable {
+    
+}
